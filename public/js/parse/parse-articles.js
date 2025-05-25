@@ -1,3 +1,5 @@
+import { buildPicArrayElement } from "./parse-pics.js";
+
 //includes FORM and DATA RETURN
 export const buildArticleWrapper = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
@@ -10,10 +12,10 @@ export const buildArticleWrapper = async (inputArray) => {
   const articleHowManyListItem = await buildArticleHowManyListItem();
   const articleSortByListItem = await buildArticleSortByListItem();
 
-  //build BACKEND DATA items
+  //build BACKEND DATA items (might need to destructure this)
   const backendArticleData = await parseArticleData(inputArray);
 
-  articleWrapper.append(articleTypeListItem, articleHowManyListItem, articleSortByListItem);
+  articleWrapper.append(articleTypeListItem, articleHowManyListItem, articleSortByListItem, backendArticleData);
 
   return articleWrapper;
 };
@@ -70,7 +72,7 @@ export const buildArticleHowManyListItem = async () => {
   articleHowManyInput.type = "text";
   articleHowManyInput.name = "article-how-many";
   articleHowManyInput.id = "article-how-many";
-  articleHowManyInput.placeholder = "[Defaults to 1 (most recent)]";
+  articleHowManyInput.placeholder = "[Defaults to 5 (most recent)]";
 
   articleHowManyListItem.append(articleHowManyLabel, articleHowManyInput);
 
@@ -115,6 +117,112 @@ export const buildArticleSortByListItem = async () => {
 export const parseArticleData = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
 
-  console.log("ARTICLE DATA");
-  console.dir(inputArray);
+  const articleList = document.createElement("ul");
+  articleList.className = "article-list";
+
+  let isFirst = true;
+  const collapseArray = [];
+
+  for (let i = 0; i < inputArray.length; i++) {
+    const articleListItem = await buildArticleListItem(inputArray[i], isFirst);
+    articleList.append(articleListItem);
+
+    // Store the collapse components for group functionality
+    const collapseItem = articleListItem.querySelector(".collapse-container");
+    if (collapseItem) collapseArray.push(collapseItem);
+
+    isFirst = false;
+  }
+
+  // Set up the collapse group behavior
+  defineCollapseItems(collapseArray);
+
+  return articleList;
+};
+
+export const buildArticleListItem = async (inputObj, isFirst) => {
+  const { title } = inputObj;
+
+  const articleListItem = document.createElement("li");
+  articleListItem.className = "article-list-item";
+
+  // Create the article element (now includes pictures inside)
+  const articleElement = await buildArticleElement(inputObj);
+
+  // Wrap the article content in a collapsible
+  const articleCollapseObj = {
+    title: title,
+    content: articleElement,
+    isExpanded: isFirst,
+    className: "article-element-collapse",
+  };
+
+  const articleCollapseContainer = await buildCollapseContainer(articleCollapseObj);
+  articleListItem.append(articleCollapseContainer);
+
+  return articleListItem;
+};
+
+export const buildArticleElement = async (inputObj) => {
+  const { date, text, picArray } = inputObj;
+
+  const articleElement = document.createElement("article");
+  articleElement.className = "article-element";
+
+  // Add pictures directly without collapse if they exist
+  if (picArray && picArray.length) {
+    const picArrayElement = await buildPicArrayElement(picArray);
+
+    if (picArrayElement) {
+      // Add a simple header to indicate pictures
+      const picHeader = document.createElement("div");
+      picHeader.className = "article-pic-header";
+      picHeader.textContent = `${picArray.length} Picture${picArray.length > 1 ? "s" : ""}`;
+
+      articleElement.append(picHeader, picArrayElement);
+    }
+  }
+
+  // Then append date and text after pictures (title is handled by collapse header)
+  const dateElement = await buildDateElement(date);
+  const textElement = await buildTextElement(text);
+
+  articleElement.append(dateElement, textElement);
+
+  return articleElement;
+};
+
+export const buildTitleElement = async (title) => {
+  const titleElement = document.createElement("h2");
+  titleElement.className = "article-title";
+  titleElement.textContent = title;
+
+  return titleElement;
+};
+
+export const buildDateElement = async (date) => {
+  // Format and append date
+  const dateElement = document.createElement("div");
+  dateElement.className = "article-date";
+  const dateObj = new Date(date);
+  dateElement.textContent = dateObj.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
+  return dateElement;
+};
+
+export const buildTextElement = async (text) => {
+  if (!text) return null;
+
+  const textElement = document.createElement("div");
+  textElement.className = "article-text";
+
+  // Fix line breaks by replacing \n with <br> tags
+  const textWithBreaks = text.replace(/\n/g, "<br>");
+  textElement.innerHTML = textWithBreaks;
+
+  return textElement;
 };
