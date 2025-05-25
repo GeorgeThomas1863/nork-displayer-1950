@@ -6,7 +6,7 @@ import dbModel from "../models/db-model.js";
 export const runGetBackendData = async () => {
   const { articles, picSetContent, vidPageContent } = CONFIG;
 
-  //articles get ONLY last 10 FATBOY by default
+  //params for articles, extra things dont matter / ignored for others
   const params = {
     sortKey: "date",
     howMany: 10,
@@ -14,16 +14,12 @@ export const runGetBackendData = async () => {
     filterValue: "fatboy",
   };
 
+  //articles get ONLY last 10 FATBOY by default
   const articleModel = new dbModel(params, articles);
   const articleArrayRaw = await articleModel.getLastItemsByTypeArray();
   const articleArray = await addArticlePicData(articleArrayRaw);
 
   // //get last 10 pic sets / vid pages
-  // const otherParams = {
-  //   sortKey: "date",
-  //   howMany: 10,
-  // };
-
   const picSetModel = new dbModel(params, picSetContent);
   const picSetArray = await picSetModel.getLastItemsArray();
 
@@ -35,9 +31,6 @@ export const runGetBackendData = async () => {
     picSetData: picSetArray,
     vidPageData: vidPageArray,
   };
-
-  console.log("DATA OBJ");
-  console.dir(dataObj);
 
   return dataObj;
 };

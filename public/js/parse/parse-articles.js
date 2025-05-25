@@ -31,9 +31,9 @@ export const buildArticleTypeListItem = async () => {
   articleTypeSelect.id = "article-type";
 
   // Create options for article type select
-  const options = [
-    { value: "all-type", id: "all-type", text: "All", selected: true },
-    { value: "fatboy", id: "fatboy", text: "Revolutionary Activities" },
+  const optionArray = [
+    { value: "fatboy", id: "fatboy", text: "Revolutionary Activities", selected: true },
+    { value: "all-type", id: "all-type", text: "All" },
     { value: "top-news", id: "top-news", text: "Top News" },
     { value: "latest-news", id: "latest-news", text: "Latest News" },
     { value: "external-news", id: "external-news", text: "External News" },
@@ -41,7 +41,8 @@ export const buildArticleTypeListItem = async () => {
     { value: "people", id: "people", text: "Always in Memory of the People" },
   ];
 
-  options.forEach((optionData) => {
+  for (let i = 0; i < optionArray.length; i++) {
+    const optionData = optionArray[i];
     const option = document.createElement("option");
     option.value = optionData.value;
     option.id = optionData.id;
@@ -50,7 +51,7 @@ export const buildArticleTypeListItem = async () => {
       option.selected = true;
     }
     articleTypeSelect.append(option);
-  });
+  }
 
   articleTypeListItem.append(articleTypeLabel, articleTypeSelect);
 
@@ -89,12 +90,13 @@ export const buildArticleSortByListItem = async () => {
   articleSortBySelect.id = "article-sort-by";
 
   // Create options for sort by select
-  const sortOptions = [
+  const optionArray = [
     { value: "article-newest-to-oldest", id: "article-newest-to-oldest", text: "Newest to Oldest", selected: true },
     { value: "article-oldest-to-newest", id: "article-oldest-to-newest", text: "Oldest to Newest" },
   ];
 
-  sortOptions.forEach((optionData) => {
+  for (let i = 0; i < optionArray.length; i++) {
+    const optionData = optionArray[i];
     const option = document.createElement("option");
     option.value = optionData.value;
     option.id = optionData.id;
@@ -103,7 +105,7 @@ export const buildArticleSortByListItem = async () => {
       option.selected = true;
     }
     articleSortBySelect.append(option);
-  });
+  }
 
   articleSortByListItem.append(articleSortByLabel, articleSortBySelect);
 
