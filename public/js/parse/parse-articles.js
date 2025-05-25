@@ -5,28 +5,9 @@ import { buildCollapseContainer, defineCollapseItems } from "../collapse.js";
 export const buildArticleWrapper = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
 
-  // Create the main container that will have the collapse functionality
-  const articleContainer = document.createElement("div");
-  articleContainer.className = "wrapper";
-  articleContainer.id = "article-container";
-
-  // Create collapse header
-  const collapseHeader = document.createElement("div");
-  collapseHeader.className = "collapse-header";
-
-  const arrow = document.createElement("div");
-  arrow.className = "collapse-arrow expanded";
-
-  const titleElement = document.createElement("div");
-  titleElement.className = "collapse-title";
-  titleElement.textContent = "ARTICLES";
-
-  collapseHeader.append(arrow, titleElement);
-
-  // Create the article wrapper (the form)
   const articleWrapper = document.createElement("ul");
   articleWrapper.id = "article-wrapper";
-  articleWrapper.className = "collapse-content";
+  articleWrapper.className = "wrapper collapse-content";
 
   //build FORM list items
   const articleTypeListItem = await buildArticleTypeListItem();
@@ -40,16 +21,20 @@ export const buildArticleWrapper = async (inputArray) => {
   //DELETE LATER
   articleWrapper.append(articleTypeListItem, articleHowManyListItem, articleSortByListItem);
   
-  // Add event listener for toggling
-  collapseHeader.addEventListener("click", () => {
-    arrow.classList.toggle("expanded");
-    articleWrapper.classList.toggle("hidden");
-  });
+  // Use the existing buildCollapseContainer function
+  const articleCollapseObj = {
+    title: "ARTICLES",
+    content: articleWrapper,
+    isExpanded: true,
+    className: "article-wrapper-collapse",
+  };
 
-  // Assemble the container
-  articleContainer.append(collapseHeader, articleWrapper);
+  const articleCollapseContainer = await buildCollapseContainer(articleCollapseObj);
   
-  return articleContainer;
+  // Apply the wrapper class to the collapse container instead
+  articleCollapseContainer.className = "wrapper";
+  
+  return articleCollapseContainer;
 };
 
 export const buildArticleTypeListItem = async () => {
