@@ -20,7 +20,17 @@ export const buildArticleWrapper = async (inputArray) => {
 
   //DELETE LATER
   articleWrapper.append(articleTypeListItem, articleHowManyListItem, articleSortByListItem);
-  return articleWrapper;
+  
+  // Wrap the article wrapper in a collapse container
+  const articleCollapseObj = {
+    title: "ARTICLES",
+    content: articleWrapper,
+    isExpanded: true,
+    className: "article-wrapper-collapse",
+  };
+
+  const articleCollapseContainer = await buildCollapseContainer(articleCollapseObj);
+  return articleCollapseContainer;
 };
 
 export const buildArticleTypeListItem = async () => {

@@ -1,3 +1,95 @@
+/* COLLAPSE COMPONENT STYLES */
+.collapse-header {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  background-color: #ffffff;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.2s ease;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.collapse-header:hover {
+  background-color: #b3d9ff;
+}
+
+.collapse-header:active {
+  transform: scale(0.99);
+}
+
+/* Arrow styling - circular background with elegant arrow */
+.collapse-arrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 28px;
+  height: 28px;
+  margin-right: 14px;
+  background-color: #f2f3f5;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Chevron for arrow */
+.collapse-arrow::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-right: 2.5px solid #2c3e50;
+  border-bottom: 2.5px solid #2c3e50;
+  transform: rotate(-45deg) translate(-1px, -1px);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Expanded state styling */
+.collapse-arrow.expanded {
+  background-color: #e9ecef;
+}
+
+.collapse-arrow.expanded::before {
+  transform: rotate(45deg) translate(-1px, -1px);
+  border-color: #2c3e50;
+}
+
+.collapse-title {
+  font-size: 1.7rem;
+  font-weight: 600;
+  color: #2c3e50;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: calc(100% - 42px);
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+  text-align: left;
+}
+
+/* Collapse content container */
+.collapse-content {
+  max-height: 100000px;
+  transition: max-height 0.5s cubic-bezier(0, 1, 0, 1), opacity 0.3s ease, padding 0.3s ease;
+  opacity: 1;
+  overflow: hidden;
+  background-color: #ffffff;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+}
+
+.collapse-content.hidden {
+  max-height: 0;
+  opacity: 0;
+  padding: 0;
+}
+
+/* ------------------------------ */
+
+/* WRAPPER STYLES */
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -86,7 +178,7 @@
 
 /* Add a subtle header effect if needed later */
 .wrapper::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
