@@ -7,27 +7,27 @@ export const runGetBackendData = async () => {
   const { articles, picSetContent, vidPageContent } = CONFIG;
 
   //articles get ONLY last 10 FATBOY by default
-  const articleParams = {
+  const params = {
     sortKey: "date",
     howMany: 10,
     filterKey: "articleType",
     filterValue: "fatboy",
   };
 
-  const articleModel = new dbModel(articleParams, articles);
+  const articleModel = new dbModel(params, articles);
   const articleArrayRaw = await articleModel.getLastItemsByTypeArray();
   const articleArray = await addArticlePicData(articleArrayRaw);
 
-  //get last 10 pic sets / vid pages
-  const otherParams = {
-    sortKey: "date",
-    howMany: 10,
-  };
+  // //get last 10 pic sets / vid pages
+  // const otherParams = {
+  //   sortKey: "date",
+  //   howMany: 10,
+  // };
 
-  const picSetModel = new dbModel(otherParams, picSetContent);
+  const picSetModel = new dbModel(params, picSetContent);
   const picSetArray = await picSetModel.getLastItemsArray();
 
-  const vidPageModel = new dbModel(otherParams, vidPageContent);
+  const vidPageModel = new dbModel(params, vidPageContent);
   const vidPageArray = await vidPageModel.getLastItemsArray();
 
   const dataObj = {

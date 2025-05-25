@@ -40,6 +40,9 @@ const buildInputForms = async (inputData) => {
   if (!inputData) return null;
   const { articleData, picSetData, vidPageData } = inputData;
 
+  console.log("INPUT DATA");
+  console.dir(inputData);
+
   const articleWrapper = await buildArticleWrapper(articleData);
 
   //DELETE
