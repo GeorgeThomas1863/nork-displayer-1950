@@ -13,11 +13,12 @@ export const buildArticleWrapper = async (inputArray) => {
   const articleHowManyListItem = await buildArticleHowManyListItem();
   const articleSortByListItem = await buildArticleSortByListItem();
 
-  //build BACKEND DATA items (might need to destructure this)
-  const backendArticleData = await parseArticleData(inputArray);
+  //RE ADD
+  // const backendArticleData = await parseArticleData(inputArray);
+  // articleWrapper.append(articleTypeListItem, articleHowManyListItem, articleSortByListItem, backendArticleData);
 
-  articleWrapper.append(articleTypeListItem, articleHowManyListItem, articleSortByListItem, backendArticleData);
-
+  //DELETE LATER
+  articleWrapper.append(articleTypeListItem, articleHowManyListItem, articleSortByListItem);
   return articleWrapper;
 };
 
