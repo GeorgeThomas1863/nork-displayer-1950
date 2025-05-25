@@ -5,15 +5,20 @@ import dbModel from "../models/db-model.js";
 //gets backend data from db
 export const runGetBackendData = async () => {
   const { articles, picSetContent, vidPageContent } = CONFIG;
+
   const params = {
     sortKey: "date",
     howMany: 10,
+    filterKey: "articleType",
+    filterValue: "fatboy",
   };
 
+  //articles get ONLY last 10 FATBOY by default
   const articleModel = new dbModel(params, articles);
-  const articleArrayRaw = await articleModel.getLastItemsArray();
+  const articleArrayRaw = await articleModel.getLastItemsByTypeArray();
   const articleArray = await addArticlePicData(articleArrayRaw);
 
+  //gets last 10 pic sets / vid pages
   const picSetModel = new dbModel(params, picSetContent);
   const picSetArray = await picSetModel.getLastItemsArray();
 
