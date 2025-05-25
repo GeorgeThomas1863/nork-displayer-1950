@@ -1,6 +1,6 @@
 //includes FORM and DATA RETURN
-export const buildArticleWrapper = async (inputObj) => {
-  if (!inputObj || !inputObj.articleData) return null;
+export const buildArticleWrapper = async (inputArray) => {
+  if (!inputArray || !inputArray.length) return null;
 
   const articleWrapper = document.createElement("ul");
   articleWrapper.id = "article-wrapper";
@@ -11,7 +11,7 @@ export const buildArticleWrapper = async (inputObj) => {
   const articleSortByListItem = await buildArticleSortByListItem();
 
   //build BACKEND DATA items
-  const backendArticleData = await parseArticleData(inputObj);
+  const backendArticleData = await parseArticleData(inputArray);
 
   articleWrapper.append(articleTypeListItem, articleHowManyListItem, articleSortByListItem);
 
@@ -110,11 +110,9 @@ export const buildArticleSortByListItem = async () => {
   return articleSortByListItem;
 };
 
-export const parseArticleData = async (inputObj) => {
-  if (!inputObj || !inputObj.articleData) return null;
-
-  const { articleData } = inputObj;
+export const parseArticleData = async (inputArray) => {
+  if (!inputArray || !inputArray.length) return null;
 
   console.log("ARTICLE DATA");
-  console.log(articleData);
+  console.dir(inputArray);
 };
