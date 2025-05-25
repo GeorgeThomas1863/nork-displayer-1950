@@ -1,4 +1,5 @@
-//ARTICLES FORM STABLE, ADDING ARTICLE CONTENT
+//CURSOR / claude fucking suck for this styling, build yourself
+
 
 //BUILD OTHER FORMS
 
