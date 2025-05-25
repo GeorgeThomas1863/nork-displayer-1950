@@ -36,6 +36,9 @@ export const runGetBackendData = async () => {
     vidPageData: vidPageArray,
   };
 
+  console.log("DATA OBJ");
+  console.dir(dataObj);
+
   return dataObj;
 };
 
