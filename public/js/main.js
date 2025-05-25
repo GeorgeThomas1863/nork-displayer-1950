@@ -10,8 +10,7 @@ export const buildDefaultDisplay = async () => {
 
   //get backend data FIRST
   const backendDataObj = await sendToBack({ route: "/get-backend-data-route" });
-  console.log("RAW BACKEND DATA");
-  console.log(backendDataObj);
+  const { articleData, picSetData, vidPageData } = backendDataObj;
 
   //build drop down
 
