@@ -1,13 +1,10 @@
 import { sendToBack } from "./util.js";
+import { buildArticleWrapper } from "./parse/parse-articles.js";
 
 //get display element
 const displayElement = document.getElementById("display-element");
 
 export const buildDefaultDisplay = async () => {
-  displayElement.innerHTML = `
-        <h1>ALLAHU AKBAR</h1>
-    `;
-
   //get backend data FIRST (to check for fail )
   const backendDataObj = await getBackendData();
 
@@ -39,14 +36,18 @@ const getBackendData = async () => {
   return backendDataObj;
 };
 
-const buildDropDown = async () => {
-  console.log("BUILD");
-};
-
 const buildInputForms = async (inputData) => {
   if (!inputData) return null;
   const { articleData, picSetData, vidPageData } = inputData;
-  console.log("INPUT DATA!!!", inputData);
+
+  const articleWrapper = await buildArticleWrapper(articleData);
+
+  //DELETE
+  return articleWrapper;
+};
+
+const buildDropDown = async () => {
+  console.log("BUILD");
 };
 
 buildDefaultDisplay();
