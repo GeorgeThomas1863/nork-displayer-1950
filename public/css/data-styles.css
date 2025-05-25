@@ -3,7 +3,7 @@
   display: flex;
   align-items: center;
   padding: 16px 20px;
-  background-color: #ffffff;
+  background-color: rgb(235, 235, 235);
   cursor: pointer;
   user-select: none;
   transition: all 0.2s ease;
@@ -106,7 +106,7 @@
 }
 
 .wrapper:hover {
-  transform: translateY(-5px);
+  /* transform: translateY(-5px); */
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
 }
 
@@ -189,4 +189,4 @@
   border-color: #666;
   box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
   outline: none;
-} 
+}
