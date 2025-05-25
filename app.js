@@ -16,8 +16,10 @@ const __dirname = dirname(__filename);
 
 const app = express();
 
-app.set("views", join(__dirname, "html"));
-app.set("view engine", "ejs");
+app.use(express.static("public"));
+
+// app.set("views", join(__dirname, "html"));
+// app.set("view engine", "ejs");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());

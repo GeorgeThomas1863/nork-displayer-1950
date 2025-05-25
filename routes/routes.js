@@ -5,7 +5,7 @@ import { indexDisplay, adminDisplay, display404, display500 } from "../controlle
 
 const router = express.Router();
 
-router.post("/admin-submit-route", adminSubmitRoute);
+// router.post("/admin-submit-route", adminSubmitRoute);
 
 // router.post("/get-backend-data", getBackendDataRoute);
 
@@ -13,7 +13,7 @@ router.post("/admin-submit-route", adminSubmitRoute);
 
 router.get("/", indexDisplay);
 
-router.use("/admin", adminDisplay);
+// router.use("/admin", adminDisplay);
 
 router.use(display404);
 
