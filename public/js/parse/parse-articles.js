@@ -14,13 +14,12 @@ export const buildArticleWrapper = async (inputArray) => {
   const articleHowManyListItem = await buildArticleHowManyListItem();
   const articleSortByListItem = await buildArticleSortByListItem();
 
-  //RE ADD
-  // const backendArticleData = await parseArticleData(inputArray);
-  // articleWrapper.append(articleTypeListItem, articleHowManyListItem, articleSortByListItem, backendArticleData);
+  const backendArticleData = await parseArticleData(inputArray);
+  articleWrapper.append(articleTypeListItem, articleHowManyListItem, articleSortByListItem, backendArticleData);
 
-  //DELETE LATER
-  articleWrapper.append(articleTypeListItem, articleHowManyListItem, articleSortByListItem);
-  
+  // //DELETE LATER
+  // articleWrapper.append(articleTypeListItem, articleHowManyListItem, articleSortByListItem);
+
   // Use the existing buildCollapseContainer function
   const articleCollapseObj = {
     title: "ARTICLES",
@@ -30,10 +29,10 @@ export const buildArticleWrapper = async (inputArray) => {
   };
 
   const articleCollapseContainer = await buildCollapseContainer(articleCollapseObj);
-  
+
   // Apply the wrapper class to the collapse container instead
   articleCollapseContainer.className = "wrapper";
-  
+
   return articleCollapseContainer;
 };
 
