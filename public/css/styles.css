@@ -1,3 +1,5 @@
+/* DEFAULT STYLES */
+
 body {
   font-family: "Roboto Condensed", sans-serif;
   margin: 0;
@@ -49,8 +51,6 @@ button {
   border-radius: 8px;
 }
 
-/* ---------------- */
-
 /* for error pages */
 h3 {
   margin-top: 3rem;
@@ -59,7 +59,55 @@ h3 {
   font-size: 3rem;
 }
 
-/* -------------- */
+/* ---------------------------------- */
+
+/* DROP DOWN STYLES*/
+
+#drop-down {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+}
+
+#drop-down a span {
+  width: 100%;
+  height: 0.3rem;
+  background-color: black;
+}
+
+#drop-down:hover {
+  transform: scale(1.5);
+}
+
+#drop-down-bars {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 3rem;
+  height: 3rem;
+  cursor: pointer;
+}
+
+#drop-down-menu-display {
+  box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.5);
+  background-color: white;
+  border-radius: 10px;
+  display: none;
+}
+
+#drop-down-menu-display h2 {
+  font-size: 3rem;
+  font-weight: bold;
+  padding: 1rem 2.5rem;
+  border: none;
+}
+
+#drop-down-menu-display h2:hover {
+  background-color: rgb(215, 215, 215);
+  border-radius: 10px;
+}
+
+/* ---------------------------------- */
 
 .hidden {
   display: none !important;
