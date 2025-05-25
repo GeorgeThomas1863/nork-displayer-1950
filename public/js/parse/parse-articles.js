@@ -5,9 +5,28 @@ import { buildCollapseContainer, defineCollapseItems } from "../collapse.js";
 export const buildArticleWrapper = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
 
+  // Create the main container that will have the collapse functionality
+  const articleContainer = document.createElement("div");
+  articleContainer.className = "wrapper";
+  articleContainer.id = "article-container";
+
+  // Create collapse header
+  const collapseHeader = document.createElement("div");
+  collapseHeader.className = "collapse-header";
+
+  const arrow = document.createElement("div");
+  arrow.className = "collapse-arrow expanded";
+
+  const titleElement = document.createElement("div");
+  titleElement.className = "collapse-title";
+  titleElement.textContent = "ARTICLES";
+
+  collapseHeader.append(arrow, titleElement);
+
+  // Create the article wrapper (the form)
   const articleWrapper = document.createElement("ul");
   articleWrapper.id = "article-wrapper";
-  articleWrapper.className = "wrapper";
+  articleWrapper.className = "collapse-content";
 
   //build FORM list items
   const articleTypeListItem = await buildArticleTypeListItem();
@@ -21,16 +40,16 @@ export const buildArticleWrapper = async (inputArray) => {
   //DELETE LATER
   articleWrapper.append(articleTypeListItem, articleHowManyListItem, articleSortByListItem);
   
-  // Wrap the article wrapper in a collapse container
-  const articleCollapseObj = {
-    title: "ARTICLES",
-    content: articleWrapper,
-    isExpanded: true,
-    className: "article-wrapper-collapse",
-  };
+  // Add event listener for toggling
+  collapseHeader.addEventListener("click", () => {
+    arrow.classList.toggle("expanded");
+    articleWrapper.classList.toggle("hidden");
+  });
 
-  const articleCollapseContainer = await buildCollapseContainer(articleCollapseObj);
-  return articleCollapseContainer;
+  // Assemble the container
+  articleContainer.append(collapseHeader, articleWrapper);
+  
+  return articleContainer;
 };
 
 export const buildArticleTypeListItem = async () => {
