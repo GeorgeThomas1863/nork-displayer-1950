@@ -1,4 +1,5 @@
 import { buildPicArrayElement } from "./parse-pics.js";
+import { buildCollapseContainer, defineCollapseItems } from "../collapse.js";
 
 //includes FORM and DATA RETURN
 export const buildArticleWrapper = async (inputArray) => {
