@@ -1,5 +1,4 @@
-import axios from "axios";
-
+//CANNOT USE AXIOS HERE (just for backend / much harder, just use fetch)
 export const sendToBack = async (inputParams) => {
   const { route } = inputParams;
 
@@ -8,10 +7,16 @@ export const sendToBack = async (inputParams) => {
 
   //send all to backend
   try {
-    const res = await axios.post(route, inputParams);
-    return res.data;
+    const res = await fetch(route, {
+      method: "POST",
+      body: JSON.stringify(inputParams),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await res.json();
+    return data;
   } catch (error) {
     console.log(error);
-    return null;
   }
 };
