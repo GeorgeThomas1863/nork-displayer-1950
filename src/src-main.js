@@ -9,12 +9,12 @@ export const runGetBackendData = async () => {
   //params for articles, extra things dont matter / ignored for others
   const params = {
     sortKey: "date",
-    howMany: 10,
+    howMany: 5,
     filterKey: "articleType",
     filterValue: "fatboy",
   };
 
-  //articles get ONLY last 10 FATBOY by default
+  //articles get ONLY last 5 FATBOY by default
   const articleModel = new dbModel(params, articles);
   const articleArrayRaw = await articleModel.getLastItemsByTypeArray();
   const articleArray = await addArticlePicData(articleArrayRaw);
