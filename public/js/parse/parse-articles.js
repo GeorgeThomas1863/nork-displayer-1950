@@ -7,6 +7,7 @@ export const buildArticleWrapper = async (inputArray) => {
 
   const articleWrapper = document.createElement("ul");
   articleWrapper.id = "article-wrapper";
+  articleWrapper.className = "wrapper";
 
   //build FORM list items
   const articleTypeListItem = await buildArticleTypeListItem();

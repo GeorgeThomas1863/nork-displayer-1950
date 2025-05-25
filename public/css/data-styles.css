@@ -1,4 +1,4 @@
-#article-wrapper {
+.wrapper {
   display: flex;
   flex-direction: column;
   width: 22%;
@@ -13,23 +13,23 @@
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
-#article-wrapper:hover {
+.wrapper:hover {
   transform: translateY(-5px);
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
 }
 
-#article-wrapper li {
+.wrapper li {
   display: flex;
   flex-direction: column;
   margin-bottom: 1.5rem;
   list-style: none;
 }
 
-#article-wrapper li:last-child {
+.wrapper li:last-child {
   margin-bottom: 0;
 }
 
-#article-wrapper label {
+.wrapper label {
   font-size: 1rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
@@ -39,7 +39,7 @@
   font-size: 0.9rem;
 }
 
-#article-wrapper input {
+.wrapper input {
   width: 100%;
   font-size: 1rem;
   padding: 0.75rem;
@@ -51,18 +51,18 @@
   background-color: white;
 }
 
-#article-wrapper input:focus {
+.wrapper input:focus {
   border-color: #666;
   box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
   outline: none;
 }
 
-#article-wrapper input::placeholder {
+.wrapper input::placeholder {
   color: #aaa;
   font-style: italic;
 }
 
-#article-wrapper select {
+.wrapper select {
   width: 100%;
   font-size: 1rem;
   padding: 0.75rem;
@@ -78,14 +78,14 @@
   box-sizing: border-box;
 }
 
-#article-wrapper select:focus {
+.wrapper select:focus {
   border-color: #666;
   box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
   outline: none;
 }
 
 /* Add a subtle header effect if needed later */
-#article-wrapper::before {
+.wrapper::before {
   content: '';
   position: absolute;
   top: 0;
