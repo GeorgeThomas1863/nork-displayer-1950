@@ -13,7 +13,7 @@ router.post("/get-backend-data-route", getBackendDataRoute);
 
 router.get("/", indexDisplay);
 
-// router.use("/admin", adminDisplay);
+router.use("/admin", adminDisplay);
 
 router.use(display404);
 
