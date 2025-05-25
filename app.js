@@ -1,3 +1,10 @@
+//MUCH BETTER WAY OF DOIING IT
+
+//BUILD ARTICLE FORM, BUILIDNG IN THE COLLPASE
+//BUILD OTHER FORMS
+
+//MAKE RESPONSIVE
+
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 

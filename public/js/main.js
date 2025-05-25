@@ -8,10 +8,7 @@ export const buildDefaultDisplay = async () => {
         <h1>ALLAHU AKBAR</h1>
     `;
 
-  //build drop down
-  const dropDownElement = await buildDropDown();
-
-  //get backend data
+  //get backend data FIRST (to check for fail )
   const backendDataObj = await getBackendData();
 
   //FIX / format this later / THROWS ERROR IF ANY ITEM (ARTICLES / PICSET / VIDPAGE) MISSING
@@ -23,25 +20,23 @@ export const buildDefaultDisplay = async () => {
   //build input forms
   const inputFormElement = await buildInputForms(backendDataObj);
 
+  //build drop down
+  const dropDownElement = await buildDropDown();
+
   displayElement.append(dropDownElement, inputFormElement);
 
   return "#DONE";
 };
 
 const getBackendData = async () => {
-  try {
-    const backendDataObj = await sendToBack({ route: "/get-backend-data-route" });
-    if (!backendDataObj || !backendDataObj.articleData || !backendDataObj.picSetData || !backendDataObj.vidPageData) {
-      const error = new Error("BACKEND DATA FUCKED");
-      error.dataReturned = backendDataObj;
-      throw error;
-    }
-    //otherwise return data
-    return backendDataObj;
-  } catch (e) {
-    console.log(e);
+  const backendDataObj = await sendToBack({ route: "/get-backend-data-route" });
+  if (!backendDataObj || !backendDataObj.articleData || !backendDataObj.picSetData || !backendDataObj.vidPageData) {
+    console.log("BACKEND DATA FUCKED");
     return null;
   }
+
+  //otherwise return data
+  return backendDataObj;
 };
 
 const buildDropDown = async () => {
@@ -51,7 +46,7 @@ const buildDropDown = async () => {
 const buildInputForms = async (inputData) => {
   if (!inputData) return null;
   const { articleData, picSetData, vidPageData } = inputData;
-  console.log("BUILD");
+  console.log("INPUT DATA!!!", inputData);
 };
 
 buildDefaultDisplay();
