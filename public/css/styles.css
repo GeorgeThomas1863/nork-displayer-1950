@@ -1,0 +1,62 @@
+body {
+  font-family: "Roboto Condensed", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#background-pic {
+  top: 0;
+  left: 0;
+  position: fixed;
+  object-fit: cover;
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+  opacity: 0.5;
+  transform: scale(1.2);
+  transform-origin: left;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+  display: block;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+button {
+  background: rgb(190, 190, 190);
+  color: inherit;
+  border: none;
+  padding: 0.5rem 2rem;
+  font: inherit;
+  font-size: 2rem;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+/* ---------------- */
+
+/* for error pages */
+h3 {
+  margin-top: 3rem;
+  padding: 0;
+  text-align: center;
+  font-size: 3rem;
+}
+
+/* -------------- */
