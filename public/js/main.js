@@ -21,6 +21,9 @@ const getBackendData = async () => {
   //get backend data
   const dataObjRaw = await sendToBack({ route: "/get-backend-data-route" });
 
+  console.log("RAW BACKEND DATA");
+  console.log(dataObjRaw);
+
   //pase backend data
 };
 
