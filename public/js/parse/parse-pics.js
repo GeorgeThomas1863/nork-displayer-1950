@@ -246,6 +246,8 @@ export const buildPicListItem = async (inputObj) => {
 };
 
 export const buildPicElement = async (savePath) => {
+  if (!savePath) return null;
+
   const picElement = document.createElement("img");
   picElement.id = "pic-element";
 
