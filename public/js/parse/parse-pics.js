@@ -124,7 +124,7 @@ export const buildPicSortByListItem = async () => {
 
 //----------------------------------
 
-export const buildPicSetData = async (inputArray) => {
+export const buildPicData = async (inputArray) => {
   console.log("BUILD");
 };
 

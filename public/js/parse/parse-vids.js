@@ -124,6 +124,6 @@ export const buildVidSortByListItem = async () => {
 
 //----------------------------
 
-export const buildVidPageData = async (inputArray) => {
+export const buildVidData = async (inputArray) => {
   console.log("BUILD");
 };
