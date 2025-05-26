@@ -165,3 +165,7 @@ export const buildPicSetSortByListItem = async () => {
 };
 
 //----------------------------------
+
+export const parsePicSetData = async (inputArray) => {
+  console.log("BUILD");
+};

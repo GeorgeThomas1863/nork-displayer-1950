@@ -90,3 +90,7 @@ export const buildVidPageSortByListItem = async () => {
 };
 
 //----------------------------
+
+export const parseVidPageData = async (inputArray) => {
+  console.log("BUILD");
+};
