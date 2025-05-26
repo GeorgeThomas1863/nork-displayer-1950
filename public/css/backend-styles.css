@@ -1,0 +1,110 @@
+/* ARTICLE STYLES */
+
+#article-element {
+  background-color: #ffffff;
+  padding: 1.5rem 2rem;
+  overflow: hidden;
+  position: relative;
+}
+
+#article-title {
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #2c3e50;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+
+#article-date {
+  margin-bottom: 1.5rem;
+  display: inline-block;
+  font-size: 0.9rem;
+  color: #64748b;
+  font-weight: 500;
+  font-style: italic;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid #e2e8f0;
+  width: 100%;
+}
+
+#article-text {
+  font-size: 1.05rem;
+  line-height: 1.3;
+  letter-spacing: -0.05em;
+  color: #334155;
+}
+
+/* ------------------------------ */
+
+/* PIC STYLES */
+
+#pic-array-element {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  padding: 1rem 0;
+  margin: 0 auto;
+  list-style: none;
+  width: 100%;
+  background-color: transparent;
+}
+
+#pic-list-item {
+  position: relative;
+  height: 0;
+  padding-bottom: 66.67%; /* Creates a 3:2 aspect ratio container */
+  /* border-radius: 8px; */
+  /* transition: box-shadow 0.3s ease; */
+  background-color: transparent;
+  overflow: hidden;
+}
+
+#pic-element {
+  position: absolute;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  object-fit: contain;
+  transition: all 0.5s ease;
+  border-radius: 6px;
+}
+
+/* .article-pic-collapse {
+  margin-bottom: 1.5rem;
+} */
+
+.article-pic-collapse .collapse-content {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+/* makes collapse headers smaller for pics */
+.article-pic-collapse .collapse-header {
+  margin: 0 auto;
+  margin-top: -1.5rem;
+  margin-bottom: 1rem;
+  width: fit-content;
+  border-radius: 8px;
+  background-color: rgb(200, 200, 200);
+
+  /* BACKGROUND FLAG (stupid) */
+  /* background-image: url("../images/north-korea-flag-icon-256.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-blend-mode: soft-light; */
+}
+
+.article-pic-collapse .collapse-title {
+  font-size: 1.5rem;
+}
+
+/* figure out how to get this to keep the border radius on the pics */
+#pic-list-item:hover #pic-element {
+  transform: translate(-50%, -50%) scale(1.2);
+  /* border-radius: 6px; */
+}
