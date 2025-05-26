@@ -90,6 +90,7 @@
 /* ------------------------------ */
 
 /* WRAPPER STYLES */
+
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -105,7 +106,7 @@
   box-shadow: none;
 }
 
-/* TRYING form / data-return classes to set width */
+/* TRYING form / data-return classes to set width; FIX HERE */
 .form {
   width: 22%;
   min-width: 280px;
@@ -200,3 +201,48 @@
   box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
   outline: none;
 }
+
+/* ------------------------------ */
+
+/* ARTICLE STYLES */
+
+.article-element {
+  background-color: #ffffff;
+  padding: 2.5rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.article-title {
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #2c3e50;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+
+.article-date {
+  margin-bottom: 1.5rem;
+  display: inline-block;
+  font-size: 0.95rem;
+  color: #64748b;
+  font-weight: 500;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid #e2e8f0;
+  width: 100%;
+}
+
+.article-text {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #334155;
+}
+
+.article-text p {
+  margin-bottom: 1.2rem;
+}
+
+/* ------------------------------ */
+
+/* PIC STYLES */
