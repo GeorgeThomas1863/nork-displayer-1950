@@ -278,7 +278,7 @@
 }
 
 /* makes collapse headers smaller for pics */
-#article-pic-header.collapse-header {
+.article-pic-collapse .collapse-header {
   font-size: 1.5rem;
   width: 5%;
 }
