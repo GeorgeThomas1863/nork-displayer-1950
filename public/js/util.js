@@ -20,3 +20,17 @@ export const sendToBack = async (inputParams) => {
     console.log(error);
   }
 };
+
+export const buildAdminParams = async () => {
+  const params = {
+    route: "/admin-submit-route",
+    commandType: document.getElementById("admin-command-type").value,
+    howMuch: document.getElementById("admin-how-much").value,
+    urlInput: document.getElementById("admin-url-input").value,
+    itemType: document.getElementById("admin-item-type").value,
+    articleType: document.getElementById("admin-article-type").value,
+    uploadTG: document.getElementById("admin-upload-tg").value,
+    tgId: document.getElementById("admin-tgId").value,
+  };
+  return params;
+};

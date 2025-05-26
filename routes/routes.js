@@ -1,11 +1,11 @@
 import express from "express";
 
 import { indexDisplay, adminDisplay, display404, display500 } from "../controllers/display.js";
-import { getBackendDataRoute } from "../controllers/api.js";
+import { adminSubmitRoute, getBackendDataRoute } from "../controllers/data-controller.js";
 
 const router = express.Router();
 
-// router.post("/admin-submit-route", adminSubmitRoute);
+router.post("/admin-submit-route", adminSubmitRoute);
 
 router.post("/get-backend-data-route", getBackendDataRoute);
 
