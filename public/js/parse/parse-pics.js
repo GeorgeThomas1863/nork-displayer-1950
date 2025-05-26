@@ -75,7 +75,7 @@ export const buildPicElement = async (savePath) => {
 
 //PARSE PIC SETS
 
-export const buildPicSetWrapper = async (inputArray) => {
+export const buildPicSetForm = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
 
   const picSetWrapper = document.createElement("ul");
@@ -166,6 +166,6 @@ export const buildPicSetSortByListItem = async () => {
 
 //----------------------------------
 
-export const parsePicSetData = async (inputArray) => {
+export const buildPicSetData = async (inputArray) => {
   console.log("BUILD");
 };

@@ -1,6 +1,6 @@
 import { buildCollapseContainer } from "../collapse.js";
 
-export const buildVidPageWrapper = async (inputArray) => {
+export const buildVidPageForm = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
 
   const vidPageWrapper = document.createElement("ul");
@@ -91,6 +91,6 @@ export const buildVidPageSortByListItem = async () => {
 
 //----------------------------
 
-export const parseVidPageData = async (inputArray) => {
+export const buildVidPageData = async (inputArray) => {
   console.log("BUILD");
 };

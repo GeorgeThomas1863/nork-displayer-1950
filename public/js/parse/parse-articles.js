@@ -2,7 +2,7 @@ import { buildPicArrayCollapse } from "./parse-pics.js";
 import { buildCollapseContainer, defineCollapseItems } from "../collapse.js";
 
 //includes FORM and DATA RETURN
-export const buildArticleWrapper = async (inputArray) => {
+export const buildArticleForm = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
 
   const articleWrapper = document.createElement("ul");
@@ -141,7 +141,7 @@ export const buildArticleSortByListItem = async () => {
 
 //--------------------------------------
 
-export const parseArticleData = async (inputArray) => {
+export const buildArticleData = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
 
   const articleList = document.createElement("ul");
