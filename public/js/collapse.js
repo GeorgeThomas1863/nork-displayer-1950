@@ -1,6 +1,6 @@
 export const buildCollapseContainer = (inputObj) => {
   if (!inputObj) return null;
-  const { title, content, isExpanded = false, className = "" } = inputObj;
+  const { titleElement, contentElement, isExpanded = false, className = "" } = inputObj;
 
   // Create container
   const container = document.createElement("div");
@@ -13,23 +13,25 @@ export const buildCollapseContainer = (inputObj) => {
   const arrow = document.createElement("div");
   arrow.className = isExpanded ? "collapse-arrow expanded" : "collapse-arrow";
 
-  const titleElement = document.createElement("div");
   titleElement.className = "collapse-title";
-  titleElement.textContent = title;
+
+  // const titleElement = document.createElement("div");
+  // titleElement.className = "collapse-title";
+  // titleElement.textContent = title;
 
   // Add arrow and title to header
   collapseHeader.append(arrow, titleElement);
 
-  content.className = isExpanded ? "collapse-content" : "collapse-content hidden";
+  contentElement.className = isExpanded ? "collapse-content" : "collapse-content hidden";
 
   // Add event listener for toggling
   collapseHeader.addEventListener("click", () => {
     arrow.classList.toggle("expanded");
-    content.classList.toggle("hidden");
+    contentElement.classList.toggle("hidden");
   });
 
   // Assemble the component
-  container.append(collapseHeader, content);
+  container.append(collapseHeader, contentElement);
 
   return container;
 };

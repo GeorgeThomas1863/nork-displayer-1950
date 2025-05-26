@@ -20,10 +20,14 @@ export const buildArticleWrapper = async (inputArray) => {
   // //DELETE LATER
   // articleWrapper.append(articleTypeListItem, articleHowManyListItem, articleSortByListItem);
 
-  // Use the existing buildCollapseContainer function
+  // create title element for collapse container
+  const titleElement = document.createElement("div");
+  titleElement.textContent = "ARTICLES";
+
+  //build collapse container
   const articleCollapseObj = {
-    title: "ARTICLES",
-    content: articleWrapper,
+    titleElement: titleElement,
+    contentElement: articleWrapper,
     isExpanded: true,
     className: "article-wrapper-collapse",
   };
@@ -170,10 +174,13 @@ export const buildArticleListItem = async (inputObj, isFirst) => {
   // Create the article element (now includes pictures inside)
   const articleElement = await buildArticleElement(inputObj);
 
+  //build title element
+  const titleElement = await buildTitleElement(title);
+
   // Wrap the article content in a collapsible
   const articleCollapseObj = {
-    title: title,
-    content: articleElement,
+    titleElement: titleElement,
+    contentElement: articleElement,
     isExpanded: isFirst,
     className: "article-element-collapse",
   };
