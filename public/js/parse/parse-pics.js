@@ -9,7 +9,7 @@ export const buildPicArrayCollapse = async (inputArray) => {
   //build pic title element
   const picTitleElement = document.createElement("div");
   picTitleElement.id = "article-pic-header";
-  picTitleElement.textContent = `${inputArray.length} PIC${inputArray.length > 1 ? "S" : ""}`;
+  picTitleElement.textContent = `${inputArray.length} ARTICLE PIC${inputArray.length > 1 ? "S" : ""}`;
 
   //build collapse container
   const picCollapseObj = {
