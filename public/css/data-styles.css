@@ -208,7 +208,7 @@
 
 #article-element {
   background-color: #ffffff;
-  padding: 1rem 2rem;
+  padding: 1.5rem 3rem;
   overflow: hidden;
   position: relative;
 }
@@ -235,8 +235,8 @@
 }
 
 #article-text {
-  font-size: 1.1rem;
-  line-height: 1.2;
+  font-size: 1.05rem;
+  line-height: 1.3;
   letter-spacing: -0.02em;
   color: #334155;
 }
