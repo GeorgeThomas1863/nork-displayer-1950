@@ -245,6 +245,26 @@
 
 /* PIC STYLES */
 
+.pic-array-element {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  padding: 1rem 0;
+  margin: 0 auto;
+  list-style: none;
+  width: 100%;
+}
+
+.pic-list-item {
+  position: relative;
+  height: 0;
+  padding-bottom: 66.67%; /* Creates a 3:2 aspect ratio container */
+  border-radius: 8px;
+  transition: box-shadow 0.3s ease;
+  background-color: transparent;
+  overflow: hidden;
+}
+
 .pic-element {
   position: absolute;
   max-width: 100%;
