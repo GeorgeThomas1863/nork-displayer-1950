@@ -281,10 +281,17 @@
 .article-pic-collapse .collapse-header {
   margin: 0 auto;
   margin-top: -1.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   width: fit-content;
   border-radius: 8px;
-  background-color: #06b6d4;
+
+  /* BACKGROUND FLAG ATTEMPT */
+  background-image: url("../images/north-korea-flag-icon-256.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-blend-mode: soft-light;
+  background-color: rgba(238, 242, 255, 0.8);
 }
 
 .article-pic-collapse .collapse-title {
