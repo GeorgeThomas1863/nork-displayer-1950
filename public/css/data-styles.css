@@ -290,7 +290,7 @@
   /* background-size: cover; */
   background-position: center;
   background-repeat: no-repeat;
-  background-blend-mode: soft-light;
+  background-blend-mode: luminosity;
 }
 
 .article-pic-collapse .collapse-title {
