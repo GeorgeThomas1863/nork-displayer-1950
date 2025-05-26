@@ -1,4 +1,30 @@
-export const buildPicArrayElement = async (inputArray) => {
+import { buildCollapseContainer } from "../collapse.js";
+
+export const buildPicArrayCollapse = async (inputArray) => {
+  if (!inputArray || !inputArray.length) return null;
+
+  const picArrayElement = await buildPicArray(inputArray);
+  if (!picArrayElement) return null;
+
+  //build pic title element
+  const picTitleElement = document.createElement("div");
+  picTitleElement.id = "article-pic-header";
+  picTitleElement.textContent = `${inputArray.length} PIC${inputArray.length > 1 ? "S" : ""}`;
+
+  //build collapse container
+  const picCollapseObj = {
+    titleElement: picTitleElement,
+    contentElement: picArrayElement,
+    isExpanded: false,
+    className: "article-pic-collapse",
+  };
+
+  const picCollapseElement = await buildCollapseContainer(picCollapseObj);
+
+  return picCollapseElement;
+};
+
+export const buildPicArray = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
 
   const picArrayElement = document.createElement("ul");
@@ -7,7 +33,6 @@ export const buildPicArrayElement = async (inputArray) => {
   for (let i = 0; i < inputArray.length; i++) {
     const picListItem = await buildPicListItem(inputArray[i]);
     if (!picListItem) continue;
-    // console.log("PIC LIST ITEM!!!", picListItem);
 
     picArrayElement.append(picListItem);
   }

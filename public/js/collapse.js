@@ -1,4 +1,4 @@
-export const buildCollapseContainer = (inputObj) => {
+export const buildCollapseContainer = async (inputObj) => {
   if (!inputObj) return null;
   const { titleElement, contentElement, isExpanded = false, className = "" } = inputObj;
 

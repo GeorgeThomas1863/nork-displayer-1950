@@ -1,4 +1,4 @@
-import { buildPicArrayElement } from "./parse-pics.js";
+import { buildPicArrayCollapse } from "./parse-pics.js";
 import { buildCollapseContainer, defineCollapseItems } from "../collapse.js";
 
 //includes FORM and DATA RETURN
@@ -139,6 +139,8 @@ export const buildArticleSortByListItem = async () => {
   return articleSortByListItem;
 };
 
+//--------------------------------------
+
 export const parseArticleData = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
 
@@ -175,7 +177,7 @@ export const buildArticleListItem = async (inputObj, isFirst) => {
   const articleElement = await buildArticleElement(inputObj);
 
   //build title element
-  const titleElement = await buildTitleElement(title);
+  const titleElement = await buildTitle(title);
 
   // Wrap the article content in a collapsible
   const articleCollapseObj = {
@@ -195,32 +197,24 @@ export const buildArticleElement = async (inputObj) => {
   const { date, text, picArray } = inputObj;
 
   const articleElement = document.createElement("article");
-  // articleElement.className = "article-element";
   articleElement.id = "article-element";
 
-  // Add pictures directly without collapse if they exist
-
-  const picArrayElement = await buildPicArrayElement(picArray);
-
-  if (picArrayElement) {
-    // Add a simple header to indicate pictures
-    const picHeader = document.createElement("div");
-    picHeader.className = "article-pic-header";
-    picHeader.textContent = `${picArray.length} Picture${picArray.length > 1 ? "s" : ""}`;
-
-    articleElement.append(picHeader, picArrayElement);
+  //Add pics as collapse
+  const picArrayCollapseElement = await buildPicArrayCollapse(picArray);
+  if (picArrayCollapseElement) {
+    articleElement.append(picArrayCollapseElement);
   }
 
   // Then append date and text after pictures (title is handled by collapse header)
-  const dateElement = await buildDateElement(date);
-  const textElement = await buildTextElement(text);
+  const dateElement = await buildDate(date);
+  const textElement = await buildText(text);
 
   articleElement.append(dateElement, textElement);
 
   return articleElement;
 };
 
-export const buildTitleElement = async (title) => {
+export const buildTitle = async (title) => {
   const titleElement = document.createElement("h2");
   titleElement.id = "article-title";
   titleElement.textContent = title;
@@ -228,7 +222,7 @@ export const buildTitleElement = async (title) => {
   return titleElement;
 };
 
-export const buildDateElement = async (date) => {
+export const buildDate = async (date) => {
   // Format and append date
   const dateElement = document.createElement("div");
   dateElement.id = "article-date";
@@ -242,7 +236,7 @@ export const buildDateElement = async (date) => {
   return dateElement;
 };
 
-export const buildTextElement = async (text) => {
+export const buildText = async (text) => {
   if (!text) return null;
 
   const textElement = document.createElement("div");
