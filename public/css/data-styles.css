@@ -277,3 +277,7 @@
   object-fit: contain;
   transition: all 0.5s ease;
 }
+
+.pic-list-item:hover .pic-element {
+  transform: translate(-50%, -50%) scale(1.5);
+}
