@@ -290,7 +290,7 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-blend-mode: lighten;
+  background-blend-mode: hard-light;
 }
 
 .article-pic-collapse .collapse-title {
