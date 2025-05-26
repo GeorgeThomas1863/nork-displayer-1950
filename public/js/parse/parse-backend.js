@@ -21,7 +21,7 @@ export const getBackendData = async () => {
 
 export const buildBackendDislay = async (inputData) => {
   if (!inputData) return null;
-  const { articleData, picSetData, vidPageData } = inputData;
+  const { articleArray, picArray, vidArray } = inputData;
 
   console.log("!!!BACKEND DATA", inputData);
   console.dir(inputData);
@@ -29,9 +29,9 @@ export const buildBackendDislay = async (inputData) => {
   const backendDataWrapper = document.createElement("div");
   backendDataWrapper.id = "backend-data-wrapper";
 
-  const articleDataWrapper = await buildArticleData(articleData);
-  const picDataWrapper = await buildPicData(picSetData);
-  const vidDataWrapper = await buildVidData(vidPageData);
+  const articleDataWrapper = await buildArticleData(articleArray);
+  const picDataWrapper = await buildPicData(picArray);
+  const vidDataWrapper = await buildVidData(vidArray);
 
   backendDataWrapper.append(articleDataWrapper, picDataWrapper, vidDataWrapper);
 

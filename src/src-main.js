@@ -4,32 +4,36 @@ import dbModel from "../models/db-model.js";
 
 //gets backend data from db
 export const runGetBackendData = async () => {
-  const { articles, picSetContent, vidPageContent } = CONFIG;
+  const { articles, pics, vids } = CONFIG;
 
-  //params for articles, extra things dont matter / ignored for others
-  const params = {
+  const vidParams = {
     sortKey: "date",
-    howMany: 5,
-    filterKey: "articleType",
-    filterValue: "fatboy",
+    howMany: 3,
   };
 
+  const picParams = { ...vidParams };
+  picParams.howMany = 9;
+
+  const articleParams = { ...vidParams, filterKey: "articleType", filterValue: "fatboy" };
+  articleParams.howMany = 5;
+
   //articles get ONLY last 5 FATBOY by default
-  const articleModel = new dbModel(params, articles);
+  const articleModel = new dbModel(articleParams, articles);
   const articleArrayRaw = await articleModel.getLastItemsByTypeArray();
   const articleArray = await addArticlePicData(articleArrayRaw);
 
-  // //get last 10 pic sets / vid pages
-  const picSetModel = new dbModel(params, picSetContent);
-  const picSetArray = await picSetModel.getLastItemsArray();
+  //get last 9 pics by default
+  const picModel = new dbModel(picParams, pics);
+  const picArray = await picModel.getLastItemsArray();
 
-  const vidPageModel = new dbModel(params, vidPageContent);
-  const vidPageArray = await vidPageModel.getLastItemsArray();
+  //get last 3 vids by default
+  const vidModel = new dbModel(vidParams, vids);
+  const vidArray = await vidModel.getLastItemsArray();
 
   const dataObj = {
-    articleData: articleArray,
-    picSetData: picSetArray,
-    vidPageData: vidPageArray,
+    articleArray: articleArray,
+    picArray: picArray,
+    vidArray: vidArray,
   };
 
   return dataObj;
