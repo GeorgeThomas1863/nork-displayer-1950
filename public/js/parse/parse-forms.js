@@ -1,5 +1,5 @@
 import { buildArticleForm } from "./parse-articles.js";
-import { buildPicSetForm } from "./parse-pics.js";
+import { buildPicAloneForm, buildPicSetForm } from "./parse-pics.js";
 import { buildVidPageForm } from "./parse-vids.js";
 
 export const buildInputForms = async () => {
