@@ -15,7 +15,7 @@ export const runGetBackendData = async () => {
 
   const picParams = {
     sortKey: "picId",
-    howMany: 9,
+    howMany: 12,
   };
 
   const vidParams = {
