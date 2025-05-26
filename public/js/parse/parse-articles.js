@@ -199,17 +199,16 @@ export const buildArticleElement = async (inputObj) => {
   articleElement.id = "article-element";
 
   // Add pictures directly without collapse if they exist
-  if (picArray && picArray.length) {
-    const picArrayElement = await buildPicArrayElement(picArray);
 
-    if (picArrayElement) {
-      // Add a simple header to indicate pictures
-      const picHeader = document.createElement("div");
-      picHeader.className = "article-pic-header";
-      picHeader.textContent = `${picArray.length} Picture${picArray.length > 1 ? "s" : ""}`;
+  const picArrayElement = await buildPicArrayElement(picArray);
 
-      articleElement.append(picHeader, picArrayElement);
-    }
+  if (picArrayElement) {
+    // Add a simple header to indicate pictures
+    const picHeader = document.createElement("div");
+    picHeader.className = "article-pic-header";
+    picHeader.textContent = `${picArray.length} Picture${picArray.length > 1 ? "s" : ""}`;
+
+    articleElement.append(picHeader, picArrayElement);
   }
 
   // Then append date and text after pictures (title is handled by collapse header)
