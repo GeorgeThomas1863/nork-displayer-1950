@@ -22,7 +22,13 @@ export const buildCollapseContainer = async (inputObj) => {
   // Add arrow and title to header
   collapseHeader.append(arrow, titleElement);
 
-  contentElement.className = isExpanded ? "collapse-content" : "collapse-content hidden";
+  // overwrites classes
+  // contentElement.className = isExpanded ? "collapse-content" : "collapse-content hidden";
+
+  //below preserves existing classes on content
+  const existingClasses = contentElement.className || "";
+  const collapseClasses = isExpanded ? "collapse-content" : "collapse-content hidden";
+  contentElement.className = existingClasses ? `${existingClasses} ${collapseClasses}` : collapseClasses;
 
   // Add event listener for toggling
   collapseHeader.addEventListener("click", () => {

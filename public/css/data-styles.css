@@ -244,7 +244,7 @@
 
 /* PIC STYLES */
 
-.pic-array-element {
+#pic-array-element {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
@@ -254,7 +254,7 @@
   width: 100%;
 }
 
-.pic-list-item {
+#pic-list-item {
   position: relative;
   height: 0;
   padding-bottom: 66.67%; /* Creates a 3:2 aspect ratio container */
@@ -264,19 +264,19 @@
   overflow: hidden;
 }
 
-.pic-element {
+#pic-element {
   position: absolute;
   max-width: 100%;
   max-height: 100%;
   width: auto;
   height: auto;
   top: 50%;
-  left: 50%;
+  left: 50%;  
   transform: translate(-50%, -50%);
   object-fit: contain;
   transition: all 0.5s ease;
 }
 
-.pic-list-item:hover .pic-element {
+#pic-list-item:hover #pic-element {
   transform: translate(-50%, -50%) scale(1.2);
 }

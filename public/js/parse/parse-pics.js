@@ -28,7 +28,7 @@ export const buildPicArray = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
 
   const picArrayElement = document.createElement("ul");
-  picArrayElement.className = "pic-array-element";
+  picArrayElement.id = "pic-array-element";
 
   for (let i = 0; i < inputArray.length; i++) {
     const picListItem = await buildPicListItem(inputArray[i]);
@@ -45,7 +45,7 @@ export const buildPicListItem = async (inputObj) => {
   const { savePath } = inputObj;
 
   const picListItem = document.createElement("li");
-  picListItem.className = "pic-list-item";
+  picListItem.id = "pic-list-item";
 
   //ADD pic stats here (scrape date, server, size, etc)
 
@@ -57,7 +57,7 @@ export const buildPicListItem = async (inputObj) => {
 
 export const buildPicElement = async (savePath) => {
   const picElement = document.createElement("img");
-  picElement.className = "pic-element";
+  picElement.id = "pic-element";
 
   //define pic path
   const fileName = savePath.split("/").pop();
