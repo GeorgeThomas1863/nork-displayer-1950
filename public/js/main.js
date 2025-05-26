@@ -7,12 +7,7 @@ const displayElement = document.getElementById("display-element");
 export const buildDefaultDisplay = async () => {
   //get backend data FIRST (to check for fail )
   const backendDataObj = await getBackendData();
-
-  //FIX / format this later / THROWS ERROR IF ANY ITEM (ARTICLES / PICSET / VIDPAGE) MISSING
-  if (!backendDataObj) {
-    displayElement.innerHTML = `<h1>BACKEND DATA LOOKUP FUCKED</h1>`;
-    return;
-  }
+  if (!backendDataObj) return null;
 
   //build input forms
   const inputFormElement = await buildInputForms(backendDataObj);
@@ -27,7 +22,10 @@ export const buildDefaultDisplay = async () => {
 
 const getBackendData = async () => {
   const backendDataObj = await sendToBack({ route: "/get-backend-data-route" });
+
+  //if ANY item missing return null [might want to CHANGE]
   if (!backendDataObj || !backendDataObj.articleData || !backendDataObj.picSetData || !backendDataObj.vidPageData) {
+    displayElement.innerHTML = `<h1>BACKEND DATA LOOKUP FUCKED</h1>`;
     console.log("BACKEND DATA FUCKED");
     return null;
   }
