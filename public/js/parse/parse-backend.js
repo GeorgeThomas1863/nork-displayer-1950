@@ -8,7 +8,7 @@ export const getBackendData = async () => {
   const backendDataObj = await sendToBack({ route: "/get-backend-data-route" });
 
   //if ANY item missing return null [might want to CHANGE]
-  if (!backendDataObj || !backendDataObj.articleData || !backendDataObj.picSetData || !backendDataObj.vidPageData) {
+  if (!backendDataObj || !backendDataObj.articleArray || !backendDataObj.picArray || !backendDataObj.vidArray) {
     const failElement = document.createElement("h1");
     failElement.innerHTML = "BACKEND DATA LOOKUP FUCKED";
     console.log(failElement);
