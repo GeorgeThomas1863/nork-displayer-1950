@@ -279,8 +279,8 @@
 
 /* makes collapse headers smaller for pics */
 .article-pic-collapse .collapse-header {
-  font-size: 1.5rem;
-  width: 5%;
+  font-size: 10rem;
+  width: 15%;
 }
 
 #pic-list-item:hover #pic-element {
