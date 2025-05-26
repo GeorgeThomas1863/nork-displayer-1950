@@ -213,10 +213,10 @@
   position: relative;
 }
 
-#article-title {
+.wrapper #article-title {
   margin-bottom: 1rem;
   /* font-size: 1.5rem; */
-  font-size: 15rem;
+  font-size: 10rem;
   font-weight: 700;
   color: #2c3e50;
   line-height: 1.3;
