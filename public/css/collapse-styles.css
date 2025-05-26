@@ -1,6 +1,7 @@
 /* COLLAPSE COMPONENT STYLES */
 .collapse-header {
   display: flex;
+  justify-content: center;
   align-items: center;
   padding: 16px 20px;
   background-color: rgb(235, 235, 235);
