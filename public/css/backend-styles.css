@@ -73,16 +73,6 @@
   border-radius: 6px;
 }
 
-.article-wrapper-collapse .collapse-header {
-  justify-content: left;
-  text-align: left;
-}
-
-.article-wrapper-collapse .collapse-title {
-  justify-content: left;
-  text-align: left;
-}
-
 .article-pic-collapse .collapse-content {
   background-color: transparent;
   box-shadow: none;
@@ -107,6 +97,10 @@
 
 .article-pic-collapse .collapse-title {
   font-size: 1.5rem;
+}
+
+.article-element-collapse .collapse-header {
+  justify-content: left;
 }
 
 /* figure out how to get this to keep the border radius on the pics */
