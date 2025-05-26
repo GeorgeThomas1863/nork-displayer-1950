@@ -271,10 +271,16 @@
   width: auto;
   height: auto;
   top: 50%;
-  left: 50%;  
+  left: 50%;
   transform: translate(-50%, -50%);
   object-fit: contain;
   transition: all 0.5s ease;
+}
+
+/* makes collapse headers smaller for pics */
+#article-pic-header {
+  font-size: 1.5rem;
+  width: 20%;
 }
 
 #pic-list-item:hover #pic-element {
