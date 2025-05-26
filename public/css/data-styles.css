@@ -290,12 +290,11 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-blend-mode: soft-light;
+  background-blend-mode: lighten;
 }
 
 .article-pic-collapse .collapse-title {
   font-size: 1.5rem;
-  color: #b3d9ff;
 }
 
 #pic-list-item:hover #pic-element {
