@@ -20,18 +20,6 @@ export const buildCollapseContainer = (inputObj) => {
   // Add arrow and title to header
   collapseHeader.append(arrow, titleElement);
 
-  //TRY WITHOUT WRAPPER
-  // Create content wrapper
-  //   const collapseContent = document.createElement("div");
-  //   collapseContent.className = isExpanded ? "collapse-content" : "collapse-content hidden";
-  //   collapseContent.append(content);
-
-  //   // Add event listener for toggling
-  //   collapseHeader.addEventListener("click", () => {
-  //     arrow.classList.toggle("expanded");
-  //     collapseContent.classList.toggle("hidden");
-  //   });
-
   content.className = isExpanded ? "collapse-content" : "collapse-content hidden";
 
   // Add event listener for toggling
