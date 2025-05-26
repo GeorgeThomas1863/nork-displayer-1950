@@ -101,6 +101,7 @@
 
 .article-pic-collapse .collapse-title {
   font-size: 1.5rem;
+  justify-content: left;
 }
 
 /* figure out how to get this to keep the border radius on the pics */
