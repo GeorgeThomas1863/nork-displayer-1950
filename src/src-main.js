@@ -4,7 +4,7 @@ import dbModel from "../models/db-model.js";
 
 //gets backend data from db
 export const runGetBackendData = async () => {
-  const { articles, pics, vids } = CONFIG;
+  const { articles, picsDownloaded, vidsDownloaded } = CONFIG;
 
   const vidParams = {
     sortKey: "date",
@@ -23,11 +23,11 @@ export const runGetBackendData = async () => {
   const articleArray = await addArticlePicData(articleArrayRaw);
 
   //get last 9 pics by default
-  const picModel = new dbModel(picParams, pics);
+  const picModel = new dbModel(picParams, picsDownloaded);
   const picArray = await picModel.getLastItemsArray();
 
   //get last 3 vids by default
-  const vidModel = new dbModel(vidParams, vids);
+  const vidModel = new dbModel(vidParams, vidsDownloaded);
   const vidArray = await vidModel.getLastItemsArray();
 
   const dataObj = {
