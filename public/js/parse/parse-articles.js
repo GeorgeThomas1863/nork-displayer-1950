@@ -188,7 +188,8 @@ export const buildArticleElement = async (inputObj) => {
   const { date, text, picArray } = inputObj;
 
   const articleElement = document.createElement("article");
-  articleElement.className = "article-element";
+  // articleElement.className = "article-element";
+  articleElement.id = "article-element";
 
   // Add pictures directly without collapse if they exist
   if (picArray && picArray.length) {
@@ -215,7 +216,7 @@ export const buildArticleElement = async (inputObj) => {
 
 export const buildTitleElement = async (title) => {
   const titleElement = document.createElement("h2");
-  titleElement.className = "article-title";
+  titleElement.id = "article-title";
   titleElement.textContent = title;
 
   return titleElement;
@@ -224,7 +225,7 @@ export const buildTitleElement = async (title) => {
 export const buildDateElement = async (date) => {
   // Format and append date
   const dateElement = document.createElement("div");
-  dateElement.className = "article-date";
+  dateElement.id = "article-date";
   const dateObj = new Date(date);
   dateElement.textContent = dateObj.toLocaleDateString("en-US", {
     year: "numeric",
@@ -239,7 +240,7 @@ export const buildTextElement = async (text) => {
   if (!text) return null;
 
   const textElement = document.createElement("div");
-  textElement.className = "article-text";
+  textElement.id = "article-text";
 
   // Fix line breaks by replacing \n with <br> tags
   const textWithBreaks = text.replace(/\n/g, "<br>");
