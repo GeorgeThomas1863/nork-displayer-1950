@@ -284,6 +284,7 @@
 
 .article-pic-collapse .collapse-content {
   background-color: transparent;
+  box-shadow: none;
 }
 
 /* makes collapse headers smaller for pics */
