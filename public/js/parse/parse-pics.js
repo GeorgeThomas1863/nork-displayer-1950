@@ -15,7 +15,7 @@ export const buildPicArrayCollapse = async (inputArray) => {
   const picCollapseObj = {
     titleElement: picTitleElement,
     contentElement: picArrayElement,
-    isExpanded: false,
+    isExpanded: true,
     className: "article-pic-collapse",
   };
 
