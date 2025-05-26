@@ -75,6 +75,7 @@
 
 .article-wrapper-collapse .collapse-header {
   justify-content: left;
+  text-align: left;
 }
 
 .article-pic-collapse .collapse-content {
