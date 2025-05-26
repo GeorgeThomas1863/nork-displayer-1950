@@ -38,6 +38,9 @@ const buildInputForms = async (inputData) => {
   if (!inputData) return null;
   const { articleData, picSetData, vidPageData } = inputData;
 
+  const formWrapperElement = document.createElement("div");
+  formWrapperElement.id = "form-wrapper";
+
   console.log("INPUT DATA");
   console.dir(inputData);
 
@@ -47,8 +50,10 @@ const buildInputForms = async (inputData) => {
 
   //BUILD VID PAGE WRAPPER
 
+  formWrapperElement.append(articleWrapper);
+
   //DELETE
-  return articleWrapper;
+  return formWrapperElement;
 };
 
 export const buildDropDown = async () => {
