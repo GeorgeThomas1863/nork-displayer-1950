@@ -280,6 +280,7 @@
 
 .article-pic-collapse {
   margin-bottom: 1.5rem;
+  background-color: transparent;
 }
 
 /* makes collapse headers smaller for pics */
