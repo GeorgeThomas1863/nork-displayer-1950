@@ -218,8 +218,8 @@
   font-size: 1.5rem;
   font-weight: 700;
   color: #2c3e50;
-  line-height: 1.3;
-  letter-spacing: -0.02em;
+  /* line-height: 1.3; */
+  /* letter-spacing: -0.02em; */
 }
 
 #article-date {
@@ -237,12 +237,12 @@
 
 #article-text {
   font-size: 0.9rem;
-  line-height: 1.3;
+  line-height: 1.5;
   color: #334155;
 }
 
 #article-text p {
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 /* ------------------------------ */
