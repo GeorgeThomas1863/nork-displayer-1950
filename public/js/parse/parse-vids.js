@@ -1,8 +1,6 @@
 import { buildCollapseContainer } from "../collapse.js";
 
-export const buildVidPageForm = async (inputArray) => {
-  if (!inputArray || !inputArray.length) return null;
-
+export const buildVidPageForm = async () => {
   const vidPageWrapper = document.createElement("ul");
   vidPageWrapper.id = "vid-page-wrapper";
   vidPageWrapper.className = "wrapper collapse-content";
@@ -10,9 +8,7 @@ export const buildVidPageForm = async (inputArray) => {
   const vidPageHowManyListItem = await buildVidPageHowManyListItem();
   const vidPageSortByListItem = await buildVidPageSortByListItem();
 
-  const backendVidPageData = await parseVidPageData(inputArray);
-
-  vidPageWrapper.append(vidPageHowManyListItem, vidPageSortByListItem, backendVidPageData);
+  vidPageWrapper.append(vidPageHowManyListItem, vidPageSortByListItem);
 
   const titleElement = document.createElement("div");
   titleElement.textContent = "VIDS";
