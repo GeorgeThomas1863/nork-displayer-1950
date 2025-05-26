@@ -208,14 +208,14 @@
 
 #article-element {
   background-color: #ffffff;
-  padding: 2rem;
+  padding: 1.5rem;
   overflow: hidden;
   position: relative;
 }
 
 #article-title {
   margin-bottom: 1rem;
-  align-items: center;
+  align-items: baseline;
   font-size: 1.5rem;
   font-weight: 700;
   color: #2c3e50;
@@ -238,7 +238,7 @@
 
 #article-text {
   font-size: 0.9rem;
-  line-height: 1;
+  line-height: 1.3;
   color: #334155;
 }
 
