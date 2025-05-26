@@ -279,10 +279,9 @@
 
 /* makes collapse headers smaller for pics */
 .article-pic-collapse .collapse-header {
-  /* width: fit-content; */
   margin: 0 auto;
   margin-top: -1.5rem;
-  width: 20%;
+  width: fit-content;
   border-radius: 8px;
 }
 
