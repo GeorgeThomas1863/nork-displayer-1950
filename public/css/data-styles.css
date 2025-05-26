@@ -279,12 +279,12 @@
 
 /* makes collapse headers smaller for pics */
 .article-pic-collapse .collapse-header {
-  margin: 0 auto;
+  /* margin: 0 auto; */
   margin-top: -1.5rem;
   margin-bottom: 1.5rem;
   width: fit-content;
   border-radius: 8px;
-  background-color: rgb(245, 245, 245);
+  background-color: rgb(200, 200, 200);
 
   /* BACKGROUND FLAG (stupid) */
   /* background-image: url("../images/north-korea-flag-icon-256.png");
