@@ -17,7 +17,7 @@ export const buildVidPageForm = async () => {
   const vidPageCollapseObj = {
     titleElement: titleElement,
     contentElement: vidPageWrapper,
-    isExpanded: true,
+    isExpanded: false,
     className: "vid-page-wrapper-collapse",
   };
 

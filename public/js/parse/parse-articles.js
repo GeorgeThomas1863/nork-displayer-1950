@@ -42,12 +42,10 @@ export const buildArticleTypeListItem = async () => {
   const articleTypeLabel = document.createElement("label");
   articleTypeLabel.setAttribute("for", "article-type");
   articleTypeLabel.textContent = "Article Type";
-  // articleTypeLabel.className = "form";
 
   const articleTypeSelect = document.createElement("select");
   articleTypeSelect.name = "article-type";
   articleTypeSelect.id = "article-type";
-  // articleTypeSelect.className = "form";
 
   // Create options for article type select
   const optionArray = [

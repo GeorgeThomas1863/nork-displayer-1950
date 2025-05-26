@@ -1,71 +1,52 @@
 import { buildCollapseContainer } from "../collapse.js";
 
-export const buildPicAloneForm = async () => {
-  const picAloneWrapper = document.createElement("ul");
-  picAloneWrapper.id = "pic-alone-wrapper";
-  picAloneWrapper.className = "wrapper collapse-content";
+export const buildPicForm = async () => {
+  const picWrapper = document.createElement("ul");
+  picWrapper.id = "pic-wrapper";
+  picWrapper.className = "wrapper collapse-content";
 
   const titleElement = document.createElement("div");
   titleElement.textContent = "PICS";
 
-  const picAloneHowManyListItem = await buildPicAloneHowManyListItem();
-  const picAloneSortByListItem = await buildPicAloneSortByListItem();
+  const picTypeListItem = await buildPicTypeListItem();
+  const picHowManyListItem = await buildPicHowManyListItem();
+  const picSortByListItem = await buildPicSortByListItem();
 
-  picAloneWrapper.append(picAloneHowManyListItem, picAloneSortByListItem);
+  picWrapper.append(picTypeListItem, picHowManyListItem, picSortByListItem);
 
   //build collapse container
-  const picAloneCollapseObj = {
+  const picCollapseObj = {
     titleElement: titleElement,
-    contentElement: picAloneWrapper,
+    contentElement: picWrapper,
     isExpanded: false,
-    className: "pic-alone-wrapper-collapse",
+    className: "pic-wrapper-collapse",
   };
 
-  const picAloneCollapseContainer = await buildCollapseContainer(picAloneCollapseObj);
+  const picCollapseContainer = await buildCollapseContainer(picCollapseObj);
 
   // Apply the wrapper class to the collapse container instead
-  picAloneCollapseContainer.className = "wrapper";
+  picCollapseContainer.className = "wrapper";
 
-  return picAloneCollapseContainer;
+  return picCollapseContainer;
 };
 
-export const buildPicAloneHowManyListItem = async () => {
-  const picAloneHowManyListItem = document.createElement("li");
-  picAloneHowManyListItem.id = "pic-alone-how-many-list-item";
-  picAloneHowManyListItem.className = "form";
+export const buildPicTypeListItem = async () => {
+  const picTypeListItem = document.createElement("li");
+  picTypeListItem.id = "pic-type-list-item";
+  picTypeListItem.className = "form";
 
-  const picAloneHowManyLabel = document.createElement("label");
-  picAloneHowManyLabel.setAttribute("for", "pic-alone-how-many");
-  picAloneHowManyLabel.textContent = "How Many?";
+  const picTypeLabel = document.createElement("label");
+  picTypeLabel.setAttribute("for", "pic-type");
+  picTypeLabel.textContent = "Pic Type";
 
-  const picAloneHowManyInput = document.createElement("input");
-  picAloneHowManyInput.type = "text";
-  picAloneHowManyInput.name = "pic-alone-how-many";
-  picAloneHowManyInput.id = "pic-alone-how-many";
-  picAloneHowManyInput.placeholder = "[Defaults to 5 (most recent)]";
+  const picTypeSelect = document.createElement("select");
+  picTypeSelect.name = "pic-type";
+  picTypeSelect.id = "pic-type";
 
-  picAloneHowManyListItem.append(picAloneHowManyLabel, picAloneHowManyInput);
-
-  return picAloneHowManyListItem;
-};
-
-export const buildPicAloneSortByListItem = async () => {
-  const picAloneSortByListItem = document.createElement("li");
-  picAloneSortByListItem.id = "pic-alone-sort-by-list-item";
-  picAloneSortByListItem.className = "form";
-
-  const picAloneSortByLabel = document.createElement("label");
-  picAloneSortByLabel.setAttribute("for", "pic-alone-sort-by");
-  picAloneSortByLabel.textContent = "Sort By";
-
-  const picAloneSortBySelect = document.createElement("select");
-  picAloneSortBySelect.name = "pic-alone-sort-by";
-  picAloneSortBySelect.id = "pic-alone-sort-by";
-
-  // Create options for sort by select
+  // Create options for article type select
   const optionArray = [
-    { value: "pic-alone-newest-to-oldest", id: "pic-alone-newest-to-oldest", text: "Newest to Oldest", selected: true },
-    { value: "pic-alone-oldest-to-newest", id: "pic-alone-oldest-to-newest", text: "Oldest to Newest" },
+    { value: "pics-alone", id: "pics-alone", text: "Just PICS", selected: true },
+    { value: "pic-sets", id: "pic-sets", text: "Pic Sets" },
   ];
 
   for (let i = 0; i < optionArray.length; i++) {
@@ -77,101 +58,157 @@ export const buildPicAloneSortByListItem = async () => {
     if (optionData.selected) {
       option.selected = true;
     }
-    picAloneSortBySelect.append(option);
+    picTypeSelect.append(option);
   }
 
-  picAloneSortByListItem.append(picAloneSortByLabel, picAloneSortBySelect);
+  picTypeListItem.append(picTypeLabel, picTypeSelect);
 
-  return picAloneSortByListItem;
+  return picTypeListItem;
+};
+
+export const buildPicHowManyListItem = async () => {
+  const picHowManyListItem = document.createElement("li");
+  picHowManyListItem.id = "pic-how-many-list-item";
+  picHowManyListItem.className = "form";
+
+  const picHowManyLabel = document.createElement("label");
+  picHowManyLabel.setAttribute("for", "pic-how-many");
+  picHowManyLabel.textContent = "How Many?";
+
+  const picHowManyInput = document.createElement("input");
+  picHowManyInput.type = "text";
+  picHowManyInput.name = "pic-how-many";
+  picHowManyInput.id = "pic-how-many";
+  picHowManyInput.placeholder = "[Defaults to 5 (most recent)]";
+
+  picHowManyListItem.append(picHowManyLabel, picHowManyInput);
+
+  return picHowManyListItem;
+};
+
+export const buildPicSortByListItem = async () => {
+  const picSortByListItem = document.createElement("li");
+  picSortByListItem.id = "pic-sort-by-list-item";
+  picSortByListItem.className = "form";
+
+  const picSortByLabel = document.createElement("label");
+  picSortByLabel.setAttribute("for", "pic-sort-by");
+  picSortByLabel.textContent = "Sort By";
+
+  const picSortBySelect = document.createElement("select");
+  picSortBySelect.name = "pic-sort-by";
+  picSortBySelect.id = "pic-sort-by";
+
+  // Create options for sort by select
+  const optionArray = [
+    { value: "pic-newest-to-oldest", id: "pic-newest-to-oldest", text: "Newest to Oldest", selected: true },
+    { value: "pic-oldest-to-newest", id: "pic-oldest-to-newest", text: "Oldest to Newest" },
+  ];
+
+  for (let i = 0; i < optionArray.length; i++) {
+    const optionData = optionArray[i];
+    const option = document.createElement("option");
+    option.value = optionData.value;
+    option.id = optionData.id;
+    option.textContent = optionData.text;
+    if (optionData.selected) {
+      option.selected = true;
+    }
+    picSortBySelect.append(option);
+  }
+
+  picSortByListItem.append(picSortByLabel, picSortBySelect);
+
+  return picSortByListItem;
 };
 
 //------------------------------
 
-//PARSE PIC SETS
-export const buildPicSetForm = async () => {
-  const picSetWrapper = document.createElement("ul");
-  picSetWrapper.id = "pic-set-wrapper";
-  picSetWrapper.className = "wrapper collapse-content";
+// //PARSE PIC SETS
+// export const buildPicSetForm = async () => {
+//   const picSetWrapper = document.createElement("ul");
+//   picSetWrapper.id = "pic-set-wrapper";
+//   picSetWrapper.className = "wrapper collapse-content";
 
-  const picSetHowManyListItem = await buildPicSetHowManyListItem();
-  const picSetSortByListItem = await buildPicSetSortByListItem();
+//   const picSetHowManyListItem = await buildPicSetHowManyListItem();
+//   const picSetSortByListItem = await buildPicSetSortByListItem();
 
-  picSetWrapper.append(picSetHowManyListItem, picSetSortByListItem);
+//   picSetWrapper.append(picSetHowManyListItem, picSetSortByListItem);
 
-  const titleElement = document.createElement("div");
-  titleElement.textContent = "PIC SETS";
+//   const titleElement = document.createElement("div");
+//   titleElement.textContent = "PIC SETS";
 
-  //build collapse container
-  const picSetCollapseObj = {
-    titleElement: titleElement,
-    contentElement: picSetWrapper,
-    isExpanded: false,
-    className: "pic-set-wrapper-collapse",
-  };
+//   //build collapse container
+//   const picSetCollapseObj = {
+//     titleElement: titleElement,
+//     contentElement: picSetWrapper,
+//     isExpanded: false,
+//     className: "pic-set-wrapper-collapse",
+//   };
 
-  const picSetCollapseContainer = await buildCollapseContainer(picSetCollapseObj);
+//   const picSetCollapseContainer = await buildCollapseContainer(picSetCollapseObj);
 
-  // Apply the wrapper class to the collapse container instead
-  picSetCollapseContainer.className = "wrapper";
+//   // Apply the wrapper class to the collapse container instead
+//   picSetCollapseContainer.className = "wrapper";
 
-  return picSetCollapseContainer;
-};
+//   return picSetCollapseContainer;
+// };
 
-export const buildPicSetHowManyListItem = async () => {
-  const picSetHowManyListItem = document.createElement("li");
-  picSetHowManyListItem.id = "pic-set-how-many-list-item";
-  picSetHowManyListItem.className = "form";
+// export const buildPicSetHowManyListItem = async () => {
+//   const picSetHowManyListItem = document.createElement("li");
+//   picSetHowManyListItem.id = "pic-set-how-many-list-item";
+//   picSetHowManyListItem.className = "form";
 
-  const picSetHowManyLabel = document.createElement("label");
-  picSetHowManyLabel.setAttribute("for", "pic-set-how-many");
-  picSetHowManyLabel.textContent = "How Many?";
+//   const picSetHowManyLabel = document.createElement("label");
+//   picSetHowManyLabel.setAttribute("for", "pic-set-how-many");
+//   picSetHowManyLabel.textContent = "How Many?";
 
-  const picSetHowManyInput = document.createElement("input");
-  picSetHowManyInput.type = "text";
-  picSetHowManyInput.name = "pic-set-how-many";
-  picSetHowManyInput.id = "pic-set-how-many";
-  picSetHowManyInput.placeholder = "[Defaults to 5 (most recent)]";
+//   const picSetHowManyInput = document.createElement("input");
+//   picSetHowManyInput.type = "text";
+//   picSetHowManyInput.name = "pic-set-how-many";
+//   picSetHowManyInput.id = "pic-set-how-many";
+//   picSetHowManyInput.placeholder = "[Defaults to 5 (most recent)]";
 
-  picSetHowManyListItem.append(picSetHowManyLabel, picSetHowManyInput);
+//   picSetHowManyListItem.append(picSetHowManyLabel, picSetHowManyInput);
 
-  return picSetHowManyListItem;
-};
+//   return picSetHowManyListItem;
+// };
 
-export const buildPicSetSortByListItem = async () => {
-  const picSetSortByListItem = document.createElement("li");
-  picSetSortByListItem.id = "pic-set-sort-by-list-item";
-  picSetSortByListItem.className = "form";
+// export const buildPicSetSortByListItem = async () => {
+//   const picSetSortByListItem = document.createElement("li");
+//   picSetSortByListItem.id = "pic-set-sort-by-list-item";
+//   picSetSortByListItem.className = "form";
 
-  const picSetSortByLabel = document.createElement("label");
-  picSetSortByLabel.setAttribute("for", "pic-set-sort-by");
-  picSetSortByLabel.textContent = "Sort By";
+//   const picSetSortByLabel = document.createElement("label");
+//   picSetSortByLabel.setAttribute("for", "pic-set-sort-by");
+//   picSetSortByLabel.textContent = "Sort By";
 
-  const picSetSortBySelect = document.createElement("select");
-  picSetSortBySelect.name = "pic-set-sort-by";
-  picSetSortBySelect.id = "pic-set-sort-by";
+//   const picSetSortBySelect = document.createElement("select");
+//   picSetSortBySelect.name = "pic-set-sort-by";
+//   picSetSortBySelect.id = "pic-set-sort-by";
 
-  // Create options for sort by select
-  const optionArray = [
-    { value: "pic-set-newest-to-oldest", id: "pic-set-newest-to-oldest", text: "Newest to Oldest", selected: true },
-    { value: "pic-set-oldest-to-newest", id: "pic-set-oldest-to-newest", text: "Oldest to Newest" },
-  ];
+//   // Create options for sort by select
+//   const optionArray = [
+//     { value: "pic-set-newest-to-oldest", id: "pic-set-newest-to-oldest", text: "Newest to Oldest", selected: true },
+//     { value: "pic-set-oldest-to-newest", id: "pic-set-oldest-to-newest", text: "Oldest to Newest" },
+//   ];
 
-  for (let i = 0; i < optionArray.length; i++) {
-    const optionData = optionArray[i];
-    const option = document.createElement("option");
-    option.value = optionData.value;
-    option.id = optionData.id;
-    option.textContent = optionData.text;
-    if (optionData.selected) {
-      option.selected = true;
-    }
-    picSetSortBySelect.append(option);
-  }
+//   for (let i = 0; i < optionArray.length; i++) {
+//     const optionData = optionArray[i];
+//     const option = document.createElement("option");
+//     option.value = optionData.value;
+//     option.id = optionData.id;
+//     option.textContent = optionData.text;
+//     if (optionData.selected) {
+//       option.selected = true;
+//     }
+//     picSetSortBySelect.append(option);
+//   }
 
-  picSetSortByListItem.append(picSetSortByLabel, picSetSortBySelect);
+//   picSetSortByListItem.append(picSetSortByLabel, picSetSortBySelect);
 
-  return picSetSortByListItem;
-};
+//   return picSetSortByListItem;
+// };
 
 //----------------------------------
 
