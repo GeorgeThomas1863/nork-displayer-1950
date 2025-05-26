@@ -8,8 +8,7 @@ export const buildInputForms = async () => {
 
   const articleFormWrapper = await buildArticleForm();
 
-  console.log("ARTICLE FORM WRAPPER");
-  console.log(articleFormWrapper);
+  const picAloneFormWrapper = await buildPicAloneForm();
 
   //BUILD PIC SET WRAPPER
   const picSetFormWrapper = await buildPicSetForm();
@@ -17,7 +16,7 @@ export const buildInputForms = async () => {
   //BUILD VID PAGE WRAPPER
   const vidPageFormWrapper = await buildVidPageForm();
 
-  formWrapperElement.append(articleFormWrapper, picSetFormWrapper, vidPageFormWrapper);
+  formWrapperElement.append(articleFormWrapper, picAloneFormWrapper, picSetFormWrapper, vidPageFormWrapper);
 
   //DELETE
   return formWrapperElement;

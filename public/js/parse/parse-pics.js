@@ -1,7 +1,93 @@
 import { buildCollapseContainer } from "../collapse.js";
 
-//PARSE PIC SETS
+export const buildPicAloneForm = async () => {
+  const picAloneWrapper = document.createElement("ul");
+  picAloneWrapper.id = "pic-alone-wrapper";
+  picAloneWrapper.className = "wrapper collapse-content";
 
+  const titleElement = document.createElement("div");
+  titleElement.textContent = "PICS";
+
+  const picAloneHowManyListItem = await buildPicAloneHowManyListItem();
+  const picAloneSortByListItem = await buildPicAloneSortByListItem();
+
+  picAloneWrapper.append(picAloneHowManyListItem, picAloneSortByListItem);
+
+  //build collapse container
+  const picAloneCollapseObj = {
+    titleElement: titleElement,
+    contentElement: picAloneWrapper,
+    isExpanded: false,
+    className: "pic-alone-wrapper-collapse",
+  };
+
+  const picAloneCollapseContainer = await buildCollapseContainer(picAloneCollapseObj);
+
+  // Apply the wrapper class to the collapse container instead
+  picAloneCollapseContainer.className = "wrapper";
+
+  return picAloneCollapseContainer;
+};
+
+export const buildPicAloneHowManyListItem = async () => {
+  const picAloneHowManyListItem = document.createElement("li");
+  picAloneHowManyListItem.id = "pic-alone-how-many-list-item";
+  picAloneHowManyListItem.className = "form";
+
+  const picAloneHowManyLabel = document.createElement("label");
+  picAloneHowManyLabel.setAttribute("for", "pic-alone-how-many");
+  picAloneHowManyLabel.textContent = "How Many?";
+
+  const picAloneHowManyInput = document.createElement("input");
+  picAloneHowManyInput.type = "text";
+  picAloneHowManyInput.name = "pic-alone-how-many";
+  picAloneHowManyInput.id = "pic-alone-how-many";
+  picAloneHowManyInput.placeholder = "[Defaults to 5 (most recent)]";
+
+  picAloneHowManyListItem.append(picAloneHowManyLabel, picAloneHowManyInput);
+
+  return picAloneHowManyListItem;
+};
+
+export const buildPicAloneSortByListItem = async () => {
+  const picAloneSortByListItem = document.createElement("li");
+  picAloneSortByListItem.id = "pic-alone-sort-by-list-item";
+  picAloneSortByListItem.className = "form";
+
+  const picAloneSortByLabel = document.createElement("label");
+  picAloneSortByLabel.setAttribute("for", "pic-alone-sort-by");
+  picAloneSortByLabel.textContent = "Sort By";
+
+  const picAloneSortBySelect = document.createElement("select");
+  picAloneSortBySelect.name = "pic-alone-sort-by";
+  picAloneSortBySelect.id = "pic-alone-sort-by";
+
+  // Create options for sort by select
+  const optionArray = [
+    { value: "pic-alone-newest-to-oldest", id: "pic-alone-newest-to-oldest", text: "Newest to Oldest", selected: true },
+    { value: "pic-alone-oldest-to-newest", id: "pic-alone-oldest-to-newest", text: "Oldest to Newest" },
+  ];
+
+  for (let i = 0; i < optionArray.length; i++) {
+    const optionData = optionArray[i];
+    const option = document.createElement("option");
+    option.value = optionData.value;
+    option.id = optionData.id;
+    option.textContent = optionData.text;
+    if (optionData.selected) {
+      option.selected = true;
+    }
+    picAloneSortBySelect.append(option);
+  }
+
+  picAloneSortByListItem.append(picAloneSortByLabel, picAloneSortBySelect);
+
+  return picAloneSortByListItem;
+};
+
+//------------------------------
+
+//PARSE PIC SETS
 export const buildPicSetForm = async () => {
   const picSetWrapper = document.createElement("ul");
   picSetWrapper.id = "pic-set-wrapper";
@@ -19,7 +105,7 @@ export const buildPicSetForm = async () => {
   const picSetCollapseObj = {
     titleElement: titleElement,
     contentElement: picSetWrapper,
-    isExpanded: true,
+    isExpanded: false,
     className: "pic-set-wrapper-collapse",
   };
 

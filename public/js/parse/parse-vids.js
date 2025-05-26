@@ -11,7 +11,7 @@ export const buildVidPageForm = async () => {
   vidPageWrapper.append(vidPageHowManyListItem, vidPageSortByListItem);
 
   const titleElement = document.createElement("div");
-  titleElement.textContent = "VIDS";
+  titleElement.textContent = "VIDEOS";
 
   //build collapse container
   const vidPageCollapseObj = {
