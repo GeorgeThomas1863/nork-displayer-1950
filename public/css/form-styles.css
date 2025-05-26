@@ -1,10 +1,23 @@
 /* FORM STYLES */
 
+/* Form wrapper flexbox styling */
+#form-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  width: 100%;
+  align-items: flex-start;
+}
+
+/* Make each form take equal width */
+#form-wrapper > * {
+  flex: 1;
+  min-width: 0; /* Allows flex items to shrink below their content size */
+}
+
 .wrapper {
   display: flex;
   flex-direction: column;
-  /* width: 90%;
-    min-width: 280px; */
   margin: 1rem;
   padding: 0;
   background-color: transparent;
