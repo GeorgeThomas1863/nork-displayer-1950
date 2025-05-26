@@ -1,4 +1,4 @@
-import { buildCollapseContainer } from "../collapse.js";
+import { buildCollapseContainer, defineCollapseItems } from "../collapse.js";
 
 export const buildPicForm = async () => {
   const picWrapper = document.createElement("ul");
@@ -124,9 +124,67 @@ export const buildPicSortByListItem = async () => {
 
 //----------------------------------
 
+//START OF CURSOR ADDITIONS
 export const buildPicData = async (inputArray) => {
-  console.log("BUILD");
+  if (!inputArray || !inputArray.length) return null;
+
+  const picList = document.createElement("ul");
+  picList.className = "pic-list data-return";
+
+  let isFirst = true;
+  const collapseArray = [];
+
+  for (let i = 0; i < inputArray.length; i++) {
+    const picListItem = await buildPicDataListItem(inputArray[i], isFirst);
+    picList.append(picListItem);
+
+    // Store the collapse components for group functionality
+    const collapseItem = picListItem.querySelector(".collapse-container");
+    if (collapseItem) collapseArray.push(collapseItem);
+
+    isFirst = false;
+  }
+
+  // Set up the collapse group behavior
+  defineCollapseItems(collapseArray);
+
+  return picList;
 };
+
+export const buildPicDataListItem = async (inputObj, isFirst) => {
+  const { savePath } = inputObj;
+
+  const picDataListItem = document.createElement("li");
+  picDataListItem.className = "pic-data-list-item";
+
+  // Create the pic element using existing function
+  const picElement = await buildPicElement(savePath);
+
+  // Create a simple wrapper for the pic
+  const picWrapper = document.createElement("div");
+  picWrapper.className = "pic-data-wrapper";
+  picWrapper.append(picElement);
+
+  // Create title from filename
+  const fileName = savePath.split("/").pop();
+  const titleElement = document.createElement("div");
+  titleElement.className = "pic-data-title";
+  titleElement.textContent = fileName;
+
+  // Wrap the pic content in a collapsible
+  const picCollapseObj = {
+    titleElement: titleElement,
+    contentElement: picWrapper,
+    isExpanded: isFirst,
+    className: "pic-data-collapse",
+  };
+
+  const picCollapseContainer = await buildCollapseContainer(picCollapseObj);
+  picDataListItem.append(picCollapseContainer);
+
+  return picDataListItem;
+};
+//END OF CURSOR ADDITIONS
 
 //-----------------------------------
 
