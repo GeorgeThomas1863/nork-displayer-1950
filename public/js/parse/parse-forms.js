@@ -1,5 +1,5 @@
 import { buildArticleForm } from "./parse-articles.js";
-import { buildPicAloneForm, buildPicSetForm } from "./parse-pics.js";
+import { buildPicForm } from "./parse-pics.js";
 import { buildVidPageForm } from "./parse-vids.js";
 
 export const buildInputForms = async () => {
@@ -8,16 +8,11 @@ export const buildInputForms = async () => {
 
   const articleFormWrapper = await buildArticleForm();
 
-  const picAloneFormWrapper = await buildPicAloneForm();
+  const picFormWrapper = await buildPicForm();
 
-  //BUILD PIC SET WRAPPER
-  const picSetFormWrapper = await buildPicSetForm();
-
-  //BUILD VID PAGE WRAPPER
   const vidPageFormWrapper = await buildVidPageForm();
 
-  formWrapperElement.append(articleFormWrapper, picAloneFormWrapper, picSetFormWrapper, vidPageFormWrapper);
+  formWrapperElement.append(articleFormWrapper, picFormWrapper, vidPageFormWrapper);
 
-  //DELETE
   return formWrapperElement;
 };
