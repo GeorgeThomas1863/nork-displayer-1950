@@ -253,7 +253,7 @@ export const buildTextElement = async (text) => {
   // const textWithBreaks = text.replace(/\n/g, "<br>");
   // textElement.innerHTML = textWithBreaks;
 
-  textElement.innerHTML = text;
-  
+  textElement.textContent = text;
+
   return textElement;
 };
