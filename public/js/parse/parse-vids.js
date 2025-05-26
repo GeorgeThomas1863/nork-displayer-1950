@@ -1,66 +1,103 @@
 import { buildCollapseContainer } from "../collapse.js";
 
-export const buildVidPageForm = async () => {
-  const vidPageWrapper = document.createElement("ul");
-  vidPageWrapper.id = "vid-page-wrapper";
-  vidPageWrapper.className = "wrapper collapse-content";
+export const buildVidForm = async () => {
+  const vidWrapper = document.createElement("ul");
+  vidWrapper.id = "vid-wrapper";
+  vidWrapper.className = "wrapper collapse-content";
 
-  const vidPageHowManyListItem = await buildVidPageHowManyListItem();
-  const vidPageSortByListItem = await buildVidPageSortByListItem();
+  const vidTypeListItem = await buildVidTypeListItem();
+  const vidHowManyListItem = await buildVidHowManyListItem();
+  const vidSortByListItem = await buildVidSortByListItem();
 
-  vidPageWrapper.append(vidPageHowManyListItem, vidPageSortByListItem);
+  vidWrapper.append(vidTypeListItem, vidHowManyListItem, vidSortByListItem);
 
   const titleElement = document.createElement("div");
   titleElement.textContent = "VIDEOS";
 
   //build collapse container
-  const vidPageCollapseObj = {
+  const vidCollapseObj = {
     titleElement: titleElement,
-    contentElement: vidPageWrapper,
+    contentElement: vidWrapper,
     isExpanded: false,
-    className: "vid-page-wrapper-collapse",
+    className: "vid-wrapper-collapse",
   };
 
-  const vidPageCollapseContainer = await buildCollapseContainer(vidPageCollapseObj);
+  const vidCollapseContainer = await buildCollapseContainer(vidCollapseObj);
 
   // Apply the wrapper class to the collapse container instead
-  vidPageCollapseContainer.className = "wrapper";
+  vidCollapseContainer.className = "wrapper";
 
-  return vidPageCollapseContainer;
+  return vidCollapseContainer;
 };
 
-export const buildVidPageHowManyListItem = async () => {
-  const vidPageHowManyListItem = document.createElement("li");
-  vidPageHowManyListItem.id = "vid-page-how-many-list-item";
-  vidPageHowManyListItem.className = "form";
+export const buildVidTypeListItem = async () => {
+  const vidTypeListItem = document.createElement("li");
+  vidTypeListItem.id = "vid-type-list-item";
+  vidTypeListItem.className = "form";
 
-  const vidPageHowManyLabel = document.createElement("label");
-  vidPageHowManyLabel.setAttribute("for", "vid-page-how-many");
-  vidPageHowManyLabel.textContent = "How Many?";
+  const vidTypeLabel = document.createElement("label");
+  vidTypeLabel.setAttribute("for", "vid-type");
+  vidTypeLabel.textContent = "Video Type";
 
-  const vidPageHowManyInput = document.createElement("input");
-  vidPageHowManyInput.type = "text";
-  vidPageHowManyInput.name = "vid-page-how-many";
-  vidPageHowManyInput.id = "vid-page-how-many";
-  vidPageHowManyInput.placeholder = "[Defaults to 5 (most recent)]";
+  const vidTypeSelect = document.createElement("select");
+  vidTypeSelect.name = "vid-type";
+  vidTypeSelect.id = "vid-type";
 
-  vidPageHowManyListItem.append(vidPageHowManyLabel, vidPageHowManyInput);
+  // Create options for article type select
+  const optionArray = [
+    { value: "vid-alone", id: "vid-alone", text: "Just Vids", selected: true },
+    { value: "vid-pages", id: "vid-pages", text: "Vid Pages" },
+  ];
 
-  return vidPageHowManyListItem;
+  for (let i = 0; i < optionArray.length; i++) {
+    const optionData = optionArray[i];
+    const option = document.createElement("option");
+    option.value = optionData.value;
+    option.id = optionData.id;
+    option.textContent = optionData.text;
+    if (optionData.selected) {
+      option.selected = true;
+    }
+    vidTypeSelect.append(option);
+  }
+
+  vidTypeListItem.append(vidTypeLabel, vidTypeSelect);
+
+  return vidTypeListItem;
 };
 
-export const buildVidPageSortByListItem = async () => {
-  const vidPageSortByListItem = document.createElement("li");
-  vidPageSortByListItem.id = "vid-page-sort-by-list-item";
-  vidPageSortByListItem.className = "form";
+export const buildVidHowManyListItem = async () => {
+  const vidHowManyListItem = document.createElement("li");
+  vidHowManyListItem.id = "vid-how-many-list-item";
+  vidHowManyListItem.className = "form";
 
-  const vidPageSortByLabel = document.createElement("label");
-  vidPageSortByLabel.setAttribute("for", "vid-page-sort-by");
-  vidPageSortByLabel.textContent = "Sort By";
+  const vidHowManyLabel = document.createElement("label");
+  vidHowManyLabel.setAttribute("for", "vid-how-many");
+  vidHowManyLabel.textContent = "How Many?";
 
-  const vidPageSortBySelect = document.createElement("select");
-  vidPageSortBySelect.name = "vid-page-sort-by";
-  vidPageSortBySelect.id = "vid-page-sort-by";
+  const vidHowManyInput = document.createElement("input");
+  vidHowManyInput.type = "text";
+  vidHowManyInput.name = "vid-how-many";
+  vidHowManyInput.id = "vid-how-many";
+  vidHowManyInput.placeholder = "[Defaults to 5 (most recent)]";
+
+  vidHowManyListItem.append(vidHowManyLabel, vidHowManyInput);
+
+  return vidHowManyListItem;
+};
+
+export const buildVidSortByListItem = async () => {
+  const vidSortByListItem = document.createElement("li");
+  vidSortByListItem.id = "vid-sort-by-list-item";
+  vidSortByListItem.className = "form";
+
+  const vidSortByLabel = document.createElement("label");
+  vidSortByLabel.setAttribute("for", "vid-sort-by");
+  vidSortByLabel.textContent = "Sort By";
+
+  const vidSortBySelect = document.createElement("select");
+  vidSortBySelect.name = "vid-sort-by";
+  vidSortBySelect.id = "vid-sort-by";
 
   // Create options for sort by select
   const optionArray = [
@@ -77,12 +114,12 @@ export const buildVidPageSortByListItem = async () => {
     if (optionData.selected) {
       option.selected = true;
     }
-    vidPageSortBySelect.append(option);
+    vidSortBySelect.append(option);
   }
 
-  vidPageSortByListItem.append(vidPageSortByLabel, vidPageSortBySelect);
+  vidSortByListItem.append(vidSortByLabel, vidSortBySelect);
 
-  return vidPageSortByListItem;
+  return vidSortByListItem;
 };
 
 //----------------------------

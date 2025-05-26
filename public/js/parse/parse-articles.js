@@ -49,7 +49,7 @@ export const buildArticleTypeListItem = async () => {
 
   // Create options for article type select
   const optionArray = [
-    { value: "fatboy", id: "fatboy", text: "Revolutionary Activities", selected: true },
+    { value: "fatboy", id: "fatboy", text: `"Revolutionary Activities"`, selected: true },
     { value: "all-type", id: "all-type", text: "All" },
     { value: "top-news", id: "top-news", text: "Top News" },
     { value: "latest-news", id: "latest-news", text: "Latest News" },

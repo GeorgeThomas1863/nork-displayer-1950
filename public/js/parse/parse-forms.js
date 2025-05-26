@@ -1,6 +1,6 @@
 import { buildArticleForm } from "./parse-articles.js";
 import { buildPicForm } from "./parse-pics.js";
-import { buildVidPageForm } from "./parse-vids.js";
+import { buildVidForm } from "./parse-vids.js";
 
 export const buildInputForms = async () => {
   const formWrapperElement = document.createElement("div");
@@ -10,9 +10,9 @@ export const buildInputForms = async () => {
 
   const picFormWrapper = await buildPicForm();
 
-  const vidPageFormWrapper = await buildVidPageForm();
+  const vidFormWrapper = await buildVidForm();
 
-  formWrapperElement.append(articleFormWrapper, picFormWrapper, vidPageFormWrapper);
+  formWrapperElement.append(articleFormWrapper, picFormWrapper, vidFormWrapper);
 
   return formWrapperElement;
 };
