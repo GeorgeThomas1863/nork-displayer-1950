@@ -6,16 +6,22 @@ import dbModel from "../models/db-model.js";
 export const runGetBackendData = async () => {
   const { articles, picsDownloaded, vidsDownloaded } = CONFIG;
 
-  const vidParams = {
-    sortKey: "date",
-    howMany: 3,
+  const articleParams = {
+    sortKey: "articleId",
+    howMany: 5,
+    filterKey: "articleType",
+    filterValue: "fatboy",
   };
 
-  const picParams = { ...vidParams };
-  picParams.howMany = 9;
+  const picParams = {
+    sortKey: "picId",
+    howMany: 9,
+  };
 
-  const articleParams = { ...vidParams, filterKey: "articleType", filterValue: "fatboy" };
-  articleParams.howMany = 5;
+  const vidParams = {
+    sortKey: "vidId",
+    howMany: 3,
+  };
 
   //articles get ONLY last 5 FATBOY by default
   const articleModel = new dbModel(articleParams, articles);
