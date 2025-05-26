@@ -1,5 +1,7 @@
 import { sendToBack } from "./util.js";
 import { buildArticleWrapper } from "./parse/parse-articles.js";
+import { buildPicSetWrapper } from "./parse/parse-pics.js";
+import { buildVidPageWrapper } from "./parse/parse-vids.js";
 
 //get display element
 const displayElement = document.getElementById("display-element");
@@ -47,10 +49,12 @@ const buildInputForms = async (inputData) => {
   const articleWrapper = await buildArticleWrapper(articleData);
 
   //BUILD PIC SET WRAPPER
+  const picSetWrapper = await buildPicSetWrapper(picSetData);
 
   //BUILD VID PAGE WRAPPER
+  const vidPageWrapper = await buildVidPageWrapper(vidPageData);
 
-  formWrapperElement.append(articleWrapper);
+  formWrapperElement.append(articleWrapper, picSetWrapper, vidPageWrapper);
 
   //DELETE
   return formWrapperElement;

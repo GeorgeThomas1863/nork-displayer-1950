@@ -1,5 +1,7 @@
 import { buildCollapseContainer } from "../collapse.js";
 
+//PARSE PICS
+
 export const buildPicArrayCollapse = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
 
@@ -67,4 +69,41 @@ export const buildPicElement = async (savePath) => {
   picElement.alt = "KCNA PIC";
 
   return picElement;
+};
+
+//----------------------------------
+
+//PARSE PIC SETS
+
+export const buildPicSetWrapper = async (inputArray) => {
+  if (!inputArray || !inputArray.length) return null;
+
+  const picSetWrapper = document.createElement("ul");
+  picSetWrapper.id = "pic-set-wrapper";
+  picSetWrapper.className = "wrapper collapse-content";
+
+  const picSetHowManyListItem = await buildPicSetHowManyListItem();
+  const picSetSortByListItem = await buildPicSetSortByListItem();
+
+  const backendPicSetData = await parsePicSetData(inputArray);
+
+  picSetWrapper.append(picSetHowManyListItem, picSetSortByListItem, backendPicSetData);
+
+  const titleElement = document.createElement("div");
+  titleElement.textContent = "PIC SETS";
+
+  //build collapse container
+  const picSetCollapseObj = {
+    titleElement: titleElement,
+    contentElement: picSetWrapper,
+    isExpanded: true,
+    className: "pic-set-wrapper-collapse",
+  };
+
+  const picSetCollapseContainer = await buildCollapseContainer(picSetCollapseObj);
+
+  // Apply the wrapper class to the collapse container instead
+  picSetCollapseContainer.className = "wrapper";
+
+  return picSetCollapseContainer;
 };

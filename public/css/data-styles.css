@@ -309,7 +309,8 @@
   font-size: 1.5rem;
 }
 
+/* figure out how to get this to keep the border radius on the pics */
 #pic-list-item:hover #pic-element {
   transform: translate(-50%, -50%) scale(1.2);
-  border-radius: 6px;
+  /* border-radius: 6px; */
 }
