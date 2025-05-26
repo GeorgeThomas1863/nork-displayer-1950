@@ -1,5 +1,5 @@
 import axios from "axios";
-import { CONFIG } from "../config/config.js";
+import CONFIG from "../config/config.js";
 
 export const runAdminSubmit = async (inputParams) => {
   const apiData = await sendAdminCommand(inputParams);
@@ -12,7 +12,8 @@ export const runAdminSubmit = async (inputParams) => {
   //     apiData: apiData,
   //   };
 
-  return scrapeObj;
+  return true;
+  //   return scrapeObj;
 };
 
 //SENDS THE ADMIN COMMAND TO THE API
