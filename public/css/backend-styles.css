@@ -78,6 +78,11 @@
   text-align: left;
 }
 
+.article-wrapper-collapse .collapse-title {
+  justify-content: left;
+  text-align: left;
+}
+
 .article-pic-collapse .collapse-content {
   background-color: transparent;
   box-shadow: none;
