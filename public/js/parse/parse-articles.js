@@ -250,8 +250,8 @@ export const buildTextElement = async (text) => {
   textElement.id = "article-text";
 
   // Fix line breaks by replacing \n with <br> tags
-  const textWithBreaks = text.replace(/\n/g, "<br>");
-  textElement.innerHTML = textWithBreaks;
+  // const textWithBreaks = text.replace(/\n/g, "<br>");
+  // textElement.innerHTML = textWithBreaks;
 
   return textElement;
 };
