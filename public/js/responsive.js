@@ -21,4 +21,7 @@ export const adminSubmitClick = async (e) => {
 };
 
 const adminSubmitButton = document.getElementById("admin-submit-button");
-adminSubmitButton.addEventListener("click", adminSubmitClick);
+//add click listener when button exists
+if (adminSubmitButton) {
+  adminSubmitButton.addEventListener("click", adminSubmitClick);
+}
