@@ -277,6 +277,11 @@
   transition: all 0.5s ease;
 }
 
+.article-pic-collapse {
+  background-color: rgb(235, 235, 235);
+  margin-bottom: 1.5rem;
+}
+
 /* makes collapse headers smaller for pics */
 .article-pic-collapse .collapse-header {
   margin: 0 auto;
