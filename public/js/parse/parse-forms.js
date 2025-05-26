@@ -8,6 +8,9 @@ export const buildInputForms = async () => {
 
   const articleFormWrapper = await buildArticleForm();
 
+  console.log("ARTICLE FORM WRAPPER");
+  console.log(articleFormWrapper);
+
   //BUILD PIC SET WRAPPER
   const picSetFormWrapper = await buildPicSetForm();
 

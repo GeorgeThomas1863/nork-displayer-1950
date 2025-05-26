@@ -2,9 +2,7 @@ import { buildPicArrayCollapse } from "./parse-pics.js";
 import { buildCollapseContainer, defineCollapseItems } from "../collapse.js";
 
 //includes FORM and DATA RETURN
-export const buildArticleForm = async (inputArray) => {
-  if (!inputArray || !inputArray.length) return null;
-
+export const buildArticleForm = async () => {
   const articleWrapper = document.createElement("ul");
   articleWrapper.id = "article-wrapper";
   articleWrapper.className = "wrapper collapse-content";
@@ -14,11 +12,7 @@ export const buildArticleForm = async (inputArray) => {
   const articleHowManyListItem = await buildArticleHowManyListItem();
   const articleSortByListItem = await buildArticleSortByListItem();
 
-  const backendArticleData = await parseArticleData(inputArray);
-  articleWrapper.append(articleTypeListItem, articleHowManyListItem, articleSortByListItem, backendArticleData);
-
-  // //DELETE LATER
-  // articleWrapper.append(articleTypeListItem, articleHowManyListItem, articleSortByListItem);
+  articleWrapper.append(articleTypeListItem, articleHowManyListItem, articleSortByListItem);
 
   // create title element for collapse container
   const titleElement = document.createElement("div");
