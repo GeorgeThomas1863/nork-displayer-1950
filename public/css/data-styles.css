@@ -208,7 +208,8 @@
 
 #article-element {
   background-color: #ffffff;
-  padding: 2.5rem;
+  /* padding: 2.5rem; */
+  padding: 10rem;
   overflow: hidden;
   position: relative;
 }
