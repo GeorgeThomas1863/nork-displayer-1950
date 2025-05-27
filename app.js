@@ -1,6 +1,4 @@
-//STarting build pic section
-
-//REDO PIC COLLAPSE
+//BUILD RESPONSIVE; FIGURE OUT DATA ACTION
 
 //RECREATE ADMIN SUBMIT CAPABILITY (so can use scraper)
 

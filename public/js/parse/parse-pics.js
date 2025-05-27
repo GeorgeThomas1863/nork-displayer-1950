@@ -4,7 +4,6 @@ export const buildPicForm = async () => {
   const picWrapper = document.createElement("ul");
   picWrapper.id = "pic-wrapper";
   picWrapper.className = "wrapper collapse-content";
-  picWrapper.setAttribute("data-action", "pic-wrapper");
 
   const titleElement = document.createElement("div");
   titleElement.textContent = "PICS";
