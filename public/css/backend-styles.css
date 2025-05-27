@@ -12,6 +12,7 @@
 /* ARTICLE STYLES */
 
 #article-element {
+  margin-bottom: 15rem;
   background-color: #ffffff;
   padding: 1.5rem 2rem;
   overflow: hidden;
