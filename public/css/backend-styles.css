@@ -12,7 +12,6 @@
 /* ARTICLE STYLES */
 
 #article-element {
-  margin-bottom: 15rem;
   background-color: #ffffff;
   padding: 1.5rem 2rem;
   overflow: hidden;
@@ -113,6 +112,10 @@
 
 .article-element-collapse .collapse-header {
   justify-content: left;
+}
+
+.article-element-collapse .collapse-container {
+  margin-bottom: 10rem;
 }
 
 #pic-element:hover {
