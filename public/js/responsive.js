@@ -25,10 +25,12 @@ export const mainClickHandler = async (e) => {
 
   const eventElement = e.target;
   const eventElementId = eventElement.id;
+  const actionType = eventElement.getAttribute("data-action");
 
   console.log("AHHHHHHHHHHHH");
   console.log(eventElement);
   console.log(eventElementId);
+  console.log(actionType);
 };
 
 //ADMIN event listener
