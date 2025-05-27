@@ -156,7 +156,7 @@ export const buildArticleData = async (inputArray) => {
   }
 
   // Set up the collapse group behavior
-  defineCollapseItems(collapseArray);
+  await defineCollapseItems(collapseArray);
 
   return articleList;
 };

@@ -42,7 +42,7 @@ export const buildCollapseContainer = async (inputObj) => {
   return container;
 };
 
-export const defineCollapseItems = (inputArray) => {
+export const defineCollapseItems = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
 
   for (let i = 0; i < inputArray.length; i++) {
