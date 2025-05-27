@@ -52,7 +52,13 @@ app.use(express.static("public"));
 
 //path to pics / vids on fs
 app.use(expressPicPath, express.static(picPath));
-app.use(expressVidPath, express.static(vidPath));
+app.use(
+  expressVidPath,
+  express.static(vidPath, {
+    acceptRanges: true,
+    cacheControl: false,
+  })
+);
 
 //routes
 app.use(routes);
