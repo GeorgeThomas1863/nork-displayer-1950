@@ -25,3 +25,14 @@ const adminSubmitButton = document.getElementById("admin-submit-button");
 if (adminSubmitButton) {
   adminSubmitButton.addEventListener("click", adminSubmitClick);
 }
+
+export const mainClickHandler = async (e) => {
+  e.preventDefault();
+
+  const eventElement = e.target;
+  const eventElementId = eventElement.id;
+
+  console.log("AHHHHHHHHHHHH");
+  console.log(eventElement);
+  console.log(eventElementId);
+};
