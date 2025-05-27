@@ -141,9 +141,11 @@ export const buildPicData = async (inputArray) => {
   return picList;
 };
 
+//BUILD PIC SET PARSE HERE
+
 //-----------------------------------
 
-//PARSE PICS
+//PARSE PIC ITEMS
 
 export const buildPicArrayCollapse = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;

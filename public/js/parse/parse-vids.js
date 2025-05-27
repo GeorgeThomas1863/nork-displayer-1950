@@ -125,5 +125,48 @@ export const buildVidSortByListItem = async () => {
 //----------------------------
 
 export const buildVidData = async (inputArray) => {
-  console.log("BUILD");
+  if (!inputArray || !inputArray.length) return null;
+
+  const vidList = document.createElement("ul");
+  vidList.id = "vid-array-element";
+
+  for (let i = 0; i < inputArray.length; i++) {
+    const vidListItem = await buildVidListItem(inputArray[i]);
+    if (!vidListItem) continue;
+
+    vidList.appendChild(vidListItem);
+  }
+
+  return vidList;
+};
+
+export const buildVidListItem = async (inputObj) => {
+  if (!inputObj || !inputObj.savePath) return null;
+  const { savePath } = inputObj;
+
+  const vidListItem = document.createElement("li");
+  vidListItem.id = "vid-list-item";
+
+  //ADD pic stats here (scrape date, server, size, etc)
+
+  const vidElement = await buildVidElement(savePath);
+  vidListItem.append(vidElement);
+
+  return vidListItem;
+};
+
+export const buildVidElement = async (savePath) => {
+  if (!savePath) return null;
+
+  const vidElement = document.createElement("video");
+  vidElement.id = "vid-element";
+
+  //define pic path
+  const fileName = savePath.split("/").pop();
+  const vidPath = "/kcna-vids/" + fileName;
+
+  vidElement.src = vidPath;
+  vidElement.alt = "KCNA VIDEO";
+
+  return vidElement;
 };
