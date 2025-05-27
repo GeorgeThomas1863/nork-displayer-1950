@@ -108,3 +108,15 @@
   transform: translate(-50%, -50%) scale(1.2);
   /* border-radius: 6px; */
 }
+
+/* ------------------------------ */
+
+/* VID STYLES */
+
+#vid-element {
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 6px;
+}

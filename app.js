@@ -50,19 +50,9 @@ app.use(cors());
 
 app.use(express.static("public"));
 
-console.log("AHHHHHHHHHHHHH");
-console.log(expressVidPath);
-console.log(vidPath);
-
 //path to pics / vids on fs
 app.use(expressPicPath, express.static(picPath));
-app.use(
-  expressVidPath,
-  express.static(vidPath, {
-    acceptRanges: true,
-    cacheControl: false,
-  })
-);
+app.use(expressVidPath, express.static(vidPath));
 
 //routes
 app.use(routes);
