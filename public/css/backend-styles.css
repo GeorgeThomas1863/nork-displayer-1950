@@ -11,6 +11,14 @@
 
 /* ARTICLE STYLES */
 
+.article-list-item {
+  margin-bottom: 1.5rem;
+}
+
+.article-list-item:last-child {
+  margin-bottom: 0;
+}
+
 #article-element {
   background-color: #ffffff;
   padding: 1.5rem 2rem;
@@ -112,10 +120,6 @@
 
 .article-element-collapse .collapse-header {
   justify-content: left;
-}
-
-.article-element-collapse .collapse-container {
-  margin-bottom: 10rem;
 }
 
 #pic-element:hover {
