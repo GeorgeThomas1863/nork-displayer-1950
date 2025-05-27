@@ -20,10 +20,6 @@ export const adminSubmitClick = async (e) => {
   // return "DONE";
 };
 
-//!!! HERE
-//FIGURE OUT WHERE TO PUT THE DATA ACTION THING
-//!!!
-
 export const mainClickHandler = async (e) => {
   e.preventDefault();
 
@@ -31,11 +27,21 @@ export const mainClickHandler = async (e) => {
   const eventElementId = eventElement.id;
   const actionType = eventElement.getAttribute("data-action");
 
+  switch (actionType) {
+    case "pics-dropdown":
+      console.log("FUCK YOU FAGGOT");
+      break;
+    default:
+      console.log("default");
+  }
+
   console.log("AHHHHHHHHHHHH");
   console.log(eventElement);
   console.log(eventElementId);
   console.log(actionType);
 };
+
+//-----------------------------------
 
 //ADMIN event listener
 const adminSubmitButton = document.getElementById("admin-submit-button");
