@@ -160,13 +160,16 @@ export const buildVidElement = async (savePath) => {
 
   const vidElement = document.createElement("video");
   vidElement.id = "vid-element";
+  vidElement.controls = true;
 
-  //define pic path
+  const sourceElement = document.createElement("source");
   const fileName = savePath.split("/").pop();
   const vidPath = "/kcna-vids/" + fileName;
 
-  vidElement.src = vidPath;
-  vidElement.controls = true;
+  sourceElement.src = vidPath;
+  sourceElement.type = "video/mp4";
+
+  vidElement.appendChild(sourceElement);
 
   return vidElement;
 };
