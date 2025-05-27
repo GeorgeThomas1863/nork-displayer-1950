@@ -72,7 +72,7 @@
   overflow: hidden;
   /* object-fit: contain; */
   transition: all 0.5s ease;
-  border-radius: 6px;
+  border-radius: 8px;
 }
 
 .article-pic-collapse .collapse-content {
@@ -113,7 +113,7 @@
 
 #pic-element:hover {
   transform: translate(-50%, -50%) scale(1.2);
-  border-radius: 7.2px;
+  border-radius: 8px;
 }
 
 /* ------------------------------ */
