@@ -65,8 +65,8 @@ h3 {
 
 #drop-down {
   position: absolute;
-  top: 1em;
-  right: 5rem;
+  top: 1rem;
+  left: 1rem;
 }
 
 #drop-down a span {
