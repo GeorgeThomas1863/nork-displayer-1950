@@ -1,3 +1,5 @@
+//throwing out cursors garbage
+
 //BUILD RESPONSIVE; FIGURE OUT DATA ACTION
 
 //RECREATE ADMIN SUBMIT CAPABILITY (so can use scraper)
