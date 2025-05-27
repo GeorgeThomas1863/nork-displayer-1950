@@ -8,7 +8,7 @@
   flex-direction: row;
   gap: 3rem;
   width: 90%;
-  /* align-items: flex-start; */
+  align-items: flex-start;
 }
 
 /* Make each form take equal width */
