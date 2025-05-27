@@ -13,6 +13,7 @@ export const buildVidForm = async () => {
 
   const titleElement = document.createElement("div");
   titleElement.textContent = "VIDEOS";
+  titleElement.setAttribute("data-expand", "vid-dropdown"); //for click listener
 
   //build collapse container
   const vidCollapseObj = {

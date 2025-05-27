@@ -34,3 +34,17 @@ export const buildAdminParams = async () => {
   };
   return params;
 };
+
+//--------------------------------
+
+export const hideArray = async (inputs) => {
+  for (const input of inputs) {
+    input.classList.add("hidden");
+  }
+};
+
+export const unhideArray = async (inputs) => {
+  for (const input of inputs) {
+    input.classList.remove("hidden");
+  }
+};

@@ -7,7 +7,7 @@ export const buildPicForm = async () => {
 
   const titleElement = document.createElement("div");
   titleElement.textContent = "PICS";
-  titleElement.setAttribute("data-action", "pics-dropdown"); //for click listener
+  titleElement.setAttribute("data-expand", "pic-dropdown"); //for click listener
 
   const picTypeListItem = await buildPicTypeListItem();
   const picHowManyListItem = await buildPicHowManyListItem();

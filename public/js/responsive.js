@@ -1,3 +1,4 @@
+import { expandBackendData } from "./main.js";
 import { buildAdminParams, sendToBack } from "./util.js";
 
 export const adminSubmitClick = async (e) => {
@@ -25,20 +26,33 @@ export const mainClickHandler = async (e) => {
 
   const eventElement = e.target;
   const eventElementId = eventElement.id;
-  const actionType = eventElement.getAttribute("data-action");
+  const expandType = eventElement.getAttribute("data-expand");
 
-  switch (actionType) {
-    case "pics-dropdown":
-      console.log("FUCK YOU FAGGOT");
+  let dataType = "";
+  switch (expandType) {
+    case "article-dropdown":
+      dataType = "article";
       break;
+
+    case "pic-dropdown":
+      dataType = "pic";
+      break;
+
+    case "vid-dropdown":
+      dataType = "vid";
+      break;
+
     default:
-      console.log("default");
+      console.log("INPUT FUCKED");
+      return null;
   }
+
+  await expandBackendData(dataType);
 
   console.log("AHHHHHHHHHHHH");
   console.log(eventElement);
   console.log(eventElementId);
-  console.log(actionType);
+  console.log(expandType);
 };
 
 //-----------------------------------

@@ -17,6 +17,7 @@ export const buildArticleForm = async () => {
   // create title element for collapse container
   const titleElement = document.createElement("div");
   titleElement.textContent = "ARTICLES";
+  titleElement.setAttribute("data-expand", "article-dropdown"); //for click listener
 
   //build collapse container
   const articleCollapseObj = {
@@ -137,6 +138,7 @@ export const buildArticleData = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
 
   const articleList = document.createElement("ul");
+  articleList.id = "article-array-element";
   articleList.className = "article-list data-return";
 
   let isFirst = true;
