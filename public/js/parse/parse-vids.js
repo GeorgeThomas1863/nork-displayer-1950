@@ -166,7 +166,7 @@ export const buildVidElement = async (savePath) => {
   const vidPath = "/kcna-vids/" + fileName;
 
   vidElement.src = vidPath;
-  vidElement.alt = "KCNA VIDEO";
+  vidElement.controls = true;
 
   return vidElement;
 };
