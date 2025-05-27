@@ -28,31 +28,30 @@ export const mainClickHandler = async (e) => {
   const eventElementId = eventElement.id;
   const expandType = eventElement.getAttribute("data-expand");
 
-  let dataType = "";
-  switch (expandType) {
-    case "article-dropdown":
-      dataType = "article";
-      break;
+  console.log("!!!!!!EVENT ELEMENT", eventElement);
+  console.log("!!!!!!EVENT ELEMENT ID", eventElementId);
+  console.log("!!!!!!EXPAND TYPE", expandType);
 
-    case "pic-dropdown":
-      dataType = "pic";
-      break;
+  // let dataType = "";
+  // switch (expandType) {
+  //   case "article-dropdown":
+  //     dataType = "article";
+  //     break;
 
-    case "vid-dropdown":
-      dataType = "vid";
-      break;
+  //   case "pic-dropdown":
+  //     dataType = "pic";
+  //     break;
 
-    default:
-      console.log("INPUT FUCKED");
-      return null;
-  }
+  //   case "vid-dropdown":
+  //     dataType = "vid";
+  //     break;
 
-  await expandBackendData(dataType);
+  //   default:
+  //     console.log("INPUT FUCKED");
+  //     return null;
+  // }
 
-  console.log("AHHHHHHHHHHHH");
-  console.log(eventElement);
-  console.log(eventElementId);
-  console.log(expandType);
+  // await expandBackendData(dataType);
 };
 
 //-----------------------------------
