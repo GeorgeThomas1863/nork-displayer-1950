@@ -68,7 +68,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  object-fit: contain;
+  /* object-fit: contain; */
   transition: all 0.5s ease;
   border-radius: 6px;
 }
@@ -111,7 +111,7 @@
 
 #pic-element:hover {
   transform: translate(-50%, -50%) scale(1.2);
-  border-radius: 20px; /* 6px * 1.2 */
+  border-radius: 7.2px; /* 6px * 1.2 */
 }
 
 /* ------------------------------ */
