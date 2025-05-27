@@ -1,6 +1,6 @@
 #backend-data-wrapper {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 1rem;
   width: 100%;
   align-items: flex-start;
