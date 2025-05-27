@@ -20,12 +20,6 @@ export const adminSubmitClick = async (e) => {
   // return "DONE";
 };
 
-const adminSubmitButton = document.getElementById("admin-submit-button");
-//add click listener when button exists
-if (adminSubmitButton) {
-  adminSubmitButton.addEventListener("click", adminSubmitClick);
-}
-
 export const mainClickHandler = async (e) => {
   e.preventDefault();
 
@@ -36,3 +30,15 @@ export const mainClickHandler = async (e) => {
   console.log(eventElement);
   console.log(eventElementId);
 };
+
+//ADMIN event listener
+const adminSubmitButton = document.getElementById("admin-submit-button");
+if (adminSubmitButton) {
+  adminSubmitButton.addEventListener("click", adminSubmitClick);
+}
+
+//MAIN event listener
+const displayElement = document.getElementById("display-element");
+if (displayElement) {
+  displayElement.addEventListener("click", mainClickHandler);
+}
