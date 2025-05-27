@@ -2,10 +2,11 @@
 
 /* Form wrapper flexbox styling */
 #form-wrapper {
+  margin: 0 auto;
   display: flex;
   flex-direction: row;
   gap: 1rem;
-  width: 100%;
+  width: 90%;
   align-items: flex-start;
 }
 
