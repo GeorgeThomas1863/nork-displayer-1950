@@ -130,6 +130,7 @@ export const buildPicData = async (inputArray) => {
 
   const picList = document.createElement("ul");
   picList.id = "pic-array-element";
+  picList.className = "hidden";
 
   for (let i = 0; i < inputArray.length; i++) {
     const picListItem = await buildPicListItem(inputArray[i]);

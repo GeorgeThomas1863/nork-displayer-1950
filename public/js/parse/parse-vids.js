@@ -129,6 +129,7 @@ export const buildVidData = async (inputArray) => {
 
   const vidList = document.createElement("ul");
   vidList.id = "vid-array-element";
+  vidList.className = "hidden";
 
   for (let i = 0; i < inputArray.length; i++) {
     const vidListItem = await buildVidListItem(inputArray[i]);
