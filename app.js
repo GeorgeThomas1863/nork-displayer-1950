@@ -1,4 +1,8 @@
-//throwing out cursors garbage
+//massive fucking failure with button clicks / events based on some timing shit,
+
+// look at other code with buttons !!!!!
+
+//otherwise just use the closest shit and implement that
 
 //BUILD RESPONSIVE; FIGURE OUT DATA ACTION
 
