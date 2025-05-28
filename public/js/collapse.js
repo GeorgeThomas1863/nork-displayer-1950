@@ -1,6 +1,6 @@
 export const buildCollapseContainer = async (inputObj) => {
   if (!inputObj) return null;
-  const { titleElement, contentElement, isExpanded = false, className = "", headerId = "" } = inputObj;
+  const { titleElement, contentElement, isExpanded = false, className = "", headerAttribute = "" } = inputObj;
 
   // Create container
   const container = document.createElement("div");
@@ -8,7 +8,7 @@ export const buildCollapseContainer = async (inputObj) => {
 
   // Create header with arrow and title
   const collapseHeader = document.createElement("div");
-  collapseHeader.id = headerId;
+  collapseHeader.setAttribute("data-expand", headerAttribute);
   collapseHeader.className = "collapse-header";
 
   const arrow = document.createElement("div");
@@ -21,10 +21,6 @@ export const buildCollapseContainer = async (inputObj) => {
 
   // Transfer data-expand attribute from titleElement to collapseHeader if it exists
   // (for dealing with clicks on the collapse headers)
-  const expandType = titleElement.getAttribute("data-expand");
-  if (expandType) {
-    collapseHeader.setAttribute("data-expand", expandType);
-  }
 
   //below preserves existing classes on content
   const existingClasses = contentElement.className || "";

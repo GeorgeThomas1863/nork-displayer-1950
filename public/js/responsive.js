@@ -26,9 +26,11 @@ export const mainClickHandler = async (e) => {
 
   const eventElement = e.target;
   const eventElementId = eventElement.id;
+  const expandType = eventElement.getAttribute("data-expand");
 
   console.log("!!!!!!EVENT ELEMENT", eventElement);
   console.log("!!!!!!EVENT ELEMENT ID", eventElementId);
+  console.log("!!!!!!EXPAND TYPE", expandType);
 
   // let dataType = "";
   // switch (expandType) {
