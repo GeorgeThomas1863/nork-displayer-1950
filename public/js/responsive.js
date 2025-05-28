@@ -26,7 +26,7 @@ export const mainClickHandler = async (e) => {
 
   const eventElement = e.target;
   const eventElementId = eventElement.id;
-  const eventClosest = e.target.closest("collapse-header");
+  const eventClosest = e.target.closest(".collapse-header");
   const expandType = eventElement.getAttribute("data-expand");
 
   console.log("!!!!!!EVENT ELEMENT", eventElement);
