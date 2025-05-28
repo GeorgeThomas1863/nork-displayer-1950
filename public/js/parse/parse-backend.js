@@ -23,9 +23,6 @@ export const buildBackendDislay = async (inputData) => {
   if (!inputData) return null;
   const { articleArray, picArray, vidArray } = inputData;
 
-  console.log("!!!BACKEND DATA", inputData);
-  console.dir(inputData);
-
   const backendDataWrapper = document.createElement("div");
   backendDataWrapper.id = "backend-data-wrapper";
 
