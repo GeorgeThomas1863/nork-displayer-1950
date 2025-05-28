@@ -13,7 +13,7 @@ export const buildVidForm = async () => {
 
   const titleElement = document.createElement("div");
   titleElement.textContent = "VIDEOS";
-  titleElement.setAttribute("data-expand", "vid-dropdown"); //for click listener
+  // titleElement.setAttribute("data-expand", "vid-dropdown"); //for click listener
 
   //build collapse container
   const vidCollapseObj = {
@@ -21,6 +21,7 @@ export const buildVidForm = async () => {
     contentElement: vidWrapper,
     isExpanded: false,
     className: "vid-wrapper-collapse",
+    headerId: "vid-form-header",
   };
 
   const vidCollapseContainer = await buildCollapseContainer(vidCollapseObj);

@@ -1,6 +1,6 @@
 export const buildCollapseContainer = async (inputObj) => {
   if (!inputObj) return null;
-  const { titleElement, contentElement, isExpanded = false, className = "" } = inputObj;
+  const { titleElement, contentElement, isExpanded = false, className = "", headerId = "" } = inputObj;
 
   // Create container
   const container = document.createElement("div");
@@ -8,6 +8,7 @@ export const buildCollapseContainer = async (inputObj) => {
 
   // Create header with arrow and title
   const collapseHeader = document.createElement("div");
+  collapseHeader.id = headerId;
   collapseHeader.className = "collapse-header";
 
   const arrow = document.createElement("div");

@@ -17,7 +17,7 @@ export const buildArticleForm = async () => {
   // create title element for collapse container
   const titleElement = document.createElement("div");
   titleElement.textContent = "ARTICLES";
-  titleElement.setAttribute("data-expand", "article-dropdown"); //for click listener
+  // titleElement.setAttribute("data-expand", "article-dropdown"); //for click listener
 
   //build collapse container
   const articleCollapseObj = {
@@ -25,6 +25,7 @@ export const buildArticleForm = async () => {
     contentElement: articleWrapper,
     isExpanded: true,
     className: "article-wrapper-collapse",
+    headerId: "article-form-header",
   };
 
   const articleCollapseContainer = await buildCollapseContainer(articleCollapseObj);
