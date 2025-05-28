@@ -25,7 +25,7 @@ export const buildArticleForm = async () => {
     contentElement: articleWrapper,
     isExpanded: true,
     className: "article-wrapper-collapse",
-    headerAttribute: "article-form-header",
+    dataAttribute: "article-form-header",
   };
 
   const articleCollapseContainer = await buildCollapseContainer(articleCollapseObj);

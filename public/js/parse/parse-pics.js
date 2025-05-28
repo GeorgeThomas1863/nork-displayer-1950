@@ -21,7 +21,7 @@ export const buildPicForm = async () => {
     contentElement: picWrapper,
     isExpanded: false,
     className: "pic-wrapper-collapse",
-    headerAttribute: "pic-form-header",
+    dataAttribute: "pic-form-header",
   };
 
   const picCollapseContainer = await buildCollapseContainer(picCollapseObj);

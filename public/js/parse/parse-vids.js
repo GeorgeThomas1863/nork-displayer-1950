@@ -21,7 +21,7 @@ export const buildVidForm = async () => {
     contentElement: vidWrapper,
     isExpanded: false,
     className: "vid-wrapper-collapse",
-    headerAttribute: "vid-form-header",
+    dataAttribute: "vid-form-header",
   };
 
   const vidCollapseContainer = await buildCollapseContainer(vidCollapseObj);
