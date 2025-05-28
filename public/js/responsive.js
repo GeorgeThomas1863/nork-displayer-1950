@@ -29,6 +29,10 @@ export const mainClickHandler = async (e) => {
 
   console.log("!!!!!!EXPAND TYPE", expandType);
 
+  //!!!!!!!!
+  //HERE / BUILD BELOW
+  //!!!!!!!!
+
   // let dataType = "";
   // switch (expandType) {
   //   case "article-dropdown":

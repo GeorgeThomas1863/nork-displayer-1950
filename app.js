@@ -1,6 +1,6 @@
-//massive fucking failure with button clicks / events based on some timing shit,
+//(other buttons dont have children you moron)
 
-// look at other code with buttons !!!!!
+//IMPLEMENT CLICK LOGIC ON FORMS
 
 //otherwise just use the closest shit and implement that
 
