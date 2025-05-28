@@ -25,17 +25,9 @@ export const mainClickHandler = async (e) => {
   e.preventDefault();
 
   const eventElement = e.target;
-  const eventCurrentTarget = e.currentTarget;
-  const eventElementId = eventElement.id;
-  const eventClosest = e.target.closest(".collapse-header");
   const expandType = eventElement.getAttribute("data-expand");
 
-  console.log("AHHHHHHHHHHHHHHH");
-  console.log("!!!!!!EVENT ELEMENT", eventElement);
-  console.log("!!!!!!EVENT CURRENT TARGET", eventCurrentTarget);
-  console.log("!!!!!!EVENT ELEMENT ID", eventElementId);
   console.log("!!!!!!EXPAND TYPE", expandType);
-  console.log("!!!!!!EVENT CLOSEST", eventClosest);
 
   // let dataType = "";
   // switch (expandType) {
