@@ -35,6 +35,21 @@ export const buildAdminParams = async () => {
   return params;
 };
 
+export const buildInputParams = async (dataType) => {
+  const params = {
+    route: "/new-data-route",
+    articleType: document.getElementById("article-type").value,
+    picType: document.getElementById("pic-type").value,
+    vidType: document.getElementById("vid-type").value,
+    articleHowMany: document.getElementById("article-how-many").value,
+    picHowMany: document.getElementById("pic-how-many").value,
+    vidHowMany: document.getElementById("vid-how-many").value,
+    articleSortBy: document.getElementById("article-sort-by").value,
+    picSortBy: document.getElementById("pic-sort-by").value,
+    vidSortBy: document.getElementById("vid-sort-by").value,
+  };
+};
+
 //--------------------------------
 
 export const hideArray = async (inputs) => {

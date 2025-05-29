@@ -1,7 +1,7 @@
 import { getBackendData, buildBackendDislay } from "./parse/parse-backend.js";
 import { buildDropDown } from "./parse/parse-drop-down.js";
 import { buildInputForms } from "./parse/parse-forms.js";
-import { hideArray, unhideArray } from "./util.js";
+import { hideArray, unhideArray, buildInputParams } from "./util.js";
 import { defineCollapseItems } from "./collapse.js";
 
 //get display element
@@ -30,7 +30,6 @@ export const buildDefaultDisplay = async () => {
 //------------------------------------
 
 //RESPONSIVE STUFF
-
 
 //better version of expand backend data equation
 export const expandBackendData = async (dataType) => {
@@ -88,6 +87,13 @@ export const expandBackendData = async (dataType) => {
   }
 
   return true;
+};
+
+//------------------------------------
+
+//GET NEW DATA SECTION
+export const getNewArticleData = async () => {
+  const inputParams = await buildInputParams("article");
 };
 
 buildDefaultDisplay();
