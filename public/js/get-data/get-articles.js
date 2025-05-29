@@ -26,12 +26,18 @@ export const checkNewArticleData = async () => {
 
   if (!newArticleData) return null;
 
-  //
   const articleDataWrapper = await buildArticleData(newArticleData);
+
+  //get backend data wrapper
+  const backendDataWrapper = document.getElementById("backend-data-wrapper");
+  const articleArrayElement = document.getElementById("article-array-element");
+
+  //please work
+  backendDataWrapper.replaceChildren(articleDataWrapper, articleArrayElement);
 
   console.log("!!!ARTICLE DATA WRAPPER", articleDataWrapper);
 
-  //NEED TO ADD TO DISPLAY ELEMENT SOMEHOW
+  return true;
 };
 
 export const getNewArticleData = async (inputParams) => {
