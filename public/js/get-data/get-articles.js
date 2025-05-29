@@ -1,4 +1,5 @@
 import { buildInputParams, sendToBack } from "../util.js";
+import { buildArticleData } from "../parse/parse-articles.js";
 
 //GET NEW DATA SECTION
 export const checkNewArticleData = async () => {
@@ -31,7 +32,6 @@ export const checkNewArticleData = async () => {
   console.log("!!!ARTICLE DATA WRAPPER", articleDataWrapper);
 
   //NEED TO ADD TO DISPLAY ELEMENT SOMEHOW
-
 };
 
 export const getNewArticleData = async (inputParams) => {
