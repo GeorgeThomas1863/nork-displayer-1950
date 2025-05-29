@@ -1,4 +1,4 @@
-//FIX NAMES OF PIC ARRAY ELEMENTS (pic-data-array-element; pic-array-element) ADD ARTICLE PIC ARRAY
+//KEEP GOING, LEGIT CLOSE ON RESPONSIVE; get article working, then copy for rest
 
 //THEN TRY EQUAION ON TG FOR EXPAND BACKEND DATA
 
