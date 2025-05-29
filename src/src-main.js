@@ -131,4 +131,4 @@ export const getNewArticleData = async (inputParams) => {
   }
 };
 
-sortKey, howMany, filterKey, filterValue;
+// sortKey, howMany, filterKey, filterValue;
