@@ -71,8 +71,8 @@ export const expandBackendData = async (dataType) => {
         await hideArray([picArrayElement, picWrapper, vidArrayElement, vidWrapper]);
         await unhideArray([articleArrayElement, articleWrapper]);
 
-        // picArrow.classList.remove("expanded");
-        // vidArrow.classList.remove("expanded");
+        isPicExpanded = false;
+        isVidExpanded = false;
       } else {
         await hideArray([articleArrayElement, articleWrapper]);
         // articleArrow.classList.add("expanded");
