@@ -1,4 +1,4 @@
-import { buildPicArrayCollapse } from "./parse-pics.js";
+import { buildArticlePicData } from "./parse-pics.js";
 import { buildCollapseContainer, defineCollapseItems } from "../collapse.js";
 
 //includes FORM and DATA RETURN
@@ -195,9 +195,9 @@ export const buildArticleElement = async (inputObj) => {
   articleElement.id = "article-element";
 
   //Add pics as collapse
-  const picArrayCollapseElement = await buildPicArrayCollapse(picArray);
-  if (picArrayCollapseElement) {
-    articleElement.append(picArrayCollapseElement);
+  const articlePicData = await buildArticlePicData(picArray);
+  if (articlePicData) {
+    articleElement.append(articlePicData);
   }
 
   // Then append date and text after pictures (title is handled by collapse header)

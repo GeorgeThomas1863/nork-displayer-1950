@@ -1,4 +1,4 @@
-import { buildCollapseContainer, defineCollapseItems } from "../collapse.js";
+import { buildCollapseContainer } from "../collapse.js";
 
 export const buildPicForm = async () => {
   const picWrapper = document.createElement("ul");
@@ -144,13 +144,7 @@ export const buildPicData = async (inputArray) => {
   return picList;
 };
 
-//BUILD PIC SET PARSE HERE
-
-//-----------------------------------
-
-//PARSE PIC ITEMS
-
-export const buildPicArrayCollapse = async (inputArray) => {
+export const buildArticlePicData = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
 
   const picArrayElement = await buildPicList(inputArray);
@@ -173,6 +167,12 @@ export const buildPicArrayCollapse = async (inputArray) => {
 
   return picCollapseElement;
 };
+
+//BUILD PIC SET PARSE HERE
+
+//------------------------
+
+//PARSE PIC ITEMS
 
 export const buildPicList = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
