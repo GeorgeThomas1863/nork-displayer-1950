@@ -35,6 +35,9 @@ export const mainClickHandler = async (e) => {
   if (eventId === "article-type") {
     console.log("AHHHHHHHHHHHHHHH");
   }
+
+  console.log("!!!EVENT ID");
+  console.log(eventId);
 };
 
 //-----------------------------------
