@@ -27,15 +27,6 @@ export const mainClickHandler = async (e) => {
   const eventElement = e.target;
   const expandType = eventElement.getAttribute("data-expand");
 
-  const arrowElement = document.querySelector("#collapse-arrow[data-expand=" + expandType + "]");
-  const isExpanded = arrowElement.classList.contains("expanded");
-
-  console.log("!!!!!!IS EXPANDED");
-  console.log(isExpanded);
-
-  console.log("!!!!!!ARROW ELEMENT");
-  console.log(arrowElement);
-
   await expandBackendData(expandType);
 
   //!!!!!!!!
