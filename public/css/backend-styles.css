@@ -57,6 +57,17 @@
 
 /* PIC STYLES */
 
+#pic-data-array-element {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  padding: 1rem 0;
+  margin: 0 auto;
+  list-style: none;
+  width: 100%;
+  background-color: transparent;
+}
+
 #pic-array-element {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
