@@ -32,8 +32,5 @@ export const buildBackendDislay = async (inputData) => {
 
   backendDataWrapper.append(articleDataWrapper, picDataWrapper, vidDataWrapper);
 
-  console.log("BACKEND DATA WRAPPER");
-  console.log(backendDataWrapper);
-
   return backendDataWrapper;
 };

@@ -44,15 +44,6 @@ export const expandBackendData = async (dataType) => {
   const isPicExpanded = picArrow.classList.contains("expanded");
   const isVidExpanded = vidArrow.classList.contains("expanded");
 
-  console.log("!!!!!!IS ARTICLE EXPANDED");
-  console.log(isArticleExpanded);
-
-  console.log("!!!!!!IS PIC EXPANDED");
-  console.log(isPicExpanded);
-
-  console.log("!!!!!!IS VID EXPANDED");
-  console.log(isVidExpanded);
-
   //get form elements
   const articleWrapper = document.getElementById("article-wrapper");
   const picWrapper = document.getElementById("pic-wrapper");
@@ -63,7 +54,10 @@ export const expandBackendData = async (dataType) => {
   const picArrayElement = document.getElementById("pic-data-array-element");
   const vidArrayElement = document.getElementById("vid-array-element");
 
-  // console.log("$$$$DATA TYPE", dataType);
+  console.log("PIC ARRAY ELEMENT");
+  console.log(picArrayElement);
+  console.log("VID ARRAY ELEMENT");
+  console.log(vidArrayElement);
 
   switch (dataType) {
     case "article-form-header":
