@@ -8,6 +8,8 @@ export const getNewArticleData = async () => {
 
   //get user input
   const inputParams = await buildInputParams();
+  console.log("INPUT PARAMS", inputParams);
+
   const { articleType, articleHowMany, articleSortBy } = inputParams;
   const articleInputArray = [articleType, articleHowMany, articleSortBy];
 
