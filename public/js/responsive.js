@@ -1,5 +1,7 @@
-import { expandBackendData, getNewArticleData } from "./main.js";
+import { expandBackendData } from "./main.js";
 import { buildAdminParams, sendToBack } from "./util.js";
+
+import { getNewArticleData } from "./get-data/get-articles.js";
 
 export const adminSubmitClick = async (e) => {
   e.preventDefault();

@@ -89,11 +89,4 @@ export const expandBackendData = async (dataType) => {
   return true;
 };
 
-//------------------------------------
-
-//GET NEW DATA SECTION
-export const getNewArticleData = async () => {
-  const inputParams = await buildInputParams("article");
-};
-
 buildDefaultDisplay();

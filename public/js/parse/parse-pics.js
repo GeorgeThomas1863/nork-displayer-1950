@@ -47,7 +47,7 @@ export const buildPicTypeListItem = async () => {
 
   // Create options for article type select
   const optionArray = [
-    { value: "pics-alone", id: "pics-alone", text: "Just Pics", selected: true },
+    { value: "pic-alone", id: "pic-alone", text: "Just Pics", selected: true },
     { value: "pic-sets", id: "pic-sets", text: "Pic Sets" },
   ];
 

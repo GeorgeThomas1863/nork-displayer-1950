@@ -103,8 +103,8 @@ export const buildVidSortByListItem = async () => {
 
   // Create options for sort by select
   const optionArray = [
-    { value: "vid-page-newest-to-oldest", id: "vid-page-newest-to-oldest", text: "Newest to Oldest", selected: true },
-    { value: "vid-page-oldest-to-newest", id: "vid-page-oldest-to-newest", text: "Oldest to Newest" },
+    { value: "vid-newest-to-oldest", id: "vid-newest-to-oldest", text: "Newest to Oldest", selected: true },
+    { value: "vid-oldest-to-newest", id: "vid-oldest-to-newest", text: "Oldest to Newest" },
   ];
 
   for (let i = 0; i < optionArray.length; i++) {
