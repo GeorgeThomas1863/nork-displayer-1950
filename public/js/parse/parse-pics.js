@@ -130,10 +130,6 @@ export const buildPicSortByListItem = async () => {
 export const buildPicData = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
 
-  console.log("ALLAHU AKBAR");
-  console.log("!!!!!!INPUT ARRAY");
-  console.log(inputArray);
-
   const picList = document.createElement("ul");
   picList.id = "pic-data-array-element";
   // picList.className = "hidden";
@@ -144,6 +140,9 @@ export const buildPicData = async (inputArray) => {
 
     picList.appendChild(picListItem);
   }
+
+  console.log("!!!!!!PIC LIST ITEM");
+  console.log(picList);
 
   return picList;
 };
