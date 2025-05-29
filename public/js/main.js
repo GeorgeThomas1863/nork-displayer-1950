@@ -40,9 +40,9 @@ export const expandBackendData = async (dataType) => {
   const picArrow = document.querySelector("#collapse-arrow[data-expand='pic-form-header']");
   const vidArrow = document.querySelector("#collapse-arrow[data-expand='vid-form-header']");
 
-  let isArticleExpanded = articleArrow.classList.contains("expanded");
-  let isPicExpanded = picArrow.classList.contains("expanded");
-  let isVidExpanded = vidArrow.classList.contains("expanded");
+  const isArticleExpanded = articleArrow.classList.contains("expanded");
+  const isPicExpanded = picArrow.classList.contains("expanded");
+  const isVidExpanded = vidArrow.classList.contains("expanded");
 
   console.log("!!!!!!IS ARTICLE EXPANDED");
   console.log(isArticleExpanded);
