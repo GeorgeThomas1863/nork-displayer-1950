@@ -51,8 +51,8 @@ class dbModel {
     return dataArray;
   }
 
-  //get last items return as array
-  async getLastItemsArray() {
+  //get NEWEST items return as array
+  async getNewestItemsArray() {
     const { sortKey, howMany } = this.dataObject;
 
     //get data
@@ -61,12 +61,32 @@ class dbModel {
     return dataArray;
   }
 
-  //get last items by TYPE (for articles)
-  async getLastItemsByTypeArray() {
+  //get last items by TYPE 
+  async getNewestItemsByTypeArray() {
     const { sortKey, howMany, filterKey, filterValue } = this.dataObject;
 
     //get data
     const dataArray = await db.dbGet().collection(this.collection).find({[filterKey]: filterValue }).sort({ [sortKey]: -1 }).limit(+howMany).toArray(); //prettier-ignore
+
+    return dataArray;
+  }
+
+  //get OLDEST ITEMS
+  async getOldestItemsArray() {
+    const { sortKey, howMany } = this.dataObject;
+
+    //get data
+    const dataArray = await db.dbGet().collection(this.collection).find().sort({ [sortKey]: 1 }).limit(+howMany).toArray(); //prettier-ignore
+
+    return dataArray;
+  }
+
+  //get last items by TYPE (for articles)
+  async getOldestItemsByTypeArray() {
+    const { sortKey, howMany, filterKey, filterValue } = this.dataObject;
+
+    //get data
+    const dataArray = await db.dbGet().collection(this.collection).find({[filterKey]: filterValue }).sort({ [sortKey]: 1 }).limit(+howMany).toArray(); //prettier-ignore
 
     return dataArray;
   }

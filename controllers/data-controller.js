@@ -1,4 +1,4 @@
-import { runGetBackendData } from "../src/src-main.js";
+import { runGetBackendData, getNewArticleData } from "../src/src-main.js";
 import { runAdminSubmit } from "../src/src-admin.js";
 
 //passes everything to main src
@@ -9,6 +9,18 @@ export const getBackendDataRoute = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Failed to get backend data" });
+  }
+};
+
+export const getNewArticleDataRoute = async (req, res) => {
+  try {
+    const inputParams = req.body;
+
+    const data = await getNewArticleData(inputParams);
+    return res.json(data);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: "Failed to process admin command" });
   }
 };
 

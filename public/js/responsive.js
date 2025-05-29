@@ -1,7 +1,7 @@
 import { expandBackendData } from "./main.js";
 import { buildAdminParams, sendToBack } from "./util.js";
 
-import { getNewArticleData } from "./get-data/get-articles.js";
+import { checkNewArticleData } from "./get-data/get-articles.js";
 
 export const adminSubmitClick = async (e) => {
   e.preventDefault();
@@ -35,7 +35,7 @@ export const mainClickHandler = async (e) => {
   }
 
   if (eventId === "article-type" || eventId === "article-sort-by") {
-    await getNewArticleData();
+    await checkNewArticleData();
   }
 
   console.log("!!!EVENT ID");
