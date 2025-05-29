@@ -75,19 +75,30 @@ export const expandBackendData = async (dataType) => {
         vidArrow.classList.remove("expanded");
       } else {
         await hideArray([articleArrayElement, articleWrapper]);
-        // articleArrow.classList.add("expanded");
       }
       break;
 
     case "pic-form-header":
-      await hideArray([articleArrayElement, articleWrapper, vidArrayElement, vidWrapper]);
-      await unhideArray([picArrayElement, picWrapper]);
-      break;
+      if (isPicExpanded) {
+        await hideArray([articleArrayElement, articleWrapper, vidArrayElement, vidWrapper]);
+        await unhideArray([picArrayElement, picWrapper]);
+
+        articleArrow.classList.remove("expanded");
+        vidArrow.classList.remove("expanded");
+      } else {
+        await hideArray([picArrayElement, picWrapper]);
+      }
 
     case "vid-form-header":
-      await hideArray([articleArrayElement, articleWrapper, picArrayElement, picWrapper]);
-      await unhideArray([vidArrayElement, vidWrapper]);
-      break;
+      if (isVidExpanded) {
+        await hideArray([articleArrayElement, articleWrapper, picArrayElement, picWrapper]);
+        await unhideArray([vidArrayElement, vidWrapper]);
+
+        articleArrow.classList.remove("expanded");
+        picArrow.classList.remove("expanded");
+      } else {
+        await hideArray([vidArrayElement, vidWrapper]);
+      }
 
     default:
       console.log("INPUT FUCKED");
