@@ -32,10 +32,6 @@ export const buildDefaultDisplay = async () => {
 //RESPONSIVE STUFF
 
 export const expandBackendData = async (dataType) => {
-  //figure out if data is expanded
-  // const arrowElement = document.querySelector("#collapse-arrow[data-expand=" + dataType + "]");
-  // const isExpanded = arrowElement.classList.contains("expanded");
-
   const articleArrow = document.querySelector("#collapse-arrow[data-expand='article-form-header']");
   const picArrow = document.querySelector("#collapse-arrow[data-expand='pic-form-header']");
   const vidArrow = document.querySelector("#collapse-arrow[data-expand='vid-form-header']");
@@ -53,11 +49,6 @@ export const expandBackendData = async (dataType) => {
   const articleArrayElement = document.getElementById("article-array-element");
   const picArrayElement = document.getElementById("pic-data-array-element");
   const vidArrayElement = document.getElementById("vid-array-element");
-
-  console.log("PIC ARRAY ELEMENT");
-  console.log(picArrayElement);
-  console.log("VID ARRAY ELEMENT");
-  console.log(vidArrayElement);
 
   switch (dataType) {
     case "article-form-header":
