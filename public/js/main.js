@@ -60,7 +60,7 @@ export const expandBackendData = async (dataType) => {
 
   //get backend data elements
   const articleArrayElement = document.getElementById("article-array-element");
-  const picArrayElement = document.getElementById("pic-array-element");
+  const picArrayElement = document.getElementById("pic-data-array-element");
   const vidArrayElement = document.getElementById("vid-array-element");
 
   // console.log("$$$$DATA TYPE", dataType);

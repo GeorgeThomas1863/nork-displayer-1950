@@ -131,7 +131,7 @@ export const buildPicData = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
 
   const picList = document.createElement("ul");
-  picList.id = "pic-array-element";
+  picList.id = "pic-data-array-element";
   picList.className = "hidden";
 
   for (let i = 0; i < inputArray.length; i++) {
