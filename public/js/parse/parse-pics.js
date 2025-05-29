@@ -141,9 +141,6 @@ export const buildPicData = async (inputArray) => {
     picList.appendChild(picListItem);
   }
 
-  console.log("!!!!!!PIC LIST ITEM");
-  console.log(picList);
-
   return picList;
 };
 
