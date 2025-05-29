@@ -42,7 +42,7 @@ export const expandBackendData = async (dataType) => {
   const picArrayElement = document.getElementById("pic-array-element");
   const vidArrayElement = document.getElementById("vid-array-element");
 
-  console.log("$$$$DATA TYPE", dataType);
+  // console.log("$$$$DATA TYPE", dataType);
 
   switch (dataType) {
     case "article-form-header":
