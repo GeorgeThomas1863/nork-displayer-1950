@@ -33,7 +33,7 @@ export const buildDefaultDisplay = async () => {
 
 export const expandBackendData = async (dataType) => {
   //figure out if data is expanded
-  const arrowElement = document.querySelector("#collapse-arrow[data-expand=" + expandType + "]");
+  const arrowElement = document.querySelector("#collapse-arrow[data-expand=" + dataType + "]");
   const isExpanded = arrowElement.classList.contains("expanded");
 
   console.log("!!!!!!IS EXPANDED");
