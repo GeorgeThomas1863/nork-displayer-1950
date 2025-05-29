@@ -131,7 +131,7 @@ export const buildPicData = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
 
   const picList = document.createElement("ul");
-  picList.id = "pic-data-array-element";
+  picList.id = "pic-array-element";
   picList.className = "hidden";
 
   for (let i = 0; i < inputArray.length; i++) {
@@ -153,7 +153,7 @@ export const buildPicData = async (inputArray) => {
 export const buildPicArrayCollapse = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
 
-  const picArrayElement = await buildPicArray(inputArray);
+  const picArrayElement = await buildPicList(inputArray);
   if (!picArrayElement) return null;
 
   //build pic title element
@@ -174,11 +174,11 @@ export const buildPicArrayCollapse = async (inputArray) => {
   return picCollapseElement;
 };
 
-export const buildPicArray = async (inputArray) => {
+export const buildPicList = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
 
   const picArrayElement = document.createElement("ul");
-  picArrayElement.id = "pic-array-element";
+  picArrayElement.id = "pic-list-element";
 
   for (let i = 0; i < inputArray.length; i++) {
     const picListItem = await buildPicListItem(inputArray[i]);

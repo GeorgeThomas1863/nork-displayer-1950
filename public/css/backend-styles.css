@@ -57,7 +57,7 @@
 
 /* PIC STYLES */
 
-#pic-data-array-element {
+#pic-array-element {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
@@ -68,7 +68,7 @@
   background-color: transparent;
 }
 
-#pic-array-element {
+#pic-list-element {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
