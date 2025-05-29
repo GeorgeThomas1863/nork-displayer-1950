@@ -32,8 +32,9 @@ export const mainClickHandler = async (e) => {
     await expandBackendData(expandType);
   }
 
-  console.log("!!!EVENT ID");
-  console.log(eventId);
+  if (eventId === "article-type") {
+    console.log("AHHHHHHHHHHHHHHH");
+  }
 };
 
 //-----------------------------------
