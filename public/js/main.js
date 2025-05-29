@@ -88,6 +88,7 @@ export const expandBackendData = async (dataType) => {
       } else {
         await hideArray([picArrayElement, picWrapper]);
       }
+      break;
 
     case "vid-form-header":
       if (isVidExpanded) {
@@ -99,6 +100,7 @@ export const expandBackendData = async (dataType) => {
       } else {
         await hideArray([vidArrayElement, vidWrapper]);
       }
+      break;
 
     default:
       console.log("INPUT FUCKED");
