@@ -14,6 +14,7 @@ export const buildCollapseContainer = async (inputObj) => {
   collapseHeader.className = "collapse-header";
 
   const arrow = document.createElement("div");
+  arrow.id = "collapse-arrow";
   arrow.className = isExpanded ? "collapse-arrow expanded" : "collapse-arrow";
   arrow.setAttribute("data-expand", dataAttribute);
 
