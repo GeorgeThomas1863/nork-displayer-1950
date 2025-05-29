@@ -40,9 +40,18 @@ export const expandBackendData = async (dataType) => {
   const picArrow = document.querySelector("#collapse-arrow[data-expand='pic-form-header']");
   const vidArrow = document.querySelector("#collapse-arrow[data-expand='vid-form-header']");
 
-  // const isArticleExpanded = articleArrow.classList.contains("expanded");
-  // const isPicExpanded = picArrow.classList.contains("expanded");
-  // const isVidExpanded = vidArrow.classList.contains("expanded");
+  let isArticleExpanded = articleArrow.classList.contains("expanded");
+  let isPicExpanded = picArrow.classList.contains("expanded");
+  let isVidExpanded = vidArrow.classList.contains("expanded");
+
+  console.log("!!!!!!IS ARTICLE EXPANDED");
+  console.log(isArticleExpanded);
+
+  console.log("!!!!!!IS PIC EXPANDED");
+  console.log(isPicExpanded);
+
+  console.log("!!!!!!IS VID EXPANDED");
+  console.log(isVidExpanded);
 
   //get form elements
   const articleWrapper = document.getElementById("article-wrapper");
@@ -58,15 +67,15 @@ export const expandBackendData = async (dataType) => {
 
   switch (dataType) {
     case "article-form-header":
-      if (articleArrow.classList.contains("expanded")) {
+      if (isArticleExpanded) {
         await hideArray([picArrayElement, picWrapper, vidArrayElement, vidWrapper]);
         await unhideArray([articleArrayElement, articleWrapper]);
 
-        picArrow.classList.remove("expanded");
-        vidArrow.classList.remove("expanded");
+        // picArrow.classList.remove("expanded");
+        // vidArrow.classList.remove("expanded");
       } else {
         await hideArray([articleArrayElement, articleWrapper]);
-        articleArrow.classList.add("expanded");
+        // articleArrow.classList.add("expanded");
       }
       break;
 
