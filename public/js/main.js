@@ -126,8 +126,8 @@ export const expandBackendData = async (dataType) => {
   const otherElements = [];
   const otherArrows = [];
 
-  for (let i = 0; i < baseTypes.length; i++) {
-    const typeValue = baseTypes[i];
+  for (let i = 0; i < typeArray.length; i++) {
+    const typeValue = typeArray[i];
     const formHeader = `${typeValue}-form-header`;
 
     if (formHeader !== dataType) {
