@@ -29,6 +29,8 @@ export const mainClickHandler = async (e) => {
 
   console.log("!!!!!!EXPAND TYPE", expandType);
 
+  await expandBackendData(expandType);
+
   //!!!!!!!!
   //HERE / BUILD BELOW
   //!!!!!!!!

@@ -33,38 +33,37 @@ export const buildDefaultDisplay = async () => {
 
 export const expandBackendData = async (dataType) => {
   //get form elements
-  const articleFormElement = document.getElementById("article-wrapper");
-  const picFormElement = document.getElementById("pic-wrapper");
-  const vidFormElement = document.getElementById("vid-wrapper");
-  const collapseArray = [articleFormElement, picFormElement, vidFormElement];
+  const articleWrapper = document.getElementById("article-wrapper");
+  const picWrapper = document.getElementById("pic-wrapper");
+  const vidWrapper = document.getElementById("vid-wrapper");
 
   //get backend data elements
-  const articleDataElement = document.getElementById("article-array-element");
-  const picDataElement = document.getElementById("pic-array-element");
-  const vidDataElement = document.getElementById("vid-array-element");
+  const articleArrayElement = document.getElementById("article-array-element");
+  const picArrayElement = document.getElementById("pic-array-element");
+  const vidArrayElement = document.getElementById("vid-array-element");
+
+  console.log("$$$$DATA TYPE", dataType);
 
   switch (dataType) {
-    case "article":
-      await hideArray([picDataElement, vidDataElement]);
-      await unhideArray([articleDataElement]);
+    case "article-form-header":
+      await hideArray([picArrayElement, picWrapper, vidArrayElement, vidWrapper]);
+      await unhideArray([articleArrayElement, articleWrapper]);
       break;
 
-    case "pic":
-      await hideArray([articleDataElement, vidDataElement]);
-      await unhideArray([picDataElement]);
+    case "pic-form-header":
+      await hideArray([articleArrayElement, articleWrapper, vidArrayElement, vidWrapper]);
+      await unhideArray([picArrayElement, picWrapper]);
       break;
 
-    case "vid":
-      await hideArray([articleDataElement, picDataElement]);
-      await unhideArray([vidDataElement]);
+    case "vid-form-header":
+      await hideArray([articleArrayElement, articleWrapper, picArrayElement, picWrapper]);
+      await unhideArray([vidArrayElement, vidWrapper]);
       break;
 
     default:
       console.log("INPUT FUCKED");
       return null;
   }
-
-  await defineCollapseItems(collapseArray);
 
   return true;
 };
