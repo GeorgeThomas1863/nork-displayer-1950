@@ -251,13 +251,16 @@ export const buildText = async (text) => {
 export const getNewArticleData = async () => {
   //get defaults
 
+  console.log("ALLAHU AKBAR");
+  console.log("debounce WORKED");
+
   const articleDefaultArray = ["fatboy", 5, "article-newest-to-oldest"];
 
   //!!!!
-  //HERE 
+  //HERE
   //ADD IN BELOW
   //!!!!!
-  // let appliedValues 
+  // let appliedValues
 
   //get user input
   const inputParams = await buildInputParams();

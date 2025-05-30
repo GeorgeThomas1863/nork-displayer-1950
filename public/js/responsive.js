@@ -49,11 +49,8 @@ export const mainInputHandler = async (e) => {
 
   //BELOW DOES NOT WORK, NEED TO FIX
   if (inputId === "article-how-many") {
-    debounce(async () => {
-      console.log("INPUT VALUE");
-      console.log(inputValue);
-      await getNewArticleData();
-    });
+    const debouncedFunction = debounce(getNewArticleData);
+    debouncedFunction();
   }
 };
 
