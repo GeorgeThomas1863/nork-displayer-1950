@@ -2,9 +2,6 @@
 export const sendToBack = async (inputParams) => {
   const { route } = inputParams;
 
-  // console.log("INPUT PARAMS");
-  // console.log(inputParams);
-
   //send all to backend
   try {
     const res = await fetch(route, {
@@ -64,4 +61,17 @@ export const unhideArray = async (inputs) => {
   for (const input of inputs) {
     input.classList.remove("hidden");
   }
+};
+
+//--------------------------------
+
+//debounce function (to add delay to input / only send to back when user stops typing) [can put elsewhere]
+export const debounce = (func) => {
+  let timer;
+  const DELAY = 300; //300 milliseconds
+
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => func(...args), DELAY);
+  };
 };

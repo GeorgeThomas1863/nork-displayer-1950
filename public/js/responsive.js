@@ -2,6 +2,8 @@ import { expandBackendData } from "./main.js";
 import { buildAdminParams, sendToBack } from "./util.js";
 import { getNewArticleData } from "./parse/parse-articles.js";
 
+import { debounce } from "./util.js";
+
 export const adminSubmitClick = async (e) => {
   e.preventDefault();
 
@@ -56,16 +58,6 @@ export const mainInputHandler = async (e) => {
     console.log(inputValue);
     debouncedGetNewArticleData();
   }
-};
-
-export const debounce = (func) => {
-  let timer;
-  const DELAY = 300; //300 milliseconds
-
-  return (...args) => {
-    clearTimeout(timer);
-    timer = setTimeout(() => func(...args), DELAY);
-  };
 };
 
 //-----------------------------------
