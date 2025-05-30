@@ -273,9 +273,6 @@ export const getNewArticleData = async () => {
     }
   }
 
-  // console.log("NEW ARTICLE DATA");
-  // console.log(newArticleData);
-
   if (!newArticleData) return null;
 
   const newArticleDataWrapper = await buildArticleData(newArticleData);
@@ -284,14 +281,9 @@ export const getNewArticleData = async () => {
   const backendDataWrapper = document.getElementById("backend-data-wrapper");
   const articleArrayElement = document.getElementById("article-array-element");
 
-  // console.log("%%%%ARTICLE ARRAY ELEMENT");
-  // console.log(articleArrayElement);
-
   //please work
   backendDataWrapper.replaceChild(newArticleDataWrapper, articleArrayElement);
 
-  // console.log("!!!NEW ARTICLE DATA WRAPPER");
-  // console.log(newArticleDataWrapper);
 
   console.log("BACKEND DATA WRAPPER");
   console.log(backendDataWrapper);
