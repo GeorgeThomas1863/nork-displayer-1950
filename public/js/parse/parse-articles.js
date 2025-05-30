@@ -252,7 +252,6 @@ export const getNewArticleData = async () => {
   //get defaults
 
   console.log("ALLAHU AKBAR");
-  console.log("debounce WORKED");
 
   const articleDefaultArray = ["fatboy", 5, "article-newest-to-oldest"];
 
