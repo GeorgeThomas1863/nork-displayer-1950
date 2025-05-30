@@ -62,6 +62,7 @@ if (displayElement) {
 //INPUT listeners
 const articleHowMany = document.getElementById("article-how-many");
 if (articleHowMany) {
+  console.log("AHHHHHHHHHH");
   articleHowMany.addEventListener("input", mainInputHandler);
 }
 // const picHowMany = document.getElementById("pic-how-many");
