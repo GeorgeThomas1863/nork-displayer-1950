@@ -43,7 +43,7 @@ export const checkNewArticleData = async () => {
   console.log(articleArrayElement);
 
   //please work
-  backendDataWrapper.replaceChildren(newArticleDataWrapper, articleArrayElement);
+  backendDataWrapper.replaceChild(newArticleDataWrapper, articleArrayElement);
 
   console.log("!!!NEW ARTICLE DATA WRAPPER");
   console.log(newArticleDataWrapper);
