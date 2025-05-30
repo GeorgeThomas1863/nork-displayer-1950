@@ -250,16 +250,7 @@ export const buildText = async (text) => {
 //GET NEW DATA SECTION
 export const getNewArticleData = async () => {
   //get defaults
-
-  console.log("ALLAHU AKBAR");
-
   const articleDefaultArray = ["fatboy", 5, "article-newest-to-oldest"];
-
-  //!!!!
-  //HERE
-  //ADD IN BELOW
-  //!!!!!
-  // let appliedValues
 
   //get user input
   const inputParams = await buildInputParams();
