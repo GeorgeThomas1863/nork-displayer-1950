@@ -52,6 +52,17 @@ export const mainInputHandler = async (e) => {
   console.log(inputValue);
 };
 
+//debounce function (to add delay to input / only send to back when user stops typing)
+export const debounce = (func) => {
+  let timer;
+  const DELAY = 300; //300 milliseconds
+
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => func(...args), DELAY);
+  };
+};
+
 //-----------------------------------
 
 //ADMIN event listener
