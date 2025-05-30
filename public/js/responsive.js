@@ -1,7 +1,6 @@
 import { expandBackendData } from "./main.js";
 import { buildAdminParams, sendToBack } from "./util.js";
-
-import { checkNewArticleData } from "./get-data/get-articles.js";
+import { getNewArticleData } from "./parse/parse-articles.js";
 
 export const adminSubmitClick = async (e) => {
   e.preventDefault();
@@ -35,7 +34,7 @@ export const mainClickHandler = async (e) => {
   }
 
   if (eventId === "article-type" || eventId === "article-sort-by") {
-    await checkNewArticleData();
+    await getNewArticleData();
   }
 
   console.log("!!!EVENT ID");
@@ -59,6 +58,6 @@ if (displayElement) {
 }
 
 //get how many inputs
-const articleHowMany = document.getElementById("article-how-many");
-const picHowMany = document.getElementById("pic-how-many");
-const vidHowMany = document.getElementById("vid-how-many");
+// const articleHowMany = document.getElementById("article-how-many");
+// const picHowMany = document.getElementById("pic-how-many");
+// const vidHowMany = document.getElementById("vid-how-many");
