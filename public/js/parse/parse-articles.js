@@ -53,9 +53,9 @@ export const buildArticleTypeListItem = async () => {
   const optionArray = [
     { value: "fatboy", id: "fatboy", text: `"Revolutionary Activities"`, selected: true },
     { value: "all-type", id: "all-type", text: "All" },
-    { value: "top-news", id: "top-news", text: "Top News" },
-    { value: "latest-news", id: "latest-news", text: "Latest News" },
-    { value: "external-news", id: "external-news", text: "External News" },
+    { value: "top", id: "top", text: "Top News" },
+    { value: "latest", id: "latest", text: "Latest News" },
+    { value: "external", id: "external", text: "External News" },
     { value: "anecdote", id: "anecdote", text: "Revolutionary Anecdotes" },
     { value: "people", id: "people", text: "Always in Memory of the People" },
   ];
