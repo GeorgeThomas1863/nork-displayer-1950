@@ -1,4 +1,5 @@
-//KEEP GOING, LEGIT CLOSE ON RESPONSIVE; get article working, then copy for rest
+//need to change article obj tracking so tracking latest state, NOT default
+
 
 //THEN TRY EQUAION ON TG FOR EXPAND BACKEND DATA
 

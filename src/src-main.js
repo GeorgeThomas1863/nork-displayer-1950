@@ -96,6 +96,10 @@ const getPicData = async (picURL) => {
   return picObj;
 };
 
+//-----------------------------------
+
+// GET NEW DATA SECTION
+
 export const getNewArticleData = async (inputParams) => {
   if (!inputParams || !inputParams.articleType || !inputParams.articleHowMany || !inputParams.articleSortBy) return null;
   const { articleType, articleHowMany, articleSortBy } = inputParams;
@@ -111,24 +115,32 @@ export const getNewArticleData = async (inputParams) => {
   const articleModel = new dbModel(articleParams, articles);
 
   //if all DONT filter by type
+  let articleArrayRaw = [];
   if (articleType === "all-type") {
     switch (articleSortBy) {
       case "article-newest-to-oldest":
-        return await articleModel.getNewestItemsArray();
+        articleArrayRaw = await articleModel.getNewestItemsArray();
+        break;
 
       case "article-oldest-to-newest":
-        return await articleModel.getOldestItemsArray();
+        articleArrayRaw = await articleModel.getOldestItemsArray();
+        break;
+    }
+  } else {
+    //otherwise filter by type
+    switch (articleSortBy) {
+      case "article-newest-to-oldest":
+        articleArrayRaw = await articleModel.getNewestItemsByTypeArray();
+        break;
+
+      case "article-oldest-to-newest":
+        articleArrayRaw = await articleModel.getOldestItemsByTypeArray();
+        break;
     }
   }
 
-  //otherwise filter by type
-  switch (articleSortBy) {
-    case "article-newest-to-oldest":
-      return await articleModel.getNewestItemsByTypeArray();
-
-    case "article-oldest-to-newest":
-      return await articleModel.getOldestItemsByTypeArray();
-  }
+  const articleArray = await addArticlePicData(articleArrayRaw);
+  return articleArray;
 };
 
 // sortKey, howMany, filterKey, filterValue;
