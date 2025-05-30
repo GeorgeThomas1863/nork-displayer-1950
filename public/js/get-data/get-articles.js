@@ -28,6 +28,9 @@ export const checkNewArticleData = async () => {
     }
   }
 
+  console.log("NEW ARTICLE DATA");
+  console.log(newArticleData);
+
   if (!newArticleData) return null;
 
   const newArticleDataWrapper = await buildArticleData(newArticleData);
