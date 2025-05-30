@@ -136,12 +136,21 @@ export const buildArticleSortByListItem = async () => {
 
 //--------------------------------------
 
-export const buildArticleData = async (inputArray) => {
+export const buildArticleData = async (inputArray, stateParams = null) => {
   if (!inputArray || !inputArray.length) return null;
 
   const articleList = document.createElement("ul");
   articleList.id = "article-array-element";
   articleList.className = "article-list data-return";
+
+  // Set initial state attributes if provided
+  if (stateParams) {
+    setCurrentArticleState(articleList, stateParams);
+  } else {
+    // Set default state for initial load
+    const defaultState = ["fatboy", 5, "article-newest-to-oldest"];
+    setCurrentArticleState(articleList, defaultState);
+  }
 
   let isFirst = true;
   const collapseArray = [];
@@ -249,44 +258,81 @@ export const buildText = async (text) => {
 
 //GET NEW DATA SECTION
 export const getNewArticleData = async () => {
-  //get defaults
-  const articleDefaultArray = ["fatboy", 5, "article-newest-to-oldest"];
-
   //get user input
   const inputParams = await buildInputParams();
   if (!inputParams || !inputParams.articleType || !inputParams.articleHowMany || !inputParams.articleSortBy) return null;
 
-  // instract out article inputs
+  // Extract article inputs
   const { articleType, articleHowMany, articleSortBy } = inputParams;
-  const articleInputArray = [articleType, articleHowMany, articleSortBy];
+  const newArticleInputArray = [articleType, articleHowMany, articleSortBy];
 
-  //set route
-  inputParams.route = "/get-new-article-data-route";
+  // Get current data state from the existing article array element
+  const articleArrayElement = document.getElementById("article-array-element");
+  const currentArticleInputArray = getCurrentArticleState(articleArrayElement);
 
-  let newArticleData;
-  for (let i = 0; i < articleDefaultArray.length; i++) {
-    if (articleDefaultArray[i] !== articleInputArray[i]) {
-      //define route, send to back
-      newArticleData = await sendToBack(inputParams);
-      //break if shit returns
-      if (newArticleData) break;
+  // Compare new input against current state, not hardcoded defaults
+  let needsNewData = false;
+  for (let i = 0; i < currentArticleInputArray.length; i++) {
+    if (currentArticleInputArray[i] !== newArticleInputArray[i]) {
+      needsNewData = true;
+      break;
     }
   }
 
+  // If no change needed, return early
+  if (!needsNewData) {
+    console.log("Article data unchanged, skipping backend request");
+    console.log("Current state:", currentArticleInputArray);
+    console.log("New input:", newArticleInputArray);
+    return false;
+  }
+
+  console.log("Article parameters changed - fetching new data");
+  console.log("Previous state:", currentArticleInputArray);
+  console.log("New state:", newArticleInputArray);
+
+  //set route and fetch new data
+  inputParams.route = "/get-new-article-data-route";
+  const newArticleData = await sendToBack(inputParams);
+
   if (!newArticleData) return null;
 
-  const newArticleDataWrapper = await buildArticleData(newArticleData);
-
-  //get backend data wrapper
+  const newArticleDataWrapper = await buildArticleData(newArticleData, newArticleInputArray);
+  
+  //get backend data wrapper and replace old data
   const backendDataWrapper = document.getElementById("backend-data-wrapper");
-  const articleArrayElement = document.getElementById("article-array-element");
 
   //please work
   backendDataWrapper.replaceChild(newArticleDataWrapper, articleArrayElement);
-
 
   console.log("BACKEND DATA WRAPPER");
   console.log(backendDataWrapper);
 
   return true;
 };
+
+// Helper function to get current article state from DOM element
+const getCurrentArticleState = (articleElement) => {
+  if (!articleElement) {
+    // If no element exists, return initial default state
+    return ["fatboy", 5, "article-newest-to-oldest"];
+  }
+
+  const articleType = articleElement.getAttribute("data-article-type") || "fatboy";
+  const articleHowMany = parseInt(articleElement.getAttribute("data-article-how-many")) || 5;
+  const articleSortBy = articleElement.getAttribute("data-article-sort-by") || "article-newest-to-oldest";
+
+  return [articleType, articleHowMany, articleSortBy];
+};
+
+// Helper function to store current article state on DOM element
+const setCurrentArticleState = (articleElement, inputArray) => {
+  if (!articleElement || !inputArray || inputArray.length < 3) return;
+
+  const [articleType, articleHowMany, articleSortBy] = inputArray;
+  
+  articleElement.setAttribute("data-article-type", articleType);
+  articleElement.setAttribute("data-article-how-many", articleHowMany.toString());
+  articleElement.setAttribute("data-article-sort-by", articleSortBy);
+};
+
