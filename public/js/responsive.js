@@ -48,10 +48,12 @@ export const mainInputHandler = async (e) => {
   const inputValue = inputElement.value;
 
   if (inputId === "article-how-many") {
-    console.log("INPUT ID");
-    console.log(inputId);
-    console.log("INPUT VALUE");
-    console.log(inputValue);
+    debounce(async () => {
+      console.log("INPUT ID");
+      console.log(inputId);
+      console.log("INPUT VALUE");
+      console.log(inputValue);
+    });
   }
 };
 
