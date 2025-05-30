@@ -41,6 +41,9 @@ export const mainClickHandler = async (e) => {
   console.log(clickId);
 };
 
+//create debounced function
+const debouncedGetNewArticleData = debounce(getNewArticleData);
+
 export const mainInputHandler = async (e) => {
   const inputElement = e.target;
 
@@ -49,14 +52,12 @@ export const mainInputHandler = async (e) => {
 
   //BELOW DOES NOT WORK, NEED TO FIX
   if (inputId === "article-how-many") {
-    const debouncedFunction = debounce(getNewArticleData);
     console.log("INPUT VALUE");
     console.log(inputValue);
-    debouncedFunction();
+    debouncedGetNewArticleData();
   }
 };
 
-//debounce function (to add delay to input / only send to back when user stops typing)
 export const debounce = (func) => {
   let timer;
   const DELAY = 300; //300 milliseconds
