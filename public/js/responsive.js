@@ -47,9 +47,12 @@ export const mainInputHandler = async (e) => {
   const inputId = inputElement.id;
   const inputValue = inputElement.value;
 
-  console.log("ALLAHU AKBAR");
-  console.log(inputId);
-  console.log(inputValue);
+  if (inputId === "article-how-many") {
+    console.log("INPUT ID");
+    console.log(inputId);
+    console.log("INPUT VALUE");
+    console.log(inputValue);
+  }
 };
 
 //debounce function (to add delay to input / only send to back when user stops typing)
