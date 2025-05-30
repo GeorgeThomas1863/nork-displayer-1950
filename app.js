@@ -1,5 +1,8 @@
+//ON PARSE-ARTICLES (under public)
+
 //need to change article obj tracking so tracking latest state, NOT default
 
+//also add debounce + how many input (maybe do first)
 
 //THEN TRY EQUAION ON TG FOR EXPAND BACKEND DATA
 

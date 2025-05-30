@@ -253,6 +253,12 @@ export const getNewArticleData = async () => {
 
   const articleDefaultArray = ["fatboy", 5, "article-newest-to-oldest"];
 
+  //!!!!
+  //HERE 
+  //ADD IN BELOW
+  //!!!!!
+  // let appliedValues 
+
   //get user input
   const inputParams = await buildInputParams();
   if (!inputParams || !inputParams.articleType || !inputParams.articleHowMany || !inputParams.articleSortBy) return null;
