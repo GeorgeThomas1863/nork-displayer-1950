@@ -49,10 +49,9 @@ export const mainInputHandler = async (e) => {
 
   if (inputId === "article-how-many") {
     debounce(async () => {
-      console.log("INPUT ID");
-      console.log(inputId);
       console.log("INPUT VALUE");
       console.log(inputValue);
+      await getNewArticleData();
     });
   }
 };
