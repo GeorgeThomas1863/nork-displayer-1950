@@ -41,7 +41,9 @@ export const mainClickHandler = async (e) => {
   console.log(eventId);
 };
 
-export const mainInputHandler = async (e) => {};
+export const mainInputHandler = async (e) => {
+  console.log("ALLAHU AKBAR");
+};
 
 //-----------------------------------
 
@@ -57,7 +59,10 @@ if (displayElement) {
   displayElement.addEventListener("click", mainClickHandler);
 }
 
-//get how many inputs
-// const articleHowMany = document.getElementById("article-how-many");
+//INPUT listeners
+const articleHowMany = document.getElementById("article-how-many");
+if (articleHowMany) {
+  articleHowMany.addEventListener("input", mainInputHandler);
+}
 // const picHowMany = document.getElementById("pic-how-many");
 // const vidHowMany = document.getElementById("vid-how-many");
