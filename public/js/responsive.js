@@ -25,24 +25,31 @@ export const adminSubmitClick = async (e) => {
 export const mainClickHandler = async (e) => {
   e.preventDefault();
 
-  const eventElement = e.target;
-  const eventId = eventElement.id;
-  const expandType = eventElement.getAttribute("data-expand");
+  const clickElement = e.target;
+  const clickId = clickElement.id;
+  const expandType = clickElement.getAttribute("data-expand");
 
   if (expandType) {
     await expandBackendData(expandType);
   }
 
-  if (eventId === "article-type" || eventId === "article-sort-by") {
+  if (clickId === "article-type" || clickId === "article-sort-by") {
     await getNewArticleData();
   }
 
   console.log("!!!EVENT ID");
-  console.log(eventId);
+  console.log(clickId);
 };
 
 export const mainInputHandler = async (e) => {
+  const inputElement = e.target;
+
+  const inputId = inputElement.id;
+  const inputValue = inputElement.value;
+
   console.log("ALLAHU AKBAR");
+  console.log(inputId);
+  console.log(inputValue);
 };
 
 //-----------------------------------
@@ -53,17 +60,18 @@ if (adminSubmitButton) {
   adminSubmitButton.addEventListener("click", adminSubmitClick);
 }
 
-//MAIN CLICK listener
+//MAIN CLICK / INPUT listener
 const displayElement = document.getElementById("display-element");
 if (displayElement) {
   displayElement.addEventListener("click", mainClickHandler);
+  displayElement.addEventListener("input", mainInputHandler);
 }
 
 //INPUT listeners
-const articleHowMany = document.getElementById("article-how-many");
-if (articleHowMany) {
-  console.log("AHHHHHHHHHH");
-  articleHowMany.addEventListener("input", mainInputHandler);
-}
+// const articleHowMany = document.getElementById("article-how-many");
+// if (articleHowMany) {
+//   console.log("AHHHHHHHHHH");
+//   articleHowMany.addEventListener("input", mainInputHandler);
+// }
 // const picHowMany = document.getElementById("pic-how-many");
 // const vidHowMany = document.getElementById("vid-how-many");
