@@ -49,13 +49,13 @@ export const mainInputHandler = async (e) => {
 
   //BELOW DOES NOT WORK, NEED TO FIX
   if (inputId === "article-how-many") {
-    const debouncedFunction = debounce(getNewArticleData);
-    debouncedFunction();
+    const debouncedFunction = await debounce(getNewArticleData);
+    await debouncedFunction();
   }
 };
 
 //debounce function (to add delay to input / only send to back when user stops typing)
-export const debounce = (func) => {
+export const debounce = async (func) => {
   let timer;
   const DELAY = 300; //300 milliseconds
 
