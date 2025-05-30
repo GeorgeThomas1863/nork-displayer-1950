@@ -47,6 +47,7 @@ export const mainInputHandler = async (e) => {
   const inputId = inputElement.id;
   const inputValue = inputElement.value;
 
+  //BELOW DOES NOT WORK, NEED TO FIX
   if (inputId === "article-how-many") {
     debounce(async () => {
       console.log("INPUT VALUE");
