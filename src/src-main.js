@@ -378,10 +378,10 @@ export const getNewVidData = async (inputParams) => {
       break;
   }
 
-  const vidArrayRaw = await fixPicDataByType(vidArrayPicRaw);
+  console.log("VID ARRAY PIC RAW LENGTH");
+  console.log(vidArrayPicRaw.length);
 
-  console.log("VID ARRAY RAW LENGTH");
-  console.log(vidArrayRaw.length);
+  const vidArrayRaw = await fixPicDataByType(vidArrayPicRaw);
 
   let vidArray = [];
   if (vidType === "vid-alone") {
