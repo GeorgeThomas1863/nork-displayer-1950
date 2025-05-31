@@ -82,7 +82,7 @@ export const buildPicHowManyListItem = async () => {
   picHowManyInput.type = "text";
   picHowManyInput.name = "pic-how-many";
   picHowManyInput.id = "pic-how-many";
-  picHowManyInput.placeholder = "[Defaults to 30 (most recent)]";
+  picHowManyInput.placeholder = "[Defaults to 9 (most recent)]";
 
   picHowManyListItem.append(picHowManyLabel, picHowManyInput);
 
@@ -141,7 +141,7 @@ export const buildPicData = async (inputArray, stateParams = null) => {
     setCurrentPicState(picList, stateParams);
   } else {
     //handle initial load
-    const defaultStateParams = ["pic-alone", 30, "pic-newest-to-oldest"];
+    const defaultStateParams = ["pic-alone", 9, "pic-newest-to-oldest"];
     setCurrentPicState(picList, defaultStateParams);
   }
 
@@ -353,11 +353,11 @@ export const getNewPicData = async () => {
 const getCurrentPicState = (picElement) => {
   if (!picElement) {
     // If no element exists, return initial default state
-    return ["pic-alone", 30, "pic-newest-to-oldest"];
+    return ["pic-alone", 9, "pic-newest-to-oldest"];
   }
 
   const picType = picElement.getAttribute("data-pic-type") || "pic-alone";
-  const picHowMany = parseInt(picElement.getAttribute("data-pic-how-many")) || 30;
+  const picHowMany = parseInt(picElement.getAttribute("data-pic-how-many")) || 9;
   const picSortBy = picElement.getAttribute("data-pic-sort-by") || "pic-newest-to-oldest";
 
   return [picType, picHowMany, picSortBy];

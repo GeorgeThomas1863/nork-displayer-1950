@@ -15,7 +15,7 @@ export const runGetBackendData = async () => {
 
   const picParams = {
     sortKey: "picId",
-    howMany: 30,
+    howMany: 9,
   };
 
   const vidParams = {
@@ -28,7 +28,7 @@ export const runGetBackendData = async () => {
   const articleArrayRaw = await articleModel.getNewestItemsByTypeArray();
   const articleArray = await addPicDataToArray(articleArrayRaw);
 
-  //get last 30 pics by default
+  //get last 9 pics by default
   const picModel = new dbModel(picParams, picsDownloaded);
   const picArray = await picModel.getNewestItemsArray();
 
