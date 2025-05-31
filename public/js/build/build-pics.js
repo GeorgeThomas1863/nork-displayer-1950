@@ -212,11 +212,8 @@ export const buildPicListItem = async (inputObj) => {
   //stats beneath the pic
   const picStatsElement = await buildPicStatsElement(inputObj);
 
-  //REENABLE
-  // const picElement = await buildPicElement(savePath);
-  // picListItem.append(picElement, picStatsElement);
-
-  picListItem.append(picStatsElement);
+  const picElement = await buildPicElement(savePath);
+  picListItem.append(picElement, picStatsElement);
 
   return picListItem;
 };

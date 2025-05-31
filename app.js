@@ -1,4 +1,4 @@
-//throwing otu a bunch of shit, very ugly performance
+//FIGURE OUT PIC STATS ON THUMBNAILS  (CANT OVERWRITE VID DATA)
 
 //TEST / STYLE PIC STATS DISPLAY
 
