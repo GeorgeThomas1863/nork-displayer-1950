@@ -237,6 +237,9 @@ export const buildPicElement = async (savePath) => {
 
 //build pic stats
 export const buildPicStatsElement = async (inputObj) => {
+  if (!inputObj) return null;
+  console.log("INPUT OBJ");
+  console.log(inputObj);
   const picStatsElement = document.createElement("div");
   picStatsElement.id = "pic-stats";
 
@@ -251,8 +254,8 @@ export const buildPicStatsElement = async (inputObj) => {
 
 //extract / format pic date
 export const buildPicDateElement = async (inputObj) => {
-  if (!inputObj || !inputObj.headerData || !inputObj.headerData.date) return null;
-  const dateInput = inputObj.headerData.date;
+  if (!inputObj || !inputObj.picDate) return null;
+  const dateInput = inputObj.picDate;
 
   const dateElement = document.createElement("div");
   dateElement.id = "pic-date";
