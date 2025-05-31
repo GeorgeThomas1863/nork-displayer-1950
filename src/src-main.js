@@ -251,7 +251,7 @@ export const getNewVidData = async (inputParams) => {
       break;
 
     case "vid-oldest-to-newest":
-      vidArray = await vidModel.getOldestItemsArray();
+      vidArrayRaw = await vidModel.getOldestItemsArray();
       break;
   }
 

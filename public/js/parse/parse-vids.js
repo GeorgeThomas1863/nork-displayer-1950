@@ -234,7 +234,7 @@ export const getNewVidData = async () => {
   if (!newVidData) return null;
 
   const newVidDataWrapper = await buildVidData(newVidData, newVidInputArray);
-  if (!newVidDataWrapper) return null;
+  // if (!newVidDataWrapper) return null;
   newVidDataWrapper.classList.remove("hidden");
 
   //get backend data wrapper and replace old data
