@@ -278,6 +278,7 @@ export const getNewPicData = async () => {
   if (!newPicData) return null;
 
   const newPicDataWrapper = await buildPicData(newPicData, newPicInputArray);
+  newPicDataWrapper.classList.remove("hidden"); //doubt this will work
 
   //get backend data wrapper and replace old data
   const backendDataWrapper = document.getElementById("backend-data-wrapper");
