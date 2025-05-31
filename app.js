@@ -1,3 +1,5 @@
+//throwing otu a bunch of shit, very ugly performance
+
 //TEST / STYLE PIC STATS DISPLAY
 
 //BUILD PIC SET / VID PAGE DISPLAYS
