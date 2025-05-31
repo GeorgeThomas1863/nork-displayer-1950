@@ -93,18 +93,20 @@ export const fixPicDataByType = async (inputArray) => {
         if (!vidObj || !vidObj.thumbnail) continue;
 
         const { thumbnail } = vidObj;
-        console.log("INPUT OBJ");
-        console.log(inputObj);
-
-        
+        // console.log("INPUT OBJ");
+        // console.log(inputObj);
 
         const thumbnailObj = await getPicData(thumbnail);
         if (!thumbnailObj) continue;
 
-        console.log("THUMBNAIL OBJ");
-        console.log(thumbnailObj);
+        // console.log("THUMBNAIL OBJ");
+        // console.log(thumbnailObj);
 
-        results.push(thumbnailObj);
+        const returnObj = { ...inputObj, ...thumbnailObj };
+        returnObj.savePath = inputObj.savePath;
+        returnObj.picSavePath = thumbnailObj.savePath;
+
+        results.push(returnObj);
         break;
     }
   }
