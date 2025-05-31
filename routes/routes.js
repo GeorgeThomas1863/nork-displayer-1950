@@ -1,7 +1,7 @@
 import express from "express";
 
 import { indexDisplay, adminDisplay, display404, display500 } from "../controllers/display.js";
-import { adminSubmitRoute, getBackendDataRoute, getNewArticleDataRoute } from "../controllers/data-controller.js";
+import { adminSubmitRoute, getBackendDataRoute, getNewArticleDataRoute, getNewPicDataRoute } from "../controllers/data-controller.js";
 
 const router = express.Router();
 
@@ -10,6 +10,8 @@ router.post("/admin-submit-route", adminSubmitRoute);
 router.post("/get-backend-data-route", getBackendDataRoute);
 
 router.post("/get-new-article-data-route", getNewArticleDataRoute);
+
+router.post("/get-new-pic-data-route", getNewPicDataRoute);
 
 router.get("/", indexDisplay);
 

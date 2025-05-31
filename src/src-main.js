@@ -26,9 +26,9 @@ export const runGetBackendData = async () => {
   //articles get ONLY last 5 FATBOY by default
   const articleModel = new dbModel(articleParams, articles);
   const articleArrayRaw = await articleModel.getNewestItemsByTypeArray();
-  const articleArray = await addArticlePicData(articleArrayRaw);
+  const articleArray = await addPicDataToArray(articleArrayRaw);
 
-  //get last 9 pics by default
+  //get last 12 pics by default
   const picModel = new dbModel(picParams, picsDownloaded);
   const picArray = await picModel.getNewestItemsArray();
 
@@ -45,14 +45,14 @@ export const runGetBackendData = async () => {
   return dataObj;
 };
 
-const addArticlePicData = async (inputArray) => {
-  const articlePicArray = [];
+const addPicDataToArray = async (inputArray) => {
+  const results = [];
   for (let i = 0; i < inputArray.length; i++) {
     const articleObj = await parseArticleObj(inputArray[i]);
-    articlePicArray.push(articleObj);
+    results.push(articleObj);
   }
 
-  return articlePicArray;
+  return results;
 };
 
 const parseArticleObj = async (inputObj) => {
@@ -139,8 +139,56 @@ export const getNewArticleData = async (inputParams) => {
     }
   }
 
-  const articleArray = await addArticlePicData(articleArrayRaw);
+  const articleArray = await addPicDataToArray(articleArrayRaw);
   return articleArray;
+};
+
+export const getNewPicData = async (inputParams) => {
+  if (!inputParams || !inputParams.picType || !inputParams.picHowMany || !inputParams.picSortBy) return null;
+  const { picType, picHowMany, picSortBy } = inputParams;
+  const { picsDownloaded, picSetContent } = CONFIG;
+
+  const picParams = {
+    sortKey: "picId",
+    howMany: picHowMany,
+  };
+
+  //SEPARATE HERE BY PIC TYPE
+  let collection = "";
+  switch (picType) {
+    case "pic-alone":
+      collection = picsDownloaded;
+      break;
+
+    case "pic-sets":
+      collection = picSetContent;
+      break;
+  }
+
+  const picModel = new dbModel(picParams, collection);
+
+  //if all DONT filter by type
+  let picArrayRaw = [];
+  switch (picSortBy) {
+    case "pic-newest-to-oldest":
+      picArrayRaw = await picModel.getNewestItemsArray();
+      break;
+
+    case "pic-oldest-to-newest":
+      picArrayRaw = await picModel.getOldestItemsArray();
+      break;
+  }
+
+  //return picArray raw on just pics
+  let picArray = [];
+  if (picType === "pic-alone") {
+    picArray = picArrayRaw;
+  } else {
+    //otherwise, add picData to pics
+    picArray = await addPicDataToArray(picArrayRaw);
+  }
+
+  return picArray;
 };
 
 // sortKey, howMany, filterKey, filterValue;
