@@ -61,21 +61,22 @@ export const fixPicDataByType = async (inputArray) => {
 
   const results = [];
   for (let i = 0; i < inputArray.length; i++) {
+    const inputObj = inputArray[i];
     // const { articleId, picSetId, thumbnail } =
-    const dataType = await deriveDataType(inputArray[i]);
+    const dataType = await deriveDataType(inputObj);
 
     switch (dataType) {
       case "articles":
       case "picSets":
         //rebuild pic array (returns input if no picArray)
-        const picArrayObj = await fixPicArray(inputArray[i]);
+        const picArrayObj = await fixPicArray(inputObj);
         if (!picArrayObj) continue;
 
         results.push(picArrayObj);
         break;
 
       case "pics":
-        const picURL = inputArray[i].url;
+        const picURL = inputObj.url;
         const picObj = await getPicData(picURL);
         if (!picObj) continue;
 
@@ -84,7 +85,7 @@ export const fixPicDataByType = async (inputArray) => {
 
       case "vids":
         //need to derive the fucking thumbnail
-        const { url } = inputArray[i];
+        const { url } = inputObj;
         const { vidPageContent } = CONFIG;
 
         const thumbnailModel = new dbModel({ keyToLookup: "vidURL", itemValue: url }, vidPageContent);
@@ -92,11 +93,16 @@ export const fixPicDataByType = async (inputArray) => {
         if (!vidObj || !vidObj.thumbnail) continue;
 
         const { thumbnail } = vidObj;
-        console.log("VID OBJ");
-        console.log(vidObj);
+        console.log("INPUT OBJ");
+        console.log(inputObj);
+
+        
 
         const thumbnailObj = await getPicData(thumbnail);
         if (!thumbnailObj) continue;
+
+        console.log("THUMBNAIL OBJ");
+        console.log(thumbnailObj);
 
         results.push(thumbnailObj);
         break;
