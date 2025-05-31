@@ -139,7 +139,7 @@ const getPicData = async (picURL) => {
   }
 
   //add source to pic obj
-  picObj.source = picSource;
+  picObj.picSource = picSource;
 
   return picObj;
 };

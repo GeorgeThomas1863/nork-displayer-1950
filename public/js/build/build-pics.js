@@ -240,16 +240,14 @@ export const buildPicStatsElement = async (inputObj) => {
   const picStatsElement = document.createElement("div");
   picStatsElement.id = "pic-stats";
 
-  const picSourceElement = await buildPicSourceElement(inputObj);
   const picDateElement = await buildPicDateElement(inputObj);
+  const picSourceElement = await buildPicSourceElement(inputObj);
+  const picServerElement = await buildPicServerElement(inputObj);
 
-  picStatsElement.append(picSourceElement, picDateElement);
+  picStatsElement.append(picDateElement, picSourceElement, picServerElement);
 
   return picStatsElement;
 };
-
-//calc where pic from (do on backend)
-export const buildPicSourceElement = async (inputObj) => {};
 
 //extract / format pic date
 export const buildPicDateElement = async (inputObj) => {
@@ -266,6 +264,30 @@ export const buildPicDateElement = async (inputObj) => {
   });
 
   return dateElement;
+};
+
+//calc where pic from (do on backend)
+export const buildPicSourceElement = async (inputObj) => {
+  if (!inputObj || !inputObj.picSource) return null;
+  const { picSource } = inputObj;
+
+  const picSourceElement = document.createElement("div");
+  picSourceElement.id = "pic-source";
+  picSourceElement.textContent = picSource;
+
+  return picSourceElement;
+};
+
+//EXTRACT PIC SERVER DATA
+export const buildPicServerElement = async (inputObj) => {
+  if (!inputObj || !inputObj.headerData || !inputObj.headerData.server) return null;
+  const serverData = inputObj.headerData.server;
+
+  const picServerElement = document.createElement("div");
+  picServerElement.id = "pic-server";
+  picServerElement.textContent = serverData;
+
+  return picServerElement;
 };
 
 //----------------------------------

@@ -1,3 +1,5 @@
+//TEST / STYLE PIC STATS DISPLAY
+
 //BUILD PIC SET / VID PAGE DISPLAYS
 
 // STYLE ARTICLE LIST BETTER (3 across with pics, if present)
