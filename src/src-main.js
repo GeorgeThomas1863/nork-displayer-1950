@@ -26,17 +26,17 @@ export const runGetBackendData = async () => {
   //articles get ONLY last 5 FATBOY by default
   const articleModel = new dbModel(articleParams, articles);
   const articleArrayRaw = await articleModel.getNewestItemsByTypeArray();
-  const articleArray = await fixPicDataByType(articleArrayRaw, "articles");
+  const articleArray = await fixPicDataByType(articleArrayRaw);
 
   //get last 9 pics by default
   const picModel = new dbModel(picParams, picsDownloaded);
   const picArrayRaw = await picModel.getNewestItemsArray();
-  const picArray = await fixPicDataByType(picArrayRaw, "pics");
+  const picArray = await fixPicDataByType(picArrayRaw);
 
   //get last 3 vids by default
   const vidModel = new dbModel(vidParams, vidsDownloaded);
   const vidArrayRaw = await vidModel.getNewestItemsArray();
-  const vidArray = await fixPicDataByType(vidArrayRaw, "vids");
+  const vidArray = await fixPicDataByType(vidArrayRaw);
 
   const dataObj = {
     articleArray: articleArray,
@@ -44,67 +44,84 @@ export const runGetBackendData = async () => {
     vidArray: vidArray,
   };
 
+  console.log("DATA RETURN LENGTHS");
+  console.log(articleArray.length);
+  console.log(picArray.length);
+  console.log(vidArray.length);
+
   return dataObj;
 };
 
-const fixPicDataByType = async (inputArray, type) => {
+//fix pic data
+export const fixPicDataByType = async (inputArray) => {
+  if (!inputArray) return null;
+  //derive type from input
+  const { articleId, picSetId, thumbnail } = inputArray;
+
   const results = [];
 
-  switch (type) {
-    case "articles":
-      for (let i = 0; i < inputArray.length; i++) {
-        //rebuild pic array (returns input if no picArray)
-        const articlePicObj = await fixPicArray(inputArray[i]);
-        results.push(articlePicObj);
-      }
+  //handle items
 
-      return results;
+  //handle normal pics
+  if (!articleId && !picSetId && !thumbnail) {
+    for (let i = 0; i < inputArray.length; i++) {
+      const inputObj = inputArray[i];
+      const picURL = inputArray[i].url;
 
-    case "picSet":
-      for (let i = 0; i < inputArray.length; i++) {
-        const { picArray } = inputArray[i];
-        if (!picArray || !picArray.length) return null;
+      const picDataObj = await getPicData(picURL);
+      if (!picDataObj) continue;
 
-        const picSetObj = await fixPicArray(inputArray[i]);
+      const picObj = { ...inputObj, ...picDataObj };
+      results.push(picObj);
+    }
 
-        results.push(picSetObj);
-      }
+    return results;
+  }
 
-      return results;
+  //handle vids
+  if (thumbnail) {
+    for (let i = 0; i < inputArray.length; i++) {
+      const inputObj = inputArray[i];
+      if (!inputObj || !inputObj.thumbnail) continue;
 
-    case "pics":
-      for (let i = 0; i < inputArray.length; i++) {
-        const inputObj = inputArray[i];
-        const picURL = inputArray[i].url;
+      const { thumbnail } = inputObj;
 
-        const picDataObj = await getPicData(picURL);
-        if (!picDataObj) continue;
+      const thumbnailDataObj = await getPicData(thumbnail);
+      if (!thumbnailDataObj) continue;
 
-        const picObj = { ...inputObj, ...picDataObj };
-        results.push(picObj);
-      }
+      const vidObj = { ...inputObj, ...thumbnailDataObj };
 
-      return results;
+      results.push(vidObj);
+    }
 
-    case "vids":
-      for (let i = 0; i < inputArray.length; i++) {
-        const inputObj = inputArray[i];
-        if (!inputObj || !inputObj.thumbnail) continue;
+    return results;
+  }
 
-        const { thumbnail } = inputObj;
+  //handle arrays
 
-        const thumbnailDataObj = await getPicData(thumbnail);
-        if (!thumbnailDataObj) continue;
+  //handle articles
+  if (articleId) {
+    for (let i = 0; i < inputArray.length; i++) {
+      //rebuild pic array (returns input if no picArray)
+      const articlePicObj = await fixPicArray(inputArray[i]);
+      results.push(articlePicObj);
+    }
 
-        const vidObj = { ...inputObj, ...thumbnailDataObj };
+    return results;
+  }
 
-        results.push(vidObj);
-      }
+  //handle pic sets
+  if (picSetId) {
+    for (let i = 0; i < inputArray.length; i++) {
+      const { picArray } = inputArray[i];
+      if (!picArray || !picArray.length) return null;
 
-      return results;
+      const picSetObj = await fixPicArray(inputArray[i]);
 
-    default:
-      return null;
+      results.push(picSetObj);
+    }
+
+    return results;
   }
 };
 
@@ -117,17 +134,17 @@ export const fixPicArray = async (inputObj) => {
 
   const picDataArray = [];
   for (let i = 0; i < picArray.length; i++) {
-    const picObj = await getPicData(picArray[i]);
-    if (!picObj) continue;
+    const picDataObj = await getPicData(picArray[i]);
+    if (!picDataObj) continue;
 
-    picDataArray.push(picObj);
+    picDataArray.push(picDataObj);
   }
 
   returnObj.picArray = picDataArray;
   return returnObj;
 };
 
-//get pic data
+//get pic data (and adds source / date)
 export const getPicData = async (picURL) => {
   const { picsDownloaded } = CONFIG;
 
@@ -286,7 +303,7 @@ export const getNewArticleData = async (inputParams) => {
     }
   }
 
-  const articleArray = await fixPicDataByType(articleArrayRaw, "articles");
+  const articleArray = await fixPicDataByType(articleArrayRaw);
   return articleArray;
 };
 
@@ -326,16 +343,7 @@ export const getNewPicData = async (inputParams) => {
       break;
   }
 
-  const picArray = await fixPicDataByType(picArrayRaw, "pics");
-
-  // //return picArray raw on just pics
-  // let picArray = [];
-  // if (picType === "pic-alone") {
-  //   picArray = picArrayRaw;
-  // } else {
-  //   //otherwise, add picData to pics
-  //   picArray = await fixPicDataByType(picArrayRaw, "picSets");
-  // }
+  const picArray = await fixPicDataByType(picArrayRaw);
 
   return picArray;
 };
@@ -385,7 +393,7 @@ export const getNewVidData = async (inputParams) => {
     vidArrayPicRaw = await addVidDataToArray(vidArrayRaw);
   }
 
-  const vidArray = await fixPicDataByType(vidArrayPicRaw, "vids");
+  const vidArray = await fixPicDataByType(vidArrayPicRaw);
 
   return vidArray;
 };
