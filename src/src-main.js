@@ -26,15 +26,17 @@ export const runGetBackendData = async () => {
   //articles get ONLY last 5 FATBOY by default
   const articleModel = new dbModel(articleParams, articles);
   const articleArrayRaw = await articleModel.getNewestItemsByTypeArray();
-  const articleArray = await addPicDataToArray(articleArrayRaw);
+  const articleArray = await fixPicDataByType(articleArrayRaw, "articles");
 
   //get last 9 pics by default
   const picModel = new dbModel(picParams, picsDownloaded);
-  const picArray = await picModel.getNewestItemsArray();
+  const picArrayRaw = await picModel.getNewestItemsArray();
+  const picArray = await fixPicDataByType(picArrayRaw, "pics");
 
   //get last 3 vids by default
   const vidModel = new dbModel(vidParams, vidsDownloaded);
-  const vidArray = await vidModel.getNewestItemsArray();
+  const vidArrayRaw = await vidModel.getNewestItemsArray();
+  const vidArray = await fixPicDataByType(vidArrayRaw, "vids");
 
   const dataObj = {
     articleArray: articleArray,
@@ -45,42 +47,89 @@ export const runGetBackendData = async () => {
   return dataObj;
 };
 
-const addPicDataToArray = async (inputArray) => {
+const fixPicDataByType = async (inputArray, type) => {
   const results = [];
-  for (let i = 0; i < inputArray.length; i++) {
-    const picObj = await parsePicObj(inputArray[i]);
-    results.push(picObj);
-  }
 
-  return results;
+  switch (type) {
+    case "articles":
+      for (let i = 0; i < inputArray.length; i++) {
+        //rebuild pic array (returns input if no picArray)
+        const articlePicObj = await fixPicArray(inputArray[i]);
+        results.push(articlePicObj);
+      }
+
+      return results;
+
+    case "picSet":
+      for (let i = 0; i < inputArray.length; i++) {
+        const { picArray } = inputArray[i];
+        if (!picArray || !picArray.length) return null;
+
+        const picSetObj = await fixPicArray(inputArray[i]);
+
+        results.push(picSetObj);
+      }
+
+      return results;
+
+    case "pics":
+      for (let i = 0; i < inputArray.length; i++) {
+        const inputObj = inputArray[i];
+        const picURL = inputArray[i].url;
+
+        const picDataObj = await getPicData(picURL);
+        if (!picDataObj) continue;
+
+        const picObj = { ...inputObj, ...picDataObj };
+        results.push(picObj);
+      }
+
+      return results;
+
+    case "vids":
+      for (let i = 0; i < inputArray.length; i++) {
+        const inputObj = inputArray[i];
+        if (!inputObj || !inputObj.thumbnail) continue;
+
+        const { thumbnail } = inputObj;
+
+        const thumbnailDataObj = await getPicData(thumbnail);
+        if (!thumbnailDataObj) continue;
+
+        const vidObj = { ...inputObj, ...thumbnailDataObj };
+
+        results.push(vidObj);
+      }
+
+      return results;
+
+    default:
+      return null;
+  }
 };
 
-const parsePicObj = async (inputObj) => {
+//rebuild the picArray
+export const fixPicArray = async (inputObj) => {
+  if (!inputObj || !inputObj.picArray || !inputObj.picArray.length) return inputObj;
+
   const { picArray } = inputObj;
-  if (!picArray || !picArray.length) return inputObj;
+  const returnObj = { ...inputObj };
 
-  //create new article obj
-  const articlePicObj = { ...inputObj };
-
-  //rebuild pic array
   const picDataArray = [];
   for (let i = 0; i < picArray.length; i++) {
-    try {
-      const picObj = await getPicData(picArray[i]);
+    const picObj = await getPicData(picArray[i]);
+    if (!picObj) continue;
 
-      picDataArray.push(picObj);
-    } catch (e) {
-      console.log(e);
-    }
+    picDataArray.push(picObj);
   }
 
-  articlePicObj.picArray = picDataArray;
-
-  return articlePicObj;
+  returnObj.picArray = picDataArray;
+  return returnObj;
 };
 
-const getPicData = async (picURL) => {
-  const { picsDownloaded, articles, picSetContent, vidPageContent } = CONFIG;
+//get pic data
+export const getPicData = async (picURL) => {
+  const { picsDownloaded } = CONFIG;
 
   //GET PIC DATA OBJ FROM DOWNLOAD COLLECTION
   const lookupParams = {
@@ -89,35 +138,53 @@ const getPicData = async (picURL) => {
   };
 
   const picDataModel = new dbModel(lookupParams, picsDownloaded);
-  const picObj = await picDataModel.getUniqueItem();
+  const picDataObj = await picDataModel.getUniqueItem();
 
   //checks if pic exists, return null if it doesnt
-  if (!picObj || !picObj.savePath || !fs.existsSync(picObj.savePath)) return null;
+  if (!picDataObj || !picDataObj.savePath || !fs.existsSync(picDataObj.savePath)) return null;
 
   //FIND WHERE PIC IS FROM
+  const picSourceObj = await getPicSourceObj(picURL);
+
+  const picObj = { ...picDataObj, ...picSourceObj };
+
+  return picObj;
+};
+
+//get pic source
+export const getPicSourceObj = async (picURL) => {
+  const { articles, picSetContent, vidPageContent } = CONFIG;
   let picSource = "";
+  let picDate = "";
 
   //check articles
   const articleModel = new dbModel({ keyToLookup: "picArray", itemValue: picURL }, articles);
   const articleObj = await articleModel.getUniqueItem();
+
   //extract type
   if (articleObj) {
-    const articleTitle = articleObj.title;
-    const articleType = articleObj.articleType;
-    //MAP ARTICLE TYPE
+    const { title, articleType, date } = articleObj;
 
-    picSource = `${articleType} Article Titled "${articleTitle}"`;
+    //MAP ARTICLE TYPE HERE!!!
+
+    picSource = `${articleType} Article Titled "${title}"`;
+    picDate = date;
   }
 
   //check pic sets
   const picSetModel = new dbModel({ keyToLookup: "picArray", itemValue: picURL }, picSetContent);
   const picSetObj = await picSetModel.getUniqueItem();
   if (picSetObj) {
-    const picSetTitle = picSetObj.title;
-    if (picSource) {
-      picSource = picSource + ` and Pic Set Titled ${picSetTitle}`;
+    const { title, date } = picSetObj;
+
+    if (!picSource) {
+      picSource = `Pic Set Titled ${title}`;
     } else {
-      picSource = `Pic Set Titled ${picSetTitle}`;
+      picSource = picSource + ` and Pic Set Titled ${title}`;
+    }
+
+    if (!picDate) {
+      picDate = date;
     }
   }
 
@@ -125,24 +192,28 @@ const getPicData = async (picURL) => {
   const vidPageModel = new dbModel({ keyToLookup: "picArray", itemValue: picURL }, vidPageContent);
   const vidPageObj = await vidPageModel.getUniqueItem();
   if (vidPageObj) {
-    const vidPageTitle = vidPageObj.title;
-    if (picSource) {
-      picSource = picSource + ` and Vid Page Titled ${vidPageTitle}`;
+    const { title, date } = vidPageObj;
+
+    if (!picSource) {
+      picSource = `Vid Page Titled ${title}`;
     } else {
-      picSource = `Vid Page Titled ${vidPageTitle}`;
+      picSource = picSource + ` and Vid Page Titled ${title}`;
+    }
+
+    if (!picDate) {
+      picDate = date;
     }
   }
 
-  //check if pic source is empty
-  if (!picSource) {
-    picSource = "PIC SOURCE FUCKED";
-  }
+  const returnObj = {
+    picSource: picSource,
+    picDate: picDate,
+  };
 
-  //add source to pic obj
-  picObj.picSource = picSource;
-
-  return picObj;
+  return returnObj;
 };
+
+//---------------------------
 
 const addVidDataToArray = async (inputArray) => {
   const results = [];
@@ -215,7 +286,7 @@ export const getNewArticleData = async (inputParams) => {
     }
   }
 
-  const articleArray = await addPicDataToArray(articleArrayRaw);
+  const articleArray = await fixPicDataByType(articleArrayRaw, "articles");
   return articleArray;
 };
 
@@ -255,14 +326,16 @@ export const getNewPicData = async (inputParams) => {
       break;
   }
 
-  //return picArray raw on just pics
-  let picArray = [];
-  if (picType === "pic-alone") {
-    picArray = picArrayRaw;
-  } else {
-    //otherwise, add picData to pics
-    picArray = await addPicDataToArray(picArrayRaw);
-  }
+  const picArray = await fixPicDataByType(picArrayRaw, "pics");
+
+  // //return picArray raw on just pics
+  // let picArray = [];
+  // if (picType === "pic-alone") {
+  //   picArray = picArrayRaw;
+  // } else {
+  //   //otherwise, add picData to pics
+  //   picArray = await fixPicDataByType(picArrayRaw, "picSets");
+  // }
 
   return picArray;
 };
@@ -304,13 +377,15 @@ export const getNewVidData = async (inputParams) => {
   }
 
   //return vid data
-  let vidArray = [];
+  let vidArrayPicRaw = [];
   if (vidType === "vid-alone") {
-    vidArray = vidArrayRaw;
+    vidArrayPicRaw = vidArrayRaw;
   } else {
     //otherwise, add picData to pics
-    vidArray = await addVidDataToArray(vidArrayRaw);
+    vidArrayPicRaw = await addVidDataToArray(vidArrayRaw);
   }
+
+  const vidArray = await fixPicDataByType(vidArrayPicRaw, "vids");
 
   return vidArray;
 };
