@@ -1,16 +1,8 @@
-//ON PARSE-ARTICLES (under public)
+//BUILD PIC SET / VID PAGE DISPLAYS
 
-//need to change article obj tracking so tracking latest state, NOT default
+// STYLE ARTICLE LIST BETTER (3 across with pics, if present)
 
-//also add debounce + how many input (maybe do first)
-
-//THEN TRY EQUAION ON TG FOR EXPAND BACKEND DATA
-
-//MAKE ARTICLE SELECTIONS RESPONSIVE
-
-//BUILD IN FORM CAPABILITIES
-
-//MAKE STYLING BETTER (returns connected to forms)
+//MAKE STYLING BETTER (return container connected to forms)
 
 //ADD MEDIA QUERIES
 
