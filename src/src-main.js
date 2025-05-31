@@ -35,11 +35,8 @@ export const runGetBackendData = async () => {
 
   //get last 3 vids by default
   const vidModel = new dbModel(vidParams, vidsDownloaded);
-  const vidArray = await vidModel.getNewestItemsArray();
-
-  // const vidModel = new dbModel(vidParams, vidsDownloaded);
-  // const vidArrayRaw = await vidModel.getNewestItemsArray();
-  // const vidArray = await fixPicDataByType(vidArrayRaw);
+  const vidArrayRaw = await vidModel.getNewestItemsArray();
+  const vidArray = await fixPicDataByType(vidArrayRaw);
 
   const dataObj = {
     articleArray: articleArray,
@@ -95,6 +92,8 @@ export const fixPicDataByType = async (inputArray) => {
         if (!vidObj || !vidObj.thumbnail) continue;
 
         const { thumbnail } = vidObj;
+        console.log("VID OBJ");
+        console.log(vidObj);
 
         const thumbnailObj = await getPicData(thumbnail);
         if (!thumbnailObj) continue;
@@ -371,18 +370,18 @@ export const getNewVidData = async (inputParams) => {
   const vidModel = new dbModel(vidParams, collection);
 
   //if all DONT filter by type
-  let vidArrayRaw = [];
+  let vidArrayPicRaw = [];
   switch (vidSortBy) {
     case "vid-newest-to-oldest":
-      vidArrayRaw = await vidModel.getNewestItemsArray();
+      vidArrayPicRaw = await vidModel.getNewestItemsArray();
       break;
 
     case "vid-oldest-to-newest":
-      vidArrayRaw = await vidModel.getOldestItemsArray();
+      vidArrayPicRaw = await vidModel.getOldestItemsArray();
       break;
   }
 
-  // const vidArrayRaw = await fixPicDataByType(vidArrayPicRaw);
+  const vidArrayRaw = await fixPicDataByType(vidArrayPicRaw);
 
   let vidArray = [];
   if (vidType === "vid-alone") {
