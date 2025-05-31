@@ -212,8 +212,11 @@ export const buildPicListItem = async (inputObj) => {
   //stats beneath the pic
   const picStatsElement = await buildPicStatsElement(inputObj);
 
-  const picElement = await buildPicElement(savePath);
-  picListItem.append(picElement, picStatsElement);
+  //REENABLE
+  // const picElement = await buildPicElement(savePath);
+  // picListItem.append(picElement, picStatsElement);
+
+  picListItem.append(picStatsElement);
 
   return picListItem;
 };
@@ -238,14 +241,17 @@ export const buildPicElement = async (savePath) => {
 //build pic stats
 export const buildPicStatsElement = async (inputObj) => {
   if (!inputObj) return null;
-  console.log("INPUT OBJ");
-  console.log(inputObj);
+  const { picDate, picSource, headerData } = inputObj;
+
+  // console.log("INPUT OBJ");
+  // console.log(inputObj);
+
   const picStatsElement = document.createElement("div");
   picStatsElement.id = "pic-stats";
 
-  const picDateElement = await buildPicDateElement(inputObj);
-  const picSourceElement = await buildPicSourceElement(inputObj);
-  const picServerElement = await buildPicServerElement(inputObj);
+  const picDateElement = await buildPicDateElement(picDate);
+  const picSourceElement = await buildPicSourceElement(picSource);
+  const picServerElement = await buildPicServerElement(headerData);
 
   picStatsElement.append(picDateElement, picSourceElement, picServerElement);
 
@@ -253,13 +259,12 @@ export const buildPicStatsElement = async (inputObj) => {
 };
 
 //extract / format pic date
-export const buildPicDateElement = async (inputObj) => {
-  if (!inputObj || !inputObj.picDate) return null;
-  const dateInput = inputObj.picDate;
+export const buildPicDateElement = async (picDate) => {
+  if (!picDate) return null;
 
   const dateElement = document.createElement("div");
   dateElement.id = "pic-date";
-  const dateObj = new Date(dateInput);
+  const dateObj = new Date(picDate);
   dateElement.textContent = dateObj.toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
@@ -270,9 +275,8 @@ export const buildPicDateElement = async (inputObj) => {
 };
 
 //calc where pic from (do on backend)
-export const buildPicSourceElement = async (inputObj) => {
-  if (!inputObj || !inputObj.picSource) return null;
-  const { picSource } = inputObj;
+export const buildPicSourceElement = async (picSource) => {
+  if (!picSource) return null;
 
   const picSourceElement = document.createElement("div");
   picSourceElement.id = "pic-source";
@@ -282,9 +286,9 @@ export const buildPicSourceElement = async (inputObj) => {
 };
 
 //EXTRACT PIC SERVER DATA
-export const buildPicServerElement = async (inputObj) => {
-  if (!inputObj || !inputObj.headerData || !inputObj.headerData.server) return null;
-  const serverData = inputObj.headerData.server;
+export const buildPicServerElement = async (headerData) => {
+  if (!headerData || !headerData.server) return null;
+  const serverData = headerData.server;
 
   const picServerElement = document.createElement("div");
   picServerElement.id = "pic-server";
