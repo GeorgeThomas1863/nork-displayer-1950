@@ -8,6 +8,8 @@ const displayElement = document.getElementById("display-element");
 
 //DEFAULT DISPLAY
 export const buildDefaultDisplay = async () => {
+  if (!displayElement) return null;
+
   //get backend data FIRST (to check for fail )
   const backendDataObj = await getBackendData();
   if (!backendDataObj) return null;
