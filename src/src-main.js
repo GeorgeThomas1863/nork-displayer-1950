@@ -48,14 +48,14 @@ export const runGetBackendData = async () => {
 const addPicDataToArray = async (inputArray) => {
   const results = [];
   for (let i = 0; i < inputArray.length; i++) {
-    const articleObj = await parseArticleObj(inputArray[i]);
-    results.push(articleObj);
+    const picObj = await parsePicObj(inputArray[i]);
+    results.push(picObj);
   }
 
   return results;
 };
 
-const parseArticleObj = async (inputObj) => {
+const parsePicObj = async (inputObj) => {
   const { picArray } = inputObj;
   if (!picArray || !picArray.length) return inputObj;
 
@@ -94,6 +94,34 @@ const getPicData = async (picURL) => {
   if (!picObj || !picObj.savePath || !fs.existsSync(picObj.savePath)) return null;
 
   return picObj;
+};
+
+const addVidDataToArray = async (inputArray) => {
+  const results = [];
+  for (let i = 0; i < inputArray.length; i++) {
+    //only one vid so dont need to parse out array (like in pics)
+    const vidObj = await getVidData(inputArray[i].url);
+    results.push(vidObj);
+  }
+
+  return results;
+};
+
+const getVidData = async (vidURL) => {
+  const { vidsDownloaded } = CONFIG;
+
+  const lookupParams = {
+    keyToLookup: "url",
+    itemValue: vidURL,
+  };
+
+  const vidDataModel = new dbModel(lookupParams, vidsDownloaded);
+  const vidObj = await vidDataModel.getUniqueItem();
+
+  //checks if pic exists, return null if it doesnt
+  if (!vidObj || !vidObj.savePath || !fs.existsSync(vidObj.savePath)) return null;
+
+  return vidObj;
 };
 
 //-----------------------------------
@@ -189,6 +217,56 @@ export const getNewPicData = async (inputParams) => {
   }
 
   return picArray;
+};
+
+export const getNewVidData = async (inputParams) => {
+  if (!inputParams || !inputParams.vidType || !inputParams.vidHowMany || !inputParams.vidSortBy) return null;
+  const { vidType, vidHowMany, vidSortBy } = inputParams;
+  const { vidsDownloaded, vidPageContent } = CONFIG;
+
+  const vidParams = {
+    sortKey: "vidId",
+    howMany: vidHowMany,
+  };
+
+  //SEPARATE HERE BY PIC TYPE
+  let collection = "";
+  switch (vidType) {
+    case "vid-alone":
+      collection = vidsDownloaded;
+      break;
+
+    case "vid-pages":
+      collection = vidPageContent;
+      break;
+  }
+
+  const vidModel = new dbModel(vidParams, collection);
+
+  //if all DONT filter by type
+  let vidArrayRaw = [];
+  switch (vidSortBy) {
+    case "vid-newest-to-oldest":
+      vidArrayRaw = await vidModel.getNewestItemsArray();
+      break;
+
+    case "vid-oldest-to-newest":
+      vidArray = await vidModel.getOldestItemsArray();
+      break;
+  }
+
+  //FIX HERE
+
+  //return vid data
+  let vidArray = [];
+  if (vidType === "vid-alone") {
+    vidArray = vidArrayRaw;
+  } else {
+    //otherwise, add picData to pics
+    vidArray = await addVidDataToArray(vidArrayRaw);
+  }
+
+  return vidArray;
 };
 
 // sortKey, howMany, filterKey, filterValue;

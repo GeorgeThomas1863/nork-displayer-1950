@@ -240,7 +240,7 @@ export const buildPicElement = async (savePath) => {
 export const getNewPicData = async () => {
   //get user input
   const inputParams = await buildInputParams();
-  if (!inputParams || !inputParams.picType || !inputParams.picType || !inputParams.picSortBy) return null;
+  if (!inputParams || !inputParams.picType || !inputParams.picHowMany || !inputParams.picSortBy) return null;
 
   // Extract article inputs
   const { picType, picHowMany, picSortBy } = inputParams;
@@ -292,11 +292,11 @@ export const getNewPicData = async () => {
   return true;
 };
 
-// Helper function to get current article state from DOM element
+// Helper function to get current pic state from DOM element
 const getCurrentPicState = (picElement) => {
   if (!picElement) {
     // If no element exists, return initial default state
-    return ["fatboy", 5, "article-newest-to-oldest"];
+    return ["pic-alone", 12, "pic-newest-to-oldest"];
   }
 
   const picType = picElement.getAttribute("data-pic-type") || "pic-alone";
@@ -306,7 +306,7 @@ const getCurrentPicState = (picElement) => {
   return [picType, picHowMany, picSortBy];
 };
 
-// Helper function to store current article state on DOM element
+// Helper function to store current pic state on DOM element
 const setCurrentPicState = (picElement, inputArray) => {
   if (!picElement || !inputArray || inputArray.length < 3) return;
 

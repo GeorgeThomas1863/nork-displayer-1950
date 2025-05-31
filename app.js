@@ -2,6 +2,8 @@
 
 // STYLE ARTICLE LIST BETTER (3 across with pics, if present)
 
+//PUT PIC / VID STATS IN HOVER
+
 //MAKE STYLING BETTER (return container connected to forms)
 
 //ADD MEDIA QUERIES

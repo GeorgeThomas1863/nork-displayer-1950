@@ -1,4 +1,4 @@
-import { runGetBackendData, getNewArticleData, getNewPicData } from "../src/src-main.js";
+import { runGetBackendData, getNewArticleData, getNewPicData, getNewVidData } from "../src/src-main.js";
 import { runAdminSubmit } from "../src/src-admin.js";
 
 //passes everything to admin src
@@ -42,6 +42,18 @@ export const getNewPicDataRoute = async (req, res) => {
     const inputParams = req.body;
 
     const data = await getNewPicData(inputParams);
+    return res.json(data);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: "Failed to process admin command" });
+  }
+};
+
+export const getNewVidDataRoute = async (req, res) => {
+  try {
+    const inputParams = req.body;
+
+    const data = await getNewVidData(inputParams);
     return res.json(data);
   } catch (error) {
     console.error(error);
