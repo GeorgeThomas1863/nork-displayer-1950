@@ -4,7 +4,9 @@
 
 //PUT PIC / VID STATS IN HOVER
 
-//MAKE STYLING BETTER (return container connected to forms)
+// MAKE VID ALONE DISPLAY NICER (put in wrappers, margins, etc)
+
+//MAKE BACKEND DISPLAY STYLING BETTER (return container connected to forms)
 
 //ADD MEDIA QUERIES
 
