@@ -58,9 +58,8 @@ export const fixPicDataByType = async (inputArray) => {
   //derive type from input
   const { articleId, picSetId, thumbnail } = inputArray;
 
-  const results = [];
-
   //handle items
+  const results = [];
 
   //handle normal pics
   if (!articleId && !picSetId && !thumbnail) {
@@ -101,6 +100,7 @@ export const fixPicDataByType = async (inputArray) => {
 
   //handle articles
   if (articleId) {
+    console.log(inputArray);
     for (let i = 0; i < inputArray.length; i++) {
       //rebuild pic array (returns input if no picArray)
       const articlePicObj = await fixPicArray(inputArray[i]);
