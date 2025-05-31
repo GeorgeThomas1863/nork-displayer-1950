@@ -94,6 +94,8 @@ export const fixPicDataByType = async (inputArray) => {
       case "vids":
         //need to derive the fucking thumbnail
         const { url } = inputArray[i];
+        const { vidPageContent } = CONFIG;
+
         const thumbnailModel = new dbModel({ keyToLookup: "vidURL", itemValue: url }, vidPageContent);
         const vidObj = await thumbnailModel.getUniqueItem();
         if (!vidObj || !vidObj.thumbnail) continue;
