@@ -54,6 +54,9 @@ export const runGetBackendData = async () => {
 
 //fix pic data
 export const fixPicDataByType = async (inputArray) => {
+  console.log("INPUT ARRAY");
+  console.log(inputArray);
+
   if (!inputArray) return null;
   //derive type from input
   const { articleId, picSetId, thumbnail } = inputArray;
@@ -100,7 +103,7 @@ export const fixPicDataByType = async (inputArray) => {
 
   //handle articles
   if (articleId) {
-    console.log(inputArray);
+    // console.log(inputArray);
     for (let i = 0; i < inputArray.length; i++) {
       //rebuild pic array (returns input if no picArray)
       const articlePicObj = await fixPicArray(inputArray[i]);
