@@ -52,8 +52,8 @@ export const runGetBackendData = async () => {
   console.log(picArray.length);
   console.log(vidArray.length);
 
-  console.log("VID ARRAY");
-  console.log(vidArray);
+  // console.log("VID ARRAY");
+  // console.log(vidArray);
 
   return dataObj;
 };
