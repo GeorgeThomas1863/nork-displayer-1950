@@ -209,14 +209,19 @@ export const buildPicListItem = async (inputObj) => {
   const picListItem = document.createElement("li");
   picListItem.id = "pic-list-item";
 
-  //ADD pic stats here (scrape date, server, size, etc)
-  console.log("AHHHHHHHHHHHHH");
-  console.log(inputObj);
+  const picDateElement = await buildPicDateElement(inputObj);
 
   const picElement = await buildPicElement(savePath);
   picListItem.append(picElement);
 
   return picListItem;
+};
+
+export const buildPicDateElement = async (inputObj) => {
+  if (!inputObj || !inputObj.headerData) return null;
+
+  console.log("AHHHHHHHHH");
+  console.log(inputObj.headerData);
 };
 
 export const buildPicElement = async (savePath) => {
