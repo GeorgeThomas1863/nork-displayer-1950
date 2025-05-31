@@ -21,7 +21,7 @@ export const adminSubmitClick = async (e) => {
   // const displayData = await displayAdminReturn(adminData);
   // console.log(displayData);
 
-  // return "DONE";
+  return "DONE";
 };
 
 export const mainClickHandler = async (e) => {
@@ -52,7 +52,6 @@ export const mainInputHandler = async (e) => {
   const inputId = inputElement.id;
   const inputValue = inputElement.value;
 
-  //BELOW DOES NOT WORK, NEED TO FIX
   if (inputId === "article-how-many") {
     console.log("INPUT VALUE");
     console.log(inputValue);
