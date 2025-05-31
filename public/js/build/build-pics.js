@@ -214,19 +214,29 @@ export const buildPicListItem = async (inputObj) => {
   const picDateElement = await buildPicDateElement(inputObj);
 
   const picElement = await buildPicElement(savePath);
-  picListItem.append(picElement);
+  picListItem.append(picElement, picDateElement);
 
   return picListItem;
 };
 
 //calc where pic from (do on backend)
-export const buildPicSourceElement = async (inputObj) => {}
+export const buildPicSourceElement = async (inputObj) => {};
 
+//extract / format pic date
 export const buildPicDateElement = async (inputObj) => {
-  if (!inputObj || !inputObj.headerData) return null;
+  if (!inputObj || !inputObj.headerData || !inputObj.headerData.date) return null;
+  const dateInput = inputObj.headerData.date;
 
-  console.log("AHHHHHHHHH");
-  console.log(inputObj.headerData.date);
+  const dateElement = document.createElement("div");
+  dateElement.id = "pic-date";
+  const dateObj = new Date(dateInput);
+  dateElement.textContent = dateObj.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
+  return dateElement;
 };
 
 export const buildPicElement = async (savePath) => {
