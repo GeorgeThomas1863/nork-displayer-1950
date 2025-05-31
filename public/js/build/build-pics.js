@@ -209,14 +209,43 @@ export const buildPicListItem = async (inputObj) => {
   const picListItem = document.createElement("li");
   picListItem.id = "pic-list-item";
 
-  const picSourcdElement = await buildPicSourceElement(inputObj);
-
-  const picDateElement = await buildPicDateElement(inputObj);
+  //stats beneath the pic
+  const picStatsElement = await buildPicStatsElement(inputObj);
 
   const picElement = await buildPicElement(savePath);
-  picListItem.append(picElement, picDateElement);
+  picListItem.append(picElement, picStatsElement);
 
   return picListItem;
+};
+
+//build pic itself
+export const buildPicElement = async (savePath) => {
+  if (!savePath) return null;
+
+  const picElement = document.createElement("img");
+  picElement.id = "pic-element";
+
+  //define pic path
+  const fileName = savePath.split("/").pop();
+  const picPath = "/kcna-pics/" + fileName;
+
+  picElement.src = picPath;
+  picElement.alt = "KCNA PIC";
+
+  return picElement;
+};
+
+//build pic stats
+export const buildPicStatsElement = async (inputObj) => {
+  const picStatsElement = document.createElement("div");
+  picStatsElement.id = "pic-stats";
+
+  const picSourceElement = await buildPicSourceElement(inputObj);
+  const picDateElement = await buildPicDateElement(inputObj);
+
+  picStatsElement.append(picSourceElement, picDateElement);
+
+  return picStatsElement;
 };
 
 //calc where pic from (do on backend)
@@ -237,22 +266,6 @@ export const buildPicDateElement = async (inputObj) => {
   });
 
   return dateElement;
-};
-
-export const buildPicElement = async (savePath) => {
-  if (!savePath) return null;
-
-  const picElement = document.createElement("img");
-  picElement.id = "pic-element";
-
-  //define pic path
-  const fileName = savePath.split("/").pop();
-  const picPath = "/kcna-pics/" + fileName;
-
-  picElement.src = picPath;
-  picElement.alt = "KCNA PIC";
-
-  return picElement;
 };
 
 //----------------------------------

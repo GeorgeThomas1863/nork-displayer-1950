@@ -80,8 +80,9 @@ const parsePicObj = async (inputObj) => {
 };
 
 const getPicData = async (picURL) => {
-  const { picsDownloaded } = CONFIG;
+  const { picsDownloaded, articles, picSetContent, vidPageContent } = CONFIG;
 
+  //GET PIC DATA OBJ FROM DOWNLOAD COLLECTION
   const lookupParams = {
     keyToLookup: "url",
     itemValue: picURL,
@@ -92,6 +93,53 @@ const getPicData = async (picURL) => {
 
   //checks if pic exists, return null if it doesnt
   if (!picObj || !picObj.savePath || !fs.existsSync(picObj.savePath)) return null;
+
+  //FIND WHERE PIC IS FROM
+  let picSource = "";
+
+  //check articles
+  const articleModel = new dbModel({ keyToLookup: "picArray", itemValue: picURL }, articles);
+  const articleObj = await articleModel.getUniqueItem();
+  //extract type
+  if (articleObj) {
+    const articleTitle = articleObj.title;
+    const articleType = articleObj.articleType;
+    //MAP ARTICLE TYPE
+
+    picSource = `${articleType} Article Titled "${articleTitle}"`;
+  }
+
+  //check pic sets
+  const picSetModel = new dbModel({ keyToLookup: "picArray", itemValue: picURL }, picSetContent);
+  const picSetObj = await picSetModel.getUniqueItem();
+  if (picSetObj) {
+    const picSetTitle = picSetObj.title;
+    if (picSource) {
+      picSource = picSource + ` and Pic Set Titled ${picSetTitle}`;
+    } else {
+      picSource = `Pic Set Titled ${picSetTitle}`;
+    }
+  }
+
+  //check vid pages
+  const vidPageModel = new dbModel({ keyToLookup: "picArray", itemValue: picURL }, vidPageContent);
+  const vidPageObj = await vidPageModel.getUniqueItem();
+  if (vidPageObj) {
+    const vidPageTitle = vidPageObj.title;
+    if (picSource) {
+      picSource = picSource + ` and Vid Page Titled ${vidPageTitle}`;
+    } else {
+      picSource = `Vid Page Titled ${vidPageTitle}`;
+    }
+  }
+
+  //check if pic source is empty
+  if (!picSource) {
+    picSource = "PIC SOURCE FUCKED";
+  }
+
+  //add source to pic obj
+  picObj.source = picSource;
 
   return picObj;
 };
