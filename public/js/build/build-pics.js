@@ -20,7 +20,7 @@ export const buildPicForm = async () => {
   const picCollapseObj = {
     titleElement: titleElement,
     contentElement: picWrapper,
-    isExpanded: false,
+    isExpanded: true,
     className: "pic-wrapper-collapse",
     dataAttribute: "pic-form-header",
   };
@@ -82,7 +82,7 @@ export const buildPicHowManyListItem = async () => {
   picHowManyInput.type = "text";
   picHowManyInput.name = "pic-how-many";
   picHowManyInput.id = "pic-how-many";
-  picHowManyInput.placeholder = "[Defaults to 12 (most recent)]";
+  picHowManyInput.placeholder = "[Defaults to 30 (most recent)]";
 
   picHowManyListItem.append(picHowManyLabel, picHowManyInput);
 
@@ -141,7 +141,7 @@ export const buildPicData = async (inputArray, stateParams = null) => {
     setCurrentPicState(picList, stateParams);
   } else {
     //handle initial load
-    const defaultStateParams = ["pic-alone", 12, "pic-newest-to-oldest"];
+    const defaultStateParams = ["pic-alone", 30, "pic-newest-to-oldest"];
     setCurrentPicState(picList, defaultStateParams);
   }
 
@@ -286,8 +286,8 @@ export const getNewPicData = async () => {
   //replace old data with new data (newPicDataWrapper) on display element
   backendDataWrapper.replaceChild(newPicDataWrapper, picArrayElement);
 
-  console.log("BACKEND DATA WRAPPER");
-  console.log(backendDataWrapper);
+  // console.log("BACKEND DATA WRAPPER");
+  // console.log(backendDataWrapper);
 
   return true;
 };
@@ -296,11 +296,11 @@ export const getNewPicData = async () => {
 const getCurrentPicState = (picElement) => {
   if (!picElement) {
     // If no element exists, return initial default state
-    return ["pic-alone", 12, "pic-newest-to-oldest"];
+    return ["pic-alone", 30, "pic-newest-to-oldest"];
   }
 
   const picType = picElement.getAttribute("data-pic-type") || "pic-alone";
-  const picHowMany = parseInt(picElement.getAttribute("data-pic-how-many")) || 12;
+  const picHowMany = parseInt(picElement.getAttribute("data-pic-how-many")) || 30;
   const picSortBy = picElement.getAttribute("data-pic-sort-by") || "pic-newest-to-oldest";
 
   return [picType, picHowMany, picSortBy];

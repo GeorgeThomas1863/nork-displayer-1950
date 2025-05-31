@@ -24,7 +24,7 @@ export const buildArticleForm = async () => {
   const articleCollapseObj = {
     titleElement: titleElement,
     contentElement: articleWrapper,
-    isExpanded: true,
+    isExpanded: false,
     className: "article-wrapper-collapse",
     dataAttribute: "article-form-header",
   };

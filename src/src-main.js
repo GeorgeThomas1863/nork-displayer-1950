@@ -15,7 +15,7 @@ export const runGetBackendData = async () => {
 
   const picParams = {
     sortKey: "picId",
-    howMany: 12,
+    howMany: 30,
   };
 
   const vidParams = {
@@ -28,7 +28,7 @@ export const runGetBackendData = async () => {
   const articleArrayRaw = await articleModel.getNewestItemsByTypeArray();
   const articleArray = await addPicDataToArray(articleArrayRaw);
 
-  //get last 12 pics by default
+  //get last 30 pics by default
   const picModel = new dbModel(picParams, picsDownloaded);
   const picArray = await picModel.getNewestItemsArray();
 
@@ -255,8 +255,6 @@ export const getNewVidData = async (inputParams) => {
       break;
   }
 
-  //FIX HERE
-
   //return vid data
   let vidArray = [];
   if (vidType === "vid-alone") {
@@ -268,5 +266,3 @@ export const getNewVidData = async (inputParams) => {
 
   return vidArray;
 };
-
-// sortKey, howMany, filterKey, filterValue;
