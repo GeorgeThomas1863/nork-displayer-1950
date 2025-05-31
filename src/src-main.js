@@ -60,14 +60,17 @@ export const fixPicDataByType = async (inputArray) => {
   for (let i = 0; i < inputArray.length; i++) {
     // const { articleId, picSetId, thumbnail } =
     const dataType = await deriveDataType(inputArray[i]);
+    console.log("DATA TYPE");
+    console.log(dataType);
 
     switch (dataType) {
       case "articles":
+      case "picSets":
         //rebuild pic array (returns input if no picArray)
-        const articlePicObj = await fixPicArray(inputArray[i]);
-        if (!articlePicObj) continue;
+        const picArrayObj = await fixPicArray(inputArray[i]);
+        if (!picArrayObj) continue;
 
-        results.push(articlePicObj);
+        results.push(picArrayObj);
         break;
 
       case "pics":
@@ -78,19 +81,24 @@ export const fixPicDataByType = async (inputArray) => {
         results.push(picObj);
         break;
 
-      case "picSets":
-        const { picArray } = inputArray[i];
-        if (!picArray || !picArray.length) continue;
+      // case "picSets":
+      //   const { picArray } = inputArray[i];
+      //   if (!picArray || !picArray.length) continue;
 
-        const picSetObj = await fixPicArray(inputArray[i]);
-        if (!picSetObj) continue;
+      //   const picSetObj = await fixPicArray(inputArray[i]);
+      //   if (!picSetObj) continue;
 
-        results.push(picSetObj);
-        break;
+      //   results.push(picSetObj);
+      //   break;
 
       case "vids":
-        const { thumbnail } = inputArray[i];
-        if (!thumbnail) continue;
+        //need to derive the fucking thumbnail
+        const { url } = inputArray[i];
+        const thumbnailModel = new dbModel({ keyToLookup: "vidURL", itemValue: url }, vidPageContent);
+        const vidObj = await thumbnailModel.getUniqueItem();
+        if (!vidObj || !vidObj.thumbnail) continue;
+
+        const { thumbnail } = vidObj;
 
         const thumbnailObj = await getPicData(thumbnail);
         if (!thumbnailObj) continue;
@@ -105,13 +113,13 @@ export const fixPicDataByType = async (inputArray) => {
 
 //incredibly stupid but dont care
 export const deriveDataType = async (inputObj) => {
-  const { articleId, picSetId, thumbnail, picId } = inputObj;
+  const { articleId, picSetId, vidId, picId } = inputObj;
 
   if (articleId) return "articles";
 
   if (picSetId) return "picSets";
 
-  if (thumbnail) return "vids";
+  if (vidId) return "vids";
 
   if (picId) return "pics";
 
@@ -377,9 +385,6 @@ export const getNewVidData = async (inputParams) => {
       vidArrayPicRaw = await vidModel.getOldestItemsArray();
       break;
   }
-
-  console.log("VID ARRAY PIC RAW LENGTH");
-  console.log(vidArrayPicRaw.length);
 
   const vidArrayRaw = await fixPicDataByType(vidArrayPicRaw);
 
