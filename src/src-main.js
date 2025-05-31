@@ -60,8 +60,6 @@ export const fixPicDataByType = async (inputArray) => {
   for (let i = 0; i < inputArray.length; i++) {
     // const { articleId, picSetId, thumbnail } =
     const dataType = await deriveDataType(inputArray[i]);
-    console.log("DATA TYPE");
-    console.log(dataType);
 
     switch (dataType) {
       case "articles":
@@ -80,16 +78,6 @@ export const fixPicDataByType = async (inputArray) => {
 
         results.push(picObj);
         break;
-
-      // case "picSets":
-      //   const { picArray } = inputArray[i];
-      //   if (!picArray || !picArray.length) continue;
-
-      //   const picSetObj = await fixPicArray(inputArray[i]);
-      //   if (!picSetObj) continue;
-
-      //   results.push(picSetObj);
-      //   break;
 
       case "vids":
         //need to derive the fucking thumbnail
