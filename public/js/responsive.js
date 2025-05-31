@@ -55,28 +55,38 @@ export const mainClickHandler = async (e) => {
       break;
   }
 
-  // if (clickId === "article-type" || clickId === "article-sort-by") {
-  //   await getNewArticleData();
-  // }
-
-  console.log("!!!EVENT ID");
-  console.log(clickId);
+  return true;
 };
 
 //create debounced function
 const debouncedGetNewArticleData = debounce(getNewArticleData);
+const debouncedGetNewPicData = debounce(getNewPicData);
+const debouncedGetNewVidData = debounce(getNewVidData);
 
 export const mainInputHandler = async (e) => {
   const inputElement = e.target;
 
   const inputId = inputElement.id;
-  const inputValue = inputElement.value;
 
-  if (inputId === "article-how-many") {
-    console.log("INPUT VALUE");
-    console.log(inputValue);
-    debouncedGetNewArticleData();
+  switch (inputId) {
+    case "article-how-many":
+      debouncedGetNewArticleData();
+      break;
+
+    case "pic-how-many":
+      debouncedGetNewPicData();
+      break;
+
+    case "vid-how-many":
+      debouncedGetNewVidData();
+      break;
   }
+  // if (inputId === "article-how-many") {
+
+  //   debouncedGetNewArticleData();
+  // }
+
+  return true;
 };
 
 //-----------------------------------
