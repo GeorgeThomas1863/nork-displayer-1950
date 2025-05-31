@@ -54,78 +54,68 @@ export const runGetBackendData = async () => {
 
 //fix pic data
 export const fixPicDataByType = async (inputArray) => {
-  console.log("INPUT ARRAY");
-  console.log(inputArray);
-
   if (!inputArray) return null;
-  //derive type from input
-  const { articleId, picSetId, thumbnail } = inputArray;
 
-  //handle items
   const results = [];
+  for (let i = 0; i < inputArray.length; i++) {
+    // const { articleId, picSetId, thumbnail } =
+    const dataType = await deriveDataType(inputArray[i]);
 
-  //handle normal pics
-  if (!articleId && !picSetId && !thumbnail) {
-    for (let i = 0; i < inputArray.length; i++) {
-      const inputObj = inputArray[i];
-      const picURL = inputArray[i].url;
+    switch (dataType) {
+      case "articles":
+        //rebuild pic array (returns input if no picArray)
+        const articlePicObj = await fixPicArray(inputArray[i]);
+        if (!articlePicObj) continue;
 
-      const picDataObj = await getPicData(picURL);
-      if (!picDataObj) continue;
+        results.push(articlePicObj);
+        break;
 
-      const picObj = { ...inputObj, ...picDataObj };
-      results.push(picObj);
+      case "pics":
+        const picURL = inputArray[i].url;
+        const picObj = await getPicData(picURL);
+        if (!picObj) continue;
+
+        results.push(picObj);
+        break;
+
+      case "picSets":
+        const { picArray } = inputArray[i];
+        if (!picArray || !picArray.length) continue;
+
+        const picSetObj = await fixPicArray(inputArray[i]);
+        if (!picSetObj) continue;
+
+        results.push(picSetObj);
+        break;
+
+      case "vids":
+        const { thumbnail } = inputArray[i];
+        if (!thumbnail) continue;
+
+        const thumbnailObj = await getPicData(thumbnail);
+        if (!thumbnailObj) continue;
+
+        results.push(thumbnailObj);
+        break;
     }
-
-    return results;
   }
 
-  //handle vids
-  if (thumbnail) {
-    for (let i = 0; i < inputArray.length; i++) {
-      const inputObj = inputArray[i];
-      if (!inputObj || !inputObj.thumbnail) continue;
+  return results;
+};
 
-      const { thumbnail } = inputObj;
+//incredibly stupid but dont care
+export const deriveDataType = async (inputObj) => {
+  const { articleId, picSetId, thumbnail, picId } = inputObj;
 
-      const thumbnailDataObj = await getPicData(thumbnail);
-      if (!thumbnailDataObj) continue;
+  if (articleId) return "articles";
 
-      const vidObj = { ...inputObj, ...thumbnailDataObj };
+  if (picSetId) return "picSets";
 
-      results.push(vidObj);
-    }
+  if (thumbnail) return "vids";
 
-    return results;
-  }
+  if (picId) return "pics";
 
-  //handle arrays
-
-  //handle articles
-  if (articleId) {
-    // console.log(inputArray);
-    for (let i = 0; i < inputArray.length; i++) {
-      //rebuild pic array (returns input if no picArray)
-      const articlePicObj = await fixPicArray(inputArray[i]);
-      results.push(articlePicObj);
-    }
-
-    return results;
-  }
-
-  //handle pic sets
-  if (picSetId) {
-    for (let i = 0; i < inputArray.length; i++) {
-      const { picArray } = inputArray[i];
-      if (!picArray || !picArray.length) return null;
-
-      const picSetObj = await fixPicArray(inputArray[i]);
-
-      results.push(picSetObj);
-    }
-
-    return results;
-  }
+  return null;
 };
 
 //rebuild the picArray
@@ -137,6 +127,7 @@ export const fixPicArray = async (inputObj) => {
 
   const picDataArray = [];
   for (let i = 0; i < picArray.length; i++) {
+    //gets pic data AND source / date
     const picDataObj = await getPicData(picArray[i]);
     if (!picDataObj) continue;
 
@@ -147,7 +138,7 @@ export const fixPicArray = async (inputObj) => {
   return returnObj;
 };
 
-//get pic data (and adds source / date)
+//get pic data (AND source / date)
 export const getPicData = async (picURL) => {
   const { picsDownloaded } = CONFIG;
 
