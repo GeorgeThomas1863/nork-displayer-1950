@@ -176,3 +176,11 @@ export const buildVidElement = async (savePath) => {
 
   return vidElement;
 };
+
+//----------------------------------
+
+//GET NEW PIC DATA
+
+export const getNewVidData = async () => {
+  console.log("TITFUCKER");
+};

@@ -1,6 +1,8 @@
 import { expandBackendData } from "./main.js";
 import { buildAdminParams, sendToBack } from "./util.js";
 import { getNewArticleData } from "./parse/parse-articles.js";
+import { getNewPicData } from "./parse/parse-pics.js";
+import { getNewVidData } from "./parse/parse-vids.js";
 
 import { debounce } from "./util.js";
 
@@ -31,13 +33,31 @@ export const mainClickHandler = async (e) => {
   const clickId = clickElement.id;
   const expandType = clickElement.getAttribute("data-expand");
 
+  //handle expand / collapse backend data
   if (expandType) {
     await expandBackendData(expandType);
   }
 
-  if (clickId === "article-type" || clickId === "article-sort-by") {
-    await getNewArticleData();
+  switch (clickId) {
+    case "article-type":
+    case "article-sort-by":
+      await getNewArticleData();
+      break;
+
+    case "pic-type":
+    case "pic-sort-by":
+      await getNewPicData();
+      break;
+
+    case "vid-type":
+    case "vid-sort-by":
+      await getNewVidData();
+      break;
   }
+
+  // if (clickId === "article-type" || clickId === "article-sort-by") {
+  //   await getNewArticleData();
+  // }
 
   console.log("!!!EVENT ID");
   console.log(clickId);
@@ -73,12 +93,3 @@ if (displayElement) {
   displayElement.addEventListener("click", mainClickHandler);
   displayElement.addEventListener("input", mainInputHandler);
 }
-
-//INPUT listeners
-// const articleHowMany = document.getElementById("article-how-many");
-// if (articleHowMany) {
-//   console.log("AHHHHHHHHHH");
-//   articleHowMany.addEventListener("input", mainInputHandler);
-// }
-// const picHowMany = document.getElementById("pic-how-many");
-// const vidHowMany = document.getElementById("vid-how-many");

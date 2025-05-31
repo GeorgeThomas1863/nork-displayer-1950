@@ -220,3 +220,11 @@ export const buildPicElement = async (savePath) => {
 
   return picElement;
 };
+
+//----------------------------------
+
+//GET NEW PIC DATA
+
+export const getNewPicData = async () => {
+  console.log("BALLFUCKER");
+};
