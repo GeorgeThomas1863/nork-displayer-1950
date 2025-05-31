@@ -133,7 +133,7 @@ export const buildPicData = async (inputArray, stateParams = null) => {
 
   const picList = document.createElement("ul");
   picList.id = "pic-array-element";
-  picList.className = "hidden";
+  // picList.className = "hidden";
 
   //set state params
   if (stateParams) {

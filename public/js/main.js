@@ -1,8 +1,7 @@
-import { getBackendData, buildBackendDislay } from "./parse/parse-backend.js";
-import { buildDropDown } from "./parse/parse-drop-down.js";
-import { buildInputForms } from "./parse/parse-forms.js";
-import { hideArray, unhideArray, buildInputParams } from "./util.js";
-import { defineCollapseItems } from "./collapse.js";
+import { getBackendData, buildBackendDislay } from "./build/build-backend.js";
+import { buildDropDown } from "./build/build-drop-down.js";
+import { buildInputForms } from "./build/build-forms.js";
+import { hideArray, unhideArray } from "./util.js";
 
 //get display element
 const displayElement = document.getElementById("display-element");

@@ -1,6 +1,6 @@
-import { buildArticleForm } from "./parse-articles.js";
-import { buildPicForm } from "./parse-pics.js";
-import { buildVidForm } from "./parse-vids.js";
+import { buildArticleForm } from "./build-articles.js";
+import { buildPicForm } from "./build-pics.js";
+import { buildVidForm } from "./build-vids.js";
 
 export const buildInputForms = async () => {
   const formWrapperElement = document.createElement("div");

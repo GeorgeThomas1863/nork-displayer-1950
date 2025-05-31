@@ -1,8 +1,8 @@
 import { expandBackendData } from "./main.js";
 import { buildAdminParams, sendToBack, debounce } from "./util.js";
-import { getNewArticleData } from "./parse/parse-articles.js";
-import { getNewPicData } from "./parse/parse-pics.js";
-import { getNewVidData } from "./parse/parse-vids.js";
+import { getNewArticleData } from "./build/build-articles.js";
+import { getNewPicData } from "./build/build-pics.js";
+import { getNewVidData } from "./build/build-vids.js";
 
 export const adminSubmitClick = async (e) => {
   e.preventDefault();

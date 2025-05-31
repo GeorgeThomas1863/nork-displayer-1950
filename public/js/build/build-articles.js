@@ -1,4 +1,4 @@
-import { buildArticlePicData } from "./parse-pics.js";
+import { buildArticlePicData } from "./build-pics.js";
 import { buildCollapseContainer, defineCollapseItems } from "../collapse.js";
 import { buildInputParams, sendToBack } from "../util.js";
 
@@ -142,6 +142,7 @@ export const buildArticleData = async (inputArray, stateParams = null) => {
   const articleList = document.createElement("ul");
   articleList.id = "article-array-element";
   articleList.className = "article-list data-return";
+  articleList.className = "hidden";
 
   // Set initial state attributes if provided
   if (stateParams) {
@@ -298,7 +299,7 @@ export const getNewArticleData = async () => {
   if (!newArticleData) return null;
 
   const newArticleDataWrapper = await buildArticleData(newArticleData, newArticleInputArray);
-  
+
   //get backend data wrapper and replace old data
   const backendDataWrapper = document.getElementById("backend-data-wrapper");
 
@@ -330,9 +331,8 @@ const setCurrentArticleState = (articleElement, inputArray) => {
   if (!articleElement || !inputArray || inputArray.length < 3) return;
 
   const [articleType, articleHowMany, articleSortBy] = inputArray;
-  
+
   articleElement.setAttribute("data-article-type", articleType);
   articleElement.setAttribute("data-article-how-many", articleHowMany.toString());
   articleElement.setAttribute("data-article-sort-by", articleSortBy);
 };
-

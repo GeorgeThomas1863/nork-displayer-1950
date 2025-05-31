@@ -1,7 +1,7 @@
 import { sendToBack } from "../util.js";
-import { buildArticleData } from "./parse-articles.js";
-import { buildPicData } from "./parse-pics.js";
-import { buildVidData } from "./parse-vids.js";
+import { buildArticleData } from "./build-articles.js";
+import { buildPicData } from "./build-pics.js";
+import { buildVidData } from "./build-vids.js";
 
 //GET BACKEND DATA
 export const getBackendData = async () => {
