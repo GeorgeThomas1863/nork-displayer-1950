@@ -367,27 +367,29 @@ export const getNewVidData = async (inputParams) => {
   const vidModel = new dbModel(vidParams, collection);
 
   //if all DONT filter by type
-  let vidArrayRaw = [];
+  let vidArrayPicRaw = [];
   switch (vidSortBy) {
     case "vid-newest-to-oldest":
-      vidArrayRaw = await vidModel.getNewestItemsArray();
+      vidArrayPicRaw = await vidModel.getNewestItemsArray();
       break;
 
     case "vid-oldest-to-newest":
-      vidArrayRaw = await vidModel.getOldestItemsArray();
+      vidArrayPicRaw = await vidModel.getOldestItemsArray();
       break;
   }
 
-  //return vid data
-  let vidArrayPicRaw = [];
+  const vidArrayRaw = await fixPicDataByType(vidArrayPicRaw);
+
+  console.log("VID ARRAY RAW LENGTH");
+  console.log(vidArrayRaw.length);
+
+  let vidArray = [];
   if (vidType === "vid-alone") {
-    vidArrayPicRaw = vidArrayRaw;
+    vidArray = vidArrayRaw;
   } else {
     //otherwise, add picData to pics
-    vidArrayPicRaw = await addVidDataToArray(vidArrayRaw);
+    vidArray = await addVidDataToArray(vidArrayRaw);
   }
-
-  const vidArray = await fixPicDataByType(vidArrayPicRaw);
 
   return vidArray;
 };
