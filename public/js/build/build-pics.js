@@ -209,7 +209,7 @@ export const buildPicListItem = async (inputObj) => {
   const picListItem = document.createElement("li");
   picListItem.id = "pic-list-item";
 
-  const picFromElement = await buildPicFromElement(inputObj);
+  const picSourcdElement = await buildPicSourceElement(inputObj);
 
   const picDateElement = await buildPicDateElement(inputObj);
 
@@ -220,13 +220,13 @@ export const buildPicListItem = async (inputObj) => {
 };
 
 //calc where pic from (do on backend)
-export const buildPicFromElement = async (inputObj) => {}
+export const buildPicSourceElement = async (inputObj) => {}
 
 export const buildPicDateElement = async (inputObj) => {
   if (!inputObj || !inputObj.headerData) return null;
 
   console.log("AHHHHHHHHH");
-  console.log(inputObj.headerData);
+  console.log(inputObj.headerData.date);
 };
 
 export const buildPicElement = async (savePath) => {
