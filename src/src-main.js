@@ -379,6 +379,7 @@ export const checkExpandType = async (inputObj) => {
 
 export const checkClickId = async (inputObj) => {
   if (!inputObj || !inputObj.clickId) return null;
+  const { clickId } = inputObj;
 
   //loop
   for (const k in clickIdTriggerMap) {
