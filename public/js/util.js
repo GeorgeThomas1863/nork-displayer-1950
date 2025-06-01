@@ -13,6 +13,10 @@ export const sendToBack = async (inputParams) => {
         "Content-Type": "application/json",
       },
     });
+    //remove
+    if (!res || !res.ok) {
+      return null;
+    }
     const data = await res.json();
     return data;
   } catch (error) {
