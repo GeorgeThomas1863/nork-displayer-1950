@@ -22,7 +22,7 @@ export const buildBackendDislay = async () => {
   for (let i = 0; i < backendTypeArr.length; i++) {
     const dataType = backendTypeArr[i];
     const dataTypeStr = dataType.charAt(0).toUpperCase() + dataType.slice(1);
-    const func = `build${dataTypeStr}Display`;
+    const func = `build${dataTypeStr}Display()`;
     console.log("FUNCTION!!!");
     console.log(func);
 
