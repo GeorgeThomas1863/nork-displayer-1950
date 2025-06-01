@@ -302,20 +302,23 @@ export const runGetNewData = async (inputObj) => {
 
   const dataType = await getDataType(inputObj);
 
-  console.log("INPUT OBJ");
-  console.log(inputObj);
+  // console.log("INPUT OBJ");
+  // console.log(inputObj);
 
-  console.log("DATA TYPE!!!");
-  console.log(dataType);
+  // console.log("DATA TYPE!!!");
+  // console.log(dataType);
 
   const paramsObj = { ...inputObj };
   paramsObj.dataType = dataType;
   paramsObj.isFirstLoad = false;
 
+  console.log("PARAMS OBJ");
+  console.log(paramsObj);
+
   const newDataObj = await runGetBackendData(paramsObj);
 
-  console.log("NEW DATA OBJ");
-  console.log(newDataObj);
+  // console.log("NEW DATA OBJ");
+  // console.log(newDataObj);
 
   return newDataObj;
 };
