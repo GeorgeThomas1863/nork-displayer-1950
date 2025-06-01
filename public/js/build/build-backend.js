@@ -10,9 +10,9 @@ export const buildBackendDislay = async () => {
 
   //BELOW DOES NOT WORK
   if (!backendDataObj || !backendDataObj.articleArray || !backendDataObj.picArray || !backendDataObj.vidArray) {
-    console.log("AHHHHHHHHHHHHHH");
     const failElement = document.createElement("h1");
     failElement.innerHTML = "BACKEND DATA LOOKUP FUCKED";
+    failElement.id = "backend-data-fail";
     console.log(failElement);
     return failElement;
   }
