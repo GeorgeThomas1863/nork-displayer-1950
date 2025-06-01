@@ -340,31 +340,55 @@ export const getDataType = async (inputObj) => {
   // console.log("INPUT OBJ");
   // console.log(inputObj);
 
-  if (expandType) {
-    const expandTrigger = expandTriggerMap[expandType];
+  const expandTypeCheck = await checkExpandType(inputObj);
+  if (expandTypeCheck) return expandTypeCheck;
 
-    console.log("EXPAND TRIGGER");
-    console.log(expandTrigger);
+  const clickIdCheck = await checkClickId(inputObj);
+  if (clickIdCheck) return clickIdCheck;
 
-    switch (expandTrigger) {
-      case "articles":
-        return "articles";
+  return null;
+};
 
-      case "pics":
-        if (picType === "pic-alone") {
-          return "pics";
-        } else {
-          return "picSets";
-        }
+export const checkExpandType = async (inputObj) => {
+  if (!inputObj || !inputObj.expandType) return null;
+  const { expandType, picType, vidType } = inputObj;
 
-      case "vids":
-        if (vidType === "vid-alone") {
-          return "vids";
-        } else {
-          return "vidPages";
-        }
+  const expandTrigger = expandTriggerMap[expandType];
+
+  switch (expandTrigger) {
+    case "articles":
+      return "articles";
+
+    case "pics":
+      if (picType === "pic-alone") {
+        return "pics";
+      } else {
+        return "picSets";
+      }
+
+    case "vids":
+      if (vidType === "vid-alone") {
+        return "vids";
+      } else {
+        return "vidPages";
+      }
+  }
+
+  return null;
+};
+
+export const checkClickId = async (inputObj) => {
+  if (!inputObj || !inputObj.clickId) return null;
+
+  //loop
+  for (const k in clickIdTriggerMap) {
+    const trigger = clickIdTriggerMap[k];
+    if (trigger.includes(clickId)) {
+      return k;
     }
   }
+
+  return null;
 };
 
 //----------------------------
