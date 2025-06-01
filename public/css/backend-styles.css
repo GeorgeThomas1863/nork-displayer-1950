@@ -87,7 +87,7 @@
 }
 
 #pic-list-item:hover {
-  transform: translate(-50%, -50%) scale(1.2);
+  transform: scale(1.2);
   /* border-radius: 8px; */
 }
 
