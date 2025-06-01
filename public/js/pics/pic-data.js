@@ -63,7 +63,7 @@ export const getNewPicData = async () => {
 };
 
 // Helper function to get current pic state from DOM element
-const getCurrentPicState = (picElement) => {
+export const getCurrentPicState = (picElement) => {
   if (!picElement) {
     // If no element exists, return initial default state
     return ["pic-alone", 9, "pic-newest-to-oldest"];
@@ -77,7 +77,7 @@ const getCurrentPicState = (picElement) => {
 };
 
 // Helper function to store current pic state on DOM element
-const setCurrentPicState = (picElement, inputArray) => {
+export const setCurrentPicState = (picElement, inputArray) => {
   if (!picElement || !inputArray || inputArray.length < 3) return;
 
   const [picType, picHowMany, picSortBy] = inputArray;

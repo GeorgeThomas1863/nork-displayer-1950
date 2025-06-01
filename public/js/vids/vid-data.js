@@ -61,7 +61,7 @@ export const getNewVidData = async () => {
 };
 
 // Helper function to get current vid state from DOM element
-const getCurrentVidState = (vidElement) => {
+export const getCurrentVidState = (vidElement) => {
   if (!vidElement) {
     // If no element exists, return initial default state
     return ["vid-alone", 3, "vid-newest-to-oldest"];
@@ -75,7 +75,7 @@ const getCurrentVidState = (vidElement) => {
 };
 
 // Helper function to store current vid state on DOM element
-const setCurrentVidState = (vidElement, inputArray) => {
+export const setCurrentVidState = (vidElement, inputArray) => {
   if (!vidElement || !inputArray || inputArray.length < 3) return;
 
   const [vidType, vidHowMany, vidSortBy] = inputArray;
