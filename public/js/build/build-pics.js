@@ -262,11 +262,13 @@ export const buildPicDateElement = async (picDate) => {
   const dateElement = document.createElement("div");
   dateElement.id = "pic-date";
   const dateObj = new Date(picDate);
-  dateElement.textContent = dateObj.toLocaleDateString("en-US", {
+  const formattedDate = dateObj.toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
     day: "numeric",
   });
+
+  dateElement.textContent = `Date: ${formattedDate}`;
 
   return dateElement;
 };
@@ -277,7 +279,7 @@ export const buildPicSourceElement = async (picSource) => {
 
   const picSourceElement = document.createElement("div");
   picSourceElement.id = "pic-source";
-  picSourceElement.textContent = picSource;
+  picSourceElement.textContent = `Pic from: ${picSource}`;
 
   return picSourceElement;
 };
@@ -289,7 +291,7 @@ export const buildPicServerElement = async (headerData) => {
 
   const picServerElement = document.createElement("div");
   picServerElement.id = "pic-server";
-  picServerElement.textContent = serverData;
+  picServerElement.textContent = `Server Data: ${serverData}`;
 
   return picServerElement;
 };
