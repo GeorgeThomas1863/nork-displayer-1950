@@ -310,7 +310,7 @@ const getVidData = async (vidURL) => {
 // GET NEW DATA SECTION
 export const runGetNewData = async (inputObj) => {
   if (!inputObj) return null;
-  const { articleHowMany, picHowMany, vidHowMany, articleType } = inputObj;
+  const { articleHowMany, picHowMany, vidHowMany, articleType, articleSortBy, picSortBy, vidSortBy } = inputObj;
 
   //get data type
   const dataType = await getDataType(inputObj);
