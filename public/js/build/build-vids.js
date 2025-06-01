@@ -127,7 +127,7 @@ export const buildVidSortByListItem = async () => {
 
 //----------------------------
 
-export const buildVidData = async (inputArray, stateParams = null) => {
+export const buildVidsDisplay = async (inputArray, stateParams = null) => {
   if (!inputArray || !inputArray.length) return null;
 
   const vidList = document.createElement("ul");
@@ -154,6 +154,38 @@ export const buildVidData = async (inputArray, stateParams = null) => {
 
   return vidList;
 };
+
+export const buildVidPagesDisplay = async (inputArray, stateParams = null) => {
+  if (!inputArray || !inputArray.length) return null;
+
+  console.log("BUILD VID PAGES DISPLAY");
+
+  // const vidList = document.createElement("ul");
+  // vidList.id = "vid-array-element";
+  // vidList.className = "hidden";
+
+  // //set state params
+  // if (stateParams) {
+  //   //state params from user input
+  //   setCurrentVidState(vidList, stateParams);
+  // } else {
+  //   //handle initial load
+  //   const defaultStateParams = ["vid-alone", 3, "vid-newest-to-oldest"];
+  //   setCurrentVidState(vidList, defaultStateParams);
+  // }
+
+  // for (let i = 0; i < inputArray.length; i++) {
+  //   //SHOULD DETERMINE HERE IF VID PAGE OR VID ALONE
+  //   const vidListItem = await buildVidListItem(inputArray[i]);
+  //   if (!vidListItem) continue;
+
+  //   vidList.appendChild(vidListItem);
+  // }
+
+  return null;
+};
+
+
 
 export const buildVidListItem = async (inputObj) => {
   if (!inputObj || !inputObj.savePath) return null;
