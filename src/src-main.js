@@ -337,11 +337,14 @@ export const runGetNewData = async (inputObj) => {
 export const getDataType = async (inputObj) => {
   const { clickId, expandType, picType, vidType } = inputObj;
 
-  console.log("INPUT OBJ");
-  console.log(inputObj);
+  // console.log("INPUT OBJ");
+  // console.log(inputObj);
 
   if (expandType) {
     const expandTrigger = expandTriggerMap[expandType];
+
+    console.log("EXPAND TRIGGER");
+    console.log(expandTrigger);
 
     switch (expandTrigger) {
       case "article-form-header":
