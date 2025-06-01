@@ -1,143 +1,175 @@
 import fs from "fs";
 import CONFIG from "../config/config.js";
-import { articleTypeMap } from "../config/map-display.js";
+import { articleTypeMap, backendDefaultParams } from "../config/map-display.js";
 import dbModel from "../models/db-model.js";
 
 //gets backend data from db
 export const runGetBackendData = async () => {
-  const { articles, picsDownloaded, picSetContent, vidsDownloaded, vidPageContent } = CONFIG;
+  // const { backendTypeArr, articles, picsDownloaded, picSetContent, vidsDownloaded, vidPageContent } = CONFIG;
+  const { backendTypeArr } = CONFIG;
 
-  //come up with less dumb way to set params
-  const articleParams = {
-    sortKey: "articleId",
-    howMany: 5,
-    filterKey: "articleType",
-    filterValue: "fatboy",
-  };
-
-  const picParams = {
-    sortKey: "picId",
-    howMany: 9,
-  };
-
-  const picSetParams = {
-    sortKey: "picSetId",
-    howMany: 5,
-  };
-
-  const vidParams = {
-    sortKey: "vidId",
-    howMany: 3,
-  };
-
-  const vidPageParams = {
-    sortKey: "vidPageId",
-    howMany: 5,
-  };
-
-  //articles get ONLY last 5 FATBOY by default
-  const articleModel = new dbModel(articleParams, articles);
-  const articleArrayRaw = await articleModel.getNewestItemsByTypeArray();
-  const articleArray = await fixPicDataByType(articleArrayRaw);
-
-  //get last 9 pics by default
-  const picModel = new dbModel(picParams, picsDownloaded);
-  const picArrayRaw = await picModel.getNewestItemsArray();
-  const picArray = await fixPicDataByType(picArrayRaw);
-
-  const picSetModel = new dbModel(picSetParams, picSetContent);
-  const picSetArrayRaw = await picSetModel.getNewestItemsArray();
-  const picSetArray = await fixPicDataByType(picSetArrayRaw);
-
-  //get last 3 vids by default
-  const vidModel = new dbModel(vidParams, vidsDownloaded);
-  const vidArrayRaw = await vidModel.getNewestItemsArray();
-  const vidArray = await fixPicDataByType(vidArrayRaw);
-
-  const vidPageModel = new dbModel(vidPageParams, vidPageContent);
-  const vidPageArrayRaw = await vidPageModel.getNewestItemsArray();
-  const vidPageArray = await fixPicDataByType(vidPageArrayRaw);
-
-  const dataObj = {
-    articleArray: articleArray,
-    picArray: picArray,
-    picSetArray: picSetArray,
-    vidArray: vidArray,
-    vidPageArray: vidPageArray,
-  };
+  const dataObj = {};
+  for (let i = 0; i < backendTypeArr.length; i++) {
+    const backendType = backendTypeArr[i];
+    const backendParams = backendDefaultParams[backendType];
+    const backendCollection = backendParams.collection;
+    const dataModel = new dbModel(backendParams, backendCollection);
+    const dataArrayRaw = await dataModel.getNewestItemsArray();
+    const dataArray = await fixPicDataByType(dataArrayRaw, backendType);
+    dataObj[backendType] = dataArray;
+  }
 
   console.log("DATA RETURN LENGTHS");
-  console.log(articleArray.length);
-  console.log(picArray.length);
-  console.log(picSetArray.length);
-  console.log(vidArray.length);
-  console.log(vidPageArray.length);
-
-  // console.log("VID ARRAY");
-  // console.log(vidArray);
+  console.log(dataObj.articles.length);
+  console.log(dataObj.pics.length);
+  console.log(dataObj.picSets.length);
+  console.log(dataObj.vids.length);
+  console.log(dataObj.vidPages.length);
 
   return dataObj;
+
+  // //come up with less dumb way to set params
+  // const articleParams = {
+  //   sortKey: "articleId",
+  //   howMany: 5,
+  //   filterKey: "articleType",
+  //   filterValue: "fatboy",
+  // };
+
+  // const picParams = {
+  //   sortKey: "picId",
+  //   howMany: 9,
+  // };
+
+  // const picSetParams = {
+  //   sortKey: "picSetId",
+  //   howMany: 5,
+  // };
+
+  // const vidParams = {
+  //   sortKey: "vidId",
+  //   howMany: 3,
+  // };
+
+  // const vidPageParams = {
+  //   sortKey: "vidPageId",
+  //   howMany: 5,
+  // };
+
+  // //articles get ONLY last 5 FATBOY by default
+  // const articleModel = new dbModel(articleParams, articles);
+  // const articleArrayRaw = await articleModel.getNewestItemsByTypeArray();
+  // const articleArray = await fixPicDataByType(articleArrayRaw);
+
+  // //get last 9 pics by default
+  // const picModel = new dbModel(picParams, picsDownloaded);
+  // const picArrayRaw = await picModel.getNewestItemsArray();
+  // const picArray = await fixPicDataByType(picArrayRaw);
+
+  // const picSetModel = new dbModel(picSetParams, picSetContent);
+  // const picSetArrayRaw = await picSetModel.getNewestItemsArray();
+  // const picSetArray = await fixPicDataByType(picSetArrayRaw);
+
+  // //get last 3 vids by default
+  // const vidModel = new dbModel(vidParams, vidsDownloaded);
+  // const vidArrayRaw = await vidModel.getNewestItemsArray();
+  // const vidArray = await fixPicDataByType(vidArrayRaw);
+
+  // const vidPageModel = new dbModel(vidPageParams, vidPageContent);
+  // const vidPageArrayRaw = await vidPageModel.getNewestItemsArray();
+  // const vidPageArray = await fixPicDataByType(vidPageArrayRaw);
+
+  // const dataObj = {
+  //   articleArray: articleArray,
+  //   picArray: picArray,
+  //   picSetArray: picSetArray,
+  //   vidArray: vidArray,
+  //   vidPageArray: vidPageArray,
+  // };
+
+  // console.log("DATA RETURN LENGTHS");
+  // console.log(articleArray.length);
+  // console.log(picArray.length);
+  // console.log(picSetArray.length);
+  // console.log(vidArray.length);
+  // console.log(vidPageArray.length);
+
+  // // console.log("VID ARRAY");
+  // // console.log(vidArray);
+
+  // return dataObj;
 };
 
 //RE-WRITE FIXING THE FUCKING PICS AS A SINGLE LOOP THAT GOES THROUGH DATAOBJ
 
 //ADD IN PIC SETS AND VID PAGES
-export const fixPicDataByType = async (inputArray) => {
+export const fixPicDataByType = async (inputArray, backendType) => {
   if (!inputArray) return null;
 
   const results = [];
   for (let i = 0; i < inputArray.length; i++) {
     const inputObj = inputArray[i];
     // const { articleId, picSetId, thumbnail } =
-    const dataType = await deriveDataType(inputObj);
+    // const dataType = await deriveDataType(inputObj);
 
-    switch (dataType) {
+    switch (backendType) {
+      //single pics
+      case "pics":
+        const picURL = inputObj.url;
+        const picDataObj = await getPicData(picURL);
+        if (!picDataObj) continue;
+
+        const picObj = { ...picDataObj, ...inputObj };
+
+        results.push(picObj);
+        break;
+
+      //picArray
       case "articles":
       case "picSets":
-        //rebuild pic array (returns input if no picArray)
+        //rebuild pic array (returns INPUTOBJ if no picArray)
         const picArrayObj = await fixPicArray(inputObj);
         if (!picArrayObj) continue;
 
         results.push(picArrayObj);
         break;
 
-      case "pics":
-        const picURL = inputObj.url;
-        const picObj = await getPicData(picURL);
-        if (!picObj) continue;
-
-        results.push(picObj);
-        break;
-
+      //pics as thumbnails
       case "vids":
-        //need to derive the fucking thumbnail
-        const { url } = inputObj;
-        const { vidPageContent } = CONFIG;
-
-        const thumbnailModel = new dbModel({ keyToLookup: "vidURL", itemValue: url }, vidPageContent);
-        const vidObj = await thumbnailModel.getUniqueItem();
-        if (!vidObj || !vidObj.thumbnail) continue;
-
-        const { thumbnail } = vidObj;
-        // console.log("INPUT OBJ");
-        // console.log(inputObj);
-
-        const thumbnailObj = await getPicData(thumbnail);
-        if (!thumbnailObj) continue;
-
-        // console.log("THUMBNAIL OBJ");
-        // console.log(thumbnailObj);
-
-        const returnObj = { ...inputObj, ...thumbnailObj };
-        returnObj.savePath = inputObj.savePath;
-        returnObj.picSavePath = thumbnailObj.savePath;
-
-        results.push(returnObj);
+      case "vidPages":
+        //return input
+        results.push(inputObj);
         break;
+
+      //DONT GIVE A SHIT ABOUT BELOW, DONT NEED IT
+      //need to derive the fucking thumbnail
+      // const { url } = inputObj;
+      // const { vidPageContent } = CONFIG;
+
+      // const thumbnailModel = new dbModel({ keyToLookup: "vidURL", itemValue: url }, vidPageContent);
+      // const vidObj = await thumbnailModel.getUniqueItem();
+      // if (!vidObj || !vidObj.thumbnail) continue;
+
+      // const { thumbnail } = vidObj;
+      // // console.log("INPUT OBJ");
+      // // console.log(inputObj);
+
+      // const thumbnailObj = await getPicData(thumbnail);
+      // if (!thumbnailObj) continue;
+
+      // // console.log("THUMBNAIL OBJ");
+      // // console.log(thumbnailObj);
+
+      // const returnObj = { ...inputObj, ...thumbnailObj };
+      // returnObj.savePath = inputObj.savePath;
+      // returnObj.picSavePath = thumbnailObj.savePath;
+
+      // results.push(returnObj);
+      // break;
 
       //NEED TO ADD PIC SETS / VID PAGES!!!
-      default:
-        return inputArray;
+      // default:
+      //   return inputArray;
     }
   }
 
@@ -145,26 +177,25 @@ export const fixPicDataByType = async (inputArray) => {
 };
 
 //incredibly stupid but dont care
-export const deriveDataType = async (inputObj) => {
-  const { articleId, picId, picSetId, vidId, vidPageId } = inputObj;
+// export const deriveDataType = async (inputObj) => {
+//   const { articleId, picId, picSetId, vidId, vidPageId } = inputObj;
 
-  if (articleId) return "articles";
+//   if (articleId) return "articles";
 
-  if (picId) return "pics";
+//   if (picId) return "pics";
 
-  if (picSetId) return "picSets";
+//   if (picSetId) return "picSets";
 
-  if (vidId) return "vids";
+//   if (vidId) return "vids";
 
-  if (vidPageId) return "vidPages";
+//   if (vidPageId) return "vidPages";
 
-  return null;
-};
+//   return null;
+// };
 
 //rebuild the picArray
 export const fixPicArray = async (inputObj) => {
   if (!inputObj || !inputObj.picArray || !inputObj.picArray.length) return inputObj;
-
   const { picArray } = inputObj;
   const returnObj = { ...inputObj };
 
@@ -183,30 +214,50 @@ export const fixPicArray = async (inputObj) => {
 
 //get pic data (AND source / date)
 export const getPicData = async (picURL) => {
-  const { picsDownloaded } = CONFIG;
+  if (!picURL) return null;
 
-  //GET PIC DATA OBJ FROM DOWNLOAD COLLECTION
-  const lookupParams = {
+  const dataParams = {
     keyToLookup: "url",
     itemValue: picURL,
   };
 
-  const picDataModel = new dbModel(lookupParams, picsDownloaded);
-  const picDataObj = await picDataModel.getUniqueItem();
+  try {
+    //GET PIC DATA OBJ FROM DOWNLOAD COLLECTION
+    const picDataObj = await getPicExtraData(dataParams);
+    //FIND PIC SOURCE DATA
+    const picSourceObj = await getPicSourceData(picURL);
+    const returnObj = { ...picDataObj, ...picSourceObj };
 
-  //checks if pic exists, return null if it doesnt
-  if (!picDataObj || !picDataObj.savePath || !fs.existsSync(picDataObj.savePath)) return null;
-
-  //FIND WHERE PIC IS FROM
-  const picSourceObj = await getPicSourceObj(picURL);
-
-  const picObj = { ...picDataObj, ...picSourceObj };
-
-  return picObj;
+    return returnObj;
+  } catch (e) {
+    console.log(e.message + "; PICURL: " + e.url + "; SAVE PATH: " + e.savePath);
+    return null;
+  }
 };
 
-//get pic source
-export const getPicSourceObj = async (picURL) => {
+export const getPicExtraData = async (params) => {
+  const { picsDownloaded } = CONFIG;
+  const picDataModel = new dbModel(params, picsDownloaded);
+  const picDataObj = await picDataModel.getUniqueItem();
+
+  if (!picDataObj || !picDataObj.savePath) return null;
+  const { savePath } = picDataObj;
+
+  //THROW ERROR IF PIC NOT DOWNLOADED
+  if (!fs.existsSync(savePath)) {
+    const error = new Error("PIC NOT DOWNLOADED");
+    error.url = picURL;
+    error.savePath = savePath;
+    throw error;
+  }
+
+  return picDataObj;
+};
+
+//FIND WHERE PIC IS FROM
+export const getPicSourceData = async (picURL) => {
+  if (!picURL) return null;
+
   const { articles, picSetContent, vidPageContent } = CONFIG;
   let picSource = "";
   let picDate = "";
