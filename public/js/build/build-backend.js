@@ -47,8 +47,8 @@ export const checkBackendData = async (inputObj) => {
 
   if (!inputObj) return failElement;
 
-  for (let i = 0; i < backendTypeArr.length; i++) {
-    const dataType = backendTypeArr[i];
+  for (let i = 0; i < d.backendTypeArr.length; i++) {
+    const dataType = d.backendTypeArr[i];
     if (!inputObj[dataType]) return failElement;
   }
 
