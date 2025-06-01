@@ -28,11 +28,11 @@ export const runGetBackendData = async (inputObj) => {
   dataObj[dataType] = dataArray;
 
   console.log("DATA RETURN LENGTHS");
-  console.log("Articles: " + dataObj.articles.length);
-  console.log("Pics: " + dataObj.pics.length);
-  console.log("Pic Sets: " + dataObj.picSets.length);
-  console.log("Vids: " + dataObj.vids.length);
-  console.log("Vid Pages: " + dataObj.vidPages.length);
+  console.log("Articles: " + dataObj?.articles?.length);
+  console.log("Pics: " + dataObj?.pics?.length);
+  console.log("Pic Sets: " + dataObj?.picSets?.length);
+  console.log("Vids: " + dataObj?.vids?.length);
+  console.log("Vid Pages: " + dataObj?.vidPages?.length);
 
   return dataObj;
 };
