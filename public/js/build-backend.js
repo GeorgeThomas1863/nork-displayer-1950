@@ -1,5 +1,5 @@
-import { sendToBack, checkBackendData, buildFailElement } from "../util.js";
-import d from "../define-things.js";
+import { sendToBack, checkBackendData, buildFailElement } from "./util.js";
+import d from "./define-things.js";
 
 //BUILDS DEFAULT DISPLAY
 export const buildBackendDislay = async () => {

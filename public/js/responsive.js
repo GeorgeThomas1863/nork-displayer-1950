@@ -1,8 +1,8 @@
 import { expandBackendData } from "./main.js";
 import { buildAdminParams, sendToBack, debounce } from "./util.js";
-import { getNewArticleData } from "./build/build-articles.js";
-import { getNewPicData } from "./build/build-pics.js";
-import { getNewVidData } from "./build/build-vids.js";
+import { getNewArticleData } from "./articles/article-data.js";
+import { getNewPicData } from "./pics/pic-data.js";
+import { getNewVidData } from "./vids/vid-data.js";
 
 export const adminSubmitClick = async (e) => {
   e.preventDefault();
@@ -25,6 +25,8 @@ export const adminSubmitClick = async (e) => {
 };
 
 //---------------------------------
+
+//MAKE A GET NEW DATA FUNCTION AND PARSE TYPE THERE
 
 export const mainClickHandler = async (e) => {
   e.preventDefault();

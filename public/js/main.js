@@ -1,6 +1,6 @@
-import { buildBackendDislay } from "./build/build-backend.js";
-import { buildDropDown } from "./build/build-drop-down.js";
-import { buildInputForms } from "./build/build-forms.js";
+import { buildBackendDislay } from "./build-backend.js";
+import { buildDropDown } from "./build-drop-down.js";
+import { buildInputForms } from "./build-forms.js";
 import { hideArray, unhideArray } from "./util.js";
 
 //get display element
