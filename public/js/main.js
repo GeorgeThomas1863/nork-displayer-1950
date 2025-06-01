@@ -45,7 +45,7 @@ export const displayNewData = async (inputObj) => {
 
   const func = d.backendFunctionMap[dataType];
   const dataElement = await func(newDataObj);
-  backendDataWrapper.replaceChild(dataElement, backendDataWrapper.firstElementChild);
+  displayElement.replaceChild(dataElement, backendDataWrapper);
 
   return true;
 };
