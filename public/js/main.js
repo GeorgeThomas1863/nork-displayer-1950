@@ -31,11 +31,23 @@ export const buildDefaultDisplay = async () => {
   return "#DONE";
 };
 
+//BUILD IN STATE SHIT
 export const displayNewData = async (inputObj) => {
-  if (!inputObj) return null;
+  if (!inputObj || !inputObj.dataType) return null;
 
   console.log("DISPLAY NEW DATA");
   console.log(inputObj);
+
+  const { dataType } = inputObj;
+  const newDataObj = inputObj[dataType];
+
+  const backendDataWrapper = document.getElementById("backend-data-wrapper");
+
+  const func = d.backendFunctionMap[dataType];
+  const dataElement = await func(newDataObj);
+  backendDataWrapper.replaceChild(dataElement, backendDataWrapper.firstElementChild);
+
+  return true;
 };
 
 //RESPONSIVE STUFF
