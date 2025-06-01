@@ -301,7 +301,9 @@ const getVidData = async (vidURL) => {
 export const runGetNewData = async (inputObj) => {
   if (!inputObj) return null;
 
-  const dataType = await parseDataType(inputObj);
+  const dataType = await getDataType(inputObj);
+  console.log("DATA TYPE!!!");
+  console.log(dataType);
 
   // const { clickId, expandType } = inputObj;
 
@@ -332,9 +334,34 @@ export const runGetNewData = async (inputObj) => {
   //first FIGURE OUT IF NEED TO PULL NEW DATA
 };
 
-export const parseDataType = async (inputObj) => {
+export const getDataType = async (inputObj) => {
+  const { clickId, expandType, picType, vidType } = inputObj;
+
   console.log("INPUT OBJ");
   console.log(inputObj);
+
+  if (expandType) {
+    const expandTrigger = expandTriggerMap[expandType];
+
+    switch (expandTrigger) {
+      case "article-form-header":
+        return "articles";
+
+      case "pic-form-header":
+        if (picType === "pic-alone") {
+          return "pics";
+        } else {
+          return "picSets";
+        }
+
+      case "vid-form-header":
+        if (vidType === "vid-alone") {
+          return "vids";
+        } else {
+          return "vidPages";
+        }
+    }
+  }
 };
 
 //----------------------------
