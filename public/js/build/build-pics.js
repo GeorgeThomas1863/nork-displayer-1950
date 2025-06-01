@@ -128,7 +128,7 @@ export const buildPicSortByListItem = async () => {
 //----------------------------------
 
 //FOR PIC ALONE
-export const buildPicDataDisplay = async (inputArray, stateParams = null) => {
+export const buildPicDisplay = async (inputArray, stateParams = null) => {
   if (!inputArray || !inputArray.length) return null;
 
   const picList = document.createElement("ul");
@@ -157,7 +157,7 @@ export const buildPicDataDisplay = async (inputArray, stateParams = null) => {
 };
 
 //BUILD PIC SET PARSE HERE
-export const buildPicSetDataDisplay = async (inputArray, stateParams = null) => {
+export const buildPicSetDisplay = async (inputArray, stateParams = null) => {
   // console.log("AHHHHHH");
   // console.log("FUCKING BUILD");
   // console.log(inputArray);
