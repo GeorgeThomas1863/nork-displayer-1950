@@ -128,7 +128,7 @@ export const buildPicSortByListItem = async () => {
 //----------------------------------
 
 //FOR PIC ALONE
-export const buildPicData = async (inputArray, stateParams = null) => {
+export const buildPicData = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
 
   const picList = document.createElement("ul");
@@ -156,6 +156,15 @@ export const buildPicData = async (inputArray, stateParams = null) => {
   return picList;
 };
 
+//!!!!!!
+//HERE, BUILD PIC SET BELOW
+//!!!!!
+
+//BUILD PIC SET PARSE HERE
+export const buildPicSetData = async (inputArray, stateParams = null) => {
+  console.log("FUCKING BUILD");
+};
+
 export const buildArticlePicData = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
 
@@ -179,8 +188,6 @@ export const buildArticlePicData = async (inputArray) => {
 
   return picCollapseElement;
 };
-
-//BUILD PIC SET PARSE HERE
 
 //------------------------
 
@@ -340,8 +347,13 @@ export const getNewPicData = async () => {
 
   if (!newPicData) return null;
 
-  const newPicDataWrapper = await buildPicData(newPicData, newPicInputArray);
-  newPicDataWrapper.classList.remove("hidden"); //doubt this will work
+  let newPicDataWrapper = "";
+  if (picType === "pic-sets") {
+    newPicDataWrapper = await buildPicSetData(newPicData, newPicInputArray);
+  } else {
+    newPicDataWrapper = await buildPicData(newPicData, newPicInputArray);
+  }
+  newPicDataWrapper.classList.remove("hidden");
 
   //get backend data wrapper and replace old data
   const backendDataWrapper = document.getElementById("backend-data-wrapper");
