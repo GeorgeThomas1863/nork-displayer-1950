@@ -268,7 +268,7 @@ export const buildPicDateElement = async (picDate) => {
     day: "numeric",
   });
 
-  dateElement.textContent = `Date: ${formattedDate}`;
+  dateElement.innerHTML = `<b>Date:</b> ${formattedDate}`;
 
   return dateElement;
 };
@@ -279,7 +279,7 @@ export const buildPicSourceElement = async (picSource) => {
 
   const picSourceElement = document.createElement("div");
   picSourceElement.id = "pic-source";
-  picSourceElement.textContent = `Pic from: ${picSource}`;
+  picSourceElement.innerHTML = `<b>Pic From:</b> ${picSource}`;
 
   return picSourceElement;
 };
@@ -291,7 +291,7 @@ export const buildPicServerElement = async (headerData) => {
 
   const picServerElement = document.createElement("div");
   picServerElement.id = "pic-server";
-  picServerElement.textContent = `Server Data: ${serverData}`;
+  picServerElement.innerHTML = `<b>Server Data:</b> ${serverData}`;
 
   return picServerElement;
 };

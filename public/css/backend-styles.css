@@ -104,6 +104,7 @@
 #pic-stats {
   display: flex;
   flex-direction: column;
+  text-align: left;
   gap: 0;
   padding: 0.5rem;
   background-color: #f5f5f5;
