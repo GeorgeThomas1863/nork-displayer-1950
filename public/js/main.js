@@ -1,4 +1,4 @@
-import { getBackendData, buildBackendDislay } from "./build/build-backend.js";
+import { buildBackendDislay } from "./build/build-backend.js";
 import { buildDropDown } from "./build/build-drop-down.js";
 import { buildInputForms } from "./build/build-forms.js";
 import { hideArray, unhideArray } from "./util.js";
@@ -10,18 +10,14 @@ const displayElement = document.getElementById("display-element");
 export const buildDefaultDisplay = async () => {
   if (!displayElement) return null;
 
-  //get backend data FIRST (to check for fail )
-  const backendDataObj = await getBackendData();
-  if (!backendDataObj) return null;
-
   //build drop down
   const dropDownElement = await buildDropDown();
 
   //build input forms
   const inputFormWrapper = await buildInputForms();
 
-  //build data return
-  const backendDataWrapper = await buildBackendDislay(backendDataObj);
+  //build data data return
+  const backendDataWrapper = await buildBackendDislay();
 
   displayElement.append(dropDownElement, inputFormWrapper, backendDataWrapper);
 
