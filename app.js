@@ -1,8 +1,12 @@
-//claude is an idiot, fixing his mistakes
-
-//FIX CLAUDE SHIT
+//MINOR BUG LIST:
+// - collapse container are wrong width when all articles collpased
+// - failing to get pic stats for vids
+// - pic sort seems to be wrong, check if by date or by id, make by date if possible
+// - border radius on pics is still weird, check collapse container border radius
 
 //BUILD PIC SET / VID PAGE DISPLAYS
+
+//REMOVE PIC STATS FROM ARTICLE PICS
 
 // STYLE ARTICLE LIST BETTER (3 across with pics, if present)
 
@@ -11,6 +15,8 @@
 // MAKE VID ALONE DISPLAY NICER (put in wrappers, margins, etc)
 
 //MAKE BACKEND DISPLAY STYLING BETTER (return container connected to forms)
+
+//make drop down responsive (2 action buttons)
 
 //ADD MEDIA QUERIES
 
