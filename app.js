@@ -1,4 +1,4 @@
-//USE CLAUDE TO MAKE PIC STAT STYLES (cursor at api limit)
+//claude is an idiot, fixing his mistakes
 
 //BUILD PIC SET / VID PAGE DISPLAYS
 
