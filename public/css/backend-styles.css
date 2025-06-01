@@ -185,14 +185,16 @@
 
 #backend-data-fail {
   margin: 0 auto;
+  margin-top: 5rem;
   width: 50rem;
   max-width: 800px;
   text-align: center;
   font-weight: bold;
+  font-size: 4rem;
   padding: 2rem;
   border-radius: 10px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+
 }
 
 /* BACKGROUND FLAG (stupid) */
