@@ -21,22 +21,33 @@ export const runGetBackendData = async (inputObj) => {
     params = { ...inputObj };
   }
 
-  const dataModel = new dbModel(params, collection);
-
+  //handle articles
   let dataArrayRaw = [];
   const { sortBy } = params;
-  switch (sortBy) {
-    case "newest-to-oldest":
-      dataArrayRaw = await dataModel.getNewestItemsArray();
-      break;
+  if (dataType === "articles") {
+    const articleDataModel = new dbModel(params, articles);
 
-    case "oldest-to-newest":
-      dataArrayRaw = await dataModel.getOldestItemsArray();
-      break;
+    switch (sortBy) {
+      case "newest-to-oldest":
+        dataArrayRaw = await articleDataModel.getNewestItemsByTypeArray();
+        break;
 
-    default:
-      dataArrayRaw = await dataModel.getNewestItemsArray();
-      break;
+      case "oldest-to-newest":
+        dataArrayRaw = await articleDataModel.getOldestItemsByTypeArrays();
+        break;
+    }
+  } else {
+    const otherDataModel = new dbModel(params, collection);
+
+    switch (sortBy) {
+      case "newest-to-oldest":
+        dataArrayRaw = await otherDataModel.getNewestItemsArray();
+        break;
+
+      case "oldest-to-newest":
+        dataArrayRaw = await otherDataModel.getOldestItemsArray();
+        break;
+    }
   }
 
   const dataArray = await fixDataByType(dataArrayRaw, dataType);
@@ -299,21 +310,45 @@ const getVidData = async (vidURL) => {
 // GET NEW DATA SECTION
 export const runGetNewData = async (inputObj) => {
   if (!inputObj) return null;
+  const { articleHowMany, picHowMany, vidHowMany, articleType } = inputObj;
 
+  //get data type
   const dataType = await getDataType(inputObj);
+  if (!dataType) return null;
 
-  // console.log("INPUT OBJ");
-  // console.log(inputObj);
+  //get params
+  const sortKey = backendDefaultParams[dataType].sortKey;
 
-  // console.log("DATA TYPE!!!");
-  // console.log(dataType);
+  let sortByRaw = "";
+  let howMany = 0;
+  switch (dataType) {
+    case "articles":
+      howMany = articleHowMany;
+      sortByRaw = articleSortBy;
+      break;
 
-  const paramsObj = { ...inputObj };
-  paramsObj.dataType = dataType;
-  paramsObj.isFirstLoad = false;
+    case "pics":
+    case "picSets":
+      howMany = picHowMany;
+      sortByRaw = picSortBy;
+      break;
 
-  console.log("PARAMS OBJ");
-  console.log(paramsObj);
+    case "vids":
+    case "vidPages":
+      howMany = vidHowMany;
+      sortByRaw = vidSortBy;
+      break;
+  }
+
+  const paramsObj = {
+    isFirstLoad: false,
+    dataType: dataType,
+    sortKey: sortKey,
+    howMany: howMany,
+    sortBy: sortByRaw.substring(sortByRaw.indexOf("-") + 1),
+    filterKey: "articleType",
+    filterValue: articleType,
+  };
 
   const newDataObj = await runGetBackendData(paramsObj);
 
@@ -380,137 +415,137 @@ export const checkClickId = async (inputObj) => {
 
 //----------------------------
 
-export const getNewArticleData = async (inputParams) => {
-  if (!inputParams || !inputParams.articleType || !inputParams.articleHowMany || !inputParams.articleSortBy) return null;
-  const { articleType, articleHowMany, articleSortBy } = inputParams;
-  const { articles } = CONFIG;
+// export const getNewArticleData = async (inputParams) => {
+//   if (!inputParams || !inputParams.articleType || !inputParams.articleHowMany || !inputParams.articleSortBy) return null;
+//   const { articleType, articleHowMany, articleSortBy } = inputParams;
+//   const { articles } = CONFIG;
 
-  const articleParams = {
-    sortKey: "articleId",
-    howMany: articleHowMany,
-    filterKey: "articleType",
-    filterValue: articleType,
-  };
+//   const articleParams = {
+//     sortKey: "articleId",
+//     howMany: articleHowMany,
+//     filterKey: "articleType",
+//     filterValue: articleType,
+//   };
 
-  const articleModel = new dbModel(articleParams, articles);
+//   const articleModel = new dbModel(articleParams, articles);
 
-  //if all DONT filter by type
-  let articleArrayRaw = [];
-  if (articleType === "all-type") {
-    switch (articleSortBy) {
-      case "article-newest-to-oldest":
-        articleArrayRaw = await articleModel.getNewestItemsArray();
-        break;
+//   //if all DONT filter by type
+//   let articleArrayRaw = [];
+//   if (articleType === "all-type") {
+//     switch (articleSortBy) {
+//       case "article-newest-to-oldest":
+//         articleArrayRaw = await articleModel.getNewestItemsArray();
+//         break;
 
-      case "article-oldest-to-newest":
-        articleArrayRaw = await articleModel.getOldestItemsArray();
-        break;
-    }
-  } else {
-    //otherwise filter by type
-    switch (articleSortBy) {
-      case "article-newest-to-oldest":
-        articleArrayRaw = await articleModel.getNewestItemsByTypeArray();
-        break;
+//       case "article-oldest-to-newest":
+//         articleArrayRaw = await articleModel.getOldestItemsArray();
+//         break;
+//     }
+//   } else {
+//     //otherwise filter by type
+//     switch (articleSortBy) {
+//       case "article-newest-to-oldest":
+//         articleArrayRaw = await articleModel.getNewestItemsByTypeArray();
+//         break;
 
-      case "article-oldest-to-newest":
-        articleArrayRaw = await articleModel.getOldestItemsByTypeArray();
-        break;
-    }
-  }
+//       case "article-oldest-to-newest":
+//         articleArrayRaw = await articleModel.getOldestItemsByTypeArray();
+//         break;
+//     }
+//   }
 
-  const articleArray = await fixDataByType(articleArrayRaw, "articles");
-  return articleArray;
-};
+//   const articleArray = await fixDataByType(articleArrayRaw, "articles");
+//   return articleArray;
+// };
 
-export const getNewPicData = async (inputParams) => {
-  if (!inputParams || !inputParams.picType || !inputParams.picHowMany || !inputParams.picSortBy) return null;
-  const { picType, picHowMany, picSortBy } = inputParams;
-  const { picsDownloaded, picSetContent } = CONFIG;
+// export const getNewPicData = async (inputParams) => {
+//   if (!inputParams || !inputParams.picType || !inputParams.picHowMany || !inputParams.picSortBy) return null;
+//   const { picType, picHowMany, picSortBy } = inputParams;
+//   const { picsDownloaded, picSetContent } = CONFIG;
 
-  const picParams = {
-    sortKey: "picId",
-    howMany: picHowMany,
-  };
+//   const picParams = {
+//     sortKey: "picId",
+//     howMany: picHowMany,
+//   };
 
-  //SEPARATE HERE BY PIC TYPE
-  let collection = "";
-  switch (picType) {
-    case "pic-alone":
-      collection = picsDownloaded;
-      break;
+//   //SEPARATE HERE BY PIC TYPE
+//   let collection = "";
+//   switch (picType) {
+//     case "pic-alone":
+//       collection = picsDownloaded;
+//       break;
 
-    case "pic-sets":
-      collection = picSetContent;
-      break;
-  }
+//     case "pic-sets":
+//       collection = picSetContent;
+//       break;
+//   }
 
-  const picModel = new dbModel(picParams, collection);
+//   const picModel = new dbModel(picParams, collection);
 
-  //if all DONT filter by type
-  let picArrayRaw = [];
-  switch (picSortBy) {
-    case "pic-newest-to-oldest":
-      picArrayRaw = await picModel.getNewestItemsArray();
-      break;
+//   //if all DONT filter by type
+//   let picArrayRaw = [];
+//   switch (picSortBy) {
+//     case "pic-newest-to-oldest":
+//       picArrayRaw = await picModel.getNewestItemsArray();
+//       break;
 
-    case "pic-oldest-to-newest":
-      picArrayRaw = await picModel.getOldestItemsArray();
-      break;
-  }
+//     case "pic-oldest-to-newest":
+//       picArrayRaw = await picModel.getOldestItemsArray();
+//       break;
+//   }
 
-  if (picType === "pic-sets") {
-    const picSetArray = await fixDataByType(picArrayRaw, "picSets");
-    return picSetArray;
-  }
+//   if (picType === "pic-sets") {
+//     const picSetArray = await fixDataByType(picArrayRaw, "picSets");
+//     return picSetArray;
+//   }
 
-  //otherwise pic alone
-  const picArray = await fixDataByType(picArrayRaw, "pics");
+//   //otherwise pic alone
+//   const picArray = await fixDataByType(picArrayRaw, "pics");
 
-  return picArray;
-};
+//   return picArray;
+// };
 
-export const getNewVidData = async (inputParams) => {
-  if (!inputParams || !inputParams.vidType || !inputParams.vidHowMany || !inputParams.vidSortBy) return null;
-  const { vidType, vidHowMany, vidSortBy } = inputParams;
-  const { vidsDownloaded, vidPageContent } = CONFIG;
+// export const getNewVidData = async (inputParams) => {
+//   if (!inputParams || !inputParams.vidType || !inputParams.vidHowMany || !inputParams.vidSortBy) return null;
+//   const { vidType, vidHowMany, vidSortBy } = inputParams;
+//   const { vidsDownloaded, vidPageContent } = CONFIG;
 
-  const vidParams = {
-    sortKey: "vidId",
-    howMany: vidHowMany,
-  };
+//   const vidParams = {
+//     sortKey: "vidId",
+//     howMany: vidHowMany,
+//   };
 
-  let collection = "";
-  switch (vidType) {
-    case "vid-alone":
-      collection = vidsDownloaded;
-      break;
+//   let collection = "";
+//   switch (vidType) {
+//     case "vid-alone":
+//       collection = vidsDownloaded;
+//       break;
 
-    case "vid-pages":
-      collection = vidPageContent;
-      break;
-  }
+//     case "vid-pages":
+//       collection = vidPageContent;
+//       break;
+//   }
 
-  const vidModel = new dbModel(vidParams, collection);
+//   const vidModel = new dbModel(vidParams, collection);
 
-  let vidArrayRaw = [];
-  switch (vidSortBy) {
-    case "vid-newest-to-oldest":
-      vidArrayRaw = await vidModel.getNewestItemsArray();
-      break;
+//   let vidArrayRaw = [];
+//   switch (vidSortBy) {
+//     case "vid-newest-to-oldest":
+//       vidArrayRaw = await vidModel.getNewestItemsArray();
+//       break;
 
-    case "vid-oldest-to-newest":
-      vidArrayRaw = await vidModel.getOldestItemsArray();
-      break;
-  }
+//     case "vid-oldest-to-newest":
+//       vidArrayRaw = await vidModel.getOldestItemsArray();
+//       break;
+//   }
 
-  if (vidType === "vid-pages") {
-    const vidArrayPicRaw = await fixDataByType(vidArrayRaw, "vidPages");
-    const vidPageArray = await fixVidDataArray(vidArrayPicRaw);
-    return vidPageArray;
-  }
+//   if (vidType === "vid-pages") {
+//     const vidArrayPicRaw = await fixDataByType(vidArrayRaw, "vidPages");
+//     const vidPageArray = await fixVidDataArray(vidArrayPicRaw);
+//     return vidPageArray;
+//   }
 
-  //otherwise vid alone, just return raw (fixing doesnt do anything)
-  const vidArray = vidArrayRaw;
-  return vidArray;
-};
+//   //otherwise vid alone, just return raw (fixing doesnt do anything)
+//   const vidArray = vidArrayRaw;
+//   return vidArray;
+// };
