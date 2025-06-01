@@ -40,8 +40,8 @@ export const mainClickHandler = async (e) => {
     expandType: expandType,
   };
 
-  console.log("clickObj");
-  console.log(clickObj);
+  // console.log("clickObj");
+  // console.log(clickObj);
 
   await getNewData(clickObj);
 

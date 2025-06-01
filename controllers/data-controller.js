@@ -28,6 +28,7 @@ export const getBackendDataRoute = async (req, res) => {
 };
 
 export const getNewDataRoute = async (req, res) => {
+  console.log("!!!!!!!getNewDataRoute");
   try {
     const inputParams = req.body;
 

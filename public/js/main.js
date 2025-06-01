@@ -40,8 +40,8 @@ export const getNewData = async (inputObj) => {
 
   //parse here???
 
-  console.log("dataObj");
-  console.log(dataObj);
+  // console.log("dataObj");
+  // console.log(dataObj);
 };
 
 //better version of expand backend data equation
