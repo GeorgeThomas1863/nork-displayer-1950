@@ -80,25 +80,14 @@
 }
 
 #pic-list-item {
-  display: flex;
-  flex-direction: column;
   position: relative;
   background-color: transparent;
   border-radius: 8px;
-}
-
-/* pic container styles per claude */
-
-#pic-image-container {
-  position: relative;
-  height: 0;
-  padding-bottom: 66.67%; /* 3:2 aspect ratio */
-  overflow: hidden;
-  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 #pic-element {
-  position: absolute;
+  /* position: absolute;
   max-width: 100%;
   max-height: 100%;
   width: auto;
@@ -106,15 +95,18 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  overflow: hidden;
+  overflow: hidden; */
   /* object-fit: contain; */
+  width: 100%;
+  height: auto;
+  display: block;
   transition: all 0.3s ease;
-  border-radius: 8px;
+  border-radius: 8px 8px 0 0;
 }
 
 #pic-element:hover {
   transform: translate(-50%, -50%) scale(1.2);
-  border-radius: 8px;
+  /* border-radius: 8px; */
 }
 
 /* Stats container */
@@ -125,6 +117,11 @@
   padding: 0.5rem;
   background-color: #f5f5f5;
   border-radius: 8px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 0 0 8px 8px;
 }
 
 .article-pic-collapse .collapse-content {
