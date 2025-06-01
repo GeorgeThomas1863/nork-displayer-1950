@@ -86,6 +86,11 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+#pic-list-item:hover {
+  transform: translate(-50%, -50%) scale(1.2);
+  /* border-radius: 8px; */
+}
+
 #pic-element {
   /* position: absolute;
   max-width: 100%;
@@ -104,10 +109,9 @@
   border-radius: 8px 8px 0 0;
 }
 
-#pic-element:hover {
+/* #pic-element:hover {
   transform: translate(-50%, -50%) scale(1.2);
-  /* border-radius: 8px; */
-}
+} */
 
 /* Stats container */
 #pic-stats {
