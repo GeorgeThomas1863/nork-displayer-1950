@@ -158,32 +158,105 @@ export const buildVidDisplay = async (inputArray, stateParams = null) => {
 export const buildVidPageDisplay = async (inputArray, stateParams = null) => {
   if (!inputArray || !inputArray.length) return null;
 
-  console.log("BUILD VID PAGES DISPLAY");
+  const vidPageList = document.createElement("ul");
+  vidPageList.id = "vid-page-array-element";
+  // picSetList.className = "hidden";
 
-  // const vidList = document.createElement("ul");
-  // vidList.id = "vid-array-element";
-  // vidList.className = "hidden";
+  //set state params
+  if (stateParams) {
+    //state params from user input
+    setCurrentVidState(vidPageList, stateParams);
+  } else {
+    //handle initial load
+    const defaultStateParams = ["vid-pages", 5, "vid-newest-to-oldest"];
+    setCurrentVidState(vidPageList, defaultStateParams);
+  }
 
-  // //set state params
-  // if (stateParams) {
-  //   //state params from user input
-  //   setCurrentVidState(vidList, stateParams);
-  // } else {
-  //   //handle initial load
-  //   const defaultStateParams = ["vid-alone", 3, "vid-newest-to-oldest"];
-  //   setCurrentVidState(vidList, defaultStateParams);
-  // }
+  let isFirst = true;
+  const collapseArray = [];
 
-  // for (let i = 0; i < inputArray.length; i++) {
-  //   //SHOULD DETERMINE HERE IF VID PAGE OR VID ALONE
-  //   const vidListItem = await buildVidListItem(inputArray[i]);
-  //   if (!vidListItem) continue;
+  for (let i = 0; i < inputArray.length; i++) {
+    const vidPageListItem = await buildVidPageListItem(inputArray[i], isFirst);
+    vidPageList.appendChild(vidPageListItem);
 
-  //   vidList.appendChild(vidListItem);
-  // }
+    // Store the collapse components for group functionality
+    const collapseItem = vidPageListItem.querySelector(".collapse-container");
+    if (collapseItem) collapseArray.push(collapseItem);
 
-  return null;
+    isFirst = false;
+  }
+
+  // Set up the collapse group behavior
+  await defineCollapseItems(collapseArray);
+
+  return vidPageList;
 };
+
+export const buildVidPageListItem = async (inputObj, isFirst) => {
+  const { title } = inputObj;
+
+  const vidPageListItem = document.createElement("li");
+  vidPageListItem.className = "vid-page-list-item";
+
+  //builds a pic container for pic array
+  const vidPageElement = await buildVidPageElement(inputObj);
+
+  //build title element
+  const titleElement = await buildVidPageTitle(title);
+
+  // Wrap the article content in a collapsible
+  const vidPageCollapseObj = {
+    titleElement: titleElement,
+    contentElement: vidPageElement,
+    isExpanded: isFirst,
+    className: "vid-page-element-collapse",
+  };
+
+  const vidPageCollapseContainer = await buildCollapseContainer(vidPageCollapseObj);
+  vidPageListItem.append(vidPageCollapseContainer);
+
+  return vidPageListItem;
+};
+
+export const buildVidPageTitle = async (title) => {
+  const titleElement = document.createElement("h2");
+  titleElement.id = "vid-page-title";
+  titleElement.textContent = title;
+
+  return titleElement;
+};
+
+//NEED TO ENSURE SAVE PATH IS IN INPUT OBJ
+export const buildVidPageElement = async (inputObj) => {
+  const { date, savePath } = inputObj;
+
+  const vidPageElement = document.createElement("article");
+  vidPageElement.id = "vid-page-element";
+
+  // Then append date and text after pictures (title is handled by collapse header)
+  const dateElement = await buildVidPageDate(date);
+
+  const vidElement = await buildVidElement(savePath);
+
+  vidPageElement.append(dateElement, vidElement);
+
+  return vidPageElement;
+};
+
+export const buildVidPageDate = async (date) => {
+  const dateElement = document.createElement("div");
+  dateElement.id = "vid-page-date";
+  const dateObj = new Date(date);
+  dateElement.textContent = dateObj.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
+  return dateElement;
+};
+
+//----------------------------
 
 export const buildVidListItem = async (inputObj) => {
   if (!inputObj || !inputObj.savePath) return null;

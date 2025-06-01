@@ -1,4 +1,5 @@
 //MINOR BUG LIST:
+// - put default state params in define-things.js
 // - collapse container are wrong width when all articles collpased
 // - failing to get pic stats for vids
 // - pic sort seems to be wrong, check if by date or by id, make by date if possible
