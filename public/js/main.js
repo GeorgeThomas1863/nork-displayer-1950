@@ -33,7 +33,11 @@ export const buildDefaultDisplay = async () => {
   return "#DONE";
 };
 
-//USE MAP TO MAKE BELOW DYNAMIC
+//!!!!!!!
+//HERE
+//!!!!!!!!!
+
+//UNFUCK HERE; USE MAP TO MAKE BELOW DYNAMIC
 export const displayNewData = async (inputObj) => {
   if (!inputObj || !inputObj.dataType) return null;
 
