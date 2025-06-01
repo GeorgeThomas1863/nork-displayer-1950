@@ -35,6 +35,7 @@ export const mainClickHandler = async (e) => {
   const clickId = clickElement.id;
 
   console.log("AHHHHHH");
+  console.log(clickElement);
   console.log(clickId);
 
   await getNewData(clickId);
