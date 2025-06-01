@@ -1,4 +1,7 @@
-//rename to pic dropdown
+import { buildPicList } from "./pic-form.js";
+import { buildCollapseContainer } from "../collapse.js";
+
+//for article pic array / pic set pic array
 export const picDropDownContainer = async (inputArray, type) => {
   if (!inputArray || !inputArray.length) return null;
 
