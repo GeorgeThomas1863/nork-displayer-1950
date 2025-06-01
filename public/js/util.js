@@ -75,3 +75,25 @@ export const debounce = (func) => {
     timer = setTimeout(() => func(...args), DELAY);
   };
 };
+
+//----------------------------------
+
+export const checkBackendData = async (inputObj) => {
+  //define fail element
+
+  if (!inputObj) return null;
+
+  for (let i = 0; i < d.backendTypeArr.length; i++) {
+    const dataType = d.backendTypeArr[i];
+    if (!inputObj[dataType]) return null;
+  }
+
+  return true;
+};
+
+export const buildFailElement = async () => {
+  const failElement = document.createElement("h1");
+  failElement.innerHTML = "BACKEND DATA LOOKUP FUCKED";
+  failElement.id = "backend-data-fail";
+  return failElement;
+};
