@@ -14,6 +14,9 @@ const d = {
     vids: buildVidReturnDisplay,
     vidPages: buildVidPageReturnDisplay,
   },
+  clickTriggerArr: ["article-type", "article-sort-by", "pic-type", "pic-sort-by", "vid-type", "vid-sort-by"],
+  expandTriggerArr: ["article-form-header", "pic-form-header", "vid-form-header"],
+  inputTriggerArr: ["article-how-many", "pic-how-many", "vid-how-many"],
 };
 
 export default d;

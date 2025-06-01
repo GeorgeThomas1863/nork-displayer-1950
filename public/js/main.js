@@ -32,16 +32,46 @@ export const buildDefaultDisplay = async () => {
 };
 
 //RESPONSIVE STUFF
-export const newDataCheck = async (inputObj) => {
-  //get user input
+
+export const getNewData = async (inputObj) => {
+  //check if new data triggered
+  const newDataTrigger = await checkNewDataTrigger(inputObj);
+  if (!newDataTrigger) return null;
+
+  //get user input, combine with params
   const userInputParams = await buildInputParams();
 
   const paramsObj = { ...userInputParams, ...inputObj };
-  paramsObj.route = "/new-data-check-route";
-
+  paramsObj.route = "/get-new-data-route";
   const dataObj = await sendToBack(paramsObj);
 
   return dataObj;
+};
+
+//add in the state shit?
+export const checkNewDataTrigger = async (inputObj) => {
+  const { clickId, expandType, inputId } = inputObj;
+
+  for (let i = 0; i < d.clickTriggerArr.length; i++) {
+    if (clickId === d.clickTriggerArr[i]) {
+      return true;
+    }
+  }
+
+  for (let i = 0; i < d.expandTriggerArr.length; i++) {
+    if (expandType === d.expandTriggerArr[i]) {
+      return true;
+    }
+  }
+
+  //MIGHT NOT BE NEEDED
+  for (let i = 0; i < d.inputTriggerArr.length; i++) {
+    if (inputId === d.inputTriggerArr[i]) {
+      return true;
+    }
+  }
+
+  return false;
 };
 
 //better version of expand backend data equation

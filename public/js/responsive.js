@@ -40,12 +40,14 @@ export const mainClickHandler = async (e) => {
     expandType: expandType,
   };
 
+  await getNewData(clickObj);
+
   // console.log("clickObj");
   // console.log(clickObj);
 
   //checks if new data needed type of data to get
-  const dataType = await newDataCheck(clickObj);
-  if (!dataType) return null;
+  // const dataType = await newDataCheck(clickObj);
+  // if (!dataType) return null;
 
   //build input PARAMs
 
