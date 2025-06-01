@@ -13,10 +13,7 @@ export const sendToBack = async (inputParams) => {
         "Content-Type": "application/json",
       },
     });
-    //remove
-    if (!res || !res.ok) {
-      return null;
-    }
+
     const data = await res.json();
     return data;
   } catch (error) {
@@ -45,7 +42,7 @@ export const buildInputParams = async () => {
     articleHowMany: Number(document.getElementById("article-how-many").value) || 5,
     articleSortBy: document.getElementById("article-sort-by").value,
     picType: document.getElementById("pic-type").value,
-    picHowMany: Number(document.getElementById("pic-how-many").value) || 12,
+    picHowMany: Number(document.getElementById("pic-how-many").value) || 9,
     picSortBy: document.getElementById("pic-sort-by").value,
     vidType: document.getElementById("vid-type").value,
     vidHowMany: Number(document.getElementById("vid-how-many").value) || 3,

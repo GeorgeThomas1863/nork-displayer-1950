@@ -1,6 +1,6 @@
 import fs from "fs";
 import CONFIG from "../config/config.js";
-import { articleTypeMap, backendDefaultParams } from "../config/map-display.js";
+import { articleTypeMap, backendDefaultParams, clickIdTriggerMap, expandTriggerMap } from "../config/map-display.js";
 import dbModel from "../models/db-model.js";
 
 //gets backend data from db
@@ -298,11 +298,15 @@ const getVidData = async (vidURL) => {
 
 // GET NEW DATA SECTION
 
-export const runGetNewData = async (inputObj) => {
+export const runCheckNewData = async (inputObj) => {
   if (!inputObj) return null;
 
-  console.log("inputObj");
+  console.log("INPUT OBJ");
   console.log(inputObj);
+
+  // const { clickId, expandType } = inputObj;
+
+  // const expandTrigger = expandTriggerMap[expandType];
 
   //first FIGURE OUT IF NEED TO PULL NEW DATA
 };

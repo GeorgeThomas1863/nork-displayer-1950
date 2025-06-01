@@ -1,4 +1,4 @@
-import { expandBackendData, getNewData } from "./main.js";
+import { expandBackendData, newDataCheck } from "./main.js";
 import { buildAdminParams, sendToBack, debounce } from "./util.js";
 import { getNewArticleData } from "./articles/article-data.js";
 import { getNewPicData } from "./pics/pic-data.js";
@@ -43,7 +43,11 @@ export const mainClickHandler = async (e) => {
   // console.log("clickObj");
   // console.log(clickObj);
 
-  await getNewData(clickObj);
+  //checks if new data needed type of data to get
+  const dataType = await newDataCheck(clickObj);
+  if (!dataType) return null;
+
+  //build input PARAMs
 
   //handle expand / collapse backend data
   if (expandType) {

@@ -2,7 +2,7 @@ import d from "./define-things.js";
 import { buildBackendDislay } from "./build-backend.js";
 import { buildDropDown } from "./build-drop-down.js";
 import { buildInputForms } from "./build-forms.js";
-import { hideArray, unhideArray, sendToBack } from "./util.js";
+import { hideArray, unhideArray, sendToBack, buildInputParams } from "./util.js";
 
 //get display element
 const displayElement = document.getElementById("display-element");
@@ -32,16 +32,16 @@ export const buildDefaultDisplay = async () => {
 };
 
 //RESPONSIVE STUFF
-export const getNewData = async (inputObj) => {
-  const paramsObj = { ...inputObj };
-  paramsObj.route = "/get-new-data-route";
+export const newDataCheck = async (inputObj) => {
+  //get user input
+  const userInputParams = await buildInputParams();
+
+  const paramsObj = { ...userInputParams, inputObj };
+  paramsObj.route = "/check-new-data-route";
 
   const dataObj = await sendToBack(paramsObj);
 
-  //parse here???
-
-  // console.log("dataObj");
-  // console.log(dataObj);
+  return dataObj;
 };
 
 //better version of expand backend data equation
