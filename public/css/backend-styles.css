@@ -192,9 +192,9 @@
   font-weight: bold;
   font-size: 3rem;
   background-color: #ffffff;
-  padding: 2rem;
+  padding: 3rem;
   border-radius: 10px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
