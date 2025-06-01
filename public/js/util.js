@@ -4,6 +4,9 @@ import d from "./define-things.js";
 export const sendToBack = async (inputParams) => {
   const { route } = inputParams;
 
+  console.log("!!!!!!!!inputParams");
+  console.log(inputParams);
+
   //send all to backend
   try {
     const res = await fetch(route, {

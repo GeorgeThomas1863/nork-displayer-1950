@@ -13,9 +13,6 @@ export const buildBackendDislay = async (inputObj) => {
   const paramsObj = { ...inputObj };
   paramsObj.route = "/get-backend-data-route";
 
-  console.log("!!!!!!!!paramsObj");
-  console.log(paramsObj);
-
   //get backend data
   const backendDataObj = await sendToBack(paramsObj);
   if (!backendDataObj) return failElement;
