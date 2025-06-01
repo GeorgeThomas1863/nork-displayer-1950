@@ -40,16 +40,9 @@ export const mainClickHandler = async (e) => {
     expandType: expandType,
   };
 
-  await getNewData(clickObj);
-
-  // console.log("clickObj");
-  // console.log(clickObj);
-
-  //checks if new data needed type of data to get
-  // const dataType = await newDataCheck(clickObj);
-  // if (!dataType) return null;
-
-  //build input PARAMs
+  const newBackendData = await getNewData(clickObj);
+  console.log("NEW BACKEND DATA");
+  console.log(newBackendData);
 
   //handle expand / collapse backend data
   if (expandType) {
