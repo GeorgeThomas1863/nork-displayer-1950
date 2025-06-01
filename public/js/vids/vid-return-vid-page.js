@@ -1,4 +1,3 @@
-import { buildVidPageListItem } from "./vid-form.js";
 import { defineCollapseItems } from "../collapse.js";
 import { setCurrentVidState } from "./vid-data.js";
 

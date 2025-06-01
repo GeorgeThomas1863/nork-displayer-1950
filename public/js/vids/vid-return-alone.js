@@ -1,4 +1,3 @@
-import { buildVidListItem } from "./vid-form.js";
 import { setCurrentVidState } from "./vid-data.js";
 
 //VID ALONE DISPLAY

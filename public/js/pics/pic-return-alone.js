@@ -1,5 +1,4 @@
 import { setCurrentPicState } from "./pic-data.js";
-import { buildPicListItem, buildPicList } from "./pic-form.js";
 
 //PIC ALONE DISPLAY
 export const buildPicReturnDisplay = async (inputArray, stateParams = null) => {
