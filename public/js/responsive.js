@@ -1,4 +1,4 @@
-import { expandBackendData, newDataCheck } from "./main.js";
+import { expandBackendData, getNewData } from "./main.js";
 import { buildAdminParams, sendToBack, debounce } from "./util.js";
 import { getNewArticleData } from "./articles/article-data.js";
 import { getNewPicData } from "./pics/pic-data.js";
