@@ -297,48 +297,28 @@ const getVidData = async (vidURL) => {
 //-----------------------------------
 
 // GET NEW DATA SECTION
-
 export const runGetNewData = async (inputObj) => {
   if (!inputObj) return null;
 
   const dataType = await getDataType(inputObj);
+
   console.log("DATA TYPE!!!");
   console.log(dataType);
 
-  // const { clickId, expandType } = inputObj;
+  const paramsObj = { ...inputObj };
+  paramsObj.dataType = dataType;
+  paramsObj.isFirstLoad = false;
 
-  // //handle data expand
-  // const expandTrigger = expandTriggerMap[expandType];
+  const newDataObj = await runGetBackendData(paramsObj);
 
-  // switch (expandTrigger) {
-  //   case "articles":
-  //     return expandTrigger;
+  console.log("NEW DATA OBJ");
+  console.log(newDataObj);
 
-  //   case "pics":
-  //     if (picType === "pic-alone") {
-  //       return "pics";
-  //     } else {
-  //       return null;
-  //     }
-
-  //   case "vids":
-  //     if (vidType === "vid-alone") {
-  //       return "vids";
-  //     } else {
-  //       return "vidPages";
-  //     }
-  // }
-
-  //handle clicks
-
-  //first FIGURE OUT IF NEED TO PULL NEW DATA
+  return newDataObj;
 };
 
 export const getDataType = async (inputObj) => {
-  const { clickId, expandType, picType, vidType } = inputObj;
-
-  // console.log("INPUT OBJ");
-  // console.log(inputObj);
+  if (!inputObj) return null;
 
   const expandTypeCheck = await checkExpandType(inputObj);
   if (expandTypeCheck) return expandTypeCheck;
