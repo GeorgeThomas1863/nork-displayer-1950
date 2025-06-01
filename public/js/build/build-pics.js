@@ -446,9 +446,9 @@ export const getNewPicData = async () => {
 
   let newPicDataWrapper = "";
   if (picType === "pic-sets") {
-    newPicDataWrapper = await buildPicSetData(newPicData, newPicInputArray);
+    newPicDataWrapper = await buildPicSetDisplay(newPicData, newPicInputArray);
   } else {
-    newPicDataWrapper = await buildPicData(newPicData, newPicInputArray);
+    newPicDataWrapper = await buildPicDisplay(newPicData, newPicInputArray);
   }
   newPicDataWrapper.classList.remove("hidden");
 

@@ -338,8 +338,12 @@ export const getNewVidData = async () => {
 
   if (!newVidData) return null;
 
-  const newVidDataWrapper = await buildVidData(newVidData, newVidInputArray);
-  // if (!newVidDataWrapper) return null;
+  let newVidDataWrapper = "";
+  if (vidType === "vid-pages") {
+    newVidDataWrapper = await buildVidPageDisplay(newVidData, newVidInputArray);
+  } else {
+    newVidDataWrapper = await buildVidDisplay(newVidData, newVidInputArray);
+  }
   newVidDataWrapper.classList.remove("hidden");
 
   //get backend data wrapper and replace old data

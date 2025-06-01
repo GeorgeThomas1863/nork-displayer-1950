@@ -301,7 +301,7 @@ export const getNewArticleData = async () => {
 
   if (!newArticleData) return null;
 
-  const newArticleDataWrapper = await buildArticleData(newArticleData, newArticleInputArray);
+  const newArticleDataWrapper = await buildArticleDisplay(newArticleData, newArticleInputArray);
   newArticleDataWrapper.classList.remove("hidden");
 
   //get backend data wrapper and replace old data
