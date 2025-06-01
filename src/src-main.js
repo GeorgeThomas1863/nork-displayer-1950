@@ -79,7 +79,7 @@ export const runGetBackendData = async () => {
   return dataObj;
 };
 
-//fix pic data
+//ADD IN PIC SETS AND VID PAGES
 export const fixPicDataByType = async (inputArray) => {
   if (!inputArray) return null;
 
@@ -132,6 +132,10 @@ export const fixPicDataByType = async (inputArray) => {
 
         results.push(returnObj);
         break;
+
+      //NEED TO ADD PIC SETS / VID PAGES!!!
+      default:
+        return inputArray;
     }
   }
 
@@ -140,15 +144,17 @@ export const fixPicDataByType = async (inputArray) => {
 
 //incredibly stupid but dont care
 export const deriveDataType = async (inputObj) => {
-  const { articleId, picSetId, vidId, picId } = inputObj;
+  const { articleId, picId, picSetId, vidId, vidPageId } = inputObj;
 
   if (articleId) return "articles";
+
+  if (picId) return "pics";
 
   if (picSetId) return "picSets";
 
   if (vidId) return "vids";
 
-  if (picId) return "pics";
+  if (vidPageId) return "vidPages";
 
   return null;
 };
