@@ -1,3 +1,4 @@
+import d from "./define-things.js";
 import { buildBackendDislay } from "./build-backend.js";
 import { buildDropDown } from "./build-drop-down.js";
 import { buildInputForms } from "./build-forms.js";
@@ -30,19 +31,18 @@ export const buildDefaultDisplay = async () => {
   return "#DONE";
 };
 
-//------------------------------------
-
 //RESPONSIVE STUFF
+export const getNewData = async (inputObj) => {
+  console.log("AHHHHHH");
+  console.log(inputObj);
+};
 
 //better version of expand backend data equation
 export const expandBackendData = async (dataType) => {
-  // Just the type names - everything else follows the pattern
-  const typeArray = ["article", "pic", "vid"];
-
   // Build typeMap using the consistent naming pattern
   const typeMap = {};
-  for (let i = 0; i < typeArray.length; i++) {
-    const typeValue = typeArray[i];
+  for (let i = 0; i < d.backendTypeArr.length; i++) {
+    const typeValue = d.backendTypeArr[i];
     const formHeader = `${typeValue}-form-header`;
 
     typeMap[formHeader] = {

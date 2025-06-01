@@ -1,4 +1,4 @@
-import { expandBackendData } from "./main.js";
+import { expandBackendData, getNewData } from "./main.js";
 import { buildAdminParams, sendToBack, debounce } from "./util.js";
 import { getNewArticleData } from "./articles/article-data.js";
 import { getNewPicData } from "./pics/pic-data.js";
@@ -33,6 +33,9 @@ export const mainClickHandler = async (e) => {
 
   const clickElement = e.target;
   const clickId = clickElement.id;
+
+  await getNewData({ clickId });
+
   const expandType = clickElement.getAttribute("data-expand");
 
   //handle expand / collapse backend data
@@ -40,22 +43,22 @@ export const mainClickHandler = async (e) => {
     await expandBackendData(expandType);
   }
 
-  switch (clickId) {
-    case "article-type":
-    case "article-sort-by":
-      await getNewArticleData();
-      break;
+  // switch (clickId) {
+  //   case "article-type":
+  //   case "article-sort-by":
+  //     await getNewArticleData();
+  //     break;
 
-    case "pic-type":
-    case "pic-sort-by":
-      await getNewPicData();
-      break;
+  //   case "pic-type":
+  //   case "pic-sort-by":
+  //     await getNewPicData();
+  //     break;
 
-    case "vid-type":
-    case "vid-sort-by":
-      await getNewVidData();
-      break;
-  }
+  //   case "vid-type":
+  //   case "vid-sort-by":
+  //     await getNewVidData();
+  //     break;
+  // }
 
   return true;
 };
