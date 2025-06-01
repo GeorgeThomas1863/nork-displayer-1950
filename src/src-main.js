@@ -28,7 +28,8 @@ export const runGetBackendData = async (inputObj) => {
   dataObj[dataType] = dataArray;
 
   if (dataObj) {
-    console.log(`GOT ${dataObj[dataType].length} ${dataType}s`);
+    const typeStr = dataType.toUpperCase();
+    console.log(`GOT ${dataObj[dataType].length} ${typeStr}`);
   }
 
   return dataObj;
