@@ -3,12 +3,13 @@ import { buildArticleData } from "./build-articles.js";
 import { buildPicData } from "./build-pics.js";
 import { buildVidData } from "./build-vids.js";
 
-//GET BACKEND DATA
+//GETS DEFAULT DATA
 export const getBackendData = async () => {
   const backendDataObj = await sendToBack({ route: "/get-backend-data-route" });
 
-  //if ANY item missing return null [might want to CHANGE]
+  //BELOW DOES NOT WORK
   if (!backendDataObj || !backendDataObj.articleArray || !backendDataObj.picArray || !backendDataObj.vidArray) {
+    console.log("AHHHHHHHHHHHHHH")
     const failElement = document.createElement("h1");
     failElement.innerHTML = "BACKEND DATA LOOKUP FUCKED";
     console.log(failElement);
@@ -19,6 +20,7 @@ export const getBackendData = async () => {
   return backendDataObj;
 };
 
+//BUILDS DEFAULT DISPLAY
 export const buildBackendDislay = async (inputData) => {
   if (!inputData) return null;
   const { articleArray, picArray, vidArray } = inputData;
