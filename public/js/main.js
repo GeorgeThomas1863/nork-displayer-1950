@@ -4,6 +4,8 @@ import { buildDropDown } from "./build-drop-down.js";
 import { buildInputForms } from "./build-forms.js";
 import { hideArray, unhideArray, sendToBack, buildInputParams } from "./util.js";
 
+import { buildArticleReturnDisplay } from "./articles/article-return.js";
+
 //get display element
 const displayElement = document.getElementById("display-element");
 
@@ -31,7 +33,7 @@ export const buildDefaultDisplay = async () => {
   return "#DONE";
 };
 
-//BUILD IN STATE SHIT
+//USE MAP TO MAKE BELOW DYNAMIC
 export const displayNewData = async (inputObj) => {
   if (!inputObj || !inputObj.dataType) return null;
 
