@@ -5,8 +5,9 @@ import dbModel from "../models/db-model.js";
 
 //gets backend data from db
 export const runGetBackendData = async () => {
-  const { articles, picsDownloaded, vidsDownloaded } = CONFIG;
+  const { articles, picsDownloaded, picSetContent, vidsDownloaded, vidPageContent } = CONFIG;
 
+  //come up with less dumb way to set params
   const articleParams = {
     sortKey: "articleId",
     howMany: 5,
@@ -19,9 +20,19 @@ export const runGetBackendData = async () => {
     howMany: 9,
   };
 
+  const picSetParams = {
+    sortKey: "picSetId",
+    howMany: 5,
+  };
+
   const vidParams = {
     sortKey: "vidId",
     howMany: 3,
+  };
+
+  const vidPageParams = {
+    sortKey: "vidPageId",
+    howMany: 5,
   };
 
   //articles get ONLY last 5 FATBOY by default
@@ -34,21 +45,33 @@ export const runGetBackendData = async () => {
   const picArrayRaw = await picModel.getNewestItemsArray();
   const picArray = await fixPicDataByType(picArrayRaw);
 
+  const picSetModel = new dbModel(picSetParams, picSetContent);
+  const picSetArrayRaw = await picSetModel.getNewestItemsArray();
+  const picSetArray = await fixPicDataByType(picSetArrayRaw);
+
   //get last 3 vids by default
   const vidModel = new dbModel(vidParams, vidsDownloaded);
   const vidArrayRaw = await vidModel.getNewestItemsArray();
   const vidArray = await fixPicDataByType(vidArrayRaw);
 
+  const vidPageModel = new dbModel(vidPageParams, vidPageContent);
+  const vidPageArrayRaw = await vidPageModel.getNewestItemsArray();
+  const vidPageArray = await fixPicDataByType(vidPageArrayRaw);
+
   const dataObj = {
     articleArray: articleArray,
     picArray: picArray,
+    picSetArray: picSetArray,
     vidArray: vidArray,
+    vidPageArray: vidPageArray,
   };
 
   console.log("DATA RETURN LENGTHS");
   console.log(articleArray.length);
   console.log(picArray.length);
+  console.log(picSetArray.length);
   console.log(vidArray.length);
+  console.log(vidPageArray.length);
 
   // console.log("VID ARRAY");
   // console.log(vidArray);
