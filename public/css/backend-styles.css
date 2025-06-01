@@ -85,10 +85,13 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* #pic-list-item:hover {
-  transform: scale(1.1);
+#pic-list-item:hover {
+  transform: scale(1.2);
   border-radius: 8px;
-} */
+  transition: all 0.3s ease;
+  /* ensures it appears above other elements */
+  z-index: 100;
+}
 
 #pic-element {
   /* position: absolute;
@@ -108,9 +111,9 @@
   border-radius: 8px 8px 0 0;
 }
 
-#pic-element:hover {
+/* #pic-element:hover {
   transform: scale(1.2);
-}
+} */
 
 /* Stats container */
 #pic-stats {
