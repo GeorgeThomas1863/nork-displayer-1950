@@ -302,6 +302,9 @@ export const runGetNewData = async (inputObj) => {
 
   const dataType = await getDataType(inputObj);
 
+  console.log("INPUT OBJ");
+  console.log(inputObj);
+
   console.log("DATA TYPE!!!");
   console.log(dataType);
 
