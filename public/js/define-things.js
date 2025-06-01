@@ -1,16 +1,18 @@
 //importing functions defined in map
-import { buildArticleDisplay } from "./articles/article-data.js";
-import { buildPicDisplay, buildPicSetDisplay } from "./pics/pic-data.js";
-import { buildVidDisplay, buildVidPageDisplay } from "./vids/vid-data.js";
+import { buildArticleReturnDisplay } from "./articles/article-return.js";
+import { buildPicReturnDisplay } from "./pics/pic-return-alone.js";
+import { buildPicSetReturnDisplay } from "./pics/pic-return-pic-set.js";
+import { buildVidReturnDisplay } from "./vids/vid-return-alone.js";
+import { buildVidPageReturnDisplay } from "./vids/vid-return-vid-page.js";
 
 const d = {
   backendTypeArr: ["articles", "pics", "picSets", "vids", "vidPages"],
   backendFunctionMap: {
-    articles: buildArticleDisplay,
-    pics: buildPicDisplay,
-    picSets: buildPicSetDisplay,
-    vids: buildVidDisplay,
-    vidPages: buildVidPageDisplay,
+    articles: buildArticleReturnDisplay,
+    pics: buildPicReturnDisplay,
+    picSets: buildPicSetReturnDisplay,
+    vids: buildVidReturnDisplay,
+    vidPages: buildVidPageReturnDisplay,
   },
 };
 

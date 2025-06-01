@@ -1,4 +1,4 @@
-import { buildArticlePicData } from "../pics/pic-data.js";
+import { picDropDownContainer } from "../pics/pic-util.js";
 import { defineCollapseItems } from "../collapse.js";
 import { setCurrentArticleState } from "./article-data.js";
 
@@ -75,7 +75,7 @@ export const buildArticleElement = async (inputObj) => {
   articleElement.id = "article-element";
 
   //Add pics as collapse
-  const articlePicData = await buildArticlePicData(picArray);
+  const articlePicData = await picDropDownContainer(picArray, "article");
   if (articlePicData) {
     articleElement.append(articlePicData);
   }

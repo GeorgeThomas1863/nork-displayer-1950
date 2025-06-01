@@ -57,7 +57,7 @@ export const getNewArticleData = async () => {
 };
 
 // Helper function to get current article state from DOM element
-const getCurrentArticleState = (articleElement) => {
+export const getCurrentArticleState = (articleElement) => {
   if (!articleElement) {
     // If no element exists, return initial default state
     return ["fatboy", 5, "article-newest-to-oldest"];
@@ -71,7 +71,7 @@ const getCurrentArticleState = (articleElement) => {
 };
 
 // Helper function to store current article state on DOM element
-const setCurrentArticleState = (articleElement, inputArray) => {
+export const setCurrentArticleState = (articleElement, inputArray) => {
   if (!articleElement || !inputArray || inputArray.length < 3) return;
 
   const [articleType, articleHowMany, articleSortBy] = inputArray;
