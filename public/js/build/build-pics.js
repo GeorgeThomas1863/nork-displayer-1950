@@ -156,13 +156,13 @@ export const buildPicData = async (inputArray) => {
   return picList;
 };
 
-//!!!!!!
-//HERE, BUILD PIC SET BELOW
-//!!!!!
-
 //BUILD PIC SET PARSE HERE
 export const buildPicSetData = async (inputArray, stateParams = null) => {
+  console.log("AHHHHHH");
   console.log("FUCKING BUILD");
+  console.log(inputArray);
+
+  return null;
 };
 
 export const buildArticlePicData = async (inputArray) => {
