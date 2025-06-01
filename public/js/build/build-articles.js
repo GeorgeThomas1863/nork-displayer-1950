@@ -136,7 +136,7 @@ export const buildArticleSortByListItem = async () => {
 
 //--------------------------------------
 
-export const buildArticlesDisplay = async (inputArray, stateParams = null) => {
+export const buildArticleDataDisplay = async (inputArray, stateParams = null) => {
   if (!inputArray || !inputArray.length) return null;
 
   const articleList = document.createElement("ul");

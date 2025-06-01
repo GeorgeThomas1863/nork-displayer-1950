@@ -127,7 +127,7 @@ export const buildVidSortByListItem = async () => {
 
 //----------------------------
 
-export const buildVidsDisplay = async (inputArray, stateParams = null) => {
+export const buildVidDataDisplay = async (inputArray, stateParams = null) => {
   if (!inputArray || !inputArray.length) return null;
 
   const vidList = document.createElement("ul");
@@ -155,7 +155,7 @@ export const buildVidsDisplay = async (inputArray, stateParams = null) => {
   return vidList;
 };
 
-export const buildVidPagesDisplay = async (inputArray, stateParams = null) => {
+export const buildVidPageDataDisplay = async (inputArray, stateParams = null) => {
   if (!inputArray || !inputArray.length) return null;
 
   console.log("BUILD VID PAGES DISPLAY");
@@ -184,8 +184,6 @@ export const buildVidPagesDisplay = async (inputArray, stateParams = null) => {
 
   return null;
 };
-
-
 
 export const buildVidListItem = async (inputObj) => {
   if (!inputObj || !inputObj.savePath) return null;

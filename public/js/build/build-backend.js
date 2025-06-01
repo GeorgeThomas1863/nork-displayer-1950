@@ -1,9 +1,8 @@
 import { sendToBack } from "../util.js";
-import { buildArticlesDisplay } from "./build-articles.js";
-import { buildPicsDisplay, buildPicSetsDisplay } from "./build-pics.js";
-import { buildVidsDisplay, buildVidPagesDisplay } from "./build-vids.js";
-
-export const backendTypeArr = ["articles", "pics", "picSets", "vids", "vidPages"];
+import d from "../define-things.js";
+// import { buildArticlesDisplay } from "./build-articles.js";
+// import { buildPicsDisplay, buildPicSetsDisplay } from "./build-pics.js";
+// import { buildVidsDisplay, buildVidPagesDisplay } from "./build-vids.js";
 
 //BUILDS DEFAULT DISPLAY
 export const buildBackendDislay = async () => {
@@ -19,10 +18,10 @@ export const buildBackendDislay = async () => {
   backendDataWrapper.id = "backend-data-wrapper";
 
   //build each data element
-  for (let i = 0; i < backendTypeArr.length; i++) {
-    const dataType = backendTypeArr[i];
-    const dataTypeStr = dataType.charAt(0).toUpperCase() + dataType.slice(1);
-    const func = `build${dataTypeStr}Display()`;
+  for (let i = 0; i < d.backendTypeArr.length; i++) {
+    const dataType = d.backendTypeArr[i];
+    const func = d.backendFunctionMap[dataType];
+
     console.log("FUNCTION!!!");
     console.log(func);
 
