@@ -298,15 +298,37 @@ const getVidData = async (vidURL) => {
 
 // GET NEW DATA SECTION
 
-export const runCheckNewData = async (inputObj) => {
+export const runNewDataCheck = async (inputObj) => {
   if (!inputObj) return null;
 
   console.log("INPUT OBJ");
   console.log(inputObj);
 
-  // const { clickId, expandType } = inputObj;
+  const { clickId, expandType } = inputObj;
 
-  // const expandTrigger = expandTriggerMap[expandType];
+  //handle data expand
+  const expandTrigger = expandTriggerMap[expandType];
+
+  switch (expandTrigger) {
+    case "articles":
+      return expandTrigger;
+
+    case "pics":
+      if (picType === "pic-alone") {
+        return "pics";
+      } else {
+        return null;
+      }
+
+    case "vids":
+      if (vidType === "vid-alone") {
+        return "vids";
+      } else {
+        return "vidPages";
+      }
+  }
+
+  //handle clicks
 
   //first FIGURE OUT IF NEED TO PULL NEW DATA
 };

@@ -36,8 +36,8 @@ export const newDataCheck = async (inputObj) => {
   //get user input
   const userInputParams = await buildInputParams();
 
-  const paramsObj = { ...userInputParams, inputObj };
-  paramsObj.route = "/check-new-data-route";
+  const paramsObj = { ...userInputParams, ...inputObj };
+  paramsObj.route = "/new-data-check-route";
 
   const dataObj = await sendToBack(paramsObj);
 

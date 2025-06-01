@@ -1,4 +1,4 @@
-import { runGetBackendData, runCheckNewData, runGetNewData, getNewArticleData, getNewPicData, getNewVidData } from "../src/src-main.js";
+import { runGetBackendData, runNewDataCheck, runGetNewData, getNewArticleData, getNewPicData, getNewVidData } from "../src/src-main.js";
 import { runAdminSubmit } from "../src/src-admin.js";
 
 //passes everything to admin src
@@ -27,11 +27,11 @@ export const getBackendDataRoute = async (req, res) => {
   }
 };
 
-export const checkNewDataRoute = async (req, res) => {
+export const newDataCheckRoute = async (req, res) => {
   try {
     const inputParams = req.body;
 
-    const data = await runCheckNewData(inputParams);
+    const data = await runNewDataCheck(inputParams);
     return res.json(data);
   } catch (error) {
     console.error(error);
