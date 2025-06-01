@@ -127,6 +127,7 @@ export const buildVidSortByListItem = async () => {
 
 //----------------------------
 
+//VID ALONE DISPLAY
 export const buildVidDisplay = async (inputArray, stateParams = null) => {
   if (!inputArray || !inputArray.length) return null;
 
@@ -155,12 +156,13 @@ export const buildVidDisplay = async (inputArray, stateParams = null) => {
   return vidList;
 };
 
+//VID PAGE DISPLAY
 export const buildVidPageDisplay = async (inputArray, stateParams = null) => {
   if (!inputArray || !inputArray.length) return null;
 
   const vidPageList = document.createElement("ul");
   vidPageList.id = "vid-page-array-element";
-  // picSetList.className = "hidden";
+  vidPageList.className = "hidden";
 
   //set state params
   if (stateParams) {

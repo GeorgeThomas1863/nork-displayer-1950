@@ -127,7 +127,7 @@ export const buildPicSortByListItem = async () => {
 
 //----------------------------------
 
-//FOR PIC ALONE
+//PIC ALONE DISPLAY
 export const buildPicDisplay = async (inputArray, stateParams = null) => {
   if (!inputArray || !inputArray.length) return null;
 
@@ -155,13 +155,13 @@ export const buildPicDisplay = async (inputArray, stateParams = null) => {
   return picList;
 };
 
-//BUILD PIC SET PARSE HERE
+//PIC SET DISPLAY
 export const buildPicSetDisplay = async (inputArray, stateParams = null) => {
   if (!inputArray || !inputArray.length) return null;
 
   const picSetList = document.createElement("ul");
   picSetList.id = "pic-set-array-element";
-  // picSetList.className = "hidden";
+  picSetList.className = "hidden";
 
   //set state params
   if (stateParams) {
