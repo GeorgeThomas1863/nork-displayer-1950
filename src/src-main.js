@@ -347,17 +347,17 @@ export const getDataType = async (inputObj) => {
     console.log(expandTrigger);
 
     switch (expandTrigger) {
-      case "article-form-header":
+      case "articles":
         return "articles";
 
-      case "pic-form-header":
+      case "pics":
         if (picType === "pic-alone") {
           return "pics";
         } else {
           return "picSets";
         }
 
-      case "vid-form-header":
+      case "vids":
         if (vidType === "vid-alone") {
           return "vids";
         } else {
