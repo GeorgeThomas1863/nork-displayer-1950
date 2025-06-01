@@ -4,27 +4,35 @@ import { articleTypeMap, backendDefaultParams } from "../config/map-display.js";
 import dbModel from "../models/db-model.js";
 
 //gets backend data from db
-export const runGetBackendData = async () => {
-  // const { backendTypeArr, articles, picsDownloaded, picSetContent, vidsDownloaded, vidPageContent } = CONFIG;
-  const { backendTypeArr } = CONFIG;
-
+export const runGetBackendData = async (inputObj) => {
+  if (!inputObj || !inputObj.dataType) return null;
+  const { dataType, firstLoad } = inputObj;
   const dataObj = {};
-  for (let i = 0; i < backendTypeArr.length; i++) {
-    const backendType = backendTypeArr[i];
-    const backendParams = backendDefaultParams[backendType];
-    const backendCollection = backendParams.collection;
-    const dataModel = new dbModel(backendParams, backendCollection);
-    const dataArrayRaw = await dataModel.getNewestItemsArray();
-    const dataArray = await fixDataByType(dataArrayRaw, backendType);
-    dataObj[backendType] = dataArray;
+
+  const collection = backendDefaultParams[dataType].collection;
+
+  let params = {};
+  if (firstLoad) {
+    //set to default
+    params = backendDefaultParams[dataType];
+    // params.dataType = dataType;
+  } else {
+    //use input
+    params = { ...inputObj };
   }
 
+  const dataModel = new dbModel(params, collection);
+  const dataArrayRaw = await dataModel.getNewestItemsArray();
+  const dataArray = await fixDataByType(dataArrayRaw, dataType);
+
+  dataObj[backendType] = dataArray;
+
   console.log("DATA RETURN LENGTHS");
-  console.log(dataObj.articles.length);
-  console.log(dataObj.pics.length);
-  console.log(dataObj.picSets.length);
-  console.log(dataObj.vids.length);
-  console.log(dataObj.vidPages.length);
+  console.log("Articles: " + dataObj.articles.length);
+  console.log("Pics: " + dataObj.pics.length);
+  console.log("Pic Sets: " + dataObj.picSets.length);
+  console.log("Vids: " + dataObj.vids.length);
+  console.log("Vid Pages: " + dataObj.vidPages.length);
 
   return dataObj;
 };

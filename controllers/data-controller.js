@@ -16,8 +16,10 @@ export const adminSubmitRoute = async (req, res) => {
 
 //get data from backend for display
 export const getBackendDataRoute = async (req, res) => {
+  const inputParams = req.body;
+
   try {
-    const data = await runGetBackendData();
+    const data = await runGetBackendData(inputParams);
     res.json(data);
   } catch (error) {
     console.error(error);

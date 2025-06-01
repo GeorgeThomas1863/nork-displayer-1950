@@ -80,18 +80,18 @@ export const debounce = (func) => {
 
 //----------------------------------
 
-export const checkBackendData = async (inputObj) => {
-  //define fail element
+// export const checkBackendData = async (inputObj) => {
+//   //define fail element
 
-  if (!inputObj) return null;
+//   if (!inputObj) return null;
 
-  for (let i = 0; i < d.backendTypeArr.length; i++) {
-    const dataType = d.backendTypeArr[i];
-    if (!inputObj[dataType]) return null;
-  }
+//   for (let i = 0; i < d.backendTypeArr.length; i++) {
+//     const dataType = d.backendTypeArr[i];
+//     if (!inputObj[dataType]) return null;
+//   }
 
-  return true;
-};
+//   return true;
+// };
 
 export const buildFailElement = async () => {
   const failElement = document.createElement("h1");

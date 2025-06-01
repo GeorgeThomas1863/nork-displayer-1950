@@ -16,8 +16,14 @@ export const buildDefaultDisplay = async () => {
   //build input forms
   const inputFormWrapper = await buildInputForms();
 
+  //set default return type
+  const typeObj = {
+    dataType: "pics",
+    firstLoad: true,
+  };
+
   //build data data return
-  const backendDataWrapper = await buildBackendDislay();
+  const backendDataWrapper = await buildBackendDislay(typeObj);
 
   displayElement.append(dropDownElement, inputFormWrapper, backendDataWrapper);
 
