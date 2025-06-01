@@ -1,5 +1,5 @@
 import { picDropDownContainer } from "../pics/pic-util.js";
-import { defineCollapseItems } from "../collapse.js";
+import { defineCollapseItems, buildCollapseContainer } from "../collapse.js";
 import { setCurrentArticleState } from "./article-data.js";
 
 export const buildArticleReturnDisplay = async (inputArray, stateParams = null) => {
