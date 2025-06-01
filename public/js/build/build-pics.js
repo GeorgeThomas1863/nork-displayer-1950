@@ -128,7 +128,7 @@ export const buildPicSortByListItem = async () => {
 //----------------------------------
 
 //FOR PIC ALONE
-export const buildPicData = async (inputArray) => {
+export const buildPicData = async (inputArray, stateParams = null) => {
   if (!inputArray || !inputArray.length) return null;
 
   const picList = document.createElement("ul");
