@@ -27,6 +27,12 @@ export const getBackendDataRoute = async (req, res) => {
   }
 };
 
+export const getNewDataRoute = async (req, res) => {
+  console.log("ALLAHU AKBAR");
+};
+
+//=---------------------------
+
 export const getNewArticleDataRoute = async (req, res) => {
   try {
     const inputParams = req.body;

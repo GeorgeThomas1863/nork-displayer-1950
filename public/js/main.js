@@ -32,9 +32,18 @@ export const buildDefaultDisplay = async () => {
 };
 
 //RESPONSIVE STUFF
-export const getNewData = async (inputObj) => {
-  console.log("AHHHHHH");
-  console.log(inputObj);
+export const getNewData = async (clickId) => {
+  const paramsObj = {
+    route: "/get-new-data-route",
+    clickId: clickId,
+  };
+
+  const dataObj = await sendToBack(paramsObj);
+
+  //parse here???
+
+  console.log("dataObj");
+  console.log(dataObj);
 };
 
 //better version of expand backend data equation

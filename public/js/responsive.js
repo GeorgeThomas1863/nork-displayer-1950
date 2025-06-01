@@ -34,7 +34,10 @@ export const mainClickHandler = async (e) => {
   const clickElement = e.target;
   const clickId = clickElement.id;
 
-  await getNewData({ clickId: clickId });
+  console.log("AHHHHHH");
+  console.log(clickId);
+
+  await getNewData(clickId);
 
   const expandType = clickElement.getAttribute("data-expand");
 
