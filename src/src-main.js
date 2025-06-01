@@ -190,7 +190,7 @@ export const getPicSourceObj = async (picURL) => {
 
     //MAP ARTICLE TYPE HERE!!!
     const articleTypeText = articleTypeMap[articleType];
-    picSource = `${articleTypeText} Article Titled <i>"${title}"</i>`;
+    picSource = `${articleTypeText} Article, Titled: <i>${title}</i>`;
     picDate = date;
   }
 
