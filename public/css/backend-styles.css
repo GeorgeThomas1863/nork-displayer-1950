@@ -185,12 +185,13 @@
 
 #backend-data-fail {
   margin: 0 auto;
-  margin-top: 5rem;
+  margin-top: 3rem;
   width: 50rem;
   max-width: 800px;
   text-align: center;
   font-weight: bold;
-  font-size: 4rem;
+  /* font-size: 3rem; */
+  font-size: clamp(2rem, 8vw, 6rem);
   padding: 2rem;
   border-radius: 10px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
