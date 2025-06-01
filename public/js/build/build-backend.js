@@ -19,7 +19,7 @@ export const buildBackendDislay = async () => {
   for (let i = 0; i < d.backendTypeArr.length; i++) {
     const dataType = d.backendTypeArr[i];
     const func = d.backendFunctionMap[dataType];
-    const dataElement = await func(backendDataObj);
+    const dataElement = await func(backendDataObj[dataType]);
     console.log("AHHHHHHHHHH");
     console.log(dataType);
     console.log(dataElement);
