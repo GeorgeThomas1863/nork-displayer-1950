@@ -32,14 +32,9 @@ export const buildDefaultDisplay = async () => {
 };
 
 //RESPONSIVE STUFF
-export const getNewData = async (clickId) => {
-  const paramsObj = {
-    route: "/get-new-data-route",
-    clickId: clickId,
-  };
-
-  console.log("paramsObj");
-  console.log(paramsObj);
+export const getNewData = async (inputObj) => {
+  const paramsObj = { ...inputObj };
+  paramsObj.route = "/get-new-data-route";
 
   const dataObj = await sendToBack(paramsObj);
 

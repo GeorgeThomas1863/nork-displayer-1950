@@ -1,4 +1,4 @@
-import { runGetBackendData, getNewArticleData, getNewPicData, getNewVidData } from "../src/src-main.js";
+import { runGetBackendData, runGetNewData, getNewArticleData, getNewPicData, getNewVidData } from "../src/src-main.js";
 import { runAdminSubmit } from "../src/src-admin.js";
 
 //passes everything to admin src
@@ -20,15 +20,23 @@ export const getBackendDataRoute = async (req, res) => {
 
   try {
     const data = await runGetBackendData(inputParams);
-    res.json(data);
+    return res.json(data);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Failed to get backend data" });
+    return res.status(500).json({ error: "Failed to get backend data" });
   }
 };
 
 export const getNewDataRoute = async (req, res) => {
-  console.log("ALLAHU AKBAR");
+  try {
+    const inputParams = req.body;
+
+    const data = await runGetNewData(inputParams);
+    return res.json(data);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: "Failed to get new data" });
+  }
 };
 
 //=---------------------------

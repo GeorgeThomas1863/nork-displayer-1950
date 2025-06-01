@@ -22,7 +22,23 @@ export const runGetBackendData = async (inputObj) => {
   }
 
   const dataModel = new dbModel(params, collection);
-  const dataArrayRaw = await dataModel.getNewestItemsArray();
+
+  let dataArrayRaw = [];
+  const { sortBy } = params;
+  switch (sortBy) {
+    case "newest-to-oldest":
+      dataArrayRaw = await dataModel.getNewestItemsArray();
+      break;
+
+    case "oldest-to-newest":
+      dataArrayRaw = await dataModel.getOldestItemsArray();
+      break;
+
+    default:
+      dataArrayRaw = await dataModel.getNewestItemsArray();
+      break;
+  }
+
   const dataArray = await fixDataByType(dataArrayRaw, dataType);
 
   dataObj[dataType] = dataArray;
@@ -281,6 +297,17 @@ const getVidData = async (vidURL) => {
 //-----------------------------------
 
 // GET NEW DATA SECTION
+
+export const runGetNewData = async (inputObj) => {
+  if (!inputObj) return null;
+
+  console.log("inputObj");
+  console.log(inputObj);
+
+  //first FIGURE OUT IF NEED TO PULL NEW DATA
+};
+
+//----------------------------
 
 export const getNewArticleData = async (inputParams) => {
   if (!inputParams || !inputParams.articleType || !inputParams.articleHowMany || !inputParams.articleSortBy) return null;
