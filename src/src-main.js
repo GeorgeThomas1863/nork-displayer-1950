@@ -79,6 +79,8 @@ export const runGetBackendData = async () => {
   return dataObj;
 };
 
+//RE-WRITE FIXING THE FUCKING PICS AS A SINGLE LOOP THAT GOES THROUGH DATAOBJ
+
 //ADD IN PIC SETS AND VID PAGES
 export const fixPicDataByType = async (inputArray) => {
   if (!inputArray) return null;
