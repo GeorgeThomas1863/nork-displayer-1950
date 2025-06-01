@@ -6,13 +6,13 @@ import dbModel from "../models/db-model.js";
 //gets backend data from db
 export const runGetBackendData = async (inputObj) => {
   if (!inputObj || !inputObj.dataType) return null;
-  const { dataType, firstLoad } = inputObj;
+  const { dataType, isFirstLoad } = inputObj;
   const dataObj = {};
 
   const collection = backendDefaultParams[dataType].collection;
 
   let params = {};
-  if (firstLoad) {
+  if (isFirstLoad) {
     //set to default
     params = backendDefaultParams[dataType];
     // params.dataType = dataType;
@@ -25,7 +25,7 @@ export const runGetBackendData = async (inputObj) => {
   const dataArrayRaw = await dataModel.getNewestItemsArray();
   const dataArray = await fixDataByType(dataArrayRaw, dataType);
 
-  dataObj[backendType] = dataArray;
+  dataObj[dataType] = dataArray;
 
   console.log("DATA RETURN LENGTHS");
   console.log("Articles: " + dataObj.articles.length);
@@ -38,14 +38,14 @@ export const runGetBackendData = async (inputObj) => {
 };
 
 //ADD IN PIC SETS AND VID PAGES
-export const fixDataByType = async (inputArray, backendType) => {
+export const fixDataByType = async (inputArray, dataType) => {
   if (!inputArray) return null;
 
   const results = [];
   for (let i = 0; i < inputArray.length; i++) {
     const inputObj = inputArray[i];
 
-    switch (backendType) {
+    switch (dataType) {
       //single pics
       case "pics":
         const picURL = inputObj.url;

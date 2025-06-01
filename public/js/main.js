@@ -19,7 +19,7 @@ export const buildDefaultDisplay = async () => {
   //set default return type
   const typeObj = {
     dataType: "pics",
-    firstLoad: true,
+    isFirstLoad: true,
   };
 
   //build data data return
