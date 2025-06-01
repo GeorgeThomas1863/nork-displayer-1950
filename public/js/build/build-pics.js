@@ -209,11 +209,15 @@ export const buildPicListItem = async (inputObj) => {
   const picListItem = document.createElement("li");
   picListItem.id = "pic-list-item";
 
-  //stats beneath the pic
-  const picStatsElement = await buildPicStatsElement(inputObj);
+  // Create image container (per claude)
+  const picImageContainer = document.createElement("div");
+  picImageContainer.id = "pic-image-container";
 
   const picElement = await buildPicElement(savePath);
-  picListItem.append(picElement, picStatsElement);
+  const picStatsElement = await buildPicStatsElement(inputObj);
+
+  picImageContainer.append(picElement);
+  picListItem.append(picImageContainer, picStatsElement);
 
   return picListItem;
 };
