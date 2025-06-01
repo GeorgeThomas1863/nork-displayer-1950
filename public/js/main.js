@@ -31,6 +31,13 @@ export const buildDefaultDisplay = async () => {
   return "#DONE";
 };
 
+export const displayNewData = async (inputObj) => {
+  if (!inputObj) return null;
+
+  console.log("DISPLAY NEW DATA");
+  console.log(inputObj);
+};
+
 //RESPONSIVE STUFF
 
 export const getNewData = async (inputObj) => {

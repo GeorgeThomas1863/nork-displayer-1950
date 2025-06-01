@@ -53,6 +53,7 @@ export const runGetBackendData = async (inputObj) => {
   const dataArray = await fixDataByType(dataArrayRaw, dataType);
 
   dataObj[dataType] = dataArray;
+  dataObj.dataType = dataType;
 
   if (dataObj) {
     const typeStr = dataType.toUpperCase();
