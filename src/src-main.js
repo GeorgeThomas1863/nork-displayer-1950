@@ -25,7 +25,7 @@ export const runGetBackendData = async (inputObj) => {
   let dataArrayRaw = [];
   const { sortBy } = params;
   if (dataType === "articles") {
-    const articleDataModel = new dbModel(params, articles);
+    const articleDataModel = new dbModel(params, collection);
 
     switch (sortBy) {
       case "newest-to-oldest":
