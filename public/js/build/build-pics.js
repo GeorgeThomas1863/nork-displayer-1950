@@ -158,9 +158,9 @@ export const buildPicDataDisplay = async (inputArray, stateParams = null) => {
 
 //BUILD PIC SET PARSE HERE
 export const buildPicSetDataDisplay = async (inputArray, stateParams = null) => {
-  console.log("AHHHHHH");
-  console.log("FUCKING BUILD");
-  console.log(inputArray);
+  // console.log("AHHHHHH");
+  // console.log("FUCKING BUILD");
+  // console.log(inputArray);
 
   return null;
 };
