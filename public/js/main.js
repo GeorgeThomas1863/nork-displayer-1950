@@ -39,13 +39,16 @@ export const displayNewData = async (inputObj) => {
   console.log(inputObj);
 
   const { dataType } = inputObj;
-  const newDataObj = inputObj[dataType];
+  const newDataArray = inputObj[dataType];
+
+  //FIGURE OUT WAY TO MAKE THIS DYNAMIC
+  const articleReturnData = await buildArticleReturnDisplay(newDataArray);
 
   const backendDataWrapper = document.getElementById("backend-data-wrapper");
 
-  const func = d.backendFunctionMap[dataType];
-  const dataElement = await func(newDataObj);
-  displayElement.replaceChild(dataElement, backendDataWrapper);
+  // const func = d.backendFunctionMap[dataType];
+  // const dataElement = await func(newDataObj);
+  displayElement.replaceChild(articleReturnData, backendDataWrapper);
 
   return true;
 };
