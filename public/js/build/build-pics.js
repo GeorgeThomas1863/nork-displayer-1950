@@ -1,4 +1,4 @@
-import { buildCollapseContainer } from "../collapse.js";
+import { buildCollapseContainer, defineCollapseItems } from "../collapse.js";
 import { buildInputParams, sendToBack } from "../util.js";
 
 export const buildPicForm = async () => {

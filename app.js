@@ -5,10 +5,7 @@
 // - pic sort seems to be wrong, check if by date or by id, make by date if possible
 // - border radius on pics is still weird, check collapse container border radius
 
-//RE-WRITE FIX PIC FUNCTION TO LOOP THROUGH DATA OBJ
-//CREATE A MAP OF THE COLLECTIONS IF NEEDED FOR LOOP
-
-//BUILD PIC SET / VID PAGE DISPLAYS
+//MAKE IT SO IT ONLY PULLS PIC DATA ON INITIAL LOAD, PULLS OTHER DATA AS NEEDED
 
 //UNFUCK PIC DISPLAY WITH VERTICAL PICS
 
