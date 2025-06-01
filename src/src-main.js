@@ -315,7 +315,7 @@ export const getNewArticleData = async (inputParams) => {
     }
   }
 
-  const articleArray = await fixPicDataByType(articleArrayRaw);
+  const articleArray = await fixDataByType(articleArrayRaw, "articles");
   return articleArray;
 };
 
@@ -355,7 +355,13 @@ export const getNewPicData = async (inputParams) => {
       break;
   }
 
-  const picArray = await fixPicDataByType(picArrayRaw);
+  if (picType === "pic-sets") {
+    const picSetArray = await fixDataByType(picArrayRaw, "picSets");
+    return picSetArray;
+  }
+
+  //otherwise pic alone
+  const picArray = await fixDataByType(picArrayRaw, "pics");
 
   return picArray;
 };
@@ -370,7 +376,6 @@ export const getNewVidData = async (inputParams) => {
     howMany: vidHowMany,
   };
 
-  //SEPARATE HERE BY PIC TYPE
   let collection = "";
   switch (vidType) {
     case "vid-alone":
@@ -384,27 +389,24 @@ export const getNewVidData = async (inputParams) => {
 
   const vidModel = new dbModel(vidParams, collection);
 
-  //if all DONT filter by type
-  let vidArrayPicRaw = [];
+  let vidArrayRaw = [];
   switch (vidSortBy) {
     case "vid-newest-to-oldest":
-      vidArrayPicRaw = await vidModel.getNewestItemsArray();
+      vidArrayRaw = await vidModel.getNewestItemsArray();
       break;
 
     case "vid-oldest-to-newest":
-      vidArrayPicRaw = await vidModel.getOldestItemsArray();
+      vidArrayRaw = await vidModel.getOldestItemsArray();
       break;
   }
 
-  const vidArrayRaw = await fixDataByType(vidArrayPicRaw);
-
-  let vidArray = [];
-  if (vidType === "vid-alone") {
-    vidArray = vidArrayRaw;
-  } else {
-    //otherwise, add picData to pics
-    vidArray = await fixVidDataArray(vidArrayRaw);
+  if (vidType === "vid-pages") {
+    const vidArrayPicRaw = await fixDataByType(vidArrayRaw, "vidPages");
+    const vidPageArray = await fixVidDataArray(vidArrayPicRaw);
+    return vidPageArray;
   }
 
+  //otherwise vid alone, just return raw (fixing doesnt do anything)
+  const vidArray = vidArrayRaw;
   return vidArray;
 };
