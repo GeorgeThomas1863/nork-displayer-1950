@@ -311,6 +311,8 @@ export const runCheckNewData = async (inputObj) => {
   //first FIGURE OUT IF NEED TO PULL NEW DATA
 };
 
+export const runGetNewData = async (inputObj) => {};
+
 //----------------------------
 
 export const getNewArticleData = async (inputParams) => {
