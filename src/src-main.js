@@ -1,5 +1,6 @@
 import fs from "fs";
 import CONFIG from "../config/config.js";
+import { articleTypeMap } from "../config/map-display.js";
 import dbModel from "../models/db-model.js";
 
 //gets backend data from db
@@ -188,8 +189,8 @@ export const getPicSourceObj = async (picURL) => {
     const { title, articleType, date } = articleObj;
 
     //MAP ARTICLE TYPE HERE!!!
-
-    picSource = `${articleType} Article Titled "${title}"`;
+    const articleTypeText = articleTypeMap[articleType];
+    picSource = `${articleTypeText} Article Titled <i>"${title}"</i>`;
     picDate = date;
   }
 
