@@ -184,12 +184,11 @@
 /* ------------------------------ */
 
 #backend-data-fail {
-  width: 80vw;
+  margin: 0 auto;
+  width: 50rem;
   max-width: 800px;
   text-align: center;
-
   font-weight: bold;
-
   padding: 2rem;
   border-radius: 10px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
