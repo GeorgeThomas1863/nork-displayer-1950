@@ -1,5 +1,6 @@
-import { expandBackendData, getNewData, displayNewData } from "./main.js";
+import { expandBackendData, getNewData } from "./main.js";
 import { buildAdminParams, sendToBack, debounce } from "./util.js";
+import { buildBackendNew } from "./build-backend.js";
 // import { getNewArticleData } from "./articles/article-data.js";
 // import { getNewPicData } from "./pics/pic-data.js";
 // import { getNewVidData } from "./vids/vid-data.js";
@@ -48,7 +49,7 @@ export const mainClickHandler = async (e) => {
   const newBackendData = await getNewData(clickObj);
   if (!newBackendData) return null;
 
-  await displayNewData(newBackendData);
+  await buildBackendNew(newBackendData);
 
   return true;
 };
