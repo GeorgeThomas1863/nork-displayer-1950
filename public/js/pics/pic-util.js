@@ -1,4 +1,4 @@
-import { buildPicList } from "./pic-return-alone.js";
+import { buildPicList } from "./pic-parse-alone.js";
 import { buildCollapseContainer } from "../collapse.js";
 
 //for article pic array / pic set pic array

@@ -1,8 +1,8 @@
-import { sendToBack, buildFailElement } from "./util.js";
 import d from "./define-things.js";
+import { sendToBack, buildFailElement } from "./util.js";
 
 //BUILDS DEFAULT DISPLAY
-export const buildBackendDislay = async (inputObj) => {
+export const buildBackendDefault = async (inputObj) => {
   if (!inputObj) return null;
   const { dataType } = inputObj;
 
@@ -22,31 +22,31 @@ export const buildBackendDislay = async (inputObj) => {
   backendDataWrapper.id = "backend-data-wrapper";
 
   //parse backend data
-  const func = d.backendFunctionMap[dataType];
+  const func = d.defaultDataDisplayMap[dataType];
   const dataElement = await func(backendDataObj[dataType]);
   backendDataWrapper.append(dataElement);
 
   if (!backendDataWrapper) return failElement;
 
   return backendDataWrapper;
+};
 
-  // //returns fail element on data fail
-  // const backendDataCheck = await checkBackendData(backendDataObj);
-  // if (!backendDataCheck) return failElement;
+//UNFUCK HERE; USE MAP TO MAKE BELOW DYNAMIC
+export const buildBackendNew = async (inputObj) => {
+  if (!inputObj || !inputObj.dataType) return null;
 
-  // //build each data element
-  // for (let i = 0; i < d.backendTypeArr.length; i++) {
-  //   const dataType = d.backendTypeArr[i];
-  //   const func = d.backendFunctionMap[dataType];
-  //   const dataElement = await func(backendDataObj[dataType]);
-  //   console.log("AHHHHHHHHHH");
-  //   console.log(dataType);
-  //   console.log(dataElement);
-  //   backendDataWrapper.append(dataElement);
-  // }
+  console.log("DISPLAY NEW DATA");
+  console.log(inputObj);
 
-  // //could make more complex
-  // if (!backendDataWrapper) return failElement;
+  const { dataType } = inputObj;
+  const newDataArray = inputObj[dataType];
 
-  // return backendDataWrapper;
+  //FIGURE OUT WAY TO MAKE THIS DYNAMIC
+  const articleReturnData = await buildArticleReturnDisplay(newDataArray);
+
+  const backendDataWrapper = document.getElementById("backend-data-wrapper");
+
+  displayElement.replaceChild(articleReturnData, backendDataWrapper);
+
+  return true;
 };

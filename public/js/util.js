@@ -81,18 +81,30 @@ export const debounce = (func) => {
 
 //----------------------------------
 
-// export const checkBackendData = async (inputObj) => {
-//   //define fail element
+export const checkNewDataTrigger = async (inputObj) => {
+  const { clickId, expandType, inputId } = inputObj;
 
-//   if (!inputObj) return null;
+  for (let i = 0; i < d.clickTriggerArr.length; i++) {
+    if (clickId === d.clickTriggerArr[i]) {
+      return true;
+    }
+  }
 
-//   for (let i = 0; i < d.backendTypeArr.length; i++) {
-//     const dataType = d.backendTypeArr[i];
-//     if (!inputObj[dataType]) return null;
-//   }
+  for (let i = 0; i < d.expandTriggerArr.length; i++) {
+    if (expandType === d.expandTriggerArr[i]) {
+      return true;
+    }
+  }
 
-//   return true;
-// };
+  //MIGHT NOT BE NEEDED
+  for (let i = 0; i < d.inputTriggerArr.length; i++) {
+    if (inputId === d.inputTriggerArr[i]) {
+      return true;
+    }
+  }
+
+  return false;
+};
 
 export const buildFailElement = async () => {
   const failElement = document.createElement("h1");

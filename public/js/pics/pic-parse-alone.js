@@ -1,8 +1,36 @@
-import { buildInputParams, sendToBack } from "../util.js";
+import { setCurrentPicState } from "./pic-data.js";
 
-//GET NEW PIC DATA
+//PIC ALONE DISPLAY
+export const buildDefaultPicDisplay = async (inputArray, stateParams = null) => {
+  if (!inputArray || !inputArray.length) return null;
 
-export const getNewPicData = async () => {
+  const picList = document.createElement("ul");
+  picList.id = "pic-array-element";
+  // picList.className = "hidden";
+
+  //set state params
+  if (stateParams) {
+    //state params from user input
+    setCurrentPicState(picList, stateParams);
+  } else {
+    //handle initial load
+    const defaultStateParams = ["pic-alone", 9, "pic-newest-to-oldest"];
+    setCurrentPicState(picList, defaultStateParams);
+  }
+
+  for (let i = 0; i < inputArray.length; i++) {
+    const picListItem = await buildPicListItem(inputArray[i]);
+    if (!picListItem) continue;
+
+    picList.appendChild(picListItem);
+  }
+
+  return picList;
+};
+
+//--------------------------------
+
+export const buildNewPicDisplay = async () => {
   //get user input
   const inputParams = await buildInputParams();
   if (!inputParams || !inputParams.picType || !inputParams.picHowMany || !inputParams.picSortBy) return null;

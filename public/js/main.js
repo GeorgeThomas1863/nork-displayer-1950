@@ -1,16 +1,14 @@
 import d from "./define-things.js";
-import { buildBackendDislay } from "./build-backend.js";
+import { buildDefaultDisplay } from "./build-backend.js";
 import { buildDropDown } from "./build-drop-down.js";
 import { buildInputForms } from "./build-forms.js";
 import { hideArray, unhideArray, sendToBack, buildInputParams } from "./util.js";
-
-import { buildArticleReturnDisplay } from "./articles/article-return.js";
 
 //get display element
 const displayElement = document.getElementById("display-element");
 
 //DEFAULT DISPLAY
-export const buildDefaultDisplay = async () => {
+export const buildDisplay = async () => {
   if (!displayElement) return null;
 
   //build drop down
@@ -26,41 +24,14 @@ export const buildDefaultDisplay = async () => {
   };
 
   //build data data return
-  const backendDataWrapper = await buildBackendDislay(typeObj);
+  const backendDataWrapper = await buildDefaultDisplay(typeObj);
 
   displayElement.append(dropDownElement, inputFormWrapper, backendDataWrapper);
 
   return "#DONE";
 };
 
-//!!!!!!!
-//HERE
-//!!!!!!!!!
-
-//UNFUCK HERE; USE MAP TO MAKE BELOW DYNAMIC
-export const displayNewData = async (inputObj) => {
-  if (!inputObj || !inputObj.dataType) return null;
-
-  console.log("DISPLAY NEW DATA");
-  console.log(inputObj);
-
-  const { dataType } = inputObj;
-  const newDataArray = inputObj[dataType];
-
-  //FIGURE OUT WAY TO MAKE THIS DYNAMIC
-  const articleReturnData = await buildArticleReturnDisplay(newDataArray);
-
-  const backendDataWrapper = document.getElementById("backend-data-wrapper");
-
-  // const func = d.backendFunctionMap[dataType];
-  // const dataElement = await func(newDataObj);
-  displayElement.replaceChild(articleReturnData, backendDataWrapper);
-
-  return true;
-};
-
 //RESPONSIVE STUFF
-
 export const getNewData = async (inputObj) => {
   //check if new data triggered
   const newDataTrigger = await checkNewDataTrigger(inputObj);
@@ -77,30 +48,6 @@ export const getNewData = async (inputObj) => {
 };
 
 //add in the state shit?
-export const checkNewDataTrigger = async (inputObj) => {
-  const { clickId, expandType, inputId } = inputObj;
-
-  for (let i = 0; i < d.clickTriggerArr.length; i++) {
-    if (clickId === d.clickTriggerArr[i]) {
-      return true;
-    }
-  }
-
-  for (let i = 0; i < d.expandTriggerArr.length; i++) {
-    if (expandType === d.expandTriggerArr[i]) {
-      return true;
-    }
-  }
-
-  //MIGHT NOT BE NEEDED
-  for (let i = 0; i < d.inputTriggerArr.length; i++) {
-    if (inputId === d.inputTriggerArr[i]) {
-      return true;
-    }
-  }
-
-  return false;
-};
 
 //better version of expand backend data equation
 export const expandBackendData = async (dataType) => {
@@ -157,4 +104,4 @@ export const expandBackendData = async (dataType) => {
   return true;
 };
 
-buildDefaultDisplay();
+buildDisplay();

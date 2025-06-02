@@ -1,6 +1,35 @@
-import { buildInputParams, sendToBack } from "../util.js";
+import { setCurrentVidState } from "./vid-data.js";
 
-export const getNewVidData = async () => {
+//VID ALONE DISPLAY
+export const buildDefaultVidDisplay = async (inputArray, stateParams = null) => {
+  if (!inputArray || !inputArray.length) return null;
+
+  const vidList = document.createElement("ul");
+  vidList.id = "vid-array-element";
+  vidList.className = "hidden";
+
+  //set state params
+  if (stateParams) {
+    //state params from user input
+    setCurrentVidState(vidList, stateParams);
+  } else {
+    //handle initial load
+    const defaultStateParams = ["vid-alone", 3, "vid-newest-to-oldest"];
+    setCurrentVidState(vidList, defaultStateParams);
+  }
+
+  for (let i = 0; i < inputArray.length; i++) {
+    //SHOULD DETERMINE HERE IF VID PAGE OR VID ALONE
+    const vidListItem = await buildVidListItem(inputArray[i]);
+    if (!vidListItem) continue;
+
+    vidList.appendChild(vidListItem);
+  }
+
+  return vidList;
+};
+
+export const buildNewVidDisplay = async () => {
   //get user input
   const inputParams = await buildInputParams();
   if (!inputParams || !inputParams.vidType || !inputParams.vidHowMany || !inputParams.vidSortBy) return null;

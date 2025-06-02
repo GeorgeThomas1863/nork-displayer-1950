@@ -1,8 +1,8 @@
 import { expandBackendData, getNewData, displayNewData } from "./main.js";
 import { buildAdminParams, sendToBack, debounce } from "./util.js";
-import { getNewArticleData } from "./articles/article-data.js";
-import { getNewPicData } from "./pics/pic-data.js";
-import { getNewVidData } from "./vids/vid-data.js";
+// import { getNewArticleData } from "./articles/article-data.js";
+// import { getNewPicData } from "./pics/pic-data.js";
+// import { getNewVidData } from "./vids/vid-data.js";
 
 export const adminSubmitClick = async (e) => {
   e.preventDefault();
@@ -63,19 +63,19 @@ export const mainInputHandler = async (e) => {
 
   const inputId = inputElement.id;
 
-  switch (inputId) {
-    case "article-how-many":
-      debouncedGetNewArticleData();
-      break;
+  // switch (inputId) {
+  //   case "article-how-many":
+  //     debouncedGetNewArticleData();
+  //     break;
 
-    case "pic-how-many":
-      debouncedGetNewPicData();
-      break;
+  //   case "pic-how-many":
+  //     debouncedGetNewPicData();
+  //     break;
 
-    case "vid-how-many":
-      debouncedGetNewVidData();
-      break;
-  }
+  //   case "vid-how-many":
+  //     debouncedGetNewVidData();
+  //     break;
+  // }
 
   return true;
 };

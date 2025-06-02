@@ -1,7 +1,52 @@
+import { picDropDownContainer } from "../pics/pic-util.js";
+import { defineCollapseItems, buildCollapseContainer } from "../collapse.js";
 import { buildInputParams, sendToBack } from "../util.js";
 
-//GET NEW DATA SECTION
-export const getNewArticleData = async () => {
+//BUILD DEFAULT ARTICLE DISPLAY
+export const buildDefaultArticleDisplay = async (inputArray, stateParams = null) => {
+  if (!inputArray || !inputArray.length) return null;
+
+  console.log("BUILD ARTICLE DISPLAY!!!!!");
+  console.log(inputArray);
+
+  const articleList = document.createElement("ul");
+  articleList.id = "article-array-element";
+  articleList.className = "article-list data-return";
+  articleList.className = "hidden";
+
+  // Set initial state attributes if provided
+  if (stateParams) {
+    setCurrentArticleState(articleList, stateParams);
+  } else {
+    // Set default state for initial load
+    const defaultState = ["fatboy", 5, "article-newest-to-oldest"];
+    setCurrentArticleState(articleList, defaultState);
+  }
+
+  let isFirst = true;
+  const collapseArray = [];
+
+  for (let i = 0; i < inputArray.length; i++) {
+    const articleListItem = await buildArticleListItem(inputArray[i], isFirst);
+    articleList.append(articleListItem);
+
+    // Store the collapse components for group functionality
+    const collapseItem = articleListItem.querySelector(".collapse-container");
+    if (collapseItem) collapseArray.push(collapseItem);
+
+    isFirst = false;
+  }
+
+  // Set up the collapse group behavior
+  await defineCollapseItems(collapseArray);
+
+  return articleList;
+};
+
+//--------------------------------
+
+//GET NEW ARTICLE DATA
+export const buildNewArticleDisplay = async () => {
   //get user input
   const inputParams = await buildInputParams();
   if (!inputParams || !inputParams.articleType || !inputParams.articleHowMany || !inputParams.articleSortBy) return null;
