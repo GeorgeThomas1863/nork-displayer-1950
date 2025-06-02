@@ -31,6 +31,7 @@ export const buildBackendDefault = async (inputObj) => {
   return backendDataWrapper;
 };
 
+//!!!!!!!!!!!!!
 //UNFUCK HERE; USE MAP TO MAKE BELOW DYNAMIC
 export const buildBackendNew = async (inputObj) => {
   if (!inputObj || !inputObj.dataType) return null;
@@ -42,11 +43,11 @@ export const buildBackendNew = async (inputObj) => {
   const newDataArray = inputObj[dataType];
 
   //FIGURE OUT WAY TO MAKE THIS DYNAMIC
-  const articleReturnData = await buildArticleReturnDisplay(newDataArray);
+  // const articleReturnData = await buildArticleReturnDisplay(newDataArray);
 
   const backendDataWrapper = document.getElementById("backend-data-wrapper");
 
-  displayElement.replaceChild(articleReturnData, backendDataWrapper);
+  // displayElement.replaceChild(articleReturnData, backendDataWrapper);
 
   return true;
 };

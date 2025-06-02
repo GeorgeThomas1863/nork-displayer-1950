@@ -1,6 +1,5 @@
-import { setCurrentPicState } from "./pic-data.js";
-import { buildCollapseContainer, defineCollapseItems } from "../collapse.js";
-import { picDropDownContainer } from "./pic-util.js";
+import { buildPicSetListItem } from "./pic-elements.js";
+import { defineCollapseItems } from "../collapse.js";
 
 //PIC SET DISPLAY
 export const buildDefaultPicSetDisplay = async (inputArray, stateParams = null) => {
@@ -13,11 +12,11 @@ export const buildDefaultPicSetDisplay = async (inputArray, stateParams = null) 
   //set state params
   if (stateParams) {
     //state params from user input
-    setCurrentPicState(picSetList, stateParams);
+    setCurrentPicSetState(picSetList, stateParams);
   } else {
     //handle initial load
     const defaultStateParams = ["pic-sets", 5, "pic-newest-to-oldest"];
-    setCurrentPicState(picSetList, defaultStateParams);
+    setCurrentPicSetState(picSetList, defaultStateParams);
   }
 
   let isFirst = true;
@@ -41,3 +40,5 @@ export const buildDefaultPicSetDisplay = async (inputArray, stateParams = null) 
 };
 
 export const buildNewPicSetDisplay = async () => {};
+
+export const setCurrentPicSetState = () => {};

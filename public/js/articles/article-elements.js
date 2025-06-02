@@ -1,4 +1,5 @@
 import { buildCollapseContainer } from "../collapse.js";
+import { picDropDownContainer } from "../pics/pic-elements.js";
 
 //ARTICLE FORM ELEMENTS
 export const buildArticleForm = async () => {

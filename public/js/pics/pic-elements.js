@@ -182,9 +182,6 @@ export const buildPicStatsElement = async (inputObj) => {
   if (!inputObj) return null;
   const { picDate, picSource, headerData } = inputObj;
 
-  // console.log("INPUT OBJ");
-  // console.log(inputObj);
-
   const picStatsElement = document.createElement("div");
   picStatsElement.id = "pic-stats";
 
@@ -236,6 +233,35 @@ export const buildPicServerElement = async (headerData) => {
   picServerElement.innerHTML = `<b>Server Data:</b> ${serverData}`;
 
   return picServerElement;
+};
+
+//------------------------------
+
+//for article pic array / pic set pic array
+export const picDropDownContainer = async (inputArray, type) => {
+  if (!inputArray || !inputArray.length) return null;
+
+  const picArrayElement = await buildPicList(inputArray);
+  if (!picArrayElement) return null;
+
+  const typeStr = type.toUpperCase();
+
+  //build pic title element
+  const picTitleElement = document.createElement("div");
+  picTitleElement.id = `${typeStr}-pic-header`;
+  picTitleElement.textContent = `${inputArray.length} ${typeStr} PIC${inputArray.length > 1 ? "S" : ""}`;
+
+  //build collapse container
+  const picCollapseObj = {
+    titleElement: picTitleElement,
+    contentElement: picArrayElement,
+    isExpanded: true,
+    className: `${typeStr}-pic-collapse`,
+  };
+
+  const picCollapseElement = await buildCollapseContainer(picCollapseObj);
+
+  return picCollapseElement;
 };
 
 //  --------------------------------

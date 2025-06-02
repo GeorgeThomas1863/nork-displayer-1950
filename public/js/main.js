@@ -1,8 +1,8 @@
 import d from "./define-things.js";
-import { buildDefaultDisplay } from "./build-backend.js";
+import { buildBackendDefault } from "./build-backend.js";
 import { buildDropDown } from "./build-drop-down.js";
 import { buildInputForms } from "./build-forms.js";
-import { hideArray, unhideArray, sendToBack, buildInputParams } from "./util.js";
+import { hideArray, unhideArray, sendToBack, buildInputParams, checkNewDataTrigger } from "./util.js";
 
 //get display element
 const displayElement = document.getElementById("display-element");
@@ -14,7 +14,7 @@ export const buildDisplay = async () => {
   //build drop down
   const dropDownElement = await buildDropDown();
 
-  //build input forms
+  //build input formss
   const inputFormWrapper = await buildInputForms();
 
   //set default return type
@@ -24,7 +24,7 @@ export const buildDisplay = async () => {
   };
 
   //build data data return
-  const backendDataWrapper = await buildDefaultDisplay(typeObj);
+  const backendDataWrapper = await buildBackendDefault(typeObj);
 
   displayElement.append(dropDownElement, inputFormWrapper, backendDataWrapper);
 
@@ -46,8 +46,6 @@ export const getNewData = async (inputObj) => {
 
   return dataObj;
 };
-
-//add in the state shit?
 
 //better version of expand backend data equation
 export const expandBackendData = async (dataType) => {

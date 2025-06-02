@@ -1,4 +1,4 @@
-import { setCurrentVidState } from "./vid-data.js";
+import { buildVidListItem } from "./vid-elements.js";
 
 //VID ALONE DISPLAY
 export const buildDefaultVidDisplay = async (inputArray, stateParams = null) => {
@@ -31,8 +31,8 @@ export const buildDefaultVidDisplay = async (inputArray, stateParams = null) => 
 
 export const buildNewVidDisplay = async () => {
   //get user input
-  const inputParams = await buildInputParams();
-  if (!inputParams || !inputParams.vidType || !inputParams.vidHowMany || !inputParams.vidSortBy) return null;
+  // const inputParams = await buildInputParams();
+  // if (!inputParams || !inputParams.vidType || !inputParams.vidHowMany || !inputParams.vidSortBy) return null;
 
   // Extract article inputs
   const { vidType, vidHowMany, vidSortBy } = inputParams;

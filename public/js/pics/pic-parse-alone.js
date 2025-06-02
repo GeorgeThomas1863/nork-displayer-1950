@@ -1,3 +1,4 @@
+import { buildPicListItem } from "./pic-elements.js";
 import { setCurrentPicState } from "./pic-data.js";
 
 //PIC ALONE DISPLAY
@@ -32,8 +33,8 @@ export const buildDefaultPicDisplay = async (inputArray, stateParams = null) => 
 
 export const buildNewPicDisplay = async () => {
   //get user input
-  const inputParams = await buildInputParams();
-  if (!inputParams || !inputParams.picType || !inputParams.picHowMany || !inputParams.picSortBy) return null;
+  // const inputParams = await buildInputParams();
+  // if (!inputParams || !inputParams.picType || !inputParams.picHowMany || !inputParams.picSortBy) return null;
 
   // Extract article inputs
   const { picType, picHowMany, picSortBy } = inputParams;

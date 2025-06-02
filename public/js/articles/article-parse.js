@@ -1,5 +1,5 @@
-import { picDropDownContainer } from "../pics/pic-util.js";
-import { defineCollapseItems, buildCollapseContainer } from "../collapse.js";
+import { buildArticleListItem } from "./article-elements.js";
+import { defineCollapseItems } from "../collapse.js";
 import { buildInputParams, sendToBack } from "../util.js";
 
 //BUILD DEFAULT ARTICLE DISPLAY
@@ -48,8 +48,8 @@ export const buildDefaultArticleDisplay = async (inputArray, stateParams = null)
 //GET NEW ARTICLE DATA
 export const buildNewArticleDisplay = async () => {
   //get user input
-  const inputParams = await buildInputParams();
-  if (!inputParams || !inputParams.articleType || !inputParams.articleHowMany || !inputParams.articleSortBy) return null;
+  // const inputParams = await buildInputParams();
+  // if (!inputParams || !inputParams.articleType || !inputParams.articleHowMany || !inputParams.articleSortBy) return null;
 
   // Extract article inputs
   const { articleType, articleHowMany, articleSortBy } = inputParams;

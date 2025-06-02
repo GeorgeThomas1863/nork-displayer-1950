@@ -54,9 +54,9 @@ export const mainClickHandler = async (e) => {
 };
 
 //create debounced function
-const debouncedGetNewArticleData = debounce(getNewArticleData);
-const debouncedGetNewPicData = debounce(getNewPicData);
-const debouncedGetNewVidData = debounce(getNewVidData);
+// const debouncedGetNewArticleData = debounce(getNewArticleData);
+// const debouncedGetNewPicData = debounce(getNewPicData);
+// const debouncedGetNewVidData = debounce(getNewVidData);
 
 export const mainInputHandler = async (e) => {
   const inputElement = e.target;

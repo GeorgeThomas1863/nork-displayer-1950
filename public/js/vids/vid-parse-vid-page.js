@@ -1,6 +1,5 @@
-import { buildVidElement } from "./vid-return-alone.js";
-import { defineCollapseItems, buildCollapseContainer } from "../collapse.js";
-import { setCurrentVidState } from "./vid-data.js";
+import { buildVidPageListItem } from "./vid-elements.js";
+import { defineCollapseItems } from "../collapse.js";
 
 //VID PAGE DISPLAY
 export const buildDefaultVidPageDisplay = async (inputArray, stateParams = null) => {
@@ -13,11 +12,11 @@ export const buildDefaultVidPageDisplay = async (inputArray, stateParams = null)
   //set state params
   if (stateParams) {
     //state params from user input
-    setCurrentVidState(vidPageList, stateParams);
+    setCurrentVidPageState(vidPageList, stateParams);
   } else {
     //handle initial load
     const defaultStateParams = ["vid-pages", 5, "vid-newest-to-oldest"];
-    setCurrentVidState(vidPageList, defaultStateParams);
+    setCurrentVidPageState(vidPageList, defaultStateParams);
   }
 
   let isFirst = true;
@@ -41,3 +40,24 @@ export const buildDefaultVidPageDisplay = async (inputArray, stateParams = null)
 };
 
 export const buildNewVidPageDisplay = async () => {};
+
+// Helper function to get current vid state from DOM element
+export const getCurrentVidPageState = (vidElement) => {
+  // if (!vidElement) {
+  //   // If no element exists, return initial default state
+  //   return ["vid-alone", 3, "vid-newest-to-oldest"];
+  // }
+  // const vidType = vidElement.getAttribute("data-vid-type") || "vid-alone";
+  // const vidHowMany = parseInt(vidElement.getAttribute("data-vid-how-many")) || 3;
+  // const vidSortBy = vidElement.getAttribute("data-vid-sort-by") || "vid-newest-to-oldest";
+  // return [vidType, vidHowMany, vidSortBy];
+};
+
+// Helper function to store current vid state on DOM element
+export const setCurrentVidPageState = (vidElement, inputArray) => {
+  // if (!vidElement || !inputArray || inputArray.length < 3) return;
+  // const [vidType, vidHowMany, vidSortBy] = inputArray;
+  // vidElement.setAttribute("data-vid-type", vidType);
+  // vidElement.setAttribute("data-vid-how-many", vidHowMany.toString());
+  // vidElement.setAttribute("data-vid-sort-by", vidSortBy);
+};
