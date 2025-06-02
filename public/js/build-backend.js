@@ -32,7 +32,10 @@ export const buildBackendDefault = async (inputObj) => {
 };
 
 //!!!!!!!!!!!!!
-//UNFUCK HERE; USE MAP TO MAKE BELOW DYNAMIC
+//HERE
+//!!!!!!!
+
+//ADD IN MAP HERE FROM d to parse data
 export const buildBackendNew = async (inputObj) => {
   if (!inputObj || !inputObj.dataType) return null;
 

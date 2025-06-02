@@ -1,4 +1,6 @@
-//KINDA STABLE BUT MOSTLY BROKEN
+//REDID ORG, MOSTLY WORKING
+
+//NOW ADD IN MAP TO DISPLAY NEW DATA
 
 //MINOR BUG LIST:
 // - put default state params in define-things.js
