@@ -18,7 +18,7 @@ export const runGetBackendData = async (inputObj) => {
     // params.dataType = dataType;
   } else {
     //use input
-    params = { ...inputObj };
+    params = await fixInputDefaults(inputObj);
   }
 
   //handle articles
@@ -61,6 +61,17 @@ export const runGetBackendData = async (inputObj) => {
   }
 
   return dataObj;
+};
+
+export const fixInputDefaults = async (inputObj) => {
+  const { articleHowMany, picHowMany, vidHowMany } = inputObj;
+  const returnObj = { ...inputObj };
+
+  if (!articleHowMany) returnObj.articleHowMany = 5;
+  if (!picHowMany) returnObj.picHowMany = 9;
+  if (!vidHowMany) returnObj.vidHowMany = 1;
+
+  return returnObj;
 };
 
 //ADD IN PIC SETS AND VID PAGES

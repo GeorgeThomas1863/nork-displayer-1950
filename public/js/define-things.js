@@ -6,8 +6,6 @@ import { buildVidAloneDisplay } from "./vids/vid-return-alone.js";
 import { buildVidPageDisplay } from "./vids/vid-return-vid-page.js";
 
 const d = {
-  backendTypeArr: ["articles", "pics", "picSets", "vids", "vidPages"],
-  expandTypeArr: ["article", "pic", "vid"],
   displayFunctionMap: {
     articles: buildArticleDisplay,
     pics: buildPicAloneDisplay,
@@ -18,6 +16,8 @@ const d = {
   clickTriggerArr: ["article-type", "article-sort-by", "pic-type", "pic-sort-by", "vid-type", "vid-sort-by"],
   expandTriggerArr: ["article-form-header", "pic-form-header", "vid-form-header"],
   inputTriggerArr: ["article-how-many", "pic-how-many", "vid-how-many"],
+  backendTypeArr: ["articles", "pics", "picSets", "vids", "vidPages"],
+  expandTypeArr: ["article", "pic", "vid"],
 };
 
 export default d;
