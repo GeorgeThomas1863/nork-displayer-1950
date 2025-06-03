@@ -49,8 +49,6 @@ export const getNewData = async (inputObj) => {
 
 //better version of expand backend data equation
 export const expandBackendData = async (dataType) => {
-  console.log("AHHHHHHHHHHHHHH");
-  console.log(dataType);
   // Build typeMap using the consistent naming pattern
   const typeMap = {};
   for (let i = 0; i < d.expandTypeArr.length; i++) {
@@ -86,9 +84,6 @@ export const expandBackendData = async (dataType) => {
       otherArrowArray.push(typeData.arrowElement());
     }
   }
-
-  console.log("OTHER ELEMENT ARRAY!!!!");
-  console.log(otherElementArray);
 
   if (isCurrentExpanded) {
     await hideArray(otherElementArray);

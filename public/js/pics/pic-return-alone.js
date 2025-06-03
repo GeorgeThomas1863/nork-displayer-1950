@@ -130,9 +130,6 @@ export const buildPicServerElement = async (headerData) => {
 export const picDropDownContainer = async (inputArray, type) => {
   if (!inputArray || !inputArray.length) return null;
 
-  console.log("TYPE!!!!");
-  console.log(type);
-
   const picArrayElement = await buildPicList(inputArray);
   if (!picArrayElement) return null;
 
@@ -150,6 +147,9 @@ export const picDropDownContainer = async (inputArray, type) => {
     isExpanded: true,
     className: `${typeStr}-pic-collapse`,
   };
+
+  console.log("PIC COLLAPSE OBJ!!!!");
+  console.log(picCollapseObj);
 
   const picCollapseElement = await buildCollapseContainer(picCollapseObj);
 
