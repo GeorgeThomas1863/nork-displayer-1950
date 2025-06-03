@@ -9,9 +9,6 @@ export const runGetBackendData = async (inputObj) => {
   const { dataType, isFirstLoad } = inputObj;
   const dataObj = {};
 
-  console.log("INPUT OBJ");
-  console.log(inputObj);
-
   const collection = backendDefaultParams[dataType].collection;
 
   let params = {};
@@ -373,7 +370,13 @@ export const checkExpandType = async (inputObj) => {
   if (!inputObj || !inputObj.expandType) return null;
   const { expandType, picType, vidType } = inputObj;
 
+  console.log("INPUT OBJ");
+  console.log(inputObj);
+
   const expandTrigger = expandTriggerMap[expandType];
+
+  console.log("EXPAND TRIGGER");
+  console.log(expandTrigger);
 
   switch (expandTrigger) {
     case "articles":
