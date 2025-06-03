@@ -1,5 +1,3 @@
-import { buildCollapseContainer } from "../collapse.js";
-
 //PIC ALONE DISPLAY
 export const buildPicAloneDisplay = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
@@ -77,13 +75,11 @@ export const buildPicStatsElement = async (inputObj, fullStats = true) => {
   const picStatsElement = document.createElement("div");
   picStatsElement.id = "pic-stats";
 
-  const picDateElement = await buildPicDateElement(picDate);
-  picStatsElement.append(picDateElement);
-
   //only include source on full stats
   if (fullStats) {
+    const picDateElement = await buildPicDateElement(picDate);
     const picSourceElement = await buildPicSourceElement(picSource);
-    picStatsElement.append(picSourceElement);
+    picStatsElement.append(picDateElement, picSourceElement);
   }
 
   const picServerElement = await buildPicServerElement(headerData);

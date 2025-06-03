@@ -1,4 +1,4 @@
-//rewrite pics
+//ADD DATE ELEMENT TO DROP DOWN COLLAPSE / STYLE IT
 
 //MINOR BUG LIST:
 // - put default state params in define-things.js
@@ -8,8 +8,6 @@
 // - border radius on pics is still weird, check collapse container border radius
 
 //UNFUCK PIC DISPLAY WITH VERTICAL PICS
-
-//REMOVE PIC STATS FROM ARTICLE PICS
 
 //[PROB DONT WANT TO DO BELOW]
 //MAKE GET NEW DATA A SINGLE FUNCTION PASSING IN THE TYPE TO BACKEND

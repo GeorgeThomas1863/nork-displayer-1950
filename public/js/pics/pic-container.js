@@ -8,16 +8,13 @@ export const picDropDownContainer = async (inputArray, type) => {
   const picArrayElement = await buildPicList(inputArray, false);
   if (!picArrayElement) return null;
 
-  // const picArrayElement = await removePicDataByType(picArrayElementRaw, type);
-
-  // console.log("PIC DROP DOWN CONTAINER PIC ARRAY ELEMENT");
-  // console.log(picArrayElement);
-
   //build pic title element
   const picTitleElement = document.createElement("div");
   picTitleElement.id = `${type}-pic-header`;
   picTitleElement.textContent = `${inputArray.length} ${type.toUpperCase()} PIC${inputArray.length > 1 ? "S" : ""}`;
 
+  //EXTRACT PIC DATE?
+  
   //build collapse container
   const picCollapseObj = {
     titleElement: picTitleElement,
@@ -30,27 +27,3 @@ export const picDropDownContainer = async (inputArray, type) => {
 
   return picCollapseElement;
 };
-
-//FIGURE OUT BELOW LOOP
-// export const removePicDataByType = async (picArrayElement, type) => {
-//   if (!picArrayElement || !type) return null;
-
-//   const picArrayElementFixed = document.createElement("ul");
-
-//   const picListItemArray = picArrayElement.querySelectorAll("li");
-
-//   // const picSourceArray = document.querySelectorAll("#pic-source");
-
-//   // if (type !== "article" && type !== "picSet") return null;
-
-//   for (let i = 0; i < picListItemArray.length; i++) {
-//     const picListItem = picListItemArray[i];
-//     const picSourceItem = picListItem.querySelector("#pic-source");
-//     //remove the source
-//     picSourceItem.remove();
-//     //add to container
-//     picArrayElementFixed.append(picListItem);
-//   }
-
-//   return picArrayElementFixed;
-// };
