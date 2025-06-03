@@ -1,3 +1,5 @@
+import { buildCollapseContainer } from "../collapse.js";
+
 //PIC ALONE DISPLAY
 export const buildPicAloneDisplay = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
