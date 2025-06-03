@@ -1,3 +1,4 @@
+import { buildVidElement } from "./vid-return-alone.js";
 import { buildCollapseContainer, defineCollapseItems } from "../collapse.js";
 
 //VID PAGE DISPLAY
