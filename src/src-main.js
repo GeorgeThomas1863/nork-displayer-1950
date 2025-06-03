@@ -66,16 +66,28 @@ export const runGetBackendData = async (inputObj) => {
 };
 
 export const fixInputDefaults = async (inputObj) => {
-  const { articleHowMany, picHowMany, vidHowMany } = inputObj;
+  const { dataType, howMany } = inputObj;
+  const { articlesHowMany, picsHowMany, vidsHowMany } = CONFIG;
   const returnObj = { ...inputObj };
 
-  console.log("AHHHHHHHHH");
-  console.log(inputObj);
+  if (howMany) return returnObj;
 
-  if (!articleHowMany) returnObj.articleHowMany = 5;
-  if (!picHowMany) returnObj.picHowMany = 9;
-  if (!vidHowMany) returnObj.vidHowMany = 1;
+  let returnHowMany = 0;
+  switch (dataType) {
+    case "articles":
+      returnHowMany = articlesHowMany;
+      break;
 
+    case "pics":
+      returnHowMany = picsHowMany;
+      break;
+
+    case "vids":
+      returnHowMany = vidsHowMany;
+      break;
+  }
+
+  returnObj.howMany = returnHowMany;
   return returnObj;
 };
 
