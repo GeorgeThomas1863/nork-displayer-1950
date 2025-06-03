@@ -59,7 +59,6 @@ export const expandBackendData = async (dataType) => {
 
     typeMap[formHeader] = {
       wrapperElement: () => document.getElementById(`${typeValue}-wrapper`),
-      dataElement: () => document.getElementById(`${typeValue}-array-element`),
       arrowElement: () => document.querySelector(`#collapse-arrow[data-expand='${formHeader}']`),
     };
   }
@@ -73,7 +72,7 @@ export const expandBackendData = async (dataType) => {
   // console.log(currentArrow);
 
   // Get all form headers by looping through baseTypes
-  const currentElementArray = [currentTypeData.wrapperElement(), currentTypeData.dataElement()];
+  const currentElementArray = [currentTypeData.wrapperElement()];
   const otherElementArray = [];
   const otherArrowArray = [];
 
@@ -84,7 +83,6 @@ export const expandBackendData = async (dataType) => {
     if (formHeader !== dataType) {
       const typeData = typeMap[formHeader];
       otherElementArray.push(typeData.wrapperElement());
-      otherElementArray.push(typeData.dataElement());
       otherArrowArray.push(typeData.arrowElement());
     }
   }
