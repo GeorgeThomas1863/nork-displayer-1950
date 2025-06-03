@@ -1,4 +1,4 @@
-//FIX PIC STATS (REMOVE FROM ARTICLE PICS / VID PICS) ON PIC ALONE
+//rewrite pics
 
 //MINOR BUG LIST:
 // - put default state params in define-things.js
