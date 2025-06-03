@@ -367,7 +367,10 @@ export const getDataType = async (inputObj) => {
   const clickIdCheck = await checkClickId(inputObj);
   if (clickIdCheck) dataType = clickIdCheck;
 
-  return null;
+  console.log("GET DATA TYPE DATA TYPE");
+  console.log(dataType);
+
+  return dataType;
 };
 
 export const checkExpandType = async (inputObj) => {
@@ -407,9 +410,6 @@ export const checkExpandType = async (inputObj) => {
 export const checkClickId = async (inputObj) => {
   if (!inputObj || !inputObj.clickId) return null;
   const { clickId } = inputObj;
-
-  console.log("CLICK ID");
-  console.log(clickId);
 
   //loop
   for (const k in clickIdTriggerMap) {
