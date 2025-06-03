@@ -64,10 +64,7 @@ export const expandBackendData = async (dataType) => {
     };
   }
 
-  // if (!currentTypeData) {
-  //   console.log("INPUT FUCKED");
-  //   return null;
-  // }
+  const currentTypeData = typeMap[dataType];
 
   const currentArrow = currentTypeData.arrowElement();
   const isCurrentExpanded = currentArrow.classList.contains("expanded");
