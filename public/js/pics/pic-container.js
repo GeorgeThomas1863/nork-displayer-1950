@@ -31,23 +31,24 @@ export const picDropDownContainer = async (inputArray, type) => {
   return picCollapseElement;
 };
 
-//!!!!
-//HERE
-//!!!!!!
-
 //FIGURE OUT BELOW LOOP
 export const removePicDataByType = async (picArrayElement, type) => {
   if (!picArrayElement || !type) return null;
 
   const picListItemArray = picArrayElement.querySelectorAll("li");
 
+  const picSourceArray = picListItemArray.querySelectorAll("#pic-source");
+
+  console.log("PIC SOURCE ARRAY");
+  console.log(picSourceArray);
+
   // if (type !== "article" && type !== "picSet") return null;
 
-  for (let i = 0; i < picListItemArray.length; i++) {
-    const picListItem = picListItemArray[i];
-    const picSource = picListItem.querySelector("#pic-source");
-    if (picSource) {
-      picSource.remove();
-    }
-  }
+  // for (let i = 0; i < picListItemArray.length; i++) {
+  //   const picListItem = picListItemArray[i];
+
+  //   if (picSource) {
+  //     picSource.remove();
+  //   }
+  // }
 };
