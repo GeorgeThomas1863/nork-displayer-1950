@@ -7,7 +7,7 @@ export const buildPicSetDisplay = async (inputArray) => {
 
   const picSetList = document.createElement("ul");
   picSetList.id = "pic-set-array-element";
-  picSetList.className = "hidden";
+  // picSetList.className = "hidden";
 
   // //set state params
   // if (stateParams) {

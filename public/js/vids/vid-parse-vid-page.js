@@ -7,7 +7,7 @@ export const buildVidPageDisplay = async (inputArray) => {
 
   const vidPageList = document.createElement("ul");
   vidPageList.id = "vid-page-array-element";
-  vidPageList.className = "hidden";
+  // vidPageList.className = "hidden";
 
   //set state params
   // if (stateParams) {

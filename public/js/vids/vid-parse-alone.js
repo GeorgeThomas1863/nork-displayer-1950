@@ -6,7 +6,7 @@ export const buildVidAloneDisplay = async (inputArray) => {
 
   const vidList = document.createElement("ul");
   vidList.id = "vid-array-element";
-  vidList.className = "hidden";
+  // vidList.className = "hidden";
 
   // //set state params
   // if (stateParams) {

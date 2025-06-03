@@ -12,7 +12,7 @@ export const buildArticleDisplay = async (inputArray) => {
   const articleList = document.createElement("ul");
   articleList.id = "article-array-element";
   articleList.className = "article-list data-return";
-  articleList.className = "hidden";
+  // articleList.className = "hidden";
 
   // // Set initial state attributes if provided
   // if (stateParams) {
