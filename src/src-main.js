@@ -1,7 +1,8 @@
 import fs from "fs";
 import CONFIG from "../config/config.js";
-import { articleTypeMap, backendDefaultParams, clickIdTriggerMap, expandTriggerMap } from "../config/map-display.js";
+import { articleTypeMap, backendDefaultParams } from "../config/map-display.js";
 import dbModel from "../models/db-model.js";
+import { fixInputDefaults, fixDataByType, checkDataType } from "./src-util.js";
 
 //gets backend data from db
 export const runGetBackendData = async (inputObj) => {
@@ -35,7 +36,7 @@ export const runGetBackendData = async (inputObj) => {
         break;
 
       case "oldest-to-newest":
-        dataArrayRaw = await articleDataModel.getOldestItemsByTypeArrays();
+        dataArrayRaw = await articleDataModel.getOldestItemsByTypeArray();
         break;
     }
   } else {
@@ -65,110 +66,57 @@ export const runGetBackendData = async (inputObj) => {
   return dataObj;
 };
 
-export const fixInputDefaults = async (inputObj) => {
-  const { dataType, howMany } = inputObj;
-  const { articlesHowMany, picsHowMany, picSetsHowMany, vidsHowMany, vidPagesHowMany } = CONFIG;
-  const returnObj = { ...inputObj };
+// GET NEW DATA SECTION
+export const runGetNewData = async (inputObj) => {
+  if (!inputObj) return null;
+  const { articleHowMany, picHowMany, vidHowMany, articleType, articleSortBy, picSortBy, vidSortBy } = inputObj;
 
-  if (howMany) return returnObj;
+  //get data type
+  const dataType = await checkDataType(inputObj);
+  if (!dataType) return null;
 
-  let returnHowMany = 0;
+  //get params
+  const sortKey = backendDefaultParams[dataType].sortKey;
+
+  let sortByRaw = "";
+  let howMany = 0;
   switch (dataType) {
     case "articles":
-      returnHowMany = articlesHowMany;
+      howMany = articleHowMany;
+      sortByRaw = articleSortBy;
       break;
 
     case "pics":
-      returnHowMany = picsHowMany;
-      break;
-
     case "picSets":
-      returnHowMany = picSetsHowMany;
+      howMany = picHowMany;
+      sortByRaw = picSortBy;
       break;
 
     case "vids":
-      returnHowMany = vidsHowMany;
-      break;
-
     case "vidPages":
-      returnHowMany = vidPagesHowMany;
+      howMany = vidHowMany;
+      sortByRaw = vidSortBy;
       break;
   }
 
-  returnObj.howMany = returnHowMany;
-  return returnObj;
+  const paramsObj = {
+    isFirstLoad: false,
+    dataType: dataType,
+    sortKey: sortKey,
+    howMany: howMany,
+    sortBy: sortByRaw.substring(sortByRaw.indexOf("-") + 1),
+    filterKey: "articleType",
+    filterValue: articleType,
+  };
+
+  const newDataObj = await runGetBackendData(paramsObj);
+
+  return newDataObj;
 };
 
-//ADD IN PIC SETS AND VID PAGES
-export const fixDataByType = async (inputArray, dataType) => {
-  if (!inputArray) return null;
+//-------------------------
 
-  const results = [];
-  for (let i = 0; i < inputArray.length; i++) {
-    const inputObj = inputArray[i];
-
-    switch (dataType) {
-      //single pics
-      case "pics":
-        const picURL = inputObj.url;
-        const picDataObj = await getPicData(picURL);
-        if (!picDataObj) continue;
-
-        const picObj = { ...picDataObj, ...inputObj };
-
-        results.push(picObj);
-        break;
-
-      //picArray
-      case "articles":
-      case "picSets":
-        //rebuild pic array (returns INPUTOBJ if no picArray)
-        const picArrayObj = await fixPicArray(inputObj);
-        if (!picArrayObj) continue;
-
-        results.push(picArrayObj);
-        break;
-
-      //pics as thumbnails
-      case "vidPages":
-        //return input
-        const vidDataObj = await fixVidDataArray(inputObj);
-        if (!vidDataObj) continue;
-
-        const vidObj = { ...vidDataObj, ...inputObj };
-        results.push(vidObj);
-        break;
-
-      //might need to fix thumbnail (prob not)
-      case "vids":
-        results.push(inputObj);
-        break;
-    }
-  }
-
-  return results;
-};
-
-//rebuild the picArray
-export const fixPicArray = async (inputObj) => {
-  if (!inputObj || !inputObj.picArray || !inputObj.picArray.length) return inputObj;
-  const { picArray } = inputObj;
-  const returnObj = { ...inputObj };
-
-  const picDataArray = [];
-  for (let i = 0; i < picArray.length; i++) {
-    //gets pic data AND source / date
-    const picDataObj = await getPicData(picArray[i]);
-    if (!picDataObj) continue;
-
-    picDataArray.push(picDataObj);
-  }
-
-  returnObj.picArray = picDataArray;
-  return returnObj;
-};
-
-//get pic data (AND source / date)
+//GET PIC DATA SECTION
 export const getPicData = async (picURL) => {
   if (!picURL) return null;
 
@@ -276,18 +224,8 @@ export const getPicSourceData = async (picURL) => {
 
 //---------------------------
 
-const fixVidDataArray = async (inputArray) => {
-  const results = [];
-  for (let i = 0; i < inputArray.length; i++) {
-    //only one vid so dont need to parse out array (like in pics)
-    const vidObj = await getVidData(inputArray[i].url);
-    results.push(vidObj);
-  }
-
-  return results;
-};
-
-const getVidData = async (vidURL) => {
+//GET VID DATA SECTION
+export const getVidData = async (vidURL) => {
   const { vidsDownloaded } = CONFIG;
 
   const lookupParams = {
@@ -310,144 +248,4 @@ const getVidData = async (vidURL) => {
   }
 
   return vidObj;
-};
-
-//-----------------------------------
-
-// GET NEW DATA SECTION
-export const runGetNewData = async (inputObj) => {
-  if (!inputObj) return null;
-  const { articleHowMany, picHowMany, vidHowMany, articleType, articleSortBy, picSortBy, vidSortBy } = inputObj;
-
-  //get data type
-  const dataType = await getDataType(inputObj);
-  if (!dataType) return null;
-
-  //get params
-  const sortKey = backendDefaultParams[dataType].sortKey;
-
-  let sortByRaw = "";
-  let howMany = 0;
-  switch (dataType) {
-    case "articles":
-      howMany = articleHowMany;
-      sortByRaw = articleSortBy;
-      break;
-
-    case "pics":
-    case "picSets":
-      howMany = picHowMany;
-      sortByRaw = picSortBy;
-      break;
-
-    case "vids":
-    case "vidPages":
-      howMany = vidHowMany;
-      sortByRaw = vidSortBy;
-      break;
-  }
-
-  const paramsObj = {
-    isFirstLoad: false,
-    dataType: dataType,
-    sortKey: sortKey,
-    howMany: howMany,
-    sortBy: sortByRaw.substring(sortByRaw.indexOf("-") + 1),
-    filterKey: "articleType",
-    filterValue: articleType,
-  };
-
-  const newDataObj = await runGetBackendData(paramsObj);
-
-  // console.log("NEW DATA OBJ");
-  // console.log(newDataObj);
-
-  return newDataObj;
-};
-
-export const getDataType = async (inputObj) => {
-  if (!inputObj) return null;
-  const { picType, vidType } = inputObj;
-
-  // console.log("GET DATA TYPE INPUT OBJ");
-  // console.log(inputObj);
-
-  let dataType = "";
-  const expandTypeCheck = await checkExpandType(inputObj);
-  if (expandTypeCheck) dataType = expandTypeCheck;
-
-  const clickIdCheck = await checkClickId(inputObj);
-  if (clickIdCheck) dataType = clickIdCheck;
-
-  if (dataType === "pics") {
-    switch (picType) {
-      case "pic-alone":
-        return "pics";
-
-      case "pic-sets":
-        return "picSets";
-    }
-  }
-
-  if (dataType === "vids") {
-    switch (vidType) {
-      case "vid-alone":
-        return "vids";
-
-      case "vid-pages":
-        return "vidPages";
-    }
-  }
-
-  return dataType;
-};
-
-export const checkExpandType = async (inputObj) => {
-  if (!inputObj || !inputObj.expandType) return null;
-  const { expandType, picType, vidType } = inputObj;
-
-  // console.log("INPUT OBJ");
-  // console.log(inputObj);
-
-  const expandTrigger = expandTriggerMap[expandType];
-  return expandTrigger;
-
-  // console.log("EXPAND TRIGGER");
-  // console.log(expandTrigger);
-
-  // switch (expandTrigger) {
-  //   case "articles":
-  //     return "articles";
-
-  //   case "pics":
-  //     if (picType === "pic-alone") {
-  //       return "pics";
-  //     } else {
-  //       return "picSets";
-  //     }
-
-  //   case "vids":
-  //     if (vidType === "vid-alone") {
-  //       return "vids";
-  //     } else {
-  //       return "vidPages";
-  //     }
-  // }
-
-  // return null;
-};
-
-export const checkClickId = async (inputObj) => {
-  if (!inputObj || !inputObj.clickId) return null;
-  const { clickId } = inputObj;
-
-  //loop
-  for (const k in clickIdTriggerMap) {
-    const trigger = clickIdTriggerMap[k];
-    if (trigger.includes(clickId)) {
-      return k;
-    }
-  }
-
-  return null;
 };
