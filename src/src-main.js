@@ -9,6 +9,9 @@ export const runGetBackendData = async (inputObj) => {
   const { dataType, isFirstLoad } = inputObj;
   const dataObj = {};
 
+  console.log("INPUT OBJ");
+  console.log(inputObj);
+
   const collection = backendDefaultParams[dataType].collection;
 
   let params = {};
