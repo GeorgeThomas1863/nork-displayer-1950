@@ -20,9 +20,6 @@ export const buildPicAloneDisplay = async (inputArray) => {
 export const buildPicList = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
 
-  console.log("BUILD PIC LIST INPUT ARRAY");
-  console.log(inputArray);
-
   const picArrayElement = document.createElement("ul");
   picArrayElement.id = "pic-list-element";
 
@@ -138,6 +135,9 @@ export const picDropDownContainer = async (inputArray, type) => {
 
   const picArrayElement = await buildPicList(inputArray);
   if (!picArrayElement) return null;
+
+  console.log("PIC DROP DOWN CONTAINER PIC ARRAY ELEMENT");
+  console.log(picArrayElement);
 
   //build pic title element
   const picTitleElement = document.createElement("div");
