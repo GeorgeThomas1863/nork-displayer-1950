@@ -67,7 +67,7 @@ export const runGetBackendData = async (inputObj) => {
 
 export const fixInputDefaults = async (inputObj) => {
   const { dataType, howMany } = inputObj;
-  const { articlesHowMany, picsHowMany, vidsHowMany } = CONFIG;
+  const { articlesHowMany, picsHowMany, picSetsHowMany, vidsHowMany, vidPagesHowMany } = CONFIG;
   const returnObj = { ...inputObj };
 
   if (howMany) return returnObj;
@@ -82,8 +82,16 @@ export const fixInputDefaults = async (inputObj) => {
       returnHowMany = picsHowMany;
       break;
 
+    case "picSets":
+      returnHowMany = picSetsHowMany;
+      break;
+
     case "vids":
       returnHowMany = vidsHowMany;
+      break;
+
+    case "vidPages":
+      returnHowMany = vidPagesHowMany;
       break;
   }
 
