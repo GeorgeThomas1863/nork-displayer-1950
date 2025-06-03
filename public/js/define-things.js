@@ -7,6 +7,7 @@ import { buildVidPageDisplay } from "./vids/vid-return-vid-page.js";
 
 const d = {
   backendTypeArr: ["articles", "pics", "picSets", "vids", "vidPages"],
+  formTypeArr: ["articles", "pics", "vids"],
   displayFunctionMap: {
     articles: buildArticleDisplay,
     pics: buildPicAloneDisplay,

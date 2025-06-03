@@ -53,8 +53,8 @@ export const expandBackendData = async (dataType) => {
   console.log(dataType);
   // Build typeMap using the consistent naming pattern
   const typeMap = {};
-  for (let i = 0; i < d.backendTypeArr.length; i++) {
-    const typeValue = d.backendTypeArr[i];
+  for (let i = 0; i < d.formTypeArr.length; i++) {
+    const typeValue = d.formTypeArr[i];
     const formHeader = `${typeValue}-form-header`;
 
     typeMap[formHeader] = {
@@ -83,8 +83,8 @@ export const expandBackendData = async (dataType) => {
   const otherElementArray = [];
   const otherArrowArray = [];
 
-  for (let i = 0; i < typeArray.length; i++) {
-    const typeValue = typeArray[i];
+  for (let i = 0; i < d.backendTypeArr.length; i++) {
+    const typeValue = d.backendTypeArr[i];
     const formHeader = `${typeValue}-form-header`;
 
     if (formHeader !== dataType) {
