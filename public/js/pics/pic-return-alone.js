@@ -20,6 +20,9 @@ export const buildPicAloneDisplay = async (inputArray) => {
 export const buildPicList = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
 
+  console.log("BUILD PIC LIST INPUT ARRAY");
+  console.log(inputArray);
+
   const picArrayElement = document.createElement("ul");
   picArrayElement.id = "pic-list-element";
 
@@ -37,8 +40,8 @@ export const buildPicListItem = async (inputObj) => {
   if (!inputObj || !inputObj.savePath) return null;
   const { savePath } = inputObj;
 
-  console.log("BUILD LIST ITEM INPUT OBJ");
-  console.log(inputObj);
+  // console.log("BUILD LIST ITEM INPUT OBJ");
+  // console.log(inputObj);
 
   const picListItem = document.createElement("li");
   picListItem.id = "pic-list-item";
