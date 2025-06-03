@@ -145,7 +145,7 @@ export const picDropDownContainer = async (inputArray, type) => {
     titleElement: picTitleElement,
     contentElement: picArrayElement,
     isExpanded: true,
-    className: `${typeStr}-pic-collapse`,
+    className: `${type}-pic-collapse`,
   };
 
   console.log("PIC COLLAPSE OBJ!!!!");
