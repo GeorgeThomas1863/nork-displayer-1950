@@ -15,9 +15,6 @@ export const runGetBackendData = async (inputObj) => {
   if (isFirstLoad) {
     //set to default
     params = backendDefaultParams[dataType];
-    console.log("STOP");
-    console.log(params);
-    // params.dataType = dataType;
   } else {
     //use input
     params = await fixInputDefaults(inputObj);

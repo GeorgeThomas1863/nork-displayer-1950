@@ -1,6 +1,6 @@
-//MOVE DEFAULT RETURN ITEMS TO FUCKING CONFIG / SET VID TO 1
+//GET PIC SETS AND VID PAGES TO DISPLAY, CHECK src-main for types its getting / returning
 
-//NOW ADD IN MAP TO DISPLAY NEW DATA
+//FIX PIC STATS (REMOVE FROM ARTICLE PICS / VID PICS)
 
 //MINOR BUG LIST:
 // - put default state params in define-things.js
@@ -8,10 +8,6 @@
 // - failing to get pic stats for vids
 // - pic sort seems to be wrong, check if by date or by id, make by date if possible
 // - border radius on pics is still weird, check collapse container border radius
-
-//UNFUCK ARTICLE TYPE
-
-//MAKE IT SO IT ONLY PULLS PIC DATA ON INITIAL LOAD, PULLS OTHER DATA AS NEEDED
 
 //UNFUCK PIC DISPLAY WITH VERTICAL PICS
 
