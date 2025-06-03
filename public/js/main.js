@@ -64,6 +64,9 @@ export const expandBackendData = async (dataType) => {
     };
   }
 
+  console.log("TYPE MAP!!!!");
+  console.log(typeMap);
+
   const currentTypeData = typeMap[dataType];
   if (!currentTypeData) {
     console.log("INPUT FUCKED");
