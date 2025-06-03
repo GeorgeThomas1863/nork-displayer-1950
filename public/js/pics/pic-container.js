@@ -35,6 +35,8 @@ export const picDropDownContainer = async (inputArray, type) => {
 export const removePicDataByType = async (picArrayElement, type) => {
   if (!picArrayElement || !type) return null;
 
+  const picArrayElementFixed = document.createElement("ul");
+
   const picListItemArray = picArrayElement.querySelectorAll("li");
 
   // const picSourceArray = document.querySelectorAll("#pic-source");
@@ -44,11 +46,11 @@ export const removePicDataByType = async (picArrayElement, type) => {
   for (let i = 0; i < picListItemArray.length; i++) {
     const picListItem = picListItemArray[i];
     const picSourceItem = picListItem.querySelector("#pic-source");
-    console.log("AHHHHHHHHHH");
-    console.log(picSourceItem);
-
-
+    //remove the source
+    picSourceItem.remove();
+    //add to container
+    picArrayElementFixed.append(picListItem);
   }
 
-  return ;
+  return picArrayElementFixed;
 };
