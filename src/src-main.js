@@ -373,7 +373,7 @@ export const getDataType = async (inputObj) => {
       case "pic-alone":
         return "pics";
 
-      case "pic-set":
+      case "pic-sets":
         return "picSets";
     }
   }
@@ -383,7 +383,7 @@ export const getDataType = async (inputObj) => {
       case "vid-alone":
         return "vids";
 
-      case "vid-page":
+      case "vid-pages":
         return "vidPages";
     }
   }
