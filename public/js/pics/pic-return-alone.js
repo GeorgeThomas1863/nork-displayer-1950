@@ -168,7 +168,7 @@ export const removePicDataByType = async (picArrayElement, type) => {
 
   for (let i = 0; i < picListItemArray.length; i++) {
     const picListItem = picListItemArray[i];
-    const picSource = picListItem.getElementById("pic-source");
+    const picSource = picListItem.querySelector("#pic-source");
     if (picSource) {
       picSource.remove();
     }
