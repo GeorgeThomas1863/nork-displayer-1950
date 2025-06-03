@@ -69,8 +69,8 @@ export const expandBackendData = async (dataType) => {
   const currentArrow = currentTypeData.arrowElement();
   const isCurrentExpanded = currentArrow.classList.contains("expanded");
 
-  console.log("CURRENT ARROW!!!!");
-  console.log(currentArrow);
+  // console.log("CURRENT ARROW!!!!");
+  // console.log(currentArrow);
 
   // Get all form headers by looping through baseTypes
   const currentElementArray = [currentTypeData.wrapperElement(), currentTypeData.dataElement()];
@@ -88,6 +88,9 @@ export const expandBackendData = async (dataType) => {
       otherArrowArray.push(typeData.arrowElement());
     }
   }
+
+  console.log("OTHER ELEMENT ARRAY!!!!");
+  console.log(otherElementArray);
 
   if (isCurrentExpanded) {
     await hideArray(otherElementArray);
