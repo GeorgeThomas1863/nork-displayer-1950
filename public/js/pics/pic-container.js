@@ -49,5 +49,8 @@ export const removePicDataByType = async (picArrayElement, type) => {
     }
   }
 
+  console.log("PIC ARRAY ELEMENT");
+  console.log(picArrayElement);
+
   return picArrayElement;
 };
