@@ -159,6 +159,11 @@ export const picDropDownContainer = async (inputArray, type) => {
   return picCollapseElement;
 };
 
+//!!!!
+//HERE
+//!!!!!!
+
+//FIGURE OUT BELOW LOOP
 export const removePicDataByType = async (picArrayElement, type) => {
   if (!picArrayElement || !type) return null;
 

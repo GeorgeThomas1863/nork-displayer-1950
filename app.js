@@ -1,6 +1,4 @@
-//GET PIC SETS AND VID PAGES TO DISPLAY, CHECK src-main for types its getting / returning
-
-//FIX PIC STATS (REMOVE FROM ARTICLE PICS / VID PICS)
+//FIX PIC STATS (REMOVE FROM ARTICLE PICS / VID PICS) ON PIC ALONE
 
 //MINOR BUG LIST:
 // - put default state params in define-things.js
