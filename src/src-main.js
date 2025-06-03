@@ -20,6 +20,9 @@ export const runGetBackendData = async (inputObj) => {
     params = await fixInputDefaults(inputObj);
   }
 
+  console.log("RUN GET BACKEND DATA PARAMS");
+  console.log(params);
+
   //handle articles
   let dataArrayRaw = [];
   const { sortBy } = params;
@@ -358,8 +361,8 @@ export const getDataType = async (inputObj) => {
   if (!inputObj) return null;
   const { picType, vidType } = inputObj;
 
-  console.log("GET DATA TYPE INPUT OBJ");
-  console.log(inputObj);
+  // console.log("GET DATA TYPE INPUT OBJ");
+  // console.log(inputObj);
 
   let dataType = "";
   const expandTypeCheck = await checkExpandType(inputObj);
