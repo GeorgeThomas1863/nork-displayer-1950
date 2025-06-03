@@ -35,9 +35,9 @@ export const picDropDownContainer = async (inputArray, type) => {
 export const removePicDataByType = async (picArrayElement, type) => {
   if (!picArrayElement || !type) return null;
 
-  const picListItemArray = picArrayElement.querySelectorAll("li");
+  // const picListItemArray = picArrayElement.querySelectorAll("li");
 
-  const picSourceArray = picListItemArray.querySelectorAll("#pic-source");
+  const picSourceArray = document.querySelectorAll("#pic-source");
 
   console.log("PIC SOURCE ARRAY");
   console.log(picSourceArray);
