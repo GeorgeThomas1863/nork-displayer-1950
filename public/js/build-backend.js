@@ -3,7 +3,6 @@ import { sendToBack, buildFailElement } from "./util.js";
 
 //get display element
 const displayElement = document.getElementById("display-element");
-s;
 
 //BUILDS DEFAULT DISPLAY
 export const buildBackendDefault = async (inputObj) => {
