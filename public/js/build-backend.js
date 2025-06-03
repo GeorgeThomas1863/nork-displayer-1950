@@ -1,6 +1,10 @@
 import d from "./define-things.js";
 import { sendToBack, buildFailElement } from "./util.js";
 
+//get display element
+const displayElement = document.getElementById("display-element");
+s;
+
 //BUILDS DEFAULT DISPLAY
 export const buildBackendDefault = async (inputObj) => {
   if (!inputObj) return null;
@@ -45,12 +49,15 @@ export const buildBackendNew = async (inputObj) => {
   const { dataType } = inputObj;
   const newDataArray = inputObj[dataType];
 
+  const func = d.newDataDisplayMap[dataType];
+  const newDataWrapper = await func(newDataArray);
+
   //FIGURE OUT WAY TO MAKE THIS DYNAMIC
   // const articleReturnData = await buildArticleReturnDisplay(newDataArray);
 
   const backendDataWrapper = document.getElementById("backend-data-wrapper");
 
-  // displayElement.replaceChild(articleReturnData, backendDataWrapper);
+  displayElement.replaceChild(newDataWrapper, backendDataWrapper);
 
   return true;
 };

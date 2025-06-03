@@ -46,7 +46,8 @@ export const buildDefaultArticleDisplay = async (inputArray, stateParams = null)
 //--------------------------------
 
 //GET NEW ARTICLE DATA
-export const buildNewArticleDisplay = async () => {
+export const buildNewArticleDisplay = async (inputArray) => {
+  if (!inputArray || !inputArray.length) return null;
   //get user input
   // const inputParams = await buildInputParams();
   // if (!inputParams || !inputParams.articleType || !inputParams.articleHowMany || !inputParams.articleSortBy) return null;
