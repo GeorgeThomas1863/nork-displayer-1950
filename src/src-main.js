@@ -356,6 +356,7 @@ export const runGetNewData = async (inputObj) => {
 
 export const getDataType = async (inputObj) => {
   if (!inputObj) return null;
+  const { picType, vidType } = inputObj;
 
   console.log("GET DATA TYPE INPUT OBJ");
   console.log(inputObj);
@@ -367,8 +368,25 @@ export const getDataType = async (inputObj) => {
   const clickIdCheck = await checkClickId(inputObj);
   if (clickIdCheck) dataType = clickIdCheck;
 
-  console.log("GET DATA TYPE DATA TYPE");
-  console.log(dataType);
+  if (dataType === "pics") {
+    switch (picType) {
+      case "pic-alone":
+        return "pics";
+
+      case "pic-set":
+        return "picSets";
+    }
+  }
+
+  if (dataType === "vids") {
+    switch (vidType) {
+      case "vid-alone":
+        return "vids";
+
+      case "vid-page":
+        return "vidPages";
+    }
+  }
 
   return dataType;
 };
@@ -381,30 +399,31 @@ export const checkExpandType = async (inputObj) => {
   // console.log(inputObj);
 
   const expandTrigger = expandTriggerMap[expandType];
+  return expandTrigger;
 
   // console.log("EXPAND TRIGGER");
   // console.log(expandTrigger);
 
-  switch (expandTrigger) {
-    case "articles":
-      return "articles";
+  // switch (expandTrigger) {
+  //   case "articles":
+  //     return "articles";
 
-    case "pics":
-      if (picType === "pic-alone") {
-        return "pics";
-      } else {
-        return "picSets";
-      }
+  //   case "pics":
+  //     if (picType === "pic-alone") {
+  //       return "pics";
+  //     } else {
+  //       return "picSets";
+  //     }
 
-    case "vids":
-      if (vidType === "vid-alone") {
-        return "vids";
-      } else {
-        return "vidPages";
-      }
-  }
+  //   case "vids":
+  //     if (vidType === "vid-alone") {
+  //       return "vids";
+  //     } else {
+  //       return "vidPages";
+  //     }
+  // }
 
-  return null;
+  // return null;
 };
 
 export const checkClickId = async (inputObj) => {
