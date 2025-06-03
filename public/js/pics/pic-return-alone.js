@@ -146,9 +146,6 @@ export const picDropDownContainer = async (inputArray, type) => {
     className: `${type}-pic-collapse`,
   };
 
-  console.log("PIC COLLAPSE OBJ!!!!");
-  console.log(picCollapseObj);
-
   const picCollapseElement = await buildCollapseContainer(picCollapseObj);
 
   return picCollapseElement;

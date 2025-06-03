@@ -38,9 +38,6 @@ export const buildBackendDefault = async (inputObj) => {
 export const buildBackendNew = async (inputObj) => {
   if (!inputObj || !inputObj.dataType) return null;
 
-  console.log("DISPLAY NEW DATA");
-  console.log(inputObj);
-
   const { dataType } = inputObj;
   const newDataArray = inputObj[dataType];
 
