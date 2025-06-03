@@ -69,7 +69,7 @@ export const buildPicSetElement = async (inputObj) => {
   picSetElement.id = "pic-set-element";
 
   //Add pics as collapse
-  const picSetPicData = await picDropDownContainer(picArray, "PicSet");
+  const picSetPicData = await picDropDownContainer(picArray, "picSet");
   if (picSetPicData) {
     picSetElement.append(picSetPicData);
   }
