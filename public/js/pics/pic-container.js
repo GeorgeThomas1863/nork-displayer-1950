@@ -5,10 +5,10 @@ import { buildCollapseContainer } from "../collapse.js";
 export const picDropDownContainer = async (inputArray, type) => {
   if (!inputArray || !inputArray.length) return null;
 
-  const picArrayElementRaw = await buildPicList(inputArray);
-  if (!picArrayElementRaw) return null;
+  const picArrayElement = await buildPicList(inputArray, false);
+  if (!picArrayElement) return null;
 
-  const picArrayElement = await removePicDataByType(picArrayElementRaw, type);
+  // const picArrayElement = await removePicDataByType(picArrayElementRaw, type);
 
   // console.log("PIC DROP DOWN CONTAINER PIC ARRAY ELEMENT");
   // console.log(picArrayElement);
@@ -32,25 +32,25 @@ export const picDropDownContainer = async (inputArray, type) => {
 };
 
 //FIGURE OUT BELOW LOOP
-export const removePicDataByType = async (picArrayElement, type) => {
-  if (!picArrayElement || !type) return null;
+// export const removePicDataByType = async (picArrayElement, type) => {
+//   if (!picArrayElement || !type) return null;
 
-  const picArrayElementFixed = document.createElement("ul");
+//   const picArrayElementFixed = document.createElement("ul");
 
-  const picListItemArray = picArrayElement.querySelectorAll("li");
+//   const picListItemArray = picArrayElement.querySelectorAll("li");
 
-  // const picSourceArray = document.querySelectorAll("#pic-source");
+//   // const picSourceArray = document.querySelectorAll("#pic-source");
 
-  // if (type !== "article" && type !== "picSet") return null;
+//   // if (type !== "article" && type !== "picSet") return null;
 
-  for (let i = 0; i < picListItemArray.length; i++) {
-    const picListItem = picListItemArray[i];
-    const picSourceItem = picListItem.querySelector("#pic-source");
-    //remove the source
-    picSourceItem.remove();
-    //add to container
-    picArrayElementFixed.append(picListItem);
-  }
+//   for (let i = 0; i < picListItemArray.length; i++) {
+//     const picListItem = picListItemArray[i];
+//     const picSourceItem = picListItem.querySelector("#pic-source");
+//     //remove the source
+//     picSourceItem.remove();
+//     //add to container
+//     picArrayElementFixed.append(picListItem);
+//   }
 
-  return picArrayElementFixed;
-};
+//   return picArrayElementFixed;
+// };

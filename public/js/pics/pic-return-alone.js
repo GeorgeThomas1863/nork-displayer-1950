@@ -17,14 +17,14 @@ export const buildPicAloneDisplay = async (inputArray) => {
   return picList;
 };
 
-export const buildPicList = async (inputArray) => {
+export const buildPicList = async (inputArray, fullStats = true) => {
   if (!inputArray || !inputArray.length) return null;
 
   const picArrayElement = document.createElement("ul");
   picArrayElement.id = "pic-list-element";
 
   for (let i = 0; i < inputArray.length; i++) {
-    const picListItem = await buildPicListItem(inputArray[i]);
+    const picListItem = await buildPicListItem(inputArray[i], fullStats);
     if (!picListItem) continue;
 
     picArrayElement.append(picListItem);
@@ -33,7 +33,7 @@ export const buildPicList = async (inputArray) => {
   return picArrayElement;
 };
 
-export const buildPicListItem = async (inputObj) => {
+export const buildPicListItem = async (inputObj, fullStats = true) => {
   if (!inputObj || !inputObj.savePath) return null;
   const { savePath } = inputObj;
 
@@ -45,7 +45,7 @@ export const buildPicListItem = async (inputObj) => {
 
   //build pic / stat elements
   const picElement = await buildPicElement(savePath);
-  const picStatsElement = await buildPicStatsElement(inputObj);
+  const picStatsElement = await buildPicStatsElement(inputObj, fullStats);
 
   picListItem.append(picElement, picStatsElement);
 
@@ -70,7 +70,7 @@ export const buildPicElement = async (savePath) => {
 };
 
 //build pic stats
-export const buildPicStatsElement = async (inputObj) => {
+export const buildPicStatsElement = async (inputObj, fullStats = true) => {
   if (!inputObj) return null;
   const { picDate, picSource, headerData } = inputObj;
 
@@ -78,10 +78,16 @@ export const buildPicStatsElement = async (inputObj) => {
   picStatsElement.id = "pic-stats";
 
   const picDateElement = await buildPicDateElement(picDate);
-  const picSourceElement = await buildPicSourceElement(picSource);
-  const picServerElement = await buildPicServerElement(headerData);
+  picStatsElement.append(picDateElement);
 
-  picStatsElement.append(picDateElement, picSourceElement, picServerElement);
+  //only include source on full stats
+  if (fullStats) {
+    const picSourceElement = await buildPicSourceElement(picSource);
+    picStatsElement.append(picSourceElement);
+  }
+
+  const picServerElement = await buildPicServerElement(headerData);
+  picStatsElement.append(picServerElement);
 
   return picStatsElement;
 };
