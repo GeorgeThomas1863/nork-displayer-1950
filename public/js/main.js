@@ -49,6 +49,8 @@ export const getNewData = async (inputObj) => {
 
 //better version of expand backend data equation
 export const expandBackendData = async (dataType) => {
+  console.log("AHHHHHHHHHHHHHH");
+  console.log(dataType);
   // Build typeMap using the consistent naming pattern
   const typeMap = {};
   for (let i = 0; i < d.backendTypeArr.length; i++) {
@@ -72,9 +74,9 @@ export const expandBackendData = async (dataType) => {
   const isCurrentExpanded = currentArrow.classList.contains("expanded");
 
   // Get all form headers by looping through baseTypes
-  const currentElements = [currentTypeData.wrapperElement(), currentTypeData.dataElement()];
-  const otherElements = [];
-  const otherArrows = [];
+  const currentElementArray = [currentTypeData.wrapperElement(), currentTypeData.dataElement()];
+  const otherElementArray = [];
+  const otherArrowArray = [];
 
   for (let i = 0; i < typeArray.length; i++) {
     const typeValue = typeArray[i];
@@ -82,21 +84,21 @@ export const expandBackendData = async (dataType) => {
 
     if (formHeader !== dataType) {
       const typeData = typeMap[formHeader];
-      otherElements.push(typeData.wrapperElement());
-      otherElements.push(typeData.dataElement());
-      otherArrows.push(typeData.arrowElement());
+      otherElementArray.push(typeData.wrapperElement());
+      otherElementArray.push(typeData.dataElement());
+      otherArrowArray.push(typeData.arrowElement());
     }
   }
 
   if (isCurrentExpanded) {
-    await hideArray(otherElements);
-    await unhideArray(currentElements);
+    await hideArray(otherElementArray);
+    await unhideArray(currentElementArray);
 
-    for (let i = 0; i < otherArrows.length; i++) {
-      otherArrows[i].classList.remove("expanded");
+    for (let i = 0; i < otherArrowArray.length; i++) {
+      otherArrowArray[i].classList.remove("expanded");
     }
   } else {
-    await hideArray(currentElements);
+    await hideArray(currentElementArray);
   }
 
   return true;
