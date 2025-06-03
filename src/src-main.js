@@ -69,6 +69,9 @@ export const fixInputDefaults = async (inputObj) => {
   const { articleHowMany, picHowMany, vidHowMany } = inputObj;
   const returnObj = { ...inputObj };
 
+  console.log("AHHHHHHHHH");
+  console.log(inputObj);
+
   if (!articleHowMany) returnObj.articleHowMany = 5;
   if (!picHowMany) returnObj.picHowMany = 9;
   if (!vidHowMany) returnObj.vidHowMany = 1;
