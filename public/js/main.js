@@ -64,12 +64,6 @@ export const expandBackendData = async (dataType) => {
     };
   }
 
-  console.log("TYPE MAP!!!!");
-  console.log(typeMap);
-
-  const currentTypeData = typeMap[dataType];
-  console.log("CURRENT TYPE DATA!!!!");
-  console.log(currentTypeData);
   // if (!currentTypeData) {
   //   console.log("INPUT FUCKED");
   //   return null;
@@ -77,6 +71,9 @@ export const expandBackendData = async (dataType) => {
 
   const currentArrow = currentTypeData.arrowElement();
   const isCurrentExpanded = currentArrow.classList.contains("expanded");
+
+  console.log("CURRENT ARROW!!!!");
+  console.log(currentArrow);
 
   // Get all form headers by looping through baseTypes
   const currentElementArray = [currentTypeData.wrapperElement(), currentTypeData.dataElement()];
