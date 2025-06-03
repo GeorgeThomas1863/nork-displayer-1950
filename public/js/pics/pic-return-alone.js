@@ -130,6 +130,9 @@ export const buildPicServerElement = async (headerData) => {
 export const picDropDownContainer = async (inputArray, type) => {
   if (!inputArray || !inputArray.length) return null;
 
+  console.log("TYPE!!!!");
+  console.log(type);
+
   const picArrayElement = await buildPicList(inputArray);
   if (!picArrayElement) return null;
 
