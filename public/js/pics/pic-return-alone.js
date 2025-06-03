@@ -133,12 +133,10 @@ export const picDropDownContainer = async (inputArray, type) => {
   const picArrayElement = await buildPicList(inputArray);
   if (!picArrayElement) return null;
 
-  const typeStr = type.toUpperCase();
-
   //build pic title element
   const picTitleElement = document.createElement("div");
-  picTitleElement.id = `${typeStr}-pic-header`;
-  picTitleElement.textContent = `${inputArray.length} ${typeStr} PIC${inputArray.length > 1 ? "S" : ""}`;
+  picTitleElement.id = `${type}-pic-header`;
+  picTitleElement.textContent = `${inputArray.length} ${type.toUpperCase()} PIC${inputArray.length > 1 ? "S" : ""}`;
 
   //build collapse container
   const picCollapseObj = {
