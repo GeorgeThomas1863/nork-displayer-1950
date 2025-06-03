@@ -357,11 +357,15 @@ export const runGetNewData = async (inputObj) => {
 export const getDataType = async (inputObj) => {
   if (!inputObj) return null;
 
+  console.log("GET DATA TYPE INPUT OBJ");
+  console.log(inputObj);
+
+  let dataType = "";
   const expandTypeCheck = await checkExpandType(inputObj);
-  if (expandTypeCheck) return expandTypeCheck;
+  if (expandTypeCheck) dataType = expandTypeCheck;
 
   const clickIdCheck = await checkClickId(inputObj);
-  if (clickIdCheck) return clickIdCheck;
+  if (clickIdCheck) dataType = clickIdCheck;
 
   return null;
 };
@@ -370,13 +374,13 @@ export const checkExpandType = async (inputObj) => {
   if (!inputObj || !inputObj.expandType) return null;
   const { expandType, picType, vidType } = inputObj;
 
-  console.log("INPUT OBJ");
-  console.log(inputObj);
+  // console.log("INPUT OBJ");
+  // console.log(inputObj);
 
   const expandTrigger = expandTriggerMap[expandType];
 
-  console.log("EXPAND TRIGGER");
-  console.log(expandTrigger);
+  // console.log("EXPAND TRIGGER");
+  // console.log(expandTrigger);
 
   switch (expandTrigger) {
     case "articles":
@@ -403,6 +407,9 @@ export const checkExpandType = async (inputObj) => {
 export const checkClickId = async (inputObj) => {
   if (!inputObj || !inputObj.clickId) return null;
   const { clickId } = inputObj;
+
+  console.log("CLICK ID");
+  console.log(clickId);
 
   //loop
   for (const k in clickIdTriggerMap) {
