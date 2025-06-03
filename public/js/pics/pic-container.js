@@ -39,16 +39,15 @@ export const removePicDataByType = async (picArrayElement, type) => {
 
   const picSourceArray = document.querySelectorAll("#pic-source");
 
-  console.log("PIC SOURCE ARRAY");
-  console.log(picSourceArray[0]);
-
   // if (type !== "article" && type !== "picSet") return null;
 
-  // for (let i = 0; i < picListItemArray.length; i++) {
-  //   const picListItem = picListItemArray[i];
+  for (let i = 0; i < picSourceArray.length; i++) {
+    const picSourceItem = picSourceArray[i];
 
-  //   if (picSource) {
-  //     picSource.remove();
-  //   }
-  // }
+    if (picSourceItem) {
+      picSourceItem.remove();
+    }
+  }
+
+  return picArrayElement;
 };
