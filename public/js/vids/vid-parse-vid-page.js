@@ -2,7 +2,7 @@ import { buildVidPageListItem } from "./vid-elements.js";
 import { defineCollapseItems } from "../collapse.js";
 
 //VID PAGE DISPLAY
-export const buildDefaultVidPageDisplay = async (inputArray, stateParams = null) => {
+export const buildVidPageDisplay = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
 
   const vidPageList = document.createElement("ul");
@@ -10,14 +10,14 @@ export const buildDefaultVidPageDisplay = async (inputArray, stateParams = null)
   vidPageList.className = "hidden";
 
   //set state params
-  if (stateParams) {
-    //state params from user input
-    setCurrentVidPageState(vidPageList, stateParams);
-  } else {
-    //handle initial load
-    const defaultStateParams = ["vid-pages", 5, "vid-newest-to-oldest"];
-    setCurrentVidPageState(vidPageList, defaultStateParams);
-  }
+  // if (stateParams) {
+  //   //state params from user input
+  //   setCurrentVidPageState(vidPageList, stateParams);
+  // } else {
+  //   //handle initial load
+  //   const defaultStateParams = ["vid-pages", 5, "vid-newest-to-oldest"];
+  //   setCurrentVidPageState(vidPageList, defaultStateParams);
+  // }
 
   let isFirst = true;
   const collapseArray = [];
@@ -39,25 +39,25 @@ export const buildDefaultVidPageDisplay = async (inputArray, stateParams = null)
   return vidPageList;
 };
 
-export const buildNewVidPageDisplay = async () => {};
+// export const buildNewVidPageDisplay = async () => {};
 
-// Helper function to get current vid state from DOM element
-export const getCurrentVidPageState = (vidElement) => {
-  // if (!vidElement) {
-  //   // If no element exists, return initial default state
-  //   return ["vid-alone", 3, "vid-newest-to-oldest"];
-  // }
-  // const vidType = vidElement.getAttribute("data-vid-type") || "vid-alone";
-  // const vidHowMany = parseInt(vidElement.getAttribute("data-vid-how-many")) || 3;
-  // const vidSortBy = vidElement.getAttribute("data-vid-sort-by") || "vid-newest-to-oldest";
-  // return [vidType, vidHowMany, vidSortBy];
-};
+// // Helper function to get current vid state from DOM element
+// export const getCurrentVidPageState = (vidElement) => {
+//   // if (!vidElement) {
+//   //   // If no element exists, return initial default state
+//   //   return ["vid-alone", 3, "vid-newest-to-oldest"];
+//   // }
+//   // const vidType = vidElement.getAttribute("data-vid-type") || "vid-alone";
+//   // const vidHowMany = parseInt(vidElement.getAttribute("data-vid-how-many")) || 3;
+//   // const vidSortBy = vidElement.getAttribute("data-vid-sort-by") || "vid-newest-to-oldest";
+//   // return [vidType, vidHowMany, vidSortBy];
+// };
 
-// Helper function to store current vid state on DOM element
-export const setCurrentVidPageState = (vidElement, inputArray) => {
-  // if (!vidElement || !inputArray || inputArray.length < 3) return;
-  // const [vidType, vidHowMany, vidSortBy] = inputArray;
-  // vidElement.setAttribute("data-vid-type", vidType);
-  // vidElement.setAttribute("data-vid-how-many", vidHowMany.toString());
-  // vidElement.setAttribute("data-vid-sort-by", vidSortBy);
-};
+// // Helper function to store current vid state on DOM element
+// export const setCurrentVidPageState = (vidElement, inputArray) => {
+//   // if (!vidElement || !inputArray || inputArray.length < 3) return;
+//   // const [vidType, vidHowMany, vidSortBy] = inputArray;
+//   // vidElement.setAttribute("data-vid-type", vidType);
+//   // vidElement.setAttribute("data-vid-how-many", vidHowMany.toString());
+//   // vidElement.setAttribute("data-vid-sort-by", vidSortBy);
+// };

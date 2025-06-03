@@ -2,22 +2,22 @@ import { buildPicSetListItem } from "./pic-elements.js";
 import { defineCollapseItems } from "../collapse.js";
 
 //PIC SET DISPLAY
-export const buildDefaultPicSetDisplay = async (inputArray, stateParams = null) => {
+export const buildPicSetDisplay = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
 
   const picSetList = document.createElement("ul");
   picSetList.id = "pic-set-array-element";
   picSetList.className = "hidden";
 
-  //set state params
-  if (stateParams) {
-    //state params from user input
-    setCurrentPicSetState(picSetList, stateParams);
-  } else {
-    //handle initial load
-    const defaultStateParams = ["pic-sets", 5, "pic-newest-to-oldest"];
-    setCurrentPicSetState(picSetList, defaultStateParams);
-  }
+  // //set state params
+  // if (stateParams) {
+  //   //state params from user input
+  //   setCurrentPicSetState(picSetList, stateParams);
+  // } else {
+  //   //handle initial load
+  //   const defaultStateParams = ["pic-sets", 5, "pic-newest-to-oldest"];
+  //   setCurrentPicSetState(picSetList, defaultStateParams);
+  // }
 
   let isFirst = true;
   const collapseArray = [];
@@ -39,6 +39,6 @@ export const buildDefaultPicSetDisplay = async (inputArray, stateParams = null) 
   return picSetList;
 };
 
-export const buildNewPicSetDisplay = async () => {};
+// export const buildNewPicSetDisplay = async () => {};
 
-export const setCurrentPicSetState = () => {};
+// export const setCurrentPicSetState = () => {};

@@ -26,7 +26,7 @@ export const buildBackendDefault = async (inputObj) => {
   backendDataWrapper.id = "backend-data-wrapper";
 
   //parse backend data
-  const func = d.defaultDataDisplayMap[dataType];
+  const func = d.displayFunctionMap[dataType];
   const dataElement = await func(backendDataObj[dataType]);
   backendDataWrapper.append(dataElement);
 
@@ -34,10 +34,6 @@ export const buildBackendDefault = async (inputObj) => {
 
   return backendDataWrapper;
 };
-
-//!!!!!!!!!!!!!
-//HERE
-//!!!!!!!
 
 //ADD IN MAP HERE FROM d to parse data
 export const buildBackendNew = async (inputObj) => {
@@ -49,15 +45,14 @@ export const buildBackendNew = async (inputObj) => {
   const { dataType } = inputObj;
   const newDataArray = inputObj[dataType];
 
-  const func = d.newDataDisplayMap[dataType];
-  const newDataWrapper = await func(newDataArray);
-
-  //FIGURE OUT WAY TO MAKE THIS DYNAMIC
-  // const articleReturnData = await buildArticleReturnDisplay(newDataArray);
+  const func = d.displayFunctionMap[dataType];
+  const newDataElement = await func(newDataArray);
 
   const backendDataWrapper = document.getElementById("backend-data-wrapper");
 
-  displayElement.replaceChild(newDataWrapper, backendDataWrapper);
+  backendDataWrapper.replaceChild(newDataElement, backendDataWrapper.firstElementChild);
+
+  displayElement.append(backendDataWrapper);
 
   return true;
 };
