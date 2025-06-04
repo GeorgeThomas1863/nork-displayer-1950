@@ -1,5 +1,7 @@
 //STYLE DATE COLLAPSE (DO YOURSELF, CHANGE CLASS NAMES AS APPROPRIATE)
 
+//UNFUCK THUMBNAIL PIC STATS
+
 //MINOR BUG LIST:
 // - put default state params in define-things.js
 // - collapse container are wrong width when all articles collpased
