@@ -23,8 +23,6 @@ export const buildVidListItem = async (inputObj) => {
   const vidListItem = document.createElement("li");
   vidListItem.id = "vid-list-item";
 
-  //ADD pic stats here (scrape date, server, size, etc)
-
   const vidElement = await buildVidElement(savePath);
   vidListItem.append(vidElement);
 

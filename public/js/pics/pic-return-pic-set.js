@@ -29,7 +29,7 @@ export const buildPicSetDisplay = async (inputArray) => {
 };
 
 export const buildPicSetListItem = async (inputObj, isFirst) => {
-  const { title } = inputObj;
+  const { title, date } = inputObj;
 
   const picSetListItem = document.createElement("li");
   picSetListItem.className = "pic-set-list-item";
@@ -39,12 +39,14 @@ export const buildPicSetListItem = async (inputObj, isFirst) => {
 
   //build title element
   const titleElement = await buildPicSetTitle(title);
+  const dateElement = await buildPicSetDate(date);
 
   // Wrap the article content in a collapsible
   const picSetCollapseObj = {
     titleElement: titleElement,
     contentElement: picSetElement,
     isExpanded: isFirst,
+    dateElement: dateElement,
     className: "pic-set-element-collapse",
   };
 
@@ -63,7 +65,7 @@ export const buildPicSetTitle = async (title) => {
 };
 
 export const buildPicSetElement = async (inputObj) => {
-  const { date, picArray } = inputObj;
+  const { picArray } = inputObj;
 
   const picSetElement = document.createElement("article");
   picSetElement.id = "pic-set-element";
@@ -73,11 +75,6 @@ export const buildPicSetElement = async (inputObj) => {
   if (picSetPicData) {
     picSetElement.append(picSetPicData);
   }
-
-  // Then append date and text after pictures (title is handled by collapse header)
-  const dateElement = await buildPicSetDate(date);
-
-  picSetElement.append(dateElement);
 
   return picSetElement;
 };
@@ -94,5 +91,3 @@ export const buildPicSetDate = async (date) => {
 
   return dateElement;
 };
-
-

@@ -29,7 +29,7 @@ export const buildVidPageDisplay = async (inputArray) => {
 };
 
 export const buildVidPageListItem = async (inputObj, isFirst) => {
-  const { title } = inputObj;
+  const { title, date } = inputObj;
 
   const vidPageListItem = document.createElement("li");
   vidPageListItem.className = "vid-page-list-item";
@@ -39,12 +39,14 @@ export const buildVidPageListItem = async (inputObj, isFirst) => {
 
   //build title element
   const titleElement = await buildVidPageTitle(title);
+  const dateElement = await buildVidPageDate(date);
 
   // Wrap the article content in a collapsible
   const vidPageCollapseObj = {
     titleElement: titleElement,
     contentElement: vidPageElement,
     isExpanded: isFirst,
+    dateElement: dateElement,
     className: "vid-page-element-collapse",
   };
 
@@ -64,17 +66,13 @@ export const buildVidPageTitle = async (title) => {
 
 //NEED TO ENSURE SAVE PATH IS IN INPUT OBJ
 export const buildVidPageElement = async (inputObj) => {
-  const { date, savePath } = inputObj;
+  const { savePath } = inputObj;
 
   const vidPageElement = document.createElement("article");
   vidPageElement.id = "vid-page-element";
 
-  // Then append date and text after pictures (title is handled by collapse header)
-  const dateElement = await buildVidPageDate(date);
-
   const vidElement = await buildVidElement(savePath);
-
-  vidPageElement.append(dateElement, vidElement);
+  vidPageElement.append(vidElement);
 
   return vidPageElement;
 };

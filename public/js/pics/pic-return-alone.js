@@ -35,9 +35,6 @@ export const buildPicListItem = async (inputObj, fullStats = true) => {
   if (!inputObj || !inputObj.savePath) return null;
   const { savePath } = inputObj;
 
-  // console.log("BUILD LIST ITEM INPUT OBJ");
-  // console.log(inputObj);
-
   const picListItem = document.createElement("li");
   picListItem.id = "pic-list-item";
 

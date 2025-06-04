@@ -73,7 +73,7 @@ export const buildArticleElement = async (inputObj) => {
 
   const textElement = await buildText(text);
 
-  articleElement.append(dateElement, textElement);
+  articleElement.append(textElement);
 
   return articleElement;
 };
