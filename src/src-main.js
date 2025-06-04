@@ -21,8 +21,8 @@ export const runGetBackendData = async (inputObj) => {
     params = await fixInputDefaults(inputObj);
   }
 
-  console.log("RUN GET BACKEND DATA PARAMS");
-  console.log(params);
+  // console.log("RUN GET BACKEND DATA PARAMS");
+  // console.log(params);
 
   //handle articles
   let dataArrayRaw = [];
