@@ -17,18 +17,17 @@ export const buildCollapseContainer = async (inputObj) => {
   arrow.id = "collapse-arrow";
   arrow.className = isExpanded ? "collapse-arrow expanded" : "collapse-arrow";
   arrow.setAttribute("data-expand", dataAttribute);
+  collapseHeader.append(arrow);
 
   titleElement.className = "collapse-title";
   titleElement.setAttribute("data-expand", dataAttribute);
+  collapseHeader.append(titleElement);
 
   // Add date if not null
   if (dateElement) {
     dateElement.className = "collapse-date";
     dateElement.setAttribute("data-expand", dataAttribute);
-
-    collapseHeader.append(arrow, titleElement, dateElement);
-  } else {
-    collapseHeader.append(arrow, titleElement);
+    collapseHeader.append(dateElement);
   }
 
   //below preserves existing classes on content
