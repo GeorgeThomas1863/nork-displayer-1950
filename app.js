@@ -1,5 +1,7 @@
 //ADD DATE ELEMENT TO DROP DOWN COLLAPSE / STYLE IT
 
+//CURSOR
+
 //MINOR BUG LIST:
 // - put default state params in define-things.js
 // - collapse container are wrong width when all articles collpased
