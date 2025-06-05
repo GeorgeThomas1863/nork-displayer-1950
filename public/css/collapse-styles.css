@@ -22,9 +22,9 @@
   background-color: #b3d9ff;
 }
 
-.collapse-header:hover .title-arrow-wrapper {
+/* .collapse-header:hover .title-arrow-wrapper {
   background-color: #b3d9ff;
-}
+} */
 
 .collapse-header:active {
   transform: scale(0.99);
