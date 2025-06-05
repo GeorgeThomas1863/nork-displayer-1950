@@ -1,9 +1,9 @@
 /* COLLAPSE COMPONENT STYLES */
-.title-arrow-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 16px 20px;
+.collapse-header {
+  display: block;
+  /* justify-content: center;
+  align-items: center; */
+  /* padding: 16px 20px; */
   background-color: rgb(235, 235, 235);
   cursor: pointer;
   user-select: none;
@@ -14,7 +14,7 @@
   overflow: hidden;
 }
 
-/* .collapse-header {
+.title-arrow-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24,10 +24,10 @@
   user-select: none;
   transition: all 0.2s ease;
   border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  /* box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08); */
   position: relative;
   overflow: hidden;
-} */
+}
 
 .collapse-header:hover {
   background-color: #b3d9ff;
