@@ -76,6 +76,10 @@ export const runGetNewData = async (inputObj) => {
 
   //get data type
   const dataType = await checkDataType(inputObj);
+
+  console.log("DATA TYPE");
+  console.log(dataType);
+
   if (!dataType) return null;
 
   //get params
