@@ -35,7 +35,7 @@
 }
 
 #article-date {
-  margin-bottom: 1.5rem;
+  /* margin-bottom: 1.5rem; */
   display: inline-block;
   /* text-align: left; */
   font-size: 0.9rem;
@@ -44,7 +44,7 @@
   font-style: italic;
   /* padding-bottom: 0.8rem;
   border-bottom: 1px solid #e2e8f0; */
-  width: 100%;
+  /* width: 100%; */
 }
 
 #article-text {
