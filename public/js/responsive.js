@@ -55,6 +55,7 @@ export const mainClickHandler = async (e) => {
 };
 
 //create debounced function
+const debouncedGetNewData = debounce(getNewData);
 // const debouncedGetNewArticleData = debounce(getNewArticleData);
 // const debouncedGetNewPicData = debounce(getNewPicData);
 // const debouncedGetNewVidData = debounce(getNewVidData);
@@ -63,6 +64,10 @@ export const mainInputHandler = async (e) => {
   const inputElement = e.target;
 
   const inputId = inputElement.id;
+
+  console.log("INPUT ID", inputId);
+
+  debouncedGetNewData({ inputId: inputId });
 
   // switch (inputId) {
   //   case "article-how-many":

@@ -1,5 +1,5 @@
 import CONFIG from "../config/config.js";
-import { clickIdTriggerMap, expandTriggerMap } from "../config/map-display.js";
+import { clickIdTriggerMap, expandTriggerMap, inputIdTriggerMap } from "../config/map-display.js";
 import { getPicData } from "./src-main.js";
 
 //FIX DATA SECTION
@@ -135,6 +135,11 @@ export const checkDataType = async (inputObj) => {
   const clickIdCheck = await checkClickId(inputObj);
   if (clickIdCheck) dataType = clickIdCheck;
 
+  if (!dataType) {
+    const inputIdCheck = await checkInputId(inputObj);
+    if (inputIdCheck) dataType = inputIdCheck;
+  }
+
   if (dataType === "pics") {
     switch (picType) {
       case "pic-alone":
@@ -182,4 +187,12 @@ export const checkClickId = async (inputObj) => {
   }
 
   return null;
+};
+
+export const checkInputId = async (inputObj) => {
+  if (!inputObj || !inputObj.inputId) return null;
+  const { inputId } = inputObj;
+
+  const inputTrigger = inputIdTriggerMap[inputId];
+  return inputTrigger;
 };
