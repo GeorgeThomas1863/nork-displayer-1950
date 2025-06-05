@@ -69,6 +69,8 @@ export const mainInputHandler = async (e) => {
   console.log(inputId);
 
   const newBackendData = debouncedGetNewData({ inputId: inputId });
+  console.log("NEW BACKEND DATA!!!!");
+  console.log(newBackendData);
   if (!newBackendData) return null;
 
   console.log("NEW BACKEND DATA!!!!");
