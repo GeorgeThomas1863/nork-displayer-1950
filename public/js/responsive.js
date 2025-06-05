@@ -67,7 +67,10 @@ export const mainInputHandler = async (e) => {
 
   console.log("INPUT ID", inputId);
 
-  debouncedGetNewData({ inputId: inputId });
+  const newBackendData = await debouncedGetNewData({ inputId: inputId });
+  if (!newBackendData) return null;
+
+  await buildBackendNew(newBackendData);
 
   // switch (inputId) {
   //   case "article-how-many":
