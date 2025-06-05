@@ -2,6 +2,8 @@
 
 //UNFUCK THUMBNAIL PIC STATS
 
+//FIX PIC SET / VID PAGE DISPLAY
+
 //MINOR BUG LIST:
 // - put default state params in define-things.js
 // - collapse container are wrong width when all articles collpased
