@@ -82,6 +82,26 @@
   text-align: left;
 }
 
+/* Date styling for collapse headers */
+.collapse-date {
+  display: block;
+  font-size: 0.9rem;
+  color: #64748b;
+  font-weight: 500;
+  font-style: italic;
+  padding: 0 20px 16px 20px;
+  margin-top: -8px;
+  text-align: center;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.2s ease;
+}
+
+.collapse-header:hover .collapse-date {
+  color: #475569;
+}
+
 /* Collapse content container */
 .collapse-content {
   max-height: 100000px;
