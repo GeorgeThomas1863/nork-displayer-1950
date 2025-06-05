@@ -46,6 +46,9 @@ export const getNewData = async (inputObj) => {
   //get user input, combine with params
   const userInputParams = await buildInputParams();
 
+  console.log("USER INPUT PARAMS");
+  console.log(userInputParams);
+
   const paramsObj = { ...userInputParams, ...inputObj };
   paramsObj.route = "/get-new-data-route";
   const dataObj = await sendToBack(paramsObj);
