@@ -78,8 +78,6 @@ export const debounce = (func) => {
   return (...args) => {
     clearTimeout(timer);
     timer = setTimeout(() => func(...args), DELAY);
-
-    console.log(timer);
   };
 };
 
