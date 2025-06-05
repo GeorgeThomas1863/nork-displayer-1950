@@ -73,8 +73,8 @@ export const mainInputHandler = async (e) => {
   console.log(newBackendData);
   if (!newBackendData) return null;
 
-  console.log("NEW BACKEND DATA!!!!");
-  console.log(newBackendData);
+  // console.log("NEW BACKEND DATA!!!!");
+  // console.log(newBackendData);
 
   await buildBackendNew(newBackendData);
 
