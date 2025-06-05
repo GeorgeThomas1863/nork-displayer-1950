@@ -78,7 +78,6 @@
 /* Date styling for collapse headers */
 .collapse-date {
   display: block;
-  padding-bottom: -5rem;
   font-size: 0.9rem;
   color: #64748b;
   font-weight: 500;
