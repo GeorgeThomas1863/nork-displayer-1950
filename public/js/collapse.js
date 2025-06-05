@@ -5,8 +5,8 @@ export const buildCollapseContainer = async (inputObj) => {
   //ADDING FUCKING DATA ATTRIBUTE TO ALL CLICKABLE ITEMS
 
   // Create container
-  const container = document.createElement("div");
-  container.className = `collapse-container ${className}`;
+  const collapseContainer = document.createElement("div");
+  collapseContainer.className = `collapse-container ${className}`;
 
   // Create header with arrow and title
   const collapseHeader = document.createElement("div");
@@ -17,34 +17,37 @@ export const buildCollapseContainer = async (inputObj) => {
   arrow.id = "collapse-arrow";
   arrow.className = isExpanded ? "collapse-arrow expanded" : "collapse-arrow";
   arrow.setAttribute("data-expand", dataAttribute);
-  collapseHeader.append(arrow);
 
   titleElement.className = "collapse-title";
   titleElement.setAttribute("data-expand", dataAttribute);
-  collapseHeader.append(titleElement);
 
-  // Add date if not null
-  if (dateElement) {
-    dateElement.className = "collapse-date";
-    dateElement.setAttribute("data-expand", dataAttribute);
-    collapseHeader.append(dateElement);
-  }
+  collapseHeader.append(arrow, titleElement);
+  collapseContainer.append(collapseHeader);
 
   //below preserves existing classes on content
   const existingClasses = contentElement.className || "";
   const collapseClasses = isExpanded ? "collapse-content" : "collapse-content hidden";
   contentElement.className = existingClasses ? `${existingClasses} ${collapseClasses}` : collapseClasses;
 
-  // Add event listener for toggling
+  //add header to element
+
+  // if date not null add  to container
+  if (dateElement) {
+    dateElement.className = "collapse-date";
+    dateElement.setAttribute("data-expand", dataAttribute);
+    collapseContainer.append(dateElement);
+  }
+
+  //add collapse element at end
+  collapseContainer.append(contentElement);
+
+  // CLICK LISTENER HERE
   collapseHeader.addEventListener("click", () => {
     arrow.classList.toggle("expanded");
     contentElement.classList.toggle("hidden");
   });
 
-  // Assemble the component
-  container.append(collapseHeader, contentElement);
-
-  return container;
+  return collapseContainer;
 };
 
 export const defineCollapseItems = async (inputArray) => {
