@@ -73,9 +73,13 @@ export const debounce = (func) => {
   let timer;
   const DELAY = 300; //300 milliseconds
 
+  console.log("DEBOUNCE FUNCTION CALLED");
+
   return (...args) => {
     clearTimeout(timer);
     timer = setTimeout(() => func(...args), DELAY);
+
+    console.log(timer);
   };
 };
 
