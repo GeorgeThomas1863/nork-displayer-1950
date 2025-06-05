@@ -99,6 +99,7 @@
   cursor: pointer;
   user-select: none;
   transition: color 0.2s ease;
+  border: none;
 }
 
 /* Collapse content container */
