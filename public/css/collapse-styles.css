@@ -18,7 +18,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 16px 20px;
+  padding: 16px 20px 8px 20px;
   background-color: rgb(235, 235, 235);
   cursor: pointer;
   user-select: none;
@@ -30,6 +30,10 @@
 }
 
 .collapse-header:hover {
+  background-color: #b3d9ff;
+}
+
+.collapse-header:hover .title-arrow-wrapper {
   background-color: #b3d9ff;
 }
 
@@ -89,17 +93,12 @@
   color: #64748b;
   font-weight: 500;
   font-style: italic;
-  padding: 0 20px 16px 20px;
-  margin-top: -8px;
+  padding: 0 20px 12px 20px;
   text-align: center;
   letter-spacing: 0.02em;
   cursor: pointer;
   user-select: none;
   transition: color 0.2s ease;
-}
-
-.collapse-header:hover .collapse-date {
-  color: #475569;
 }
 
 /* Collapse content container */
