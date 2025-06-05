@@ -1,4 +1,4 @@
-//STYLE DATE COLLAPSE , make betters
+//STYLE DATE COLLAPSE style slightly better
 
 //UNFUCK THUMBNAIL PIC STATS
 
