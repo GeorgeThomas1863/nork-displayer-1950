@@ -1,7 +1,7 @@
 /* COLLAPSE COMPONENT STYLES */
 .collapse-header {
   display: block;
-  padding: 2rem 0 0 0;
+  padding: 1.5rem;
   background-color: rgb(235, 235, 235);
   cursor: pointer;
   user-select: none;
@@ -78,6 +78,7 @@
 /* Date styling for collapse headers */
 .collapse-date {
   display: block;
+  padding-bottom: 0.5rem;
   font-size: 0.9rem;
   color: #64748b;
   font-weight: 500;
