@@ -13,6 +13,10 @@ export const buildCollapseContainer = async (inputObj) => {
   collapseHeader.setAttribute("data-expand", dataAttribute);
   collapseHeader.className = "collapse-header";
 
+  const titleArrowWrapper = document.createElement("div");
+  titleArrowWrapper.className = "title-arrow-wrapper";
+  titleArrowWrapper.setAttribute("data-expand", dataAttribute);
+
   const arrow = document.createElement("div");
   arrow.id = "collapse-arrow";
   arrow.className = isExpanded ? "collapse-arrow expanded" : "collapse-arrow";
@@ -21,25 +25,24 @@ export const buildCollapseContainer = async (inputObj) => {
   titleElement.className = "collapse-title";
   titleElement.setAttribute("data-expand", dataAttribute);
 
-  collapseHeader.append(arrow, titleElement);
-  collapseContainer.append(collapseHeader);
+  //add to wrapper
+  titleArrowWrapper.append(arrow, titleElement);
+  collapseHeader.append(titleArrowWrapper);
+
+  // if date not null add  to container
+  if (dateElement) {
+    dateElement.className = "collapse-date";
+    dateElement.setAttribute("data-expand", dataAttribute);
+    collapseHeader.append(dateElement);
+  }
 
   //below preserves existing classes on content
   const existingClasses = contentElement.className || "";
   const collapseClasses = isExpanded ? "collapse-content" : "collapse-content hidden";
   contentElement.className = existingClasses ? `${existingClasses} ${collapseClasses}` : collapseClasses;
 
-  //add header to element
-
-  // if date not null add  to container
-  if (dateElement) {
-    dateElement.className = "collapse-date";
-    dateElement.setAttribute("data-expand", dataAttribute);
-    collapseContainer.append(dateElement);
-  }
-
   //add collapse element at end
-  collapseContainer.append(contentElement);
+  collapseContainer.append(collapseHeader, contentElement);
 
   // CLICK LISTENER HERE
   collapseHeader.addEventListener("click", () => {
