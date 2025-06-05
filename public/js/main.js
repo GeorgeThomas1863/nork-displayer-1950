@@ -38,6 +38,9 @@ export const getNewData = async (inputObj) => {
   console.log(inputObj);
 
   const newDataTrigger = await checkNewDataTrigger(inputObj);
+  console.log("NEW DATA TRIGGER");
+  console.log(newDataTrigger);
+
   if (!newDataTrigger) return null;
 
   //get user input, combine with params
