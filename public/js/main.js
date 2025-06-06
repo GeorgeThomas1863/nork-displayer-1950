@@ -37,20 +37,24 @@ export const getNewData = async (inputObj) => {
   console.log("GET NEW DATA CALLED");
   console.log(inputObj);
 
-  const newDataTrigger = await checkNewDataTrigger(inputObj);
+  //checks if command triggered, if so gets type of command triggered
+  const commandTriggerType = await checkNewDataTrigger(inputObj);
   console.log("NEW DATA TRIGGER");
-  console.log(newDataTrigger);
+  console.log(commandTriggerType);
 
-  if (!newDataTrigger) return null;
+  if (!commandTriggerType) return null;
 
-  //get user input, combine with params
+  //get user input
   const userInputParams = await buildInputParams();
 
-  console.log("USER INPUT PARAMS");
-  console.log(userInputParams);
+  // console.log("USER INPUT PARAMS");
+  // console.log(userInputParams);
 
+  //build params
   const paramsObj = { ...userInputParams, ...inputObj };
   paramsObj.route = "/get-new-data-route";
+  paramsObj.commandType = commandTriggerType;
+
   const dataObj = await sendToBack(paramsObj);
 
   return dataObj;

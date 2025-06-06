@@ -123,7 +123,10 @@ export const fixVidDataArray = async (inputArray) => {
 
 export const checkDataType = async (inputObj) => {
   if (!inputObj) return null;
-  const { picType, vidType } = inputObj;
+  const { picType, vidType, commandType } = inputObj;
+
+  console.log("COMMAND TYPE");
+  console.log(commandType);
 
   // console.log("GET DATA TYPE INPUT OBJ");
   // console.log(inputObj);
@@ -135,10 +138,10 @@ export const checkDataType = async (inputObj) => {
   const clickIdCheck = await checkClickId(inputObj);
   if (clickIdCheck) dataType = clickIdCheck;
 
-  if (!dataType) {
-    const inputIdCheck = await checkInputId(inputObj);
-    if (inputIdCheck) dataType = inputIdCheck;
-  }
+  const inputIdCheck = await checkInputId(inputObj);
+  if (inputIdCheck) dataType = inputIdCheck;
+
+  if (!dataType) return null;
 
   if (dataType === "pics") {
     switch (picType) {

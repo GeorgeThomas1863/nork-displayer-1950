@@ -88,24 +88,24 @@ export const checkNewDataTrigger = async (inputObj) => {
 
   for (let i = 0; i < d.clickTriggerArr.length; i++) {
     if (clickId === d.clickTriggerArr[i]) {
-      return true;
+      return "click";
     }
   }
 
   for (let i = 0; i < d.expandTriggerArr.length; i++) {
     if (expandType === d.expandTriggerArr[i]) {
-      return true;
+      return "expand";
     }
   }
 
   //MIGHT NOT BE NEEDED
   for (let i = 0; i < d.inputTriggerArr.length; i++) {
     if (inputId === d.inputTriggerArr[i]) {
-      return true;
+      return "input";
     }
   }
 
-  return false;
+  return null;
 };
 
 export const buildFailElement = async () => {
