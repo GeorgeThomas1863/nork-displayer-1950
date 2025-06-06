@@ -68,14 +68,14 @@ export const runGetNewData = async (inputObj) => {
   if (!inputObj) return null;
   const { articleHowMany, picHowMany, vidHowMany, articleType, articleSortBy, picSortBy, vidSortBy } = inputObj;
 
-  console.log("RUN GET NEW DATA CALLED");
-  console.log(inputObj);
+  // console.log("RUN GET NEW DATA CALLED");
+  // console.log(inputObj);
 
   //get data type
   const dataType = await checkDataType(inputObj);
 
-  console.log("DATA TYPE");
-  console.log(dataType);
+  // console.log("DATA TYPE");
+  // console.log(dataType);
 
   if (!dataType) return null;
 
@@ -112,6 +112,9 @@ export const runGetNewData = async (inputObj) => {
     filterKey: "articleType",
     filterValue: articleType,
   };
+
+  console.log("PARAMS OBJ");
+  console.log(paramsObj);
 
   const newDataObj = await runGetBackendData(paramsObj);
 
