@@ -65,32 +65,27 @@ export const mainInputHandler = async (e) => {
 
   const inputId = inputElement.id;
 
-  // console.log("INPUT ID!!!");
-  // console.log(inputId);
-
-  const newBackendData = await debouncedGetNewData({ inputId: inputId });
-  console.log("NEW BACKEND DATA!!!!");
-  console.log(newBackendData);
-  if (!newBackendData) return null;
+  const inputObj = {
+    inputId: inputId,
+  };
 
   // console.log("NEW BACKEND DATA!!!!");
   // console.log(newBackendData);
 
-  await buildBackendNew(newBackendData);
+  switch (inputId) {
+    case "article-how-many":
+    case "pic-how-many":
+    case "vid-how-many":
+      const newBackendData = await debouncedGetNewData(inputObj);
+      console.log("NEW BACKEND DATA!!!!");
+      console.log(newBackendData);
 
-  // switch (inputId) {
-  //   case "article-how-many":
-  //     debouncedGetNewArticleData();
-  //     break;
+      await buildBackendNew(newBackendData);
+      break;
 
-  //   case "pic-how-many":
-  //     debouncedGetNewPicData();
-  //     break;
-
-  //   case "vid-how-many":
-  //     debouncedGetNewVidData();
-  //     break;
-  // }
+    default:
+      return null;
+  }
 
   return true;
 };
