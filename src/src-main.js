@@ -10,8 +10,8 @@ export const runGetBackendData = async (inputObj) => {
   const { dataType, isFirstLoad } = inputObj;
   const dataObj = {};
 
-  console.log("INPUT OBJ RUN GET BACKEND DATA");
-  console.log(inputObj);
+  // console.log("INPUT OBJ RUN GET BACKEND DATA");
+  // console.log(inputObj);
 
   const collection = backendDefaultParams[dataType].collection;
 
@@ -57,6 +57,9 @@ export const runGetBackendData = async (inputObj) => {
 
   dataObj[dataType] = dataArray;
   dataObj.dataType = dataType;
+
+  console.log("DATA OBJ");
+  console.log(dataObj);
 
   if (dataObj) {
     const typeStr = dataType.toUpperCase();
