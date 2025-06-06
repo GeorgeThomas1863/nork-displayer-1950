@@ -1,9 +1,6 @@
 import { expandBackendData, getNewData } from "./main.js";
 import { buildAdminParams, sendToBack, debounce } from "./util.js";
 import { buildBackendNew } from "./build-backend.js";
-// import { getNewArticleData } from "./articles/article-data.js";
-// import { getNewPicData } from "./pics/pic-data.js";
-// import { getNewVidData } from "./vids/vid-data.js";
 
 export const adminSubmitClick = async (e) => {
   e.preventDefault();
@@ -53,10 +50,8 @@ export const mainClickHandler = async (e) => {
 
 //create debounced function
 const debouncedGetNewData = debounce(getNewData);
-// const debouncedGetNewArticleData = debounce(getNewArticleData);
-// const debouncedGetNewPicData = debounce(getNewPicData);
-// const debouncedGetNewVidData = debounce(getNewVidData);
 
+//input handler
 export const mainInputHandler = async (e) => {
   const inputElement = e.target;
 
@@ -67,10 +62,7 @@ export const mainInputHandler = async (e) => {
   };
 
   const newBackendData = await debouncedGetNewData(inputObj);
-
-  console.log("NEW BACKEND DATA!!!!");
-  console.log(newBackendData);
-
+  if (!newBackendData) return null;
   await buildBackendNew(newBackendData);
 
   return true;
