@@ -125,21 +125,23 @@ export const checkDataType = async (inputObj) => {
   if (!inputObj) return null;
   const { picType, vidType, commandType } = inputObj;
 
-  console.log("COMMAND TYPE");
-  console.log(commandType);
-
-  // console.log("GET DATA TYPE INPUT OBJ");
-  // console.log(inputObj);
+  // console.log("COMMAND TYPE");
+  // console.log(commandType);
 
   let dataType = "";
-  const expandTypeCheck = await checkExpandType(inputObj);
-  if (expandTypeCheck) dataType = expandTypeCheck;
+  switch (commandType) {
+    case "click":
+      dataType = await checkClickId(inputObj);
+      break;
 
-  const clickIdCheck = await checkClickId(inputObj);
-  if (clickIdCheck) dataType = clickIdCheck;
+    case "expand":
+      dataType = await checkExpandType(inputObj);
+      break;
 
-  const inputIdCheck = await checkInputId(inputObj);
-  if (inputIdCheck) dataType = inputIdCheck;
+    case "input":
+      dataType = await checkInputId(inputObj);
+      break;
+  }
 
   if (!dataType) return null;
 
