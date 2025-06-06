@@ -15,12 +15,9 @@ export const adminSubmitClick = async (e) => {
 
   //get data
   const adminData = await sendToBack(adminParams);
-
   console.log("ADMIN DATA", adminData);
 
-  //display it (remove variable name)
-  // const displayData = await displayAdminReturn(adminData);
-  // console.log(displayData);
+  //BUILD ADMIN DISPLAY
 
   return "DONE";
 };
@@ -69,23 +66,12 @@ export const mainInputHandler = async (e) => {
     inputId: inputId,
   };
 
-  // console.log("NEW BACKEND DATA!!!!");
-  // console.log(newBackendData);
+  const newBackendData = await debouncedGetNewData(inputObj);
 
-  switch (inputId) {
-    case "article-how-many":
-    case "pic-how-many":
-    case "vid-how-many":
-      const newBackendData = await debouncedGetNewData(inputObj);
-      console.log("NEW BACKEND DATA!!!!");
-      console.log(newBackendData);
+  console.log("NEW BACKEND DATA!!!!");
+  console.log(newBackendData);
 
-      await buildBackendNew(newBackendData);
-      break;
-
-    default:
-      return null;
-  }
+  await buildBackendNew(newBackendData);
 
   return true;
 };

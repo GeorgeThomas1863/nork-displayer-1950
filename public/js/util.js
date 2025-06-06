@@ -73,11 +73,22 @@ export const debounce = (func) => {
   let timer;
   const DELAY = 300; //300 milliseconds
 
-  console.log("DEBOUNCE FUNCTION CALLED");
-
+  //method for creating new promise, so can use with async await
   return (...args) => {
-    clearTimeout(timer);
-    timer = setTimeout(() => func(...args), DELAY);
+    return new Promise((resolve, reject) => {
+      // Cancel any pending execution
+      clearTimeout(timer);
+
+      // Schedule new execution
+      timer = setTimeout(async () => {
+        try {
+          const result = await func(...args);
+          resolve(result);
+        } catch (error) {
+          reject(error);
+        }
+      }, DELAY);
+    });
   };
 };
 
