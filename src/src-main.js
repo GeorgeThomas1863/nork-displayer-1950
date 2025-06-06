@@ -10,6 +10,9 @@ export const runGetBackendData = async (inputObj) => {
   const { dataType, isFirstLoad } = inputObj;
   const dataObj = {};
 
+  console.log("INPUT OBJ RUN GET BACKEND DATA");
+  console.log(inputObj);
+
   const collection = backendDefaultParams[dataType].collection;
 
   let params = {};
@@ -113,8 +116,8 @@ export const runGetNewData = async (inputObj) => {
     filterValue: articleType,
   };
 
-  console.log("PARAMS OBJ");
-  console.log(paramsObj);
+  // console.log("PARAMS OBJ");
+  // console.log(paramsObj);
 
   const newDataObj = await runGetBackendData(paramsObj);
 
