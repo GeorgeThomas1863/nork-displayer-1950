@@ -79,7 +79,7 @@
   /* border-radius: 8px; */
 }
 
-.collapse-content .collapse-container .picSet-pic-collapse {
+.collapse-content .collapse-container.picSet-pic-collapse {
   border-radius: 8px;
 }
 
