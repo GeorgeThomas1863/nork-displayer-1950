@@ -44,8 +44,7 @@ export const buildArticleListItem = async (inputObj, isFirst) => {
 
   // Wrap the article content in a collapsible
   const articleCollapseObj = {
-    titleElement: titleElement,
-    dateElement: dateElement,
+    titleElement: titleElement.innerHTML(`${titleElement.textContent};  <i>${dateElement.textContent}</i>`),
     contentElement: articleElement,
     isExpanded: isFirst,
     className: "article-element-collapse",
@@ -58,7 +57,7 @@ export const buildArticleListItem = async (inputObj, isFirst) => {
 };
 
 export const buildArticleElement = async (inputObj) => {
-  const { text, picArray } = inputObj;
+  const { date, text, picArray } = inputObj;
 
   const articleElement = document.createElement("article");
   articleElement.id = "article-element";
@@ -70,10 +69,10 @@ export const buildArticleElement = async (inputObj) => {
   }
 
   // Then append date and text after pictures (title is handled by collapse header)
-
+  const dateElement = await buildDate(date);
   const textElement = await buildText(text);
 
-  articleElement.append(textElement);
+  articleElement.append(dateElement, textElement);
 
   return articleElement;
 };

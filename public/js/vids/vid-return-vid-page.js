@@ -43,10 +43,9 @@ export const buildVidPageListItem = async (inputObj, isFirst) => {
 
   // Wrap the article content in a collapsible
   const vidPageCollapseObj = {
-    titleElement: titleElement,
+    titleElement: titleElement.innerHTML(`${titleElement.textContent};  <i>${dateElement.textContent}</i>`),
     contentElement: vidPageElement,
     isExpanded: isFirst,
-    dateElement: dateElement,
     className: "vid-page-element-collapse",
   };
 

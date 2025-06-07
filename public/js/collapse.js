@@ -1,6 +1,6 @@
 export const buildCollapseContainer = async (inputObj) => {
   if (!inputObj) return null;
-  const { titleElement, contentElement, isExpanded = false, className = "", dataAttribute = "", dateElement = null } = inputObj;
+  const { titleElement, contentElement, isExpanded = false, className = "", dataAttribute = "" } = inputObj;
 
   //ADDING FUCKING DATA ATTRIBUTE TO ALL CLICKABLE ITEMS
 
@@ -13,10 +13,6 @@ export const buildCollapseContainer = async (inputObj) => {
   collapseHeader.setAttribute("data-expand", dataAttribute);
   collapseHeader.className = "collapse-header";
 
-  const titleArrowWrapper = document.createElement("div");
-  titleArrowWrapper.className = "title-arrow-wrapper";
-  titleArrowWrapper.setAttribute("data-expand", dataAttribute);
-
   const arrow = document.createElement("div");
   arrow.id = "collapse-arrow";
   arrow.className = isExpanded ? "collapse-arrow expanded" : "collapse-arrow";
@@ -25,16 +21,8 @@ export const buildCollapseContainer = async (inputObj) => {
   titleElement.className = "collapse-title";
   titleElement.setAttribute("data-expand", dataAttribute);
 
-  //add to wrapper
-  titleArrowWrapper.append(arrow, titleElement);
-  collapseHeader.append(titleArrowWrapper);
-
-  // if date not null add  to container
-  if (dateElement) {
-    dateElement.className = "collapse-date";
-    dateElement.setAttribute("data-expand", dataAttribute);
-    collapseHeader.append(dateElement);
-  }
+  //add arrow / title to header
+  collapseHeader.append(arrow, titleElement);
 
   //below preserves existing classes on content
   const existingClasses = contentElement.className || "";

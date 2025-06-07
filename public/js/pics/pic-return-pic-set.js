@@ -43,10 +43,9 @@ export const buildPicSetListItem = async (inputObj, isFirst) => {
 
   // Wrap the article content in a collapsible
   const picSetCollapseObj = {
-    titleElement: titleElement,
+    titleElement: titleElement.innerHTML(`${titleElement.textContent};  <i>${dateElement.textContent}</i>`),
     contentElement: picSetElement,
     isExpanded: isFirst,
-    dateElement: dateElement,
     className: "pic-set-element-collapse",
   };
 
