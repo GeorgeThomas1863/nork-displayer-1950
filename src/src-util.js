@@ -45,21 +45,13 @@ export const fixDataByType = async (inputArray, dataType) => {
   for (let i = 0; i < inputArray.length; i++) {
     const inputObj = inputArray[i];
 
-    // console.log("INPUT OBJ");
-    // console.log(inputObj);
-
-    // console.log("DATA TYPE");
-    // console.log(dataType);
-
     switch (dataType) {
       //single pics
       case "pics":
         const { url } = inputObj;
 
         const picDataObj = await getPicData(url);
-        console.log("PIC DATA OBJ");
-        console.log(picDataObj);
-        // if (!picDataObj) continue;
+        if (!picDataObj) continue;
 
         const picObj = { ...picDataObj, ...inputObj };
 
