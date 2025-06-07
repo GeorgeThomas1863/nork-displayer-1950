@@ -205,7 +205,7 @@ export const getPicSourceData = async (picURL) => {
     if (!picSource) {
       picSource = `Pic Set Titled ${title}`;
     } else {
-      picSource = picSource + ` and Pic Set Titled ${title}`;
+      picSource = picSource + ` and Pic Set Titled <i>${title}</i>`;
     }
 
     if (!picDate) {
@@ -222,7 +222,7 @@ export const getPicSourceData = async (picURL) => {
     if (!picSource) {
       picSource = `Vid Page Titled ${title}`;
     } else {
-      picSource = picSource + ` and Vid Page Titled ${title}`;
+      picSource = picSource + ` and Vid Page Titled <i>${title}</i>`;
     }
 
     if (!picDate) {

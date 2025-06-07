@@ -48,7 +48,10 @@ export const fixDataByType = async (inputArray, dataType) => {
     switch (dataType) {
       //single pics
       case "pics":
-        const picURL = inputObj.url;
+        const { url, thumbnail } = inputObj;
+        let picURL = url;
+        if (thumbnail) picURL = thumbnail;
+
         const picDataObj = await getPicData(picURL);
         if (!picDataObj) continue;
 
