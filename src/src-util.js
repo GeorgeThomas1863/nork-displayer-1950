@@ -83,6 +83,7 @@ export const fixDataByType = async (inputArray, dataType) => {
 
       //might need to fix thumbnail (prob not)
       case "vids":
+        console.log("AHHHHHHHHHHHH");
         //check if vid exists
         try {
           const vidAloneDataObj = await getVidData(inputObj.url);
