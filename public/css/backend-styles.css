@@ -71,7 +71,8 @@
 }
 
 #pic-set-element {
-  background-color: #ffffff;
+  /* background-color: #ffffff; */
+  background-color: transparent;
   padding: 1.5rem 2rem;
   overflow: hidden;
   position: relative;
