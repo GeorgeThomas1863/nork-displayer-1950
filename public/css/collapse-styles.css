@@ -128,8 +128,5 @@
 
 .vid-page-element-collapse .collapse-header {
   justify-content: left;
-}
-
-.collapse-container.vid-page-element-collapse {
   width: 100%;
 }
