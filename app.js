@@ -1,8 +1,8 @@
-//COME UP WITH A WAY TO REQUERY FOR SHIT THAT DOESNT EXIST [PERHAPS BUILD DIRECTLY INTO MONGO QUERY?]
+//ADD CLAUDE's ANSWER FOR PIC / VID EXIST MONGO PROBLEM
 
-//MAKE CHECK FOR WHETER PIC / VID DOWNLOADED CHECK SIZE OF ITEM and compare to whats on fs
+//IMPLEMET DATE SORTS
 
-//ADD ERROR SITUATIONS FOR WHEN PIC / VIDS NOT DOWNLOADED
+//ADD MEDIA STYLES
 
 //FIX PIC ALONE ORDER (SORT BY DATE RATHER THAN ID)
 
@@ -10,11 +10,9 @@
 
 //PIC ALONE DISPLAY IS WRONG ORDER
 
-//MINOR BUG LIST:
-// - put default state params in define-things.js
-// - collapse container are wrong width when all articles collpased
-// - failing to get pic stats for vids
-// - pic sort seems to be wrong, check if by date or by id, make by date if possible
+//FUTURE BUG LIST:
+// - make article display better (3 across with pics, if present)
+// - combine vid / vid page display into one (just use vid page)
 // - border radius on pics is still weird, check collapse container border radius
 
 //UNFUCK PIC DISPLAY WITH VERTICAL PICS
@@ -22,8 +20,6 @@
 //[PROB DONT WANT TO DO BELOW]
 //MAKE GET NEW DATA A SINGLE FUNCTION PASSING IN THE TYPE TO BACKEND
 //THIS WAY YOU CAN DO THE SAME SEQUENCE AS YOU DO FOR DEFAULT DATA (AND FIX PICS BEFORE RETURNING)
-
-// STYLE ARTICLE LIST BETTER (3 across with pics, if present)
 
 //PUT PIC / VID STATS IN HOVER
 
