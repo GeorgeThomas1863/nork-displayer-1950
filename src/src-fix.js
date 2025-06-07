@@ -73,7 +73,7 @@ export const fixDataByType = async (inputArray, dataType) => {
       //pics as thumbnails
       case "vidPages":
         //return input
-        const vidDataObj = await fixVidDataArray(inputObj);
+        const vidDataObj = await fixVidArray(inputObj);
         if (!vidDataObj) continue;
 
         const vidPageObj = { ...vidDataObj, ...inputObj };
@@ -131,7 +131,10 @@ export const fixPicArray = async (inputObj) => {
 
 //FIX VID DATA
 
-export const fixVidDataArray = async (inputArray) => {
+export const fixVidArray = async (inputObj) => {
+  console.log("FIX VID ARRAY INPUT");
+  console.log(inputObj);
+
   const results = [];
   for (let i = 0; i < inputArray.length; i++) {
     //only one vid so dont need to parse out array (like in pics)
