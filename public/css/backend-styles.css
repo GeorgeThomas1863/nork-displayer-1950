@@ -34,10 +34,9 @@
   letter-spacing: -0.02em;
 }
 
-/* STYLE SPAN HERE */
 #article-title span {
   font-size: 1.2rem;
-  align-self: top;
+  vertical-align: middle;
 }
 
 #article-date {
