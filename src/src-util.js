@@ -48,6 +48,9 @@ export const fixDataByType = async (inputArray, dataType) => {
     console.log("INPUT OBJ");
     console.log(inputObj);
 
+    console.log("DATA TYPE");
+    console.log(dataType);
+
     switch (dataType) {
       //single pics
       case "pics":
