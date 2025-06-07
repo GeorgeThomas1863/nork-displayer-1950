@@ -44,8 +44,8 @@ export const fixDataByType = async (inputArray, dataType) => {
   for (let i = 0; i < inputArray.length; i++) {
     const inputObj = inputArray[i];
 
-    console.log("FIX DATA BY TYPE INPUT");
-    console.log(inputObj);
+    // console.log("FIX DATA BY TYPE INPUT");
+    // console.log(inputObj);
 
     switch (dataType) {
       //single pics
@@ -82,12 +82,11 @@ export const fixDataByType = async (inputArray, dataType) => {
 
       //might need to fix thumbnail (prob not)
       case "vids":
-        console.log("AHHHHHHHHHHHH");
         //check if vid exists
         try {
           const vidAloneDataObj = await getVidData(inputObj.url);
-          console.log("VID ALONE DATA OBJ");
-          console.log(vidAloneDataObj);
+        //   console.log("VID ALONE DATA OBJ");
+        //   console.log(vidAloneDataObj);
           if (!vidAloneDataObj) continue;
 
           const vidAloneObj = { ...vidAloneDataObj, ...inputObj };
@@ -132,8 +131,8 @@ export const fixPicArray = async (inputObj) => {
 //FIX VID DATA
 
 export const fixVidPageArray = async (inputArray) => {
-  console.log("FIX VID ARRAY INPUT");
-  console.log(inputArray);
+//   console.log("FIX VID ARRAY INPUT");
+//   console.log(inputArray);
 
   const results = [];
   for (let i = 0; i < inputArray.length; i++) {
