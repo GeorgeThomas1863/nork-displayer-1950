@@ -102,20 +102,20 @@
   background-color: rgb(200, 200, 200);
 }
 
+.picSet-pic-collapse .collapse-header {
+  margin: 0 auto;
+  margin-bottom: 1rem;
+  width: fit-content;
+  border-radius: 8px;
+  background-color: rgb(200, 200, 200);
+}
+
 .article-pic-collapse .collapse-title {
   font-size: 1.5rem;
 }
 
 .article-element-collapse .collapse-header {
   justify-content: left;
-}
-
-.picSet-pic-collapse .collapse-header {
-  margin: 0 auto;
-  margin-bottom: 1rem;
-  /* width: fit-content; */
-  border-radius: 8px;
-  background-color: rgb(200, 200, 200);
 }
 
 .picSet-pic-collapse .collapse-title {
@@ -128,4 +128,8 @@
 
 .vid-page-element-collapse .collapse-header {
   justify-content: left;
+}
+
+.vid-page-element-collapse {
+  width: 100%;
 }
