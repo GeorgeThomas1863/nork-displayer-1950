@@ -214,7 +214,7 @@ export const getPicSourceData = async (picURL) => {
   }
 
   //check vid pages
-  const vidPageModel = new dbModel({ keyToLookup: "picArray", itemValue: picURL }, vidPageContent);
+  const vidPageModel = new dbModel({ keyToLookup: "thumbnail", itemValue: picURL }, vidPageContent);
   const vidPageObj = await vidPageModel.getUniqueItem();
   if (vidPageObj) {
     const { title, date } = vidPageObj;
