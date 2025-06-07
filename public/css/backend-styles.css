@@ -37,6 +37,7 @@
 /* STYLE SPAN HERE */
 #article-title span {
   font-size: 1.2rem;
+  align-self: top;
 }
 
 #article-date {
