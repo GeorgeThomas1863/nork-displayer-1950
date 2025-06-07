@@ -35,6 +35,11 @@
 }
 
 /* STYLE SPAN HERE */
+#article-title span {
+  font-size: 0.9rem;
+  color: #64748b;
+  font-weight: 500;
+}
 
 #article-date {
   margin: 1rem 0;
@@ -43,8 +48,6 @@
   font-size: 0.9rem;
   color: #64748b;
   font-weight: 500;
-  font-style: italic;
-
   border-top: 1px solid #e2e8f0;
   border-bottom: 1px solid #e2e8f0;
   width: 100%;
