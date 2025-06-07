@@ -113,7 +113,7 @@
 .picSet-pic-collapse .collapse-header {
   margin: 0 auto;
   margin-bottom: 1rem;
-  width: fit-content;
+  /* width: fit-content; */
   border-radius: 8px;
   background-color: rgb(200, 200, 200);
 }
