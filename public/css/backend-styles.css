@@ -202,6 +202,9 @@
 /* ------------------------------ */
 
 /* VID PAGE STYLES */
+#vid-page-array-element {
+  width: 100%;
+}
 
 .vid-page-list-item {
   margin-bottom: 1.5rem;
