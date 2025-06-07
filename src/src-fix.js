@@ -136,15 +136,15 @@ export const fixPicArray = async (inputObj) => {
 //FIX VID DATA
 
 export const fixVidPageArray = async (inputArray) => {
-    console.log("FIX VID ARRAY INPUT");
-    console.log(inputArray);
+  // console.log("FIX VID ARRAY INPUT");
+  // console.log(inputArray);
 
   const results = [];
   for (let i = 0; i < inputArray.length; i++) {
     try {
       const inputObj = inputArray[i];
-      //only one vid so dont need to parse out array (like in pics)
-      const vidDataObj = await getVidData(inputObj.url);
+      //NEEDS TO BE URL TO VID NOT the fucking vidPage
+      const vidDataObj = await getVidData(inputObj.vidURL);
       if (!vidDataObj) continue;
 
       const vidPageObj = { ...vidDataObj, ...inputObj };
