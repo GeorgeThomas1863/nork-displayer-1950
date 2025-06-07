@@ -142,6 +142,7 @@ export const fixVidPageArray = async (inputArray) => {
   const results = [];
   for (let i = 0; i < inputArray.length; i++) {
     try {
+      console.log("AHHHHHHHHHHHHHHHHHHHHHHH");
       const inputObj = inputArray[i];
       //NEEDS TO BE URL TO VID NOT the fucking vidPage
       const vidDataObj = await getVidData(inputObj.vidURL);
