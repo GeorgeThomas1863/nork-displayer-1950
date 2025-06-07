@@ -73,7 +73,7 @@ export const fixDataByType = async (inputArray, dataType) => {
       //pics as thumbnails
       case "vidPages":
         //return input
-        const vidDataObj = await fixVidArray(inputObj);
+        const vidDataObj = await fixVidPageArray(inputObj);
         if (!vidDataObj) continue;
 
         const vidPageObj = { ...vidDataObj, ...inputObj };
@@ -131,15 +131,25 @@ export const fixPicArray = async (inputObj) => {
 
 //FIX VID DATA
 
-export const fixVidArray = async (inputObj) => {
+export const fixVidPageArray = async (inputArray) => {
   console.log("FIX VID ARRAY INPUT");
-  console.log(inputObj);
+  console.log(inputArray);
 
   const results = [];
   for (let i = 0; i < inputArray.length; i++) {
-    //only one vid so dont need to parse out array (like in pics)
-    const vidObj = await getVidData(inputArray[i].url);
-    results.push(vidObj);
+    try {
+      const inputObj = inputArray[i];
+      //only one vid so dont need to parse out array (like in pics)
+      const vidDataObj = await getVidData(inputObj.url);
+      if (!vidDataObj) continue;
+
+      const vidPageObj = { ...vidDataObj, ...inputObj };
+      results.push(vidPageObj);
+    } catch (error) {
+      console.log("ERROR GETTING VID PAGE DATA");
+      console.log(error);
+      continue;
+    }
   }
 
   return results;
