@@ -66,7 +66,7 @@ export const buildVidPageTitle = async (title) => {
 
 //NEED TO ENSURE SAVE PATH IS IN INPUT OBJ
 export const buildVidPageElement = async (inputObj) => {
-  const { savePath } = inputObj;
+  const { savePath, date } = inputObj;
 
   console.log("VID PAGE ELEMENT");
   console.log(inputObj);
@@ -75,7 +75,9 @@ export const buildVidPageElement = async (inputObj) => {
   vidPageElement.id = "vid-page-element";
 
   const vidElement = await buildVidElement(savePath);
-  vidPageElement.append(vidElement);
+  const dateElement = await buildVidPageDate(date);
+
+  vidPageElement.append(vidElement, dateElement);
 
   return vidPageElement;
 };
