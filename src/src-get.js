@@ -123,8 +123,8 @@ export const getVidData = async (vidURL) => {
   const vidDataModel = new dbModel(lookupParams, vidsDownloaded);
   const vidObj = await vidDataModel.getUniqueItem();
 
-  console.log("VID OBJ");
-  console.log(vidObj);
+//   console.log("VID OBJ");
+//   console.log(vidObj);
 
   //checks if pic exists, return null if it doesnt
   if (!vidObj || !vidObj.savePath) return null;

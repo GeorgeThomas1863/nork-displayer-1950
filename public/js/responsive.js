@@ -43,6 +43,10 @@ export const mainClickHandler = async (e) => {
   const newBackendData = await getNewData(clickObj);
   if (!newBackendData) return null;
 
+  console.log("NEW BACKEND DATA");
+  console.log(newBackendData);
+  console.dir(newBackendData);
+
   await buildBackendNew(newBackendData);
 
   return true;
