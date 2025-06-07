@@ -42,8 +42,8 @@ export const fixInputDefaults = async (inputObj) => {
 export const fixDataByType = async (inputArray, dataType) => {
   if (!inputArray) return null;
 
-  console.log("FIX DATA BY TYPE");
-  console.log(dataType);
+  // console.log("FIX DATA BY TYPE");
+  // console.log(dataType);
 
   const results = [];
   for (let i = 0; i < inputArray.length; i++) {
@@ -136,8 +136,8 @@ export const fixPicArray = async (inputObj) => {
 //FIX VID DATA
 
 export const fixVidPageArray = async (inputArray) => {
-  //   console.log("FIX VID ARRAY INPUT");
-  //   console.log(inputArray);
+    console.log("FIX VID ARRAY INPUT");
+    console.log(inputArray);
 
   const results = [];
   for (let i = 0; i < inputArray.length; i++) {
