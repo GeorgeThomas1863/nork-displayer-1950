@@ -33,14 +33,8 @@ export const buildDisplay = async () => {
 
 //RESPONSIVE STUFF
 export const getNewData = async (inputObj) => {
-  //check if new data triggered
-  console.log("GET NEW DATA CALLED");
-  console.log(inputObj);
-
   //checks if command triggered, if so gets type of command triggered
   const commandTriggerType = await checkNewDataTrigger(inputObj);
-  console.log("NEW DATA TRIGGER");
-  console.log(commandTriggerType);
 
   if (!commandTriggerType) return null;
 

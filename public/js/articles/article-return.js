@@ -39,12 +39,13 @@ export const buildArticleListItem = async (inputObj, isFirst) => {
   const articleElement = await buildArticleElement(inputObj);
 
   //build title element
-  const titleElement = await buildTitle(title);
   const dateElement = await buildDate(date);
+  const titleElement = await buildTitle(title);
+  titleElement.innerHTML = `${titleElement.textContent};  <i>${dateElement.textContent}</i>`;
 
   // Wrap the article content in a collapsible
   const articleCollapseObj = {
-    titleElement: titleElement.innerHTML(`${titleElement.textContent};  <i>${dateElement.textContent}</i>`),
+    titleElement: titleElement,
     contentElement: articleElement,
     isExpanded: isFirst,
     className: "article-element-collapse",

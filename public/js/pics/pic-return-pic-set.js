@@ -38,12 +38,13 @@ export const buildPicSetListItem = async (inputObj, isFirst) => {
   const picSetElement = await buildPicSetElement(inputObj);
 
   //build title element
-  const titleElement = await buildPicSetTitle(title);
   const dateElement = await buildPicSetDate(date);
+  const titleElement = await buildPicSetTitle(title);
+  titleElement.innerHTML = `${titleElement.textContent};  <i>${dateElement.textContent}</i>`;
 
   // Wrap the article content in a collapsible
   const picSetCollapseObj = {
-    titleElement: titleElement.innerHTML(`${titleElement.textContent};  <i>${dateElement.textContent}</i>`),
+    titleElement: titleElement,
     contentElement: picSetElement,
     isExpanded: isFirst,
     className: "pic-set-element-collapse",

@@ -38,12 +38,13 @@ export const buildVidPageListItem = async (inputObj, isFirst) => {
   const vidPageElement = await buildVidPageElement(inputObj);
 
   //build title element
-  const titleElement = await buildVidPageTitle(title);
   const dateElement = await buildVidPageDate(date);
+  const titleElement = await buildVidPageTitle(title);
+  titleElement.innerHTML = `${titleElement.textContent};  <i>${dateElement.textContent}</i>`;
 
   // Wrap the article content in a collapsible
   const vidPageCollapseObj = {
-    titleElement: titleElement.innerHTML(`${titleElement.textContent};  <i>${dateElement.textContent}</i>`),
+    titleElement: titleElement,
     contentElement: vidPageElement,
     isExpanded: isFirst,
     className: "vid-page-element-collapse",
