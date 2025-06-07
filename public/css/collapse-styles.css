@@ -79,9 +79,10 @@
   /* border-radius: 8px; */
 }
 
-.collapse-content .collapse-container.picSet-pic-collapse {
+/* BELOW DOESNT WORK */
+/* .collapse-content .collapse-container.picSet-pic-collapse {
   border-radius: 8px;
-}
+} */
 
 .collapse-content.hidden {
   max-height: 0;
