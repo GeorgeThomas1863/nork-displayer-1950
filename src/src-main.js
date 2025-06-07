@@ -10,8 +10,8 @@ export const runGetBackendData = async (inputObj) => {
   const { dataType, isFirstLoad } = inputObj;
   const dataObj = {};
 
-  console.log("INPUT OBJ RUN GET BACKEND DATA");
-  console.log(inputObj);
+  // console.log("INPUT OBJ RUN GET BACKEND DATA");
+  // console.log(inputObj);
 
   const collection = backendDefaultParams[dataType].collection;
 
@@ -24,13 +24,13 @@ export const runGetBackendData = async (inputObj) => {
     params = await fixInputDefaults(inputObj);
   }
 
-  console.log("PARAMS");
-  console.log(params);
+  // console.log("PARAMS");
+  // console.log(params);
 
   //handle articles
   let dataArrayRaw = [];
-  const { sortBy } = params;
-  if (dataType === "articles") {
+  const { sortBy, filterValue } = params;
+  if (dataType === "articles" && filterValue !== "all-type") {
     const articleDataModel = new dbModel(params, collection);
 
     switch (sortBy) {
