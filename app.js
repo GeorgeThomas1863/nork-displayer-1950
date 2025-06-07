@@ -1,6 +1,4 @@
-
-
-//STYLE DATE COLLAPSE style slightly better
+//FIX ARTICLE TYPE ALL
 
 //UNFUCK THUMBNAIL PIC STATS
 
