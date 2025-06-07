@@ -65,7 +65,7 @@ export const buildPicSetTitle = async (title) => {
 };
 
 export const buildPicSetElement = async (inputObj) => {
-  const { picArray } = inputObj;
+  const { date, picArray } = inputObj;
 
   const picSetElement = document.createElement("article");
   picSetElement.id = "pic-set-element";
@@ -75,6 +75,10 @@ export const buildPicSetElement = async (inputObj) => {
   if (picSetPicData) {
     picSetElement.append(picSetPicData);
   }
+
+  //append pic set date
+  const dateElement = await buildPicSetDate(date);
+  picSetElement.append(dateElement);
 
   return picSetElement;
 };
