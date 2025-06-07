@@ -156,6 +156,20 @@
 
 /* ------------------------------ */
 
+#pic-set-date {
+  margin: 1rem 0;
+  padding: 0.5rem 0;
+  display: inline-block;
+  font-size: 0.9rem;
+  color: #64748b;
+  font-weight: 500;
+  border-top: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e2e8f0;
+  width: 100%;
+}
+
+/* ------------------------------ */
+
 /* VID STYLES */
 
 #vid-element {
