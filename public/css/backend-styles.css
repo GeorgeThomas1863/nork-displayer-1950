@@ -60,6 +60,31 @@
 
 /* ------------------------------ */
 
+/* PIC SET STYLES */
+
+.pic-set-list-item {
+  margin-bottom: 1.5rem;
+}
+
+.pic-set-list-item:last-child {
+  margin-bottom: 0;
+}
+
+#pic-set-date {
+  margin: 1rem 0;
+  padding: 0.5rem 0;
+  padding-left: 1rem;
+  display: inline-block;
+  font-size: 0.9rem;
+  color: #64748b;
+  font-weight: 500;
+  border-top: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e2e8f0;
+  width: 100%;
+}
+
+/* ------------------------------ */
+
 /* PIC STYLES */
 
 #pic-array-element {
@@ -152,21 +177,6 @@
 #pic-server {
   color: #888;
   /* width: fit-content; */
-}
-
-/* ------------------------------ */
-
-#pic-set-date {
-  margin: 1rem 0;
-  padding: 0.5rem 0;
-  padding-left: 1rem;
-  display: inline-block;
-  font-size: 0.9rem;
-  color: #64748b;
-  font-weight: 500;
-  border-top: 1px solid #e2e8f0;
-  border-bottom: 1px solid #e2e8f0;
-  width: 100%;
 }
 
 /* ------------------------------ */
