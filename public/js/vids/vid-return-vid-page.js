@@ -68,6 +68,9 @@ export const buildVidPageTitle = async (title) => {
 export const buildVidPageElement = async (inputObj) => {
   const { savePath } = inputObj;
 
+  console.log("VID PAGE ELEMENT");
+  console.log(inputObj);
+
   const vidPageElement = document.createElement("article");
   vidPageElement.id = "vid-page-element";
 
