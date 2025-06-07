@@ -130,6 +130,6 @@
   justify-content: left;
 }
 
-.vid-page-element-collapse {
+.collapse-container.vid-page-element-collapse {
   width: 100%;
 }
