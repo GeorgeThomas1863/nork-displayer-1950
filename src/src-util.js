@@ -1,6 +1,6 @@
 import CONFIG from "../config/config.js";
 import { clickIdTriggerMap, expandTriggerMap, inputIdTriggerMap } from "../config/map-display.js";
-import { getPicData } from "./src-main.js";
+import { getPicData, getVidData } from "./src-main.js";
 
 //FIX DATA SECTION
 export const fixInputDefaults = async (inputObj) => {
@@ -77,14 +77,25 @@ export const fixDataByType = async (inputArray, dataType) => {
         const vidDataObj = await fixVidDataArray(inputObj);
         if (!vidDataObj) continue;
 
-        const vidObj = { ...vidDataObj, ...inputObj };
-        results.push(vidObj);
+        const vidPageObj = { ...vidDataObj, ...inputObj };
+        results.push(vidPageObj);
         break;
 
       //might need to fix thumbnail (prob not)
       case "vids":
-        results.push(inputObj);
-        break;
+        //check if vid exists
+        try {
+          const vidAloneDataObj = await getVidData(inputObj.url);
+          if (!vidAloneDataObj) continue;
+
+          const vidAloneObj = { ...vidAloneDataObj, ...inputObj };
+          results.push(vidAloneObj);
+          break;
+        } catch (error) {
+          console.log("ERROR GETTING VID ALONE");
+          console.log(error);
+          continue;
+        }
     }
   }
 
