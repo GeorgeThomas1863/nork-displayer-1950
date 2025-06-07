@@ -87,6 +87,8 @@ export const fixDataByType = async (inputArray, dataType) => {
         //check if vid exists
         try {
           const vidAloneDataObj = await getVidData(inputObj.url);
+          console.log("VID ALONE DATA OBJ");
+          console.log(vidAloneDataObj);
           if (!vidAloneDataObj) continue;
 
           const vidAloneObj = { ...vidAloneDataObj, ...inputObj };
