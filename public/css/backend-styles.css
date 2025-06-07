@@ -227,6 +227,7 @@
 #vid-page-date {
   margin: 1rem 0;
   padding: 0.5rem 0;
+  padding-left: 1rem;
   display: inline-block;
   font-size: 0.9rem;
   color: #64748b;
