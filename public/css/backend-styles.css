@@ -36,9 +36,7 @@
 
 /* STYLE SPAN HERE */
 #article-title span {
-  font-size: 0.9rem;
-  color: #64748b;
-  font-weight: 500;
+  font-size: 1.2rem;
 }
 
 #article-date {
