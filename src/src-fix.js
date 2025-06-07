@@ -150,29 +150,4 @@ export const fixVidPageObj = async (inputObj) => {
     console.log(error);
     return null;
   }
-
-  // console.log("FIX VID ARRAY INPUT");
-  // console.log(inputArray);
-
-  // const results = [];
-  // for (let i = 0; i < inputArray.length; i++) {
-  //   try {
-  //     const inputObj = inputArray[i];
-  //     //NEEDS TO BE URL TO VID NOT the fucking vidPage
-
-  //     // console.log("VID DATA OBJ");
-  //     // console.log(vidDataObj);
-
-  //     if (!vidDataObj) continue;
-
-  //     const vidPageObj = { ...vidDataObj, ...inputObj };
-  //     results.push(vidPageObj);
-  //   } catch (error) {
-  //     console.log("ERROR GETTING VID PAGE DATA");
-  //     console.log(error);
-  //     continue;
-  //   }
-  // }
-
-  // return results;
 };
