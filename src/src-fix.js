@@ -78,7 +78,7 @@ export const fixDataByType = async (inputArray, dataType) => {
       //pics as thumbnails
       case "vidPages":
         //return input
-        const vidDataObj = await fixVidPageArray(inputObj);
+        const vidDataObj = await fixVidPageObj(inputObj);
         if (!vidDataObj) continue;
 
         const vidPageObj = { ...vidDataObj, ...inputObj };
@@ -135,29 +135,44 @@ export const fixPicArray = async (inputObj) => {
 
 //FIX VID DATA
 
-export const fixVidPageArray = async (inputArray) => {
-  console.log("FIX VID ARRAY INPUT");
-  console.log(inputArray);
+export const fixVidPageObj = async (inputObj) => {
+  if (!inputObj || !inputObj.vidURL) return null;
+  const { vidURL } = inputObj;
 
-  const results = [];
-  for (let i = 0; i < inputArray.length; i++) {
-    try {
-      const inputObj = inputArray[i];
-      //NEEDS TO BE URL TO VID NOT the fucking vidPage
-      const vidDataObj = await getVidData(inputObj.vidURL);
-      // console.log("VID DATA OBJ");
-      // console.log(vidDataObj);
+  try {
+    const vidDataObj = await getVidData(vidURL);
+    if (!vidDataObj) return null;
 
-      if (!vidDataObj) continue;
-
-      const vidPageObj = { ...vidDataObj, ...inputObj };
-      results.push(vidPageObj);
-    } catch (error) {
-      console.log("ERROR GETTING VID PAGE DATA");
-      console.log(error);
-      continue;
-    }
+    const vidPageObj = { ...vidDataObj, ...inputObj };
+    return vidPageObj;
+  } catch (error) {
+    console.log("ERROR GETTING VID PAGE DATA");
+    console.log(error);
+    return null;
   }
 
-  return results;
+  // console.log("FIX VID ARRAY INPUT");
+  // console.log(inputArray);
+
+  // const results = [];
+  // for (let i = 0; i < inputArray.length; i++) {
+  //   try {
+  //     const inputObj = inputArray[i];
+  //     //NEEDS TO BE URL TO VID NOT the fucking vidPage
+
+  //     // console.log("VID DATA OBJ");
+  //     // console.log(vidDataObj);
+
+  //     if (!vidDataObj) continue;
+
+  //     const vidPageObj = { ...vidDataObj, ...inputObj };
+  //     results.push(vidPageObj);
+  //   } catch (error) {
+  //     console.log("ERROR GETTING VID PAGE DATA");
+  //     console.log(error);
+  //     continue;
+  //   }
+  // }
+
+  // return results;
 };
