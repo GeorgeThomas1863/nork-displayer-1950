@@ -208,6 +208,7 @@ export const removeInvalidItems = async (inputArray, dataType, howMany) => {
       break;
 
     case "vids":
+    case "vidPages":
       for (let i = 0; i < inputArray.length; i++) {
         const dataObj = inputArray[i];
         const itemExists = await checkItemExists(dataObj, "vid");
