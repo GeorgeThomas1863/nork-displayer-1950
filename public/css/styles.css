@@ -81,8 +81,7 @@ h3 {
   display: flex;
   align-items: flex-start;
   gap: 1rem;
-  /* width: fit-content; */
-  width: 110%;
+  width: fit-content;
 }
 
 #drop-down a span {
