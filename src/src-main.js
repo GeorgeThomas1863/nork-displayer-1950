@@ -17,7 +17,7 @@ export const runGetBackendData = async (inputObj) => {
 
   //build backend params based on if first load
   const backendParams = await getBackendParams(inputObj);
-  const { sortBy, filterValue } = backendParams;
+  const { sortBy, filterValue, howMany } = backendParams;
 
   console.log("BACKEND PARAMS");
   console.log(backendParams);
