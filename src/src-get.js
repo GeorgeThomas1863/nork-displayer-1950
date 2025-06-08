@@ -9,19 +9,16 @@ export const getBackendParams = async (inputObj) => {
   if (!inputObj || !inputObj.dataType || !inputObj.isFirstLoad) return null;
   const { isFirstLoad, dataType } = inputObj;
 
+  console.log("GET BACKEND PARAMS");
+  console.log(inputObj);
+
   //set to default on first load
   if (isFirstLoad) {
     return backendDefaultParams[dataType];
   }
 
-  console.log("GET BACKEND PARAMS");
-  console.log(inputObj);
-
   //otherwise use input
-  const testData = await fixInputDefaults(inputObj);
-  console.log("TEST DATA");
-  console.log(testData);
-  return testData;
+  return await fixInputDefaults(inputObj);
 };
 
 //GET PIC DATA SECTION
