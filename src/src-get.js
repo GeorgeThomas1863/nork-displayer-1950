@@ -9,6 +9,9 @@ export const getBackendParams = async (inputObj) => {
   if (!inputObj || !inputObj.dataType || !inputObj.isFirstLoad) return null;
   const { isFirstLoad, dataType } = inputObj;
 
+  console.log("DATA TYPE");
+  console.log(dataType);
+
   console.log("GET BACKEND PARAMS");
   console.log(inputObj);
 
