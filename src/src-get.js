@@ -36,7 +36,7 @@ export const getValidDataArray = async (inputParams, dataType, collection) => {
     //if it doesnt exist skip it
     if (!fs.existsSync(savePath)) {
       console.log("AHHHHHHHHHHHHHHHHHH");
-      console.log(`${savePath} does not exist`);
+      console.log("SAVE PATH DOES NOT EXIST");
       continue;
     }
 
