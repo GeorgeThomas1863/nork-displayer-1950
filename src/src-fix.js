@@ -8,6 +8,9 @@ export const fixInputDefaults = async (inputObj) => {
   const { articlesHowMany, picsHowMany, picSetsHowMany, vidsHowMany, vidPagesHowMany } = CONFIG;
   const returnObj = { ...inputObj };
 
+  console.log("FIX INPUT DEFAULTS");
+  console.log(inputObj);
+
   if (howMany) return returnObj;
 
   let returnHowMany = 0;
