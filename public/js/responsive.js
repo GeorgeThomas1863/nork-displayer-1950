@@ -29,11 +29,12 @@ export const mainClickHandler = async (e) => {
   const clickElement = e.target;
   const clickId = clickElement.id;
   const expandType = clickElement.getAttribute("data-expand");
+  const toggleType = clickElement.getAttribute("data-toggle");
 
   console.log("CLICK INFO");
   console.log(clickElement);
   console.log(clickId);
-  console.log(expandType);
+  console.log(toggleType);
 
   //handle expand / collapse backend data
   if (expandType) {

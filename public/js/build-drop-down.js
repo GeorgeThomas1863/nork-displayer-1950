@@ -2,16 +2,17 @@ export const buildDropDown = async () => {
   // Create main drop-down container
   const dropDownElement = document.createElement("div");
   dropDownElement.id = "drop-down";
+  dropDownElement.setAttribute("data-toggle", "dropdown");
 
   // Create bars link element
   const dropDownBars = document.createElement("a");
   dropDownBars.id = "drop-down-bars";
-  dropDownBars.setAttribute("data-action", "toggle-dropdown");
+  dropDownBars.setAttribute("data-toggle", "dropdown");
 
   // Create three spans for the bars
   for (let i = 0; i < 3; i++) {
     const span = document.createElement("span");
-    span.setAttribute("data-action", "toggle-dropdown");
+    span.setAttribute("data-toggle", "dropdown");
     dropDownBars.appendChild(span);
   }
 
