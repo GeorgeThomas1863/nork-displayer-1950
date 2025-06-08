@@ -17,14 +17,14 @@ export const runGetBackendData = async (inputObj) => {
 
   //build backend params based on if first load
   const backendParams = await getBackendParams(inputObj);
-  const { howMany, sortBy, filterValue } = backendParams;
+  const { sortBy, filterValue } = backendParams;
 
   console.log("BACKEND PARAMS");
   console.log(backendParams);
 
   //update how many (to account for fucked items)
-  const howManyBuffer = Math.ceil(howMany * 1.5);
-  backendParams.howMany = howManyBuffer;
+  // const howManyBuffer = Math.ceil(howMany * 1.5);
+  // backendParams.howMany = howManyBuffer;
 
   //CLAUDE's VERSION OF MY SHITTY CODE to lookup data
   const dataModel = new dbModel(backendParams, collection);
