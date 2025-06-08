@@ -159,7 +159,7 @@ h3 {
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.1s ease;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
   text-transform: uppercase;
   letter-spacing: 0.5px;
