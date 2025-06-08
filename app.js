@@ -1,4 +1,4 @@
-//throwing out cursor styles
+//throwing out cursor styles again
 
 //ADD MEDIA STYLES (FIX THEM, USE CURSOR)
 
