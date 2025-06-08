@@ -1,14 +1,6 @@
-//combine vid / vid page display into one (just use vid page)
-
 //MAKE DROP DOWN RESPONSIVE
 
 //ADD MEDIA STYLES (FIX THEM, USE CURSOR)
-
-//FIX PIC ALONE ORDER (SORT BY DATE RATHER THAN ID)
-
-//FIX PIC SET / VID PAGE DISPLAY
-
-//PIC ALONE DISPLAY IS WRONG ORDER
 
 //FUTURE BUG LIST:
 // - make article display better (3 across with pics, if present)
