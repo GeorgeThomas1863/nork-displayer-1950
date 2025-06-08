@@ -14,6 +14,7 @@
 //THINGS TO DO LATER:
 // - UNFUCK PIC DISPLAY WITH VERTICAL PICS
 // - add vid stats to vid display
+// - make scroll an event, load more pics / vids on scroll (esp on mobile)
 
 //
 
