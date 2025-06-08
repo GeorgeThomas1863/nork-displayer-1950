@@ -48,8 +48,8 @@ export const buildVidTypeListItem = async () => {
 
   // Create options for article type select
   const optionArray = [
-    { value: "vid-pages", id: "vid-pages", text: "Vid Pages", selected: true },
-    { value: "vid-alone", id: "vid-alone", text: "Just Vids" },
+    { value: "vid-alone", id: "vid-alone", text: "Just Vids", selected: true },
+    { value: "vid-pages", id: "vid-pages", text: "Vid Pages" },
   ];
 
   for (let i = 0; i < optionArray.length; i++) {
