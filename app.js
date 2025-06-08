@@ -6,7 +6,7 @@
 
 //MAKE DROP DOWN RESPONSIVE
 
-//ADD MEDIA STYLES
+//ADD MEDIA STYLES (FIX THEM / MAKE THEM WORK)
 
 //FIX PIC ALONE ORDER (SORT BY DATE RATHER THAN ID)
 
@@ -16,7 +16,7 @@
 
 //FUTURE BUG LIST:
 // - make article display better (3 across with pics, if present)
-// -
+// - "external articles" link seems to be constantly broken, check if right link
 // - border radius on pics is still weird, check collapse container border radius
 
 //UNFUCK PIC DISPLAY WITH VERTICAL PICS
