@@ -1,5 +1,3 @@
-//ADD PIC ID AS A SECOND SORT TO PIC RETURNs
-
 //combine vid / vid page display into one (just use vid page)
 
 //MAKE DROP DOWN RESPONSIVE
