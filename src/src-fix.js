@@ -1,4 +1,3 @@
-import fs from "fs";
 import CONFIG from "../config/config.js";
 import { getPicData, getVidData } from "./src-get.js";
 import { checkItemExists } from "./src-check.js";

@@ -3,7 +3,6 @@ import CONFIG from "../config/config.js";
 import { backendDefaultParams } from "../config/map-display.js";
 import dbModel from "../models/db-model.js";
 import { articleTypeMap } from "../config/map-display.js";
-import { checkLookupArray } from "./src-check.js";
 import { fixInputDefaults } from "./src-fix.js";
 
 export const getBackendParams = async (inputObj) => {
