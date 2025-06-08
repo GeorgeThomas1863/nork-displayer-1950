@@ -1,0 +1,285 @@
+/* MEDIA QUERIES FOR STYLES.CSS */
+
+/* ===== LARGE TABLETS AND SMALL DESKTOPS (769px TO 992px) ===== */
+@media only screen and (min-width: 769px) and (max-width: 992px) {
+  #pic-array-element {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.8rem;
+  }
+
+  #backend-data-wrapper {
+    margin-top: 2rem;
+    margin-left: 1.5rem;
+    margin-right: 2rem;
+  }
+}
+
+/* ===== MEDIUM DEVICES (TABLETS, 577px TO 768px) ===== */
+@media only screen and (min-width: 577px) and (max-width: 768px) {
+  /* ===== GENERAL & FORM STYLES ===== */
+
+  .wrapper label {
+    min-width: 7rem;
+    font-size: 1.5rem;
+  }
+
+  .wrapper input,
+  .wrapper select {
+    font-size: 1.2rem;
+  }
+
+  .action-button {
+    font-size: 1.5rem;
+    padding: 0.4rem 1.5rem;
+  }
+
+  /* Container adjustments */
+  #backend-data-wrapper {
+    margin-top: 1.5rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+
+  /* Pictures grid - change to 2 columns for tablets */
+  #pic-array-element {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+  }
+
+  /* Article element adjustments */
+  #article-element {
+    padding: 1.8rem;
+  }
+
+  #article-title {
+    font-size: 1.6rem;
+  }
+
+  /* Collapsible adjustments */
+  .article-pic-list-collapse .collapsible-header {
+    width: 25%;
+  }
+}
+
+/* ===== SMALL DEVICES (PHONES, 576PX AND DOWN) ===== */
+@media only screen and (max-width: 576px) {
+  /* ===== GENERAL & FORM STYLES ===== */
+
+  /* change background pic */
+  #background-pic {
+    content: url("/images/KJU2.jpg");
+  }
+
+  /* change default button color (make slightly darker) */
+  button {
+    background: rgb(170, 170, 170);
+  }
+
+  /* Keep nav buttons on same line but make them smaller */
+  nav ul {
+    margin: 0;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: center;
+    /* align-items: top; */
+    gap: 1.5rem;
+  }
+
+  .action-button {
+    padding: 0.4rem 1.5rem;
+    font-size: 1.3rem;
+    white-space: nowrap;
+  }
+
+  #form-wrapper {
+    margin-top: 1rem;
+    margin-left: 0.5rem;
+    width: 95%;
+  }
+
+  /* Keep labels beside inputs but make them more compact */
+  .wrapper li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .wrapper label {
+    font-size: 1.2rem;
+    margin-right: 0.5rem;
+    min-width: 6rem;
+    text-align: right;
+  }
+
+  .wrapper select {
+    font-size: 1.2rem;
+    height: 2.3rem;
+    flex: 1;
+  }
+
+  .wrapper input {
+    font-size: 1.2rem;
+    height: 2rem;
+  }
+
+  button#submit-button {
+    display: block;
+    margin: 0 auto;
+    margin-top: 1rem;
+    padding: 0.4rem 3rem;
+    font-size: 1.3rem;
+  }
+
+  /* Container adjustments */
+  #backend-data-wrapper {
+    margin-top: 2rem;
+    margin-left: 0.2rem;
+    margin-right: 0.2rem;
+  }
+
+  /* Article list adjustments */
+  #article-list {
+    gap: 1.5rem;
+  }
+
+  /* Article element styling */
+  #article-element {
+    padding: 1.2rem;
+  }
+
+  /* Article title */
+  #article-title {
+    font-size: 1.4rem;
+    margin-bottom: 0.7rem;
+  }
+
+  /* Article date */
+  #article-date {
+    font-size: 0.85rem;
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.5rem;
+  }
+
+  /* Article content */
+  #article-content {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  #article-content p {
+    margin-bottom: 0.8rem;
+  }
+
+  #article-content h3 {
+    font-size: 1.2rem;
+    margin: 1.2rem 0 0.6rem;
+  }
+
+  #article-content h4 {
+    font-size: 1.1rem;
+    margin: 1rem 0 0.5rem;
+  }
+
+  #article-content blockquote {
+    padding-left: 0.7rem;
+  }
+
+  #article-content pre {
+    padding: 0.7rem;
+    margin: 1rem 0;
+  }
+
+  /* Pictures grid - change to 1 column */
+  #pic-array-element {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  #pic-array-element img {
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  /* Collapsible header */
+  .article-pic-list-collapse .collapsible-header {
+    padding: 12px 15px;
+  }
+
+  .article-pic-list-collapse .collapsible-title {
+    font-size: 1.3rem;
+    max-width: calc(100% - 36px);
+  }
+
+  .article-pic-list-collapse .collapsible-arrow {
+    width: 22px;
+    height: 22px;
+    margin-right: 8px;
+  }
+
+  /* Article pic list collapse adjustments */
+  .article-pic-list-collapse .collapsible-header {
+    width: 50%;
+    padding: 8px 10px;
+  }
+
+  .article-pic-list-collapse .collapsible-title {
+    font-size: 1.1rem;
+  }
+
+  /* Empty container */
+  .empty-container {
+    margin-top: 2rem;
+  }
+
+  .empty-text {
+    padding: 0.8rem 1.2rem;
+    font-size: 1.5rem;
+    max-width: 90%;
+  }
+
+  .empty-text h2 {
+    margin-top: 1rem;
+    font-size: 1.2rem;
+  }
+}
+
+/* ===== LANDSCAPE ORIENTATION FOR PHONES ===== */
+@media only screen and (max-width: 896px) and (orientation: landscape) {
+  /* ===== GENERAL & FORM STYLES ===== */
+  #form-wrapper {
+    width: 80%;
+    margin-left: 2rem;
+  }
+
+  .wrapper li {
+    margin-bottom: 0.5rem; /* Reduce vertical spacing in landscape */
+  }
+
+  .wrapper label {
+    font-size: 1.2rem;
+    min-width: 8rem;
+  }
+
+  nav ul {
+    margin-left: 2rem;
+  }
+
+  #pic-array-element {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  #backend-data-wrapper {
+    margin-top: 1rem;
+  }
+
+  #article-element {
+    padding: 1.5rem;
+  }
+
+  #article-content {
+    font-size: 0.9rem;
+  }
+}
