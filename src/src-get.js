@@ -18,7 +18,10 @@ export const getBackendParams = async (inputObj) => {
   console.log(inputObj);
 
   //otherwise use input
-  return await fixInputDefaults(inputObj);
+  const testData = await fixInputDefaults(inputObj);
+  console.log("TEST DATA");
+  console.log(testData);
+  return testData;
 };
 
 //GET PIC DATA SECTION
