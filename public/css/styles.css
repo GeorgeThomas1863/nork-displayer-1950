@@ -67,6 +67,18 @@ h3 {
   position: absolute;
   top: 1rem;
   left: 1rem;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+/* When action buttons are visible, dropdown becomes part of document flow */
+#drop-down:has(#action-button-element:not(.hidden)) {
+  position: relative;
+  top: 0;
+  left: 0;
+  margin: 1rem;
+  display: block;
+  width: fit-content;
 }
 
 #drop-down a span {
@@ -77,6 +89,11 @@ h3 {
 
 #drop-down:hover {
   transform: scale(1.5);
+}
+
+/* Don't scale when action buttons are visible */
+#drop-down:has(#action-button-element:not(.hidden)):hover {
+  transform: none;
 }
 
 #drop-down-bars {
@@ -105,6 +122,72 @@ h3 {
 #drop-down-menu-display h2:hover {
   background-color: rgb(215, 215, 215);
   border-radius: 10px;
+}
+
+/* ---------------------------------- */
+
+/* ACTION BUTTON STYLES */
+
+#action-button-element {
+  margin-top: 1rem;
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 1rem;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+#action-button-element li {
+  margin-bottom: 0.8rem;
+}
+
+#action-button-element li:last-child {
+  margin-bottom: 0;
+}
+
+.action-button {
+  width: 100%;
+  min-width: 200px;
+  padding: 0.8rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.action-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, #5a6fd8 0%, #6b4190 100%);
+}
+
+.action-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+#scrape-kcna-action-button {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+}
+
+#scrape-kcna-action-button:hover {
+  background: linear-gradient(135deg, #ff5252 0%, #d32f2f 100%);
+}
+
+#track-crypto-action-button {
+  background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+}
+
+#track-crypto-action-button:hover {
+  background: linear-gradient(135deg, #26a69a 0%, #388e3c 100%);
 }
 
 /* ---------------------------------- */
