@@ -175,6 +175,8 @@ export const removeInvalidItems = async (inputArray, dataType, howMany) => {
         const { picArray } = dataObj;
         if (!picArray) {
           dataReturnArray.push(dataObj);
+          if (dataReturnArray.length === howMany) return dataReturnArray;
+          continue;
         }
 
         const picArrayFixed = [];
