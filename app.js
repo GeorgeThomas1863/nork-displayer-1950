@@ -1,6 +1,4 @@
-//make action buttons side by side rather than stacked
-
-//ADD MEDIA STYLES (FIX THEM, USE CURSOR)
+//fully organize / test media queries 1 size at a time
 
 //FUTURE BUG LIST:
 // - make article display better (3 across with pics, if present)
