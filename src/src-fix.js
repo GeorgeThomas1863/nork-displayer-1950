@@ -11,32 +11,34 @@ export const fixInputDefaults = async (inputObj) => {
   console.log("FIX INPUT DEFAULTS");
   console.log(inputObj);
 
-  if (howMany) return returnObj;
+  if (!howMany) {
+    let returnHowMany = 0;
+    switch (dataType) {
+      case "articles":
+        returnHowMany = articlesHowMany;
+        break;
 
-  let returnHowMany = 0;
-  switch (dataType) {
-    case "articles":
-      returnHowMany = articlesHowMany;
-      break;
+      case "pics":
+        returnHowMany = picsHowMany;
+        break;
 
-    case "pics":
-      returnHowMany = picsHowMany;
-      break;
+      case "picSets":
+        returnHowMany = picSetsHowMany;
+        break;
 
-    case "picSets":
-      returnHowMany = picSetsHowMany;
-      break;
+      case "vids":
+        returnHowMany = vidsHowMany;
+        break;
 
-    case "vids":
-      returnHowMany = vidsHowMany;
-      break;
+      case "vidPages":
+        returnHowMany = vidPagesHowMany;
+        break;
+    }
 
-    case "vidPages":
-      returnHowMany = vidPagesHowMany;
-      break;
+    returnObj.howMany = returnHowMany;
+    return returnObj;
   }
 
-  returnObj.howMany = returnHowMany;
   return returnObj;
 };
 
