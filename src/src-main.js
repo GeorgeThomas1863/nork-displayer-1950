@@ -1,7 +1,8 @@
 import { backendDefaultParams } from "../config/map-display.js";
-import { getValidDataArray } from "./src-get.js";
+import dbModel from "../models/db-model.js";
+import { getBackendParams } from "./src-get.js";
 import { checkDataType } from "./src-check.js";
-import { fixInputDefaults, fixDataByType } from "./src-fix.js";
+import { fixDataByType, removeInvalidItems } from "./src-fix.js";
 
 //gets backend data from db
 export const runGetBackendData = async (inputObj) => {
@@ -11,19 +12,29 @@ export const runGetBackendData = async (inputObj) => {
 
   const collection = backendDefaultParams[dataType].collection;
 
-  let params = {};
-  if (isFirstLoad) {
-    //set to default
-    params = backendDefaultParams[dataType];
-  } else {
-    //use input
-    params = await fixInputDefaults(inputObj);
-  }
+  //build backend params based on if first load
+  const backendParams = await getBackendParams(inputObj);
+  const { howMany, sortBy, filterValue } = backendParams;
+
+  //update how many (to account for fucked items)
+  const howManyBuffer = Math.ceil(howMany * 1.5);
+  backendParams.howMany = howManyBuffer;
+
+  //CLAUDE's VERSION OF MY SHITTY CODE to lookup data
+  const dataModel = new dbModel(backendParams, collection);
+  const isArticleFilter = dataType === "articles" && filterValue !== "all-type";
+
+  const sortPrefix = sortBy === "newest-to-oldest" ? "Newest" : "Oldest";
+  const typeSuffix = isArticleFilter ? "sByType" : "s";
+  const methodName = `get${sortPrefix}Item${typeSuffix}Array`;
+
+  const dataArrayRaw = await dataModel[methodName]();
 
   //checks if items EXIST, only returns those that do
-  const dataArrayRaw = await getValidDataArray(params, dataType, collection);
+  // const dataArrayRaw = await getValidDataArray(params, dataType, collection);
 
-  const dataArray = await fixDataByType(dataArrayRaw, dataType);
+  const dataArrayFixed = await fixDataByType(dataArrayRaw, dataType);
+  const dataArray = await removeInvalidItems(dataArrayFixed, dataType, howMany);
 
   dataObj[dataType] = dataArray;
   dataObj.dataType = dataType;
@@ -38,6 +49,34 @@ export const runGetBackendData = async (inputObj) => {
 
   return dataObj;
 };
+
+//OLD WAY OF DOING LOOKUP (DELETE)
+// let dataArrayRaw = [];
+// if (dataType === "articles" && filterValue !== "all-type") {
+//   const articleDataModel = new dbModel(lookupParams, collection);
+
+//   switch (sortBy) {
+//     case "newest-to-oldest":
+//       dataArrayRaw = await articleDataModel.getNewestItemsByTypeArray();
+//       break;
+
+//     case "oldest-to-newest":
+//       dataArrayRaw = await articleDataModel.getOldestItemsByTypeArray();
+//       break;
+//   }
+// } else {
+//   const otherDataModel = new dbModel(lookupParams, collection);
+
+//   switch (sortBy) {
+//     case "newest-to-oldest":
+//       dataArrayRaw = await otherDataModel.getNewestItemsArray();
+//       break;
+
+//     case "oldest-to-newest":
+//       dataArrayRaw = await otherDataModel.getOldestItemsArray();
+//       break;
+//   }
+// }
 
 // GET NEW DATA SECTION
 export const runGetNewData = async (inputObj) => {

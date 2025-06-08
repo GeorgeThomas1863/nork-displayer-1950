@@ -1,5 +1,7 @@
+import fs from "fs";
 import CONFIG from "../config/config.js";
 import { getPicData, getVidData } from "./src-get.js";
+import { checkItemExists } from "./src-check.js";
 
 //FIX DATA SECTION
 export const fixInputDefaults = async (inputObj) => {
@@ -150,4 +152,66 @@ export const fixVidPageObj = async (inputObj) => {
     console.log(error);
     return null;
   }
+};
+
+//--------------------
+
+//REMOVE INVALID ITEMS FROM RETURN
+
+export const removeInvalidItems = async (inputArray, dataType, howMany) => {
+  if (!inputArray || !inputArray.length || !dataType) return null;
+
+  const dataReturnArray = [];
+  switch (dataType) {
+    //delete pics that dont exist from picArray
+    case "articles":
+    case "picSets":
+      for (let i = 0; i < inputArray.length; i++) {
+        const dataObj = inputArray[i];
+        const { picArray } = dataObj;
+        if (!picArray) {
+          dataReturnArray.push(dataObj);
+        }
+
+        const picArrayFixed = [];
+        for (let j = 0; j < picArray.length; j++) {
+          const picObj = picArray[j];
+          const itemExists = await checkItemExists(picObj);
+          if (!itemExists) continue;
+
+          picArrayFixed.push(picObj);
+        }
+
+        dataObj.picArray = picArrayFixed;
+        dataReturnArray.push(dataObj);
+
+        //check if right length return when it is
+        if (dataReturnArray.length === howMany) return dataReturnArray;
+      }
+      break;
+
+    case "pics":
+      for (let i = 0; i < inputArray.length; i++) {
+        const dataObj = inputArray[i];
+        const itemExists = await checkItemExists(dataObj);
+        if (!itemExists) continue;
+
+        dataReturnArray.push(dataObj);
+        if (dataReturnArray.length === howMany) return dataReturnArray;
+      }
+      break;
+
+    case "vids":
+      for (let i = 0; i < inputArray.length; i++) {
+        const dataObj = inputArray[i];
+        const itemExists = await checkItemExists(dataObj, "vid");
+        if (!itemExists) continue;
+
+        dataReturnArray.push(dataObj);
+        if (dataReturnArray.length === howMany) return dataReturnArray;
+      }
+      break;
+  }
+
+  return dataReturnArray;
 };

@@ -1,82 +1,22 @@
 import fs from "fs";
 import CONFIG from "../config/config.js";
-import { articleTypeMap } from "../config/map-display.js";
+import { backendDefaultParams } from "../config/map-display.js";
 import dbModel from "../models/db-model.js";
+import { articleTypeMap } from "../config/map-display.js";
+import { checkLookupArray } from "./src-check.js";
+import { fixInputDefaults } from "./src-fix.js";
 
-//CLAUDE LOOKUP FUNCTION FOR ENSURING SHIT VALID (incredibly inefficient method, dont care)
-export const getValidDataArray = async (inputParams, dataType, collection) => {
-  if (!inputParams || !inputParams.howMany || !dataType || !collection) return null;
+export const getBackendParams = async (inputObj) => {
+  if (!inputObj || !inputObj.dataType || !inputObj.isFirstLoad) return null;
+  const { isFirstLoad, dataType } = inputObj;
 
-  const { sortBy, sortKey, howMany, filterValue, filterKey } = inputParams;
-  const howManyBuffer = Math.ceil(howMany * 1.5);
-
-  const lookupParams = {
-    sortKey: sortKey,
-    howMany: howManyBuffer,
-    filterKey: filterKey,
-    filterValue: filterValue,
-  };
-
-  //CLAUDE's VERSION OF MY SHITTY CODE
-  const dataModel = new dbModel(lookupParams, collection);
-  const isArticleFilter = dataType === "articles" && filterValue !== "all-type";
-
-  const sortPrefix = sortBy === "newest-to-oldest" ? "Newest" : "Oldest";
-  const typeSuffix = isArticleFilter ? "sByType" : "s";
-  const methodName = `get${sortPrefix}Item${typeSuffix}Array`;
-
-  const dataArrayRaw = await dataModel[methodName]();
-  //END OF CLAUDE VERSION
-
-  console.log("DATA ARRAY RAW");
-  console.log(dataArrayRaw);
-
-  const dataReturnArray = [];
-  for (let i = 0; i < dataArrayRaw.length; i++) {
-    const dataObj = dataArrayRaw[i];
-    const { savePath } = dataObj;
-
-    //if it doesnt exist skip it
-    if (!fs.existsSync(savePath)) {
-      console.log("AHHHHHHHHHHHHHHHHHH");
-      console.log("SAVE PATH DOES NOT EXIST");
-      continue;
-    }
-
-    dataReturnArray.push(dataObj);
-    if (dataReturnArray.length === howMany) {
-      return dataReturnArray;
-    }
+  //set to default on first load
+  if (isFirstLoad) {
+    return backendDefaultParams[dataType];
   }
 
-  return dataReturnArray;
-
-  // let dataArrayRaw = [];
-  // if (dataType === "articles" && filterValue !== "all-type") {
-  //   const articleDataModel = new dbModel(lookupParams, collection);
-
-  //   switch (sortBy) {
-  //     case "newest-to-oldest":
-  //       dataArrayRaw = await articleDataModel.getNewestItemsByTypeArray();
-  //       break;
-
-  //     case "oldest-to-newest":
-  //       dataArrayRaw = await articleDataModel.getOldestItemsByTypeArray();
-  //       break;
-  //   }
-  // } else {
-  //   const otherDataModel = new dbModel(lookupParams, collection);
-
-  //   switch (sortBy) {
-  //     case "newest-to-oldest":
-  //       dataArrayRaw = await otherDataModel.getNewestItemsArray();
-  //       break;
-
-  //     case "oldest-to-newest":
-  //       dataArrayRaw = await otherDataModel.getOldestItemsArray();
-  //       break;
-  //   }
-  // }
+  //otherwise use input
+  return await fixInputDefaults(inputObj);
 };
 
 //GET PIC DATA SECTION

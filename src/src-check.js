@@ -1,9 +1,9 @@
+import fs from "fs";
 import { clickIdTriggerMap, expandTriggerMap, inputIdTriggerMap } from "../config/map-display.js";
 
 //--------------------------------
 
-//CHECK DATA SECTION
-
+//CHECK DATA
 export const checkDataType = async (inputObj) => {
   if (!inputObj) return null;
   const { picType, vidType, commandType } = inputObj;
@@ -83,4 +83,21 @@ export const checkInputId = async (inputObj) => {
 
   const inputTrigger = inputIdTriggerMap[inputId];
   return inputTrigger;
+};
+
+//----------------------
+
+//throw error if item doesnt exist
+export const checkItemExists = async (inputObj, type = "pic") => {
+  if (!inputObj || !inputObj.savePath) return null;
+  const { savePath, url } = inputObj;
+
+  if (!savePath || !fs.existsSync(savePath)) {
+    console.log("AHHHHHHHHHHHHHHHH");
+    console.log(`${type.toUpperCase()} NOT DOWNLOADED`);
+    console.log("ITEM URL: " + url);
+    return null;
+  }
+
+  return true;
 };
