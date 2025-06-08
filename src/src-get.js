@@ -28,6 +28,9 @@ export const getValidDataArray = async (inputParams, dataType, collection) => {
   const dataArrayRaw = await dataModel[methodName]();
   //END OF CLAUDE VERSION
 
+  console.log("DATA ARRAY RAW");
+  console.log(dataArrayRaw);
+
   const dataReturnArray = [];
   for (let i = 0; i < dataArrayRaw.length; i++) {
     const dataObj = dataArrayRaw[i];
