@@ -41,9 +41,6 @@ export const getNewData = async (inputObj) => {
   //get user input
   const userInputParams = await buildInputParams();
 
-  // console.log("USER INPUT PARAMS");
-  // console.log(userInputParams);
-
   //build params
   const paramsObj = { ...userInputParams, ...inputObj };
   paramsObj.route = "/get-new-data-route";
@@ -101,6 +98,12 @@ export const expandBackendData = async (dataType) => {
   }
 
   return true;
+};
+
+export const toggleDropdown = async (toggleType) => {
+  if (!toggleType || toggleType !== "dropdown") return null;
+
+  console.log("AHHHHHHHHHHHHH");
 };
 
 buildDisplay();

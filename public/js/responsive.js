@@ -1,4 +1,4 @@
-import { expandBackendData, getNewData } from "./main.js";
+import { getNewData, expandBackendData, toggleDropdown } from "./main.js";
 import { buildAdminParams, sendToBack, debounce } from "./util.js";
 import { buildBackendNew } from "./build-backend.js";
 
@@ -31,10 +31,14 @@ export const mainClickHandler = async (e) => {
   const expandType = clickElement.getAttribute("data-expand");
   const toggleType = clickElement.getAttribute("data-toggle");
 
-  console.log("CLICK INFO");
-  console.log(clickElement);
-  console.log(clickId);
-  console.log(toggleType);
+  // console.log("CLICK INFO");
+  // console.log(clickElement);
+  // console.log(clickId);
+  // console.log(toggleType);
+
+  if (toggleType) {
+    await toggleDropdown(toggleType);
+  }
 
   //handle expand / collapse backend data
   if (expandType) {
