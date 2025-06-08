@@ -10,8 +10,8 @@ export const runGetBackendData = async (inputObj) => {
   const { dataType } = inputObj;
   const dataObj = {};
 
-  console.log("INPUT OBJ");
-  console.log(inputObj);
+  // console.log("INPUT OBJ");
+  // console.log(inputObj);
 
   const collection = backendDefaultParams[dataType].collection;
 
@@ -34,8 +34,8 @@ export const runGetBackendData = async (inputObj) => {
   const typeSuffix = isArticleFilter ? "sByType" : "s";
   const methodName = `get${sortPrefix}Item${typeSuffix}Array`;
 
-  console.log("METHOD NAME");
-  console.log(methodName);
+  // console.log("METHOD NAME");
+  // console.log(methodName);
 
   const dataArrayRaw = await dataModel[methodName]();
 
