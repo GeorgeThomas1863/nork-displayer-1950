@@ -103,7 +103,14 @@ export const expandBackendData = async (dataType) => {
 export const toggleDropdown = async (toggleType) => {
   if (!toggleType || toggleType !== "dropdown") return null;
 
-  console.log("AHHHHHHHHHHHHH");
+  const actionButtonElement = document.getElementById("action-button-element");
+  if (!actionButtonElement) return null;
+
+  const isHidden = actionButtonElement.classList.contains("hidden");
+
+  isHidden ? await unhideArray([actionButtonElement]) : await hideArray([actionButtonElement]);
+
+  return true;
 };
 
 buildDisplay();
