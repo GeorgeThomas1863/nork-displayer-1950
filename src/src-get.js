@@ -3,6 +3,79 @@ import CONFIG from "../config/config.js";
 import { articleTypeMap } from "../config/map-display.js";
 import dbModel from "../models/db-model.js";
 
+//CLAUDE LOOKUP FUNCTION FOR ENSURING SHIT VALID (incredibly inefficient method, dont care)
+export const getValidDataArray = async (inputParams, dataType, collection) => {
+  if (!inputParams || !inputParams.howMany || !dataType || !collection) return null;
+
+  const { sortBy, sortKey, howMany, filterValue, filterKey } = inputParams;
+  const howManyBuffer = Math.ceil(howMany * 1.5);
+
+  const lookupParams = {
+    sortKey: sortKey,
+    howMany: howManyBuffer,
+    filterKey: filterKey,
+    filterValue: filterValue,
+  };
+
+  //CLAUDE's VERSION OF MY SHITTY CODE
+  const dataModel = new dbModel(lookupParams, collection);
+  const isArticleFilter = dataType === "articles" && filterValue !== "all-type";
+
+  const sortPrefix = sortBy === "newest-to-oldest" ? "Newest" : "Oldest";
+  const typeSuffix = isArticleFilter ? "sByType" : "s";
+  const methodName = `get${sortPrefix}Item${typeSuffix}Array`;
+
+  const dataArrayRaw = await dataModel[methodName]();
+  //END OF CLAUDE VERSION
+
+  const dataReturnArray = [];
+  for (let i = 0; i < dataArrayRaw.length; i++) {
+    const dataObj = dataArrayRaw[i];
+    const { savePath } = dataObj;
+
+    //if it doesnt exist skip it
+    if (!fs.existsSync(savePath)) {
+      console.log("AHHHHHHHHHHHHHHHHHH");
+      console.log(`${savePath} does not exist`);
+      continue;
+    }
+
+    dataReturnArray.push(dataObj);
+    if (dataReturnArray.length === howMany) {
+      return dataReturnArray;
+    }
+  }
+
+  return dataReturnArray;
+
+  // let dataArrayRaw = [];
+  // if (dataType === "articles" && filterValue !== "all-type") {
+  //   const articleDataModel = new dbModel(lookupParams, collection);
+
+  //   switch (sortBy) {
+  //     case "newest-to-oldest":
+  //       dataArrayRaw = await articleDataModel.getNewestItemsByTypeArray();
+  //       break;
+
+  //     case "oldest-to-newest":
+  //       dataArrayRaw = await articleDataModel.getOldestItemsByTypeArray();
+  //       break;
+  //   }
+  // } else {
+  //   const otherDataModel = new dbModel(lookupParams, collection);
+
+  //   switch (sortBy) {
+  //     case "newest-to-oldest":
+  //       dataArrayRaw = await otherDataModel.getNewestItemsArray();
+  //       break;
+
+  //     case "oldest-to-newest":
+  //       dataArrayRaw = await otherDataModel.getOldestItemsArray();
+  //       break;
+  //   }
+  // }
+};
+
 //GET PIC DATA SECTION
 export const getPicData = async (picURL) => {
   if (!picURL) return null;
@@ -123,8 +196,8 @@ export const getVidData = async (vidURL) => {
   const vidDataModel = new dbModel(lookupParams, vidsDownloaded);
   const vidObj = await vidDataModel.getUniqueItem();
 
-//   console.log("VID OBJ");
-//   console.log(vidObj);
+  //   console.log("VID OBJ");
+  //   console.log(vidObj);
 
   //checks if pic exists, return null if it doesnt
   if (!vidObj || !vidObj.savePath) return null;

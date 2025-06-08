@@ -1,5 +1,5 @@
 import { backendDefaultParams } from "../config/map-display.js";
-import dbModel from "../models/db-model.js";
+import { getValidDataArray } from "./src-get.js";
 import { checkDataType } from "./src-check.js";
 import { fixInputDefaults, fixDataByType } from "./src-fix.js";
 
@@ -8,9 +8,6 @@ export const runGetBackendData = async (inputObj) => {
   if (!inputObj || !inputObj.dataType) return null;
   const { dataType, isFirstLoad } = inputObj;
   const dataObj = {};
-
-  // console.log("INPUT OBJ RUN GET BACKEND DATA");
-  // console.log(inputObj);
 
   const collection = backendDefaultParams[dataType].collection;
 
@@ -23,37 +20,8 @@ export const runGetBackendData = async (inputObj) => {
     params = await fixInputDefaults(inputObj);
   }
 
-  // console.log("PARAMS");
-  // console.log(params);
-
-  //handle articles
-  let dataArrayRaw = [];
-  const { sortBy, filterValue } = params;
-  if (dataType === "articles" && filterValue !== "all-type") {
-    const articleDataModel = new dbModel(params, collection);
-
-    switch (sortBy) {
-      case "newest-to-oldest":
-        dataArrayRaw = await articleDataModel.getNewestItemsByTypeArray();
-        break;
-
-      case "oldest-to-newest":
-        dataArrayRaw = await articleDataModel.getOldestItemsByTypeArray();
-        break;
-    }
-  } else {
-    const otherDataModel = new dbModel(params, collection);
-
-    switch (sortBy) {
-      case "newest-to-oldest":
-        dataArrayRaw = await otherDataModel.getNewestItemsArray();
-        break;
-
-      case "oldest-to-newest":
-        dataArrayRaw = await otherDataModel.getOldestItemsArray();
-        break;
-    }
-  }
+  //checks if items EXIST, only returns those that do
+  const dataArrayRaw = await getValidDataArray(params, dataType, collection);
 
   const dataArray = await fixDataByType(dataArrayRaw, dataType);
 
