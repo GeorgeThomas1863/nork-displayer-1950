@@ -6,21 +6,13 @@ import { articleTypeMap } from "../config/map-display.js";
 import { fixInputDefaults } from "./src-fix.js";
 
 export const getBackendParams = async (inputObj) => {
-  if (!inputObj || !inputObj.dataType || !inputObj.isFirstLoad) return null;
+  if (!inputObj || !inputObj.dataType) return null;
   const { isFirstLoad, dataType } = inputObj;
-
-  console.log("DATA TYPE");
-  console.log(dataType);
-
-  console.log("GET BACKEND PARAMS");
-  console.log(inputObj);
 
   //set to default on first load
   if (isFirstLoad) {
     return backendDefaultParams[dataType];
   }
-
-  console.log("AHHHHHHHHHHHHHHHHHHHHHHHHHH");
 
   //otherwise use input
   return await fixInputDefaults(inputObj);
