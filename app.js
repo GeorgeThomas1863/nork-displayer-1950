@@ -1,4 +1,4 @@
-//fully organize / test media queries 1 size at a time
+//MEDIA QUERIES, ORGANIZE / TEST  1 size at a time
 
 //FUTURE BUG LIST:
 // - make article display better (3 across with pics, if present)
@@ -15,10 +15,6 @@
 // - make scroll an event, load more pics / vids on scroll (esp on mobile)
 
 //
-
-//[PROB DONT WANT TO DO BELOW]
-//MAKE GET NEW DATA A SINGLE FUNCTION PASSING IN THE TYPE TO BACKEND
-//THIS WAY YOU CAN DO THE SAME SEQUENCE AS YOU DO FOR DEFAULT DATA (AND FIX PICS BEFORE RETURNING)
 
 //PUT PIC / VID STATS IN HOVER
 
