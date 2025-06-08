@@ -103,9 +103,8 @@ export const fixDataByType = async (inputArray, dataType) => {
           const vidAloneObj = { ...vidAloneDataObj, ...inputObj };
           results.push(vidAloneObj);
           break;
-        } catch (error) {
-          console.log("ERROR GETTING VID ALONE");
-          console.log(error);
+        } catch (e) {
+          console.log(e.message + "; SAVE PATH: " + e.savePath + "; VIDURL: " + e.url);
           continue;
         }
     }
@@ -151,9 +150,8 @@ export const fixVidPageObj = async (inputObj) => {
 
     const vidPageObj = { ...vidDataObj, ...inputObj };
     return vidPageObj;
-  } catch (error) {
-    console.log("ERROR GETTING VID PAGE DATA");
-    console.log(error);
+  } catch (e) {
+    console.log(e.message + "; SAVE PATH: " + e.savePath + "; VIDURL: " + e.url);
     return null;
   }
 };

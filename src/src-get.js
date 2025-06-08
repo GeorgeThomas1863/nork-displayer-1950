@@ -36,7 +36,7 @@ export const getPicData = async (picURL) => {
 
     return returnObj;
   } catch (e) {
-    console.log(e.message + "; PICURL: " + e.url + "; SAVE PATH: " + e.savePath);
+    console.log(e.message + "; SAVE PATH: " + e.savePath + "; PICURL: " + e.url);
     return null;
   }
 };
@@ -143,11 +143,11 @@ export const getVidData = async (vidURL) => {
 
   //checks if pic exists, return null if it doesnt
   if (!vidObj || !vidObj.savePath) return null;
-  const { savePath } = vidObj;
+  const { savePath, url } = vidObj;
 
   if (!fs.existsSync(savePath)) {
     const error = new Error("VID NOT DOWNLOADED");
-    error.url = vidURL;
+    error.url = url;
     error.savePath = savePath;
     throw error;
   }
