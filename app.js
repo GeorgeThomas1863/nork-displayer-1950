@@ -1,4 +1,4 @@
-//throwing out cursor styles again
+//make action buttons side by side rather than stacked
 
 //ADD MEDIA STYLES (FIX THEM, USE CURSOR)
 
