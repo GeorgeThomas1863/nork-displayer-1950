@@ -47,52 +47,18 @@ export const runGetBackendData = async (inputObj) => {
   return dataObj;
 };
 
-//OLD WAY OF DOING LOOKUP (DELETE)
-// let dataArrayRaw = [];
-// if (dataType === "articles" && filterValue !== "all-type") {
-//   const articleDataModel = new dbModel(lookupParams, collection);
-
-//   switch (sortBy) {
-//     case "newest-to-oldest":
-//       dataArrayRaw = await articleDataModel.getNewestItemsByTypeArray();
-//       break;
-
-//     case "oldest-to-newest":
-//       dataArrayRaw = await articleDataModel.getOldestItemsByTypeArray();
-//       break;
-//   }
-// } else {
-//   const otherDataModel = new dbModel(lookupParams, collection);
-
-//   switch (sortBy) {
-//     case "newest-to-oldest":
-//       dataArrayRaw = await otherDataModel.getNewestItemsArray();
-//       break;
-
-//     case "oldest-to-newest":
-//       dataArrayRaw = await otherDataModel.getOldestItemsArray();
-//       break;
-//   }
-// }
-
 // GET NEW DATA SECTION
 export const runGetNewData = async (inputObj) => {
   if (!inputObj) return null;
   const { articleHowMany, picHowMany, vidHowMany, articleType, articleSortBy, picSortBy, vidSortBy } = inputObj;
 
-  // console.log("RUN GET NEW DATA CALLED");
-  // console.log(inputObj);
-
   //get data type
   const dataType = await checkDataType(inputObj);
-
-  // console.log("DATA TYPE");
-  // console.log(dataType);
-
   if (!dataType) return null;
 
   //get params
   const sortKey = backendDefaultParams[dataType].sortKey;
+  const sortKey2 = backendDefaultParams[dataType].sortKey2;
 
   let sortByRaw = "";
   let howMany = 0;
@@ -119,14 +85,12 @@ export const runGetNewData = async (inputObj) => {
     isFirstLoad: false,
     dataType: dataType,
     sortKey: sortKey,
+    sortKey2: sortKey2,
     howMany: howMany,
     sortBy: sortByRaw.substring(sortByRaw.indexOf("-") + 1),
     filterKey: "articleType",
     filterValue: articleType,
   };
-
-  // console.log("PARAMS OBJ");
-  // console.log(paramsObj);
 
   const newDataObj = await runGetBackendData(paramsObj);
 
