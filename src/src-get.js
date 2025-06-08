@@ -47,12 +47,12 @@ export const getPicExtraData = async (params) => {
   const picDataObj = await picDataModel.getUniqueItem();
 
   if (!picDataObj || !picDataObj.savePath) return null;
-  const { savePath } = picDataObj;
+  const { url, savePath } = picDataObj;
 
   //THROW ERROR IF PIC NOT DOWNLOADED
   if (!fs.existsSync(savePath)) {
     const error = new Error("PIC NOT DOWNLOADED");
-    error.url = picURL;
+    error.url = url;
     error.savePath = savePath;
     throw error;
   }
