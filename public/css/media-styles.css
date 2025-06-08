@@ -359,7 +359,6 @@
     margin-bottom: 1rem; /* Keep bottom spacing */
     width: auto; /* Override fit-content to allow min-width */
     min-width: 200px; /* Smaller minimum for these specific types */
-    font-size: 0.95rem;
   }
 
   #drop-down {
@@ -503,6 +502,12 @@
     font-size: 0.6rem;
     line-height: 1;
   }
+
+  /* Article pic collapse adjustments */
+  /* .article-pic-collapse .collapse-header {
+    width: 50%;
+    padding: 8px 10px;
+  } */
 
   .article-pic-collapse .collapse-title {
     font-size: 1.1rem;
