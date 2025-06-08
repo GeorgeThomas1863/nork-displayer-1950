@@ -17,46 +17,40 @@ export const runGetBackendData = async (inputObj) => {
 
   //build backend params based on if first load
   const backendParams = await getBackendParams(inputObj);
-  const { sortBy, filterValue, howMany } = backendParams;
+  // const { sortBy, filterValue, howMany } = backendParams;
 
   console.log("BACKEND PARAMS");
   console.log(backendParams);
 
   //update how many (to account for fucked items)
-  const howManyBuffer = Math.ceil(+howMany * 1.5);
-  backendParams.howMany = howManyBuffer;
+  // const howManyBuffer = Math.ceil(+howMany * 1.5);
+  // backendParams.howMany = howManyBuffer;
 
-  //CLAUDE's VERSION OF MY SHITTY CODE to lookup data
-  const dataModel = new dbModel(backendParams, collection);
-  const isArticleFilter = dataType === "articles" && filterValue !== "all-type";
+  // //CLAUDE's VERSION OF MY SHITTY CODE to lookup data
+  // const dataModel = new dbModel(backendParams, collection);
+  // const isArticleFilter = dataType === "articles" && filterValue !== "all-type";
 
-  const sortPrefix = sortBy === "newest-to-oldest" ? "Newest" : "Oldest";
-  const typeSuffix = isArticleFilter ? "sByType" : "s";
-  const methodName = `get${sortPrefix}Item${typeSuffix}Array`;
+  // const sortPrefix = sortBy === "newest-to-oldest" ? "Newest" : "Oldest";
+  // const typeSuffix = isArticleFilter ? "sByType" : "s";
+  // const methodName = `get${sortPrefix}Item${typeSuffix}Array`;
 
-  console.log("METHOD NAME");
-  console.log(methodName);
+  // console.log("METHOD NAME");
+  // console.log(methodName);
 
-  const dataArrayRaw = await dataModel[methodName]();
+  // const dataArrayRaw = await dataModel[methodName]();
 
-  //checks if items EXIST, only returns those that do
-  // const dataArrayRaw = await getValidDataArray(params, dataType, collection);
+  // const dataArrayFixed = await fixDataByType(dataArrayRaw, dataType);
+  // const dataArray = await removeInvalidItems(dataArrayFixed, dataType, howMany);
 
-  const dataArrayFixed = await fixDataByType(dataArrayRaw, dataType);
-  const dataArray = await removeInvalidItems(dataArrayFixed, dataType, howMany);
+  // dataObj[dataType] = dataArray;
+  // dataObj.dataType = dataType;
 
-  dataObj[dataType] = dataArray;
-  dataObj.dataType = dataType;
+  // if (dataObj) {
+  //   const typeStr = dataType.toUpperCase();
+  //   console.log(`GOT ${dataObj[dataType].length} ${typeStr}`);
+  // }
 
-  // console.log("DATA OBJ");
-  // console.log(dataObj);
-
-  if (dataObj) {
-    const typeStr = dataType.toUpperCase();
-    console.log(`GOT ${dataObj[dataType].length} ${typeStr}`);
-  }
-
-  return dataObj;
+  // return dataObj;
 };
 
 //OLD WAY OF DOING LOOKUP (DELETE)
