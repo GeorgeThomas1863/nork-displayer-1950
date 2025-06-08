@@ -56,7 +56,7 @@
   }
 
   /* Collapsible adjustments */
-  .article-pic-list-collapse .collapsible-header {
+  .article-pic-collapse .collapse-header {
     width: 25%;
   }
 }
@@ -75,15 +75,14 @@
     background: rgb(170, 170, 170);
   }
 
-  /* Keep nav buttons on same line but make them smaller */
-  nav ul {
-    margin: 0;
-    margin-top: 1rem;
-    margin-bottom: 1.5rem;
-    display: flex;
-    justify-content: center;
-    /* align-items: top; */
-    gap: 1.5rem;
+  /* Dropdown and action button adjustments */
+  #drop-down {
+    margin: 1rem 0.5rem;
+  }
+
+  #action-button-element {
+    flex-direction: column;
+    gap: 0.5rem;
   }
 
   .action-button {
@@ -123,12 +122,10 @@
     height: 2rem;
   }
 
-  button#submit-button {
-    display: block;
-    margin: 0 auto;
-    margin-top: 1rem;
-    padding: 0.4rem 3rem;
-    font-size: 1.3rem;
+  .action-button {
+    min-width: auto;
+    padding: 0.4rem 2rem;
+    font-size: 1.1rem;
   }
 
   /* Container adjustments */
@@ -138,8 +135,8 @@
     margin-right: 0.2rem;
   }
 
-  /* Article list adjustments */
-  #article-list {
+  /* Article array adjustments */
+  #article-array-element {
     gap: 1.5rem;
   }
 
@@ -161,31 +158,31 @@
     padding-bottom: 0.5rem;
   }
 
-  /* Article content */
-  #article-content {
+  /* Article text content */
+  #article-text {
     font-size: 0.95rem;
     line-height: 1.5;
   }
 
-  #article-content p {
+  #article-text p {
     margin-bottom: 0.8rem;
   }
 
-  #article-content h3 {
+  #article-text h3 {
     font-size: 1.2rem;
     margin: 1.2rem 0 0.6rem;
   }
 
-  #article-content h4 {
+  #article-text h4 {
     font-size: 1.1rem;
     margin: 1rem 0 0.5rem;
   }
 
-  #article-content blockquote {
+  #article-text blockquote {
     padding-left: 0.7rem;
   }
 
-  #article-content pre {
+  #article-text pre {
     padding: 0.7rem;
     margin: 1rem 0;
   }
@@ -203,30 +200,21 @@
     overflow: hidden;
   }
 
-  /* Collapsible header */
-  .article-pic-list-collapse .collapsible-header {
-    padding: 12px 15px;
-  }
-
-  .article-pic-list-collapse .collapsible-title {
-    font-size: 1.3rem;
-    max-width: calc(100% - 36px);
-  }
-
-  .article-pic-list-collapse .collapsible-arrow {
-    width: 22px;
-    height: 22px;
-    margin-right: 8px;
-  }
-
-  /* Article pic list collapse adjustments */
-  .article-pic-list-collapse .collapsible-header {
+  /* Article pic collapse adjustments */
+  .article-pic-collapse .collapse-header {
     width: 50%;
     padding: 8px 10px;
   }
 
-  .article-pic-list-collapse .collapsible-title {
+  .article-pic-collapse .collapse-title {
     font-size: 1.1rem;
+    max-width: calc(100% - 36px);
+  }
+
+  .article-pic-collapse .collapse-arrow {
+    width: 22px;
+    height: 22px;
+    margin-right: 8px;
   }
 
   /* Empty container */
@@ -263,8 +251,8 @@
     min-width: 8rem;
   }
 
-  nav ul {
-    margin-left: 2rem;
+  #drop-down {
+    margin-left: 1.5rem;
   }
 
   #pic-array-element {
@@ -279,7 +267,7 @@
     padding: 1.5rem;
   }
 
-  #article-content {
+  #article-text {
     font-size: 0.9rem;
   }
 }
