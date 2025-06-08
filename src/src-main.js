@@ -10,9 +10,6 @@ export const runGetBackendData = async (inputObj) => {
   const { dataType } = inputObj;
   const dataObj = {};
 
-  // console.log("INPUT OBJ");
-  // console.log(inputObj);
-
   const collection = backendDefaultParams[dataType].collection;
 
   //build backend params based on if first load
@@ -33,9 +30,6 @@ export const runGetBackendData = async (inputObj) => {
   const sortPrefix = sortBy === "newest-to-oldest" ? "Newest" : "Oldest";
   const typeSuffix = isArticleFilter ? "sByType" : "s";
   const methodName = `get${sortPrefix}Item${typeSuffix}Array`;
-
-  // console.log("METHOD NAME");
-  // console.log(methodName);
 
   const dataArrayRaw = await dataModel[methodName]();
 

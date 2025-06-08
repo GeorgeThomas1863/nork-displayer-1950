@@ -17,6 +17,10 @@
 // - "external articles" link seems to be constantly broken, check if right link
 // - border radius on pics is still weird, check collapse container border radius
 
+//STUFF TO DO AT THE END:
+// - write chronjob that deletes files after certain number on server
+// - as part of chronjob, look for pics / vids under certain size and delete them (bc errors)
+
 //UNFUCK PIC DISPLAY WITH VERTICAL PICS
 
 //[PROB DONT WANT TO DO BELOW]
