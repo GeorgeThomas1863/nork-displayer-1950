@@ -11,7 +11,11 @@
 // - write chronjob that deletes files after certain number on server
 // - as part of chronjob, look for pics / vids under certain size and delete them (bc errors)
 
-//UNFUCK PIC DISPLAY WITH VERTICAL PICS
+//THINGS TO DO LATER:
+// - UNFUCK PIC DISPLAY WITH VERTICAL PICS
+// - add vid stats to vid display
+
+//
 
 //[PROB DONT WANT TO DO BELOW]
 //MAKE GET NEW DATA A SINGLE FUNCTION PASSING IN THE TYPE TO BACKEND

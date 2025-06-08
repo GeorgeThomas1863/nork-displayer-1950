@@ -12,6 +12,10 @@
     margin-left: 1.5rem;
     margin-right: 2rem;
   }
+
+  #pic-stats {
+    padding: 0.3rem 0.5rem;
+  }
 }
 
 /* ===== MEDIUM DEVICES (TABLETS, 577px TO 768px) ===== */
@@ -58,6 +62,48 @@
   /* Collapsible adjustments */
   .article-pic-collapse .collapse-header {
     width: 25%;
+  }
+}
+
+/* ===== LANDSCAPE ORIENTATION FOR PHONES ===== */
+@media only screen and (max-width: 896px) and (orientation: landscape) {
+  /* ===== GENERAL & FORM STYLES ===== */
+  #form-wrapper {
+    width: 80%;
+    margin-left: 2rem;
+  }
+
+  .wrapper li {
+    margin-bottom: 0.5rem; /* Reduce vertical spacing in landscape */
+  }
+
+  .wrapper label {
+    font-size: 1.2rem;
+    min-width: 8rem;
+  }
+
+  #drop-down {
+    margin-left: 1.5rem;
+  }
+
+  #pic-array-element {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  #backend-data-wrapper {
+    margin-top: 1rem;
+  }
+
+  #article-element {
+    padding: 1.5rem;
+  }
+
+  #article-text {
+    font-size: 0.9rem;
+  }
+
+  #pic-stats {
+    padding: 0.3rem 0.5rem;
   }
 }
 
@@ -187,7 +233,9 @@
     margin: 1rem 0;
   }
 
-  /* Pictures grid - change to 1 column */
+  /* ------------------- */
+
+  /* MOBILE PICS - change to 1 column */
   #pic-array-element {
     grid-template-columns: 1fr;
     gap: 0.8rem;
@@ -198,6 +246,26 @@
   #pic-array-element img {
     border-radius: 8px;
     overflow: hidden;
+  }
+
+  #pic-list-item {
+    /* ✨ NEW: Adjust aspect ratio for mobile if needed */
+    aspect-ratio: 1.2;
+  }
+
+  #pic-stats {
+    /* ✨ NEW: Even more compact stats on mobile */
+    padding: 0.2rem 0.4rem;
+    min-height: 2rem;
+    max-height: 2.5rem;
+  }
+
+  #pic-date,
+  #pic-source,
+  #pic-server {
+    /* ✨ NEW: Smaller font on mobile */
+    font-size: 0.6rem;
+    line-height: 1;
   }
 
   /* Article pic collapse adjustments */
@@ -231,43 +299,5 @@
   .empty-text h2 {
     margin-top: 1rem;
     font-size: 1.2rem;
-  }
-}
-
-/* ===== LANDSCAPE ORIENTATION FOR PHONES ===== */
-@media only screen and (max-width: 896px) and (orientation: landscape) {
-  /* ===== GENERAL & FORM STYLES ===== */
-  #form-wrapper {
-    width: 80%;
-    margin-left: 2rem;
-  }
-
-  .wrapper li {
-    margin-bottom: 0.5rem; /* Reduce vertical spacing in landscape */
-  }
-
-  .wrapper label {
-    font-size: 1.2rem;
-    min-width: 8rem;
-  }
-
-  #drop-down {
-    margin-left: 1.5rem;
-  }
-
-  #pic-array-element {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  #backend-data-wrapper {
-    margin-top: 1rem;
-  }
-
-  #article-element {
-    padding: 1.5rem;
-  }
-
-  #article-text {
-    font-size: 0.9rem;
   }
 }
