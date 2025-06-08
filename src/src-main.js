@@ -16,6 +16,9 @@ export const runGetBackendData = async (inputObj) => {
   const backendParams = await getBackendParams(inputObj);
   const { howMany, sortBy, filterValue } = backendParams;
 
+  console.log("BACKEND PARAMS");
+  console.log(backendParams);
+
   //update how many (to account for fucked items)
   const howManyBuffer = Math.ceil(howMany * 1.5);
   backendParams.howMany = howManyBuffer;
@@ -27,6 +30,9 @@ export const runGetBackendData = async (inputObj) => {
   const sortPrefix = sortBy === "newest-to-oldest" ? "Newest" : "Oldest";
   const typeSuffix = isArticleFilter ? "sByType" : "s";
   const methodName = `get${sortPrefix}Item${typeSuffix}Array`;
+
+  console.log("METHOD NAME");
+  console.log(methodName);
 
   const dataArrayRaw = await dataModel[methodName]();
 
