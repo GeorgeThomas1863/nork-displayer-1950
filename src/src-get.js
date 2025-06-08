@@ -20,6 +20,8 @@ export const getBackendParams = async (inputObj) => {
     return backendDefaultParams[dataType];
   }
 
+  console.log("AHHHHHHHHHHHHHHHHHHHHHHHHHH");
+
   //otherwise use input
   return await fixInputDefaults(inputObj);
 };
