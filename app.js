@@ -1,4 +1,4 @@
-//MAKE DROP DOWN RESPONSIVE
+//throwing out cursor styles
 
 //ADD MEDIA STYLES (FIX THEM, USE CURSOR)
 
