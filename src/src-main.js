@@ -23,8 +23,8 @@ export const runGetBackendData = async (inputObj) => {
   console.log(backendParams);
 
   //update how many (to account for fucked items)
-  // const howManyBuffer = Math.ceil(howMany * 1.5);
-  // backendParams.howMany = howManyBuffer;
+  const howManyBuffer = Math.ceil(howMany * 1.5);
+  backendParams.howMany = howManyBuffer;
 
   //CLAUDE's VERSION OF MY SHITTY CODE to lookup data
   const dataModel = new dbModel(backendParams, collection);
