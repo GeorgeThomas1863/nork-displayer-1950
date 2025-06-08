@@ -1,8 +1,10 @@
 //ADD CLAUDE's ANSWER FOR PIC / VID EXIST MONGO PROBLEM
 
-//MAKE DROP DOWN RESPONSIVE
+//ADD PIC ID AS A SECOND SORT TO PIC RETURNs
 
-//IMPLEMET DATE SORTS
+//combine vid / vid page display into one (just use vid page)
+
+//MAKE DROP DOWN RESPONSIVE
 
 //ADD MEDIA STYLES
 
@@ -14,7 +16,7 @@
 
 //FUTURE BUG LIST:
 // - make article display better (3 across with pics, if present)
-// - combine vid / vid page display into one (just use vid page)
+// -
 // - border radius on pics is still weird, check collapse container border radius
 
 //UNFUCK PIC DISPLAY WITH VERTICAL PICS
