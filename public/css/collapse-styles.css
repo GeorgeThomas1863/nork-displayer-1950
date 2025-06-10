@@ -14,12 +14,14 @@
   overflow: hidden;
 }
 
-.collapse-header:hover {
-  background-color: #b3d9ff;
-}
-
-.collapse-header:active {
-  transform: scale(0.99);
+.collapse-title {
+  font-size: 1.7rem;
+  font-weight: 600;
+  color: #2c3e50;
+  max-width: calc(100% - 42px);
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+  text-align: left;
 }
 
 /* Arrow styling - circular background with elegant arrow */
@@ -34,6 +36,14 @@
   border-radius: 50%;
   flex-shrink: 0;
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.collapse-header:hover {
+  background-color: #b3d9ff;
+}
+
+.collapse-header:active {
+  transform: scale(0.99);
 }
 
 /* Chevron for arrow */
@@ -55,16 +65,6 @@
 .collapse-arrow.expanded::before {
   transform: rotate(45deg) translate(-1px, -1px);
   border-color: #2c3e50;
-}
-
-.collapse-title {
-  font-size: 1.7rem;
-  font-weight: 600;
-  color: #2c3e50;
-  max-width: calc(100% - 42px);
-  letter-spacing: -0.01em;
-  line-height: 1.4;
-  text-align: left;
 }
 
 /* Collapse content container */
