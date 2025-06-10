@@ -1,4 +1,4 @@
-//MEDIA QUERIES, ORGANIZE / TEST  1 size at a time
+//FINISH MEDIA QUERIES, ORGANIZE / TEST  1 size at a time
 
 //FUTURE BUG LIST:
 // - make article display better (3 across with pics, if present)
