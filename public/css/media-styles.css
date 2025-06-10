@@ -65,8 +65,8 @@
   }
 
   /* Make article and picSet pics show 2 across instead of 3 */
-  .article-pic-collapse #pic-array-element,
-  .picSet-pic-collapse #pic-array-element {
+  .article-pic-collapse #pic-list-element,
+  .picSet-pic-collapse #pic-list-element {
     grid-template-columns: repeat(2, 1fr);
   }
 
