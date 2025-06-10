@@ -1,6 +1,8 @@
-//FINISH MEDIA QUERIES, ORGANIZE / TEST  1 size at a time
+//FUCKING PIC NUMBER PROBLEM STILL THERE, FIX
 
-//THROWING SHIT OUT
+//FINISH FUCKING MEDIA STYLES
+
+
 
 // style phone portraits
 // style landscape
