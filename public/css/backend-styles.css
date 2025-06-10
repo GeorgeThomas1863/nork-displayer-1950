@@ -181,11 +181,6 @@
   border-radius: 0 0 8px 8px;
 }
 
-.article-pic-collapse .collapse-content {
-  background-color: transparent;
-  box-shadow: none;
-}
-
 /* Individual stat elements */
 #pic-date,
 #pic-source,
