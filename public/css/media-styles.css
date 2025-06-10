@@ -4,6 +4,7 @@
 @media (max-width: 1100px) and (orientation: portrait) {
   #form-wrapper {
     gap: 3rem; /* Reduced from 5rem */
+    width: 80%;
   }
 
   .wrapper {
