@@ -62,9 +62,6 @@
   .article-pic-collapse .collapse-title,
   .picSet-pic-collapse .collapse-title {
     font-size: 0.9rem; /* Reduced from 1.5rem */
-    /* white-space: nowrap;
-    overflow: hidden; 
-    text-overflow: ellipsis;  */
   }
 
   /* Make article and picSet pics show 2 across instead of 3 */
@@ -299,6 +296,12 @@
     gap: 0.8rem;
     width: 90%;
     margin: 0 auto;
+  }
+
+  /* Keep article and picSet pics at 2 columns even on mobile */
+  .article-pic-collapse #pic-array-element,
+  .picSet-pic-collapse #pic-array-element {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   #pic-array-element img {
