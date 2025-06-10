@@ -53,14 +53,14 @@
     font-size: 1.2rem; /* Reduced from 1.7rem */
   }
 
-  .article-pic-collapse .collapse-header,
+  /* .article-pic-collapse .collapse-header,
   .picSet-pic-collapse .collapse-header {
     width: 30%;
-  }
+  } */
 
   .article-pic-collapse .collapse-title,
   .picSet-pic-collapse .collapse-title {
-    font-size: 1rem; /* Reduced from 1.5rem */
+    font-size: 0.9rem; /* Reduced from 1.5rem */
   }
 
   .collapse-arrow {
