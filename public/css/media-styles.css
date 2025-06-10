@@ -3,7 +3,7 @@
 /* ===== IPAD PORTRAIT ===== */
 @media (max-width: 1100px) and (orientation: portrait) {
   #form-wrapper {
-    gap: 2rem; /* Reduced from 5rem */
+    gap: 1rem; /* Reduced from 5rem */
   }
 
   #pic-array-element {
