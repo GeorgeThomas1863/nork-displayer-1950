@@ -1,0 +1,14 @@
+/* ===== LARGE PHONES / TABLETS LANDSCAPE ===== */
+@media (max-width: 1024px) and (orientation: landscape) {
+  /* Mobile phones in landscape */
+}
+
+/* ===== MEDIUM PHONES LANDSCAPE ===== */
+@media (max-width: 876px) and (orientation: landscape) {
+  /* Mobile phones in landscape */
+}
+
+/* ===== SMALL PHONES LANDSCAPE ===== */
+@media (max-width: 700px) and (orientation: landscape) {
+  /* Mobile phones in landscape */
+}

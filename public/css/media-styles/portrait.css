@@ -38,8 +38,8 @@
   }
 }
 
-/* ===== MEDIUM DEVICES (TABLETS, 577px TO 768px) ===== */
-@media only screen and (min-width: 577px) and (max-width: 768px) {
+/* ===== TABLET PORTRAIT ===== */
+@media (max-width: 768px) and (orientation: portrait) {
   /* ===== GENERAL & FORM STYLES ===== */
 
   .action-button {
@@ -139,8 +139,8 @@
   }
 }
 
-/* ===== SMALL DEVICES (PHONES, 576PX AND DOWN) ===== */
-@media only screen and (max-width: 576px) {
+/* ===== PHONE PORTRAIT ===== */
+@media (max-width: 576px) and (orientation: portrait) {
   /* ===== GENERAL & FORM STYLES ===== */
 
   /* change background pic */
@@ -390,6 +390,10 @@
     margin-top: 1rem;
     font-size: 1.2rem;
   }
+}
+
+/* ===== SMALL PHONES PORTRAIT ===== */
+@media (max-width: 400px) and (orientation: portrait) {
 }
 
 /* ===== LANDSCAPE ORIENTATION FOR PHONES ===== */
