@@ -1,5 +1,7 @@
 //FINISH MEDIA QUERIES, ORGANIZE / TEST  1 size at a time
 
+//THROWING SHIT OUT
+
 // style phone portraits
 // style landscape
 
