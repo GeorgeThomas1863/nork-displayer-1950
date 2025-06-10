@@ -1,5 +1,8 @@
 //FINISH MEDIA QUERIES, ORGANIZE / TEST  1 size at a time
 
+// make article pics / pic set pics 2 across for 768; 
+// style phone portraits
+
 //FUTURE BUG LIST:
 // - make article display better (3 across with pics, if present)
 // - "external articles" link seems to be constantly broken, check if right link
