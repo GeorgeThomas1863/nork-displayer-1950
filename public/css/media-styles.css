@@ -42,7 +42,7 @@
 @media (max-width: 768px) and (orientation: portrait) {
   /* ===== GENERAL & FORM STYLES ===== */
   #form-wrapper {
-    gap: 0.5rem;
+    gap: 0;
   }
 
   #pic-array-element {
@@ -53,10 +53,10 @@
     font-size: 1.2rem; /* Reduced from 1.7rem */
   }
 
-  /* .article-pic-collapse .collapse-header,
+  .article-pic-collapse .collapse-header,
   .picSet-pic-collapse .collapse-header {
-    width: 100%;
-  } */
+    width: 30%;
+  }
 
   .article-pic-collapse .collapse-title,
   .picSet-pic-collapse .collapse-title {
