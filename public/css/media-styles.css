@@ -1,29 +1,9 @@
 /* MEDIA QUERIES FOR STYLES.CSS */
 
-/* ===== LARGE TABLETS AND SMALL DESKTOPS (769px TO 992px) ===== */
-@media only screen and (min-width: 769px) and (max-width: 992px) {
-  #form-wrapper {
-    gap: 20rem;
-  }
-
-  #pic-array-element {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.8rem;
-  }
-
-  #backend-data-wrapper {
-    margin-top: 2rem;
-    margin-left: 1.5rem;
-    margin-right: 2rem;
-  }
-
-  #pic-stats {
-    padding: 0.3rem 0.5rem;
-  }
-
+/* ===== IPAD PORTRAIT ===== */
+@media (max-width: 1100px) and (orientation: portrait) {
   #form-wrapper {
     gap: 3rem; /* Reduced from 5rem */
-    width: 95%;
   }
 
   .wrapper {
@@ -40,17 +20,8 @@
 
   .wrapper input,
   .wrapper select {
-    font-size: 0.95rem; /* Slightly smaller */
-    padding: 0.65rem; /* Reduced padding */
-  }
-
-  .collapse-title {
-    font-size: 1.4rem; /* Reduced from 1.7rem */
-  }
-
-  .article-pic-collapse .collapse-title,
-  .picSet-pic-collapse .collapse-title {
-    font-size: 1.2rem; /* Reduced from 1.5rem */
+    font-size: 0.85rem; /* Slightly smaller */
+    padding: 0.5rem; /* Reduced padding */
   }
 
   #drop-down-bars {
@@ -61,6 +32,25 @@
   #drop-down-menu-display h2 {
     font-size: 2.5rem; /* Reduced from 3rem */
     padding: 0.8rem 2rem; /* Reduced padding */
+  }
+
+  /* #backend-data-wrapper {
+    margin-top: 2rem;
+    margin-left: 1.5rem;
+    margin-right: 2rem;
+  } */
+
+  #pic-array-element {
+    gap: 0.8rem;
+  }
+
+  .collapse-title {
+    font-size: 1.4rem; /* Reduced from 1.7rem */
+  }
+
+  .article-pic-collapse .collapse-title,
+  .picSet-pic-collapse .collapse-title {
+    font-size: 1.2rem; /* Reduced from 1.5rem */
   }
 }
 
@@ -163,102 +153,6 @@
   #drop-down-menu-display h2 {
     font-size: 2.2rem; /* Reduced from 3rem */
     padding: 0.7rem 1.8rem; /* Reduced padding */
-  }
-}
-
-/* ===== LANDSCAPE ORIENTATION FOR PHONES ===== */
-@media only screen and (max-width: 896px) and (orientation: landscape) {
-  /* ===== GENERAL & FORM STYLES ===== */
-  #form-wrapper {
-    width: 80%;
-    margin-left: 2rem;
-  }
-
-  #drop-down {
-    margin-left: 1.5rem;
-  }
-
-  #pic-array-element {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  #backend-data-wrapper {
-    margin-top: 1rem;
-  }
-
-  #article-element {
-    padding: 1.5rem;
-  }
-
-  #article-text {
-    font-size: 0.9rem;
-  }
-
-  #pic-stats {
-    padding: 0.3rem 0.5rem;
-  }
-
-  #form-wrapper {
-    gap: 1.5rem;
-    margin-top: 0.5rem;
-  }
-
-  .wrapper {
-    margin: 0.3rem;
-  }
-
-  .wrapper .collapse-content {
-    padding: 0.8rem;
-  }
-
-  .wrapper li {
-    margin-bottom: 0.5rem;
-  }
-
-  .wrapper label {
-    font-size: 0.75rem;
-    min-width: 8rem;
-  }
-
-  .wrapper input,
-  .wrapper select {
-    font-size: 0.8rem;
-    padding: 0.5rem;
-  }
-
-  .collapse-title {
-    font-size: 1rem;
-  }
-
-  .article-pic-collapse .collapse-title,
-  .picSet-pic-collapse .collapse-title {
-    font-size: 0.9rem;
-  }
-
-  .collapse-arrow {
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-  }
-
-  .collapse-arrow::before {
-    width: 6px;
-    height: 6px;
-    border-width: 1.5px;
-  }
-
-  #drop-down-bars {
-    width: 1.8rem;
-    height: 1.8rem;
-  }
-
-  #drop-down:hover {
-    transform: scale(1.2);
-  }
-
-  #drop-down-menu-display h2 {
-    font-size: 1.8rem;
-    padding: 0.5rem 1.2rem;
   }
 }
 
@@ -514,3 +408,99 @@
     font-size: 1.2rem;
   }
 }
+
+/* ===== LANDSCAPE ORIENTATION FOR PHONES ===== */
+
+/* @media only screen and (max-width: 896px) and (orientation: landscape) {
+  #form-wrapper {
+    width: 80%;
+    margin-left: 2rem;
+  }
+
+  #drop-down {
+    margin-left: 1.5rem;
+  }
+
+  #pic-array-element {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  #backend-data-wrapper {
+    margin-top: 1rem;
+  }
+
+  #article-element {
+    padding: 1.5rem;
+  }
+
+  #article-text {
+    font-size: 0.9rem;
+  }
+
+  #pic-stats {
+    padding: 0.3rem 0.5rem;
+  }
+
+  #form-wrapper {
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .wrapper {
+    margin: 0.3rem;
+  }
+
+  .wrapper .collapse-content {
+    padding: 0.8rem;
+  }
+
+  .wrapper li {
+    margin-bottom: 0.5rem;
+  }
+
+  .wrapper label {
+    font-size: 0.75rem;
+    min-width: 8rem;
+  }
+
+  .wrapper input,
+  .wrapper select {
+    font-size: 0.8rem;
+    padding: 0.5rem;
+  }
+
+  .collapse-title {
+    font-size: 1rem;
+  }
+
+  .article-pic-collapse .collapse-title,
+  .picSet-pic-collapse .collapse-title {
+    font-size: 0.9rem;
+  }
+
+  .collapse-arrow {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+  }
+
+  .collapse-arrow::before {
+    width: 6px;
+    height: 6px;
+    border-width: 1.5px;
+  }
+
+  #drop-down-bars {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+
+  #drop-down:hover {
+    transform: scale(1.2);
+  }
+
+  #drop-down-menu-display h2 {
+    font-size: 1.8rem;
+    padding: 0.5rem 1.2rem;
+  }
+} */
