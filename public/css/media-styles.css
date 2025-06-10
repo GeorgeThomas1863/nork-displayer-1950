@@ -45,41 +45,18 @@
     gap: 0.5rem;
   }
 
-  /* Pictures grid - change to 2 columns for tablets */
   #pic-array-element {
     gap: 0.8rem;
-  }
-
-  .wrapper {
-    margin: 0.5rem;
-  }
-
-  .wrapper .collapse-content {
-    padding: 1rem; /* Reduced from 1.5rem */
-  }
-
-  .wrapper li {
-    margin-bottom: 1rem; /* Reduced from 1.5rem */
-  }
-
-  .wrapper label {
-    font-size: 0.8rem;
-  }
-
-  .wrapper input,
-  .wrapper select {
-    font-size: 0.9rem;
-    padding: 0.6rem;
   }
 
   .collapse-title {
     font-size: 1.2rem; /* Reduced from 1.7rem */
   }
 
-  .article-pic-collapse .collapse-header,
+  /* .article-pic-collapse .collapse-header,
   .picSet-pic-collapse .collapse-header {
     width: 100%;
-  }
+  } */
 
   .article-pic-collapse .collapse-title,
   .picSet-pic-collapse .collapse-title {
