@@ -2,28 +2,6 @@
 
 /* ===== IPAD PORTRAIT ===== */
 @media (max-width: 1100px) and (orientation: portrait) {
-  #form-wrapper {
-    gap: 3rem; /* Reduced from 5rem */
-  }
-
-  .wrapper {
-    margin: 0.8rem;
-  }
-
-  .wrapper .collapse-content {
-    padding: 1.2rem; /* Reduced from 1.5rem */
-  }
-
-  .wrapper label {
-    font-size: 0.85rem; /* Slightly smaller */
-  }
-
-  .wrapper input,
-  .wrapper select {
-    font-size: 0.85rem; /* Slightly smaller */
-    padding: 0.5rem; /* Reduced padding */
-  }
-
   #drop-down-bars {
     width: 2.2rem; /* Reduced from 2.5rem */
     height: 2.2rem;
