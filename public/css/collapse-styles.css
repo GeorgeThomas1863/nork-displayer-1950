@@ -120,3 +120,8 @@
 .vid-page-element-collapse .collapse-header {
   justify-content: left;
 }
+
+.article-pic-collapse .collapse-content {
+  background-color: transparent;
+  box-shadow: none;
+}

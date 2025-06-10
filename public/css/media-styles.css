@@ -78,7 +78,7 @@
 
   .article-pic-collapse .collapse-header,
   .picSet-pic-collapse .collapse-header {
-    width: fit-content;
+    width: 100%;
   }
 
   .article-pic-collapse .collapse-title,
