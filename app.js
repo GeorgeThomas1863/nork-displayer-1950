@@ -4,6 +4,7 @@
 // - make article display better (3 across with pics, if present)
 // - "external articles" link seems to be constantly broken, check if right link
 // - border radius on pics is still weird, check collapse container border radius
+// - recombine css files into 2 files (one reg / one media)
 
 //STUFF TO DO AT THE END:
 // - write chronjob that deletes files after certain number on server
