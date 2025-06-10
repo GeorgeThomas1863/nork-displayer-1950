@@ -102,12 +102,25 @@
     content: url("/images/KJU2.jpg");
   }
 
-  /* change default button color (make slightly darker) */
-  button {
+  #form-wrapper {
+    flex-direction: column;
+    gap: 1rem;
+    width: 50%;
+  }
+
+  .wrapper {
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  /* REMOVE EVERYTHING ELSE */
+
+
+  /* button {
     background: rgb(170, 170, 170);
   }
 
-  /* Dropdown and action button adjustments */
+
   #drop-down {
     margin: 1rem 0.5rem;
   }
@@ -157,24 +170,11 @@
     width: 7px;
     height: 7px;
     border-width: 2px;
-  }
+  } */
 
-  .collapse-header {
-    min-width: 280px; /* Minimum width for readability */
-    max-width: 90%; /* Don't exceed screen width */
-    margin: 0 auto; /* Center horizontally */
-    justify-content: center; /* Center content within header */
-  }
+  
 
-  .article-pic-collapse .collapse-header,
-  .picSet-pic-collapse .collapse-header {
-    margin: 0 auto; /* Override existing margins to center */
-    margin-bottom: 1rem; /* Keep bottom spacing */
-    width: auto; /* Override fit-content to allow min-width */
-    min-width: 200px; /* Smaller minimum for these specific types */
-  }
-
-  #drop-down {
+  /* #drop-down {
     top: 0.5rem;
     left: 0.5rem;
   }
@@ -186,20 +186,10 @@
 
   #drop-down:hover {
     transform: scale(1.1);
-  }
+  } */
 
-  #drop-down-menu-display h2 {
-    font-size: 2rem; /* Smaller but still readable */
-    padding: 0.8rem 1.5rem; /* Comfortable touch targets */
-  }
-
-  #drop-down:has(#action-button-element:not(.hidden)) {
-    margin: 0.5rem; /* Reduced margin when in flow */
-    gap: 0.5rem; /* Tighter spacing */
-  }
-
-  /* Keep labels beside inputs but make them more compact */
-  .wrapper li {
+  
+  /* .wrapper li {
     display: flex;
     align-items: center;
     margin-bottom: 1rem;
@@ -227,66 +217,9 @@
     min-width: auto;
     padding: 0.4rem 2rem;
     font-size: 1.1rem;
-  }
+  } */
 
-  /* Container adjustments */
-  #backend-data-wrapper {
-    margin-top: 2rem;
-    margin-left: 0.2rem;
-    margin-right: 0.2rem;
-  }
-
-  /* Article array adjustments */
-  #article-array-element {
-    gap: 1.5rem;
-  }
-
-  /* Article element styling */
-  #article-element {
-    padding: 1.2rem;
-  }
-
-  /* Article title */
-  #article-title {
-    font-size: 1.4rem;
-    margin-bottom: 0.7rem;
-  }
-
-  /* Article date */
-  #article-date {
-    font-size: 0.85rem;
-    margin-bottom: 0.8rem;
-    padding-bottom: 0.5rem;
-  }
-
-  /* Article text content */
-  #article-text {
-    font-size: 0.95rem;
-    line-height: 1.5;
-  }
-
-  #article-text p {
-    margin-bottom: 0.8rem;
-  }
-
-  #article-text h3 {
-    font-size: 1.2rem;
-    margin: 1.2rem 0 0.6rem;
-  }
-
-  #article-text h4 {
-    font-size: 1.1rem;
-    margin: 1rem 0 0.5rem;
-  }
-
-  #article-text blockquote {
-    padding-left: 0.7rem;
-  }
-
-  #article-text pre {
-    padding: 0.7rem;
-    margin: 1rem 0;
-  }
+  
 
   /* ------------------- */
 
@@ -299,12 +232,12 @@
   }
 
   /* Keep article and picSet pics at 2 columns even on mobile */
-  .article-pic-collapse #pic-list-element,
+  /* .article-pic-collapse #pic-list-element,
   .picSet-pic-collapse #pic-list-element {
     grid-template-columns: repeat(2, 1fr);
-  }
+  } */
 
-  #pic-array-element img {
+  /* #pic-array-element img {
     border-radius: 8px;
     overflow: hidden;
   }
@@ -320,11 +253,11 @@
   #pic-server {
     font-size: 0.6rem;
     line-height: 1;
-  }
+  } */
 
   /* Article pic collapse adjustments */
 
-  .article-pic-collapse .collapse-title {
+  /* .article-pic-collapse .collapse-title {
     font-size: 1.1rem;
     max-width: calc(100% - 36px);
   }
@@ -333,7 +266,7 @@
     width: 22px;
     height: 22px;
     margin-right: 8px;
-  }
+  } */
 
   /* Empty container */
   .empty-container {
