@@ -51,16 +51,26 @@
 
   .collapse-title {
     font-size: 1.2rem; /* Reduced from 1.7rem */
+    max-width: calc(100% - 20px);
   }
 
-  .article-pic-collapse .collapse-header,
+  /* .article-pic-collapse .collapse-header,
   .picSet-pic-collapse .collapse-header {
     width: fit-content;
-  }
+  } */
 
   .article-pic-collapse .collapse-title,
   .picSet-pic-collapse .collapse-title {
     font-size: 0.9rem; /* Reduced from 1.5rem */
+    /* white-space: nowrap;
+    overflow: hidden; 
+    text-overflow: ellipsis;  */
+  }
+
+  /* Make article and picSet pics show 2 across instead of 3 */
+  .article-pic-collapse #pic-array-element,
+  .picSet-pic-collapse #pic-array-element {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .collapse-arrow {
