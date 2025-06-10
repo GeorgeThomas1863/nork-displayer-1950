@@ -299,8 +299,8 @@
   }
 
   /* Keep article and picSet pics at 2 columns even on mobile */
-  .article-pic-collapse #pic-array-element,
-  .picSet-pic-collapse #pic-array-element {
+  .article-pic-collapse #pic-list-element,
+  .picSet-pic-collapse #pic-list-element {
     grid-template-columns: repeat(2, 1fr);
   }
 
