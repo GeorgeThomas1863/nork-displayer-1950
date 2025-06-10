@@ -10,6 +10,24 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .wrapper {
+    margin: 0.8rem;
+  }
+
+  .wrapper .collapse-content {
+    padding: 1.2rem; /* Reduced from 1.5rem */
+  }
+
+  .wrapper label {
+    font-size: 0.85rem; /* Slightly smaller */
+  }
+
+  .wrapper input,
+  .wrapper select {
+    font-size: 0.85rem; /* Slightly smaller */
+    padding: 0.5rem; /* Reduced padding */
+  }
+
   .collapse-title {
     font-size: 1.5rem; /* Reduced from 1.7rem */
   }
