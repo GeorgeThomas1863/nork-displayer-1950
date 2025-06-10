@@ -42,42 +42,9 @@
 @media (max-width: 768px) and (orientation: portrait) {
   /* ===== GENERAL & FORM STYLES ===== */
 
-  .action-button {
-    font-size: 1.5rem;
-    padding: 0.4rem 1.5rem;
-  }
-
-  /* Container adjustments */
-  #backend-data-wrapper {
-    margin-top: 1.5rem;
-    margin-left: 1rem;
-    margin-right: 1rem;
-  }
-
   /* Pictures grid - change to 2 columns for tablets */
   #pic-array-element {
     gap: 0.8rem;
-  }
-
-  /* Article element adjustments */
-  #article-element {
-    padding: 1.8rem;
-  }
-
-  #article-title {
-    font-size: 1.6rem;
-  }
-
-  /* Collapsible adjustments */
-  .article-pic-collapse .collapse-header {
-    width: 25%;
-  }
-
-  #form-wrapper {
-    gap: 2rem; /* Reduced from 5rem */
-    width: 95%;
-    margin-left: 1rem;
-    margin-right: 1rem;
   }
 
   .wrapper {
@@ -94,7 +61,6 @@
 
   .wrapper label {
     font-size: 0.8rem;
-    min-width: auto;
   }
 
   .wrapper input,
