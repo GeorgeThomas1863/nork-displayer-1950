@@ -41,6 +41,9 @@
 /* ===== TABLET PORTRAIT ===== */
 @media (max-width: 768px) and (orientation: portrait) {
   /* ===== GENERAL & FORM STYLES ===== */
+  #form-wrapper {
+    gap: 0.5rem;
+  }
 
   /* Pictures grid - change to 2 columns for tablets */
   #pic-array-element {
