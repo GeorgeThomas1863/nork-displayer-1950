@@ -39,6 +39,9 @@ export const fixInputDefaults = async (inputObj) => {
     return returnObj;
   }
 
+  console.log("RETURN OBJ");
+  console.log(returnObj);
+
   return returnObj;
 };
 
