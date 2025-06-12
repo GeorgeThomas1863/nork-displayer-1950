@@ -8,8 +8,6 @@ export const adminSubmitClick = async (e) => {
   const clickElement = e.target;
   const clickType = clickElement.getAttribute("type");
 
-  console.log("THING CLICKED");
-  console.log(clickElement);
   console.log(clickType);
 
   // if (clickType === "submit") {
