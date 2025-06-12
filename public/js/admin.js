@@ -25,12 +25,23 @@ export const buildAdminDisplay = async () => {
 export const getNewAdminData = async () => {
   //get user input
   const adminParams = await buildAdminParams();
-  adminParams.isFirstLoad = false;
-  adminParams.route = "/get-admin-backend-data-route";
 
-  const adminDataObj = await sendToBack(adminParams);
+  //send submit first
+  adminParams.route = "/admin-submit-route";
+  const adminSubmitObj = await sendToBack(adminParams);
 
-  return adminDataObj;
+  //GET SCRAPE ID FROOM ADMIN SUBMIT
+  const backendParams = {
+    scrapeId: adminSubmitObj.scrapeId,
+    isFirstLoad: false,
+    route: "/get-admin-backend-data-route",
+  };
+
+  const adminBackendObj = await sendToBack(backendParams);
+
+  const adminObj = { ...adminSubmitObj, ...adminBackendObj };
+
+  return adminObj;
 };
 
 buildAdminDisplay();
