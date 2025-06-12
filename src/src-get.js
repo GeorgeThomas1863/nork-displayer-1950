@@ -9,9 +9,6 @@ export const getBackendParams = async (inputObj) => {
   if (!inputObj || !inputObj.dataType) return null;
   const { isFirstLoad, dataType } = inputObj;
 
-  console.log("BACKEND INPUT OBJ");
-  console.log(inputObj);
-
   //set to default on first load
   if (isFirstLoad) {
     const defaultParams = await getBackendDefaultParams(dataType);

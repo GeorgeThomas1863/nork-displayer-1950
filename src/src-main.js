@@ -17,9 +17,6 @@ export const runGetBackendData = async (inputObj) => {
   const backendParams = await getBackendParams(inputObj);
   const { sortBy, filterValue, howMany } = backendParams;
 
-  console.log("BACKEND PARAMS");
-  console.log(backendParams);
-
   // update how many (to account for fucked items)
   const howManyBuffer = Math.ceil(+howMany * 1.5);
   backendParams.howMany = howManyBuffer;
