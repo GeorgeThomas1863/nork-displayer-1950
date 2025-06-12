@@ -1,4 +1,4 @@
-import { backendDefaultParams } from "../config/map-display.js";
+import { getBackendDefaultParams } from "../config/map-display.js";
 import dbModel from "../models/db-model.js";
 import { getBackendParams } from "./src-get.js";
 import { checkDataType } from "./src-check.js";
@@ -10,7 +10,8 @@ export const runGetBackendData = async (inputObj) => {
   const { dataType } = inputObj;
   const dataObj = {};
 
-  const collection = backendDefaultParams[dataType].collection;
+  const defaultParams = await getBackendDefaultParams(dataType);
+  const collection = defaultParams.collection;
 
   //build backend params based on if first load
   const backendParams = await getBackendParams(inputObj);
@@ -57,8 +58,9 @@ export const runGetNewData = async (inputObj) => {
   if (!dataType) return null;
 
   //get params
-  const sortKey = backendDefaultParams[dataType].sortKey;
-  const sortKey2 = backendDefaultParams[dataType].sortKey2;
+  const defaultParams = await getBackendDefaultParams(dataType);
+  const sortKey = defaultParams.sortKey;
+  const sortKey2 = defaultParams.sortKey2;
 
   let sortByRaw = "";
   let howMany = 0;
