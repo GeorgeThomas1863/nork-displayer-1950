@@ -75,10 +75,10 @@ export const buildAdminBackendNew = async (inputObj) => {
   if (!dataElement) return failElement;
 
   //replace old data with new data
-  // const adminBackendWrapper = document.getElementById("admin-backend-wrapper");
-  // adminBackendWrapper.replaceChild(dataElement, adminBackendWrapper.firstElementChild);
+  const adminBackendWrapper = document.getElementById("admin-backend-wrapper");
+  adminBackendWrapper.replaceChild(dataElement, adminBackendWrapper.firstElementChild);
 
-  adminDisplayElement.append(dataElement);
+  // adminDisplayElement.append(dataElement);
 
   return true;
 };
