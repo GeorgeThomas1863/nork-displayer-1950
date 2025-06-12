@@ -5,6 +5,9 @@ import { buildBackendNew } from "./build-backend.js";
 export const adminSubmitClick = async (e) => {
   e.preventDefault();
 
+  console.log("THING CLICKED");
+  console.log(e.target);
+
   //get input params
   const adminParams = await buildAdminParams();
 
