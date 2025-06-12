@@ -30,7 +30,8 @@
 
   .collapse-title {
     font-size: 1.4rem; /* Reduced from 1.7rem */
-    max-width: calc(100% - 3rem);
+    /* 42px = 2.625rem (28px arrow + 14px margin) */
+    /* max-width: calc(100% - 2.625rem);  */
   }
 
   .article-pic-collapse .collapse-title,
@@ -52,7 +53,6 @@
 
   .collapse-title {
     font-size: 1.2rem; /* Reduced from 1.7rem */
-    max-width: calc(100% - 18px);
   }
 
   /* .article-pic-collapse .collapse-header,
