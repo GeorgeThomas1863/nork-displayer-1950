@@ -1,9 +1,3 @@
-//FUCKING PIC NUMBER PROBLEM STILL THERE, FIX
-
-//FINISH FUCKING MEDIA STYLES
-
-
-
 // style phone portraits
 // style landscape
 
