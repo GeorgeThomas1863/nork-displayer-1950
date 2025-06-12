@@ -114,13 +114,10 @@
     width: 95%;
   }
 
-  /* .wrapper {
-    margin: 0 auto;  
-  } */
-
-  .wrapper {
-    margin: 0.5rem 0;
-    width: 100%;
+  #form-wrapper > * {
+    flex: 0 0 auto;
+    width: 80%;
+    margin: 0 auto;
   }
 
   .collapse-title {
