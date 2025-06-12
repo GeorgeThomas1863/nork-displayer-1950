@@ -38,11 +38,6 @@ export const mainClickHandler = async (e) => {
   const expandType = clickElement.getAttribute("data-expand");
   const toggleType = clickElement.getAttribute("data-toggle");
 
-  // console.log("CLICK INFO");
-  // console.log(clickElement);
-  // console.log(clickId);
-  // console.log(toggleType);
-
   if (toggleType) {
     await toggleDropdown(toggleType);
   }
@@ -62,7 +57,6 @@ export const mainClickHandler = async (e) => {
 
   console.log("NEW BACKEND DATA");
   console.log(newBackendData);
-  console.dir(newBackendData);
 
   await buildBackendNew(newBackendData);
 
