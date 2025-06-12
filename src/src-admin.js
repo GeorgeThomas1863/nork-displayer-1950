@@ -50,8 +50,12 @@ export const runGetAdminBackendData = async (inputObj) => {
   };
 
   const scrapeDataModel = new dbModel(params, "log");
-  const scrapeDataObj = await scrapeDataModel.getUniqueItem();
-  returnObj.scrapeDataObj = scrapeDataObj;
+  const scrapeDataArray = await scrapeDataModel.getUniqueArray();
+
+  console.log("SCRAPE DATA ARRAY");
+  console.log(scrapeDataArray);
+
+  returnObj.scrapeDataObj = scrapeDataArray[0];
 
   return returnObj;
 };
