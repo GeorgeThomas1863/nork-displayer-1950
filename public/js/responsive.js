@@ -8,9 +8,9 @@ export const adminSubmitClick = async (e) => {
   const clickElement = e.target;
   const clickType = clickElement.getAttribute("type");
 
-  console.log(clickType);
+  if (clickType !== "submit") return null;
 
-  // if (clickType === "submit") {
+  console.log("AHHHHHHHHHHH");
 
   //get input params
   const adminParams = await buildAdminParams();
