@@ -1,7 +1,7 @@
 /* MEDIA QUERIES */
 
 /* ===== IPAD PORTRAIT ===== */
-@media (max-width: 1100px) and (orientation: portrait) {
+@media (max-width: 1200px) and (orientation: portrait) {
   #form-wrapper {
     gap: 1rem; /* Reduced from 5rem */
   }
