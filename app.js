@@ -1,11 +1,14 @@
-// style phone portraits
-// style landscape
+//TO DO:
+// 1. admin functionality
+// 1. admin auth
+// // 1. landscape styles
+// 1. chronjob or some other way to auto delete pics / vids from server
+// 1. tracing
 
 //FUTURE BUG LIST:
 // - make article display better (3 across with pics, if present)
 // - "external articles" link seems to be constantly broken, check if right link
 // - border radius on pics is still weird, check collapse container border radius
-// - recombine css files into 2 files (one reg / one media)
 
 //STUFF TO DO AT THE END:
 // - write chronjob that deletes files after certain number on server
@@ -15,20 +18,6 @@
 // - UNFUCK PIC DISPLAY WITH VERTICAL PICS
 // - add vid stats to vid display
 // - make scroll an event, load more pics / vids on scroll (esp on mobile)
-
-//
-
-//PUT PIC / VID STATS IN HOVER
-
-// MAKE VID ALONE DISPLAY NICER (put in wrappers, margins, etc)
-
-//MAKE BACKEND DISPLAY STYLING BETTER (return container connected to forms)
-
-//make drop down responsive (2 action buttons)
-
-//ADD MEDIA QUERIES
-
-//REBUILD ADMIN DATA TRACKING
 
 //MAKE ADMIN PAGE LOOK NICE
 
