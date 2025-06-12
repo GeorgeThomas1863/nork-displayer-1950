@@ -40,6 +40,9 @@ export const runGetAdminBackendData = async (inputObj) => {
   //return if no scrapeId (bc first load)
   if (isFirstLoad) return returnObj;
 
+  console.log("INPUT OBJ!!!");
+  console.log(inputObj);
+
   //GET SPECIFIC FROM LOG COLLECTION
   const params = {
     keyToLookup: "scrapeId",
