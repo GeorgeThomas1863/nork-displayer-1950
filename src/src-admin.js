@@ -43,19 +43,13 @@ export const runGetAdminBackendData = async (inputObj) => {
   console.log("INPUT OBJ!!!");
   console.log(inputObj);
 
-  //GET SPECIFIC FROM LOG COLLECTION
-  const params = {
-    keyToLookup: "_id",
-    itemValue: scrapeId,
-  };
-
-  const scrapeDataModel = new dbModel(params, "log");
-  const scrapeDataArray = await scrapeDataModel.getUniqueArray();
+  const scrapeDataModel = new dbModel({ scrapeId: scrapeId }, "log");
+  const scrapeDataObj = await scrapeDataModel.getScrapeData();
 
   console.log("SCRAPE DATA ARRAY");
-  console.log(scrapeDataArray);
+  console.log(scrapeDataObj);
 
-  returnObj.scrapeDataObj = scrapeDataArray[0];
+  returnObj.scrapeDataObj = scrapeDataObj;
 
   return returnObj;
 };

@@ -45,17 +45,20 @@ class dbModel {
   //unique array
   async getUniqueArray() {
     const { keyToLookup, itemValue } = this.dataObject;
-    const mongoValue = new ObjectId(itemValue); //unsure why necessary, but THIS is key step
+    const mongoValue = new ObjectId(itemValue); //convert to mongoId
 
     const dataArray = await db.dbGet().collection(this.collection).find({ [keyToLookup]: mongoValue }).toArray(); //prettier-ignore
     return dataArray;
   }
 
-  // async getUniqueScrape() {
-  //   const { scrapeId } = this.dataObject;
-  //   const mongoValue = new ObjectId(scrapeId); //convert to mongoId
+  //data for single scrape
+  async getScrapeData() {
+    const { scrapeId } = this.dataObject;
+    const mongoValue = new ObjectId(scrapeId); //convert to mongoId
 
-  // }
+    const scrapeData = await db.dbGet().collection(this.collection).findOne({_id: mongoValue }); //prettier-ignore
+    return scrapeData;
+  }
 
   //------------------------------
 
