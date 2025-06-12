@@ -1,12 +1,13 @@
 export const buildAdminDefaultDisplay = async (inputObj) => {
   const { allDataObj } = inputObj;
 
+  const adminBackendList = document.createElement("ul");
+  adminBackendList.classList.add("admin-backend-list");
+
   const listTitleElement = document.createElement("h2");
   listTitleElement.innerHTML = "Data Already Scraped";
   listTitleElement.classList.add("admin-backend-list-title");
-
-  const adminBackendList = document.createElement("ul");
-  adminBackendList.classList.add("admin-backend-list");
+  adminBackendList.append(listTitleElement);
 
   const keys = Object.keys(allDataObj);
 
