@@ -1,11 +1,13 @@
 export const buildAdminDefaultDisplay = async (inputObj) => {
   const { allDataObj } = inputObj;
 
-  // console.log("BUILD ADMIN DEFAULT DISPLAY");
-  // console.log(inputObj);
-  // console.dir(inputObj);
+  const listTitleElement = document.createElement("h2");
+  listTitleElement.innerHTML = "Data Already Scraped";
+  listTitleElement.classList.add("admin-backend-list-title");
 
-  const adminBackedList = document.createElement("ul");
+  const adminBackendList = document.createElement("ul");
+  adminBackendList.classList.add("admin-backend-list");
+
   const keys = Object.keys(allDataObj);
 
   // Loop through each key
@@ -15,15 +17,16 @@ export const buildAdminDefaultDisplay = async (inputObj) => {
 
     // Create list item element
     const listItem = document.createElement("li");
+    listItem.classList.add("admin-backend-list-item");
 
     // Set the content
     listItem.innerHTML = `${key}: ${value}`;
 
     // Append to your list (replace 'yourList' with your actual list element)
-    adminBackedList.append(listItem);
+    adminBackendList.append(listItem);
   }
 
-  return adminBackedList;
+  return adminBackendList;
 };
 
 export const buildAdminNewDisplay = async (inputObj) => {
