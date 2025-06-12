@@ -51,7 +51,7 @@
 
   .collapse-title {
     font-size: 1.2rem; /* Reduced from 1.7rem */
-    max-width: calc(100% - 20px);
+    max-width: calc(100% - 18px);
   }
 
   /* .article-pic-collapse .collapse-header,

@@ -18,7 +18,8 @@
   font-size: 1.7rem;
   font-weight: 600;
   color: #2c3e50;
-  max-width: calc(100% - 42px);
+  /* max-width: calc(100% - 42px); */
+  max-width: calc(100% - 4rem);
   letter-spacing: -0.01em;
   line-height: 1.4;
   text-align: left;
