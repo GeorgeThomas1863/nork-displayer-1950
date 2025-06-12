@@ -29,7 +29,8 @@
   }
 
   .collapse-title {
-    font-size: 1.3rem; /* Reduced from 1.7rem */
+    font-size: 1.4rem; /* Reduced from 1.7rem */
+    max-width: calc(100% - 3rem);
   }
 
   .article-pic-collapse .collapse-title,
