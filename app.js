@@ -1,7 +1,10 @@
 //TO DO:
-// 1. admin functionality
-// 1. admin auth
 // // 1. landscape styles
+
+// 1. admin functionality
+
+// 1. admin auth
+
 // 1. chronjob or some other way to auto delete pics / vids from server
 // 1. tracing
 
