@@ -1,15 +1,17 @@
 export const buildAdminDefaultDisplay = async (inputObj) => {
-  console.log("BUILD ADMIN DEFAULT DISPLAY");
-  console.log(inputObj);
-  console.dir(inputObj);
+  const { allDataObj } = inputObj;
+
+  // console.log("BUILD ADMIN DEFAULT DISPLAY");
+  // console.log(inputObj);
+  // console.dir(inputObj);
 
   const adminBackedList = document.createElement("ul");
-  const keys = Object.keys(inputObj);
+  const keys = Object.keys(allDataObj);
 
   // Loop through each key
   for (let i = 0; i < keys.length; i++) {
     const key = keys[i];
-    const value = inputObj[key];
+    const value = allDataObj[key];
 
     // Create list item element
     const listItem = document.createElement("li");
