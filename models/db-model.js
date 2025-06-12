@@ -51,6 +51,12 @@ class dbModel {
     return dataArray;
   }
 
+  // async getUniqueScrape() {
+  //   const { scrapeId } = this.dataObject;
+  //   const mongoValue = new ObjectId(scrapeId); //convert to mongoId
+
+  // }
+
   //------------------------------
 
   //get NEWEST items return as array

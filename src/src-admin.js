@@ -45,7 +45,7 @@ export const runGetAdminBackendData = async (inputObj) => {
 
   //GET SPECIFIC FROM LOG COLLECTION
   const params = {
-    keyToLookup: "scrapeId",
+    keyToLookup: "_id",
     itemValue: scrapeId,
   };
 
