@@ -1,6 +1,7 @@
 import { getNewData, expandBackendData, toggleDropdown } from "./main.js";
-import { buildAdminParams, sendToBack, debounce } from "./util.js";
-import { buildBackendNew } from "./build-backend.js";
+import { getNewAdminData } from "./admin.js";
+import { debounce } from "./util.js";
+import { buildBackendNew, buildAdminBackendNew } from "./build-backend.js";
 
 export const adminSubmitClick = async (e) => {
   e.preventDefault();
@@ -12,16 +13,15 @@ export const adminSubmitClick = async (e) => {
 
   console.log("AHHHHHHHHHHH");
 
-  //get input params
-  const adminParams = await buildAdminParams();
-
-  console.log("ADMIN PARAMS", adminParams);
-
   //get data
-  const adminData = await sendToBack(adminParams);
-  console.log("ADMIN DATA", adminData);
+  const newAdminData = await getNewAdminData();
+  if (!newAdminData) return null;
 
-  //BUILD ADMIN DISPLAYs
+  console.log("NEW ADMIN DATA");
+  console.log(newAdminData);
+
+  await buildAdminBackendNew(newAdminData);
+  console.log("ADMIN DATA", newAdminData);
 
   return "DONE";
 };

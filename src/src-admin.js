@@ -1,23 +1,15 @@
 import axios from "axios";
 import CONFIG from "../config/config.js";
+import dbModel from "../models/db-model.js";
 
 export const runAdminSubmit = async (inputParams) => {
   const apiData = await sendAdminCommand(inputParams);
   console.log("API DATA", apiData);
-  //   const { scrapeId } = apiData;
-
-  //   const statsArray = await getStatsArray(scrapeId);
-  //   const scrapeObj = {
-  //     statsArray: statsArray,
-  //     apiData: apiData,
-  //   };
-
-  return true;
-  //   return scrapeObj;
+  return apiData;
 };
 
 //SENDS THE ADMIN COMMAND TO THE API
-const sendAdminCommand = async (inputParams) => {
+export const sendAdminCommand = async (inputParams) => {
   const { apiURL } = CONFIG;
   try {
     const res = await axios.post(apiURL, inputParams);
@@ -28,6 +20,43 @@ const sendAdminCommand = async (inputParams) => {
     return null;
   }
 };
+
+//gets admin backend data
+export const runGetAdminBackendData = async (inputObj) => {
+  const { scrapeId, isFirstLoad } = inputObj;
+  const { logArr } = CONFIG;
+
+  //get ALL DATA FIRST
+  const returnObj = {};
+  const allDataObj = {};
+  for (let i = 0; i < logArr.length; i++) {
+    const allItem = logArr[i];
+    const allModel = new dbModel("", CONFIG[allItem]);
+    const allArray = await allModel.getAll();
+    allDataObj[allItem] = allArray?.length || 0;
+  }
+  returnObj.allDataObj = allDataObj;
+
+  //return if no scrapeId (bc first load)
+  if (isFirstLoad) return returnObj;
+
+  //GET SPECIFIC FROM LOG COLLECTION
+  const params = {
+    keyToLookup: "scrapeId",
+    itemValue: scrapeId,
+  };
+
+  const scrapeDataModel = new dbModel(params, "log");
+  const scrapeDataObj = await scrapeDataModel.getUniqueItem();
+  returnObj.scrapeDataObj = scrapeDataObj;
+
+  return returnObj;
+};
+
+// let params = "";
+// if (isFirstLoad) {
+
+// }
 
 //ENABLE BELOW LATER
 //GET SCRAPE STATS FROM MONGO [USE SAME LOOP METHOD]

@@ -1,16 +1,15 @@
 import d from "./define-things.js";
 import { sendToBack, buildFailElement } from "./util.js";
+import { buildAdminDefaultDisplay, buildAdminNewDisplay } from "./admin/admin-return.js";
 
-//get display element
+//get default elements
 const displayElement = document.getElementById("display-element");
+const failElement = await buildFailElement();
 
 //BUILDS DEFAULT DISPLAY
 export const buildBackendDefault = async (inputObj) => {
   if (!inputObj) return null;
   const { dataType } = inputObj;
-
-  //get fail element
-  const failElement = await buildFailElement();
 
   //set backend params
   const paramsObj = { ...inputObj };
@@ -51,4 +50,34 @@ export const buildBackendNew = async (inputObj) => {
   displayElement.append(backendDataWrapper);
 
   return true;
+};
+
+export const buildAdminBackendDefault = async (inputObj) => {
+  //build current backend data
+  const backendAdminData = await sendToBack(inputObj);
+  if (!backendAdminData) return failElement;
+
+  //build wrapper
+  const backendDataWrapper = document.createElement("div");
+  backendDataWrapper.id = "backend-data-wrapper";
+
+  //parse backend data
+  const dataElement = await buildAdminDefaultDisplay(backendAdminData);
+  backendDataWrapper.append(dataElement);
+  if (!backendDataWrapper) return failElement;
+
+  return backendDataWrapper;
+};
+
+export const buildAdminBackendNew = async (inputObj) => {
+  //build wrapper
+  const backendDataWrapper = document.createElement("div");
+  backendDataWrapper.id = "backend-data-wrapper";
+
+  //parse backend data
+  const dataElement = await buildAdminNewDisplay(inputObj);
+  backendDataWrapper.append(dataElement);
+  if (!backendDataWrapper) return failElement;
+
+  return backendDataWrapper;
 };
