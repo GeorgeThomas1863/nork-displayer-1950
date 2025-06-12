@@ -114,6 +114,7 @@
 .article-pic-collapse .collapse-title,
 .picSet-pic-collapse .collapse-title {
   font-size: 1.5rem;
+  max-width: calc(100% - 1rem);
 }
 
 .article-element-collapse .collapse-header,
