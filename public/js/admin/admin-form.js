@@ -216,6 +216,7 @@ export const buildAdminForm = async () => {
   const button = document.createElement("button");
   button.id = "admin-submit-button";
   button.textContent = "Submit";
+  button.setAttribute("type", "submit");
 
   adminWrapper.append(commandListItem, howMuchListItem, urlListItem, itemTypeListItem, articleTypeListItem, uploadTgListItem, tgIdListItem, button);
 

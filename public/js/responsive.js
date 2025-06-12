@@ -5,8 +5,14 @@ import { buildBackendNew } from "./build-backend.js";
 export const adminSubmitClick = async (e) => {
   e.preventDefault();
 
+  const clickElement = e.target;
+  const clickType = clickElement.getAttribute("type");
+
   console.log("THING CLICKED");
-  console.log(e.target);
+  console.log(clickElement);
+  console.log(clickType);
+
+  // if (clickType === "submit") {
 
   //get input params
   const adminParams = await buildAdminParams();
@@ -17,7 +23,7 @@ export const adminSubmitClick = async (e) => {
   const adminData = await sendToBack(adminParams);
   console.log("ADMIN DATA", adminData);
 
-  //BUILD ADMIN DISPLAY
+  //BUILD ADMIN DISPLAYs
 
   return "DONE";
 };
@@ -88,9 +94,14 @@ export const mainInputHandler = async (e) => {
 //-----------------------------------
 
 //ADMIN event listener
-const adminSubmitButton = document.getElementById("admin-submit-button");
-if (adminSubmitButton) {
-  adminSubmitButton.addEventListener("click", adminSubmitClick);
+// const adminSubmitButton = document.getElementById("admin-submit-button");
+// if (adminSubmitButton) {
+//   adminSubmitButton.addEventListener("click", adminSubmitClick);
+// }
+
+const adminDisplayElement = document.getElementById("admin-display-element");
+if (adminDisplayElement) {
+  adminDisplayElement.addEventListener("click", adminSubmitClick);
 }
 
 //MAIN CLICK / INPUT listener
