@@ -12,10 +12,7 @@ export const getBackendParams = async (inputObj) => {
   //set to default on first load
   if (isFirstLoad) {
     const defaultParams = await getBackendDefaultParams(dataType);
-    console.log("TEST DATA");
-    console.log(defaultParams);
     return defaultParams;
-    // return backendDefaultParams[dataType];
   }
 
   //otherwise use input
