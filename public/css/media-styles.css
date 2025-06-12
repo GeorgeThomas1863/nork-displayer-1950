@@ -116,12 +116,18 @@
 
   #form-wrapper > * {
     flex: 0 0 auto;
-    width: 50%;
+    width: 70%;
     margin: 0 auto;
   }
 
   .collapse-title {
     font-size: 0.8rem;
+  }
+
+  #vid-array-element {
+    grid-template-columns: 1fr;
+    width: 90%;
+    margin: 0 auto;
   }
 
   /* REMOVE EVERYTHING ELSE */
