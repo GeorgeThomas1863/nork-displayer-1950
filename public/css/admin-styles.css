@@ -77,8 +77,8 @@
   border-radius: 6px;
   font-family: inherit;
   appearance: none;
-  /* background: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E")
-    no-repeat right 0.75rem center; */
+  background: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E")
+    no-repeat right 0.75rem center;
   background-size: 0.8em;
   background-color: white;
   transition: all 0.2s ease;
@@ -151,7 +151,7 @@
 }
 
 /* Specific styling for individual admin sections */
-#admin-command-list-item {
+/* #admin-command-list-item {
   background: linear-gradient(135deg, rgba(200, 200, 200, 0.3), rgba(235, 235, 235, 0.3));
 }
 
@@ -165,10 +165,10 @@
 
 #admin-upload-tg-list-item {
   background: linear-gradient(135deg, rgba(235, 235, 235, 0.3), rgba(200, 200, 200, 0.3));
-}
+} */
 
 /* Special styling for URL input when shown */
-#admin-url-input-list-item {
+/* #admin-url-input-list-item {
   background: linear-gradient(135deg, rgba(179, 217, 255, 0.2), rgba(235, 235, 235, 0.3));
   border: 1px solid rgba(179, 217, 255, 0.5);
   border-radius: 6px;
@@ -178,10 +178,10 @@
 #admin-url-input-list-item label {
   color: #2c3e50;
   font-weight: 600;
-}
+} */
 
 /* Special styling for article type when shown */
-#admin-article-type-list-item {
+/* #admin-article-type-list-item {
   background: linear-gradient(135deg, rgba(179, 217, 255, 0.2), rgba(235, 235, 235, 0.3));
   border: 1px solid rgba(179, 217, 255, 0.5);
   border-radius: 6px;
@@ -191,10 +191,10 @@
 #admin-article-type-list-item label {
   color: #2c3e50;
   font-weight: 600;
-}
+} */
 
 /* Responsive design - following media-styles.css patterns */
-@media (max-width: 768px) and (orientation: portrait) {
+/* @media (max-width: 768px) and (orientation: portrait) {
   #admin-wrapper {
     width: 90%;
     margin-top: 2rem;
@@ -239,4 +239,4 @@
     font-size: 0.9rem;
     padding: 0.6rem;
   }
-}
+} */
