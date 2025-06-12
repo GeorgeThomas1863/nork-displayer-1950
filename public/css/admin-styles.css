@@ -1,0 +1,242 @@
+/* ADMIN STYLES */
+
+/* Main admin wrapper - follows the same pattern as form wrapper */
+#admin-wrapper {
+  margin: 3rem auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 60%;
+  max-width: 600px;
+  padding: 0;
+  background-color: transparent;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: none;
+}
+
+#admin-wrapper:hover {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+}
+
+/* Admin wrapper background styling - similar to collapse content */
+#admin-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgb(235, 235, 235);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  z-index: -1;
+}
+
+/* Individual admin list items - follow wrapper li pattern */
+#admin-wrapper li {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 1.5rem 2rem;
+  list-style: none;
+  position: relative;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+#admin-wrapper li:first-child {
+  padding-top: 2rem;
+  border-radius: 12px 12px 0 0;
+}
+
+#admin-wrapper li:last-of-type {
+  border-bottom: none;
+  border-radius: 0 0 12px 12px;
+  padding-bottom: 1.5rem;
+}
+
+/* Admin labels - follow wrapper label pattern */
+#admin-wrapper label {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #444;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.9rem;
+}
+
+/* Admin select elements - follow wrapper select pattern */
+#admin-wrapper select {
+  width: 100%;
+  font-size: 1rem;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-family: inherit;
+  appearance: none;
+  background: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E")
+    no-repeat right 0.75rem center;
+  background-size: 0.8em;
+  background-color: white;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+#admin-wrapper select:focus {
+  border-color: #666;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+  outline: none;
+}
+
+/* Admin input elements - follow wrapper input pattern */
+#admin-wrapper input {
+  width: 100%;
+  font-size: 1rem;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-family: inherit;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+  background-color: white;
+}
+
+#admin-wrapper input:focus {
+  border-color: #666;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+  outline: none;
+}
+
+#admin-wrapper input::placeholder {
+  color: #aaa;
+  font-style: italic;
+}
+
+/* Admin submit button - enhanced version of default button */
+#admin-submit-button {
+  background: linear-gradient(135deg, rgb(180, 180, 180), rgb(200, 200, 200));
+  color: #2c3e50;
+  border: none;
+  padding: 1rem 3rem;
+  font: inherit;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 8px;
+  margin: 1.5rem auto 2rem auto;
+  width: fit-content;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+#admin-submit-button:hover {
+  background: linear-gradient(135deg, rgb(160, 160, 160), rgb(180, 180, 180));
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+#admin-submit-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Hidden elements styling - consistent with existing hidden class */
+#admin-wrapper .hidden {
+  display: none !important;
+}
+
+/* Specific styling for individual admin sections */
+#admin-command-list-item {
+  background: linear-gradient(135deg, rgba(200, 200, 200, 0.3), rgba(235, 235, 235, 0.3));
+}
+
+#admin-how-much-list-item {
+  background: linear-gradient(135deg, rgba(235, 235, 235, 0.3), rgba(200, 200, 200, 0.3));
+}
+
+#admin-item-type-list-item {
+  background: linear-gradient(135deg, rgba(200, 200, 200, 0.3), rgba(235, 235, 235, 0.3));
+}
+
+#admin-upload-tg-list-item {
+  background: linear-gradient(135deg, rgba(235, 235, 235, 0.3), rgba(200, 200, 200, 0.3));
+}
+
+/* Special styling for URL input when shown */
+#admin-url-input-list-item {
+  background: linear-gradient(135deg, rgba(179, 217, 255, 0.2), rgba(235, 235, 235, 0.3));
+  border: 1px solid rgba(179, 217, 255, 0.5);
+  border-radius: 6px;
+  margin: 0.5rem;
+}
+
+#admin-url-input-list-item label {
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+/* Special styling for article type when shown */
+#admin-article-type-list-item {
+  background: linear-gradient(135deg, rgba(179, 217, 255, 0.2), rgba(235, 235, 235, 0.3));
+  border: 1px solid rgba(179, 217, 255, 0.5);
+  border-radius: 6px;
+  margin: 0.5rem;
+}
+
+#admin-article-type-list-item label {
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+/* Responsive design - following media-styles.css patterns */
+@media (max-width: 768px) and (orientation: portrait) {
+  #admin-wrapper {
+    width: 90%;
+    margin-top: 2rem;
+  }
+  
+  #admin-wrapper li {
+    padding: 1rem 1.5rem;
+  }
+  
+  #admin-submit-button {
+    font-size: 1.3rem;
+    padding: 0.8rem 2rem;
+  }
+}
+
+@media (max-width: 576px) and (orientation: portrait) {
+  #admin-wrapper {
+    width: 95%;
+    margin-top: 1rem;
+  }
+  
+  #admin-wrapper li {
+    padding: 0.8rem 1rem;
+  }
+  
+  #admin-wrapper li:first-child {
+    padding-top: 1.5rem;
+  }
+  
+  #admin-submit-button {
+    font-size: 1.2rem;
+    padding: 0.7rem 1.5rem;
+    margin: 1rem auto 1.5rem auto;
+  }
+  
+  #admin-wrapper label {
+    font-size: 0.8rem;
+  }
+  
+  #admin-wrapper select,
+  #admin-wrapper input {
+    font-size: 0.9rem;
+    padding: 0.6rem;
+  }
+}
