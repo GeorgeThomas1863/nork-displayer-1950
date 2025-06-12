@@ -1,6 +1,6 @@
 import fs from "fs";
 import CONFIG from "../config/config.js";
-import { backendDefaultParams } from "../config/map-display.js";
+import { getBackendDefaultParams } from "../config/map-display.js";
 import dbModel from "../models/db-model.js";
 import { articleTypeMap } from "../config/map-display.js";
 import { fixInputDefaults } from "./src-fix.js";
@@ -14,10 +14,10 @@ export const getBackendParams = async (inputObj) => {
 
   //set to default on first load
   if (isFirstLoad) {
-    const testData = backendDefaultParams[dataType];
+    const defaultParams = await getBackendDefaultParams(dataType);
     console.log("TEST DATA");
-    console.log(testData);
-    return testData;
+    console.log(defaultParams);
+    return defaultParams;
     // return backendDefaultParams[dataType];
   }
 
