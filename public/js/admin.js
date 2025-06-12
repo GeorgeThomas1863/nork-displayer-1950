@@ -16,6 +16,7 @@ export const buildAdminDisplay = async () => {
   };
 
   const backendAdminWrapper = await buildAdminBackendDefault(params);
+  backendAdminWrapper.id = "admin-backend-wrapper";
 
   adminDisplayElement.append(adminFormWrapper, backendAdminWrapper);
 

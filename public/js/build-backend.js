@@ -4,6 +4,7 @@ import { buildAdminDefaultDisplay, buildAdminNewDisplay } from "./admin/admin-re
 
 //get default elements
 const displayElement = document.getElementById("display-element");
+const adminDisplayElement = document.getElementById("admin-display-element");
 const failElement = await buildFailElement();
 
 //BUILDS DEFAULT DISPLAY
@@ -69,13 +70,15 @@ export const buildAdminBackendDefault = async (inputObj) => {
 };
 
 export const buildAdminBackendNew = async (inputObj) => {
-  //build wrapper
-  // const backendDataWrapper = document.createElement("div");
-  // backendDataWrapper.id = "backend-data-wrapper";
-
   //parse backend data
   const dataElement = await buildAdminNewDisplay(inputObj);
   if (!dataElement) return failElement;
 
-  return dataElement;
+  //replace old data with new data
+  const adminBackendWrapper = document.getElementById("admin-backend-wrapper");
+  adminBackendWrapper.replaceChild(dataElement, adminBackendWrapper.firstElementChild);
+
+  adminDisplayElement.append(adminBackendWrapper);
+
+  return true;
 };
