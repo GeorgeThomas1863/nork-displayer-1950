@@ -116,12 +116,12 @@
 
   #form-wrapper > * {
     flex: 0 0 auto;
-    width: 70%;
+    width: 65%;
     margin: 0 auto;
   }
 
   .collapse-title {
-    font-size: 0.8rem;
+    font-size: 1.2rem;
   }
 
   #vid-array-element {
