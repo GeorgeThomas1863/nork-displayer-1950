@@ -31,6 +31,9 @@ export const buildAdminDefaultDisplay = async (inputObj) => {
 };
 
 export const buildAdminNewDisplay = async (inputObj) => {
+  console.log("BUILD ADMIN NEW DISPLAY");
+  console.log(inputObj);
+
   const { scrapeDataObj } = inputObj;
 
   const adminNewContainer = document.createElement("div");
