@@ -72,8 +72,8 @@ export const buildAdminBackendNew = async (inputObj) => {
 
   console.log("admin display element");
   console.log(adminDisplayElement);
-  console.log(adminDisplayElement.children.length);
-  // adminDisplayElement.replaceChild(dataElement, adminDisplayElement.firstElementChild);
+  console.log(adminDisplayElement.children[1]);
+  adminDisplayElement.replaceChild(dataElement, adminDisplayElement.children[1]);
 
   // adminDisplayElement.append(dataElement);
 
