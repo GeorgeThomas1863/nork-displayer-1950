@@ -58,17 +58,11 @@ export const buildAdminBackendDefault = async (inputObj) => {
   const backendAdminData = await sendToBack(inputObj);
   if (!backendAdminData) return failElement;
 
-  //build wrapper
-  const adminBackendDataWrapper = document.createElement("div");
-  adminBackendDataWrapper.id = "admin-backend-data-wrapper";
-
   //parse backend data
   const dataElement = await buildAdminDefaultDisplay(backendAdminData);
   if (!dataElement) return failElement;
 
-  adminBackendDataWrapper.append(dataElement);
-
-  return adminBackendDataWrapper;
+  return dataElement;
 };
 
 export const buildAdminBackendNew = async (inputObj) => {
@@ -76,12 +70,9 @@ export const buildAdminBackendNew = async (inputObj) => {
   const dataElement = await buildAdminNewDisplay(inputObj);
   if (!dataElement) return failElement;
 
-  //replace old data with new data
-  const adminBackendDataWrapper = document.getElementById("admin-backend-data-wrapper");
-
-  console.log("BACKEND DATA WRAPPER");
-  console.log(adminBackendDataWrapper);
-  adminBackendDataWrapper.replaceChild(dataElement, adminBackendDataWrapper.firstElementChild);
+  console.log("admin display element");
+  console.log(adminDisplayElement);
+  adminDisplayElement.replaceChild(dataElement, adminDisplayElement.firstElementChild);
 
   // adminDisplayElement.append(dataElement);
 
