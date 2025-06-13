@@ -1,5 +1,12 @@
 //TO DO:
-// throwing out garbage styles
+
+// ADD landscape styles to phones
+
+//UPDATE SITE / SERVER
+
+// style admin data return
+
+// continue building admin start / stop capabilities
 
 // 1. admin functionality
 
