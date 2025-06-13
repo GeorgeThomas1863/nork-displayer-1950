@@ -1,5 +1,5 @@
 //TO DO:
-// // 1. landscape styles
+// throwing out garbage styles
 
 // 1. admin functionality
 
