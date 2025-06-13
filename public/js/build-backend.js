@@ -78,6 +78,9 @@ export const buildAdminBackendNew = async (inputObj) => {
 
   //replace old data with new data
   const backendDataWrapper = document.getElementById("admin-backend-data-wrapper");
+
+  console.log("BACKEND DATA WRAPPER");
+  console.log(backendDataWrapper);
   backendDataWrapper.replaceChild(dataElement, backendDataWrapper.firstElementChild);
 
   // adminDisplayElement.append(dataElement);
