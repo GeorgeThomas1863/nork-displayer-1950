@@ -59,14 +59,16 @@ export const buildAdminBackendDefault = async (inputObj) => {
   if (!backendAdminData) return failElement;
 
   //build wrapper
-  // const backendDataWrapper = document.createElement("div");
-  // backendDataWrapper.id = "backend-data-wrapper";
+  const backendDataWrapper = document.createElement("div");
+  backendDataWrapper.id = "admin-backend-data-wrapper";
 
   //parse backend data
   const dataElement = await buildAdminDefaultDisplay(backendAdminData);
   if (!dataElement) return failElement;
 
-  return dataElement;
+  backendDataWrapper.append(dataElement);
+
+  return backendDataWrapper;
 };
 
 export const buildAdminBackendNew = async (inputObj) => {
@@ -75,8 +77,8 @@ export const buildAdminBackendNew = async (inputObj) => {
   if (!dataElement) return failElement;
 
   //replace old data with new data
-  const adminBackendWrapper = document.getElementById("admin-backend-wrapper");
-  adminBackendWrapper.replaceChild(dataElement, adminBackendWrapper.firstElementChild);
+  const backendDataWrapper = document.getElementById("admin-backend-data-wrapper");
+  backendDataWrapper.replaceChild(dataElement, backendDataWrapper.firstElementChild);
 
   // adminDisplayElement.append(dataElement);
 
