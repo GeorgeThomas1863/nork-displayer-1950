@@ -77,7 +77,7 @@ export const buildAdminNewDisplay = async (inputObj) => {
     newDataList.append(endTimeElement);
   }
 
-  adminNewContainer.append(adminBackendList, newDataList);
+  adminNewContainer.append(newDataList, adminBackendList);
 
   return adminNewContainer;
 };
