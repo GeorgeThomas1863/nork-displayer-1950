@@ -150,93 +150,77 @@
   display: none !important;
 }
 
-/* Specific styling for individual admin sections */
-/* #admin-command-list-item {
-  background: linear-gradient(135deg, rgba(200, 200, 200, 0.3), rgba(235, 235, 235, 0.3));
+/* ------------------------------ */
+
+/* CLAUDE BACKEND STYLES */
+
+/* Container styling */
+.admin-new-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  min-height: 100vh;
+  box-sizing: border-box;
 }
 
-#admin-how-much-list-item {
-  background: linear-gradient(135deg, rgba(235, 235, 235, 0.3), rgba(200, 200, 200, 0.3));
+/* List styling */
+.admin-backend-list,
+.admin-new-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 3rem 0;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e9ecef;
 }
 
-#admin-item-type-list-item {
-  background: linear-gradient(135deg, rgba(200, 200, 200, 0.3), rgba(235, 235, 235, 0.3));
+.admin-new-list {
+  margin-bottom: 2rem;
 }
 
-#admin-upload-tg-list-item {
-  background: linear-gradient(135deg, rgba(235, 235, 235, 0.3), rgba(200, 200, 200, 0.3));
-} */
-
-/* Special styling for URL input when shown */
-/* #admin-url-input-list-item {
-  background: linear-gradient(135deg, rgba(179, 217, 255, 0.2), rgba(235, 235, 235, 0.3));
-  border: 1px solid rgba(179, 217, 255, 0.5);
-  border-radius: 6px;
-  margin: 0.5rem;
-}
-
-#admin-url-input-list-item label {
-  color: #2c3e50;
+/* Title styling */
+.admin-backend-default-title,
+.admin-new-title {
+  margin: 0;
+  padding: 2rem 2rem 1.5rem 2rem;
+  font-size: 1.5rem;
   font-weight: 600;
-} */
-
-/* Special styling for article type when shown */
-/* #admin-article-type-list-item {
-  background: linear-gradient(135deg, rgba(179, 217, 255, 0.2), rgba(235, 235, 235, 0.3));
-  border: 1px solid rgba(179, 217, 255, 0.5);
-  border-radius: 6px;
-  margin: 0.5rem;
+  color: #212529;
+  border-bottom: 2px solid #e9ecef;
+  background-color: #ffffff;
 }
 
-#admin-article-type-list-item label {
-  color: #2c3e50;
-  font-weight: 600;
-} */
-
-/* Responsive design - following media-styles.css patterns */
-/* @media (max-width: 768px) and (orientation: portrait) {
-  #admin-wrapper {
-    width: 90%;
-    margin-top: 2rem;
-  }
-  
-  #admin-wrapper li {
-    padding: 1rem 1.5rem;
-  }
-  
-  #admin-submit-button {
-    font-size: 1.3rem;
-    padding: 0.8rem 2rem;
-  }
+.admin-new-title {
+  color: #0d6efd;
 }
 
-@media (max-width: 576px) and (orientation: portrait) {
-  #admin-wrapper {
-    width: 95%;
-    margin-top: 1rem;
-  }
-  
-  #admin-wrapper li {
-    padding: 0.8rem 1rem;
-  }
-  
-  #admin-wrapper li:first-child {
-    padding-top: 1.5rem;
-  }
-  
-  #admin-submit-button {
-    font-size: 1.2rem;
-    padding: 0.7rem 1.5rem;
-    margin: 1rem auto 1.5rem auto;
-  }
-  
-  #admin-wrapper label {
-    font-size: 0.8rem;
-  }
-  
-  #admin-wrapper select,
-  #admin-wrapper input {
-    font-size: 0.9rem;
-    padding: 0.6rem;
-  }
-} */
+/* List item styling */
+.admin-backend-list-item,
+.admin-new-list-item {
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #e9ecef;
+  background-color: #ffffff;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #495057;
+  transition: background-color 0.2s ease;
+}
+
+.admin-backend-list-item:hover,
+.admin-new-list-item:hover {
+  background-color: #f8f9fa;
+}
+
+.admin-backend-list-item:last-child,
+.admin-new-list-item:last-child {
+  border-bottom: none;
+}
+
+/* New data specific styling */
+.admin-new-list-item {
+  border-left: 3px solid #0d6efd;
+}
