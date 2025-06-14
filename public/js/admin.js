@@ -27,11 +27,11 @@ export const buildAdminDisplay = async (isFirstLoad = true, scrapeId = null) => 
   }
 
   //otherwise replace data
-  adminDisplayElement.children[1].innerHTML = "";
+  adminDisplayElement.children[1].remove();
   if (adminDisplayElement.children[2]) {
-    adminDisplayElement.children[2].innerHTML = "";
+    adminDisplayElement.children[2].remove();
   }
-  
+
   adminDisplayElement.append(adminBackendData.children[0], adminBackendData.children[1]);
   return "#DONE";
 };
