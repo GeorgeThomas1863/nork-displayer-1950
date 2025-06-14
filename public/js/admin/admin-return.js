@@ -38,7 +38,7 @@ export const buildAdminNewDisplay = async (inputObj) => {
   const { startTime, endTime } = scrapeDataObj;
 
   const adminNewContainer = document.createElement("div");
-  adminNewContainer.classList.add("admin-new-container");
+  adminNewContainer.id = "admin-new-container";
 
   //get already scraped data
   const adminBackendList = await buildAdminDefaultDisplay(inputObj);
