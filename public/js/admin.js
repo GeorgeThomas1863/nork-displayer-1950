@@ -28,10 +28,10 @@ export const buildAdminDisplay = async (isFirstLoad = true, scrapeId = null) => 
 
   //otherwise replace data
   adminDisplayElement.children[1].innerHTML = "";
-  adminDisplayElement.children[2]?.innerHTML = "";
+  if (adminDisplayElement.children[2]) adminDisplayElement.children[2].innerHTML = "";
+
   adminDisplayElement.append(adminBackendData.children[0], adminBackendData.children[1]);
 
- 
   // //append / display the data
   // switch (isFirstLoad) {
   //   case true:
