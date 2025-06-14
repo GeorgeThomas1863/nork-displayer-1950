@@ -53,32 +53,44 @@ export const buildBackendNew = async (inputObj) => {
   return true;
 };
 
-export const buildAdminBackendDefault = async (inputObj) => {
-  //build current backend data
-  const backendAdminData = await sendToBack(inputObj);
-  if (!backendAdminData) return failElement;
+// export const buildAdminBackendDefault = async (inputObj) => {
+//   //build current backend data
+//   const backendAdminData = await sendToBack(inputObj);
+//   if (!backendAdminData) return failElement;
 
-  //build wrapper
-  // const backendAdminWrapper = document.createElement("div");
-  // backendAdminWrapper.id = "backend-admin-wrapper";
+//   //build wrapper
+//   // const backendAdminWrapper = document.createElement("div");
+//   // backendAdminWrapper.id = "backend-admin-wrapper";
 
-  //parse backend data
-  const dataElement = await buildAdminDefaultDisplay(backendAdminData);
-  if (!dataElement) return failElement;
+//   //parse backend data
+//   const dataElement = await buildAdminDefaultDisplay(backendAdminData);
+//   if (!dataElement) return failElement;
 
-  // backendAdminWrapper.append(dataElement);
+//   // backendAdminWrapper.append(dataElement);
 
-  return dataElement;
-};
+//   return dataElement;
+// };
 
-export const buildAdminBackendNew = async (inputObj) => {
-  //parse backend data
-  const dataElement = await buildAdminNewDisplay(inputObj);
-  if (!dataElement) return failElement;
+// export const buildAdminBackendNew = async (inputObj) => {
+//   //parse backend data
+//   const dataElement = await buildAdminNewDisplay(inputObj);
+//   if (!dataElement) return failElement;
 
-  adminDisplayElement.replaceChild(dataElement, adminDisplayElement.children[1]);
+//   adminDisplayElement.replaceChild(dataElement, adminDisplayElement.children[1]);
 
-  // adminDisplayElement.append(dataElement);
+//   // adminDisplayElement.append(dataElement);
 
-  return true;
+//   return true;
+// };
+
+export const buildAdminBackendDisplay = async (inputObj) => {
+  const { isFirstLoad } = inputObj;
+
+  switch (isFirstLoad) {
+    case true:
+      return buildAdminDefaultDisplay(inputObj);
+
+    case false:
+      return buildAdminNewDisplay(inputObj);
+  }
 };
