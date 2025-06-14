@@ -79,7 +79,7 @@ h3 {
 #admin-display-element {
   display: flex;
   width: 90%;
-  margin: 3rem auto;
+  margin: 2rem auto;
 }
 
 /* Main admin wrapper - follows the same pattern as form wrapper */
@@ -87,10 +87,10 @@ h3 {
   margin: 0 auto;
   padding: 0;
   width: 100%;
-  /* background-color: transparent; */
+  background-color: transparent;
   border-radius: 12px;
   transition: all 0.3s ease;
-  position: relative;
+  /* position: relative; */
   overflow: hidden;
   box-shadow: none;
 }
