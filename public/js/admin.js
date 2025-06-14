@@ -8,6 +8,7 @@ const adminDisplayElement = document.getElementById("admin-display-element");
 export const buildAdminDisplay = async (isFirstLoad = true, scrapeId = null) => {
   if (!adminDisplayElement) return null;
 
+  //build the form
   const adminFormData = await buildAdminForm();
   adminDisplayElement.append(adminFormData);
 
@@ -21,11 +22,18 @@ export const buildAdminDisplay = async (isFirstLoad = true, scrapeId = null) => 
   const adminBackendRaw = await sendToBack(params);
   const adminBackendData = await buildAdminBackendDisplay(adminBackendRaw);
 
-  //if first laod just append data
+  //if first laod just return appended data
   if (isFirstLoad) return adminDisplayElement.append(adminFormData, adminBackendData);
 
+  if (adminDisplayElement.children[2]) {
+    adminDisplayElement.children[2].remove();
+  }
+
+  const existingBackendElement = document.querySelector(".admin-backend-default-collapse");
+  existingBackendElement.replaceWith(adminBackendData.children[0], adminBackendData.children[1]);
+
   //otherwise replace
-  adminDisplayElement.replaceChildren(adminDisplayElement.children[0], adminBackendData.children[0], adminBackendData.children[1]);
+  // adminDisplayElement.replaceChildren(adminDisplayElement.children[0], adminBackendData.children[0], adminBackendData.children[1]);
 
   return "#DONE";
 };
