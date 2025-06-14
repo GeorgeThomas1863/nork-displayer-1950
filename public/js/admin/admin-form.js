@@ -12,7 +12,7 @@ export const buildAdminForm = async () => {
   // create title element for collapse container
   const titleElement = document.createElement("div");
   titleElement.textContent = "ADMIN FORM";
-  titleElement.className = "collapse-header";
+  titleElement.className = "collapse-header admin-form-title";
   // titleElement.setAttribute("data-expand", "article-dropdown"); //for click listener
 
   //build collapse container
