@@ -28,6 +28,9 @@ export const buildAdminDisplay = async (isFirstLoad = true, scrapeId = null) => 
     case false:
       // const adminBackendContainer = document.getElementById("admin-backend-container");
       //try resetting the display
+      console.log("ADMIN BACKEND DATA");
+      console.log(adminBackendData);
+
       adminDisplayElement.innerHTML = "";
       adminDisplayElement.append(adminFormData, adminBackendData);
 
