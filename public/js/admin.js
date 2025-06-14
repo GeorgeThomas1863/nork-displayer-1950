@@ -19,17 +19,18 @@ export const buildAdminDisplay = async (isFirstLoad = true, scrapeId = null) => 
   const adminBackendRaw = await sendToBack(params);
   const adminBackendData = await buildAdminBackendDisplay(adminBackendRaw);
 
-  console.log("ADMIN BACKEND DATA PARSED");
-  console.log(adminBackendData);
-  
-  //PROB NEED TO APPEND DIFFERENTLY
+  //create the fucking element
+  const backendAdminWrapper = document.createElement("div");
+  backendAdminWrapper.id = "backend-admin-wrapper";
 
-  // //create the fucking element
-  // const backendAdminWrapper = document.createElement("div");
-  // backendAdminWrapper.id = "backend-admin-wrapper";
-  // backendAdminWrapper.append(adminBackendParsed);
+  //attempt to be less stupid with data display
+  if (isFirstLoad) {
+    backendAdminWrapper.append(adminBackendData);
+  } else {
+    backendAdminWrapper.replaceChild(adminBackendData, backendAdminWrapper.firstElementChild);
+  }
 
-  adminDisplayElement.append(adminFormData, adminBackendData);
+  adminDisplayElement.append(adminFormData, backendAdminWrapper);
 
   return "#DONE";
 };
