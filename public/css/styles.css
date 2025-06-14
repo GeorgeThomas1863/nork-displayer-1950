@@ -103,26 +103,13 @@ h3 {
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
 }
 
-/* Admin wrapper background styling - similar to collapse content */
-/* #admin-form-wrapper::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgb(235, 235, 235);
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-  z-index: -1;
-} */
-
 /* Individual admin list items - follow wrapper li pattern */
 #admin-form-wrapper li {
   display: flex;
   flex-direction: column;
   margin: 0;
-  padding: 1.5rem 2rem;
+  padding: 0;
+  /* padding: 1.5rem 2rem; */
   list-style: none;
   position: relative;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
