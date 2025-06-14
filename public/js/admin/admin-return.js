@@ -30,7 +30,7 @@ export const buildAdminBackendDisplay = async (inputObj) => {
   if (isFirstLoad) return adminBackendContainer;
 
   //
-  const newListData = await buildAdminNewList(scrapedDataObj, scrapeId);
+  const newListData = await buildAdminNewList(scrapedDataObj);
 
   const newTitleElement = document.createElement("h2");
   newTitleElement.innerHTML = "New Scrape Data";
@@ -76,8 +76,10 @@ export const buildAdminDefaultList = async (inputObj) => {
   return adminDefaultList;
 };
 
-export const buildAdminNewList = async (inputObj, scrapeId) => {
+export const buildAdminNewList = async (inputObj) => {
+  if (!inputObj || !inputObj._id) return null;
   const { startTime, endTime, textStr } = inputObj;
+  const scrapeId = inputObj._id;
 
   // console.log("BUILD ADMIN NEW DISPLAY");
   // console.log(inputObj);
