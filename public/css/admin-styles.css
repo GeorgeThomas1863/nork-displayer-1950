@@ -155,7 +155,7 @@
 /* CLAUDE BACKEND STYLES */
 
 #backend-admin-wrapper {
-  width: 100%;
+  width: 30%;
   margin: 2rem auto;
   padding: 2rem;
   background-color: #ffffff;
@@ -171,7 +171,7 @@
   flex-direction: row;
   justify-content: center;
   gap: 2rem;
-  width: 100%;
+  width: 70%;
   margin: 0 auto;
   padding: 2rem;
   background-color: transparent;
@@ -189,6 +189,7 @@
   border-radius: 8px;
   border: 1px solid #e9ecef;
   min-width: 0; /* Prevents flex items from overflowing */
+  width: 30%; /* Each list takes up 30% width */
 }
 
 /* Title styling */
