@@ -154,25 +154,15 @@
 
 /* CLAUDE BACKEND STYLES */
 
-/* Container styling */
-/* .admin-new-container {
-  max-width: 70%;
-  margin: 2rem auto;
-  padding: 2rem;
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  box-sizing: border-box;
-} */
-
 #backend-admin-wrapper {
-  max-width: 70%;
+  max-width: 50%;
   margin: 2rem auto;
   padding: 2rem;
   background-color: #ffffff;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   box-sizing: border-box;
+  opacity: 0.7;
 }
 
 /* List styling */
@@ -195,8 +185,8 @@
 .admin-backend-default-title,
 .admin-new-title {
   margin: 0;
-  padding: 2rem 2rem 1.5rem 2rem;
-  font-size: 1.5rem;
+  /* padding: 2rem 2rem 1.5rem 2rem; */
+  font-size: 2rem;
   font-weight: 600;
   color: #212529;
   border-bottom: 2px solid #e9ecef;
@@ -213,7 +203,7 @@
   padding: 1rem 2rem;
   border-bottom: 1px solid #e9ecef;
   background-color: #ffffff;
-  font-size: 0.95rem;
+  font-size: 1.2rem;
   line-height: 1.5;
   color: #495057;
   transition: background-color 0.2s ease;
