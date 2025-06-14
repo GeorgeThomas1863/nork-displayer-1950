@@ -30,11 +30,7 @@ export const buildAdminDisplay = async (isFirstLoad = true, scrapeId = null) => 
   }
 
   const existingBackendElement = document.getElementById("admin-backend-container");
-  existingBackendElement.replaceWith(adminBackendData.children[0]);
-  adminDisplayElement.append(adminBackendData.children[1]);
-
-  //otherwise replace
-  // adminDisplayElement.replaceChildren(adminDisplayElement.children[0], adminBackendData.children[0], adminBackendData.children[1]);
+  existingBackendElement.replaceWith(adminBackendData);
 
   return "#DONE";
 };
