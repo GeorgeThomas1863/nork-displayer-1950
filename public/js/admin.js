@@ -32,7 +32,7 @@ export const buildAdminDisplay = async (isFirstLoad = true, scrapeId = null) => 
       console.log(adminBackendData);
 
       adminDisplayElement.innerHTML = "";
-      adminDisplayElement.append(adminFormData, adminBackendData);
+      adminDisplayElement.append(adminFormData, adminBackendData.children[0], adminBackendData.children[1]);
 
       // console.log("ADMINN DISPLAY ELEMENT");
       // console.log(adminDisplayElement);
