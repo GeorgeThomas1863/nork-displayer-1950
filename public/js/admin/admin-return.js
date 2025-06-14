@@ -32,8 +32,8 @@ export const buildAdminBackendDisplay = async (inputObj) => {
   //OTHERWISE get new list data
   const newListData = await buildAdminNewList(scrapeDataObj, scrapeId);
 
-  console.log("NEW LIST DATA");
-  console.log(newListData);
+  // console.log("NEW LIST DATA");
+  // console.log(newListData);
 
   const newTitleElement = document.createElement("h2");
   newTitleElement.innerHTML = "New Scrape Data";

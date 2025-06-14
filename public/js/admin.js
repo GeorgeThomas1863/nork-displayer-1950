@@ -26,11 +26,12 @@ export const buildAdminDisplay = async (isFirstLoad = true, scrapeId = null) => 
       break;
 
     case false:
+      // const adminBackendContainer = document.getElementById("admin-backend-container");
       console.log("ADMINN DISPLAY ELEMENT");
       console.log(adminDisplayElement);
       console.log("ADMIN BACKEND DATA");
       console.log(adminBackendData);
-      // adminDisplayElement.replaceChild(adminBackendData, adminDisplayElement.firstElementChild);
+      adminDisplayElement.replaceChild(adminDisplayElement.children[1], adminBackendData);
       break;
   }
 
