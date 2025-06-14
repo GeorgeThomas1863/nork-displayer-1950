@@ -155,7 +155,7 @@
 /* CLAUDE BACKEND STYLES */
 
 #backend-admin-wrapper {
-  max-width: 30%;
+  width: 100%;
   margin: 2rem auto;
   padding: 2rem;
   background-color: #ffffff;
@@ -168,45 +168,34 @@
 
 #admin-new-container {
   display: flex;
-  /* flex-direction: column; */
-  /* align-items: center; */
+  flex-direction: row;
   justify-content: center;
   gap: 2rem;
-  max-width: 50%;
+  width: 100%;
   margin: 0 auto;
   padding: 2rem;
-  /* background-color: #ffffff; */
-  /* box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); */
   background-color: transparent;
   border-radius: 12px;
-  /* box-sizing: border-box; */
   text-align: center;
 }
 
 /* List styling */
 .admin-backend-list,
 .admin-new-list {
+  flex: 1;
   display: block;
   list-style: none;
-  /* padding: 0;
-  margin: 0; */
-  /* margin: 0 0 3rem 0; */
   background-color: #f8f9fa;
   border-radius: 8px;
-  /* overflow: hidden; */
   border: 1px solid #e9ecef;
+  min-width: 0; /* Prevents flex items from overflowing */
 }
-
-/* .admin-new-list {
-  margin-bottom: 2rem;
-} */
 
 /* Title styling */
 .admin-backend-default-title,
 .admin-new-title {
   margin: 0;
   padding: 1rem 0;
-  /* padding: 2rem 2rem 1.5rem 2rem; */
   font-size: 2rem;
   font-weight: 600;
   color: #212529;
@@ -228,6 +217,8 @@
   line-height: 1.5;
   color: #495057;
   transition: background-color 0.2s ease;
+  word-wrap: break-word; /* Ensures long text wraps properly */
+  overflow-wrap: break-word;
 }
 
 .admin-backend-list-item:hover,
