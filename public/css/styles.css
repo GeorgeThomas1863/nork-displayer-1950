@@ -231,7 +231,7 @@ h3 {
   display: block;
   list-style: none;
   background-color: rgb(235, 235, 235);
-  border-radius: 12px;
+  border-radius: 0 0 12px 12px;
   border: 1px solid #e9ecef;
   width: 100%;
   text-align: center;
