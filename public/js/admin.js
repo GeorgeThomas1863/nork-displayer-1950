@@ -35,7 +35,12 @@ export const buildAdminDisplay = async (isFirstLoad = true, scrapeId = null) => 
   if (adminDisplayElement.children[2]) {
     adminDisplayElement.children[2].remove();
   }
+
+  if (adminDisplayElement.children[3]) {
+    adminDisplayElement.children[3].remove();
+  }
   
+
   //otherwise replace data
   adminDisplayElement.children[1].remove();
 
