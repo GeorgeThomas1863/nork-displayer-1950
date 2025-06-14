@@ -90,9 +90,13 @@ h3 {
   background-color: transparent;
   border-radius: 12px;
   transition: all 0.3s ease;
-  /* position: relative; */
+  position: relative;
   overflow: hidden;
   box-shadow: none;
+}
+
+.admin-form-wrapper-collapse {
+  width: 100%;
 }
 
 #admin-form-wrapper:hover {
