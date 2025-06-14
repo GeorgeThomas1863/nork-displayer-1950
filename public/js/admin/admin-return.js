@@ -29,8 +29,9 @@ export const buildAdminBackendDisplay = async (inputObj) => {
   //if first load return here
   if (isFirstLoad) return adminBackendContainer;
 
-  //
   const newListData = await buildAdminNewList(scrapedDataObj);
+  console.log("NEW LIST DATA");
+  console.log(newListData);
 
   const newTitleElement = document.createElement("h2");
   newTitleElement.innerHTML = "New Scrape Data";
