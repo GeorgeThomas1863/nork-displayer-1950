@@ -225,10 +225,6 @@ h3 {
   gap: 3rem;
 }
 
-/* #admin-backend-container:hover {
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
-} */
-
 /* CLAUDE BACKEND STYLES */
 
 /* #backend-admin-wrapper {
@@ -263,10 +259,16 @@ h3 {
   border-radius: 12px;
   border: 1px solid #e9ecef;
   width: 100%;
+  text-align: center;
 }
 
 .admin-new-list {
   align-self: flex-start;
+}
+
+.admin-default-list:hover,
+.admin-new-list:hover {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
 }
 
 /* Title styling */
