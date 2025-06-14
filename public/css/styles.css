@@ -225,31 +225,6 @@ h3 {
   gap: 3rem;
 }
 
-/* CLAUDE BACKEND STYLES */
-
-/* #backend-admin-wrapper {
-
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  box-sizing: border-box;
-  opacity: 0.95;
-  text-align: center;
-} */
-
-/* #admin-new-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 2rem;
-  width: 60%;
-  margin: 0 auto;
-  padding: 2rem;
-  background-color: transparent;
-  border-radius: 12px;
-  text-align: center;
-} */
-
 /* List styling */
 .admin-default-list,
 .admin-new-list {
