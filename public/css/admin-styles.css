@@ -191,7 +191,7 @@
 }
 
 .admin-new-list {
-  align-self: flex-start; /* This will make it only as tall as its content */
+  align-self: flex-start;
 }
 
 /* Title styling */
@@ -203,7 +203,6 @@
   font-weight: 600;
   color: #212529;
   border-bottom: 2px solid #e9ecef;
-  background-color: #ffffff;
 }
 
 .admin-new-title {
@@ -215,7 +214,6 @@
 .admin-new-list-item {
   padding: 1rem 2rem;
   border-bottom: 1px solid #e9ecef;
-  background-color: #ffffff;
   font-size: 1.2rem;
   line-height: 1.5;
   color: #495057;
