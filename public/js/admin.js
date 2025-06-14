@@ -29,20 +29,22 @@ export const buildAdminDisplay = async (isFirstLoad = true, scrapeId = null) => 
     return;
   }
 
-  console.log("ADMIN DISPLAY ELEMENT CHILDREN");
-  console.log(adminDisplayElement.children.length);
+  adminDisplayElement.replaceChildren(adminDisplayElement.children[0]);
 
-  if (adminDisplayElement.children[2]) {
-    adminDisplayElement.children[2].remove();
-  }
+  // console.log("ADMIN DISPLAY ELEMENT CHILDREN");
+  // console.log(adminDisplayElement.children.length);
 
-  if (adminDisplayElement.children[3]) {
-    adminDisplayElement.children[3].remove();
-  }
+  // if (adminDisplayElement.children[2]) {
+  //   adminDisplayElement.children[2].remove();
+  // }
+
+  // if (adminDisplayElement.children[3]) {
+  //   adminDisplayElement.children[3].remove();
+  // }
   
 
-  //otherwise replace data
-  adminDisplayElement.children[1].remove();
+  // //otherwise replace data
+  // adminDisplayElement.children[1].remove();
 
   adminDisplayElement.append(adminBackendData.children[0], adminBackendData.children[1]);
   return "#DONE";
