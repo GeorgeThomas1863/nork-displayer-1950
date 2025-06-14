@@ -1,4 +1,7 @@
 /* ADMIN STYLES */
+#admin-display-element {
+  display: flex;
+}
 
 /* Main admin wrapper - follows the same pattern as form wrapper */
 #admin-wrapper {
