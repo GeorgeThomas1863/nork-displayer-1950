@@ -225,6 +225,10 @@ h3 {
   gap: 3rem;
 }
 
+#admin-backend-container > .collapse-header {
+  border-radius: 12px 12px 0 0;
+}
+
 /* List styling */
 .admin-default-list,
 .admin-new-list {
