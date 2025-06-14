@@ -109,7 +109,7 @@ h3 {
   flex-direction: column;
   margin: 0;
   padding: 0;
-  /* padding: 1.5rem 2rem; */
+  padding: 1rem 2rem;
   list-style: none;
   position: relative;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
