@@ -1,7 +1,7 @@
 import { buildCollapseContainer } from "../collapse.js";
 
 export const buildAdminBackendDisplay = async (inputObj) => {
-  const { allDataObj, scrapedDataObj, isFirstLoad } = inputObj;
+  const { allDataObj, scrapedDataObj, scrapeId, isFirstLoad } = inputObj;
 
   console.log("BUILD ADMIN BACKEND DISPLAY");
   console.log(inputObj);
@@ -29,7 +29,9 @@ export const buildAdminBackendDisplay = async (inputObj) => {
   //if first load return here
   if (isFirstLoad) return adminBackendContainer;
 
-  const newListData = await buildAdminNewList(scrapedDataObj);
+  //OTHERWISE get new list data
+  const newListData = await buildAdminNewList(scrapedDataObj, scrapeId);
+
   console.log("NEW LIST DATA");
   console.log(newListData);
 
@@ -77,10 +79,8 @@ export const buildAdminDefaultList = async (inputObj) => {
   return adminDefaultList;
 };
 
-export const buildAdminNewList = async (inputObj) => {
-  if (!inputObj || !inputObj._id) return null;
+export const buildAdminNewList = async (inputObj, scrapeId) => {
   const { startTime, endTime, textStr } = inputObj;
-  const scrapeId = inputObj["_id"];
 
   console.log("BUILD ADMIN NEW DISPLAY");
   console.log(inputObj);
