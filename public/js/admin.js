@@ -22,7 +22,7 @@ export const buildAdminDisplay = async (isFirstLoad = true, scrapeId = null) => 
   //append / display the data
   switch (isFirstLoad) {
     case true:
-      adminDisplayElement.append(adminFormData, adminBackendData);
+      adminDisplayElement.append(adminFormData, adminBackendData.children[0]);
       break;
 
     case false:
