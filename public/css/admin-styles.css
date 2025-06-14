@@ -163,7 +163,7 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   box-sizing: border-box;
   opacity: 0.95;
-  /* text-align: center; */
+  text-align: center;
 }
 
 /* List styling */
@@ -203,7 +203,6 @@
 .admin-backend-list-item,
 .admin-new-list-item {
   padding: 1rem 2rem;
-  padding-left: 5rem;
   border-bottom: 1px solid #e9ecef;
   background-color: #ffffff;
   font-size: 1.2rem;
