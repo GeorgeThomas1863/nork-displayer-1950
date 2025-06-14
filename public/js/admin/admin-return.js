@@ -8,12 +8,14 @@ export const buildAdminBackendDisplay = async (inputObj) => {
 
   const adminBackendContainer = document.createElement("div");
   adminBackendContainer.id = "admin-backend-container";
+  adminBackendContainer.className = "wrapper collapse-content";
 
   const defaultListData = await buildAdminDefaultList(allDataObj);
+  defaultListData.className = "collapse-content";
 
   const defaultTitleElement = document.createElement("h2");
   defaultTitleElement.innerHTML = "Data Already Scraped";
-  defaultTitleElement.classList.add("admin-backend-default-title");
+  defaultTitleElement.className = "collapse-header admin-default-title";
 
   //make default list drop down
   const defaultListCollapseObj = {
@@ -37,7 +39,7 @@ export const buildAdminBackendDisplay = async (inputObj) => {
 
   const newTitleElement = document.createElement("h2");
   newTitleElement.innerHTML = "New Scrape Data";
-  newTitleElement.classList.add("admin-new-title");
+  newTitleElement.className = "collapse-header admin-new-title";
 
   const newListCollapseObj = {
     titleElement: newTitleElement,

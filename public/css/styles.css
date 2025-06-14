@@ -89,7 +89,7 @@ h3 {
   padding: 0;
   width: 100%;
   background-color: rgb(235, 235, 235);
-  border-radius: 12px;
+  /* border-radius: 12px; */
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
@@ -116,12 +116,12 @@ h3 {
 
 #admin-form-wrapper li:first-child {
   padding-top: 2rem;
-  border-radius: 12px 12px 0 0;
+  /* border-radius: 12px 12px 0 0; */
 }
 
 #admin-form-wrapper li:last-of-type {
   border-bottom: none;
-  border-radius: 0 0 12px 12px;
+  /* border-radius: 0 0 12px 12px; */
   padding-bottom: 1.5rem;
 }
 
@@ -229,7 +229,7 @@ h3 {
 #admin-backend-container > * {
   flex: 1;
   min-width: 0; /* Allows flex items to shrink below their content size */
-  border-radius: 12px;
+  /* border-radius: 12px; */
 }
 
 /* List styling */

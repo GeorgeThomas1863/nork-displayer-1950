@@ -4,6 +4,7 @@ export const buildAdminForm = async () => {
   //create the fucking element
   const adminFormWrapper = document.createElement("div");
   adminFormWrapper.id = "admin-form-wrapper";
+  adminFormWrapper.className = "wrapper collapse-content";
 
   const adminFormContent = await buildAdminFormContent();
   adminFormWrapper.append(adminFormContent);
@@ -11,6 +12,7 @@ export const buildAdminForm = async () => {
   // create title element for collapse container
   const titleElement = document.createElement("div");
   titleElement.textContent = "ADMIN FORM";
+  titleElement.className = "collapse-header";
   // titleElement.setAttribute("data-expand", "article-dropdown"); //for click listener
 
   //build collapse container
@@ -255,7 +257,16 @@ export const buildAdminFormContent = async () => {
   buttonListItem.id = "admin-submit-list-item";
   buttonListItem.appendChild(button);
 
-  adminFormList.append(commandListItem, howMuchListItem, urlListItem, itemTypeListItem, articleTypeListItem, uploadTgListItem, tgIdListItem, buttonListItem);
+  adminFormList.append(
+    commandListItem,
+    howMuchListItem,
+    urlListItem,
+    itemTypeListItem,
+    articleTypeListItem,
+    uploadTgListItem,
+    tgIdListItem,
+    buttonListItem
+  );
 
   return adminFormList;
 };
