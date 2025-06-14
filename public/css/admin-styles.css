@@ -168,7 +168,7 @@
 
 #admin-new-container {
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   align-items: center;
   justify-content: center;
   gap: 2rem;
@@ -186,6 +186,7 @@
 /* List styling */
 .admin-backend-list,
 .admin-new-list {
+  display: block;
   list-style: none;
   padding: 0;
   margin: 0;
