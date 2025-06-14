@@ -17,21 +17,25 @@ export const buildAdminDisplay = async (isFirstLoad = true, scrapeId = null) => 
 
   const adminBackendRaw = await sendToBack(params);
   const adminBackendData = await buildAdminBackendDisplay(adminBackendRaw);
+  const adminFormData = await buildAdminForm();
 
   //append / display the data
   switch (isFirstLoad) {
     case true:
-      const adminFormData = await buildAdminForm();
       adminDisplayElement.append(adminFormData, adminBackendData);
       break;
 
     case false:
       // const adminBackendContainer = document.getElementById("admin-backend-container");
-      console.log("ADMINN DISPLAY ELEMENT");
-      console.log(adminDisplayElement);
-      console.log("ADMIN BACKEND DATA");
-      console.log(adminBackendData);
-      adminDisplayElement.replaceChild(adminDisplayElement.children[1], adminBackendData);
+      //try resetting the display
+      adminDisplayElement.innerHTML = "";
+      adminDisplayElement.append(adminFormData, adminBackendData);
+
+      // console.log("ADMINN DISPLAY ELEMENT");
+      // console.log(adminDisplayElement);
+      // console.log("ADMIN BACKEND DATA");
+      // console.log(adminBackendData);
+      // adminDisplayElement.replaceChild(adminDisplayElement.children[1], adminBackendData);
       break;
   }
 
