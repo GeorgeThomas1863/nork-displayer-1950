@@ -26,8 +26,11 @@ export const buildAdminDisplay = async (isFirstLoad = true, scrapeId = null) => 
     return adminDisplayElement.append(adminFormData, adminBackendData);
   }
 
+  console.log("ADMIN DISPLAY ELEMENT CHILDREN");
+  console.log(adminDisplayElement.children.length);
+
   //otherwise replace data
-  adminDisplayElement.children[1].remove();
+  adminDisplayElement.children[1]?.remove();
   if (adminDisplayElement.children[2]) {
     adminDisplayElement.children[2].remove();
   }
