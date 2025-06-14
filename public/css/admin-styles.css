@@ -172,7 +172,7 @@
   /* align-items: center; */
   justify-content: center;
   gap: 2rem;
-  max-width: 65%;
+  max-width: 80%;
   margin: 0 auto;
   padding: 2rem;
   /* background-color: #ffffff; */
@@ -193,7 +193,7 @@
   /* margin: 0 0 3rem 0; */
   background-color: #f8f9fa;
   border-radius: 8px;
-  overflow: hidden;
+  /* overflow: hidden; */
   border: 1px solid #e9ecef;
 }
 
