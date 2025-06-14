@@ -242,7 +242,7 @@ h3 {
 }
 
 /* List styling */
-.admin-backend-list,
+.admin-default-list,
 .admin-new-list {
   display: block;
   list-style: none;
@@ -257,7 +257,7 @@ h3 {
 }
 
 /* Title styling */
-.admin-backend-default-title,
+.admin-default-default-title,
 .admin-new-title {
   margin: 0;
   padding: 1rem 0;
@@ -272,7 +272,7 @@ h3 {
 }
 
 /* List item styling */
-.admin-backend-list-item,
+.admin-default-list-item,
 .admin-new-list-item {
   padding: 1rem 2rem;
   border-bottom: 1px solid #e9ecef;
@@ -284,12 +284,12 @@ h3 {
   overflow-wrap: break-word;
 }
 
-.admin-backend-list-item:hover,
+.admin-default-list-item:hover,
 .admin-new-list-item:hover {
   background-color: #f8f9fa;
 }
 
-.admin-backend-list-item:last-child,
+.admin-default-list-item:last-child,
 .admin-new-list-item:last-child {
   border-bottom: none;
 }

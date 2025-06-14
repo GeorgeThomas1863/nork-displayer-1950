@@ -1,83 +1,112 @@
-export const buildAdminDefaultDisplay = async (inputObj) => {
-  const { allDataObj } = inputObj;
+import { buildCollapseContainer } from "../collapse.js";
 
-  const adminBackendList = document.createElement("ul");
-  adminBackendList.classList.add("admin-backend-list");
+export const buildAdminBackendDisplay = async (inputObj) => {
+  const { allDataObj, scrapedDataObj, scrapeId, isFirstLoad } = inputObj;
+
+  const adminBackendContainer = document.createElement("div");
+  adminBackendContainer.id = "admin-backend-container";
+
+  const defaultListData = await buildAdminDefaultList(allDataObj);
 
   const defaultTitleElement = document.createElement("h2");
   defaultTitleElement.innerHTML = "Data Already Scraped";
   defaultTitleElement.classList.add("admin-backend-default-title");
-  adminBackendList.append(defaultTitleElement);
 
-  const keys = Object.keys(allDataObj);
+  //make default list drop down
+  const defaultListCollapseObj = {
+    titleElement: defaultTitleElement,
+    contentElement: defaultListData,
+    isExpanded: true,
+    className: "admin-backend-default-collapse",
+  };
+
+  const defaultListCollapseContainer = await buildCollapseContainer(defaultListCollapseObj);
+  adminBackendContainer.append(defaultListCollapseContainer);
+
+  //if first load return here
+  if (isFirstLoad) return adminBackendContainer;
+
+  //
+  const newListData = await buildAdminNewList(scrapedDataObj, scrapeId);
+
+  const newTitleElement = document.createElement("h2");
+  newTitleElement.innerHTML = "New Scrape Data";
+  newTitleElement.classList.add("admin-new-title");
+
+  const newListCollapseObj = {
+    titleElement: newTitleElement,
+    contentElement: newListData,
+    isExpanded: true,
+    className: "admin-new-collapse",
+  };
+
+  const newListCollapseContainer = await buildCollapseContainer(newListCollapseObj);
+  adminBackendContainer.append(newListCollapseContainer);
+
+  return adminBackendContainer;
+};
+
+export const buildAdminDefaultList = async (inputObj) => {
+  const adminDefaultList = document.createElement("ul");
+  adminDefaultList.classList.add("admin-default-list");
+
+  const keys = Object.keys(inputObj);
 
   // Loop through each key
   for (let i = 0; i < keys.length; i++) {
     const key = keys[i];
-    const value = allDataObj[key];
+    const value = inputObj[key];
 
     // Create list item element
     const listItem = document.createElement("li");
-    listItem.classList.add("admin-backend-list-item");
+    listItem.classList.add("admin-default-list-item");
+
+    //ADD MAP FUNCTION HERE
 
     // Set the content
     listItem.innerHTML = `${key}: ${value}`;
 
     // Append to your list (replace 'yourList' with your actual list element)
-    adminBackendList.append(listItem);
+    adminDefaultList.append(listItem);
   }
 
-  return adminBackendList;
+  return adminDefaultList;
 };
 
-export const buildAdminNewDisplay = async (inputObj) => {
-  console.log("BUILD ADMIN NEW DISPLAY");
-  console.log(inputObj);
+export const buildAdminNewList = async (inputObj, scrapeId) => {
+  const { startTime, endTime, textStr } = inputObj;
 
-  const { scrapeDataObj, scrapeId, textStr } = inputObj;
-  const { startTime, endTime } = scrapeDataObj;
+  // console.log("BUILD ADMIN NEW DISPLAY");
+  // console.log(inputObj);
 
-  const adminNewContainer = document.createElement("div");
-  adminNewContainer.id = "admin-new-container";
-
-  //get already scraped data
-  const adminBackendList = await buildAdminDefaultDisplay(inputObj);
-
-  const newDataList = document.createElement("ul");
-  newDataList.classList.add("admin-new-list");
-
-  const newDataTitleElement = document.createElement("h2");
-  newDataTitleElement.innerHTML = "New Scrape Data";
-  newDataTitleElement.classList.add("admin-new-title");
-  newDataList.append(newDataTitleElement);
+  const adminNewList = document.createElement("ul");
+  adminNewList.classList.add("admin-new-list");
 
   //scrape Id
   const scrapeIdElement = document.createElement("li");
   scrapeIdElement.innerHTML = `Scrape ID: ${scrapeId}`;
   scrapeIdElement.classList.add("admin-new-list-item");
-  newDataList.append(scrapeIdElement);
 
   //scrape text
   const scrapeTextElement = document.createElement("li");
   scrapeTextElement.innerHTML = `Scrape Text: ${textStr}`;
   scrapeTextElement.classList.add("admin-new-list-item");
-  newDataList.append(scrapeTextElement);
+
+  adminNewList.append(scrapeIdElement, scrapeTextElement);
 
   if (startTime) {
     const startTimeElement = document.createElement("li");
     startTimeElement.innerHTML = `Start Time: ${startTime}`;
     startTimeElement.classList.add("admin-new-list-item");
-    newDataList.append(startTimeElement);
+    adminNewList.append(startTimeElement);
   }
 
   if (endTime) {
     const endTimeElement = document.createElement("li");
     endTimeElement.innerHTML = `End Time: ${endTime}`;
     endTimeElement.classList.add("admin-new-list-item");
-    newDataList.append(endTimeElement);
+    adminNewList.append(endTimeElement);
   }
 
-  adminNewContainer.append(newDataList, adminBackendList);
-
-  return adminNewContainer;
+  return adminNewList;
 };

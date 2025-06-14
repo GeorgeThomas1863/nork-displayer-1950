@@ -1,6 +1,6 @@
 import d from "./define-things.js";
 import { sendToBack, buildFailElement } from "./util.js";
-import { buildAdminDefaultDisplay, buildAdminNewDisplay } from "./admin/admin-return.js";
+import { buildAdminBackendDisplay, buildAdminNewDisplay } from "./admin/admin-return.js";
 
 //get default elements
 const displayElement = document.getElementById("display-element");
@@ -83,14 +83,15 @@ export const buildBackendNew = async (inputObj) => {
 //   return true;
 // };
 
-export const buildAdminBackendDisplay = async (inputObj) => {
-  const { isFirstLoad } = inputObj;
+//GET RID OF THIS YOU FFUKCING RETARD
+// export const buildAdminBackendDisplay = async (inputObj) => {
+//   const { isFirstLoad } = inputObj;
 
-  switch (isFirstLoad) {
-    case true:
-      return buildAdminDefaultDisplay(inputObj);
+//   switch (isFirstLoad) {
+//     case true:
+//       return buildAdminBackendDisplay(inputObj);
 
-    case false:
-      return buildAdminNewDisplay(inputObj);
-  }
-};
+//     case false:
+//       return buildAdminNewDisplay(inputObj);
+//   }
+// };
