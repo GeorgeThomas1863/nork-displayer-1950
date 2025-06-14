@@ -1,10 +1,10 @@
 import d from "./define-things.js";
 import { sendToBack, buildFailElement } from "./util.js";
-import { buildAdminBackendDisplay, buildAdminNewDisplay } from "./admin/admin-return.js";
+// import { buildAdminBackendDisplay, buildAdminNewDisplay } from "./admin/admin-return.js";
 
 //get default elements
 const displayElement = document.getElementById("display-element");
-const adminDisplayElement = document.getElementById("admin-display-element");
+// const adminDisplayElement = document.getElementById("admin-display-element");
 const failElement = await buildFailElement();
 
 //BUILDS DEFAULT DISPLAY
