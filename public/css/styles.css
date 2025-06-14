@@ -229,6 +229,7 @@ h3 {
 #admin-backend-container > * {
   flex: 1;
   min-width: 0; /* Allows flex items to shrink below their content size */
+  border-radius: 12px;
 }
 
 /* List styling */
@@ -237,7 +238,7 @@ h3 {
   display: block;
   list-style: none;
   background-color: rgb(235, 235, 235);
-  border-radius: 12px;
+  /* border-radius: 12px; */
   border: 1px solid #e9ecef;
   width: 100%;
   text-align: center;
