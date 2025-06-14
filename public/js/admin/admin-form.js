@@ -250,7 +250,12 @@ export const buildAdminFormContent = async () => {
   button.textContent = "Submit";
   button.setAttribute("type", "submit");
 
-  adminFormList.append(commandListItem, howMuchListItem, urlListItem, itemTypeListItem, articleTypeListItem, uploadTgListItem, tgIdListItem, button);
+  // Create list item for button
+  const buttonListItem = document.createElement("li");
+  buttonListItem.id = "admin-submit-list-item";
+  buttonListItem.appendChild(button);
+
+  adminFormList.append(commandListItem, howMuchListItem, urlListItem, itemTypeListItem, articleTypeListItem, uploadTgListItem, tgIdListItem, buttonListItem);
 
   return adminFormList;
 };
