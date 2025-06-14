@@ -1,5 +1,5 @@
 export const buildCollapseContainer = async (inputObj) => {
-  if (!inputObj) return null;
+  if (!inputObj || !inputObj.titleElement || !inputObj.contentElement) return null;
   const { titleElement, contentElement, isExpanded = false, className = "", dataAttribute = "" } = inputObj;
 
   //ADDING FUCKING DATA ATTRIBUTE TO ALL CLICKABLE ITEMS
