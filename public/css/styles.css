@@ -223,7 +223,6 @@ h3 {
   width: 100%;
   display: flex;
   gap: 3rem;
-  border-radius: 12px;
 }
 
 /* #admin-backend-container:hover {
@@ -233,9 +232,7 @@ h3 {
 /* CLAUDE BACKEND STYLES */
 
 /* #backend-admin-wrapper {
-  width: 30%;
-  margin: 2rem auto;
-  padding: 2rem;
+
   background-color: #ffffff;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
@@ -262,10 +259,10 @@ h3 {
 .admin-new-list {
   display: block;
   list-style: none;
-  background-color: #f8f9fa;
-  border-radius: 8px;
+  background-color: rgb(235, 235, 235);
+  border-radius: 12px;
   border: 1px solid #e9ecef;
-  width: 40%;
+  width: 100%;
 }
 
 .admin-new-list {
