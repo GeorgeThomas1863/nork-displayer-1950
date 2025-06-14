@@ -225,8 +225,10 @@ h3 {
   gap: 3rem;
 }
 
-#admin-backend-container > .collapse-header {
-  border-radius: 12px 12px 0 0;
+/* Make each form take equal width */
+#admin-backend-container > * {
+  flex: 1;
+  min-width: 0; /* Allows flex items to shrink below their content size */
 }
 
 /* List styling */
@@ -235,7 +237,7 @@ h3 {
   display: block;
   list-style: none;
   background-color: rgb(235, 235, 235);
-  border-radius: 0 0 12px 12px;
+  border-radius: 12px;
   border: 1px solid #e9ecef;
   width: 100%;
   text-align: center;
