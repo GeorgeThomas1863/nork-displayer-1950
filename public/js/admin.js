@@ -24,55 +24,14 @@ export const buildAdminDisplay = async (isFirstLoad = true, scrapeId = null) => 
   //if first laod just append data
   if (isFirstLoad) return adminDisplayElement.append(adminFormData, adminBackendData);
 
+  console.log("ADMIN DISPLAY ELEMENT");
+  console.log(adminDisplayElement);
+
   //otherwise replace data
   adminDisplayElement.children[1].innerHTML = "";
   if (adminDisplayElement.children[2]) adminDisplayElement.children[2].innerHTML = "";
 
   return adminDisplayElement.append(adminBackendData.children[0], adminBackendData.children[1]);
-
-  // //append / display the data
-  // switch (isFirstLoad) {
-  //   case true:
-  //     adminDisplayElement.append(adminFormData, adminBackendData.children[0]);
-  //     break;
-
-  //   case false:
-  //     // const adminBackendContainer = document.getElementById("admin-backend-container");
-  //     //try resetting the display
-  //     console.log("ADMIN BACKEND DATA");
-  //     console.log(adminBackendData);
-
-  //     // adminDisplayElement.innerHTML = "";
-  //     // adminDisplayElement.append(adminFormData, adminBackendData.children[0], adminBackendData.children[1]);
-
-  //     adminDisplayElement.children[1].innerHTML = "";
-  //     adminDisplayElement.append(adminBackendData.children[0], adminBackendData.children[1]);
-
-  //     // console.log("ADMINN DISPLAY ELEMENT");
-  //     // console.log(adminDisplayElement);
-  //     // console.log("ADMIN BACKEND DATA");
-  //     // console.log(adminBackendData);
-  //     // adminDisplayElement.replaceChild(adminDisplayElement.children[1], adminBackendData);
-  //     break;
-  // }
-
-  //create the fucking element
-  // const backendAdminWrapper = document.createElement("div");
-  // backendAdminWrapper.id = "backend-admin-wrapper";
-
-  // //attempt to be less stupid with data display
-  // if (isFirstLoad) {
-  //   backendAdminWrapper.append(adminBackendData);
-  // } else {
-  //   backendAdminWrapper.replaceChild(adminBackendData, backendAdminWrapper.firstElementChild);
-  // }
-
-  //attempt to be less stupid with data display
-  // if (isFirstLoad) {
-  // } else {
-  // }
-
-  // adminDisplayElement.append(adminFormData, backendAdminWrapper);
 };
 
 export const getNewAdminData = async () => {
