@@ -20,12 +20,6 @@ export const buildAdminDisplay = async (isFirstLoad = true, scrapeId = null) => 
   const adminBackendRaw = await sendToBack(params);
   const adminBackendData = await buildAdminBackendDisplay(adminBackendRaw);
 
-  console.log("ADMIN BACKEND DATA");
-  console.log(adminBackendData);
-
-  console.log("ADMIN DISPLAY ELEMENT");
-  console.log(adminDisplayElement);
-
   //create the fucking element
   // const backendAdminWrapper = document.createElement("div");
   // backendAdminWrapper.id = "backend-admin-wrapper";
@@ -41,7 +35,11 @@ export const buildAdminDisplay = async (isFirstLoad = true, scrapeId = null) => 
   if (isFirstLoad) {
     adminDisplayElement.append(adminBackendData);
   } else {
-    adminDisplayElement.replaceChild(adminBackendData, adminDisplayElement.firstElementChild);
+    console.log("ADMINN DISPLAY ELEMENT");
+    console.log(adminDisplayElement);
+    console.log("ADMIN BACKEND DATA");
+    console.log(adminBackendData);
+    // adminDisplayElement.replaceChild(adminBackendData, adminDisplayElement.firstElementChild);
   }
 
   // adminDisplayElement.append(adminFormData, backendAdminWrapper);
