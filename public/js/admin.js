@@ -20,6 +20,12 @@ export const buildAdminDisplay = async (isFirstLoad = true, scrapeId = null) => 
   const adminBackendRaw = await sendToBack(params);
   const adminBackendData = await buildAdminBackendDisplay(adminBackendRaw);
 
+  console.log("ADMIN BACKEND DATA");
+  console.log(adminBackendData);
+
+  console.log("ADMIN DISPLAY ELEMENT");
+  console.log(adminDisplayElement);
+
   //create the fucking element
   // const backendAdminWrapper = document.createElement("div");
   // backendAdminWrapper.id = "backend-admin-wrapper";
