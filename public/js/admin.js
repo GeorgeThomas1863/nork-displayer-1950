@@ -22,14 +22,10 @@ export const buildAdminDisplay = async (isFirstLoad = true, scrapeId = null) => 
   const adminBackendData = await buildAdminBackendDisplay(adminBackendRaw);
 
   //if first laod just append data
-  if (isFirstLoad) {
-    adminDisplayElement.append(adminFormData, adminBackendData);
-    console.log("ADMIN DISPLAY ELEMENT CHILDREN");
-    console.log(adminDisplayElement.children.length);
-    return;
-  }
+  if (isFirstLoad) return adminDisplayElement.append(adminFormData, adminBackendData);
 
-  adminDisplayElement.replaceChildren(adminDisplayElement.children[0]);
+  //otherwise replace
+  adminDisplayElement.replaceChildren(adminDisplayElement.children[0], adminBackendData.children[0], adminBackendData.children[1]);
 
   // console.log("ADMIN DISPLAY ELEMENT CHILDREN");
   // console.log(adminDisplayElement.children.length);
@@ -41,12 +37,11 @@ export const buildAdminDisplay = async (isFirstLoad = true, scrapeId = null) => 
   // if (adminDisplayElement.children[3]) {
   //   adminDisplayElement.children[3].remove();
   // }
-  
 
   // //otherwise replace data
   // adminDisplayElement.children[1].remove();
 
-  adminDisplayElement.append(adminBackendData.children[0], adminBackendData.children[1]);
+  // adminDisplayElement.append(adminBackendData.children[0], adminBackendData.children[1]);
   return "#DONE";
 };
 
