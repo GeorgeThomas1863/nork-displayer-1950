@@ -182,14 +182,14 @@
 /* List styling */
 .admin-backend-list,
 .admin-new-list {
-  flex: 1;
+  flex: 0 1 auto;
   display: block;
   list-style: none;
   background-color: #f8f9fa;
   border-radius: 8px;
   border: 1px solid #e9ecef;
-  min-width: 0; /* Prevents flex items from overflowing */
-  width: 30%; /* Each list takes up 30% width */
+  min-width: 0;
+  width: 30%;
 }
 
 /* Title styling */
@@ -218,7 +218,7 @@
   line-height: 1.5;
   color: #495057;
   transition: background-color 0.2s ease;
-  word-wrap: break-word; /* Ensures long text wraps properly */
+  word-wrap: break-word;
   overflow-wrap: break-word;
 }
 
