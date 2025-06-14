@@ -79,7 +79,7 @@ export const buildAdminDefaultList = async (inputObj) => {
 export const buildAdminNewList = async (inputObj) => {
   if (!inputObj || !inputObj._id) return null;
   const { startTime, endTime, textStr } = inputObj;
-  const scrapeId = inputObj._id;
+  const scrapeId = inputObj["_id"];
 
   console.log("BUILD ADMIN NEW DISPLAY");
   console.log(inputObj);
@@ -91,13 +91,15 @@ export const buildAdminNewList = async (inputObj) => {
   const scrapeIdElement = document.createElement("li");
   scrapeIdElement.innerHTML = `Scrape ID: ${scrapeId}`;
   scrapeIdElement.classList.add("admin-new-list-item");
+  adminNewList.append(scrapeIdElement);
 
   //scrape text
-  const scrapeTextElement = document.createElement("li");
-  scrapeTextElement.innerHTML = `Scrape Text: ${textStr}`;
-  scrapeTextElement.classList.add("admin-new-list-item");
-
-  adminNewList.append(scrapeIdElement, scrapeTextElement);
+  if (textStr) {
+    const scrapeTextElement = document.createElement("li");
+    scrapeTextElement.innerHTML = `Scrape Text: ${textStr}`;
+    scrapeTextElement.classList.add("admin-new-list-item");
+    adminNewList.append(scrapeTextElement);
+  }
 
   if (startTime) {
     const startTimeElement = document.createElement("li");
