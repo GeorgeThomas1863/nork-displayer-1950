@@ -20,12 +20,12 @@
   box-shadow: none;
 }
 
-#admin-wrapper:hover {
+#admin-form-wrapper:hover {
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
 }
 
 /* Admin wrapper background styling - similar to collapse content */
-#admin-wrapper::before {
+#admin-form-wrapper::before {
   content: "";
   position: absolute;
   top: 0;
@@ -39,7 +39,7 @@
 }
 
 /* Individual admin list items - follow wrapper li pattern */
-#admin-wrapper li {
+#admin-form-wrapper li {
   display: flex;
   flex-direction: column;
   margin: 0;
@@ -49,19 +49,19 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-#admin-wrapper li:first-child {
+#admin-form-wrapper li:first-child {
   padding-top: 2rem;
   border-radius: 12px 12px 0 0;
 }
 
-#admin-wrapper li:last-of-type {
+#admin-form-wrapper li:last-of-type {
   border-bottom: none;
   border-radius: 0 0 12px 12px;
   padding-bottom: 1.5rem;
 }
 
 /* Admin labels - follow wrapper label pattern */
-#admin-wrapper label {
+#admin-form-wrapper label {
   font-size: 1rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
@@ -72,7 +72,7 @@
 }
 
 /* Admin select elements - follow wrapper select pattern */
-#admin-wrapper select {
+#admin-form-wrapper select {
   width: 100%;
   font-size: 1rem;
   padding: 0.75rem;
@@ -88,14 +88,14 @@
   box-sizing: border-box;
 }
 
-#admin-wrapper select:focus {
+#admin-form-wrapper select:focus {
   border-color: #666;
   box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
   outline: none;
 }
 
 /* Admin input elements - follow wrapper input pattern */
-#admin-wrapper input {
+#admin-form-wrapper input {
   width: 100%;
   font-size: 1rem;
   padding: 0.75rem;
@@ -107,13 +107,13 @@
   background-color: white;
 }
 
-#admin-wrapper input:focus {
+#admin-form-wrapper input:focus {
   border-color: #666;
   box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
   outline: none;
 }
 
-#admin-wrapper input::placeholder {
+#admin-form-wrapper input::placeholder {
   color: #aaa;
   font-style: italic;
 }
@@ -149,9 +149,9 @@
 }
 
 /* Hidden elements styling - consistent with existing hidden class */
-#admin-wrapper .hidden {
+/* #admin-wrapper .hidden {
   display: none !important;
-}
+} */
 
 /* ------------------------------ */
 
