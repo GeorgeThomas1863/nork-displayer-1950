@@ -29,7 +29,7 @@ export const buildAdminDisplay = async (isFirstLoad = true, scrapeId = null) => 
     adminDisplayElement.children[2].remove();
   }
 
-  const existingBackendElement = document.querySelector(".admin-backend-default-collapse");
+  const existingBackendElement = document.getElementById("admin-backend-container");
   existingBackendElement.replaceWith(adminBackendData.children[0], adminBackendData.children[1]);
 
   //otherwise replace
