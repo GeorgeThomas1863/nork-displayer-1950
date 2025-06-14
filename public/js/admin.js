@@ -9,6 +9,7 @@ export const buildAdminDisplay = async (isFirstLoad = true, scrapeId = null) => 
   if (!adminDisplayElement) return null;
 
   const adminFormData = await buildAdminForm();
+  adminDisplayElement.append(adminFormData);
 
   const params = {
     route: "/get-admin-backend-data-route",
@@ -20,17 +21,24 @@ export const buildAdminDisplay = async (isFirstLoad = true, scrapeId = null) => 
   const adminBackendData = await buildAdminBackendDisplay(adminBackendRaw);
 
   //create the fucking element
-  const backendAdminWrapper = document.createElement("div");
-  backendAdminWrapper.id = "backend-admin-wrapper";
+  // const backendAdminWrapper = document.createElement("div");
+  // backendAdminWrapper.id = "backend-admin-wrapper";
+
+  // //attempt to be less stupid with data display
+  // if (isFirstLoad) {
+  //   backendAdminWrapper.append(adminBackendData);
+  // } else {
+  //   backendAdminWrapper.replaceChild(adminBackendData, backendAdminWrapper.firstElementChild);
+  // }
 
   //attempt to be less stupid with data display
   if (isFirstLoad) {
-    backendAdminWrapper.append(adminBackendData);
+    adminDisplayElement.append(adminBackendData);
   } else {
-    backendAdminWrapper.replaceChild(adminBackendData, backendAdminWrapper.firstElementChild);
+    adminDisplayElement.replaceChild(adminBackendData, adminDisplayElement.firstElementChild);
   }
 
-  adminDisplayElement.append(adminFormData, backendAdminWrapper);
+  // adminDisplayElement.append(adminFormData, backendAdminWrapper);
 
   return "#DONE";
 };
