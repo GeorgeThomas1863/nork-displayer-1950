@@ -88,7 +88,8 @@ h3 {
   margin: 0 auto;
   padding: 0;
   width: 100%;
-  background-color: transparent;
+  /* background-color: transparent; */
+  background-color: rgb(235, 235, 235);
   border-radius: 12px;
   transition: all 0.3s ease;
   position: relative;
