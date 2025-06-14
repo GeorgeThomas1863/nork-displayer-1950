@@ -1,6 +1,6 @@
 //TO DO:
 
-//MAKE REPLACE LESS STUPID; USE FUCKING CLAUDE
+//reverting changes, cant get time back
 
 //FINISH ADMIN STYLES
 
