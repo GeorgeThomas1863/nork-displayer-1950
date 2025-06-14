@@ -37,6 +37,9 @@ export const runGetAdminBackendData = async (inputObj) => {
   }
   returnObj.allDataObj = allDataObj;
 
+  //add is first load
+  returnObj.isFirstLoad = isFirstLoad;
+
   //return if no scrapeId (bc first load)
   if (isFirstLoad) return returnObj;
 

@@ -3,32 +3,7 @@ import { getNewAdminData } from "./admin.js";
 import { debounce } from "./util.js";
 import { buildBackendNew, buildAdminBackendNew } from "./build-backend.js";
 
-export const adminSubmitClick = async (e) => {
-  e.preventDefault();
-
-  const clickElement = e.target;
-  const clickType = clickElement.getAttribute("type");
-
-  if (clickType !== "submit") return null;
-
-  console.log("AHHHHHHHHHHH");
-
-  //get data
-  const newAdminData = await getNewAdminData();
-  if (!newAdminData) return null;
-
-  console.log("NEW ADMIN DATA");
-  console.log(newAdminData);
-
-  await buildAdminBackendNew(newAdminData);
-  console.log("ADMIN DATA", newAdminData);
-
-  return "DONE";
-};
-
-//---------------------------------
-
-//MAKE A GET NEW DATA FUNCTION AND PARSE TYPE THERE
+//MAIN / NORMAL RESPONSIVE
 
 export const mainClickHandler = async (e) => {
   e.preventDefault();
@@ -85,11 +60,36 @@ export const mainInputHandler = async (e) => {
 
 //-----------------------------------
 
-//ADMIN event listener
-// const adminSubmitButton = document.getElementById("admin-submit-button");
-// if (adminSubmitButton) {
-//   adminSubmitButton.addEventListener("click", adminSubmitClick);
-// }
+//ADMIN RESPONSIVE
+
+export const adminSubmitClick = async (e) => {
+  e.preventDefault();
+
+  const clickElement = e.target;
+  const clickType = clickElement.getAttribute("type");
+
+  if (clickType !== "submit") return null;
+
+  //run thing
+  console.log("AHHHHHHHHHHH");
+  await getNewAdminData();
+
+  //get data
+  // const newAdminData = await getNewAdminData();
+  // if (!newAdminData) return null;
+
+  // console.log("NEW ADMIN DATA");
+  // console.log(newAdminData);
+
+  // await buildAdminBackendNew(newAdminData);
+  // console.log("ADMIN DATA", newAdminData);
+
+  return "DONE";
+};
+
+// ------------------------------------
+
+//CLICK / INPUT LISTENERS
 
 const adminDisplayElement = document.getElementById("admin-display-element");
 if (adminDisplayElement) {
