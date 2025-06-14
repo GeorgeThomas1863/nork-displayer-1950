@@ -182,14 +182,16 @@
 /* List styling */
 .admin-backend-list,
 .admin-new-list {
-  flex: 0 1 auto;
   display: block;
   list-style: none;
   background-color: #f8f9fa;
   border-radius: 8px;
   border: 1px solid #e9ecef;
-  min-width: 0;
   width: 30%;
+}
+
+.admin-new-list {
+  align-self: flex-start; /* This will make it only as tall as its content */
 }
 
 /* Title styling */
