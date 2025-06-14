@@ -155,7 +155,7 @@
 /* CLAUDE BACKEND STYLES */
 
 #backend-admin-wrapper {
-  max-width: 50%;
+  max-width: 30%;
   margin: 2rem auto;
   padding: 2rem;
   background-color: #ffffff;
@@ -163,6 +163,7 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   box-sizing: border-box;
   opacity: 0.7;
+  text-align: center;
 }
 
 /* List styling */
@@ -185,6 +186,7 @@
 .admin-backend-default-title,
 .admin-new-title {
   margin: 0;
+  padding: 1rem 0;
   /* padding: 2rem 2rem 1.5rem 2rem; */
   font-size: 2rem;
   font-weight: 600;
