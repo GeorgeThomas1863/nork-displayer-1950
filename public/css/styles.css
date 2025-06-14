@@ -78,17 +78,16 @@ h3 {
 /* ADMIN STYLES */
 #admin-display-element {
   display: flex;
+  width: 90%;
+  margin: 3rem auto;
 }
 
 /* Main admin wrapper - follows the same pattern as form wrapper */
 #admin-form-wrapper {
-  margin: 3rem auto 0 auto;
-  /* display: flex;
-  flex-direction: column;
-  gap: 0; */
-  width: 100%;
+  margin: 0 auto;
   padding: 0;
-  background-color: transparent;
+  width: 100%;
+  /* background-color: transparent; */
   border-radius: 12px;
   transition: all 0.3s ease;
   position: relative;
