@@ -74,16 +74,6 @@ export const adminSubmitClick = async (e) => {
   console.log("AHHHHHHHHHHH");
   await getNewAdminData();
 
-  //get data
-  // const newAdminData = await getNewAdminData();
-  // if (!newAdminData) return null;
-
-  // console.log("NEW ADMIN DATA");
-  // console.log(newAdminData);
-
-  // await buildAdminBackendNew(newAdminData);
-  // console.log("ADMIN DATA", newAdminData);
-
   return "DONE";
 };
 

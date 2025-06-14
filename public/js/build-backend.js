@@ -1,10 +1,8 @@
 import d from "./define-things.js";
 import { sendToBack, buildFailElement } from "./util.js";
-// import { buildAdminBackendDisplay, buildAdminNewDisplay } from "./admin/admin-return.js";
 
 //get default elements
 const displayElement = document.getElementById("display-element");
-// const adminDisplayElement = document.getElementById("admin-display-element");
 const failElement = await buildFailElement();
 
 //BUILDS DEFAULT DISPLAY
@@ -52,46 +50,3 @@ export const buildBackendNew = async (inputObj) => {
 
   return true;
 };
-
-// export const buildAdminBackendDefault = async (inputObj) => {
-//   //build current backend data
-//   const backendAdminData = await sendToBack(inputObj);
-//   if (!backendAdminData) return failElement;
-
-//   //build wrapper
-//   // const backendAdminWrapper = document.createElement("div");
-//   // backendAdminWrapper.id = "backend-admin-wrapper";
-
-//   //parse backend data
-//   const dataElement = await buildAdminDefaultDisplay(backendAdminData);
-//   if (!dataElement) return failElement;
-
-//   // backendAdminWrapper.append(dataElement);
-
-//   return dataElement;
-// };
-
-// export const buildAdminBackendNew = async (inputObj) => {
-//   //parse backend data
-//   const dataElement = await buildAdminNewDisplay(inputObj);
-//   if (!dataElement) return failElement;
-
-//   adminDisplayElement.replaceChild(dataElement, adminDisplayElement.children[1]);
-
-//   // adminDisplayElement.append(dataElement);
-
-//   return true;
-// };
-
-//GET RID OF THIS YOU FFUKCING RETARD
-// export const buildAdminBackendDisplay = async (inputObj) => {
-//   const { isFirstLoad } = inputObj;
-
-//   switch (isFirstLoad) {
-//     case true:
-//       return buildAdminBackendDisplay(inputObj);
-
-//     case false:
-//       return buildAdminNewDisplay(inputObj);
-//   }
-// };
