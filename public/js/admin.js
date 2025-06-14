@@ -21,16 +21,14 @@ export const buildAdminDisplay = async (isFirstLoad = true, scrapeId = null) => 
   const adminBackendRaw = await sendToBack(params);
   const adminBackendData = await buildAdminBackendDisplay(adminBackendRaw);
 
-  if (isFirstLoad) {
-    adminDisplayElement.append(adminFormData, adminBackendData);
-    return "#DONE FIRST LOAD";
-  }
+  //if first laod just append data
+  if (isFirstLoad) return adminDisplayElement.append(adminFormData, adminBackendData);
 
   //otherwise replace data
   adminDisplayElement.children[1].innerHTML = "";
   if (adminDisplayElement.children[2]) adminDisplayElement.children[2].innerHTML = "";
 
-  adminDisplayElement.append(adminBackendData.children[0], adminBackendData.children[1]);
+  return adminDisplayElement.append(adminBackendData.children[0], adminBackendData.children[1]);
 
   // //append / display the data
   // switch (isFirstLoad) {
@@ -75,8 +73,6 @@ export const buildAdminDisplay = async (isFirstLoad = true, scrapeId = null) => 
   // }
 
   // adminDisplayElement.append(adminFormData, backendAdminWrapper);
-
-  return "#DONE DATA DISPLAY";
 };
 
 export const getNewAdminData = async () => {
