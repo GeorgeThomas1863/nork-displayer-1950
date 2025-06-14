@@ -1,7 +1,7 @@
 import { getNewData, expandBackendData, toggleDropdown } from "./main.js";
 import { getNewAdminData } from "./admin.js";
 import { debounce } from "./util.js";
-import { buildBackendNew, buildAdminBackendNew } from "./build-backend.js";
+import { buildBackendNew } from "./build-backend.js";
 
 //MAIN / NORMAL RESPONSIVE
 
@@ -90,15 +90,14 @@ export const adminSubmitClick = async (e) => {
 // ------------------------------------
 
 //CLICK / INPUT LISTENERS
-
 const adminDisplayElement = document.getElementById("admin-display-element");
-if (adminDisplayElement) {
-  adminDisplayElement.addEventListener("click", adminSubmitClick);
-}
-
-//MAIN CLICK / INPUT listener
 const displayElement = document.getElementById("display-element");
+
 if (displayElement) {
   displayElement.addEventListener("click", mainClickHandler);
   displayElement.addEventListener("input", mainInputHandler);
+}
+
+if (adminDisplayElement) {
+  adminDisplayElement.addEventListener("click", adminSubmitClick);
 }
