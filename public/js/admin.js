@@ -8,9 +8,7 @@ const adminDisplayElement = document.getElementById("admin-display-element");
 export const buildAdminDisplay = async (isFirstLoad = true, scrapeId = null) => {
   if (!adminDisplayElement) return null;
 
-  const adminFormData = await buildAdminForm();
-  adminDisplayElement.append(adminFormData);
-
+  //get data first
   const params = {
     route: "/get-admin-backend-data-route",
     isFirstLoad: isFirstLoad,
@@ -19,6 +17,22 @@ export const buildAdminDisplay = async (isFirstLoad = true, scrapeId = null) => 
 
   const adminBackendRaw = await sendToBack(params);
   const adminBackendData = await buildAdminBackendDisplay(adminBackendRaw);
+
+  //append / display the data
+  switch (isFirstLoad) {
+    case true:
+      const adminFormData = await buildAdminForm();
+      adminDisplayElement.append(adminFormData, adminBackendData);
+      break;
+
+    case false:
+      console.log("ADMINN DISPLAY ELEMENT");
+      console.log(adminDisplayElement);
+      console.log("ADMIN BACKEND DATA");
+      console.log(adminBackendData);
+      // adminDisplayElement.replaceChild(adminBackendData, adminDisplayElement.firstElementChild);
+      break;
+  }
 
   //create the fucking element
   // const backendAdminWrapper = document.createElement("div");
@@ -32,15 +46,9 @@ export const buildAdminDisplay = async (isFirstLoad = true, scrapeId = null) => 
   // }
 
   //attempt to be less stupid with data display
-  if (isFirstLoad) {
-    adminDisplayElement.append(adminBackendData);
-  } else {
-    console.log("ADMINN DISPLAY ELEMENT");
-    console.log(adminDisplayElement);
-    console.log("ADMIN BACKEND DATA");
-    console.log(adminBackendData);
-    // adminDisplayElement.replaceChild(adminBackendData, adminDisplayElement.firstElementChild);
-  }
+  // if (isFirstLoad) {
+  // } else {
+  // }
 
   // adminDisplayElement.append(adminFormData, backendAdminWrapper);
 
