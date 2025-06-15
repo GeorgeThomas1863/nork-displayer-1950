@@ -1,9 +1,5 @@
 //TO DO:
 
-//reverting changes, cant get time back
-
-//FINISH ADMIN STYLES
-
 // ADD landscape styles to phones
 
 //UPDATE SITE / SERVER
