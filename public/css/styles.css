@@ -80,7 +80,7 @@ h3 {
   display: flex;
   flex-direction: row;
   gap: 3rem;
-  width: 80%;
+  width: 90%;
   margin: 2rem auto;
   align-items: flex-start;
 }
@@ -126,7 +126,7 @@ h3 {
   flex-direction: column;
   margin: 0;
   padding: 0;
-  padding: 1rem 2rem;
+  padding: 1rem;
   list-style: none;
   position: relative;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
@@ -242,6 +242,7 @@ h3 {
   gap: 3rem;
   background-color: transparent;
   box-shadow: none;
+  align-items: center;
 }
 
 /* List styling */
@@ -288,10 +289,10 @@ h3 {
   overflow-wrap: break-word;
 }
 
-/* .admin-default-list-item:hover,
+.admin-default-list-item:hover,
 .admin-new-list-item:hover {
-  background-color: #f8f9fa;
-} */
+  box-shadow: none;
+}
 
 .admin-default-list-item:last-child,
 .admin-new-list-item:last-child {
