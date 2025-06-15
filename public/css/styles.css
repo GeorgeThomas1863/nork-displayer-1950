@@ -118,9 +118,9 @@ h3 {
   align-items: center;
 }
 
-#admin-form-wrapper:hover {
+/* #admin-form-wrapper:hover {
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
-}
+} */
 
 /* Individual admin list items - follow wrapper li pattern */
 #admin-form-wrapper li {
@@ -288,11 +288,6 @@ h3 {
   transition: background-color 0.2s ease;
   word-wrap: break-word;
   overflow-wrap: break-word;
-}
-
-.admin-default-list-item:hover,
-.admin-new-list-item:hover {
-  box-shadow: none;
 }
 
 .admin-default-list-item:last-child,
@@ -985,6 +980,11 @@ h3 {
 
 .article-pic-collapse .collapse-content {
   background-color: transparent;
+  box-shadow: none;
+}
+
+.admin-default-list-item:hover,
+.admin-new-list-item:hover {
   box-shadow: none;
 }
 
