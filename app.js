@@ -1,10 +1,6 @@
 //TO DO:
 
-// ADD landscape styles to phones
-
-//UPDATE SITE / SERVER
-
-// style admin data return
+//ADD AUTO SCRAPER / make it part of admin start / stop
 
 // continue building admin start / stop capabilities
 
@@ -23,13 +19,12 @@
 //STUFF TO DO AT THE END:
 // - write chronjob that deletes files after certain number on server
 // - as part of chronjob, look for pics / vids under certain size and delete them (bc errors)
+// - set the cors thing to just this port
 
 //THINGS TO DO LATER:
 // - UNFUCK PIC DISPLAY WITH VERTICAL PICS
 // - add vid stats to vid display
 // - make scroll an event, load more pics / vids on scroll (esp on mobile)
-
-//MAKE ADMIN PAGE LOOK NICE
 
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
