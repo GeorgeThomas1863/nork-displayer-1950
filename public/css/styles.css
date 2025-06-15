@@ -228,9 +228,15 @@ h3 {
   width: 100%;
   display: flex;
   flex-direction: row;
-  gap: 1rem;
+  gap: 5rem;
   background-color: transparent;
   box-shadow: none;
+}
+
+/* Make each backend container take equal width */
+#admin-backend-container > * {
+  flex: 1;
+  min-width: 0; /* Allows flex items to shrink below their content size */
 }
 
 /* List styling */
@@ -247,11 +253,6 @@ h3 {
 .admin-new-list {
   align-self: flex-start;
 }
-
-/* .admin-default-list:hover,
-.admin-new-list:hover {
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
-} */
 
 /* Title styling */
 .admin-default-title,
