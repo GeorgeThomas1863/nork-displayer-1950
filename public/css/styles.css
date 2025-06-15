@@ -78,18 +78,25 @@ h3 {
 /* ADMIN STYLES */
 #admin-display-element {
   display: flex;
-  width: 90%;
+  flex-direction: row;
+  gap: 5rem;
+  width: 80%;
   margin: 2rem auto;
-  gap: 3rem;
+  align-items: flex-start;
+}
+
+/* Make each form take equal width */
+#admin-display-element > * {
+  flex: 1;
+  min-width: 0; /* Allows flex items to shrink below their content size */
 }
 
 /* Main admin wrapper - follows the same pattern as form wrapper */
 #admin-form-wrapper {
-  margin: 0 auto;
+  margin: 0;
   padding: 0;
   width: 100%;
   background-color: rgb(235, 235, 235);
-  /* border-radius: 12px; */
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
@@ -116,12 +123,10 @@ h3 {
 
 #admin-form-wrapper li:first-child {
   padding-top: 2rem;
-  /* border-radius: 12px 12px 0 0; */
 }
 
 #admin-form-wrapper li:last-of-type {
   border-bottom: none;
-  /* border-radius: 0 0 12px 12px; */
   padding-bottom: 1.5rem;
 }
 
@@ -218,18 +223,12 @@ h3 {
 /* ADMIN BACKEND STYLES */
 
 #admin-backend-container {
-  margin: 0 auto;
+  margin: 0;
   padding: 0;
   width: 100%;
   display: flex;
-  gap: 3rem;
-}
-
-/* Make each form take equal width */
-#admin-backend-container > * {
-  flex: 1;
-  min-width: 0; /* Allows flex items to shrink below their content size */
-  /* border-radius: 12px; */
+  flex-direction: column;
+  gap: 1rem;
 }
 
 /* List styling */
@@ -238,7 +237,6 @@ h3 {
   display: block;
   list-style: none;
   background-color: rgb(235, 235, 235);
-  /* border-radius: 12px; */
   border: 1px solid #e9ecef;
   width: 100%;
   text-align: center;
@@ -254,7 +252,7 @@ h3 {
 }
 
 /* Title styling */
-.admin-default-default-title,
+.admin-default-title,
 .admin-new-title {
   margin: 0;
   padding: 1rem 0;

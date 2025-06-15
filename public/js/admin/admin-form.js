@@ -25,9 +25,7 @@ export const buildAdminForm = async () => {
   };
 
   const adminFormCollapseContainer = await buildCollapseContainer(adminFormCollapseObj);
-
-  // Apply the wrapper class to the collapse container instead
-  // adminFormCollapseContainer.className = "wrapper";
+  adminFormCollapseContainer.className = "wrapper";
 
   return adminFormCollapseContainer;
 };

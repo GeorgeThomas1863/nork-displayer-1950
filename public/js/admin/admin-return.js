@@ -13,7 +13,7 @@ export const buildAdminBackendDisplay = async (inputObj) => {
   const defaultListData = await buildAdminDefaultList(allDataObj);
   defaultListData.className = "collapse-content";
 
-  const defaultTitleElement = document.createElement("h2");
+  const defaultTitleElement = document.createElement("div");
   defaultTitleElement.innerHTML = "Data Already Scraped";
   defaultTitleElement.className = "collapse-header admin-default-title";
 
@@ -23,9 +23,11 @@ export const buildAdminBackendDisplay = async (inputObj) => {
     contentElement: defaultListData,
     isExpanded: true,
     className: "admin-backend-default-collapse",
+    dataAttribute: "admin-default-header",
   };
 
   const defaultListCollapseContainer = await buildCollapseContainer(defaultListCollapseObj);
+  defaultListCollapseContainer.className = "wrapper";
   adminBackendContainer.append(defaultListCollapseContainer);
 
   //if first load RETURN HERE
@@ -33,11 +35,12 @@ export const buildAdminBackendDisplay = async (inputObj) => {
 
   //OTHERWISE get new list data
   const newListData = await buildAdminNewList(scrapeDataObj, scrapeId);
+  newListData.className = "collapse-content";
 
   // console.log("NEW LIST DATA");
   // console.log(newListData);
 
-  const newTitleElement = document.createElement("h2");
+  const newTitleElement = document.createElement("div");
   newTitleElement.innerHTML = "New Scrape Data";
   newTitleElement.className = "collapse-header admin-new-title";
 
@@ -46,9 +49,11 @@ export const buildAdminBackendDisplay = async (inputObj) => {
     contentElement: newListData,
     isExpanded: true,
     className: "admin-new-collapse",
+    dataAttribute: "admin-new-header",
   };
 
   const newListCollapseContainer = await buildCollapseContainer(newListCollapseObj);
+  newListCollapseContainer.className = "wrapper";
   adminBackendContainer.append(newListCollapseContainer);
 
   return adminBackendContainer;
