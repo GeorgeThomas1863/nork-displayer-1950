@@ -102,6 +102,7 @@ h3 {
 #admin-backend-container > * {
   flex: 1;
   min-width: 0;
+  text-align: center;
 }
 
 /* Main admin wrapper - follows the same pattern as form wrapper */
@@ -244,6 +245,7 @@ h3 {
   gap: 3rem;
   background-color: transparent;
   box-shadow: none;
+  text-align: center;
 }
 
 /* List styling */
