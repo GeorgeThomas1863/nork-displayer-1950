@@ -284,8 +284,8 @@ h3 {
 .admin-new-list-item {
   padding: 0.5rem 1rem;
   border-bottom: 1px solid #e9ecef;
-  font-size: 1rem;
-  line-height: 1;
+  font-size: 1.2rem;
+  line-height: 0.75;
   color: #495057;
   transition: background-color 0.2s ease;
   word-wrap: break-word;
