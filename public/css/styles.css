@@ -89,6 +89,7 @@ h3 {
 #admin-display-element > * {
   flex: 1;
   min-width: 0; /* Allows flex items to shrink below their content size */
+  max-width: 30%;
 }
 
 /* When admin-backend-container has 2 children, make it take up 2/3 of the space */
@@ -243,6 +244,7 @@ h3 {
   background-color: transparent;
   box-shadow: none;
   align-items: center;
+  justify-content: center;
 }
 
 /* List styling */
