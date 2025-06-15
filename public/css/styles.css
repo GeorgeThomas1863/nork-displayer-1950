@@ -230,6 +230,7 @@ h3 {
   flex-direction: row;
   gap: 1rem;
   background-color: transparent;
+  box-shadow: none;
 }
 
 /* List styling */
