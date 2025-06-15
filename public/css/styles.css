@@ -288,10 +288,10 @@ h3 {
   overflow-wrap: break-word;
 }
 
-.admin-default-list-item:hover,
+/* .admin-default-list-item:hover,
 .admin-new-list-item:hover {
   background-color: #f8f9fa;
-}
+} */
 
 .admin-default-list-item:last-child,
 .admin-new-list-item:last-child {
