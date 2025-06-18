@@ -5,8 +5,11 @@ import { buildAdminBackendDisplay } from "./admin/admin-return.js";
 const adminDisplayElement = document.getElementById("admin-display-element");
 
 //BREAK OUT INTO SEPARATE FUNCTIONS
-export const buildAdminDisplay = async (isFirstLoad = true, scrapeId = null) => {
+export const buildAdminDisplay = async (isFirstLoad = true, inputObj = null) => {
+  // export const buildAdminDisplay = async (isFirstLoad = true, scrapeId = null, textStr = null) => {
   if (!adminDisplayElement) return null;
+  if (!inputObj) return null;
+  const { scrapeId, textStr } = inputObj;
 
   //build the form
   const adminFormData = await buildAdminForm();
@@ -20,6 +23,8 @@ export const buildAdminDisplay = async (isFirstLoad = true, scrapeId = null) => 
   };
 
   const adminBackendRaw = await sendToBack(params);
+  if (!adminBackendRaw) return null;
+  adminBackendRaw.textStr = textStr;
   const adminBackendData = await buildAdminBackendDisplay(adminBackendRaw);
 
   //if first laod just return appended data
@@ -45,7 +50,7 @@ export const getNewAdminData = async () => {
   if (!adminSubmitObj || !adminSubmitObj.scrapeId) return null;
 
   //build the display
-  await buildAdminDisplay(false, adminSubmitObj.scrapeId);
+  await buildAdminDisplay(false, adminSubmitObj);
 };
 
 buildAdminDisplay();
