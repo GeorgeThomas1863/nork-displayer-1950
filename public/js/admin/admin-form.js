@@ -39,8 +39,9 @@ export const buildAdminFormContent = async () => {
   const commandOptionArray = [
     { value: "admin-start-scrape", id: "admin-start-scrape", text: "Start Scrape", selected: true },
     { value: "admin-stop-scrape", id: "admin-stop-scrape", text: "Stop Scrape" },
+    { value: "admin-start-scheduler", id: "admin-start-scheduler", text: "Start Scheduler" },
+    { value: "admin-stop-scheduler", id: "admin-stop-scheduler", text: "Stop Scheduler" },
     { value: "admin-scrape-status", id: "admin-scrape-status", text: "Get Scrape Status" },
-    { value: "admin-restart-auto", id: "admin-restart-auto", text: "Restart Auto Scraper" },
   ];
 
   // Create Command list item
@@ -255,16 +256,7 @@ export const buildAdminFormContent = async () => {
   buttonListItem.id = "admin-submit-list-item";
   buttonListItem.appendChild(button);
 
-  adminFormList.append(
-    commandListItem,
-    howMuchListItem,
-    urlListItem,
-    itemTypeListItem,
-    articleTypeListItem,
-    uploadTgListItem,
-    tgIdListItem,
-    buttonListItem
-  );
+  adminFormList.append(commandListItem, howMuchListItem, urlListItem, itemTypeListItem, articleTypeListItem, uploadTgListItem, tgIdListItem, buttonListItem);
 
   return adminFormList;
 };
