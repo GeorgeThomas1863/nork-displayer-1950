@@ -8,7 +8,7 @@ const adminDisplayElement = document.getElementById("admin-display-element");
 export const buildAdminDisplay = async (isFirstLoad = true, inputObj = null) => {
   // export const buildAdminDisplay = async (isFirstLoad = true, scrapeId = null, textStr = null) => {
   if (!adminDisplayElement) return null;
-  const { scrapeId, textStr } = inputObj;
+  const { scrapeId, textStr } = inputObj ?? {}; //sets items to null if inputObj null
 
   //build the form
   const adminFormData = await buildAdminForm();
