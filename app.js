@@ -1,5 +1,15 @@
 //TO DO:
 
+//CONFIRM SCHEDULER WORKS
+
+//GET MORE DATA ON DEFAULT LOAD (last 3? articles [plus their pics]; 9 total pics; 1 vid)
+
+//ADD LOGIC for WHETHER getting new data is necessary [key part]
+
+//REDO EVENT LISTENERS FOR HOW MUCH
+
+// get rid of vids as separate thing
+
 //ADD AUTO SCRAPER / make it part of admin start / stop
 
 // continue building admin start / stop capabilities
