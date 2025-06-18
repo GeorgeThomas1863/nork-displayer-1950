@@ -37,10 +37,10 @@ export const buildAdminFormContent = async () => {
 
   // Command select options
   const commandOptionArray = [
-    { value: "admin-start-scrape", id: "admin-start-scrape", text: "Start Scrape", selected: true },
-    { value: "admin-stop-scrape", id: "admin-stop-scrape", text: "Stop Scrape" },
-    { value: "admin-start-scheduler", id: "admin-start-scheduler", text: "Start Scheduler" },
-    { value: "admin-stop-scheduler", id: "admin-stop-scheduler", text: "Stop Scheduler" },
+    { value: "admin-start-scrape", id: "admin-start-scrape", text: "Scrape Start", selected: true },
+    { value: "admin-stop-scrape", id: "admin-stop-scrape", text: "Scrape Stop" },
+    { value: "admin-start-scheduler", id: "admin-start-scheduler", text: "Scheduler ON" },
+    { value: "admin-stop-scheduler", id: "admin-stop-scheduler", text: "Scheduler OFF" },
     { value: "admin-scrape-status", id: "admin-scrape-status", text: "Get Scrape Status" },
   ];
 
