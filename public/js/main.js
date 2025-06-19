@@ -104,7 +104,7 @@ export const expandForm = async (dataType) => {
   //build array of expand form elements [could use object.Keys()]
   const expandElementsArr = [];
   for (const key in d.expandTypeMap) {
-    expandElementsArr.push(d.expandTypeMap[key]);
+    expandElementsArr.push(key);
   }
 
   console.log("EXPAND ELEMENTS ARRAY");
