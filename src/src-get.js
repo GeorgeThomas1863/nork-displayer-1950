@@ -243,7 +243,7 @@ export const rePullData = async (dataType, howMany) => {
         sortKey2: "vidPageId",
         howMany: howMany,
         filterKey: "vidPageId",
-        filterValue: { $lte: vidPageId + 1 },
+        filterValue: { $lt: vidPageId + 1 },
       };
 
       console.log("VID PAGE GET PARAMS");
