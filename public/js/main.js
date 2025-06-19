@@ -108,6 +108,7 @@ export const expandForm = async (dataType) => {
 
     case "pic-form-header":
       break;
+
     case "vid-form-header":
       break;
   }
