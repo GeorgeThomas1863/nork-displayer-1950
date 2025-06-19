@@ -32,7 +32,8 @@ export const getBackendDataDefault = async () => {
     const dataArray = await removeInvalidItems(dataArrayFixed, dataType, howMany);
 
     const dataObj = {
-      [dataType]: dataArray,
+      dataType: dataType,
+      dataArray: dataArray,
     };
 
     defaultDataArray.push(dataObj);

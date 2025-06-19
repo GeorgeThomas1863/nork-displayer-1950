@@ -25,15 +25,12 @@ export const buildDisplay = async () => {
   const newDataNeeded = await newDataTrigger();
   if (!newDataNeeded) return null;
 
-  console.log("CURRENT DATA STATE");
-  console.log(currentData);
+  //get / parse backend data (returns array of objects)
+  const backendDataArray = await sendToBack(currentData);
+  console.log("BACKEND DATA ARRAY");
+  console.log(backendDataArray);
 
-  //get / parse backend data
-  const backendDataObj = await sendToBack(currentData);
-  console.log("BACKEND DATA OBJ");
-  console.log(backendDataObj);
-
-  const backendDataParsed = await buildBackendDisplay(backendDataObj);
+  const backendDataParsed = await buildBackendDisplay(backendDataArray);
 
   displayElement.append(backendDataParsed);
 
@@ -42,19 +39,28 @@ export const buildDisplay = async () => {
   return "#DONE";
 };
 
-export const buildBackendDisplay = async (inputObj) => {
-  if (!inputObj) return failElement;
+export const buildBackendDisplay = async (inputArray) => {
+  if (!inputArray || !inputArray.length) return failElement;
+  const { isFirstLoad } = currentData;
 
   //build wrapper
   const backendDataWrapper = document.createElement("div");
   backendDataWrapper.id = "backend-data-wrapper";
 
-  //WILL NEED A FOR LOOP HERE
+  //only need for loop on first load (could break this part out)
+  if (isFirstLoad) {
+    for (let i = 0; i < d.inputArray.length; i++) {
+      const dataObj = inputArray[i];
+      const { dataType, dataArray } = dataObj;
+      const func = d.displayFunctionMap[dataType];
+      const dataElement = await func(dataArray);
+      backendDataWrapper.append(dataElement);
+    }
+  }
 
-  //parse backend data
-  const func = d.displayFunctionMap[dataType];
-  const dataElement = await func(backendDataObj[dataType]);
-  backendDataWrapper.append(dataElement);
+  if (!backendDataWrapper) return failElement;
+
+  return backendDataWrapper;
 };
 //RESPONSIVE STUFF
 // export const getNewData = async (inputObj) => {
