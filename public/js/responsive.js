@@ -9,7 +9,7 @@ export const mainClickHandler = async (e) => {
   e.preventDefault();
 
   const clickElement = e.target;
-  const clickId = clickElement.id;
+  // const clickId = clickElement.id;
   const expandType = clickElement.getAttribute("data-expand");
   const toggleType = clickElement.getAttribute("data-toggle");
 
@@ -22,10 +22,10 @@ export const mainClickHandler = async (e) => {
     await expandBackendData(expandType);
   }
 
-  const clickObj = {
-    clickId: clickId,
-    expandType: expandType,
-  };
+  // const clickObj = {
+  //   clickId: clickId,
+  //   expandType: expandType,
+  // };
 
   // const newBackendData = await getNewData(clickObj);
   // if (!newBackendData) return null;
@@ -36,6 +36,14 @@ export const mainClickHandler = async (e) => {
   // await buildBackendNew(newBackendData);
 
   return true;
+};
+
+export const mainChangeHandler = async (e) => {
+  e.preventDefault();
+  const changeElement = e.target;
+  console.log("CHANGE ELEMENT");
+  console.log(e);
+  console.log(changeElement);
 };
 
 //create debounced function
@@ -86,6 +94,7 @@ const displayElement = document.getElementById("display-element");
 if (displayElement) {
   displayElement.addEventListener("click", mainClickHandler);
   displayElement.addEventListener("input", mainInputHandler);
+  displayElement.addEventListener("change", mainChangeHandler);
 }
 
 if (adminDisplayElement) {
