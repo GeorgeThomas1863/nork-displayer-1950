@@ -1,5 +1,7 @@
 //TO DO:
 
+//resetting to when shit worked
+
 //CONFIRM SCHEDULER WORKS
 
 //GET MORE DATA ON DEFAULT LOAD (last 3? articles [plus their pics]; 9 total pics; 1 vid)
