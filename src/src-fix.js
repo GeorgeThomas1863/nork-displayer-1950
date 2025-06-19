@@ -1,4 +1,5 @@
 import CONFIG from "../config/config.js";
+import dbModel from "../models/db-model.js";
 import { getPicData, getVidData } from "./src-get.js";
 import { checkItemExists } from "./src-check.js";
 
@@ -223,18 +224,8 @@ export const removeInvalidItems = async (inputArray, dataType, howMany) => {
       break;
   }
 
-  console.log("DATA TYPE BLANK");
-  console.log(dataType);
+  //half assed answer below, might need to do same for picSets
+  const reGetData = await reGetData(dataType, howMany);
 
-  //loop through the fucking return to ensure none null
-  // for (let i = 0; i < dataReturnArray.length; i++) {
-  //   const dataObj = dataReturnArray[i];
-  //   if (!dataObj) {
-  //     console.log("AHHHHHHHHHH");
-  //     console.log("DATA OBJ IS NULL");
-  //     console.log(dataObj);
-  //   }
-  // }
-
-  return dataReturnArray;
+  return reGetData;
 };

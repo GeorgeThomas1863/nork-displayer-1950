@@ -209,3 +209,25 @@ export const getVidData = async (vidURL) => {
 
   return vidObj;
 };
+
+//-------------------------
+
+//[half assed answer below, might need to do same for picSets / assumes prob is newest shit not downloaded]
+//RE-GET / PULL DATA
+export const reGetData = async (dataType, howMany) => {
+  const { vidsDownloaded } = CONFIG;
+
+  switch (dataType) {
+    case "vidPages":
+    case "vids":
+      const dataParams = await getBackendDefaultParams("vids");
+      dataParams.howMany = 1;
+
+      const vidDataModel = new dbModel(dataParams, vidsDownloaded);
+      const vidDataObj = await vidDataModel.getNewestItemsArray();
+      console.log("VID DATA OBJ");
+      console.log(vidDataObj);
+
+      // return vidDataObj;
+  }
+};
