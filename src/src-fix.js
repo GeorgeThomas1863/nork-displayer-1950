@@ -227,8 +227,5 @@ export const removeInvalidItems = async (inputArray, dataType, howMany) => {
   //half assed answer below, might need to do same for picSets
   const newDataArray = await rePullData(dataType, howMany);
 
-  // console.log("NEW DATA ARRAY");
-  // console.log(newDataArray);
-
   return newDataArray;
 };

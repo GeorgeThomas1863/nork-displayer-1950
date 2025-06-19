@@ -246,14 +246,8 @@ export const rePullData = async (dataType, howMany) => {
         filterValue: { $lte: vidPageId },
       };
 
-      console.log("VID PAGE GET PARAMS");
-      console.log(vidPageGetParams);
-
       const vidPageGetModel = new dbModel(vidPageGetParams, vidPageContent);
       const vidPageGetArray = await vidPageGetModel.getNewestItemsByTypeArray();
-
-      console.log("VID PAGE GET ARRAY");
-      console.log(vidPageGetArray);
 
       return vidPageGetArray;
 
