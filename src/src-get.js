@@ -29,14 +29,14 @@ export const getBackendDataDefault = async () => {
     }
 
     const dataArrayFixed = await fixDataByType(dataArrayRaw, dataType);
-    console.log("DATA ARRAY FIXED");
-    console.log(dataType);
-    console.log(dataArrayFixed);
+    // console.log("DATA ARRAY FIXED");
+    // console.log(dataType);
+    // console.log(dataArrayFixed);
     const dataArray = await removeInvalidItems(dataArrayFixed, dataType, howMany);
 
-    console.log("DATA ARRAY");
-    console.log(dataType);
-    console.log(dataArray);
+    // console.log("DATA ARRAY");
+    // console.log(dataType);
+    // console.log(dataArray);
 
     const dataObj = {
       dataType: dataType,
