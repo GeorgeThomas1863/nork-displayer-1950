@@ -82,7 +82,7 @@ export const buildPicHowManyListItem = async () => {
   picHowManyInput.type = "text";
   picHowManyInput.name = "pic-how-many";
   picHowManyInput.id = "pic-how-many";
-  picHowManyInput.placeholder = "[Defaults to 9 (most recent)]";
+  picHowManyInput.placeholder = "[Defaults to 6 (most recent)]";
 
   picHowManyListItem.append(picHowManyLabel, picHowManyInput);
 

@@ -19,13 +19,17 @@ const d = {
   backendTypeArr: ["articles", "pics", "picSets", "vids", "vidPages"],
   expandTypeArr: ["article", "pic", "vid"],
 
-  // changeIdMap: {
-  //   articles: ["article-type", "article-sort-by"],
-  //   pics: ["pic-type", "pic-sort-by"],
-  //   picSets: ["pic-type", "pic-sort-by"],
-  //   vids: ["vid-type", "vid-sort-by"],
-  //   vidPages: ["vid-type", "vid-sort-by"],
-  // },
+  defaultInputMap: {
+    articleType: "fatboy",
+    articleHowMany: 5,
+    articleSortBy: "article-newest-to-oldest",
+    picType: "pic-alone",
+    picHowMany: 6,
+    picSortBy: "pic-newest-to-oldest",
+    vidType: "vid-alone",
+    vidHowMany: 1,
+    vidSortBy: "vid-newest-to-oldest",
+  },
 };
 
 export default d;

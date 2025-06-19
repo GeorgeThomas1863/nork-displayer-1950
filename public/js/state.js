@@ -1,4 +1,5 @@
 import d from "./define-things.js";
+import { buildInputParams } from "./util.js";
 
 export const state = {
   route: "/get-backend-data-route",
@@ -15,8 +16,18 @@ export const newDataTrigger = async () => {
   //trigger new data on first load
   if (isFirstLoad || !data) return true;
 
-  console.log("NEW DATA TRIGGER");
-  console.log(data);
+  const inputParams = await buildInputParams();
+  const defaultParams = d.defaultInputMap;
+
+  const diffArr = [];
+  for (const key in inputParams) {
+    const inputItem = inputParams[key];
+    if (inputItem === defaultParams[key]) continue;
+    console.log("AHHHHHHHHHHHH");
+    console.log(key);
+    console.log(inputItem);
+    console.log(defaultParams[key]);
+  }
 
   return true;
 };
