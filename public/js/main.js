@@ -28,10 +28,13 @@ export const buildDisplay = async () => {
   //get / parse backend data (returns array of objects)
   const backendData = await sendToBack(state);
   const backendDataParsed = await buildBackendDisplay(backendData);
-  console.log("!!!!BACKEND DATA PARSED");
-  console.log(backendDataParsed);
+  // console.log("!!!!BACKEND DATA PARSED");
+  // console.log(backendDataParsed);
 
   displayElement.append(backendDataParsed);
+
+  console.log("DISPLAY ELEMENT");
+  console.log(displayElement);
 
   //UPDATE THE STATE HERE
   state.data = backendData;
@@ -98,6 +101,16 @@ export const buildBackendDisplay = async (inputArray) => {
 export const expandForm = async (dataType) => {
   console.log("EXPAND BACKEND DATA");
   console.log(dataType);
+
+  switch (dataType) {
+    case "article-form-header":
+      break;
+
+    case "pic-form-header":
+      break;
+    case "vid-form-header":
+      break;
+  }
 
   // Build typeMap using the consistent naming pattern
   // const typeMap = {};
