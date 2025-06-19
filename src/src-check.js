@@ -1,5 +1,5 @@
 import fs from "fs";
-import { clickIdTriggerMap, expandTriggerMap, inputIdTriggerMap } from "../config/map-display.js";
+import { expandTriggerMap, inputIdTriggerMap } from "../config/map-display.js";
 
 //--------------------------------
 
