@@ -223,18 +223,18 @@ export const removeInvalidItems = async (inputArray, dataType, howMany) => {
       break;
   }
 
-  console.log("DATA RETURN ARRAY");
-  console.log(dataReturnArray);
+  console.log("DATA TYPE BLANK");
+  console.log(dataType);
 
   //loop through the fucking return to ensure none null
-  for (let i = 0; i < dataReturnArray.length; i++) {
-    const dataObj = dataReturnArray[i];
-    if (!dataObj) {
-      console.log("AHHHHHHHHHH");
-      console.log("DATA OBJ IS NULL");
-      console.log(dataObj);
-    }
-  }
+  // for (let i = 0; i < dataReturnArray.length; i++) {
+  //   const dataObj = dataReturnArray[i];
+  //   if (!dataObj) {
+  //     console.log("AHHHHHHHHHH");
+  //     console.log("DATA OBJ IS NULL");
+  //     console.log(dataObj);
+  //   }
+  // }
 
   return dataReturnArray;
 };
