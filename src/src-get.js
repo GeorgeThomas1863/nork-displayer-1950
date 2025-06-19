@@ -29,6 +29,11 @@ export const getBackendDataDefault = async () => {
     }
 
     const dataArrayValid = await removeInvalidItems(dataArrayRaw, dataType, howMany);
+
+    console.log("DATA ARRAY VALID");
+    console.log(dataType);
+    console.log(dataArrayValid);
+
     const dataArrayFixed = await fixDataByType(dataArrayValid, dataType);
     // console.log("DATA ARRAY FIXED");
     // console.log(dataType);
