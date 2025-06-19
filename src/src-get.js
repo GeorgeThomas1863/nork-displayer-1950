@@ -235,10 +235,29 @@ export const rePullData = async (dataType, howMany) => {
       //use url to get vid Page
       const vidPageFindModel = new dbModel(vidPageFindParams, vidPageContent);
       const vidPageObj = await vidPageFindModel.getUniqueItem();
+      if (!vidPageObj || !vidPageObj.vidPageId) return null;
+      const { vidPageId } = vidPageObj;
 
-      console.log("VID PAGE OBJ");
-      console.log(vidPageObj);
+      const vidPageGetParams = {
+        sortKey: "date",
+        sortKey2: "vidPageId",
+        howMany: howMany,
+        filterKey: "vidPageId",
+        filterValue: { $lte: vidPageId },
+      };
 
-    // return vidDataObj;
+      console.log("VID PAGE GET PARAMS");
+      console.log(vidPageGetParams);
+
+      const vidPageGetModel = new dbModel(vidPageGetParams, vidPageContent);
+      const vidPageGetArray = await vidPageGetModel.getNewestItemsArray();
+
+      console.log("VID PAGE GET ARRAY");
+      console.log(vidPageGetArray);
+
+      return vidPageGetArray;
+
+    default:
+      return null;
   }
 };
