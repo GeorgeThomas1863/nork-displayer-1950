@@ -175,6 +175,9 @@ export const getPicSourceData = async (picURL) => {
 
 //GET VID DATA
 export const getVidData = async (vidURL) => {
+  console.log("GET VID DATA");
+  console.log(vidURL);
+
   const { vidsDownloaded } = CONFIG;
 
   const lookupParams = {
