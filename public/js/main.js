@@ -4,6 +4,7 @@ import { buildInputForms } from "./build-forms.js";
 // import { buildBackendDefault } from "./build-backend.js";
 import { hideArray, unhideArray, sendToBack, buildInputParams, checkNewDataTrigger, buildFailElement } from "./util.js";
 import { state, newDataTrigger } from "./state.js";
+import { defineCollapseItems } from "./collapse.js";
 
 //get display element
 const displayElement = document.getElementById("display-element");
@@ -55,6 +56,7 @@ export const buildBackendDisplay = async (inputArray) => {
   backendDataWrapper.id = "backend-data-wrapper";
 
   //only need for loop on first load (could break this part out)
+  const testArr = [];
   if (isFirstLoad) {
     for (let i = 0; i < inputArray.length; i++) {
       const dataObj = inputArray[i];
@@ -68,7 +70,11 @@ export const buildBackendDisplay = async (inputArray) => {
       }
 
       backendDataWrapper.append(dataElement);
+
+      testArr.push(dataElement);
     }
+
+    await defineCollapseItems(testArr);
 
     //hide everything but pics for default
   }
