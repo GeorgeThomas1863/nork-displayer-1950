@@ -243,14 +243,14 @@ export const rePullData = async (dataType, howMany) => {
         sortKey2: "vidPageId",
         howMany: howMany,
         filterKey: "vidPageId",
-        filterValue: { $lt: vidPageId + 1 },
+        filterValue: { $lte: vidPageId },
       };
 
       console.log("VID PAGE GET PARAMS");
       console.log(vidPageGetParams);
 
       const vidPageGetModel = new dbModel(vidPageGetParams, vidPageContent);
-      const vidPageGetArray = await vidPageGetModel.getNewestItemsArray();
+      const vidPageGetArray = await vidPageGetModel.getNewestItemsByTypeArray();
 
       console.log("VID PAGE GET ARRAY");
       console.log(vidPageGetArray);
