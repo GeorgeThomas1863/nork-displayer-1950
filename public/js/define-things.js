@@ -30,6 +30,14 @@ const d = {
     vidHowMany: 1,
     vidSortBy: "vid-newest-to-oldest",
   },
+
+  expandTypeMap: {
+    articleFormElement: document.getElementById("article-array-element"),
+    picFormElement: document.getElementById("pic-array-element"),
+    picSetFormElement: document.getElementById("pic-set-array-element"),
+    vidFormElement: document.getElementById("vid-array-element"),
+    vidPageFormElement: document.getElementById("vid-page-array-element"),
+  },
 };
 
 export default d;

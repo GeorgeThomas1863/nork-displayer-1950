@@ -101,16 +101,30 @@ export const expandForm = async (dataType) => {
   console.log("EXPAND BACKEND DATA");
   console.log(dataType);
 
-  switch (dataType) {
-    case "article-form-header":
-      break;
-
-    case "pic-form-header":
-      break;
-
-    case "vid-form-header":
-      break;
+  //build array of expand form elements [could use object.Keys()]
+  const expandElementsArr = [];
+  for (const key in d.expandTypeMap) {
+    expandElementsArr.push(d.expandTypeMap[key]);
   }
+
+  console.log("EXPAND ELEMENTS ARRAY");
+  console.log(expandElementsArr);
+
+  //hide everything
+  await hideArray(expandElementsArr);
+
+  //unhide the one that is being expanded
+
+  // switch (dataType) {
+  //   case "article-form-header":
+  //     break;
+
+  //   case "pic-form-header":
+  //     break;
+
+  //   case "vid-form-header":
+  //     break;
+  // }
 
   // Build typeMap using the consistent naming pattern
   // const typeMap = {};
