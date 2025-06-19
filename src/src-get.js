@@ -219,15 +219,26 @@ export const rePullData = async (dataType, howMany) => {
 
   switch (dataType) {
     case "vidPages":
-    case "vids":
-      const dataParams = await getBackendDefaultParams("vids");
-      dataParams.howMany = 1;
+      const vidParams = await getBackendDefaultParams("vids");
+      vidParams.howMany = 1;
 
-      const vidDataModel = new dbModel(dataParams, vidsDownloaded);
+      const vidDataModel = new dbModel(vidParams, vidsDownloaded);
       const vidDataObj = await vidDataModel.getNewestItemsArray();
-      console.log("VID DATA OBJ");
-      console.log(vidDataObj);
+      if (!vidDataObj || !vidDataObj[0] || !vidDataObj[0].url) return null;
+      const { url } = vidDataObj[0];
 
-      // return vidDataObj;
+      const vidPageFindParams = {
+        keyToLookup: "vidURL",
+        itemValue: url,
+      };
+
+      //use url to get vid Page
+      const vidPageFindModel = new dbModel(vidPageFindParams, vidPageContent);
+      const vidPageObj = await vidPageFindModel.getUniqueItem();
+
+      console.log("VID PAGE OBJ");
+      console.log(vidPageObj);
+
+    // return vidDataObj;
   }
 };
