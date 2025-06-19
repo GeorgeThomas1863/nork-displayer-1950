@@ -144,9 +144,6 @@ export const fixPicArray = async (inputObj) => {
 //FIX VID DATA
 
 export const fixVidPageObj = async (inputObj) => {
-  console.log("FIX VID PAGE OBJ");
-  console.log(inputObj);
-
   if (!inputObj || !inputObj.vidURL) return null;
   const { vidURL } = inputObj;
 
