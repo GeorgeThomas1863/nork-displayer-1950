@@ -1,6 +1,6 @@
 import { getBackendDefaultParams } from "../config/map-display.js";
 import dbModel from "../models/db-model.js";
-import { getBackendParams } from "./src-get.js";
+import { getBackendParams, getBackendDataDefault } from "./src-get.js";
 import { checkDataType } from "./src-check.js";
 import { fixDataByType, removeInvalidItems } from "./src-fix.js";
 

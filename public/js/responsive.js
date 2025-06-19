@@ -27,13 +27,13 @@ export const mainClickHandler = async (e) => {
     expandType: expandType,
   };
 
-  const newBackendData = await getNewData(clickObj);
-  if (!newBackendData) return null;
+  // const newBackendData = await getNewData(clickObj);
+  // if (!newBackendData) return null;
 
-  console.log("NEW BACKEND DATA");
-  console.log(newBackendData);
+  // console.log("NEW BACKEND DATA");
+  // console.log(newBackendData);
 
-  await buildBackendNew(newBackendData);
+  // await buildBackendNew(newBackendData);
 
   return true;
 };
