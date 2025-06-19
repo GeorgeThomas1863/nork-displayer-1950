@@ -95,52 +95,55 @@ export const buildBackendDisplay = async (inputArray) => {
 // };
 
 //better version of expand backend data equation
-export const expandBackendData = async (dataType) => {
+export const expandForm = async (dataType) => {
+  console.log("EXPAND BACKEND DATA");
+  console.log(dataType);
+
   // Build typeMap using the consistent naming pattern
-  const typeMap = {};
-  for (let i = 0; i < d.expandTypeArr.length; i++) {
-    const typeValue = d.expandTypeArr[i];
-    const formHeader = `${typeValue}-form-header`;
+  // const typeMap = {};
+  // for (let i = 0; i < d.expandTypeArr.length; i++) {
+  //   const typeValue = d.expandTypeArr[i];
+  //   const formHeader = `${typeValue}-form-header`;
 
-    typeMap[formHeader] = {
-      wrapperElement: () => document.getElementById(`${typeValue}-wrapper`),
-      arrowElement: () => document.querySelector(`#collapse-arrow[data-expand='${formHeader}']`),
-    };
-  }
+  //   typeMap[formHeader] = {
+  //     wrapperElement: () => document.getElementById(`${typeValue}-wrapper`),
+  //     arrowElement: () => document.querySelector(`#collapse-arrow[data-expand='${formHeader}']`),
+  //   };
+  // }
 
-  const currentTypeData = typeMap[dataType];
+  // const currentTypeData = typeMap[dataType];
 
-  const currentArrow = currentTypeData.arrowElement();
-  const isCurrentExpanded = currentArrow.classList.contains("expanded");
+  // const currentArrow = currentTypeData.arrowElement();
+  // const isCurrentExpanded = currentArrow.classList.contains("expanded");
 
-  // Get all form headers by looping through baseTypes
-  const currentElementArray = [currentTypeData.wrapperElement()];
-  const otherElementArray = [];
-  const otherArrowArray = [];
+  // // Get all form headers by looping through baseTypes
+  // const currentElementArray = [currentTypeData.wrapperElement()];
+  // const otherElementArray = [];
+  // const otherArrowArray = [];
 
-  for (let i = 0; i < d.expandTypeArr.length; i++) {
-    const typeValue = d.expandTypeArr[i];
-    const formHeader = `${typeValue}-form-header`;
+  // for (let i = 0; i < d.expandTypeArr.length; i++) {
+  //   const typeValue = d.expandTypeArr[i];
+  //   const formHeader = `${typeValue}-form-header`;
 
-    if (formHeader !== dataType) {
-      const typeData = typeMap[formHeader];
-      otherElementArray.push(typeData.wrapperElement());
-      otherArrowArray.push(typeData.arrowElement());
-    }
-  }
+  //   if (formHeader !== dataType) {
+  //     const typeData = typeMap[formHeader];
+  //     otherElementArray.push(typeData.wrapperElement());
+  //     otherArrowArray.push(typeData.arrowElement());
+  //   }
+  // }
 
-  if (isCurrentExpanded) {
-    await hideArray(otherElementArray);
-    await unhideArray(currentElementArray);
+  // if (isCurrentExpanded) {
+  //   await hideArray(otherElementArray);
+  //   await unhideArray(currentElementArray);
 
-    for (let i = 0; i < otherArrowArray.length; i++) {
-      otherArrowArray[i].classList.remove("expanded");
-    }
-  } else {
-    await hideArray(currentElementArray);
-  }
+  //   for (let i = 0; i < otherArrowArray.length; i++) {
+  //     otherArrowArray[i].classList.remove("expanded");
+  //   }
+  // } else {
+  //   await hideArray(currentElementArray);
+  // }
 
-  return true;
+  // return true;
 };
 
 export const toggleDropdown = async (toggleType) => {

@@ -1,4 +1,4 @@
-import { expandBackendData, toggleDropdown } from "./main.js";
+import { toggleDropdown, expandForm } from "./main.js";
 import { getNewAdminData } from "./admin.js";
 import { debounce } from "./util.js";
 import { buildBackendNew } from "./build-backend.js";
@@ -19,7 +19,7 @@ export const mainClickHandler = async (e) => {
 
   //handle expand / collapse backend data
   if (expandType) {
-    await expandBackendData(expandType);
+    await expandForm(expandType);
   }
 
   // const clickObj = {
