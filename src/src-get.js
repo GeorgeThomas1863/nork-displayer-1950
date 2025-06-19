@@ -29,6 +29,7 @@ export const getBackendDataDefault = async () => {
     }
 
     console.log("DATA ARRAY RAW");
+    console.log(dataType);
     console.log(dataArrayRaw);
 
     const dataArrayFixed = await fixDataByType(dataArrayRaw, dataType);
