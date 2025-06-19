@@ -2,6 +2,7 @@ import { expandBackendData, toggleDropdown } from "./main.js";
 import { getNewAdminData } from "./admin.js";
 import { debounce } from "./util.js";
 import { buildBackendNew } from "./build-backend.js";
+import { checkChangeTriggered, newDataTrigger } from "./state.js";
 
 //MAIN / NORMAL RESPONSIVE
 
@@ -9,7 +10,6 @@ export const mainClickHandler = async (e) => {
   e.preventDefault();
 
   const clickElement = e.target;
-  // const clickId = clickElement.id;
   const expandType = clickElement.getAttribute("data-expand");
   const toggleType = clickElement.getAttribute("data-toggle");
 
@@ -41,9 +41,22 @@ export const mainClickHandler = async (e) => {
 export const mainChangeHandler = async (e) => {
   e.preventDefault();
   const changeElement = e.target;
+  const changeId = changeElement.id;
   console.log("CHANGE ELEMENT");
   console.log(e);
   console.log(changeElement);
+  console.log(changeId);
+
+  const changeTriggered = await checkChangeTriggered(changeId);
+  if (!changeTriggered) return null;
+
+  const newDataNeeded = await newDataTrigger();
+
+  //if needed get new data
+
+  //otherwise hide / unhide things
+
+
 };
 
 //create debounced function

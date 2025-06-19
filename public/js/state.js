@@ -1,3 +1,5 @@
+import d from "./define-things.js";
+
 export const state = {
   route: "/get-backend-data-route",
   dataType: "pics",
@@ -17,6 +19,16 @@ export const newDataTrigger = async () => {
   console.log(data);
 
   return true;
+};
+
+export const checkChangeTriggered = async (changeId) => {
+  const { changeTriggerArr } = d;
+
+  for (let i = 0; i < changeTriggerArr.length; i++) {
+    if (changeId === changeTriggerArr[i]) return true;
+  }
+
+  return null;
 };
 
 // MAKE BELOW CLICK TRIGGER

@@ -13,11 +13,19 @@ const d = {
     vids: buildVidAloneDisplay,
     vidPages: buildVidPageDisplay,
   },
-  clickTriggerArr: ["article-type", "article-sort-by", "pic-type", "pic-sort-by", "vid-type", "vid-sort-by"],
+  changeTriggerArr: ["article-type", "article-sort-by", "pic-type", "pic-sort-by", "vid-type", "vid-sort-by"],
   expandTriggerArr: ["article-form-header", "pic-form-header", "vid-form-header"],
   inputTriggerArr: ["article-how-many", "pic-how-many", "vid-how-many"],
   backendTypeArr: ["articles", "pics", "picSets", "vids", "vidPages"],
   expandTypeArr: ["article", "pic", "vid"],
+
+  // changeIdMap: {
+  //   articles: ["article-type", "article-sort-by"],
+  //   pics: ["pic-type", "pic-sort-by"],
+  //   picSets: ["pic-type", "pic-sort-by"],
+  //   vids: ["vid-type", "vid-sort-by"],
+  //   vidPages: ["vid-type", "vid-sort-by"],
+  // },
 };
 
 export default d;
