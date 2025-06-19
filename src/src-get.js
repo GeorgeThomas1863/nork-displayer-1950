@@ -5,6 +5,44 @@ import dbModel from "../models/db-model.js";
 import { articleTypeMap } from "../config/map-display.js";
 import { fixInputDefaults } from "./src-fix.js";
 
+export const getBackendDataDefault = async () => {
+  //get default shit
+  const typeArr = CONFIG.backendTypeArr;
+
+  const defaultDataArray = [];
+  for (let i = 0; i < typeArr.length; i++) {
+    const dataType = typeArr[i];
+    const dataParams = await getBackendDefaultParams(dataType);
+    const { collection, howMany } = dataParams;
+
+    // update how many (to account for fucked items)
+    const howManyBuffer = Math.ceil(+howMany * 1.2);
+    dataParams.howMany = howManyBuffer;
+
+    const dataModel = new dbModel(dataParams, collection);
+
+    let dataArrayRaw = "";
+    if (dataType === "articles") {
+      dataArrayRaw = await dataModel.getNewestItemsByTypeArray();
+    } else {
+      dataArrayRaw = await dataModel.getNewestItemsArray();
+    }
+
+    const dataArrayFixed = await fixDataByType(dataArrayRaw, dataType);
+    const dataArray = await removeInvalidItems(dataArrayFixed, dataType, howMany);
+
+    const dataObj = {
+      [dataType]: dataArray,
+    };
+
+    defaultDataArray.push(dataObj);
+  }
+
+  return defaultDataArray;
+};
+
+//-------------------------------
+
 export const getBackendParams = async (inputObj) => {
   if (!inputObj || !inputObj.dataType) return null;
   const { isFirstLoad, dataType } = inputObj;

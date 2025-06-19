@@ -10,43 +10,46 @@ export const runGetBackendData = async (inputObj) => {
   const { dataType, isFirstLoad } = inputObj;
   const dataObj = {};
 
-  if (isFirstLoad){
-    
+  if (isFirstLoad) {
+    const defaultData = await getBackendDataDefault();
+    console.log("DEFAULT DATA BACKEND");
+    console.log(defaultData);
+    return defaultData;
   }
 
-  const defaultParams = await getBackendDefaultParams(dataType);
-  const collection = defaultParams.collection;
+  // const defaultParams = await getBackendDefaultParams(dataType);
+  // const collection = defaultParams.collection;
 
-  //build backend params based on if first load
-  const backendParams = await getBackendParams(inputObj);
-  const { sortBy, filterValue, howMany } = backendParams;
+  // //build backend params based on if first load
+  // const backendParams = await getBackendParams(inputObj);
+  // const { sortBy, filterValue, howMany } = backendParams;
 
-  // update how many (to account for fucked items)
-  const howManyBuffer = Math.ceil(+howMany * 1.5);
-  backendParams.howMany = howManyBuffer;
+  // // update how many (to account for fucked items)
+  // const howManyBuffer = Math.ceil(+howMany * 1.5);
+  // backendParams.howMany = howManyBuffer;
 
-  //CLAUDE's VERSION OF MY SHITTY CODE to lookup data
-  const dataModel = new dbModel(backendParams, collection);
-  const isArticleFilter = dataType === "articles" && filterValue !== "all-type";
+  // //CLAUDE's VERSION OF MY SHITTY CODE to lookup data
+  // const dataModel = new dbModel(backendParams, collection);
+  // const isArticleFilter = dataType === "articles" && filterValue !== "all-type";
 
-  const sortPrefix = sortBy === "newest-to-oldest" ? "Newest" : "Oldest";
-  const typeSuffix = isArticleFilter ? "sByType" : "s";
-  const methodName = `get${sortPrefix}Item${typeSuffix}Array`;
+  // const sortPrefix = sortBy === "newest-to-oldest" ? "Newest" : "Oldest";
+  // const typeSuffix = isArticleFilter ? "sByType" : "s";
+  // const methodName = `get${sortPrefix}Item${typeSuffix}Array`;
 
-  const dataArrayRaw = await dataModel[methodName]();
+  // const dataArrayRaw = await dataModel[methodName]();
 
-  const dataArrayFixed = await fixDataByType(dataArrayRaw, dataType);
-  const dataArray = await removeInvalidItems(dataArrayFixed, dataType, howMany);
+  // const dataArrayFixed = await fixDataByType(dataArrayRaw, dataType);
+  // const dataArray = await removeInvalidItems(dataArrayFixed, dataType, howMany);
 
-  dataObj[dataType] = dataArray;
-  dataObj.dataType = dataType;
+  // dataObj[dataType] = dataArray;
+  // dataObj.dataType = dataType;
 
-  if (dataObj) {
-    const typeStr = dataType.toUpperCase();
-    console.log(`GOT ${dataObj[dataType].length} ${typeStr}`);
-  }
+  // if (dataObj) {
+  //   const typeStr = dataType.toUpperCase();
+  //   console.log(`GOT ${dataObj[dataType].length} ${typeStr}`);
+  // }
 
-  return dataObj;
+  // return dataObj;
 };
 
 // GET NEW DATA SECTION
