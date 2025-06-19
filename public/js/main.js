@@ -25,6 +25,9 @@ export const buildDisplay = async () => {
   const newDataNeeded = await newDataTrigger();
   if (!newDataNeeded) return null;
 
+  console.log("CURRENT DATA STATE");
+  console.log(currentData);
+
   //get / parse backend data
   const backendDataObj = await sendToBack(currentData);
   console.log("BACKEND DATA OBJ");

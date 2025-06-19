@@ -39,7 +39,7 @@ export const mainClickHandler = async (e) => {
 };
 
 //create debounced function
-const debouncedGetNewData = debounce(getNewData);
+// const debouncedGetNewData = debounce(getNewData);
 
 //input handler
 export const mainInputHandler = async (e) => {
