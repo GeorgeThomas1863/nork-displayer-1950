@@ -27,10 +27,9 @@ export const buildDisplay = async () => {
 
   //get / parse backend data (returns array of objects)
   const backendDataArray = await sendToBack(currentData);
-  console.log("BACKEND DATA ARRAY");
-  console.log(backendDataArray);
-
   const backendDataParsed = await buildBackendDisplay(backendDataArray);
+  console.log("!!!!BACKEND DATA PARSED");
+  console.log(backendDataParsed);
 
   displayElement.append(backendDataParsed);
 
@@ -56,6 +55,8 @@ export const buildBackendDisplay = async (inputArray) => {
       const dataElement = await func(dataArray);
       backendDataWrapper.append(dataElement);
     }
+
+    //hide everything but pics for default
   }
 
   if (!backendDataWrapper) return failElement;
