@@ -49,7 +49,7 @@ export const buildBackendDisplay = async (inputArray) => {
 
   //only need for loop on first load (could break this part out)
   if (isFirstLoad) {
-    for (let i = 0; i < d.inputArray.length; i++) {
+    for (let i = 0; i < inputArray.length; i++) {
       const dataObj = inputArray[i];
       const { dataType, dataArray } = dataObj;
       const func = d.displayFunctionMap[dataType];
