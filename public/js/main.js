@@ -58,7 +58,7 @@ export const buildBackendDisplay = async (inputArray) => {
       const { dataType, dataArray } = dataObj;
       const func = d.displayFunctionMap[dataType];
       const dataElement = await func(dataArray);
-
+      if (!dataElement) continue;
       //hide everything except pics on default
       if (dataElement.id !== "pic-array-element") {
         dataElement.classList.add("hidden");
