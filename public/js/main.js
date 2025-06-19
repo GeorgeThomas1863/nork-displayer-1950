@@ -53,6 +53,10 @@ export const buildBackendDisplay = async (inputArray) => {
       const { dataType, dataArray } = dataObj;
       const func = d.displayFunctionMap[dataType];
       const dataElement = await func(dataArray);
+      console.log(dataElement.id);
+      if (dataElement.id === "pic-array-element") {
+        console.log("AHHHHHHHH");
+      }
       backendDataWrapper.append(dataElement);
     }
 
