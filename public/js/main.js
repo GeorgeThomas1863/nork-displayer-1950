@@ -2,54 +2,73 @@ import d from "./define-things.js";
 import { buildDropDown } from "./build-drop-down.js";
 import { buildInputForms } from "./build-forms.js";
 import { buildBackendDefault } from "./build-backend.js";
-import { hideArray, unhideArray, sendToBack, buildInputParams, checkNewDataTrigger } from "./util.js";
+import { hideArray, unhideArray, sendToBack, buildInputParams, checkNewDataTrigger, buildFailElement } from "./util.js";
+import { currentData, newDataTrigger } from "./state.js";
 
 //get display element
 const displayElement = document.getElementById("display-element");
+const failElement = await buildFailElement();
 
 //DEFAULT DISPLAY
 export const buildDisplay = async () => {
   if (!displayElement) return null;
+  const { isFirstLoad } = currentData;
 
-  //build drop down
-  const dropDownElement = await buildDropDown();
+  //build drop down / form on first load
+  if (isFirstLoad) {
+    const dropDownElement = await buildDropDown();
+    const inputFormWrapper = await buildInputForms();
+    displayElement.append(dropDownElement, inputFormWrapper);
+  }
 
-  //build input formss
-  const inputFormWrapper = await buildInputForms();
+  //check if new data is needed [will pass on first load]
+  const newDataNeeded = await newDataTrigger();
+  if (!newDataNeeded) return null;
 
-  //set default return type
-  const typeObj = {
-    dataType: "pics",
-    isFirstLoad: true,
-  };
+  //get / parse backend data
+  const backendDataObj = await sendToBack(currentData);
+  const backendDataParsed = await buildBackendDisplay(backendDataObj);
 
-  //build data data return
-  const backendDataWrapper = await buildBackendDefault(typeObj);
+  displayElement.append(backendDataParsed);
 
-  displayElement.append(dropDownElement, inputFormWrapper, backendDataWrapper);
+  //UPDATE THE STATE HERE
 
   return "#DONE";
 };
 
-//RESPONSIVE STUFF
-export const getNewData = async (inputObj) => {
-  //checks if command triggered, if so gets type of command triggered
-  const commandTriggerType = await checkNewDataTrigger(inputObj);
+export const buildBackendDisplay = async (inputObj) => {
+  if (!inputObj) return failElement;
 
-  if (!commandTriggerType) return null;
+  //build wrapper
+  const backendDataWrapper = document.createElement("div");
+  backendDataWrapper.id = "backend-data-wrapper";
 
-  //get user input
-  const userInputParams = await buildInputParams();
+  //WILL NEED A FOR LOOP HERE
 
-  //build params
-  const paramsObj = { ...userInputParams, ...inputObj };
-  paramsObj.route = "/get-new-data-route";
-  paramsObj.commandType = commandTriggerType;
-
-  const dataObj = await sendToBack(paramsObj);
-
-  return dataObj;
+  //parse backend data
+  const func = d.displayFunctionMap[dataType];
+  const dataElement = await func(backendDataObj[dataType]);
+  backendDataWrapper.append(dataElement);
 };
+//RESPONSIVE STUFF
+// export const getNewData = async (inputObj) => {
+//   //checks if command triggered, if so gets type of command triggered
+//   const commandTriggerType = await checkNewDataTrigger(inputObj);
+
+//   if (!commandTriggerType) return null;
+
+//   //get user input
+//   const userInputParams = await buildInputParams();
+
+//   //build params
+//   const paramsObj = { ...userInputParams, ...inputObj };
+//   paramsObj.route = "/get-new-data-route";
+//   paramsObj.commandType = commandTriggerType;
+
+//   const dataObj = await sendToBack(paramsObj);
+
+//   return dataObj;
+// };
 
 //better version of expand backend data equation
 export const expandBackendData = async (dataType) => {
