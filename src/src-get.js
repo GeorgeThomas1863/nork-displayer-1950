@@ -3,7 +3,7 @@ import CONFIG from "../config/config.js";
 import { getBackendDefaultParams } from "../config/map-display.js";
 import dbModel from "../models/db-model.js";
 import { articleTypeMap } from "../config/map-display.js";
-import { fixInputDefaults } from "./src-fix.js";
+import { fixInputDefaults, fixDataByType, removeInvalidItems } from "./src-fix.js";
 
 export const getBackendDataDefault = async () => {
   //get default shit
