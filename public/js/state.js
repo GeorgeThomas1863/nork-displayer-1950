@@ -1,17 +1,22 @@
-export const currentData = {
+export const state = {
   route: "/get-backend-data-route",
   dataType: "pics",
-  dataObj: null,
+  data: null,
   isFirstLoad: true,
   clickId: null,
   expandType: null,
 };
 
 export const newDataTrigger = async () => {
-  const { isFirstLoad } = currentData;
+  const { isFirstLoad, data } = state;
 
   //trigger new data on first load
-  if (isFirstLoad) return true;
+  if (isFirstLoad || !data) return true;
+
+  console.log("NEW DATA TRIGGER");
+  console.log(data);
+
+  return true;
 };
 
 // MAKE BELOW CLICK TRIGGER

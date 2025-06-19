@@ -3,7 +3,7 @@ import { buildDropDown } from "./build-drop-down.js";
 import { buildInputForms } from "./build-forms.js";
 // import { buildBackendDefault } from "./build-backend.js";
 import { hideArray, unhideArray, sendToBack, buildInputParams, checkNewDataTrigger, buildFailElement } from "./util.js";
-import { currentData, newDataTrigger } from "./state.js";
+import { state, newDataTrigger } from "./state.js";
 
 //get display element
 const displayElement = document.getElementById("display-element");
@@ -12,7 +12,7 @@ const failElement = await buildFailElement();
 //DEFAULT DISPLAY
 export const buildDisplay = async () => {
   if (!displayElement) return null;
-  const { isFirstLoad } = currentData;
+  const { isFirstLoad } = state;
 
   //build drop down / form on first load
   if (isFirstLoad) {
@@ -26,21 +26,26 @@ export const buildDisplay = async () => {
   if (!newDataNeeded) return null;
 
   //get / parse backend data (returns array of objects)
-  const backendDataArray = await sendToBack(currentData);
-  const backendDataParsed = await buildBackendDisplay(backendDataArray);
+  const backendData = await sendToBack(state);
+  const backendDataParsed = await buildBackendDisplay(backendData);
   console.log("!!!!BACKEND DATA PARSED");
   console.log(backendDataParsed);
 
   displayElement.append(backendDataParsed);
 
   //UPDATE THE STATE HERE
+  state.data = backendData;
+  state.isFirstLoad = false;
+
+  console.log("CURRENT state");
+  console.log(state);
 
   return "#DONE";
 };
 
 export const buildBackendDisplay = async (inputArray) => {
   if (!inputArray || !inputArray.length) return failElement;
-  const { isFirstLoad } = currentData;
+  const { isFirstLoad } = state;
 
   //build wrapper
   const backendDataWrapper = document.createElement("div");
