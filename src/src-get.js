@@ -28,11 +28,11 @@ export const getBackendDataDefault = async () => {
       dataArrayRaw = await dataModel.getNewestItemsArray();
     }
 
-    const dataArrayFixed = await fixDataByType(dataArrayRaw, dataType);
+    const dataArrayValid = await removeInvalidItems(dataArrayRaw, dataType, howMany);
+    const dataArrayFixed = await fixDataByType(dataArrayValid, dataType);
     // console.log("DATA ARRAY FIXED");
     // console.log(dataType);
     // console.log(dataArrayFixed);
-    const dataArray = await removeInvalidItems(dataArrayFixed, dataType, howMany);
 
     // console.log("DATA ARRAY");
     // console.log(dataType);
@@ -40,7 +40,7 @@ export const getBackendDataDefault = async () => {
 
     const dataObj = {
       dataType: dataType,
-      dataArray: dataArray,
+      dataArray: dataArrayFixed,
     };
 
     defaultDataArray.push(dataObj);
