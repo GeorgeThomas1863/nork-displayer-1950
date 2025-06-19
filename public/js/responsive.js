@@ -1,4 +1,4 @@
-import { getNewData, expandBackendData, toggleDropdown } from "./main.js";
+import { expandBackendData, toggleDropdown } from "./main.js";
 import { getNewAdminData } from "./admin.js";
 import { debounce } from "./util.js";
 import { buildBackendNew } from "./build-backend.js";

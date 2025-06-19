@@ -1,7 +1,7 @@
 import d from "./define-things.js";
 import { buildDropDown } from "./build-drop-down.js";
 import { buildInputForms } from "./build-forms.js";
-import { buildBackendDefault } from "./build-backend.js";
+// import { buildBackendDefault } from "./build-backend.js";
 import { hideArray, unhideArray, sendToBack, buildInputParams, checkNewDataTrigger, buildFailElement } from "./util.js";
 import { currentData, newDataTrigger } from "./state.js";
 
@@ -27,6 +27,9 @@ export const buildDisplay = async () => {
 
   //get / parse backend data
   const backendDataObj = await sendToBack(currentData);
+  console.log("BACKEND DATA OBJ");
+  console.log(backendDataObj);
+
   const backendDataParsed = await buildBackendDisplay(backendDataObj);
 
   displayElement.append(backendDataParsed);
