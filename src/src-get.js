@@ -214,7 +214,7 @@ export const getVidData = async (vidURL) => {
 
 //[half assed answer below, might need to do same for picSets / assumes prob is newest shit not downloaded]
 //RE-GET / PULL DATA
-export const reGetData = async (dataType, howMany) => {
+export const rePullData = async (dataType, howMany) => {
   const { vidsDownloaded } = CONFIG;
 
   switch (dataType) {

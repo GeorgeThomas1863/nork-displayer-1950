@@ -1,6 +1,6 @@
 import CONFIG from "../config/config.js";
 import dbModel from "../models/db-model.js";
-import { getPicData, getVidData } from "./src-get.js";
+import { getPicData, getVidData, rePullData } from "./src-get.js";
 import { checkItemExists } from "./src-check.js";
 
 //FIX DATA SECTION
@@ -225,7 +225,7 @@ export const removeInvalidItems = async (inputArray, dataType, howMany) => {
   }
 
   //half assed answer below, might need to do same for picSets
-  const reGetData = await reGetData(dataType, howMany);
+  const newDataArray = await rePullData(dataType, howMany);
 
-  return reGetData;
+  return newDataArray;
 };
