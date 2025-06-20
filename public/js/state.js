@@ -40,7 +40,7 @@ export const newDataTrigger = async () => {
     //pass condition
     if (defaultItem === inputItem) continue;
 
-    const moreDataNeeded = await checkMoreDataNeeded(k, inputItem, defaultItem);
+    const moreDataNeeded = await checkMoreDataNeeded(k, inputItem);
     if (!moreDataNeeded) continue;
 
     // console.log("k");
@@ -57,13 +57,15 @@ export const newDataTrigger = async () => {
   return false;
 };
 
-export const checkMoreDataNeeded = async (k, inputItem, defaultItem) => {
+export const checkMoreDataNeeded = async (k, inputItem) => {
+  const { dataReq } = state;
+  //return true on all sorts (just assume not loaded)
+  if (k.includes("-to-")) return true;
+
   console.log("k");
   console.log(k);
   console.log("inputItem");
   console.log(inputItem);
-  console.log("defaultItem");
-  console.log(defaultItem);
 
   // if (inputItem === defaultItem) return false;
 
