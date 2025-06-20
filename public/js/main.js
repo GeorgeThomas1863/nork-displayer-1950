@@ -44,9 +44,6 @@ export const buildDisplay = async () => {
   state.data = backendData;
   state.isFirstLoad = false;
 
-  console.log("CURRENT state");
-  console.log(state);
-
   return "#DONE";
 };
 

@@ -42,10 +42,10 @@ export const mainChangeHandler = async (e) => {
   e.preventDefault();
   const changeElement = e.target;
   const changeId = changeElement.id;
-  console.log("CHANGE ELEMENT");
-  console.log(e);
-  console.log(changeElement);
-  console.log(changeId);
+  // console.log("CHANGE ELEMENT");
+  // console.log(e);
+  // console.log(changeElement);
+  // console.log(changeId);
 
   const eventTriggered = await checkEventTriggered(changeId);
   if (!eventTriggered) return null;
