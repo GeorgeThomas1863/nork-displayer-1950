@@ -184,12 +184,12 @@ export const removeInvalidItems = async (inputArray, dataType, howMany) => {
           continue;
         }
 
-        console.log("PIC ARRAY");
-        console.log(picArray);
-
         const picArrayFixed = [];
         for (let j = 0; j < picArray.length; j++) {
           const picObj = picArray[j];
+          console.log("BALLFUCKER!!!!");
+          console.log(picObj);
+
           const itemExists = await checkItemExists(picObj);
           if (!itemExists) continue;
 
