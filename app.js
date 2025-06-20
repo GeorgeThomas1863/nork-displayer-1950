@@ -4,6 +4,8 @@
 
 //ADD LOGIC for WHETHER getting new data is necessary [key part]
 
+//KEEP GOING WIHT LOGIC FOR WHETHER TO GET NEW DATA
+
 //REDO EVENT LISTENERS FOR HOW MUCH
 
 // get rid of vids as separate thing
