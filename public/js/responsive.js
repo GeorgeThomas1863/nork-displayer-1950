@@ -55,8 +55,6 @@ export const mainChangeHandler = async (e) => {
   //if needed get new data
 
   //otherwise hide / unhide things
-
-
 };
 
 //create debounced function
@@ -72,9 +70,9 @@ export const mainInputHandler = async (e) => {
     inputId: inputId,
   };
 
-  const newBackendData = await debouncedGetNewData(inputObj);
-  if (!newBackendData) return null;
-  await buildBackendNew(newBackendData);
+  // const newBackendData = await debouncedGetNewData(inputObj);
+  // if (!newBackendData) return null;
+  // await buildBackendNew(newBackendData);
 
   return true;
 };
