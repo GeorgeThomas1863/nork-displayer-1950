@@ -28,11 +28,11 @@ export const newDataTrigger = async () => {
   const inputParams = await buildInputParams();
   const defaultParams = d.defaultInputMap;
 
-  console.log("INPUT PARAMS");
-  console.log(inputParams);
+  // console.log("INPUT PARAMS");
+  // console.dir(inputParams);
 
-  // console.log("!!!!!!!DEFAULT PARAMS");
-  // console.log(defaultParams);
+  console.log("!!!!!!!DEFAULT PARAMS");
+  console.dir(defaultParams);
 
   // const diffArr = [];
   // for (let k in defaultParams) {
