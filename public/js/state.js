@@ -40,6 +40,9 @@ export const newDataTrigger = async () => {
     //pass condition
     if (defaultItem === inputItem) continue;
 
+    const moreDataNeeded = await checkMoreDataNeeded(k, inputItem, defaultItem);
+    if (!moreDataNeeded) continue;
+
     // console.log("k");
     // console.log(k);
 
@@ -52,6 +55,19 @@ export const newDataTrigger = async () => {
   }
 
   return false;
+};
+
+export const checkMoreDataNeeded = async (k, inputItem, defaultItem) => {
+  console.log("k");
+  console.log(k);
+  console.log("inputItem");
+  console.log(inputItem);
+  console.log("defaultItem");
+  console.log(defaultItem);
+
+  // if (inputItem === defaultItem) return false;
+
+  // return true;
 };
 
 // MAKE BELOW CLICK TRIGGER
