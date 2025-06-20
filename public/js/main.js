@@ -41,7 +41,7 @@ export const buildDisplay = async () => {
   console.log(displayElement);
 
   //UPDATE THE STATE HERE
-  state.data = backendData;
+  // state.data = backendData;
   state.isFirstLoad = false;
 
   return "#DONE";
