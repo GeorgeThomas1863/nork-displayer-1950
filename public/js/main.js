@@ -98,17 +98,15 @@ export const buildBackendDisplay = async (inputArray) => {
 
 //better version of expand backend data equation
 export const expandForm = async (dataType) => {
+  const { expandIdsArr } = d;
   console.log("EXPAND BACKEND DATA");
   console.log(dataType);
 
-  //build array of expand form elements [could use object.Keys()]
-  const articleFormElement = document.getElementById("article-array-element");
-  const picFormElement = document.getElementById("pic-array-element");
-  const picSetFormElement = document.getElementById("pic-set-array-element");
-  const vidFormElement = document.getElementById("vid-array-element");
-  const vidPageFormElement = document.getElementById("vid-page-array-element");
-
-  const expandElementsArr = [articleFormElement, picFormElement, picSetFormElement, vidFormElement, vidPageFormElement];
+  //build array of expand form elements (defining id's in define-things.js)
+  const expandElementsArr = [];
+  for (let i = 0; i < expandIdsArr.length; i++) {
+    expandElementsArr.push(document.getElementById(expandIdsArr[i]));
+  }
 
   console.log("EXPAND ELEMENTS ARRAY");
   console.log(expandElementsArr);

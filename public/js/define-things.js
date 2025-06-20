@@ -15,6 +15,7 @@ const d = {
   },
   changeTriggerArr: ["article-type", "article-sort-by", "pic-type", "pic-sort-by", "vid-type", "vid-sort-by"],
   expandTriggerArr: ["article-form-header", "pic-form-header", "vid-form-header"],
+  expandIdsArr: ["article-array-element", "pic-array-element", "pic-set-array-element", "vid-array-element", "vid-page-array-element"],
   inputTriggerArr: ["article-how-many", "pic-how-many", "vid-how-many"],
   backendTypeArr: ["articles", "pics", "picSets", "vids", "vidPages"],
   expandTypeArr: ["article", "pic", "vid"],
@@ -29,14 +30,6 @@ const d = {
     vidType: "vid-alone",
     vidHowMany: 1,
     vidSortBy: "vid-newest-to-oldest",
-  },
-
-  expandTypeMap: {
-    articleFormElement: document.getElementById("article-array-element"),
-    picFormElement: document.getElementById("pic-array-element"),
-    picSetFormElement: document.getElementById("pic-set-array-element"),
-    vidFormElement: document.getElementById("vid-array-element"),
-    vidPageFormElement: document.getElementById("vid-page-array-element"),
   },
 };
 
