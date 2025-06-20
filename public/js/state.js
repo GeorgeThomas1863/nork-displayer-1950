@@ -35,11 +35,11 @@ export const newDataTrigger = async () => {
   // console.log(defaultParams);
 
   const diffArr = [];
-  for (let i = 0; i < defaultParams.length; i++) {
-    const key = defaultParams[i];
-
-    console.log("AHHHHHHHHHHHH");
-    console.log(key);
+  for (let k in defaultParams) {
+    if (defaultParams[k] !== inputParams[k]) {
+      console.log("AHHHHHHHHHHHH");
+      console.log(k);
+    }
 
     // for (const key in inputParams) {
     //   const inputItem = inputParams[key];
