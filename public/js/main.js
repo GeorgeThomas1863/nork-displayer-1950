@@ -123,7 +123,7 @@ export const expandForm = async (dataType) => {
     case "pic-form-header":
       if (picType === "pic-alone") {
         await unhideArray([expandElementsArr[1]]);
-      } else if (picType === "pic-set") {
+      } else if (picType === "pic-sets") {
         await unhideArray([expandElementsArr[2]]);
       } else {
         return null;
