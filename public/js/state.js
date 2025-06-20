@@ -6,7 +6,8 @@ export const state = {
   dataType: "pics",
   data: null,
   isFirstLoad: true,
-  howMany: 0,
+  //data already requested
+  dataReq: d.defaultInputMap,
 };
 
 export const checkEventTriggered = async (changeId) => {
@@ -20,28 +21,28 @@ export const checkEventTriggered = async (changeId) => {
 };
 
 export const newDataTrigger = async () => {
-  const { isFirstLoad, data } = state;
+  const { isFirstLoad, data, dataReq } = state;
 
   //trigger new data on first load
   if (isFirstLoad || !data) return true;
 
   const inputParams = await buildInputParams();
-  const defaultParams = d.defaultInputMap;
+  // const defaultParams = d.defaultInputMap;
 
   // console.log("!!!!!!!DEFAULT PARAMS");
   // console.dir(defaultParams);
 
   const diffArr = [];
-  for (let k in defaultParams) {
-    const defaultItem = defaultParams[k];
+  for (let k in dataReq) {
+    const defaultItem = dataReq[k];
     const inputItem = inputParams[k];
 
-    if (defaultItem !== inputItem) {
-      console.log("AHHHHHHHHHHHH");
-      console.log(k);
-      console.log(defaultItem);
-      console.log(inputItem);
-    }
+    if (defaultItem === inputItem) continue;
+
+    console.log("AHHHHHHHHHHHH");
+    console.log(k);
+    console.log(defaultItem);
+    console.log(inputItem);
   }
 
   console.log("DEFAULT PARAMS");
