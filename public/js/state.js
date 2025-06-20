@@ -21,10 +21,10 @@ export const checkEventTriggered = async (changeId) => {
 };
 
 export const newDataTrigger = async () => {
-  const { isFirstLoad, data, dataReq } = state;
+  const { isFirstLoad, dataReq } = state;
 
   //trigger new data on first load
-  if (isFirstLoad || !data) return true;
+  if (isFirstLoad) return true;
 
   const inputParams = await buildInputParams();
   // const defaultParams = d.defaultInputMap;
