@@ -99,8 +99,11 @@ export const buildBackendDisplay = async (inputArray) => {
 //better version of expand backend data equation
 export const expandForm = async (dataType) => {
   const { expandIdsArr } = d;
-  console.log("EXPAND BACKEND DATA");
-  console.log(dataType);
+  // console.log("EXPAND BACKEND DATA");
+  // console.log(dataType);
+
+  const picType = document.getElementById("pic-type").value;
+  const vidType = document.getElementById("vid-type").value;
 
   //build array of expand form elements (defining id's in define-things.js)
   const expandElementsArr = [];
@@ -111,66 +114,34 @@ export const expandForm = async (dataType) => {
   //hide everything
   await hideArray(expandElementsArr);
 
-  //unhide the one that is being expanded
+  //unhide the one  being expanded
   switch (dataType) {
     case "article-form-header":
       await unhideArray([expandElementsArr[0]]);
       return true;
 
     case "pic-form-header":
-      await unhideArray([expandElementsArr[1]]);
+      if (picType === "pic-alone") {
+        await unhideArray([expandElementsArr[1]]);
+      } else if (picType === "pic-set") {
+        await unhideArray([expandElementsArr[2]]);
+      } else {
+        return null;
+      }
+
       return true;
 
     case "vid-form-header":
-      await unhideArray([expandElementsArr[3]]);
+      if (vidType === "vid-alone") {
+        await unhideArray([expandElementsArr[3]]);
+      } else if (vidType === "vid-pages") {
+        await unhideArray([expandElementsArr[4]]);
+      } else {
+        return null;
+      }
+
       return true;
   }
-
-  // Build typeMap using the consistent naming pattern
-  // const typeMap = {};
-  // for (let i = 0; i < d.expandTypeArr.length; i++) {
-  //   const typeValue = d.expandTypeArr[i];
-  //   const formHeader = `${typeValue}-form-header`;
-
-  //   typeMap[formHeader] = {
-  //     wrapperElement: () => document.getElementById(`${typeValue}-wrapper`),
-  //     arrowElement: () => document.querySelector(`#collapse-arrow[data-expand='${formHeader}']`),
-  //   };
-  // }
-
-  // const currentTypeData = typeMap[dataType];
-
-  // const currentArrow = currentTypeData.arrowElement();
-  // const isCurrentExpanded = currentArrow.classList.contains("expanded");
-
-  // // Get all form headers by looping through baseTypes
-  // const currentElementArray = [currentTypeData.wrapperElement()];
-  // const otherElementArray = [];
-  // const otherArrowArray = [];
-
-  // for (let i = 0; i < d.expandTypeArr.length; i++) {
-  //   const typeValue = d.expandTypeArr[i];
-  //   const formHeader = `${typeValue}-form-header`;
-
-  //   if (formHeader !== dataType) {
-  //     const typeData = typeMap[formHeader];
-  //     otherElementArray.push(typeData.wrapperElement());
-  //     otherArrowArray.push(typeData.arrowElement());
-  //   }
-  // }
-
-  // if (isCurrentExpanded) {
-  //   await hideArray(otherElementArray);
-  //   await unhideArray(currentElementArray);
-
-  //   for (let i = 0; i < otherArrowArray.length; i++) {
-  //     otherArrowArray[i].classList.remove("expanded");
-  //   }
-  // } else {
-  //   await hideArray(currentElementArray);
-  // }
-
-  // return true;
 };
 
 export const toggleDropdown = async (toggleType) => {
