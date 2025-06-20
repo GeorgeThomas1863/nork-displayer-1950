@@ -13,8 +13,7 @@ export const runGetBackendData = async (inputObj) => {
   if (isFirstLoad) {
     const defaultData = await getBackendDataDefault();
     console.log("DEFAULT DATA BACKEND");
-    console.log(defaultData.dataType);
-    console.dir(defaultData.dataType);
+    console.log(defaultData);
     return defaultData;
   }
 
