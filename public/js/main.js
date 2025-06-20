@@ -102,10 +102,13 @@ export const expandForm = async (dataType) => {
   console.log(dataType);
 
   //build array of expand form elements [could use object.Keys()]
-  const expandElementsArr = [];
-  for (const key in d.expandTypeMap) {
-    expandElementsArr.push(key);
-  }
+  const articleFormElement = document.getElementById("article-array-element");
+  const picFormElement = document.getElementById("pic-array-element");
+  const picSetFormElement = document.getElementById("pic-set-array-element");
+  const vidFormElement = document.getElementById("vid-array-element");
+  const vidPageFormElement = document.getElementById("vid-page-array-element");
+
+  const expandElementsArr = [articleFormElement, picFormElement, picSetFormElement, vidFormElement, vidPageFormElement];
 
   console.log("EXPAND ELEMENTS ARRAY");
   console.log(expandElementsArr);
