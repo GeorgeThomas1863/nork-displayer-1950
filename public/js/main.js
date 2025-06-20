@@ -29,7 +29,7 @@ export const buildDisplay = async () => {
   const backendData = await sendToBack(state);
 
   console.log("BACKEND DATA");
-  console.log(backendData);
+  console.log(backendData.length);
 
   const backendDataParsed = await buildBackendDisplay(backendData);
   // console.log("!!!!BACKEND DATA PARSED");
