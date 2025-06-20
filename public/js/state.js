@@ -8,6 +8,7 @@ export const state = {
   isFirstLoad: true,
   //data already requested
   dataReq: d.defaultInputMap,
+  trigger: null,
 };
 
 export const checkEventTriggered = async (changeId) => {
@@ -44,6 +45,7 @@ export const newDataTrigger = async () => {
 
     //trigger new data, set the dataReq first
     state.dataReq = inputParams;
+    state.trigger = k;
     // console.log("STATE");
     // console.dir(state);
     return true;
