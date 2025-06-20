@@ -45,10 +45,8 @@ export const newDataTrigger = async () => {
     console.log(inputItem);
   }
 
-  console.log("DEFAULT PARAMS");
-  console.dir(defaultParams);
-  console.log("INPUT PARAMS");
-  console.dir(inputParams);
+  // console.log("INPUT PARAMS");
+  // console.dir(inputParams);
 
   // return true;
 };
