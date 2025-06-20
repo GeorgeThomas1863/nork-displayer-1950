@@ -3,7 +3,7 @@ import { buildDropDown } from "./build-drop-down.js";
 import { buildInputForms } from "./build-forms.js";
 // import { buildBackendDefault } from "./build-backend.js";
 import { hideArray, unhideArray, sendToBack, buildInputParams, checkNewDataTrigger, buildFailElement } from "./util.js";
-import { state, newDataTrigger } from "./state.js";
+import { state, updateDataLoaded, newDataTrigger } from "./state.js";
 
 //get display element
 const displayElement = document.getElementById("display-element");
