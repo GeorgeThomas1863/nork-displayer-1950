@@ -28,8 +28,8 @@ export const buildDisplay = async () => {
   //get / parse backend data (returns array of objects)
   const backendData = await sendToBack(state);
 
-  console.log("BACKEND DATA");
-  console.log(backendData.length);
+  // console.log("BACKEND DATA");
+  // console.log(backendData.length);
 
   const backendDataParsed = await buildBackendDisplay(backendData);
   // console.log("!!!!BACKEND DATA PARSED");
@@ -41,7 +41,7 @@ export const buildDisplay = async () => {
   console.log(displayElement);
 
   //UPDATE THE STATE HERE
-  // state.data = backendData;
+  await updateDataLoaded(backendData);
   state.isFirstLoad = false;
 
   return "#DONE";

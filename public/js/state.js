@@ -4,11 +4,16 @@ import { buildInputParams } from "./util.js";
 export const state = {
   route: "/get-backend-data-route",
   dataType: "pics",
-  // data: null,
   isFirstLoad: true,
   //data already requested
   dataReq: d.defaultInputMap,
+  dataLoaded: null,
   trigger: null,
+};
+
+export const updateDataLoaded = async (backendData) => {
+  console.log("BACKEND DATA");
+  console.dir(backendData);
 };
 
 export const checkEventTriggered = async (changeId) => {
