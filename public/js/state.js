@@ -34,15 +34,22 @@ export const newDataTrigger = async () => {
   console.log("DEFAULT PARAMS");
   console.log(defaultParams);
 
-  // const diffArr = [];
-  // for (const key in inputParams) {
-  //   const inputItem = inputParams[key];
-  //   if (inputItem === defaultParams[key]) continue;
-  //   console.log("AHHHHHHHHHHHH");
-  //   console.log(key);
-  //   console.log(inputItem);
-  //   console.log(defaultParams[key]);
-  // }
+  const diffArr = [];
+  for (let i = 0; i < defaultParams.length; i++) {
+    const key = defaultParams[i];
+    const inputItem = inputParams[key];
+    console.log("AHHHHHHHHHHHH");
+    console.log(key);
+    console.log(inputItem);
+
+    // for (const key in inputParams) {
+    //   const inputItem = inputParams[key];
+    //   if (inputItem === defaultParams[key]) continue;
+    //   console.log("AHHHHHHHHHHHH");
+    //   console.log(key);
+    //   console.log(inputItem);
+    //   console.log(defaultParams[key]);
+  }
 
   // return true;
 };
