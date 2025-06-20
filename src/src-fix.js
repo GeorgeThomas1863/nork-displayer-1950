@@ -176,6 +176,7 @@ export const removeInvalidItems = async (inputArray, dataType, howMany) => {
     case "articles":
     case "picSets":
       for (let i = 0; i < inputArray.length; i++) {
+        //extract picArray
         const dataObj = inputArray[i];
         const { picArray } = dataObj;
         if (!picArray) {
@@ -184,16 +185,19 @@ export const removeInvalidItems = async (inputArray, dataType, howMany) => {
           continue;
         }
 
+        //check if exists
         const picArrayFixed = [];
         for (let j = 0; j < picArray.length; j++) {
-          const picObj = picArray[j];
-          console.log("BALLFUCKER!!!!");
-          console.log(picObj);
+          try {
+            const url = picArray[j];
+            const itemExists = await checkItemExists(url);
+            if (!itemExists) continue;
 
-          const itemExists = await checkItemExists(picObj);
-          if (!itemExists) continue;
-
-          picArrayFixed.push(picObj);
+            picArrayFixed.push(url);
+          } catch (e) {
+            console.log(e.message + "; SAVE PATH: " + e.savePath + "; PICURL: " + e.url);
+            continue;
+          }
         }
 
         dataObj.picArray = picArrayFixed;
@@ -207,7 +211,10 @@ export const removeInvalidItems = async (inputArray, dataType, howMany) => {
     case "pics":
       for (let i = 0; i < inputArray.length; i++) {
         const dataObj = inputArray[i];
-        const itemExists = await checkItemExists(dataObj);
+        if (!dataObj || !dataObj.url) continue;
+        const { url } = dataObj;
+
+        const itemExists = await checkItemExists(url);
         if (!itemExists) continue;
 
         dataReturnArray.push(dataObj);
@@ -219,7 +226,10 @@ export const removeInvalidItems = async (inputArray, dataType, howMany) => {
     case "vidPages":
       for (let i = 0; i < inputArray.length; i++) {
         const dataObj = inputArray[i];
-        const itemExists = await checkItemExists(dataObj, "vid");
+        if (!dataObj || !dataObj.url) continue;
+        const { url } = dataObj;
+
+        const itemExists = await checkItemExists(url);
         if (!itemExists) continue;
 
         dataReturnArray.push(dataObj);

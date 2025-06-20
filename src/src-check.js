@@ -1,5 +1,6 @@
-import fs from "fs";
+// import fs from "fs";
 import { expandTriggerMap, inputIdTriggerMap } from "../config/map-display.js";
+import { getPicExtraData } from "./src-get.js";
 
 //--------------------------------
 
@@ -88,16 +89,40 @@ export const checkInputId = async (inputObj) => {
 //----------------------
 
 //throw error if item doesnt exist
-export const checkItemExists = async (inputObj, type = "pic") => {
-  if (!inputObj || !inputObj.savePath) return null;
-  const { savePath, url } = inputObj;
+// export const checkItemExists = async (inputObj, type = "pic") => {
+//   if (!inputObj || !inputObj.savePath) return null;
+//   const { savePath, url } = inputObj;
 
-  if (!savePath || !fs.existsSync(savePath)) {
-    console.log("AHHHHHHHHHHHHHHHH");
-    console.log(`${type.toUpperCase()} NOT DOWNLOADED`);
-    console.log("ITEM URL: " + url);
-    return null;
-  }
+//   if (!savePath || !fs.existsSync(savePath)) {
+//     console.log("AHHHHHHHHHHHHHHHH");
+//     console.log(`${type.toUpperCase()} NOT DOWNLOADED`);
+//     console.log("ITEM URL: " + url);
+//     return null;
+//   }
+
+//   return true;
+// };
+
+export const checkItemExists = async (url) => {
+  if (!url) return null;
+
+  //get save path from url
+  const params = {
+    keyToLookup: "url",
+    itemValue: url,
+  };
+
+  //throws error if item doesnt exit
+  await getPicExtraData(params);
+
+  // const checkModel = new dbModel(params, picsDownloaded);
+
+  // if (!savePath || !fs.existsSync(savePath)) {
+  //   console.log("AHHHHHHHHHHHHHHHH");
+  //   console.log(`${type.toUpperCase()} NOT DOWNLOADED`);
+  //   console.log("ITEM URL: " + url);
+  //   return null;
+  // }
 
   return true;
 };
