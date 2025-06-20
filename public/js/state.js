@@ -39,7 +39,7 @@ export const newDataTrigger = async () => {
     console.log(defaultParams[key]);
   }
 
-  return true;
+  // return true;
 };
 
 // MAKE BELOW CLICK TRIGGER
