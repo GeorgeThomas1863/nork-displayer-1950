@@ -108,24 +108,23 @@ export const expandForm = async (dataType) => {
     expandElementsArr.push(document.getElementById(expandIdsArr[i]));
   }
 
-  console.log("EXPAND ELEMENTS ARRAY");
-  console.log(expandElementsArr);
-
   //hide everything
   await hideArray(expandElementsArr);
 
   //unhide the one that is being expanded
+  switch (dataType) {
+    case "article-form-header":
+      await unhideArray([expandElementsArr[0]]);
+      return true;
 
-  // switch (dataType) {
-  //   case "article-form-header":
-  //     break;
+    case "pic-form-header":
+      await unhideArray([expandElementsArr[1]]);
+      return true;
 
-  //   case "pic-form-header":
-  //     break;
-
-  //   case "vid-form-header":
-  //     break;
-  // }
+    case "vid-form-header":
+      await unhideArray([expandElementsArr[3]]);
+      return true;
+  }
 
   // Build typeMap using the consistent naming pattern
   // const typeMap = {};
