@@ -39,9 +39,14 @@ export const newDataTrigger = async () => {
     //pass condition
     if (defaultItem === inputItem) continue;
 
+    console.log("k");
+    console.log(k);
+
     //trigger new data, set the dataReq first
-    data.dataReq = inputParams;
-    return true;
+    state.dataReq = inputParams;
+    console.log("STATE");
+    console.dir(state);
+    // return true;
   }
 
   return false;
