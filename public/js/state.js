@@ -10,8 +10,21 @@ export const state = {
   expandType: null,
 };
 
+export const checkEventTriggered = async (changeId) => {
+  const { changeTriggerArr } = d;
+
+  for (let i = 0; i < changeTriggerArr.length; i++) {
+    if (changeId === changeTriggerArr[i]) return true;
+  }
+
+  return null;
+};
+
 export const newDataTrigger = async () => {
   const { isFirstLoad, data } = state;
+  console.log("NEW DATA TRIGGER");
+  console.log("AHHHHHHHHHHH");
+  console.log(state);
 
   //trigger new data on first load
   if (isFirstLoad || !data) return true;
@@ -30,16 +43,6 @@ export const newDataTrigger = async () => {
   }
 
   return true;
-};
-
-export const checkChangeTriggered = async (changeId) => {
-  const { changeTriggerArr } = d;
-
-  for (let i = 0; i < changeTriggerArr.length; i++) {
-    if (changeId === changeTriggerArr[i]) return true;
-  }
-
-  return null;
 };
 
 // MAKE BELOW CLICK TRIGGER

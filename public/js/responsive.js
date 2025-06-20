@@ -1,8 +1,8 @@
-import { toggleDropdown, expandForm } from "./main.js";
+import { buildDisplay, toggleDropdown, expandForm } from "./main.js";
 import { getNewAdminData } from "./admin.js";
 import { debounce } from "./util.js";
 import { buildBackendNew } from "./build-backend.js";
-import { checkChangeTriggered, newDataTrigger } from "./state.js";
+import { checkEventTriggered, newDataTrigger } from "./state.js";
 
 //MAIN / NORMAL RESPONSIVE
 
@@ -47,10 +47,10 @@ export const mainChangeHandler = async (e) => {
   console.log(changeElement);
   console.log(changeId);
 
-  const changeTriggered = await checkChangeTriggered(changeId);
-  if (!changeTriggered) return null;
+  const eventTriggered = await checkEventTriggered(changeId);
+  if (!eventTriggered) return null;
 
-  const newDataNeeded = await newDataTrigger();
+  await buildDisplay();
 
   //if needed get new data
 
@@ -61,21 +61,21 @@ export const mainChangeHandler = async (e) => {
 // const debouncedGetNewData = debounce(getNewData);
 
 //input handler
-export const mainInputHandler = async (e) => {
-  const inputElement = e.target;
+// export const mainInputHandler = async (e) => {
+//   const inputElement = e.target;
 
-  const inputId = inputElement.id;
+//   const inputId = inputElement.id;
 
-  const inputObj = {
-    inputId: inputId,
-  };
+//   const inputObj = {
+//     inputId: inputId,
+//   };
 
-  // const newBackendData = await debouncedGetNewData(inputObj);
-  // if (!newBackendData) return null;
-  // await buildBackendNew(newBackendData);
+//   // const newBackendData = await debouncedGetNewData(inputObj);
+//   // if (!newBackendData) return null;
+//   // await buildBackendNew(newBackendData);
 
-  return true;
-};
+//   return true;
+// };
 
 //-----------------------------------
 
