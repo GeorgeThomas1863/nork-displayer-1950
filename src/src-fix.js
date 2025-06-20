@@ -177,14 +177,15 @@ export const removeInvalidItems = async (inputArray, dataType, howMany) => {
     case "picSets":
       for (let i = 0; i < inputArray.length; i++) {
         const dataObj = inputArray[i];
-        console.log("!!!AHHHHHHHHHHH DATA OBJ");
-        console.log(dataObj);
         const { picArray } = dataObj;
         if (!picArray) {
           dataReturnArray.push(dataObj);
           if (dataReturnArray.length === howMany) return dataReturnArray;
           continue;
         }
+
+        console.log("PIC ARRAY");
+        console.log(picArray);
 
         const picArrayFixed = [];
         for (let j = 0; j < picArray.length; j++) {
