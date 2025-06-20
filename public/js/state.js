@@ -32,23 +32,19 @@ export const newDataTrigger = async () => {
   // console.log("!!!!!!!DEFAULT PARAMS");
   // console.dir(defaultParams);
 
-  const diffArr = [];
   for (let k in dataReq) {
     const defaultItem = dataReq[k];
     const inputItem = inputParams[k];
 
+    //pass condition
     if (defaultItem === inputItem) continue;
 
-    console.log("AHHHHHHHHHHHH");
-    console.log(k);
-    console.log(defaultItem);
-    console.log(inputItem);
+    //trigger new data, set the dataReq first
+    data.dataReq = inputParams;
+    return true;
   }
 
-  // console.log("INPUT PARAMS");
-  // console.dir(inputParams);
-
-  // return true;
+  return false;
 };
 
 // MAKE BELOW CLICK TRIGGER
