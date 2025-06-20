@@ -66,6 +66,8 @@ export const checkMoreDataNeeded = async (k, inputItem) => {
   console.log(k);
   console.log("inputItem");
   console.log(inputItem);
+  console.log("dataReq");
+  console.dir(dataReq);
 
   // if (inputItem === defaultItem) return false;
 
