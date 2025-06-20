@@ -166,9 +166,9 @@ export const fixVidPageObj = async (inputObj) => {
 export const removeInvalidItems = async (inputArray, dataType, howMany) => {
   if (!inputArray || !inputArray.length || !dataType) return null;
 
-  console.log("REMOVE INVALID ITEMS DATA TYPE");
-  console.log(dataType);
-  console.log(howMany);
+  // console.log("REMOVE INVALID ITEMS DATA TYPE");
+  // console.log(dataType);
+  // console.log(howMany);
 
   const dataReturnArray = [];
   switch (dataType) {
@@ -177,6 +177,8 @@ export const removeInvalidItems = async (inputArray, dataType, howMany) => {
     case "picSets":
       for (let i = 0; i < inputArray.length; i++) {
         const dataObj = inputArray[i];
+        console.log("!!!AHHHHHHHHHHH DATA OBJ");
+        console.log(dataObj);
         const { picArray } = dataObj;
         if (!picArray) {
           dataReturnArray.push(dataObj);
