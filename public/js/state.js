@@ -22,9 +22,6 @@ export const checkEventTriggered = async (changeId) => {
 
 export const newDataTrigger = async () => {
   const { isFirstLoad, data } = state;
-  console.log("NEW DATA TRIGGER");
-  console.log("AHHHHHHHHHHH");
-  console.log(state);
 
   //trigger new data on first load
   if (isFirstLoad || !data) return true;
@@ -36,10 +33,10 @@ export const newDataTrigger = async () => {
   for (const key in inputParams) {
     const inputItem = inputParams[key];
     if (inputItem === defaultParams[key]) continue;
-    // console.log("AHHHHHHHHHHHH");
-    // console.log(key);
-    // console.log(inputItem);
-    // console.log(defaultParams[key]);
+    console.log("AHHHHHHHHHHHH");
+    console.log(key);
+    console.log(inputItem);
+    console.log(defaultParams[key]);
   }
 
   return true;
