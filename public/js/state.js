@@ -23,10 +23,10 @@ export const newDataTrigger = async () => {
   for (const key in inputParams) {
     const inputItem = inputParams[key];
     if (inputItem === defaultParams[key]) continue;
-    console.log("AHHHHHHHHHHHH");
-    console.log(key);
-    console.log(inputItem);
-    console.log(defaultParams[key]);
+    // console.log("AHHHHHHHHHHHH");
+    // console.log(key);
+    // console.log(inputItem);
+    // console.log(defaultParams[key]);
   }
 
   return true;
