@@ -6,8 +6,7 @@ export const state = {
   dataType: "pics",
   data: null,
   isFirstLoad: true,
-  clickId: null,
-  expandType: null,
+  howMany: 0,
 };
 
 export const checkEventTriggered = async (changeId) => {
@@ -29,10 +28,11 @@ export const newDataTrigger = async () => {
   const inputParams = await buildInputParams();
   const defaultParams = d.defaultInputMap;
 
-  console.log("STATE");
-  console.log(state);
-  console.log("!!!DATA");
-  console.log(data);
+  console.log("INPUT PARAMS");
+  console.log(inputParams);
+
+  // console.log("!!!!!!!DEFAULT PARAMS");
+  // console.log(defaultParams);
 
   // const diffArr = [];
   // for (let k in defaultParams) {
