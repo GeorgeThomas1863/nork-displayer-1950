@@ -27,7 +27,7 @@ const d = {
     picType: "pic-alone",
     picHowMany: 6,
     picSortBy: "pic-newest-to-oldest",
-    vidType: "vid-alone",
+    vidType: "vid-pages",
     vidHowMany: 1,
     vidSortBy: "vid-newest-to-oldest",
   },
