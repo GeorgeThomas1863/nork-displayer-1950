@@ -4,7 +4,6 @@ import { buildInputForms } from "./build-forms.js";
 // import { buildBackendDefault } from "./build-backend.js";
 import { hideArray, unhideArray, sendToBack, buildInputParams, checkNewDataTrigger, buildFailElement } from "./util.js";
 import { state, newDataTrigger } from "./state.js";
-import { defineCollapseItems } from "./collapse.js";
 
 //get display element
 const displayElement = document.getElementById("display-element");
