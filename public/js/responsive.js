@@ -104,7 +104,7 @@ const displayElement = document.getElementById("display-element");
 
 if (displayElement) {
   displayElement.addEventListener("click", mainClickHandler);
-  displayElement.addEventListener("input", mainInputHandler);
+  // displayElement.addEventListener("input", mainInputHandler);
   displayElement.addEventListener("change", mainChangeHandler);
 }
 
