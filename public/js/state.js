@@ -12,11 +12,13 @@ export const state = {
 };
 
 export const updateDataLoaded = async (inputArray) => {
-  const { backendTypeArr } = d;
+  // const { backendTypeArr } = d;
+  console.log("BACKEND TYPE ARRAY");
+  console.dir(inputArray);
 
   for (let i = 0; i < inputArray.length; i++) {
     const inputItem = inputArray[i];
-    const numberLoaded = inputItem[dataArray].length;
+    const numberLoaded = inputItem.dataArray.length;
     console.log("NUMBER LOADED");
     console.log(numberLoaded);
   }
