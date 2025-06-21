@@ -1,6 +1,7 @@
-import CONFIG from "../config/config.js";
-import dbModel from "../models/db-model.js";
-import { getPicData, getVidData, rePullData } from "./src-get.js";
+// import CONFIG from "../config/config.js";
+// import dbModel from "../models/db-model.js";
+import { rePullData } from "./src-main.js";
+import { getPicData, getVidData } from "./src-get.js";
 import { checkItemExists } from "./src-check.js";
 
 //FIX DATA SECTION

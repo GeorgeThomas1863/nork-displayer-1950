@@ -45,11 +45,6 @@ export const getBackendDataDefault = async () => {
     const dataArrayValid = await removeInvalidItems(dataArrayRaw, dataType, howMany);
     const dataArrayFixed = await fixDataByType(dataArrayValid, dataType);
 
-    if (dataType === "vidPages") {
-      console.log("AHHHHHHHHHHHHHHH");
-      console.log(dataArrayFixed);
-    }
-
     const dataObj = {
       dataType: dataType,
       dataArray: dataArrayFixed,
@@ -120,4 +115,54 @@ export const getBackendDataNew = async (inputObj) => {
   console.dir(dataArray);
 
   return dataArray;
+};
+
+//------------------------
+
+//[half assed answer below, might need to do same for picSets / assumes prob is newest shit not downloaded]
+//RE-GET / PULL DATA
+export const rePullData = async (dataType, howMany) => {
+  const { vidsDownloaded, vidPageContent } = CONFIG;
+
+  console.log("RE-PULL DATA DATA TYPE TRIGGERED");
+  console.log(dataType);
+  console.log(howMany);
+
+  switch (dataType) {
+    case "vidPages":
+      const vidParams = await getBackendDefaultParams("vids");
+      vidParams.howMany = 1;
+
+      const vidDataModel = new dbModel(vidParams, vidsDownloaded);
+      const vidDataObj = await vidDataModel.getNewestItemsArray();
+      if (!vidDataObj || !vidDataObj[0] || !vidDataObj[0].url) return null;
+      const { url } = vidDataObj[0];
+
+      const vidPageFindParams = {
+        keyToLookup: "vidURL",
+        itemValue: url,
+      };
+
+      //use url to get vid Page
+      const vidPageFindModel = new dbModel(vidPageFindParams, vidPageContent);
+      const vidPageObj = await vidPageFindModel.getUniqueItem();
+      if (!vidPageObj || !vidPageObj.vidPageId) return null;
+      const { vidPageId } = vidPageObj;
+
+      const vidPageGetParams = {
+        sortKey: "date",
+        sortKey2: "vidPageId",
+        howMany: howMany,
+        filterKey: "vidPageId",
+        filterValue: { $lte: vidPageId },
+      };
+
+      const vidPageGetModel = new dbModel(vidPageGetParams, vidPageContent);
+      const vidPageGetArray = await vidPageGetModel.getNewestItemsByTypeArray();
+
+      return vidPageGetArray;
+
+    default:
+      return null;
+  }
 };

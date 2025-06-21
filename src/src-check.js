@@ -88,21 +88,6 @@ export const checkInputId = async (inputObj) => {
 
 //----------------------
 
-//throw error if item doesnt exist
-// export const checkItemExists = async (inputObj, type = "pic") => {
-//   if (!inputObj || !inputObj.savePath) return null;
-//   const { savePath, url } = inputObj;
-
-//   if (!savePath || !fs.existsSync(savePath)) {
-//     console.log("AHHHHHHHHHHHHHHHH");
-//     console.log(`${type.toUpperCase()} NOT DOWNLOADED`);
-//     console.log("ITEM URL: " + url);
-//     return null;
-//   }
-
-//   return true;
-// };
-
 export const checkItemExists = async (url, type = "pic") => {
   if (!url) return null;
 

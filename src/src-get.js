@@ -1,6 +1,6 @@
 import fs from "fs";
 import CONFIG from "../config/config.js";
-import { getBackendDefaultParams } from "../config/map-display.js";
+// import { getBackendDefaultParams } from "../config/map-display.js";
 import dbModel from "../models/db-model.js";
 import { articleTypeMap } from "../config/map-display.js";
 
@@ -158,52 +158,3 @@ export const getVidData = async (vidURL) => {
 };
 
 //-------------------------
-
-//[half assed answer below, might need to do same for picSets / assumes prob is newest shit not downloaded]
-// MOVE TO MAIN
-//RE-GET / PULL DATA
-export const rePullData = async (dataType, howMany) => {
-  const { vidsDownloaded, vidPageContent } = CONFIG;
-
-  console.log("RE-PULL DATA DATA TYPE TRIGGERED");
-  console.log(dataType);
-  console.log(howMany);
-
-  switch (dataType) {
-    case "vidPages":
-      const vidParams = await getBackendDefaultParams("vids");
-      vidParams.howMany = 1;
-
-      const vidDataModel = new dbModel(vidParams, vidsDownloaded);
-      const vidDataObj = await vidDataModel.getNewestItemsArray();
-      if (!vidDataObj || !vidDataObj[0] || !vidDataObj[0].url) return null;
-      const { url } = vidDataObj[0];
-
-      const vidPageFindParams = {
-        keyToLookup: "vidURL",
-        itemValue: url,
-      };
-
-      //use url to get vid Page
-      const vidPageFindModel = new dbModel(vidPageFindParams, vidPageContent);
-      const vidPageObj = await vidPageFindModel.getUniqueItem();
-      if (!vidPageObj || !vidPageObj.vidPageId) return null;
-      const { vidPageId } = vidPageObj;
-
-      const vidPageGetParams = {
-        sortKey: "date",
-        sortKey2: "vidPageId",
-        howMany: howMany,
-        filterKey: "vidPageId",
-        filterValue: { $lte: vidPageId },
-      };
-
-      const vidPageGetModel = new dbModel(vidPageGetParams, vidPageContent);
-      const vidPageGetArray = await vidPageGetModel.getNewestItemsByTypeArray();
-
-      return vidPageGetArray;
-
-    default:
-      return null;
-  }
-};
