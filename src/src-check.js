@@ -106,6 +106,9 @@ export const checkInputId = async (inputObj) => {
 export const checkItemExists = async (url, type = "pic") => {
   if (!url) return null;
 
+  console.log("!!!!!!!!!!!CHECK ITEM EXISTS");
+  console.log(url);
+
   //auto throws error if vid doesnt exist
   if (type === "vid") {
     await getVidData(url);
