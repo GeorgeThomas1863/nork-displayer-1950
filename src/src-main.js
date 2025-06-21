@@ -7,7 +7,7 @@ import { fixDataByType, removeInvalidItems } from "./src-fix.js";
 
 //gets backend data from db
 export const runGetBackendData = async (inputObj) => {
-  if (!inputObj || !inputObj.isFirstLoad || !inputObj.dataType) return null;
+  if (!inputObj || !inputObj.dataType) return null;
   const { isFirstLoad } = inputObj;
 
   switch (isFirstLoad) {
