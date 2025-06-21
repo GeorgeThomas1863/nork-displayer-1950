@@ -15,9 +15,8 @@ export const state = {
 
 //MAKE MUCH MORE COMPLEX
 export const updateDataLoaded = async (inputArray) => {
-  // const { backendTypeArr } = d;
-  // console.log("BACKEND TYPE ARRAY");
-  // console.dir(inputArray);
+  console.log("UPDATE DATA LOADED INPUT");
+  console.dir(inputArray);
 
   const returnObj = {};
   for (let i = 0; i < inputArray.length; i++) {
@@ -37,6 +36,9 @@ export const updateDataLoaded = async (inputArray) => {
 
   state.dataLoaded = returnObj;
   state.isFirstLoad = false;
+
+  console.log("STATE AFTER UPDATE");
+  console.dir(state);
 
   return true;
 };

@@ -22,8 +22,8 @@ export const buildDisplay = async () => {
 
   //check if new data is needed [will pass on first load]
   const newDataNeeded = await checkNewDataNeeded();
-  console.log("NEW DATA NEEDED");
-  console.log(newDataNeeded);
+  // console.log("NEW DATA NEEDED");
+  // console.log(newDataNeeded);
 
   if (!newDataNeeded) return null;
 
@@ -41,8 +41,8 @@ export const buildDisplay = async () => {
 
   displayElement.append(backendDataParsed);
 
-  console.log("DISPLAY ELEMENT");
-  console.log(displayElement);
+  // console.log("DISPLAY ELEMENT");
+  // console.log(displayElement);
 
   //UPDATE THE STATE HERE
   await updateDataLoaded(backendData);
@@ -82,8 +82,8 @@ export const buildBackendDisplay = async (inputArray) => {
     const replaceId = d.replaceTypeMap[dataType];
     const replaceElement = document.getElementById(replaceId);
 
-    console.log("REPLACE ELEMENT");
-    console.log(replaceElement);
+    // console.log("REPLACE ELEMENT");
+    // console.log(replaceElement);
 
     //format data
     const func = d.displayFunctionMap[dataType];
