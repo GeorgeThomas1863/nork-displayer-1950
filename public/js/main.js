@@ -76,6 +76,10 @@ export const buildBackendDisplay = async (inputArray) => {
     }
   }
 
+  //otherwise new data
+  console.log("NEW DATA");
+  console.log(inputArray);
+
   if (!backendDataWrapper) return failElement;
 
   return backendDataWrapper;
