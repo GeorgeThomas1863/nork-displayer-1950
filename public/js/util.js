@@ -56,6 +56,7 @@ export const buildInputParams = async () => {
 
 export const hideArray = async (inputs) => {
   for (const input of inputs) {
+    if (!input) continue;
     input.classList.add("hidden");
   }
 };
