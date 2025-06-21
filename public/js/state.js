@@ -11,27 +11,22 @@ export const state = {
   trigger: null,
 };
 
-//!!!!HERE!!!!!
-
-//ADD ARTICLE TYPE HERE
-
 //MAKE MUCH MORE COMPLEX
 export const updateDataLoaded = async (inputArray) => {
   // const { backendTypeArr } = d;
-  console.log("BACKEND TYPE ARRAY");
-  console.dir(inputArray);
+  // console.log("BACKEND TYPE ARRAY");
+  // console.dir(inputArray);
 
   const returnObj = {};
   for (let i = 0; i < inputArray.length; i++) {
     const inputItem = inputArray[i];
     const { dataType } = inputItem;
 
+    //add in article type here
     if (dataType === "articles") {
       //just pull type from the first one
       const articleType = inputItem.dataArray[0].articleType;
-      console.log("ARTICLE DATA");
-      console.log(inputItem);
-      console.log(articleType);
+      state.articleType = articleType;
     }
 
     const numberLoaded = inputItem.dataArray.length;
@@ -57,6 +52,9 @@ export const checkEventTriggered = async (changeId) => {
 //basically return true except for how many
 export const checkNewDataNeeded = async () => {
   const { isFirstLoad, dataReq, dataLoaded, trigger } = state;
+
+  console.log("STATE");
+  console.dir(state);
 
   if (isFirstLoad) return true;
 
