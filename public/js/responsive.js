@@ -42,8 +42,8 @@ export const mainChangeHandler = async (e) => {
   state.trigger = eventTriggered;
   state.dataReq = inputParams;
 
-  console.log("EVENT TRIGGERED");
-  console.log(eventTriggered);
+  // console.log("EVENT TRIGGERED");
+  // console.log(eventTriggered);
 
   await buildDisplay();
 
