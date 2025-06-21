@@ -11,10 +11,13 @@ export const state = {
   trigger: null,
 };
 
+//!!!!HERE!!!!!
+
+//MAKE MUCH MORE COMPLEX
 export const updateDataLoaded = async (inputArray) => {
   // const { backendTypeArr } = d;
-  // console.log("BACKEND TYPE ARRAY");
-  // console.dir(inputArray);
+  console.log("BACKEND TYPE ARRAY");
+  console.dir(inputArray);
 
   const returnObj = {};
   for (let i = 0; i < inputArray.length; i++) {
@@ -34,6 +37,50 @@ export const checkEventTriggered = async (changeId) => {
   for (let i = 0; i < changeTriggerArr.length; i++) {
     const changeItem = changeTriggerArr[i];
     if (changeId === changeItem) return changeItem;
+  }
+
+  return null;
+};
+
+//basically return true except for how many
+export const checkNewDataNeeded = async () => {
+  const { isFirstLoad, dataReq, dataLoaded, trigger } = state;
+
+  if (isFirstLoad) return true;
+
+  //return true on all sorts (just assume not loaded)
+  if (trigger.includes("sort-by")) return true;
+
+  switch (trigger) {
+    case "pic-type":
+      const { pics, picSets } = dataLoaded;
+      const { picType, picHowMany } = dataReq;
+
+      switch (picType) {
+        case "pic-alone":
+          if (pics >= picHowMany) return null;
+          return true;
+        case "pic-sets":
+          if (picSets >= picHowMany) return null;
+          return true;
+      }
+
+    case "vid-type":
+      const { vids, vidPages } = dataLoaded;
+      const { vidType, vidHowMany } = dataReq;
+
+      switch (vidType) {
+        case "vid-alone":
+          if (vids >= vidHowMany) return null;
+          return true;
+        case "vid-pages":
+          if (vidPages >= vidHowMany) return null;
+          return true;
+      }
+
+    //MAKE ARTICLE LOGIC DEAL WITH ARTICLE TYPE
+    case "article-type":
+      return true;
   }
 
   return null;
@@ -73,95 +120,4 @@ export const checkEventTriggered = async (changeId) => {
 //   }
 
 //   return false;
-// };
-
-//basically return true except for how many
-export const checkNewDataNeeded = async () => {
-  const { isFirstLoad, dataReq, dataLoaded, trigger } = state;
-
-  console.log("STATE");
-  console.dir(state);
-
-  if (isFirstLoad) return true;
-
-  //return true on all sorts (just assume not loaded)
-  if (trigger.includes("sort-by")) return true;
-
-  switch (trigger) {
-    case "pic-type":
-      const { pics, picSets } = dataLoaded;
-      const { picType, picHowMany } = dataReq;
-
-      console.log("PIC HOW MANY");
-      console.log(picHowMany);
-      console.log("PICS SETS");
-      console.log(picSets);
-
-      switch (picType) {
-        case "pic-alone":
-          if (pics >= picHowMany) return null;
-          return true;
-        case "pic-sets":
-          if (picSets >= picHowMany) return null;
-          return true;
-      }
-
-    case "vid-type":
-      const { vids, vidPages } = dataLoaded;
-      const { vidType, vidHowMany } = dataReq;
-
-      switch (vidType) {
-        case "vid-alone":
-          if (vids >= vidHowMany) return null;
-          return true;
-        case "vid-pages":
-          if (vidPages >= vidHowMany) return null;
-          return true;
-      }
-
-    //MAKE ARTICLE LOGIC DEAL WITH ARTICLE TYPE
-    case "article-type":
-      return true;
-  }
-
-  return null;
-
-  // console.log("k");
-  // console.log(k);
-  // console.log("inputItem");
-  // console.log(inputItem);
-  // console.log("dataReq");
-  // console.dir(dataReq);
-  // console.log("dataLoaded");
-  // console.dir(dataLoaded);
-
-  // if (inputItem === defaultItem) return false;
-
-  // return true;
-};
-
-// MAKE BELOW CLICK TRIGGER
-// export const checkNewDataTrigger = async (inputObj) => {
-//     const { clickId, expandType, inputId } = inputObj;
-
-//     for (let i = 0; i < d.clickTriggerArr.length; i++) {
-//       if (clickId === d.clickTriggerArr[i]) {
-//         return "click";
-//       }
-//     }
-
-//     for (let i = 0; i < d.expandTriggerArr.length; i++) {
-//       if (expandType === d.expandTriggerArr[i]) {
-//         return "expand";
-//       }
-//     }
-
-//     //MIGHT NOT BE NEEDED
-//     for (let i = 0; i < d.inputTriggerArr.length; i++) {
-//       if (inputId === d.inputTriggerArr[i]) {
-//         return "input";
-//       }
-//     }
-
-//     return null;
-//   };
+// };s
