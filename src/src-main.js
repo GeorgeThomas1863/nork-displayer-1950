@@ -12,7 +12,10 @@ export const runGetBackendData = async (inputObj) => {
 
   switch (isFirstLoad) {
     case true:
-      return await getBackendDataDefault();
+      const testData = await getBackendDataDefault();
+      console.log("TEST DATA");
+      console.dir(testData);
+      return testData;
 
     case false:
       return await getBackendDataNew(inputObj);
@@ -53,8 +56,8 @@ export const getBackendDataDefault = async () => {
     defaultDataArray.push(dataObj);
   }
 
-  console.log("DEFAULT DATA ARRAY");
-  console.dir(defaultDataArray);
+  // console.log("DEFAULT DATA ARRAY");
+  // console.dir(defaultDataArray);
 
   return defaultDataArray;
 };
