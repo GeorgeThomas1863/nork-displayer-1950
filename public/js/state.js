@@ -65,8 +65,8 @@ export const newDataTrigger = async () => {
     // console.log(k);
 
     //trigger new data, set the dataReq first
-    state.dataReq = inputParams;
-    state.trigger = k;
+    // state.dataReq = inputParams;
+    // state.trigger = k;
     // console.log("STATE");
     // console.dir(state);
     return true;
