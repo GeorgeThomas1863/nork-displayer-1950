@@ -36,6 +36,7 @@ export const buildDisplay = async () => {
   // console.log(backendData.length);
 
   const backendDataParsed = await buildBackendDisplay(backendData);
+  if (!backendDataParsed) return null;
   // console.log("!!!!BACKEND DATA PARSED");
   // console.log(backendDataParsed);
 
@@ -76,10 +77,18 @@ export const buildBackendDisplay = async (inputArray) => {
     }
   } else {
     const dataObj = inputArray[0];
+    console.log("DATA OBJ");
+    console.dir(dataObj);
+
     const { dataType, dataArray } = dataObj;
     const func = d.displayFunctionMap[dataType];
     const dataElement = await func(dataArray);
     if (!dataElement) return failElement;
+
+    // const currentBackendDataWrapper = document.getElementById("backend-data-wrapper");
+    // const replaceId = dataElement.id;
+    // if (!currentBackendDataWrapper) return failElement;
+
     console.log("DISPLAY ELEMENT");
     console.log(displayElement);
 

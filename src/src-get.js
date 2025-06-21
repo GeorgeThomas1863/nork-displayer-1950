@@ -5,59 +5,6 @@ import dbModel from "../models/db-model.js";
 import { articleTypeMap } from "../config/map-display.js";
 import { fixInputDefaults, fixDataByType, removeInvalidItems } from "./src-fix.js";
 
-export const getBackendDataDefault = async () => {
-  //get default shit
-  const typeArr = CONFIG.backendTypeArr;
-
-  const defaultDataArray = [];
-  for (let i = 0; i < typeArr.length; i++) {
-    const dataType = typeArr[i];
-    const dataParams = await getBackendDefaultParams(dataType);
-    const { collection, howMany } = dataParams;
-
-    // update how many (to account for fucked items)
-    const howManyBuffer = Math.ceil(+howMany * 1.2);
-    dataParams.howMany = howManyBuffer;
-
-    const dataModel = new dbModel(dataParams, collection);
-
-    let dataArrayRaw = "";
-    if (dataType === "articles") {
-      dataArrayRaw = await dataModel.getNewestItemsByTypeArray();
-    } else {
-      dataArrayRaw = await dataModel.getNewestItemsArray();
-    }
-
-    // console.log("DATA ARRAY RAW");
-    // console.log(dataType);
-    // console.log(dataArrayRaw);
-
-    const dataArrayValid = await removeInvalidItems(dataArrayRaw, dataType, howMany);
-
-    // console.log("DATA ARRAY VALID");
-    // console.log(dataType);
-    // console.log(dataArrayValid);
-
-    const dataArrayFixed = await fixDataByType(dataArrayValid, dataType);
-    // console.log("DATA ARRAY FIXED");
-    // console.log(dataType);
-    // console.log(dataArrayFixed);
-
-    // console.log("DATA ARRAY");
-    // console.log(dataType);
-    // console.log(dataArray);
-
-    const dataObj = {
-      dataType: dataType,
-      dataArray: dataArrayFixed,
-    };
-
-    defaultDataArray.push(dataObj);
-  }
-
-  return defaultDataArray;
-};
-
 //-------------------------------
 
 export const getBackendParams = async (inputObj) => {

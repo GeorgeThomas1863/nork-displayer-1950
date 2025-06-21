@@ -3,21 +3,21 @@ import dbModel from "../models/db-model.js";
 import { getPicData, getVidData, rePullData } from "./src-get.js";
 import { checkItemExists } from "./src-check.js";
 
-export const fixSortByInput = (inputObj) => {
-  const { dataType, dataReq } = inputObj;
+// export const fixSortByInput = (inputObj) => {
+//   const { dataType, dataReq } = inputObj;
 
-  let typeKey = "";
-  if (dataType === "picSets" || dataType === "vidPages") {
-    typeKey = dataType.substring(0, 3);
-  } else {
-    typeKey = dataType.substring(0, dataType.length - 1);
-  }
+//   let typeKey = "";
+//   if (dataType === "picSets" || dataType === "vidPages") {
+//     typeKey = dataType.substring(0, 3);
+//   } else {
+//     typeKey = dataType.substring(0, dataType.length - 1);
+//   }
 
-  console.log("TYPE KEY");
-  console.log(typeKey);
+//   console.log("TYPE KEY");
+//   console.log(typeKey);
 
-  return dataReq[`${typeKey}SortBy`];
-};
+//   return dataReq[`${typeKey}SortBy`];
+// };
 
 //FIX DATA SECTION
 export const fixInputDefaults = async (inputObj) => {
