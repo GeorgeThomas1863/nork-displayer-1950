@@ -4,7 +4,7 @@ import { getPicData, getVidData, rePullData } from "./src-get.js";
 import { checkItemExists } from "./src-check.js";
 
 export const fixSortByInput = (inputObj) => {
-  const { dataType } = inputObj;
+  const { dataType, dataReq } = inputObj;
 
   let typeKey = "";
   if (dataType === "picSets" || dataType === "vidPages") {
@@ -16,7 +16,7 @@ export const fixSortByInput = (inputObj) => {
   console.log("TYPE KEY");
   console.log(typeKey);
 
-  return inputObj[`${typeKey}SortBy`];
+  return dataReq[`${typeKey}SortBy`];
 };
 
 //FIX DATA SECTION
