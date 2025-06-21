@@ -13,8 +13,8 @@ export const state = {
 
 export const updateDataLoaded = async (inputArray) => {
   // const { backendTypeArr } = d;
-  console.log("BACKEND TYPE ARRAY");
-  console.dir(inputArray);
+  // console.log("BACKEND TYPE ARRAY");
+  // console.dir(inputArray);
 
   const returnObj = {};
   for (let i = 0; i < inputArray.length; i++) {

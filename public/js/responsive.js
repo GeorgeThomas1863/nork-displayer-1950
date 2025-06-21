@@ -5,39 +5,6 @@ import { buildBackendNew } from "./build-backend.js";
 import { checkEventTriggered, newDataTrigger } from "./state.js";
 
 //MAIN / NORMAL RESPONSIVE
-
-export const mainClickHandler = async (e) => {
-  e.preventDefault();
-
-  const clickElement = e.target;
-  const expandType = clickElement.getAttribute("data-expand");
-  const toggleType = clickElement.getAttribute("data-toggle");
-
-  if (toggleType) {
-    await toggleDropdown(toggleType);
-  }
-
-  //handle expand / collapse backend data
-  if (expandType) {
-    await expandForm(expandType);
-  }
-
-  // const clickObj = {
-  //   clickId: clickId,
-  //   expandType: expandType,
-  // };
-
-  // const newBackendData = await getNewData(clickObj);
-  // if (!newBackendData) return null;
-
-  // console.log("NEW BACKEND DATA");
-  // console.log(newBackendData);
-
-  // await buildBackendNew(newBackendData);
-
-  return true;
-};
-
 export const mainChangeHandler = async (e) => {
   e.preventDefault();
   const changeElement = e.target;
@@ -56,6 +23,38 @@ export const mainChangeHandler = async (e) => {
 
   //otherwise hide / unhide things
 };
+
+// export const mainClickHandler = async (e) => {
+//   e.preventDefault();
+
+//   const clickElement = e.target;
+//   const expandType = clickElement.getAttribute("data-expand");
+//   const toggleType = clickElement.getAttribute("data-toggle");
+
+//   if (toggleType) {
+//     await toggleDropdown(toggleType);
+//   }
+
+//   //handle expand / collapse backend data
+//   if (expandType) {
+//     await expandForm(expandType);
+//   }
+
+//   // const clickObj = {
+//   //   clickId: clickId,
+//   //   expandType: expandType,
+//   // };
+
+//   // const newBackendData = await getNewData(clickObj);
+//   // if (!newBackendData) return null;
+
+//   // console.log("NEW BACKEND DATA");
+//   // console.log(newBackendData);
+
+//   // await buildBackendNew(newBackendData);
+
+//   return true;
+// };
 
 //create debounced function
 // const debouncedGetNewData = debounce(getNewData);
@@ -103,9 +102,9 @@ const adminDisplayElement = document.getElementById("admin-display-element");
 const displayElement = document.getElementById("display-element");
 
 if (displayElement) {
-  displayElement.addEventListener("click", mainClickHandler);
-  // displayElement.addEventListener("input", mainInputHandler);
   displayElement.addEventListener("change", mainChangeHandler);
+  // displayElement.addEventListener("click", mainClickHandler);
+  // displayElement.addEventListener("input", mainInputHandler);
 }
 
 if (adminDisplayElement) {
