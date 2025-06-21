@@ -31,8 +31,16 @@ export const runGetBackendData = async (inputObj) => {
     typeKey = dataType.substring(0, dataType.length - 1);
   }
 
+  console.log("DATA LOADED");
+  console.log(dataLoaded.dataType);
+
   const sortByInput = dataReq[`${typeKey}SortBy`];
   const howManyInput = dataReq[`${typeKey}HowMany`] || dataLoaded?.dataType;
+
+  // let howManyInput = dataReq[`${typeKey}HowMany`];
+  // if (!howManyInput) {
+  //   howManyInput = dataLoaded?.dataType;
+  // }
 
   console.log("SORT BY INPUT");
   console.log(sortByInput);
