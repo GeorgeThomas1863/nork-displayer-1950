@@ -13,6 +13,9 @@ export const fixSortByInput = (inputObj) => {
     typeKey = dataType.substring(0, dataType.length - 1);
   }
 
+  console.log("TYPE KEY");
+  console.log(typeKey);
+
   return inputObj[`${typeKey}SortBy`];
 };
 
