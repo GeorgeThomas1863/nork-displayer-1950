@@ -41,11 +41,11 @@ export const buildDisplay = async () => {
 
   displayElement.append(backendDataParsed);
 
-  // console.log("DISPLAY ELEMENT");
-  // console.log(displayElement);
-
   //UPDATE THE STATE HERE
   await updateDataLoaded(backendData);
+
+  console.log("DISPLAY ELEMENT");
+  console.log(displayElement);
 
   return "#DONE";
 };
