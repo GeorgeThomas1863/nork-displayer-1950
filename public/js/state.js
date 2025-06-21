@@ -16,15 +16,17 @@ export const updateDataLoaded = async (inputArray) => {
   console.log("BACKEND TYPE ARRAY");
   console.dir(inputArray);
 
+  const returnObj = {};
   for (let i = 0; i < inputArray.length; i++) {
     const inputItem = inputArray[i];
     const numberLoaded = inputItem.dataArray.length;
-    console.log("NUMBER LOADED");
-    console.log(numberLoaded);
+    // console.log("NUMBER LOADED");
+    // console.log(numberLoaded);
+    returnObj[inputItem.dataType] = numberLoaded;
   }
 
-  console.log("BACKEND DATA");
-  console.dir(inputArray);
+  console.log("RETURN OBJ");
+  console.dir(returnObj);
 };
 
 export const checkEventTriggered = async (changeId) => {
