@@ -2,7 +2,7 @@ import { getBackendDefaultParams } from "../config/map-display.js";
 import dbModel from "../models/db-model.js";
 import { getBackendParams, getBackendDataDefault } from "./src-get.js";
 import { checkDataType } from "./src-check.js";
-import { fixDataByType, removeInvalidItems, fixSortByInput } from "./src-fix.js";
+import { fixDataByType, removeInvalidItems } from "./src-fix.js";
 
 //gets backend data from db
 export const runGetBackendData = async (inputObj) => {
