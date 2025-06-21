@@ -15,32 +15,36 @@ export const state = {
 
 //MAKE MUCH MORE COMPLEX
 export const updateDataLoaded = async (inputArray) => {
-  console.log("UPDATE DATA LOADED INPUT");
-  console.dir(inputArray);
+  const { isFirstLoad } = state;
 
-  const returnObj = {};
-  for (let i = 0; i < inputArray.length; i++) {
-    const inputItem = inputArray[i];
-    const { dataType } = inputItem;
+  if (isFirstLoad) {
+    const returnObj = {};
+    for (let i = 0; i < inputArray.length; i++) {
+      const inputItem = inputArray[i];
+      const { dataType } = inputItem;
 
-    //add in article type here
-    if (dataType === "articles") {
-      //just pull type from the first one
-      const articleType = inputItem.dataArray[0].articleType;
-      state.articleType = articleType;
+      //add in article type here
+      if (dataType === "articles") {
+        //just pull type from the first one
+        const articleType = inputItem.dataArray[0].articleType;
+        state.articleType = articleType;
+      }
+
+      const numberLoaded = inputItem.dataArray.length;
+      returnObj[inputItem.dataType] = numberLoaded;
     }
 
-    const numberLoaded = inputItem.dataArray.length;
-    returnObj[inputItem.dataType] = numberLoaded;
+    state.dataLoaded = returnObj;
+    state.isFirstLoad = false;
+    return true;
   }
 
-  state.dataLoaded = returnObj;
-  state.isFirstLoad = false;
+  //otherwise not first load
+  console.log("INPUT ITEM");
+  console.dir(inputArray);
 
-  console.log("STATE AFTER UPDATE");
+  console.log("STATE DATA LOADED");
   console.dir(state);
-
-  return true;
 };
 
 export const checkEventTriggered = async (changeId) => {
@@ -67,8 +71,8 @@ export const checkEventTriggered = async (changeId) => {
 export const checkNewDataNeeded = async () => {
   const { isFirstLoad, dataReq, dataLoaded, trigger } = state;
 
-  console.log("STATE");
-  console.dir(state);
+  // console.log("STATE");
+  // console.dir(state);
 
   if (isFirstLoad) return true;
 
