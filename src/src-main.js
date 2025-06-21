@@ -17,6 +17,9 @@ export const runGetBackendData = async (inputObj) => {
     return defaultData;
   }
 
+  console.log("INPUT OBJ");
+  console.dir(inputObj);
+
   const params = await getBackendDefaultParams(dataType);
   const { collection } = params;
 
