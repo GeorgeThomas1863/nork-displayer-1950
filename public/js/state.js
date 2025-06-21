@@ -13,6 +13,8 @@ export const state = {
 
 //!!!!HERE!!!!!
 
+//ADD ARTICLE TYPE HERE
+
 //MAKE MUCH MORE COMPLEX
 export const updateDataLoaded = async (inputArray) => {
   // const { backendTypeArr } = d;
