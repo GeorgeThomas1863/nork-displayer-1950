@@ -2,7 +2,7 @@ import { getBackendDefaultParams } from "../config/map-display.js";
 import dbModel from "../models/db-model.js";
 import { getBackendParams, getBackendDataDefault } from "./src-get.js";
 import { checkDataType } from "./src-check.js";
-import { fixDataByType, removeInvalidItems } from "./src-fix.js";
+import { fixDataByType, removeInvalidItems, fixSortByInput } from "./src-fix.js";
 
 //gets backend data from db
 export const runGetBackendData = async (inputObj) => {
@@ -17,16 +17,21 @@ export const runGetBackendData = async (inputObj) => {
     return defaultData;
   }
 
-  //BUILD BACKEND TRIGGER MAP
+  const params = await getBackendDefaultParams(dataType);
+  const { collection } = params;
 
-  console.log("INPUT OBJ");
-  console.dir(inputObj);
+  const sortByInput = await fixSortByInput(inputObj);
 
-  const defaultParams = await getBackendDefaultParams(dataType);
-  const collection = defaultParams.collection;
+  console.log("SORT BY INPUT");
+  console.log(sortByInput);
 
-  console.log("DEFAULT PARAMS");
-  console.dir(defaultParams);
+  params.sortBy = sortByInput;
+
+  // console.log("INPUT OBJ");
+  // console.dir(inputObj);s
+
+  // console.log("PARAMS");
+  // console.dir(params);
 
   // //build backend params based on if first load
   // const backendParams = await getBackendParams(inputObj);
