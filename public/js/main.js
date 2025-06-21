@@ -82,6 +82,8 @@ export const buildBackendDisplay = async (inputArray) => {
     if (!dataElement) return failElement;
     console.log("DISPLAY ELEMENT");
     console.log(displayElement);
+
+    return null;
   }
 
   if (!backendDataWrapper) return failElement;
