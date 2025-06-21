@@ -169,9 +169,9 @@ export const fixVidPageObj = async (inputObj) => {
 export const removeInvalidItems = async (inputArray, dataType, howMany) => {
   if (!inputArray || !inputArray.length || !dataType) return null;
 
-  // console.log("REMOVE INVALID ITEMS DATA TYPE");
-  // console.log(dataType);
-  // console.log(howMany);
+  console.log("REMOVE INVALID ITEMS DATA TYPE");
+  console.log(dataType);
+  console.log(howMany);
 
   const dataReturnArray = [];
   switch (dataType) {
