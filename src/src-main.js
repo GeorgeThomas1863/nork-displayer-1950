@@ -88,6 +88,9 @@ export const getBackendDataNew = async (inputObj) => {
   params.sortBy = sortByInput;
   params.howMany = howManyBuffer;
 
+  console.log("NEW DATA PARAMS");
+  console.dir(params);
+
   // console.log("SORT BY INPUT");
   // console.log(sortByInput);
 
