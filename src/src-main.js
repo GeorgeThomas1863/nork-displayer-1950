@@ -7,7 +7,7 @@ import { fixDataByType, removeInvalidItems, fixSortByInput } from "./src-fix.js"
 //gets backend data from db
 export const runGetBackendData = async (inputObj) => {
   if (!inputObj || !inputObj.dataType) return null;
-  const { dataType, isFirstLoad } = inputObj;
+  const { dataType, dataReq, dataLoaded, isFirstLoad } = inputObj;
   const dataObj = {};
 
   if (isFirstLoad) {
@@ -23,12 +23,27 @@ export const runGetBackendData = async (inputObj) => {
   const params = await getBackendDefaultParams(dataType);
   const { collection } = params;
 
-  const sortByInput = await fixSortByInput(inputObj);
+  //get the type key
+  let typeKey = "";
+  if (dataType === "picSets" || dataType === "vidPages") {
+    typeKey = dataType.substring(0, 3);
+  } else {
+    typeKey = dataType.substring(0, dataType.length - 1);
+  }
+
+  const sortByInput = dataReq[`${typeKey}SortBy`];
+  const howManyInput = dataReq[`${typeKey}HowMany`] || dataLoaded?.dataType;
 
   console.log("SORT BY INPUT");
   console.log(sortByInput);
 
-  params.sortBy = sortByInput;
+  console.log("HOW MANY INPUT");
+  console.log(howManyInput);
+
+  console.log("PARAMS");
+  console.log(params);
+
+  // params.sortBy = sortByInput;
 
   // console.log("INPUT OBJ");
   // console.dir(inputObj);s
