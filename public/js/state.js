@@ -40,21 +40,21 @@ export const updateDataLoaded = async (inputArray) => {
   return true;
 };
 
-//HERE!!!!
-//UPDATE DATA TYPE HERE????
-
 export const checkEventTriggered = async (changeId) => {
   const { changeTriggerArr } = d;
   console.log("CHANGE ID");
   console.log(changeId);
 
-  const newType = d.triggerTypeMap(changeId);
-  console.log("NEW TYPE");
-  console.log(newType);
-
   for (let i = 0; i < changeTriggerArr.length; i++) {
     const changeItem = changeTriggerArr[i];
-    if (changeId === changeItem) return changeItem;
+
+    //change event NOT found
+    if (changeId !== changeItem) continue;
+
+    //otherwise change event triggered, update dataType first
+    const newType = d.triggerTypeMap(changeId);
+    state.dataType = newType;
+    return changeItem;
   }
 
   return null;
