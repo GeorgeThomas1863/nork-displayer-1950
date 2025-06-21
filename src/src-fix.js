@@ -84,9 +84,6 @@ export const fixDataByType = async (inputArray, dataType) => {
 
       //pics as thumbnails
       case "vidPages":
-        console.log("ON THIS PART FAGGOT");
-        console.log(inputObj);
-
         const vidDataObj = await fixVidPageObj(inputObj);
         console.log("VID DATA OBJ");
         console.log(vidDataObj);
@@ -146,6 +143,9 @@ export const fixPicArray = async (inputObj) => {
 //FIX VID DATA
 
 export const fixVidPageObj = async (inputObj) => {
+  console.log("ON THIS PART FAGGOT");
+  console.log(inputObj);
+
   if (!inputObj || !inputObj.vidURL) return null;
   const { vidURL } = inputObj;
 
