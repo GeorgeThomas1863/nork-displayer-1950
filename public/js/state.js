@@ -88,7 +88,7 @@ export const checkNewDataNeeded = async () => {
   if (trigger.includes("-to-")) return true;
 
   switch (trigger) {
-    case "pics-type":
+    case "pic-type":
       return null;
   }
 
