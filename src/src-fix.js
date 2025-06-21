@@ -235,6 +235,8 @@ export const removeInvalidItems = async (inputArray, dataType, howMany) => {
         const { url } = dataObj;
 
         const itemExists = await checkItemExists(url);
+        console.log("!!!!!!!!!!!!!!!ITEM EXISTS");
+        console.log(itemExists);
         if (!itemExists) continue;
 
         dataReturnArray.push(dataObj);
