@@ -45,6 +45,12 @@ export const updateDataLoaded = async (inputArray) => {
 
 export const checkEventTriggered = async (changeId) => {
   const { changeTriggerArr } = d;
+  console.log("CHANGE ID");
+  console.log(changeId);
+
+  const newType = d.triggerTypeMap(changeId);
+  console.log("NEW TYPE");
+  console.log(newType);
 
   for (let i = 0; i < changeTriggerArr.length; i++) {
     const changeItem = changeTriggerArr[i];
