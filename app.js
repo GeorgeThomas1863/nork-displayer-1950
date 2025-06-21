@@ -1,5 +1,7 @@
 //TO DO:
 
+//ON runGetBackendData in src-main
+
 //MAKE NEW DATA WORK, USE STATE TO TRIGGER GETTING / LOADING NEW DATA
 
 //ADD LOGIC for WHETHER getting new data is necessary [key part]

@@ -17,6 +17,8 @@ export const runGetBackendData = async (inputObj) => {
     return defaultData;
   }
 
+  //BUILD BACKEND TRIGGER MAP 
+
   console.log("INPUT OBJ");
   console.dir(inputObj);
 
