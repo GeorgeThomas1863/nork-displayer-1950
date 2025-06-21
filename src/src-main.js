@@ -120,13 +120,15 @@ export const getBackendDataNew = async (inputObj) => {
     dataArray: dataArrayFixed,
   };
 
+  return dataObj;
+
   //return as array to match default
-  const dataArray = [dataObj];
+  // const dataArray = [dataObj];
 
-  console.log("NEW DATA ARRAY");
-  console.dir(dataArray);
+  // console.log("NEW DATA ARRAY");
+  // console.dir(dataArray);
 
-  return dataArray;
+  // return dataArray;
 };
 
 // if (isFirstLoad) {
