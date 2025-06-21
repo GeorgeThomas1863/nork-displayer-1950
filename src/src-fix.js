@@ -52,8 +52,10 @@ import { checkItemExists } from "./src-check.js";
 export const fixDataByType = async (inputArray, dataType) => {
   if (!inputArray) return null;
 
-  console.log("FIX TYPE AHHHHHHHHHHHHHHH");
-  console.log(dataType);
+  if (dataType === "vidPages") {
+    console.log("ON THIS PART FAGGOT");
+    console.log(inputArray);
+  } 
 
   const results = [];
   for (let i = 0; i < inputArray.length; i++) {
