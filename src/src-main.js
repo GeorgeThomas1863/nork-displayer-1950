@@ -53,6 +53,9 @@ export const getBackendDataDefault = async () => {
     defaultDataArray.push(dataObj);
   }
 
+  console.log("DEFAULT DATA ARRAY");
+  console.dir(defaultDataArray);
+
   return defaultDataArray;
 };
 
@@ -113,6 +116,9 @@ export const getBackendDataNew = async (inputObj) => {
     dataType: dataType,
     dataArray: dataArrayFixed,
   };
+
+  console.log("NEW DATA OBJ");
+  console.dir(dataObj);
 
   return dataObj;
 };
