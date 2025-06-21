@@ -39,16 +39,19 @@ export const updateDataLoaded = async (inputArray) => {
     return true;
   }
 
+  console.log("STTE BEFRE");
+  console.log(state);
+
+  //otherwise not first load, only update one thing
   const updateItem = inputArray[0];
   const { dataType, dataArray } = updateItem;
   const { dataLoaded } = state;
 
-  //otherwise not first load
-  console.log("UPDATE ITEM");
-  console.log(updateItem);
+  //update the thing loaded
+  dataLoaded[dataType] = dataArray.length;
 
-  console.log("DATA LOADED");
-  console.log(dataLoaded);
+  console.log("STATE AFTER");
+  console.log(state);
 };
 
 export const checkEventTriggered = async (changeId) => {
