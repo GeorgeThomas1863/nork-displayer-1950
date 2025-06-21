@@ -92,6 +92,11 @@ export const checkNewDataNeeded = async () => {
       const { pics, picSets } = dataLoaded;
       const { picType, picHowMany } = dataReq;
 
+      console.log("PIC HOW MANY");
+      console.log(picHowMany);
+      console.log("PICS SETS");
+      console.log(picSets);
+
       switch (picType) {
         case "pic-alone":
           if (pics >= picHowMany) return null;
