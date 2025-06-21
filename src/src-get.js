@@ -137,6 +137,9 @@ export const getVidData = async (vidURL) => {
     itemValue: vidURL,
   };
 
+  console.log("!!!!!!!!!!!GET VID DATA");
+  console.log(lookupParams);
+
   const vidDataModel = new dbModel(lookupParams, vidsDownloaded);
   const vidObj = await vidDataModel.getUniqueItem();
 
