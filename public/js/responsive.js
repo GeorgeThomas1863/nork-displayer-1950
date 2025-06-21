@@ -2,7 +2,7 @@ import { buildDisplay, toggleDropdown, expandForm } from "./main.js";
 import { getNewAdminData } from "./admin.js";
 import { debounce } from "./util.js";
 import { buildBackendNew } from "./build-backend.js";
-import { checkEventTriggered, newDataTrigger } from "./state.js";
+import { state, checkEventTriggered, newDataTrigger } from "./state.js";
 
 //MAIN / NORMAL RESPONSIVE
 
@@ -36,6 +36,9 @@ export const mainChangeHandler = async (e) => {
 
   const eventTriggered = await checkEventTriggered(changeId);
   if (!eventTriggered) return null;
+
+  //otherwise change the trigger
+  state.trigger = eventTriggered;
 
   console.log("EVENT TRIGGERED");
   console.log(eventTriggered);
