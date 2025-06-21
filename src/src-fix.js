@@ -88,6 +88,8 @@ export const fixDataByType = async (inputArray, dataType) => {
         console.log(inputObj);
 
         const vidDataObj = await fixVidPageObj(inputObj);
+        console.log("VID DATA OBJ");
+        console.log(vidDataObj);
         if (!vidDataObj) continue;
 
         const vidPageObj = { ...vidDataObj, ...inputObj };
