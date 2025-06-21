@@ -50,6 +50,14 @@ const d = {
     }
     return null;
   },
+
+  replaceTypeMap: {
+    articles: "article-array-element",
+    pics: "pic-array-element",
+    picSets: "pic-set-array-element",
+    vids: "vid-array-element",
+    vidPages: "vid-page-array-element",
+  },
 };
 
 export default d;

@@ -77,22 +77,23 @@ export const buildBackendDisplay = async (inputArray) => {
     }
   } else {
     const dataObj = inputArray[0];
-    console.log("DATA OBJ");
-    console.dir(dataObj);
-
     const { dataType, dataArray } = dataObj;
+
+    //get replace shit first
+    // const currentBackendDataWrapper = document.getElementById("backend-data-wrapper");
+    const replaceId = d.replaceTypeMap[dataType];
+    const replaceElement = document.getElementById(replaceId);
+
+    //format data
     const func = d.displayFunctionMap[dataType];
     const dataElement = await func(dataArray);
     if (!dataElement) return failElement;
 
-    // const currentBackendDataWrapper = document.getElementById("backend-data-wrapper");
-    // const replaceId = dataElement.id;
-    // if (!currentBackendDataWrapper) return failElement;
+    //replace element
+    replaceElement.replaceWith(dataElement);
+    // return backendDataWrapper;
 
-    console.log("DISPLAY ELEMENT");
-    console.log(displayElement);
-
-    return null;
+    // return true;
   }
 
   if (!backendDataWrapper) return failElement;
