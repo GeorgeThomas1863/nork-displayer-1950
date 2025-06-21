@@ -61,27 +61,28 @@ export const buildBackendDisplay = async (inputArray) => {
 
   //only need for loop on first load (could break this part out)
   //
-  for (let i = 0; i < inputArray.length; i++) {
-    const dataObj = inputArray[i];
+  if (isFirstLoad) {
+    for (let i = 0; i < inputArray.length; i++) {
+      const dataObj = inputArray[i];
+      const { dataType, dataArray } = dataObj;
+      const func = d.displayFunctionMap[dataType];
+      const dataElement = await func(dataArray);
+      if (!dataElement) continue;
+      //hide everything except pics on default
+      if (dataElement.id !== "pic-array-element") {
+        dataElement.classList.add("hidden");
+      }
+      backendDataWrapper.append(dataElement);
+    }
+  } else {
+    const dataObj = inputArray[0];
     const { dataType, dataArray } = dataObj;
     const func = d.displayFunctionMap[dataType];
     const dataElement = await func(dataArray);
-    if (!dataElement) continue;
-    //hide everything except pics on default
-    if (dataElement.id !== "pic-array-element") {
-      dataElement.classList.add("hidden");
-    }
-
-    if (isFirstLoad) {
-      backendDataWrapper.append(dataElement);
-    } else {
-      //otherwise new data
-      console.log("NEW DATA");
-      console.log(inputArray);
-      console.log(backendDataWrapper);
-    }
+    if (!dataElement) return failElement;
+    console.log("DISPLAY ELEMENT");
+    console.log(displayElement);
   }
-  // }
 
   if (!backendDataWrapper) return failElement;
 
