@@ -11,9 +11,18 @@ export const state = {
   trigger: null,
 };
 
-export const updateDataLoaded = async (backendData) => {
+export const updateDataLoaded = async (inputArray) => {
+  const { backendTypeArr } = d;
+
+  for (let i = 0; i < inputArray.length; i++) {
+    const inputItem = inputArray[i];
+    const numberLoaded = inputItem[dataArray].length;
+    console.log("NUMBER LOADED");
+    console.log(numberLoaded);
+  }
+
   console.log("BACKEND DATA");
-  console.dir(backendData);
+  console.dir(inputArray);
 };
 
 export const checkEventTriggered = async (changeId) => {
