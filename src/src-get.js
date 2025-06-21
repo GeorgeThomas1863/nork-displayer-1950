@@ -52,6 +52,12 @@ export const getBackendDataDefault = async () => {
       dataArray: dataArrayFixed,
     };
 
+    //add article type here (half assed answer but oh well)
+    if (dataType === "articles") {
+      console.log("ARTICLE DATA");
+      console.log(dataArrayFixed);
+    }
+
     defaultDataArray.push(dataObj);
   }
 
