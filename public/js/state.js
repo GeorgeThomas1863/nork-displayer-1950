@@ -15,43 +15,37 @@ export const state = {
 
 //MAKE MUCH MORE COMPLEX
 export const updateDataLoaded = async (inputArray) => {
-  const { isFirstLoad } = state;
+  const { isFirstLoad, dataLoaded } = state;
 
-  if (isFirstLoad) {
-    const returnObj = {};
-    for (let i = 0; i < inputArray.length; i++) {
-      const inputItem = inputArray[i];
-      const { dataType, dataArray } = inputItem;
+  //if not first load only update one thing
+  if (!isFirstLoad) {
+    const updateItem = inputArray[0];
+    const { dataType, dataArray } = updateItem;
 
-      //add in article type here
-      if (dataType === "articles") {
-        //just pull type from the first one
-        const articleType = inputItem.dataArray[0].articleType;
-        state.articleType = articleType;
-      }
-
-      const numberLoaded = dataArray.length;
-      returnObj[dataType] = numberLoaded;
-    }
-
-    state.dataLoaded = returnObj;
-    state.isFirstLoad = false;
+    dataLoaded[dataType] = dataArray.length;
     return true;
   }
 
-  console.log("STTE BEFRE");
-  console.log(state);
+  //otherwise first load, update all types
+  const returnObj = {};
+  for (let i = 0; i < inputArray.length; i++) {
+    const inputItem = inputArray[i];
+    const { dataType, dataArray } = inputItem;
 
-  //otherwise not first load, only update one thing
-  const updateItem = inputArray[0];
-  const { dataType, dataArray } = updateItem;
-  const { dataLoaded } = state;
+    //add in article type here
+    if (dataType === "articles") {
+      //just pull type from the first one
+      const articleType = inputItem.dataArray[0].articleType;
+      state.articleType = articleType;
+    }
 
-  //update the thing loaded
-  dataLoaded[dataType] = dataArray.length;
+    const numberLoaded = dataArray.length;
+    returnObj[dataType] = numberLoaded;
+  }
 
-  console.log("STATE AFTER");
-  console.log(state);
+  state.dataLoaded = returnObj;
+  state.isFirstLoad = false;
+  return true;
 };
 
 export const checkEventTriggered = async (changeId) => {
