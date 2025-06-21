@@ -60,7 +60,7 @@ export const buildBackendDisplay = async (inputArray) => {
   backendDataWrapper.id = "backend-data-wrapper";
 
   //only need for loop on first load (could break this part out)
-  // if (isFirstLoad) {
+  //
   for (let i = 0; i < inputArray.length; i++) {
     const dataObj = inputArray[i];
     const { dataType, dataArray } = dataObj;
@@ -72,13 +72,15 @@ export const buildBackendDisplay = async (inputArray) => {
       dataElement.classList.add("hidden");
     }
 
-    backendDataWrapper.append(dataElement);
+    if (isFirstLoad) {
+      backendDataWrapper.append(dataElement);
+    } else {
+      //otherwise new data
+      console.log("NEW DATA");
+      console.log(inputArray);
+    }
   }
   // }
-
-  //otherwise new data
-  console.log("NEW DATA");
-  console.log(inputArray);
 
   if (!backendDataWrapper) return failElement;
 
