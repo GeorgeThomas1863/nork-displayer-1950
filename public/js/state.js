@@ -74,19 +74,23 @@ export const newDataTrigger = async () => {
   return false;
 };
 
+//basically return true except for how many
 export const checkMoreDataNeeded = async (k, inputItem) => {
   const { dataReq, dataLoaded } = state;
   //return true on all sorts (just assume not loaded)
   if (k.includes("-to-")) return true;
 
-  console.log("k");
-  console.log(k);
-  console.log("inputItem");
-  console.log(inputItem);
-  console.log("dataReq");
-  console.dir(dataReq);
-  console.log("dataLoaded");
-  console.dir(dataLoaded);
+  //RETURN TRUE EXCEPT FOR HOW MANY
+  return true;
+
+  // console.log("k");
+  // console.log(k);
+  // console.log("inputItem");
+  // console.log(inputItem);
+  // console.log("dataReq");
+  // console.dir(dataReq);
+  // console.log("dataLoaded");
+  // console.dir(dataLoaded);
 
   // if (inputItem === defaultItem) return false;
 
