@@ -39,13 +39,13 @@ export const buildInputParams = async () => {
   const params = {
     route: "/new-data-route",
     articleType: document.getElementById("article-type").value,
-    articleHowMany: Number(document.getElementById("article-how-many").value) || 5,
+    articleHowMany: Number(document.getElementById("article-how-many").value),
     articleSortBy: document.getElementById("article-sort-by").value,
     picType: document.getElementById("pic-type").value,
-    picHowMany: Number(document.getElementById("pic-how-many").value) || 6,
+    picHowMany: Number(document.getElementById("pic-how-many").value),
     picSortBy: document.getElementById("pic-sort-by").value,
     vidType: document.getElementById("vid-type").value,
-    vidHowMany: Number(document.getElementById("vid-how-many").value) || 1,
+    vidHowMany: Number(document.getElementById("vid-how-many").value),
     vidSortBy: document.getElementById("vid-sort-by").value,
   };
 
