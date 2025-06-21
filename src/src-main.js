@@ -42,11 +42,6 @@ export const getBackendDataDefault = async () => {
       dataArrayRaw = await dataModel.getNewestItemsArray();
     }
 
-    if (dataType === "vidPages") {
-      console.log("AHHHHHHHHHHHHHHH");
-      console.log(dataArrayRaw);
-    }
-
     const dataArrayValid = await removeInvalidItems(dataArrayRaw, dataType, howMany);
 
     if (dataType === "vidPages") {
