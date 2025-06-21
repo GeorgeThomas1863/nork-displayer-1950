@@ -1,6 +1,6 @@
 // import fs from "fs";
 import { expandTriggerMap, inputIdTriggerMap } from "../config/map-display.js";
-import { getPicExtraData } from "./src-get.js";
+import { getPicExtraData, getVidData } from "./src-get.js";
 
 //--------------------------------
 
