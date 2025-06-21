@@ -17,6 +17,9 @@ export const mainChangeHandler = async (e) => {
   const eventTriggered = await checkEventTriggered(changeId);
   if (!eventTriggered) return null;
 
+  console.log("EVENT TRIGGERED");
+  console.log(eventTriggered);
+
   await buildDisplay();
 
   //if needed get new data
