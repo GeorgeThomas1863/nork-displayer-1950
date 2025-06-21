@@ -39,45 +39,48 @@ export const checkEventTriggered = async (changeId) => {
   return null;
 };
 
-export const newDataTrigger = async () => {
-  const { isFirstLoad, dataReq } = state;
+// export const newDataTrigger = async () => {
+//   const { isFirstLoad, dataReq } = state;
 
-  //trigger new data on first load
-  if (isFirstLoad) return true;
+//   //trigger new data on first load
+//   if (isFirstLoad) return true;
 
-  const inputParams = await buildInputParams();
-  // const defaultParams = d.defaultInputMap;
+//   const inputParams = await buildInputParams();
+//   // const defaultParams = d.defaultInputMap;
 
-  // console.log("!!!!!!!DEFAULT PARAMS");
-  // console.dir(defaultParams);
+//   // console.log("!!!!!!!DEFAULT PARAMS");
+//   // console.dir(defaultParams);
 
-  for (let k in dataReq) {
-    const defaultItem = dataReq[k];
-    const inputItem = inputParams[k];
+//   for (let k in dataReq) {
+//     const defaultItem = dataReq[k];
+//     const inputItem = inputParams[k];
 
-    //pass condition
-    if (defaultItem === inputItem) continue;
+//     //pass condition
+//     if (defaultItem === inputItem) continue;
 
-    const moreDataNeeded = await checkMoreDataNeeded(k, inputItem);
-    if (!moreDataNeeded) continue;
+//     const moreDataNeeded = await checkMoreDataNeeded(k, inputItem);
+//     if (!moreDataNeeded) continue;
 
-    // console.log("k");
-    // console.log(k);
+//     // console.log("k");
+//     // console.log(k);
 
-    //trigger new data, set the dataReq first
-    // state.dataReq = inputParams;
-    // state.trigger = k;
-    // console.log("STATE");
-    // console.dir(state);
-    return true;
-  }
+//     //trigger new data, set the dataReq first
+//     // state.dataReq = inputParams;
+//     // state.trigger = k;
+//     // console.log("STATE");
+//     // console.dir(state);
+//     return true;
+//   }
 
-  return false;
-};
+//   return false;
+// };
 
 //basically return true except for how many
-export const checkMoreDataNeeded = async (k, inputItem) => {
-  const { dataReq, dataLoaded } = state;
+export const checkNewDataNeeded = async () => {
+  const { isFirstLoad, dataReq, dataLoaded } = state;
+
+  if (isFirstLoad) return true;
+
   //return true on all sorts (just assume not loaded)
   if (k.includes("-to-")) return true;
 

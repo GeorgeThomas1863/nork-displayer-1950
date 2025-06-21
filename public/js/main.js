@@ -3,7 +3,7 @@ import { buildDropDown } from "./build-drop-down.js";
 import { buildInputForms } from "./build-forms.js";
 // import { buildBackendDefault } from "./build-backend.js";
 import { hideArray, unhideArray, sendToBack, buildInputParams, checkNewDataTrigger, buildFailElement } from "./util.js";
-import { state, updateDataLoaded, newDataTrigger } from "./state.js";
+import { state, updateDataLoaded, checkNewDataNeeded } from "./state.js";
 
 //get display element
 const displayElement = document.getElementById("display-element");
@@ -22,7 +22,7 @@ export const buildDisplay = async () => {
   }
 
   //check if new data is needed [will pass on first load]
-  const newDataNeeded = await newDataTrigger();
+  const newDataNeeded = await checkNewDataNeeded();
   if (!newDataNeeded) return null;
 
   //get / parse backend data (returns array of objects)
