@@ -78,7 +78,7 @@ export const buildBackendDisplay = async (inputArray) => {
       //otherwise new data
       console.log("NEW DATA");
       console.log(inputArray);
-      console.log(dataElement);
+      console.log(backendDataWrapper);
     }
   }
   // }
