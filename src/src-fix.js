@@ -143,8 +143,8 @@ export const fixPicArray = async (inputObj) => {
 //FIX VID DATA
 
 export const fixVidPageObj = async (inputObj) => {
-  console.log("ON THIS PART FAGGOT");
-  console.log(inputObj);
+  // console.log("ON THIS PART FAGGOT");
+  // console.log(inputObj);S
 
   if (!inputObj || !inputObj.vidURL) return null;
   const { vidURL } = inputObj;
@@ -169,9 +169,9 @@ export const fixVidPageObj = async (inputObj) => {
 export const removeInvalidItems = async (inputArray, dataType, howMany) => {
   if (!inputArray || !inputArray.length || !dataType) return null;
 
-  console.log("REMOVE INVALID ITEMS DATA TYPE");
-  console.log(dataType);
-  console.log(howMany);
+  // console.log("REMOVE INVALID ITEMS DATA TYPE");
+  // console.log(dataType);
+  // console.log(howMany);
 
   const dataReturnArray = [];
   switch (dataType) {
@@ -229,6 +229,8 @@ export const removeInvalidItems = async (inputArray, dataType, howMany) => {
     case "vidPages":
       for (let i = 0; i < inputArray.length; i++) {
         const dataObj = inputArray[i];
+        console.log("VID DATA OBJ");
+        console.log(dataObj);
         if (!dataObj || !dataObj.url) continue;
         const { url } = dataObj;
 
