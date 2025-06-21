@@ -87,6 +87,11 @@ export const checkNewDataNeeded = async () => {
   //return true on all sorts (just assume not loaded)
   if (trigger.includes("-to-")) return true;
 
+  switch (trigger) {
+    case "pics-type":
+      return null;
+  }
+
   //RETURN TRUE EXCEPT FOR HOW MANY
   return true;
 
