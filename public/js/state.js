@@ -20,13 +20,12 @@ export const updateDataLoaded = async (inputArray) => {
   for (let i = 0; i < inputArray.length; i++) {
     const inputItem = inputArray[i];
     const numberLoaded = inputItem.dataArray.length;
-    // console.log("NUMBER LOADED");
-    // console.log(numberLoaded);
     returnObj[inputItem.dataType] = numberLoaded;
   }
 
-  console.log("RETURN OBJ");
-  console.dir(returnObj);
+  state.dataLoaded = returnObj;
+
+  return true;
 };
 
 export const checkEventTriggered = async (changeId) => {
@@ -76,7 +75,7 @@ export const newDataTrigger = async () => {
 };
 
 export const checkMoreDataNeeded = async (k, inputItem) => {
-  const { dataReq } = state;
+  const { dataReq, dataLoaded } = state;
   //return true on all sorts (just assume not loaded)
   if (k.includes("-to-")) return true;
 
@@ -86,6 +85,8 @@ export const checkMoreDataNeeded = async (k, inputItem) => {
   console.log(inputItem);
   console.log("dataReq");
   console.dir(dataReq);
+  console.log("dataLoaded");
+  console.dir(dataLoaded);
 
   // if (inputItem === defaultItem) return false;
 
