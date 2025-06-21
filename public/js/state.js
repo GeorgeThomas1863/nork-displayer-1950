@@ -36,6 +36,7 @@ export const updateDataLoaded = async (inputArray) => {
   }
 
   state.dataLoaded = returnObj;
+  state.isFirstLoad = false;
 
   return true;
 };

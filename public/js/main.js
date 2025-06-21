@@ -46,7 +46,6 @@ export const buildDisplay = async () => {
 
   //UPDATE THE STATE HERE
   await updateDataLoaded(backendData);
-  state.isFirstLoad = false;
 
   return "#DONE";
 };
