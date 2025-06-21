@@ -17,13 +17,16 @@ export const runGetBackendData = async (inputObj) => {
     return defaultData;
   }
 
-  //BUILD BACKEND TRIGGER MAP 
+  //BUILD BACKEND TRIGGER MAP
 
   console.log("INPUT OBJ");
   console.dir(inputObj);
 
-  // const defaultParams = await getBackendDefaultParams(dataType);
-  // const collection = defaultParams.collection;
+  const defaultParams = await getBackendDefaultParams(dataType);
+  const collection = defaultParams.collection;
+
+  console.log("DEFAULT PARAMS");
+  console.dir(defaultParams);
 
   // //build backend params based on if first load
   // const backendParams = await getBackendParams(inputObj);
