@@ -3,23 +3,22 @@ import CONFIG from "../config/config.js";
 import { getBackendDefaultParams } from "../config/map-display.js";
 import dbModel from "../models/db-model.js";
 import { articleTypeMap } from "../config/map-display.js";
-import { fixInputDefaults, fixDataByType, removeInvalidItems } from "./src-fix.js";
 
 //-------------------------------
 
-export const getBackendParams = async (inputObj) => {
-  if (!inputObj || !inputObj.dataType) return null;
-  const { isFirstLoad, dataType } = inputObj;
+// export const getBackendParams = async (inputObj) => {
+//   if (!inputObj || !inputObj.dataType) return null;
+//   const { isFirstLoad, dataType } = inputObj;
 
-  //set to default on first load
-  if (isFirstLoad) {
-    const defaultParams = await getBackendDefaultParams(dataType);
-    return defaultParams;
-  }
+//   //set to default on first load
+//   if (isFirstLoad) {
+//     const defaultParams = await getBackendDefaultParams(dataType);
+//     return defaultParams;
+//   }
 
-  //otherwise use input
-  return await fixInputDefaults(inputObj);
-};
+//   //otherwise use input
+//   return await fixInputDefaults(inputObj);
+// };
 
 //GET PIC DATA SECTION
 export const getPicData = async (picURL) => {
