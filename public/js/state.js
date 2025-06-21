@@ -85,7 +85,7 @@ export const checkNewDataNeeded = async () => {
   if (isFirstLoad) return true;
 
   //return true on all sorts (just assume not loaded)
-  if (trigger.includes("-to-")) return true;
+  if (trigger.includes("sort-by")) return true;
 
   switch (trigger) {
     case "pic-type":
