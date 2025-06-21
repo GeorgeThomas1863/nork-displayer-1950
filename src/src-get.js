@@ -162,6 +162,10 @@ export const getVidData = async (vidURL) => {
 export const rePullData = async (dataType, howMany) => {
   const { vidsDownloaded, vidPageContent } = CONFIG;
 
+  console.log("RE-PULL DATA DATA TYPE TRIGGERED");
+  console.log(dataType);
+  console.log(howMany);
+
   switch (dataType) {
     case "vidPages":
       const vidParams = await getBackendDefaultParams("vids");

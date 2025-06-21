@@ -229,8 +229,8 @@ export const removeInvalidItems = async (inputArray, dataType, howMany) => {
     case "vidPages":
       for (let i = 0; i < inputArray.length; i++) {
         const dataObj = inputArray[i];
-        console.log("VID REMOVE DATA OBJ");
-        console.log(dataObj);
+        // console.log("VID REMOVE DATA OBJ");
+        // console.log(dataObj);
         if (!dataObj || !dataObj.url) continue;
         const { url } = dataObj;
 
