@@ -89,11 +89,37 @@ export const checkNewDataNeeded = async () => {
 
   switch (trigger) {
     case "pic-type":
-      return null;
+      const { pics, picSets } = dataLoaded;
+      const { picType, picHowMany } = dataReq;
+
+      switch (picType) {
+        case "pic-alone":
+          if (pics >= picHowMany) return null;
+          return true;
+        case "pic-sets":
+          if (picSets >= picHowMany) return null;
+          return true;
+      }
+
+    case "vid-type":
+      const { vids, vidPages } = dataLoaded;
+      const { vidType, vidHowMany } = dataReq;
+
+      switch (vidType) {
+        case "vid-alone":
+          if (vids >= vidHowMany) return null;
+          return true;
+        case "vid-pages":
+          if (vidPages >= vidHowMany) return null;
+          return true;
+      }
+
+    //MAKE ARTICLE LOGIC DEAL WITH ARTICLE TYPE
+    case "article-type":
+      return true;
   }
 
-  //RETURN TRUE EXCEPT FOR HOW MANY
-  return true;
+  return null;
 
   // console.log("k");
   // console.log(k);
