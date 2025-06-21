@@ -29,11 +29,6 @@ export const getBackendDataDefault = async () => {
     const dataParams = await getBackendDefaultParams(dataType);
     const { collection, howMany } = dataParams;
 
-    if (dataType === "vidPages") {
-      console.log("AHHHHHHHHHHHHHHH");
-      console.log(dataParams);
-    }
-
     // update how many (to account for fucked items)
     const howManyBuffer = Math.ceil(+howMany * 1.2);
     dataParams.howMany = howManyBuffer;
@@ -47,8 +42,18 @@ export const getBackendDataDefault = async () => {
       dataArrayRaw = await dataModel.getNewestItemsArray();
     }
 
+    if (dataType === "vidPages") {
+      console.log("AHHHHHHHHHHHHHHH");
+      console.log(dataArrayRaw);
+    }
+
     const dataArrayValid = await removeInvalidItems(dataArrayRaw, dataType, howMany);
     const dataArrayFixed = await fixDataByType(dataArrayValid, dataType);
+
+    if (dataType === "vidPages") {
+      console.log("AHHHHHHHHHHHHHHH");
+      console.log(dataArrayFixed);
+    }
 
     const dataObj = {
       dataType: dataType,
