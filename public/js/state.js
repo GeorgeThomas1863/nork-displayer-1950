@@ -77,12 +77,15 @@ export const checkEventTriggered = async (changeId) => {
 
 //basically return true except for how many
 export const checkNewDataNeeded = async () => {
-  const { isFirstLoad, dataReq, dataLoaded } = state;
+  const { isFirstLoad, dataReq, dataLoaded, trigger } = state;
+
+  console.log("STATE");
+  console.dir(state);
 
   if (isFirstLoad) return true;
 
   //return true on all sorts (just assume not loaded)
-  if (k.includes("-to-")) return true;
+  if (trigger.includes("-to-")) return true;
 
   //RETURN TRUE EXCEPT FOR HOW MANY
   return true;
