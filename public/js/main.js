@@ -84,6 +84,9 @@ export const buildBackendDisplay = async (inputArray) => {
     const replaceId = d.replaceTypeMap[dataType];
     const replaceElement = document.getElementById(replaceId);
 
+    console.log("REPLACE ELEMENT");
+    console.log(replaceElement);
+
     //format data
     const func = d.displayFunctionMap[dataType];
     const dataElement = await func(dataArray);
