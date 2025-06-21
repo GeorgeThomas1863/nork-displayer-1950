@@ -21,7 +21,7 @@ export const updateDataLoaded = async (inputArray) => {
     const returnObj = {};
     for (let i = 0; i < inputArray.length; i++) {
       const inputItem = inputArray[i];
-      const { dataType } = inputItem;
+      const { dataType, dataArray } = inputItem;
 
       //add in article type here
       if (dataType === "articles") {
@@ -30,8 +30,8 @@ export const updateDataLoaded = async (inputArray) => {
         state.articleType = articleType;
       }
 
-      const numberLoaded = inputItem.dataArray.length;
-      returnObj[inputItem.dataType] = numberLoaded;
+      const numberLoaded = dataArray.length;
+      returnObj[dataType] = numberLoaded;
     }
 
     state.dataLoaded = returnObj;
@@ -39,12 +39,16 @@ export const updateDataLoaded = async (inputArray) => {
     return true;
   }
 
-  //otherwise not first load
-  console.log("INPUT ITEM");
-  console.dir(inputArray);
+  const updateItem = inputArray[0];
+  const { dataType, dataArray } = updateItem;
+  const { dataLoaded } = state;
 
-  console.log("STATE DATA LOADED");
-  console.dir(state);
+  //otherwise not first load
+  console.log("UPDATE ITEM");
+  console.log(updateItem);
+
+  console.log("DATA LOADED");
+  console.log(dataLoaded);
 };
 
 export const checkEventTriggered = async (changeId) => {
