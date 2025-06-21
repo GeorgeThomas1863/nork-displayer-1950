@@ -41,13 +41,14 @@ export const getBackendDataDefault = async () => {
     } else {
       dataArrayRaw = await dataModel.getNewestItemsArray();
     }
+  }
 
-    if (dataType === "vidPages") {
-      console.log("AHHHHHHHHHHHHHHH");
-      console.log(dataArrayRaw);
-    }
+  const dataArrayValid = await removeInvalidItems(dataArrayRaw, dataType, howMany);
 
-    const dataArrayValid = await removeInvalidItems(dataArrayRaw, dataType, howMany);
+  if (dataType === "vidPages") {
+    console.log("AHHHHHHHHHHHHHHH");
+    console.log(dataArrayValid);
+
     const dataArrayFixed = await fixDataByType(dataArrayValid, dataType);
 
     if (dataType === "vidPages") {
