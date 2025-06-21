@@ -1,6 +1,6 @@
 import { buildDisplay, toggleDropdown, expandForm } from "./main.js";
 import { getNewAdminData } from "./admin.js";
-import { debounce } from "./util.js";
+import { debounce, buildInputParams } from "./util.js";
 import { buildBackendNew } from "./build-backend.js";
 import { state, checkEventTriggered } from "./state.js";
 
@@ -37,8 +37,10 @@ export const mainChangeHandler = async (e) => {
   const eventTriggered = await checkEventTriggered(changeId);
   if (!eventTriggered) return null;
 
-  //otherwise change the trigger
+  //otherwise note current dataReq and change the trigger
+  const inputParams = await buildInputParams();
   state.trigger = eventTriggered;
+  state.dataReq = inputParams;
 
   console.log("EVENT TRIGGERED");
   console.log(eventTriggered);
