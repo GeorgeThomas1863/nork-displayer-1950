@@ -27,8 +27,11 @@ export const updateDataLoaded = async (inputArray) => {
     const { dataType } = inputItem;
 
     if (dataType === "articles") {
+      //just pull type from the first one
+      const articleType = inputItem.dataArray[0].articleType;
       console.log("ARTICLE DATA");
       console.log(inputItem);
+      console.log(articleType);
     }
 
     const numberLoaded = inputItem.dataArray.length;
