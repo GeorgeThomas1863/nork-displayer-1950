@@ -149,9 +149,10 @@ export const fixVidPageObj = async (inputObj) => {
   if (!inputObj || !inputObj.vidURL) return null;
   const { vidURL } = inputObj;
 
+  //DONT RETURN NULL HERE
   try {
     const vidDataObj = await getVidData(vidURL);
-    if (!vidDataObj) return null;
+    // if (!vidDataObj) return null;
 
     const vidPageObj = { ...vidDataObj, ...inputObj };
     return vidPageObj;
