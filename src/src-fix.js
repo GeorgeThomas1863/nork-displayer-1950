@@ -52,11 +52,6 @@ import { checkItemExists } from "./src-check.js";
 export const fixDataByType = async (inputArray, dataType) => {
   if (!inputArray) return null;
 
-  if (dataType === "vidPages") {
-    console.log("ON THIS PART FAGGOT");
-    console.log(inputArray);
-  } 
-
   const results = [];
   for (let i = 0; i < inputArray.length; i++) {
     const inputObj = inputArray[i];
@@ -89,6 +84,9 @@ export const fixDataByType = async (inputArray, dataType) => {
 
       //pics as thumbnails
       case "vidPages":
+        console.log("ON THIS PART FAGGOT");
+        console.log(inputObj);
+
         const vidDataObj = await fixVidPageObj(inputObj);
         if (!vidDataObj) continue;
 
