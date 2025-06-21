@@ -106,19 +106,30 @@ export const checkInputId = async (inputObj) => {
 export const checkItemExists = async (url, type = "pic") => {
   if (!url) return null;
 
-  //auto throws error if vid doesnt exist
-  if (type === "vid") {
-    await getVidData(url);
-    return true;
+  let itemExists = "";
+  switch (type) {
+    case "pic":
+      const params = {
+        keyToLookup: "url",
+        itemValue: url,
+      };
+      //throws error if path doesnt exist
+      itemExists = await getPicExtraData(params);
+      break;
+
+    case "vid":
+      //throws error if path doesnt exist
+      itemExists = await getVidData(url);
+      break;
   }
 
-  //otherwise test pics
-  const params = {
-    keyToLookup: "url",
-    itemValue: url,
-  };
+  //returns null if item not in db, throw error
+  if (!itemExists) {
+    const error = new Error("ITEM NOT IN DB");
+    error.url = url;
+    error.savePath = type;
+    throw error;
+  }
 
-  //throws error if pic doesnt exist
-  await getPicExtraData(params);
   return true;
 };
