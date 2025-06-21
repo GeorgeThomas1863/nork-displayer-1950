@@ -3,8 +3,10 @@ import { buildInputParams } from "./util.js";
 
 export const state = {
   route: "/get-backend-data-route",
-  dataType: "pics",
   isFirstLoad: true,
+  dataType: "pics",
+  articleType: null,
+
   //data already requested
   dataReq: d.defaultInputMap,
   dataLoaded: null,
@@ -37,6 +39,9 @@ export const updateDataLoaded = async (inputArray) => {
 
   return true;
 };
+
+//HERE!!!!
+//UPDATE DATA TYPE HERE????
 
 export const checkEventTriggered = async (changeId) => {
   const { changeTriggerArr } = d;

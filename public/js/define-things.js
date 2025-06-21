@@ -13,12 +13,16 @@ const d = {
     vids: buildVidAloneDisplay,
     vidPages: buildVidPageDisplay,
   },
-  changeTriggerArr: ["article-type", "article-sort-by", "pic-type", "pic-sort-by", "vid-type", "vid-sort-by"],
+  backendTypeArr: ["articles", "pics", "picSets", "vids", "vidPages"],
+
+  //expand triggers
   expandTriggerArr: ["article-form-header", "pic-form-header", "vid-form-header"],
   expandIdsArr: ["article-array-element", "pic-array-element", "pic-set-array-element", "vid-array-element", "vid-page-array-element"],
-  inputTriggerArr: ["article-how-many", "pic-how-many", "vid-how-many"],
-  backendTypeArr: ["articles", "pics", "picSets", "vids", "vidPages"],
   expandTypeArr: ["article", "pic", "vid"],
+
+  //change triggers
+  changeTriggerArr: ["article-type", "article-sort-by", "pic-type", "pic-sort-by", "vid-type", "vid-sort-by"],
+  inputTriggerArr: ["article-how-many", "pic-how-many", "vid-how-many"],
 
   defaultInputMap: {
     articleType: "fatboy",
