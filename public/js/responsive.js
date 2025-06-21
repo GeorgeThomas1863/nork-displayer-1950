@@ -2,7 +2,7 @@ import { buildDisplay, toggleDropdown, expandForm } from "./main.js";
 import { getNewAdminData } from "./admin.js";
 import { debounce } from "./util.js";
 import { buildBackendNew } from "./build-backend.js";
-import { state, checkEventTriggered, newDataTrigger } from "./state.js";
+import { state, checkEventTriggered } from "./state.js";
 
 //MAIN / NORMAL RESPONSIVE
 
