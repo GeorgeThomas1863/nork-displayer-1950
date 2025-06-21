@@ -24,6 +24,13 @@ export const updateDataLoaded = async (inputArray) => {
   const returnObj = {};
   for (let i = 0; i < inputArray.length; i++) {
     const inputItem = inputArray[i];
+    const { dataType } = inputItem;
+
+    if (dataType === "articles") {
+      console.log("ARTICLE DATA");
+      console.log(inputItem);
+    }
+
     const numberLoaded = inputItem.dataArray.length;
     returnObj[inputItem.dataType] = numberLoaded;
   }
