@@ -85,8 +85,8 @@ export const fixDataByType = async (inputArray, dataType) => {
       //pics as thumbnails
       case "vidPages":
         const vidDataObj = await fixVidPageObj(inputObj);
-        console.log("VID DATA OBJ");
-        console.log(vidDataObj);
+        // console.log("VID DATA OBJ");
+        // console.log(vidDataObj);
         if (!vidDataObj) continue;
 
         const vidPageObj = { ...vidDataObj, ...inputObj };
@@ -229,7 +229,7 @@ export const removeInvalidItems = async (inputArray, dataType, howMany) => {
     case "vidPages":
       for (let i = 0; i < inputArray.length; i++) {
         const dataObj = inputArray[i];
-        console.log("VID DATA OBJ");
+        console.log("VID REMOVE DATA OBJ");
         console.log(dataObj);
         if (!dataObj || !dataObj.url) continue;
         const { url } = dataObj;
