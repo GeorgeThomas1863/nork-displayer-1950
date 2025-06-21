@@ -213,34 +213,43 @@ export const removeInvalidItems = async (inputArray, dataType, howMany) => {
 
     case "pics":
       for (let i = 0; i < inputArray.length; i++) {
-        const dataObj = inputArray[i];
-        if (!dataObj || !dataObj.url) continue;
-        const { url } = dataObj;
+        try {
+          const dataObj = inputArray[i];
+          if (!dataObj || !dataObj.url) continue;
+          const { url } = dataObj;
+          const itemExists = await checkItemExists(url);
+          if (!itemExists) continue;
 
-        const itemExists = await checkItemExists(url);
-        if (!itemExists) continue;
-
-        dataReturnArray.push(dataObj);
-        if (dataReturnArray.length === howMany) return dataReturnArray;
+          dataReturnArray.push(dataObj);
+          if (dataReturnArray.length === howMany) return dataReturnArray;
+        } catch (e) {
+          console.log(e.message + "; SAVE PATH: " + e.savePath + "; PICURL: " + e.url);
+          continue;
+        }
       }
       break;
 
     case "vids":
     case "vidPages":
       for (let i = 0; i < inputArray.length; i++) {
-        const dataObj = inputArray[i];
-        // console.log("VID REMOVE DATA OBJ");
-        // console.log(dataObj);
-        if (!dataObj || !dataObj.url) continue;
-        const { url } = dataObj;
+        try {
+          const dataObj = inputArray[i];
+          // console.log("VID REMOVE DATA OBJ");
+          // console.log(dataObj);
+          if (!dataObj || !dataObj.url) continue;
+          const { url } = dataObj;
 
-        const itemExists = await checkItemExists(url);
-        console.log("!!!!!!!!!!!!!!!ITEM EXISTS");
-        console.log(itemExists);
-        if (!itemExists) continue;
+          const itemExists = await checkItemExists(url, "vid");
+          console.log("!!!!!!!!!!!!!!!ITEM EXISTS");
+          console.log(itemExists);
+          if (!itemExists) continue;
 
-        dataReturnArray.push(dataObj);
-        if (dataReturnArray.length === howMany) return dataReturnArray;
+          dataReturnArray.push(dataObj);
+          if (dataReturnArray.length === howMany) return dataReturnArray;
+        } catch (e) {
+          console.log(e.message + "; SAVE PATH: " + e.savePath + "; VIDURL: " + e.url);
+          continue;
+        }
       }
       break;
   }

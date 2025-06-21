@@ -103,26 +103,22 @@ export const checkInputId = async (inputObj) => {
 //   return true;
 // };
 
-export const checkItemExists = async (url) => {
+export const checkItemExists = async (url, type = "pic") => {
   if (!url) return null;
 
-  //get save path from url
+  //auto throws error if vid doesnt exist
+  if (type === "vid") {
+    await getVidData(url);
+    return true;
+  }
+
+  //otherwise test pics
   const params = {
     keyToLookup: "url",
     itemValue: url,
   };
 
-  //throws error if item doesnt exit
+  //throws error if pic doesnt exist
   await getPicExtraData(params);
-
-  // const checkModel = new dbModel(params, picsDownloaded);
-
-  // if (!savePath || !fs.existsSync(savePath)) {
-  //   console.log("AHHHHHHHHHHHHHHHH");
-  //   console.log(`${type.toUpperCase()} NOT DOWNLOADED`);
-  //   console.log("ITEM URL: " + url);
-  //   return null;
-  // }
-
   return true;
 };
