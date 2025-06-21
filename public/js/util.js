@@ -14,13 +14,6 @@ export const sendToBack = async (inputParams) => {
       },
     });
 
-    //can remove prob
-    if (!res || !res.ok) {
-      console.log("RES NOT OK");
-      console.log(res);
-      return null;
-    }
-
     const data = await res.json();
     return data;
   } catch (error) {

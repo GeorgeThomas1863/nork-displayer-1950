@@ -32,7 +32,8 @@ export const checkEventTriggered = async (changeId) => {
   const { changeTriggerArr } = d;
 
   for (let i = 0; i < changeTriggerArr.length; i++) {
-    if (changeId === changeTriggerArr[i]) return true;
+    const changeItem = changeTriggerArr[i];
+    if (changeId === changeItem) return changeItem;
   }
 
   return null;
