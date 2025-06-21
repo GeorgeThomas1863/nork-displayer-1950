@@ -12,10 +12,7 @@ export const runGetBackendData = async (inputObj) => {
 
   switch (isFirstLoad) {
     case true:
-      const testData = await getBackendDataDefault();
-      console.log("TEST DATA");
-      console.dir(testData);
-      return testData;
+      return await getBackendDataDefault();
 
     case false:
       return await getBackendDataNew(inputObj);
@@ -31,6 +28,11 @@ export const getBackendDataDefault = async () => {
     const dataType = typeArr[i];
     const dataParams = await getBackendDefaultParams(dataType);
     const { collection, howMany } = dataParams;
+
+    if (dataType === "vidPages") {
+      console.log("AHHHHHHHHHHHHHHH");
+      console.log(dataParams);
+    }
 
     // update how many (to account for fucked items)
     const howManyBuffer = Math.ceil(+howMany * 1.2);
