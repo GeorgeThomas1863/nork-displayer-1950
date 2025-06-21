@@ -158,6 +158,7 @@ export const getVidData = async (vidURL) => {
 //-------------------------
 
 //[half assed answer below, might need to do same for picSets / assumes prob is newest shit not downloaded]
+// MOVE TO MAIN
 //RE-GET / PULL DATA
 export const rePullData = async (dataType, howMany) => {
   const { vidsDownloaded, vidPageContent } = CONFIG;

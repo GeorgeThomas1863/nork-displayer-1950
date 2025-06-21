@@ -1,8 +1,7 @@
 import d from "./define-things.js";
 import { buildDropDown } from "./build-drop-down.js";
 import { buildInputForms } from "./build-forms.js";
-// import { buildBackendDefault } from "./build-backend.js";
-import { hideArray, unhideArray, sendToBack, buildInputParams, checkNewDataTrigger, buildFailElement } from "./util.js";
+import { hideArray, unhideArray, sendToBack, buildFailElement } from "./util.js";
 import { state, updateDataLoaded, checkNewDataNeeded } from "./state.js";
 
 //get display element
@@ -103,25 +102,6 @@ export const buildBackendDisplay = async (inputArray) => {
 
   return backendDataWrapper;
 };
-//RESPONSIVE STUFF
-// export const getNewData = async (inputObj) => {
-//   //checks if command triggered, if so gets type of command triggered
-//   const commandTriggerType = await checkNewDataTrigger(inputObj);
-
-//   if (!commandTriggerType) return null;
-
-//   //get user input
-//   const userInputParams = await buildInputParams();
-
-//   //build params
-//   const paramsObj = { ...userInputParams, ...inputObj };
-//   paramsObj.route = "/get-new-data-route";
-//   paramsObj.commandType = commandTriggerType;
-
-//   const dataObj = await sendToBack(paramsObj);
-
-//   return dataObj;
-// };
 
 //better version of expand backend data equation
 export const expandForm = async (dataType) => {

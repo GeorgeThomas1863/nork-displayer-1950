@@ -3,64 +3,48 @@ import dbModel from "../models/db-model.js";
 import { getPicData, getVidData, rePullData } from "./src-get.js";
 import { checkItemExists } from "./src-check.js";
 
-// export const fixSortByInput = (inputObj) => {
-//   const { dataType, dataReq } = inputObj;
+//FIX DATA SECTION
+// export const fixInputDefaults = async (inputObj) => {
+//   const { dataType, howMany } = inputObj;
+//   const { articlesHowMany, picsHowMany, picSetsHowMany, vidsHowMany, vidPagesHowMany } = CONFIG;
+//   const returnObj = { ...inputObj };
 
-//   let typeKey = "";
-//   if (dataType === "picSets" || dataType === "vidPages") {
-//     typeKey = dataType.substring(0, 3);
-//   } else {
-//     typeKey = dataType.substring(0, dataType.length - 1);
+//   // console.log("FIX INPUT DEFAULTS");
+//   // console.log(inputObj);
+
+//   if (!howMany) {
+//     let returnHowMany = 0;
+//     switch (dataType) {
+//       case "articles":
+//         returnHowMany = articlesHowMany;
+//         break;
+
+//       case "pics":
+//         returnHowMany = picsHowMany;
+//         break;
+
+//       case "picSets":
+//         returnHowMany = picSetsHowMany;
+//         break;
+
+//       case "vids":
+//         returnHowMany = vidsHowMany;
+//         break;
+
+//       case "vidPages":
+//         returnHowMany = vidPagesHowMany;
+//         break;
+//     }
+
+//     returnObj.howMany = returnHowMany;
+//     return returnObj;
 //   }
 
-//   console.log("TYPE KEY");
-//   console.log(typeKey);
+//   console.log("RETURN OBJ");
+//   console.log(returnObj);
 
-//   return dataReq[`${typeKey}SortBy`];
+//   return returnObj;
 // };
-
-//FIX DATA SECTION
-export const fixInputDefaults = async (inputObj) => {
-  const { dataType, howMany } = inputObj;
-  const { articlesHowMany, picsHowMany, picSetsHowMany, vidsHowMany, vidPagesHowMany } = CONFIG;
-  const returnObj = { ...inputObj };
-
-  // console.log("FIX INPUT DEFAULTS");
-  // console.log(inputObj);
-
-  if (!howMany) {
-    let returnHowMany = 0;
-    switch (dataType) {
-      case "articles":
-        returnHowMany = articlesHowMany;
-        break;
-
-      case "pics":
-        returnHowMany = picsHowMany;
-        break;
-
-      case "picSets":
-        returnHowMany = picSetsHowMany;
-        break;
-
-      case "vids":
-        returnHowMany = vidsHowMany;
-        break;
-
-      case "vidPages":
-        returnHowMany = vidPagesHowMany;
-        break;
-    }
-
-    returnObj.howMany = returnHowMany;
-    return returnObj;
-  }
-
-  console.log("RETURN OBJ");
-  console.log(returnObj);
-
-  return returnObj;
-};
 
 //----------------------------
 
