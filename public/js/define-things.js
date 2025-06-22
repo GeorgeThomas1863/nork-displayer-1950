@@ -1,19 +1,17 @@
 //importing functions defined in map
 import { buildArticleDisplay } from "./articles/article-return.js";
-import { buildPicAloneDisplay } from "./pics/pic-return-alone.js";
+// import { buildPicAloneDisplay } from "./pics/pic-return-alone.js";
 import { buildPicSetDisplay } from "./pics/pic-return-pic-set.js";
-import { buildVidAloneDisplay } from "./vids/vid-return-alone.js";
+// import { buildVidAloneDisplay } from "./vids/vid-return-alone.js";
 import { buildVidPageDisplay } from "./vids/vid-return-vid-page.js";
 
 const d = {
   displayFunctionMap: {
     articles: buildArticleDisplay,
-    pics: buildPicAloneDisplay,
-    picSets: buildPicSetDisplay,
-    vids: buildVidAloneDisplay,
-    vidPages: buildVidPageDisplay,
+    pics: buildPicSetDisplay,
+    vids: buildVidPageDisplay,
   },
-  backendTypeArr: ["articles", "pics", "picSets", "vids", "vidPages"],
+  // backendTypeArr: ["articles", "pics", "picSets", "vids", "vidPages"],
 
   //expand triggers
   expandTriggerArr: ["article-form-header", "pic-form-header", "vid-form-header"],
