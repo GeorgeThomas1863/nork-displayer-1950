@@ -29,6 +29,9 @@ export const getBackendDataDefault = async () => {
     const dataParams = await getParamsMap(dataType);
     const { collection, howMany } = dataParams;
 
+    console.log("DATA PARAMS");
+    console.dir(dataParams);
+
     // update how many (to account for fucked items)
     const howManyBuffer = Math.ceil(+howMany * 1.2);
     dataParams.howMany = howManyBuffer;
