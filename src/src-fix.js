@@ -13,6 +13,7 @@ export const removeInvalidItems = async (inputArray, dataType, howMany) => {
   switch (dataType) {
     //delete pics that dont exist from picArray
     case "articles":
+    case "pics":
       for (let i = 0; i < inputArray.length; i++) {
         //extract picArray
         const dataObj = inputArray[i];
@@ -48,23 +49,23 @@ export const removeInvalidItems = async (inputArray, dataType, howMany) => {
       }
       break;
 
-    case "pics":
-      for (let i = 0; i < inputArray.length; i++) {
-        try {
-          const picObj = inputArray[i];
-          if (!picObj || !picObj.savePath) continue;
-          const { savePath } = picObj;
-          const itemExists = await checkItemExists(savePath);
-          if (!itemExists) continue;
+    // case "pics":
+    //   for (let i = 0; i < inputArray.length; i++) {
+    //     try {
+    //       const picObj = inputArray[i];
+    //       if (!picObj || !picObj.savePath) continue;
+    //       const { savePath } = picObj;
+    //       const itemExists = await checkItemExists(savePath);
+    //       if (!itemExists) continue;
 
-          dataReturnArray.push(picObj);
-          if (dataReturnArray.length === howMany) return dataReturnArray;
-        } catch (e) {
-          console.log(e.message + "; SAVE PATH: " + e.savePath + "; PICURL: " + e.url);
-          continue;
-        }
-      }
-      break;
+    //       dataReturnArray.push(picObj);
+    //       if (dataReturnArray.length === howMany) return dataReturnArray;
+    //     } catch (e) {
+    //       console.log(e.message + "; SAVE PATH: " + e.savePath + "; PICURL: " + e.url);
+    //       continue;
+    //     }
+    //   }
+    //   break;
 
     case "vids":
       for (let i = 0; i < inputArray.length; i++) {
