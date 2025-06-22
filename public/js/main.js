@@ -31,13 +31,13 @@ export const buildDisplay = async () => {
   const backendData = await sendToBack(state);
   if (!backendData) return null;
 
-  console.log("BACKEND DATA");
-  console.log(backendData.length);
+  // console.log("BACKEND DATA");
+  // console.log(backendData.length);
 
   const backendDataParsed = await buildBackendDisplay(backendData);
 
-  console.log("!!!!BACKEND DATA PARSED");
-  console.dir(backendDataParsed);
+  // console.log("!!!!BACKEND DATA PARSED");
+  // console.dir(backendDataParsed);
 
   if (!backendDataParsed) return null;
   // console.log("!!!!BACKEND DATA PARSED");
@@ -60,6 +60,9 @@ export const buildDisplay = async () => {
 export const buildBackendDisplay = async (inputArray) => {
   if (!inputArray || !inputArray.length) return failElement;
   const { isFirstLoad } = state;
+
+  console.log("!!!!BUILD BACKEND DISPLAY");
+  console.log(inputArray);
 
   //build wrapper
   const backendDataWrapper = document.createElement("div");
