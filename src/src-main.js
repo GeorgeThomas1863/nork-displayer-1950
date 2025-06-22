@@ -42,12 +42,12 @@ export const getBackendDataDefault = async () => {
       dataArrayRaw = await dataModel.getNewestItemsArray();
     }
 
-    console.log("DATA ARRAY RAW");
-    console.log(dataType);
-    console.dir(dataArrayRaw);
-
     const dataArrayValid = await removeInvalidItems(dataArrayRaw, dataType, howMany);
     // const dataArrayFixed = await fixDataByType(dataArrayValid, dataType);
+
+    console.log("DATA ARRAY VALID");
+    console.log(dataType);
+    console.dir(dataArrayValid);
 
     const dataObj = {
       dataType: dataType,
