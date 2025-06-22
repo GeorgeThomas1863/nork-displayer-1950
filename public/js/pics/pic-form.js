@@ -10,17 +10,17 @@ export const buildPicForm = async () => {
   titleElement.textContent = "PICS";
   // titleElement.setAttribute("data-expand", "pic-dropdown"); //for click listener
 
-  const picTypeListItem = await buildPicTypeListItem();
+  // const picTypeListItem = await buildPicTypeListItem();
   const picHowManyListItem = await buildPicHowManyListItem();
   const picSortByListItem = await buildPicSortByListItem();
 
-  picWrapper.append(picTypeListItem, picHowManyListItem, picSortByListItem);
+  picWrapper.append(picHowManyListItem, picSortByListItem);
 
   //build collapse container
   const picCollapseObj = {
     titleElement: titleElement,
     contentElement: picWrapper,
-    isExpanded: true,
+    isExpanded: false,
     className: "pic-wrapper-collapse",
     dataAttribute: "pic-form-header",
   };
@@ -33,41 +33,41 @@ export const buildPicForm = async () => {
   return picCollapseContainer;
 };
 
-export const buildPicTypeListItem = async () => {
-  const picTypeListItem = document.createElement("li");
-  picTypeListItem.id = "pic-type-list-item";
-  picTypeListItem.className = "form";
+// export const buildPicTypeListItem = async () => {
+//   const picTypeListItem = document.createElement("li");
+//   picTypeListItem.id = "pic-type-list-item";
+//   picTypeListItem.className = "form";
 
-  const picTypeLabel = document.createElement("label");
-  picTypeLabel.setAttribute("for", "pic-type");
-  picTypeLabel.textContent = "Pic Type";
+//   const picTypeLabel = document.createElement("label");
+//   picTypeLabel.setAttribute("for", "pic-type");
+//   picTypeLabel.textContent = "Pic Type";
 
-  const picTypeSelect = document.createElement("select");
-  picTypeSelect.name = "pic-type";
-  picTypeSelect.id = "pic-type";
+//   const picTypeSelect = document.createElement("select");
+//   picTypeSelect.name = "pic-type";
+//   picTypeSelect.id = "pic-type";
 
-  // Create options for article type select
-  const optionArray = [
-    { value: "pic-alone", id: "pic-alone", text: "Just Pics", selected: true },
-    { value: "pic-sets", id: "pic-sets", text: "Pic Sets" },
-  ];
+//   // Create options for article type select
+//   const optionArray = [
+//     { value: "pic-alone", id: "pic-alone", text: "Just Pics", selected: true },
+//     { value: "pic-sets", id: "pic-sets", text: "Pic Sets" },
+//   ];
 
-  for (let i = 0; i < optionArray.length; i++) {
-    const optionData = optionArray[i];
-    const option = document.createElement("option");
-    option.value = optionData.value;
-    option.id = optionData.id;
-    option.textContent = optionData.text;
-    if (optionData.selected) {
-      option.selected = true;
-    }
-    picTypeSelect.append(option);
-  }
+//   for (let i = 0; i < optionArray.length; i++) {
+//     const optionData = optionArray[i];
+//     const option = document.createElement("option");
+//     option.value = optionData.value;
+//     option.id = optionData.id;
+//     option.textContent = optionData.text;
+//     if (optionData.selected) {
+//       option.selected = true;
+//     }
+//     picTypeSelect.append(option);
+//   }
 
-  picTypeListItem.append(picTypeLabel, picTypeSelect);
+//   picTypeListItem.append(picTypeLabel, picTypeSelect);
 
-  return picTypeListItem;
-};
+//   return picTypeListItem;
+// };
 
 export const buildPicHowManyListItem = async () => {
   const picHowManyListItem = document.createElement("li");

@@ -3,7 +3,7 @@ import { getBackendDefaultParams } from "../config/map-display.js";
 import dbModel from "../models/db-model.js";
 // import { getBackendParams } from "./src-get.js";
 // import { checkDataType } from "./src-check.js";
-import { fixDataByType, removeInvalidItems } from "./src-fix.js";
+// import { fixDataByType, removeInvalidItems } from "./src-fix.js";
 
 //gets backend data from db
 export const runGetBackendData = async (inputObj) => {
@@ -21,7 +21,9 @@ export const runGetBackendData = async (inputObj) => {
 
 //get default data with loop through types
 export const getBackendDataDefault = async () => {
-  const typeArr = CONFIG.backendTypeArr;
+  //OLD 5 way array
+  // const typeArr = CONFIG.backendTypeArr;
+  const { typeArr } = CONFIG;
 
   const defaultDataArray = [];
   for (let i = 0; i < typeArr.length; i++) {
@@ -43,7 +45,7 @@ export const getBackendDataDefault = async () => {
     }
 
     const dataArrayValid = await removeInvalidItems(dataArrayRaw, dataType, howMany);
-    const dataArrayFixed = await fixDataByType(dataArrayValid, dataType);
+    // const dataArrayFixed = await fixDataByType(dataArrayValid, dataType);
 
     const dataObj = {
       dataType: dataType,

@@ -1,169 +1,7 @@
 // import CONFIG from "../config/config.js";
 // import dbModel from "../models/db-model.js";
 import { rePullData } from "./src-main.js";
-import { getPicData, getVidData } from "./src-get.js";
-import { checkItemExists } from "./src-check.js";
-
-//FIX DATA SECTION
-// export const fixInputDefaults = async (inputObj) => {
-//   const { dataType, howMany } = inputObj;
-//   const { articlesHowMany, picsHowMany, picSetsHowMany, vidsHowMany, vidPagesHowMany } = CONFIG;
-//   const returnObj = { ...inputObj };
-
-//   // console.log("FIX INPUT DEFAULTS");
-//   // console.log(inputObj);
-
-//   if (!howMany) {
-//     let returnHowMany = 0;
-//     switch (dataType) {
-//       case "articles":
-//         returnHowMany = articlesHowMany;
-//         break;
-
-//       case "pics":
-//         returnHowMany = picsHowMany;
-//         break;
-
-//       case "picSets":
-//         returnHowMany = picSetsHowMany;
-//         break;
-
-//       case "vids":
-//         returnHowMany = vidsHowMany;
-//         break;
-
-//       case "vidPages":
-//         returnHowMany = vidPagesHowMany;
-//         break;
-//     }
-
-//     returnObj.howMany = returnHowMany;
-//     return returnObj;
-//   }
-
-//   console.log("RETURN OBJ");
-//   console.log(returnObj);
-
-//   return returnObj;
-// };
-
-//----------------------------
-
-//ADD IN PIC SETS AND VID PAGES
-export const fixDataByType = async (inputArray, dataType) => {
-  if (!inputArray) return null;
-
-  const results = [];
-  for (let i = 0; i < inputArray.length; i++) {
-    const inputObj = inputArray[i];
-
-    // console.log("FIX DATA BY TYPE INPUT");
-    // console.log(inputObj);
-
-    switch (dataType) {
-      //single pics
-      case "pics":
-        const { url } = inputObj;
-
-        const picDataObj = await getPicData(url);
-        if (!picDataObj) continue;
-
-        const picObj = { ...picDataObj, ...inputObj };
-
-        results.push(picObj);
-        break;
-
-      //picArray
-      case "articles":
-      case "picSets":
-        //rebuild pic array (returns INPUTOBJ if no picArray)
-        const picArrayObj = await fixPicArray(inputObj);
-        if (!picArrayObj) continue;
-
-        results.push(picArrayObj);
-        break;
-
-      //pics as thumbnails
-      case "vidPages":
-        const vidDataObj = await fixVidPageObj(inputObj);
-        // console.log("VID DATA OBJ");
-        // console.log(vidDataObj);
-        if (!vidDataObj) continue;
-
-        const vidPageObj = { ...vidDataObj, ...inputObj };
-        results.push(vidPageObj);
-        break;
-
-      //might need to fix thumbnail (prob not)
-      case "vids":
-        //check if vid exists
-        try {
-          const vidAloneDataObj = await getVidData(inputObj.url);
-          //   console.log("VID ALONE DATA OBJ");
-          //   console.log(vidAloneDataObj);
-          if (!vidAloneDataObj) continue;
-
-          const vidAloneObj = { ...vidAloneDataObj, ...inputObj };
-          results.push(vidAloneObj);
-          break;
-        } catch (e) {
-          console.log(e.message + "; SAVE PATH: " + e.savePath + "; VIDURL: " + e.url);
-          continue;
-        }
-    }
-  }
-
-  return results;
-};
-
-//-------------------------
-
-//FIX PIC DATA
-
-//rebuild the picArray
-export const fixPicArray = async (inputObj) => {
-  if (!inputObj || !inputObj.picArray || !inputObj.picArray.length) return inputObj;
-  const { picArray } = inputObj;
-  const returnObj = { ...inputObj };
-
-  const picDataArray = [];
-  for (let i = 0; i < picArray.length; i++) {
-    //gets pic data AND source / date
-    const picDataObj = await getPicData(picArray[i]);
-    if (!picDataObj) continue;
-
-    picDataArray.push(picDataObj);
-  }
-
-  returnObj.picArray = picDataArray;
-  return returnObj;
-};
-
-//---------------------------
-
-//FIX VID DATA
-
-export const fixVidPageObj = async (inputObj) => {
-  // console.log("ON THIS PART FAGGOT");
-  // console.log(inputObj);S
-
-  if (!inputObj || !inputObj.vidURL) return null;
-  const { vidURL } = inputObj;
-
-  //DONT RETURN NULL HERE
-  try {
-    const vidDataObj = await getVidData(vidURL);
-    // if (!vidDataObj) return null;
-
-    const vidPageObj = { ...vidDataObj, ...inputObj };
-    return vidPageObj;
-  } catch (e) {
-    console.log(e.message + "; SAVE PATH: " + e.savePath + "; VIDURL: " + e.url);
-    return null;
-  }
-};
-
-//--------------------
+// import { getPicData, getVidData } from "./src-get.js";
 
 //REMOVE INVALID ITEMS FROM RETURN
 
@@ -178,7 +16,6 @@ export const removeInvalidItems = async (inputArray, dataType, howMany) => {
   switch (dataType) {
     //delete pics that dont exist from picArray
     case "articles":
-    case "picSets":
       for (let i = 0; i < inputArray.length; i++) {
         //extract picArray
         const dataObj = inputArray[i];
@@ -231,7 +68,6 @@ export const removeInvalidItems = async (inputArray, dataType, howMany) => {
       break;
 
     case "vids":
-    case "vidPages":
       for (let i = 0; i < inputArray.length; i++) {
         try {
           const dataObj = inputArray[i];
@@ -261,3 +97,153 @@ export const removeInvalidItems = async (inputArray, dataType, howMany) => {
 
   return newDataArray;
 };
+
+//re-write to use fs
+export const checkItemExists = async (url, type = "pic") => {
+  if (!url) return null;
+
+  // let itemExists = "";
+  // switch (type) {
+  //   case "pic":
+  //     const params = {
+  //       keyToLookup: "url",
+  //       itemValue: url,
+  //     };
+  //     //throws error if path doesnt exist
+  //     // itemExists = await getPicExtraData(params);
+  //     break;
+
+  //   case "vid":
+  //     //throws error if path doesnt exist
+  //     // itemExists = await getVidData(url);
+  //     break;
+  // }
+
+  // //returns null if item not in db, throw error
+  // if (!itemExists) {
+  //   const error = new Error("ITEM NOT IN DB");
+  //   error.url = url;
+  //   error.savePath = type;
+  //   throw error;
+  // }
+
+  return true;
+};
+
+//----------------------------
+
+// //ADD IN PIC SETS AND VID PAGES
+// export const fixDataByType = async (inputArray, dataType) => {
+//   if (!inputArray) return null;
+
+//   const results = [];
+//   for (let i = 0; i < inputArray.length; i++) {
+//     const inputObj = inputArray[i];
+
+//     // console.log("FIX DATA BY TYPE INPUT");
+//     // console.log(inputObj);
+
+//     switch (dataType) {
+//       //single pics
+//       case "pics":
+//         const { url } = inputObj;
+
+//         const picDataObj = await getPicData(url);
+//         if (!picDataObj) continue;
+
+//         const picObj = { ...picDataObj, ...inputObj };
+
+//         results.push(picObj);
+//         break;
+
+//       //picArray
+//       case "articles":
+//       case "picSets":
+//         //rebuild pic array (returns INPUTOBJ if no picArray)
+//         const picArrayObj = await fixPicArray(inputObj);
+//         if (!picArrayObj) continue;
+
+//         results.push(picArrayObj);
+//         break;
+
+//       //pics as thumbnails
+//       case "vidPages":
+//         const vidDataObj = await fixVidPageObj(inputObj);
+//         // console.log("VID DATA OBJ");
+//         // console.log(vidDataObj);
+//         if (!vidDataObj) continue;
+
+//         const vidPageObj = { ...vidDataObj, ...inputObj };
+//         results.push(vidPageObj);
+//         break;
+
+//       //might need to fix thumbnail (prob not)
+//       case "vids":
+//         //check if vid exists
+//         try {
+//           const vidAloneDataObj = await getVidData(inputObj.url);
+//           //   console.log("VID ALONE DATA OBJ");
+//           //   console.log(vidAloneDataObj);
+//           if (!vidAloneDataObj) continue;
+
+//           const vidAloneObj = { ...vidAloneDataObj, ...inputObj };
+//           results.push(vidAloneObj);
+//           break;
+//         } catch (e) {
+//           console.log(e.message + "; SAVE PATH: " + e.savePath + "; VIDURL: " + e.url);
+//           continue;
+//         }
+//     }
+//   }
+
+//   return results;
+// };
+
+// //-------------------------
+
+// //FIX PIC DATA
+
+// //rebuild the picArray
+// export const fixPicArray = async (inputObj) => {
+//   if (!inputObj || !inputObj.picArray || !inputObj.picArray.length) return inputObj;
+//   const { picArray } = inputObj;
+//   const returnObj = { ...inputObj };
+
+//   const picDataArray = [];
+//   for (let i = 0; i < picArray.length; i++) {
+//     //gets pic data AND source / date
+//     const picDataObj = await getPicData(picArray[i]);
+//     if (!picDataObj) continue;
+
+//     picDataArray.push(picDataObj);
+//   }
+
+//   returnObj.picArray = picDataArray;
+//   return returnObj;
+// };
+
+// //---------------------------
+
+// //FIX VID DATA
+
+// export const fixVidPageObj = async (inputObj) => {
+//   // console.log("ON THIS PART FAGGOT");
+//   // console.log(inputObj);S
+
+//   if (!inputObj || !inputObj.vidURL) return null;
+//   const { vidURL } = inputObj;
+
+//   //DONT RETURN NULL HERE
+//   try {
+//     const vidDataObj = await getVidData(vidURL);
+//     // if (!vidDataObj) return null;
+
+//     const vidPageObj = { ...vidDataObj, ...inputObj };
+//     return vidPageObj;
+//   } catch (e) {
+//     console.log(e.message + "; SAVE PATH: " + e.savePath + "; VIDURL: " + e.url);
+//     return null;
+//   }
+// };
+
+//--------------------

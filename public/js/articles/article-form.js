@@ -22,7 +22,7 @@ export const buildArticleForm = async () => {
   const articleCollapseObj = {
     titleElement: titleElement,
     contentElement: articleWrapper,
-    isExpanded: false,
+    isExpanded: true,
     className: "article-wrapper-collapse",
     dataAttribute: "article-form-header",
   };
