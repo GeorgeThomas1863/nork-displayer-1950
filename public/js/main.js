@@ -22,8 +22,8 @@ export const buildDisplay = async () => {
 
   //check if new data is needed [will pass on first load]
   const newDataNeeded = await checkNewDataNeeded();
-  console.log("NEW DATA NEEDED");
-  console.log(newDataNeeded);
+  // console.log("NEW DATA NEEDED");
+  // console.log(newDataNeeded);
 
   if (!newDataNeeded) return null;
 
@@ -31,8 +31,8 @@ export const buildDisplay = async () => {
   const backendData = await sendToBack(state);
   if (!backendData) return null;
 
-  // console.log("BACKEND DATA");
-  // console.log(backendData.length);
+  console.log("BACKEND DATA");
+  console.log(backendData.length);
 
   const backendDataParsed = await buildBackendDisplay(backendData);
   if (!backendDataParsed) return null;
