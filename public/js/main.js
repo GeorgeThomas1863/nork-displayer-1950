@@ -90,13 +90,13 @@ export const buildBackendDisplay = async (inputArray) => {
     const replaceElement = document.getElementById(replaceId);
     const backendDataWrapper = document.getElementById("backend-data-wrapper");
 
-    // console.log("REPLACE ELEMENT");
-    // console.log(replaceElement);
-
     //format data
     const func = d.displayFunctionMap[dataType];
     const dataElement = await func(dataArray);
     if (!dataElement) return failElement;
+
+    console.log("REPLACE ELEMENT");
+    console.log(replaceElement);
 
     console.log("BACKEND DATA WRAPPER BEFORE ");
     console.log(backendDataWrapper);
