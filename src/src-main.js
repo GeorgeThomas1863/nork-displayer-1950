@@ -68,8 +68,8 @@ export const getBackendDataDefault = async () => {
 export const getBackendDataNew = async (inputObj) => {
   const { dataType, dataReq, dataLoaded, isFirstLoad } = inputObj;
 
-  console.log("INPUT OBJ");
-  console.dir(inputObj);
+  // console.log("INPUT OBJ");
+  // console.dir(inputObj);
 
   const params = await getParamsMap(dataType);
   const { collection } = params;
