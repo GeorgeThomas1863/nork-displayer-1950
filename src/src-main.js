@@ -1,5 +1,5 @@
 import CONFIG from "../config/config.js";
-import { getBackendDefaultParams } from "../config/map-display.js";
+import { getParamsMap } from "../config/map-display.js";
 import dbModel from "../models/db-model.js";
 import { removeInvalidItems } from "./src-fix.js";
 
@@ -26,7 +26,7 @@ export const getBackendDataDefault = async () => {
   const defaultDataArray = [];
   for (let i = 0; i < typeArr.length; i++) {
     const dataType = typeArr[i];
-    const dataParams = await getBackendDefaultParams(dataType);
+    const dataParams = await getParamsMap(dataType);
     const { collection, howMany } = dataParams;
 
     // update how many (to account for fucked items)
@@ -67,7 +67,7 @@ export const getBackendDataNew = async (inputObj) => {
   console.log("INPUT OBJ");
   console.dir(inputObj);
 
-  const params = await getBackendDefaultParams(dataType);
+  const params = await getParamsMap(dataType);
   const { collection } = params;
 
   //get the type key
@@ -130,7 +130,7 @@ export const rePullData = async (dataType, howMany) => {
 
   switch (dataType) {
     case "vidPages":
-      const vidParams = await getBackendDefaultParams("vids");
+      const vidParams = await getParamsMap("vids");
       vidParams.howMany = 1;
 
       const vidDataModel = new dbModel(vidParams, vidsDownloaded);
