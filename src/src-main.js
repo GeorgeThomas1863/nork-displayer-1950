@@ -1,8 +1,6 @@
 import CONFIG from "../config/config.js";
 import { getBackendDefaultParams } from "../config/map-display.js";
 import dbModel from "../models/db-model.js";
-// import { getBackendParams } from "./src-get.js";
-// import { checkDataType } from "./src-check.js";
 import { removeInvalidItems } from "./src-fix.js";
 
 //gets backend data from db
