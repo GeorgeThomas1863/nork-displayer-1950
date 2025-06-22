@@ -61,9 +61,6 @@ export const buildBackendDisplay = async (inputArray) => {
   if (!inputArray || !inputArray.length) return failElement;
   const { isFirstLoad } = state;
 
-  console.log("!!!!BUILD BACKEND DISPLAY");
-  console.log(inputArray);
-
   //build wrapper
   const backendDataWrapper = document.createElement("div");
   backendDataWrapper.id = "backend-data-wrapper";
@@ -101,7 +98,13 @@ export const buildBackendDisplay = async (inputArray) => {
     const dataElement = await func(dataArray);
     if (!dataElement) return failElement;
 
-    backendDataWrapper.replaceChild(dataElement, replaceElement)
+    console.log("BACKEND DATA WRAPPER BEFORE ");
+    console.log(backendDataWrapper);
+
+    backendDataWrapper.replaceChild(dataElement, replaceElement);
+
+    console.log("BACKEND DATA WRAPPER AFTER");
+    console.log(backendDataWrapper);
 
     //replace element
 
