@@ -95,16 +95,19 @@ export const buildBackendDisplay = async (inputArray) => {
     const dataElement = await func(dataArray);
     if (!dataElement) return failElement;
 
+    console.log("DATA ELEMENT");
+    console.log(dataElement);
+
     console.log("REPLACE ELEMENT");
     console.log(replaceElement);
 
-    console.log("BACKEND DATA WRAPPER BEFORE ");
-    console.log(backendDataWrapper);
+    // console.log("BACKEND DATA WRAPPER BEFORE ");
+    // console.log(backendDataWrapper);
 
     backendDataWrapper.replaceChild(dataElement, replaceElement);
 
-    console.log("BACKEND DATA WRAPPER AFTER");
-    console.log(backendDataWrapper);
+    // console.log("BACKEND DATA WRAPPER AFTER");
+    // console.log(backendDataWrapper);
 
     //replace element
 
