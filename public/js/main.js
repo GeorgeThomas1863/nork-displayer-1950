@@ -91,6 +91,7 @@ export const buildBackendDisplay = async (inputArray) => {
     // const currentBackendDataWrapper = document.getElementById("backend-data-wrapper");
     const replaceId = d.replaceTypeMap[dataType];
     const replaceElement = document.getElementById(replaceId);
+    const backendDataWrapper = document.getElementById("backend-data-wrapper");
 
     // console.log("REPLACE ELEMENT");
     // console.log(replaceElement);
@@ -100,8 +101,10 @@ export const buildBackendDisplay = async (inputArray) => {
     const dataElement = await func(dataArray);
     if (!dataElement) return failElement;
 
+    backendDataWrapper.replaceChild(dataElement, replaceElement)
+
     //replace element
-    replaceElement.replaceWith(dataElement);
+
     // return backendDataWrapper;
 
     // return true;
