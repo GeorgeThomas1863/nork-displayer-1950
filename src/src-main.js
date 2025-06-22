@@ -29,9 +29,6 @@ export const getBackendDataDefault = async () => {
     const dataParams = await getParamsMap(dataType);
     const { collection, howMany } = dataParams;
 
-    console.log("DATA PARAMS");
-    console.dir(dataParams);
-
     // update how many (to account for fucked items)
     const howManyBuffer = Math.ceil(+howMany * 1.2);
     dataParams.howMany = howManyBuffer;
@@ -44,6 +41,10 @@ export const getBackendDataDefault = async () => {
     } else {
       dataArrayRaw = await dataModel.getNewestItemsArray();
     }
+
+    console.log("DATA ARRAY RAW");
+    console.log(dataType);
+    console.dir(dataArrayRaw);
 
     const dataArrayValid = await removeInvalidItems(dataArrayRaw, dataType, howMany);
     // const dataArrayFixed = await fixDataByType(dataArrayValid, dataType);
