@@ -10,7 +10,7 @@ export const buildVidForm = async () => {
   const vidHowManyListItem = await buildVidHowManyListItem();
   const vidSortByListItem = await buildVidSortByListItem();
 
-  vidWrapper.append(vidTypeListItem, vidHowManyListItem, vidSortByListItem);
+  vidWrapper.append(vidHowManyListItem, vidSortByListItem);
 
   const titleElement = document.createElement("div");
   titleElement.textContent = "VIDEOS";
