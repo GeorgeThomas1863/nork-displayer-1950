@@ -51,8 +51,8 @@ export const buildDisplay = async () => {
   // console.log("STATE");
   // console.log(state);
 
-  // console.log("DISPLAY ELEMENT");
-  // console.log(displayElement);
+  console.log("DISPLAY ELEMENT");
+  console.log(displayElement);
 
   return "#DONE";
 };
@@ -95,11 +95,11 @@ export const buildBackendDisplay = async (inputArray) => {
     const dataElement = await func(dataArray);
     if (!dataElement) return failElement;
 
-    console.log("DATA ELEMENT");
-    console.log(dataElement);
+    // console.log("DATA ELEMENT");
+    // console.log(dataElement);
 
-    console.log("REPLACE ELEMENT");
-    console.log(replaceElement);
+    // console.log("REPLACE ELEMENT");
+    // console.log(replaceElement);
 
     // console.log("BACKEND DATA WRAPPER BEFORE ");
     // console.log(backendDataWrapper);
