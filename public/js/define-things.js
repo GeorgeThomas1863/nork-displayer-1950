@@ -1,25 +1,25 @@
 //importing functions defined in map
 import { buildArticleDisplay } from "./articles/article-return.js";
 // import { buildPicAloneDisplay } from "./pics/pic-return-alone.js";
-import { buildPicSetDisplay } from "./pics/pic-return-pic-set.js";
+import { buildPicDisplay } from "./pics/pic-return.js";
 // import { buildVidAloneDisplay } from "./vids/vid-return-alone.js";
-import { buildVidPageDisplay } from "./vids/vid-return-vid-page.js";
+import { buildVidDisplay } from "./vids/vid-return.js";
 
 const d = {
   displayFunctionMap: {
     articles: buildArticleDisplay,
-    pics: buildPicSetDisplay,
-    vids: buildVidPageDisplay,
+    pics: buildPicDisplay,
+    vids: buildVidDisplay,
   },
   // backendTypeArr: ["articles", "pics", "picSets", "vids", "vidPages"],
 
   //expand triggers
   expandTriggerArr: ["article-form-header", "pic-form-header", "vid-form-header"],
-  expandIdsArr: ["article-array-element", "pic-array-element", "pic-set-array-element", "vid-array-element", "vid-page-array-element"],
+  expandIdsArr: ["article-array-element", "pic-array-element", "vid-array-element"],
   expandTypeArr: ["article", "pic", "vid"],
 
   //change triggers
-  changeTriggerArr: ["article-type", "article-sort-by", "pic-type", "pic-sort-by", "vid-type", "vid-sort-by"],
+  changeTriggerArr: ["article-type", "article-sort-by", "pic-sort-by", "vid-sort-by"],
   inputTriggerArr: ["article-how-many", "pic-how-many", "vid-how-many"],
 
   defaultInputMap: {
@@ -35,8 +35,8 @@ const d = {
   },
 
   articleTriggerValues: ["article-type", "article-sort-by", "article-how-many"],
-  picTriggerValues: ["pic-type", "pic-sort-by", "pic-how-many"],
-  vidTriggerValues: ["vid-type", "vid-sort-by", "vid-how-many"],
+  picTriggerValues: ["pic-sort-by", "pic-how-many"],
+  vidTriggerValues: ["vid-sort-by", "vid-how-many"],
 
   triggerTypeMap(value) {
     if (this.articleTriggerValues.includes(value)) {
@@ -52,9 +52,7 @@ const d = {
   replaceTypeMap: {
     articles: "article-array-element",
     pics: "pic-array-element",
-    picSets: "pic-set-array-element",
     vids: "vid-array-element",
-    vidPages: "vid-page-array-element",
   },
 };
 

@@ -127,8 +127,8 @@ export const expandForm = async (dataType) => {
   // console.log("EXPAND BACKEND DATA");
   // console.log(dataType);
 
-  const picType = document.getElementById("pic-type").value;
-  const vidType = document.getElementById("vid-type").value;
+  // const picType = document.getElementById("pic-type").value;
+  // const vidType = document.getElementById("vid-type").value;
 
   //build array of expand form elements (defining id's in define-things.js)
   const expandElementsArr = [];
@@ -146,27 +146,14 @@ export const expandForm = async (dataType) => {
       return true;
 
     case "pic-form-header":
-      if (picType === "pic-alone") {
-        await unhideArray([expandElementsArr[1]]);
-      } else if (picType === "pic-sets") {
-        await unhideArray([expandElementsArr[2]]);
-      } else {
-        return null;
-      }
-
+      await unhideArray([expandElementsArr[1]]);
       return true;
 
     case "vid-form-header":
-      if (vidType === "vid-alone") {
-        await unhideArray([expandElementsArr[3]]);
-      } else if (vidType === "vid-pages") {
-        await unhideArray([expandElementsArr[4]]);
-      } else {
-        return null;
-      }
-
+      await unhideArray([expandElementsArr[2]]);
       return true;
   }
+  return null;
 };
 
 export const toggleDropdown = async (toggleType) => {
