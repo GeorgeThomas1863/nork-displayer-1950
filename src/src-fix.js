@@ -7,7 +7,7 @@ export const removeInvalidItems = async (inputArray, dataType, howMany) => {
 
   console.log("REMOVE INVALID ITEMS DATA TYPE");
   console.log(dataType);
-  console.log(inputArray.length);
+  console.log(inputArray);
 
   const dataReturnArray = [];
   switch (dataType) {
