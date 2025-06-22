@@ -244,8 +244,6 @@ export const removeInvalidItems = async (inputArray, dataType, howMany) => {
           if (dataType === "vidPages") url = dataObj.vidURL;
 
           const itemExists = await checkItemExists(url, "vid");
-          console.log("!!!!!!!!!!!!!!!ITEM EXISTS");
-          console.log(itemExists);
           if (!itemExists) continue;
 
           dataReturnArray.push(dataObj);
