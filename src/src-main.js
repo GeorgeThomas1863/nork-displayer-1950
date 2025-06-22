@@ -3,7 +3,7 @@ import { getBackendDefaultParams } from "../config/map-display.js";
 import dbModel from "../models/db-model.js";
 // import { getBackendParams } from "./src-get.js";
 // import { checkDataType } from "./src-check.js";
-// import { fixDataByType, removeInvalidItems } from "./src-fix.js";
+import { removeInvalidItems } from "./src-fix.js";
 
 //gets backend data from db
 export const runGetBackendData = async (inputObj) => {
@@ -49,7 +49,7 @@ export const getBackendDataDefault = async () => {
 
     const dataObj = {
       dataType: dataType,
-      dataArray: dataArrayFixed,
+      dataArray: dataArrayValid,
     };
 
     defaultDataArray.push(dataObj);
@@ -103,11 +103,11 @@ export const getBackendDataNew = async (inputObj) => {
   const dataArrayRaw = await dataModel[methodName]();
 
   const dataArrayValid = await removeInvalidItems(dataArrayRaw, dataType, howManyInput);
-  const dataArrayFixed = await fixDataByType(dataArrayValid, dataType);
+  // const dataArrayFixed = await fixDataByType(dataArrayValid, dataType);
 
   const dataObj = {
     dataType: dataType,
-    dataArray: dataArrayFixed,
+    dataArray: dataArrayValid,
   };
 
   //return as array to match default
