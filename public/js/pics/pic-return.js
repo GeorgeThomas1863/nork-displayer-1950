@@ -193,10 +193,9 @@ export const buildPicElementServer = async (headerData) => {
 export const picDropDownContainer = async (inputArray, type) => {
   if (!inputArray || !inputArray.length) return null;
 
-  console.log("PIC DROP DOWN CONTAINER");
-  console.log(inputArray);
-
   const picArrayElement = await buildPicWrapper(inputArray, false);
+  console.log("PIC ARRAY ELEMENT");
+  console.log(picArrayElement);
   if (!picArrayElement) return null;
 
   //build pic title element
