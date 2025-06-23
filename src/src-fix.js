@@ -112,6 +112,9 @@ export const checkItemExists = async (inputObj, type = "pic") => {
       break;
   }
 
+  console.log("CHECK SIZE RAW");
+  console.log(checkSizeRaw);
+
   if (!checkSizeRaw) wrongSize = true;
 
   //GET FILE SIZE FRM FILE (TEST THIS)
