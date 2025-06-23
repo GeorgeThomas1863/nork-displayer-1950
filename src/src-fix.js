@@ -53,6 +53,8 @@ export const removeInvalidItems = async (inputArray, dataType, howMany) => {
       for (let i = 0; i < inputArray.length; i++) {
         try {
           const dataObj = inputArray[i];
+          console.log("!!!!BACKEND VID DATA OBJ!!!");
+          console.log(dataObj);
           //check thumbnail first
           if (!dataObj || !dataObj.thumbnailData || !dataObj.thumbnailData.savePath) continue;
           const thumbnailExists = await checkItemExists(dataObj.thumbnailData.savePath);
