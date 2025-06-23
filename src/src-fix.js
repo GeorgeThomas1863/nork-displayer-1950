@@ -123,13 +123,11 @@ export const checkItemExists = async (inputObj, type = "pic") => {
 
   //throw error if wrong size
   if (wrongSize) {
+    console.log("AHHHHHHHHHHHHHHHHHHHH");
     const error = new Error("FILE CORRUPTED / WRONG SIZE");
     error.savePath = savePath;
     throw error;
   }
-
-  console.log("CHECK SIZE");
-  console.log(checkSize);
 
   //otherwise return true
   return true;
