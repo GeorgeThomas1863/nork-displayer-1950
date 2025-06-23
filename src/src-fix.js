@@ -96,14 +96,40 @@ export const checkItemExists = async (inputObj, type = "pic") => {
     throw error;
   }
 
-  // if (type === "vid") {
-  //   const vid = await fs.promises.readFile(savePath, "utf8");
-  //   if (!vid) {
-  //     const error = new Error("VID NOT DOWNLOADED");
-  //     error.savePath = savePath;
-  //     throw error;
-  //   }
-  // }
+  //check for size
+  let wrongSize = false;
+  let checkSizeRaw = 0;
+  //adult would write this with ternary operator, change later
+  switch (type) {
+    case "pic":
+      const { downloadedSize } = inputObj;
+      checkSizeRaw = downloadedSize;
+      break;
+
+    case "vid":
+      const { vidSizeBytes } = inputObj;
+      checkSizeRaw = vidSizeBytes;
+      break;
+  }
+
+  if (!checkSizeRaw) wrongSize = true;
+
+  //GET FILE SIZE FRM FILE (TEST THIS)
+  const fileSize = fs.statSync(savePath).size;
+
+  //check for slightly smaller file
+  const checkSize = checkSizeRaw * 0.7;
+  if (fileSize < checkSize) wrongSize = true;
+
+  //throw error if wrong size
+  if (wrongSize) {
+    const error = new Error("FILE CORRUPTED / WRONG SIZE");
+    error.savePath = savePath;
+    throw error;
+  }
+
+  console.log("CHECK SIZE");
+  console.log(checkSize);
 
   //otherwise return true
   return true;
