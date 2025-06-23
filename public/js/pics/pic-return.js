@@ -95,14 +95,30 @@ export const buildPicContainerDate = async (date) => {
   return dateElement;
 };
 
-export const buildPicWrapper = async (inputObj, fullStats = true) => {
+export const buildPicWrapper = async (inputArray, fullStats = true) => {
+  if (!inputArray || !inputArray.length) return null;
+
+  const picWrapperElement = document.createElement("li");
+  picWrapperElement.id = "pic-wrapper-element";
+
+  //build pic / stat elements
+  for (let i = 0; i < inputArray.length; i++) {
+    const picWrapperItem = await buildPicWrapperItem(inputArray[i], fullStats);
+    if (!picWrapperItem) continue;
+
+    picWrapperElement.append(picWrapperItem);
+  }
+
+  return picWrapperElement;
+};
+
+export const buildPicWrapperItem = async (inputObj, fullStats = true) => {
   if (!inputObj || !inputObj.savePath) return null;
   const { savePath } = inputObj;
 
   const picWrapperItem = document.createElement("li");
-  picWrapperItem.id = "pic-wrapper-element";
+  picWrapperItem.id = "pic-wrapper-item";
 
-  //build pic / stat elements
   const picElement = await buildPicElement(savePath);
   const picStatsElement = await buildPicElementStats(inputObj, fullStats);
 
