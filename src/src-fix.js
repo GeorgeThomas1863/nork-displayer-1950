@@ -87,8 +87,8 @@ export const checkItemExists = async (inputObj, type = "pic") => {
   const { savePath } = inputObj;
   if (!savePath) return null;
 
-  console.log("CHECK ITEM EXISTS");
-  console.log(inputObj);
+  // console.log("CHECK ITEM EXISTS");
+  // console.log(inputObj);
 
   if (!fs.existsSync(savePath)) {
     const error = new Error("ITEM NOT DOWNLOADED");
