@@ -57,6 +57,9 @@ export const buildVidListItem = async (inputObj, isFirst) => {
 export const buildVidContainer = async (inputObj) => {
   const { savePath, date } = inputObj;
 
+  console.log("!!!!VID CONTAINER!!!");
+  console.log(inputObj);
+
   const vidContainerElement = document.createElement("article");
   vidContainerElement.id = "vid-container-element";
 
