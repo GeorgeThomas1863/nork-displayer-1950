@@ -54,11 +54,10 @@ export const buildVidListItem = async (inputObj, isFirst) => {
   return vidListItem;
 };
 
+//changed the path to vids by nesting in vidData
 export const buildVidContainer = async (inputObj) => {
-  const { savePath, date } = inputObj;
-
-  console.log("!!!!VID CONTAINER!!!");
-  console.log(inputObj);
+  const { vidData, date } = inputObj;
+  const { savePath } = vidData;
 
   const vidContainerElement = document.createElement("article");
   vidContainerElement.id = "vid-container-element";
