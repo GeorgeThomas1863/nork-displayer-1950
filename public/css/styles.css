@@ -728,7 +728,7 @@ h3 {
   transform: scale(1.2);
   /* border-radius: 8px; */
   transition: all 0.3s ease;
-  z-index: 100; /* makes it appear above other elements */
+  z-index: 100000; /* makes it appear above other elements */
 }
 
 /* Stats container */
