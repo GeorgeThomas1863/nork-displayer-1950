@@ -30,8 +30,7 @@ export const removeInvalidItems = async (inputArray, dataType, howMany) => {
           try {
             const picObj = picArray[j];
             if (!picObj || !picObj.savePath) continue;
-            const { savePath } = picObj;
-            const itemExists = await checkItemExists(savePath);
+            const itemExists = await checkItemExists(picObj);
             if (!itemExists) continue;
 
             picArrayFixed.push(picObj);
@@ -53,18 +52,18 @@ export const removeInvalidItems = async (inputArray, dataType, howMany) => {
       for (let i = 0; i < inputArray.length; i++) {
         try {
           const dataObj = inputArray[i];
-          console.log("!!!!BACKEND VID DATA OBJ!!!");
-          console.log(dataObj);
+
           //check thumbnail first
-          if (!dataObj || !dataObj.thumbnailData || !dataObj.thumbnailData.savePath) continue;
-          const thumbnailExists = await checkItemExists(dataObj.thumbnailData.savePath);
+          if (!dataObj || !dataObj.thumbnailData) continue;
+          const { thumbnailData } = dataObj;
+          const thumbnailExists = await checkItemExists(thumbnailData);
           if (!thumbnailExists) continue;
 
           //check vid exists
-          if (!dataObj || !dataObj.vidData || !dataObj.vidData.savePath) continue;
-          const { savePath } = dataObj.vidData;
+          if (!dataObj || !dataObj.vidData) continue;
+          const { vidData } = dataObj;
 
-          const itemExists = await checkItemExists(savePath);
+          const itemExists = await checkItemExists(vidData, "vid");
           if (!itemExists) continue;
 
           dataReturnArray.push(dataObj);
@@ -84,14 +83,27 @@ export const removeInvalidItems = async (inputArray, dataType, howMany) => {
 };
 
 //re-write to use fs
-export const checkItemExists = async (savePath) => {
+export const checkItemExists = async (inputObj, type = "pic") => {
+  const { savePath } = inputObj;
   if (!savePath) return null;
+
+  console.log("CHECK ITEM EXISTS");
+  console.log(inputObj);
 
   if (!fs.existsSync(savePath)) {
     const error = new Error("ITEM NOT DOWNLOADED");
     error.savePath = savePath;
     throw error;
   }
+
+  // if (type === "vid") {
+  //   const vid = await fs.promises.readFile(savePath, "utf8");
+  //   if (!vid) {
+  //     const error = new Error("VID NOT DOWNLOADED");
+  //     error.savePath = savePath;
+  //     throw error;
+  //   }
+  // }
 
   //otherwise return true
   return true;
