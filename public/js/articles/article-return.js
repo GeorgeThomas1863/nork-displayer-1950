@@ -1,4 +1,4 @@
-import { picDropDownContainer } from "../pics/pic-container.js";
+import { picDropDownContainer } from "../pics/pic-return.js";
 import { buildCollapseContainer, defineCollapseItems } from "../collapse.js";
 
 //BUILD DEFAULT ARTICLE DISPLAY
