@@ -623,15 +623,15 @@ h3 {
 
 /* PIC SET STYLES */
 
-#pic-set-array-element {
+#pic-array-element {
   width: 100%;
 }
 
-.pic-set-list-item {
+.pic-list-item {
   margin-bottom: 1.5rem;
 }
 
-.pic-set-list-item:last-child {
+.pic-list-item:last-child {
   margin-bottom: 0;
 }
 
@@ -642,7 +642,7 @@ h3 {
   position: relative;
 } */
 
-#pic-set-title {
+#pic-container-title {
   font-size: 1.7rem;
   font-weight: 700;
   color: #2c3e50;
@@ -650,12 +650,12 @@ h3 {
   letter-spacing: -0.02em;
 }
 
-#pic-set-title span {
+#pic-container-title span {
   font-size: 1.5rem;
   vertical-align: middle;
 }
 
-#pic-set-date {
+#pic-container-date {
   margin: 1rem 0;
   padding: 0.5rem 0;
   padding-left: 1rem;
@@ -672,7 +672,18 @@ h3 {
 
 /* PIC STYLES */
 
-#pic-array-element {
+/* #pic-array-element {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  padding: 1rem 0;
+  margin: 0 auto;
+  list-style: none;
+  width: 100%;
+  background-color: transparent;
+} */
+
+#pic-wrapper-element {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
@@ -683,18 +694,7 @@ h3 {
   background-color: transparent;
 }
 
-#pic-list-element {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  padding: 1rem 0;
-  margin: 0 auto;
-  list-style: none;
-  width: 100%;
-  background-color: transparent;
-}
-
-#pic-list-item {
+#pic-container-element {
   position: relative;
   background-color: transparent;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -705,7 +705,7 @@ h3 {
   flex-direction: column;
 }
 
-#pic-list-item:hover {
+#pic-container-element:hover {
   transform: scale(1.2);
   /* border-radius: 8px; */
   transition: all 0.3s ease;
@@ -724,7 +724,7 @@ h3 {
 }
 
 /* Stats container */
-#pic-stats {
+#pic-element-stats {
   display: flex;
   flex-direction: column;
   text-align: left;
@@ -739,9 +739,9 @@ h3 {
 }
 
 /* Individual stat elements */
-#pic-date,
-#pic-source,
-#pic-server {
+#pic-element-date,
+#pic-element-source,
+#pic-element-server {
   font-size: 0.7rem;
   line-height: 1.2;
   color: #666;
@@ -753,19 +753,19 @@ h3 {
 }
 
 /* Date styling */
-#pic-date {
+#pic-element-date {
   font-weight: 600;
   color: #444;
   margin-bottom: 0.1rem;
 }
 
 /* Source styling */
-#pic-source {
+#pic-element-source {
   color: #777;
 }
 
 /* Server styling */
-#pic-server {
+#pic-element-server {
   color: #888;
   /* width: fit-content; */
 }

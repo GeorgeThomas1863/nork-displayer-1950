@@ -5,18 +5,18 @@ import { picDropDownContainer } from "./pic-container.js";
 export const buildPicDisplay = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
 
-  const picSetList = document.createElement("ul");
-  picSetList.id = "pic-array-element";
+  const picArrayElement = document.createElement("ul");
+  picArrayElement.id = "pic-array-element";
 
   let isFirst = true;
   const collapseArray = [];
 
   for (let i = 0; i < inputArray.length; i++) {
-    const picSetListItem = await buildPicListItem(inputArray[i], isFirst);
-    picSetList.appendChild(picSetListItem);
+    const picListItem = await buildPicListItem(inputArray[i], isFirst);
+    picArrayElement.appendChild(picListItem);
 
     // Store the collapse components for group functionality
-    const collapseItem = picSetListItem.querySelector(".collapse-container");
+    const collapseItem = picListItem.querySelector(".collapse-container");
     if (collapseItem) collapseArray.push(collapseItem);
 
     isFirst = false;
@@ -25,7 +25,7 @@ export const buildPicDisplay = async (inputArray) => {
   // Set up the collapse group behavior
   await defineCollapseItems(collapseArray);
 
-  return picSetList;
+  return picArrayElement;
 };
 
 export const buildPicListItem = async (inputObj, isFirst) => {
@@ -35,11 +35,11 @@ export const buildPicListItem = async (inputObj, isFirst) => {
   picSetListItem.className = "pic-list-item";
 
   //builds a pic container for pic array
-  const picContainerElement = await buildPicContainerElement(inputObj);
+  const picContainerElement = await buildPicContainer(inputObj);
 
   //build title element
-  const dateElement = await buildPicDate(date);
-  const titleElement = await buildPicTitle(title);
+  const dateElement = await buildPicContainerDate(date);
+  const titleElement = await buildPicContainerTitle(title);
   titleElement.innerHTML = `${titleElement.textContent} <span>[${dateElement.textContent}]</span>`;
 
   // Wrap the article content in a collapsible
@@ -56,17 +56,36 @@ export const buildPicListItem = async (inputObj, isFirst) => {
   return picSetListItem;
 };
 
-export const buildPicTitle = async (title) => {
+export const buildPicContainer = async (inputObj) => {
+  const { date, picArray } = inputObj;
+
+  const picContainerElement = document.createElement("article");
+  picContainerElement.id = "pic-container-element";
+
+  //Add pics as collapse
+  const picContainerData = await picDropDownContainer(picArray, "picContainer");
+  if (picContainerData) {
+    picContainerElement.append(picContainerData);
+  }
+
+  //append pic set date
+  const dateElement = await buildPicContainerDate(date);
+  picContainerElement.append(dateElement);
+
+  return picContainerElement;
+};
+
+export const buildPicContainerTitle = async (title) => {
   const titleElement = document.createElement("h2");
-  titleElement.id = "pic-title";
+  titleElement.id = "pic-container-title";
   titleElement.textContent = title;
 
   return titleElement;
 };
 
-export const buildPicDate = async (date) => {
+export const buildPicContainerDate = async (date) => {
   const dateElement = document.createElement("div");
-  dateElement.id = "pic-date";
+  dateElement.id = "pic-container-date";
   const dateObj = new Date(date);
   dateElement.textContent = dateObj.toLocaleDateString("en-US", {
     year: "numeric",
@@ -77,21 +96,123 @@ export const buildPicDate = async (date) => {
   return dateElement;
 };
 
-export const buildPicContainerElement = async (inputObj) => {
-  const { date, picArray } = inputObj;
+export const buildPicWrapper = async (inputObj, fullStats = true) => {
+  if (!inputObj || !inputObj.savePath) return null;
+  const { savePath } = inputObj;
 
-  const picContainerElement = document.createElement("article");
-  picContainerElement.id = "pic-element";
+  const picWrapperItem = document.createElement("li");
+  picWrapperItem.id = "pic-wrapper-element";
 
-  //Add pics as collapse
-  const picContainerData = await picDropDownContainer(picArray, "picContainer");
-  if (picContainerData) {
-    picContainerElement.append(picContainerData);
+  //build pic / stat elements
+  const picElement = await buildPicElement(savePath);
+  const picStatsElement = await buildPicElementStats(inputObj, fullStats);
+
+  picWrapperItem.append(picElement, picStatsElement);
+
+  return picWrapperItem;
+};
+
+//build pic itself
+export const buildPicElement = async (savePath) => {
+  if (!savePath) return null;
+
+  const picElement = document.createElement("img");
+  picElement.id = "pic-element";
+
+  //define pic path
+  const fileName = savePath.split("/").pop();
+  const picPath = "/kcna-pics/" + fileName;
+
+  picElement.src = picPath;
+  picElement.alt = "KCNA PIC";
+
+  return picElement;
+};
+
+//build pic stats
+export const buildPicElementStats = async (inputObj, fullStats = true) => {
+  if (!inputObj) return null;
+  const { picDate, picSource, headerData } = inputObj;
+
+  const picStatsElement = document.createElement("div");
+  picStatsElement.id = "pic-element-stats";
+
+  //only include source on full stats
+  if (fullStats) {
+    const picDateElement = await buildPicElementDate(picDate);
+    const picSourceElement = await buildPicElementSource(picSource);
+    picStatsElement.append(picDateElement, picSourceElement);
   }
 
-  //append pic set date
-  const dateElement = await buildPicDate(date);
-  picContainerElement.append(dateElement);
+  const picServerElement = await buildPicElementServer(headerData);
+  picStatsElement.append(picServerElement);
 
-  return picContainerElement;
+  return picStatsElement;
+};
+
+//extract / format pic date
+export const buildPicElementDate = async (picDate) => {
+  if (!picDate) return null;
+
+  const dateElement = document.createElement("div");
+  dateElement.id = "pic-element-date";
+  const dateObj = new Date(picDate);
+  const formattedDate = dateObj.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
+  dateElement.innerHTML = `<b>Date:</b> ${formattedDate}`;
+
+  return dateElement;
+};
+
+//calc where pic from (do on backend)
+export const buildPicElementSource = async (picSource) => {
+  if (!picSource) return null;
+
+  const picSourceElement = document.createElement("div");
+  picSourceElement.id = "pic-element-source";
+  picSourceElement.innerHTML = `<b>Pic From:</b> ${picSource}`;
+
+  return picSourceElement;
+};
+
+//EXTRACT PIC SERVER DATA
+export const buildPicElementServer = async (headerData) => {
+  if (!headerData || !headerData.server) return null;
+  const serverData = headerData.server;
+
+  const picServerElement = document.createElement("div");
+  picServerElement.id = "pic-element-server";
+  picServerElement.innerHTML = `<b>Server Data:</b> ${serverData}`;
+
+  return picServerElement;
+};
+
+export const picDropDownContainer = async (inputArray, type) => {
+  if (!inputArray || !inputArray.length) return null;
+
+  const picArrayElement = await buildPicWrapper(inputArray, false);
+  if (!picArrayElement) return null;
+
+  //build pic title element
+  const picTitleElement = document.createElement("div");
+  picTitleElement.id = `${type}-pic-header`;
+  picTitleElement.textContent = `${inputArray.length} ${type.toUpperCase()} PIC${inputArray.length > 1 ? "S" : ""}`;
+
+  //EXTRACT PIC DATE?
+
+  //build collapse container
+  const picCollapseObj = {
+    titleElement: picTitleElement,
+    contentElement: picArrayElement,
+    isExpanded: true,
+    className: `${type}-pic-collapse`,
+  };
+
+  const picCollapseElement = await buildCollapseContainer(picCollapseObj);
+
+  return picCollapseElement;
 };
