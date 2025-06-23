@@ -1,5 +1,4 @@
 import { buildCollapseContainer, defineCollapseItems } from "../collapse.js";
-import { picDropDownContainer } from "./pic-container.js";
 
 //PIC SET DISPLAY
 export const buildPicDisplay = async (inputArray) => {
