@@ -35,7 +35,7 @@ export const buildPicListItem = async (inputObj, isFirst) => {
   picSetListItem.className = "pic-list-item";
 
   //builds a pic container for pic array
-  const picSetElement = await buildPicElement(inputObj);
+  const picContainerElement = await buildPicContainerElement(inputObj);
 
   //build title element
   const dateElement = await buildPicDate(date);
@@ -45,7 +45,7 @@ export const buildPicListItem = async (inputObj, isFirst) => {
   // Wrap the article content in a collapsible
   const picSetCollapseObj = {
     titleElement: titleElement,
-    contentElement: picSetElement,
+    contentElement: picContainerElement,
     isExpanded: isFirst,
     className: "pic-element-collapse",
   };
@@ -64,25 +64,6 @@ export const buildPicTitle = async (title) => {
   return titleElement;
 };
 
-export const buildPicElement = async (inputObj) => {
-  const { date, picArray } = inputObj;
-
-  const picSetElement = document.createElement("article");
-  picSetElement.id = "pic-element";
-
-  //Add pics as collapse
-  const picSetPicData = await picDropDownContainer(picArray, "picSet");
-  if (picSetPicData) {
-    picSetElement.append(picSetPicData);
-  }
-
-  //append pic set date
-  const dateElement = await buildPicDate(date);
-  picSetElement.append(dateElement);
-
-  return picSetElement;
-};
-
 export const buildPicDate = async (date) => {
   const dateElement = document.createElement("div");
   dateElement.id = "pic-date";
@@ -94,4 +75,23 @@ export const buildPicDate = async (date) => {
   });
 
   return dateElement;
+};
+
+export const buildPicContainerElement = async (inputObj) => {
+  const { date, picArray } = inputObj;
+
+  const picContainerElement = document.createElement("article");
+  picContainerElement.id = "pic-element";
+
+  //Add pics as collapse
+  const picContainerData = await picDropDownContainer(picArray, "picContainer");
+  if (picContainerData) {
+    picContainerElement.append(picContainerData);
+  }
+
+  //append pic set date
+  const dateElement = await buildPicDate(date);
+  picContainerElement.append(dateElement);
+
+  return picContainerElement;
 };
