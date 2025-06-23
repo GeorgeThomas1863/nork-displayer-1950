@@ -4,18 +4,18 @@ import { buildCollapseContainer, defineCollapseItems } from "../collapse.js";
 export const buildVidDisplay = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
 
-  const vidPageList = document.createElement("ul");
-  vidPageList.id = "vid-array-element";
+  const vidArrayElement = document.createElement("ul");
+  vidArrayElement.id = "vid-array-element";
 
   let isFirst = true;
   const collapseArray = [];
 
   for (let i = 0; i < inputArray.length; i++) {
-    const vidPageListItem = await buildVidListItem(inputArray[i], isFirst);
-    vidPageList.appendChild(vidPageListItem);
+    const vidListItem = await buildVidListItem(inputArray[i], isFirst);
+    vidArrayElement.appendChild(vidListItem);
 
     // Store the collapse components for group functionality
-    const collapseItem = vidPageListItem.querySelector(".collapse-container");
+    const collapseItem = vidListItem.querySelector(".collapse-container");
     if (collapseItem) collapseArray.push(collapseItem);
 
     isFirst = false;
@@ -24,17 +24,16 @@ export const buildVidDisplay = async (inputArray) => {
   // Set up the collapse group behavior
   await defineCollapseItems(collapseArray);
 
-  return vidPageList;
+  return vidArrayElement;
 };
 
 export const buildVidListItem = async (inputObj, isFirst) => {
   const { title, date } = inputObj;
 
-  const vidPageListItem = document.createElement("li");
-  vidPageListItem.className = "vid-list-item";
+  const vidListItem = document.createElement("li");
+  vidListItem.className = "vid-list-item";
 
-  //builds a pic container for pic array
-  const vidPageElement = await buildVidElement(inputObj);
+  const vidContainerElement = await buildVidContainer(inputObj);
 
   //build title element
   const dateElement = await buildVidDate(date);
@@ -42,17 +41,31 @@ export const buildVidListItem = async (inputObj, isFirst) => {
   titleElement.innerHTML = `${titleElement.textContent} <span>[${dateElement.textContent}]</span>`;
 
   // Wrap the article content in a collapsible
-  const vidPageCollapseObj = {
+  const vidCollapseObj = {
     titleElement: titleElement,
-    contentElement: vidPageElement,
+    contentElement: vidContainerElement,
     isExpanded: isFirst,
     className: "vid-element-collapse",
   };
 
-  const vidPageCollapseContainer = await buildCollapseContainer(vidPageCollapseObj);
-  vidPageListItem.append(vidPageCollapseContainer);
+  const vidCollapseContainer = await buildCollapseContainer(vidCollapseObj);
+  vidListItem.append(vidCollapseContainer);
 
-  return vidPageListItem;
+  return vidListItem;
+};
+
+export const buildVidContainer = async (inputObj) => {
+  const { savePath, date } = inputObj;
+
+  const vidContainerElement = document.createElement("article");
+  vidContainerElement.id = "vid-container-element";
+
+  const vidElement = await buildVidElement(savePath);
+  const dateElement = await buildVidDate(date);
+
+  vidContainerElement.append(vidElement, dateElement);
+
+  return vidContainerElement;
 };
 
 export const buildVidTitle = async (title) => {
@@ -76,26 +89,7 @@ export const buildVidDate = async (date) => {
   return dateElement;
 };
 
-//NEED TO ENSURE SAVE PATH IS IN INPUT OBJ
-// export const buildVidElement = async (inputObj) => {
-//   const { savePath, date } = inputObj;
-
-//   // console.log("VID PAGE ELEMENT");
-//   // console.log(inputObj);
-
-//   const vidPageElement = document.createElement("article");
-//   vidPageElement.id = "vid-element";
-
-//   const vidElement = await buildVidElement(savePath);
-//   const dateElement = await buildVidPageDate(date);
-
-//   vidPageElement.append(vidElement, dateElement);
-
-//   return vidPageElement;
-// };
-
-export const buildVidElement = async (inputObj) => {
-  const { savePath } = inputObj;
+export const buildVidElement = async (savePath) => {
   if (!savePath) return null;
 
   const vidElement = document.createElement("video");
