@@ -142,6 +142,9 @@ export const rePullData = async (dataType, howMany) => {
       if (!vidDataObj || !vidDataObj[0] || !vidDataObj[0].url) return null;
       const { url } = vidDataObj[0];
 
+      console.log("Vid Data Obj");
+      console.dir(vidDataObj);
+
       const vidPageFindParams = {
         keyToLookup: "vidURL",
         itemValue: url,
