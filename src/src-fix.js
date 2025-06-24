@@ -1,5 +1,6 @@
 import fs from "fs";
 import CONFIG from "../config/config.js";
+import dbModel from "../models/db-model.js";
 
 //REMOVE INVALID ITEMS FROM RETURN
 export const removeInvalidItems = async (inputArray, dataType, howMany) => {
@@ -153,6 +154,9 @@ export const rePullData = async (dataType, howMany) => {
 
       const latestVid = await getLatestVid(vidArrayFS);
 
+      console.log("LATEST VID");
+      console.log(latestVid);
+
     //     const vidDataModel = new dbModel(vidParams, vidsDownloaded);
     //     const vidDataObj = await vidDataModel.getNewestItemsArray();
     //     if (!vidDataObj || !vidDataObj[0] || !vidDataObj[0].url) return null;
@@ -192,6 +196,7 @@ export const rePullData = async (dataType, howMany) => {
 
 export const getLatestVid = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
+  const { vidsDownloaded, vidPath } = CONFIG;
 
   const sortArray = inputArray.sort((a, b) => {
     const numA = parseInt(a.replace(".mp4", ""));
@@ -199,7 +204,32 @@ export const getLatestVid = async (inputArray) => {
     return numB - numA; // numB - numA for descending order
   });
 
-  //sort array
-  console.log("GET LATEST VID");
-  console.log(sortArray);
+  //loop through array
+  for (let i = 0; i < sortArray.length; i++) {
+    const vidName = sortArray[i];
+    const vidFullPath = `${vidPath}/${vidName}`;
+
+    //double check if it exists (not necessary)
+    const vidExists = fs.existsSync(vidFullPath);
+    if (!vidExists) continue;
+
+    const dataParams = {
+      keyToLookup: "savePath",
+      itemValue: vidFullPath,
+    };
+
+    const dataModel = new dbModel(dataParams, vidsDownloaded);
+    const vidDataObj = await dataModel.getUniqueItem();
+    if (!vidDataObj || !vidDataObj.vidSizeBytes) return null;
+    const { vidSizeBytes } = vidDataObj;
+
+    //check slightly smaller
+    const checkSize = vidSizeBytes * 0.7;
+    const fileSize = fs.statSync(vidFullPath).size;
+    if (fileSize < checkSize) continue;
+
+    return vidFullPath;
+  }
+
+  return null;
 };
