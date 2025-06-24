@@ -207,7 +207,10 @@ export const getLatestVid = async (inputArray) => {
   //loop through array
   for (let i = 0; i < sortArray.length; i++) {
     const vidName = sortArray[i];
-    const vidFullPath = `${vidPath}/${vidName}`;
+    const vidFullPath = vidPath + vidName;
+
+    console.log("VID FULL PATH");
+    console.log(vidFullPath);
 
     //double check if it exists (not necessary)
     const vidExists = fs.existsSync(vidFullPath);
