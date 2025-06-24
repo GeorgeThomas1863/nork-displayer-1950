@@ -133,7 +133,7 @@ export const rePullData = async (dataType, howMany) => {
   console.log(howMany);
 
   switch (dataType) {
-    case "vidPages":
+    case "vids":
       const vidParams = await getParamsMap("vids");
       vidParams.howMany = 1;
 
