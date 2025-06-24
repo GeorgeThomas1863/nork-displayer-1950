@@ -191,6 +191,15 @@ export const rePullData = async (dataType, howMany) => {
 };
 
 export const getLatestVid = async (inputArray) => {
+  if (!inputArray || !inputArray.length) return null;
+
+  const sortArray = inputArray.sort((a, b) => {
+    const numA = parseInt(a.replace(".mp4", ""));
+    const numB = parseInt(b.replace(".mp4", ""));
+    return numB - numA; // numB - numA for descending order
+  });
+
+  //sort array
   console.log("GET LATEST VID");
-  console.log(inputArray);
+  console.log(sortArray);
 };
