@@ -1,5 +1,4 @@
 import fs from "fs";
-import { rePullData } from "./src-main.js";
 
 //REMOVE INVALID ITEMS FROM RETURN
 export const removeInvalidItems = async (inputArray, dataType, howMany) => {
@@ -79,8 +78,8 @@ export const removeInvalidItems = async (inputArray, dataType, howMany) => {
   //half assed answer below, might need to redo
   const newDataArray = await rePullData(dataType, howMany);
 
-  console.log("NEW DATA ARRAY");
-  console.log(newDataArray);
+  // console.log("NEW DATA ARRAY");
+  // console.log(newDataArray);
 
   return newDataArray;
 };
@@ -99,8 +98,6 @@ export const checkItemExists = async (inputObj, type = "pic") => {
     throw error;
   }
 
-  //check for size
-  let wrongSize = false;
   let checkSizeRaw = 0;
   //adult would write this with ternary operator, change later
   switch (type) {
@@ -114,9 +111,6 @@ export const checkItemExists = async (inputObj, type = "pic") => {
       checkSizeRaw = vidSizeBytes;
       break;
   }
-
-  console.log("CHECK SIZE RAW");
-  console.log(checkSizeRaw);
 
   if (!checkSizeRaw) {
     console.log("AHHHHHHHHHHHHHHHHHHHH");
@@ -139,4 +133,63 @@ export const checkItemExists = async (inputObj, type = "pic") => {
 
   //otherwise return true
   return true;
+};
+
+//[half assed answer below, might need to do same for picSets / assumes prob is newest shit not downloaded]
+//RE-GET / PULL DATA
+export const rePullData = async (dataType, howMany) => {
+  const { vidsDownloaded, vidPageContent, vidPath } = CONFIG;
+
+  // console.log("RE-PULL DATA DATA TYPE TRIGGERED");
+  // console.log(dataType);
+  // console.log(howMany);
+
+  //REBUILD SO IT JUST GETS THE FUCKING FILE ON THE DRIVE
+  switch (dataType) {
+    case "vids":
+      //get vid array on drive
+      const vidArrayFS = fs.readdirSync(vidPath);
+
+      const latestVid = await getLatestVid(vidArrayFS);
+
+    //     const vidDataModel = new dbModel(vidParams, vidsDownloaded);
+    //     const vidDataObj = await vidDataModel.getNewestItemsArray();
+    //     if (!vidDataObj || !vidDataObj[0] || !vidDataObj[0].url) return null;
+    //     const { url } = vidDataObj[0];
+
+    //     console.log("Vid Data Obj");
+    //     console.dir(vidDataObj);
+
+    //     const vidPageFindParams = {
+    //       keyToLookup: "vidURL",
+    //       itemValue: url,
+    //     };
+
+    //     //use url to get vid Page
+    //     const vidPageFindModel = new dbModel(vidPageFindParams, vidPageContent);
+    //     const vidPageObj = await vidPageFindModel.getUniqueItem();
+    //     if (!vidPageObj || !vidPageObj.vidPageId) return null;
+    //     const { vidPageId } = vidPageObj;
+
+    //     const vidPageGetParams = {
+    //       sortKey: "date",
+    //       sortKey2: "vidPageId",
+    //       howMany: howMany,
+    //       filterKey: "vidPageId",
+    //       filterValue: { $lte: vidPageId },
+    //     };
+
+    //     const vidPageGetModel = new dbModel(vidPageGetParams, vidPageContent);
+    //     const vidPageGetArray = await vidPageGetModel.getNewestItemsByTypeArray();
+
+    //     return vidPageGetArray;
+
+    //   default:
+    //     return null;
+  }
+};
+
+export const getLatestVid = async (inputArray) => {
+  console.log("GET LATEST VID");
+  console.log(inputArray);
 };
