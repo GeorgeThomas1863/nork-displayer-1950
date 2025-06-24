@@ -153,9 +153,12 @@ export const rePullData = async (dataType, howMany) => {
       const vidArrayFS = fs.readdirSync(vidPath);
 
       const latestVid = await getLatestVid(vidArrayFS);
-
       console.log("LATEST VID");
       console.log(latestVid);
+
+    //!!!!!!!!!!!!
+    //HERE (pull latest vidPage from vid)
+    //!!!!!!!!!!!!
 
     //     const vidDataModel = new dbModel(vidParams, vidsDownloaded);
     //     const vidDataObj = await vidDataModel.getNewestItemsArray();
@@ -208,9 +211,6 @@ export const getLatestVid = async (inputArray) => {
   for (let i = 0; i < sortArray.length; i++) {
     const vidName = sortArray[i];
     const vidFullPath = vidPath + vidName;
-
-    console.log("VID FULL PATH");
-    console.log(vidFullPath);
 
     //double check if it exists (not necessary)
     const vidExists = fs.existsSync(vidFullPath);
