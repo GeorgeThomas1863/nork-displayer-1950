@@ -1,4 +1,5 @@
 import fs from "fs";
+import CONFIG from "../config/config.js";
 
 //REMOVE INVALID ITEMS FROM RETURN
 export const removeInvalidItems = async (inputArray, dataType, howMany) => {
