@@ -45,9 +45,9 @@ export const getBackendDataDefault = async () => {
     const dataArrayValid = await removeInvalidItems(dataArrayRaw, dataType, howMany);
     // const dataArrayFixed = await fixDataByType(dataArrayValid, dataType);
 
-    console.log("DATA PULLED");
-    console.log(dataType);
-    console.dir(dataArrayValid.length);
+    // console.log("DATA PULLED");
+    // console.log(dataType);
+    // console.dir(dataArrayValid.length);
 
     const dataObj = {
       dataType: dataType,
@@ -66,10 +66,10 @@ export const getBackendDataDefault = async () => {
 //--------------------------------
 
 export const getBackendDataNew = async (inputObj) => {
-  const { dataType, dataReq, dataLoaded, isFirstLoad } = inputObj;
+  const { dataType, dataReq, dataLoaded } = inputObj;
 
-  // console.log("INPUT OBJ");
-  // console.dir(inputObj);
+  console.log("INPUT OBJ");
+  console.dir(inputObj);
 
   const params = await getParamsMap(dataType);
   const { collection } = params;
@@ -115,8 +115,8 @@ export const getBackendDataNew = async (inputObj) => {
   //return as array to match default
   const dataArray = [dataObj];
 
-  console.log("NEW DATA ARRAY");
-  console.dir(dataArray);
+  // console.log("NEW DATA ARRAY");
+  // console.dir(dataArray);
 
   return dataArray;
 };
