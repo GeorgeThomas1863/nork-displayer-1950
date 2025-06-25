@@ -1,5 +1,5 @@
 //import mongo
-import * as db from "../data/db.js";
+import * as db from "../config/db.js";
 import { ObjectId } from "mongodb";
 
 //connect to db AGAIN here just to be safe
