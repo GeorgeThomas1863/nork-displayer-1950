@@ -210,8 +210,8 @@ export const picDropDownContainer = async (inputArray, type) => {
   if (!inputArray || !inputArray.length) return null;
 
   const picArrayElement = await buildPicWrapper(inputArray, false);
-  console.log("PIC ARRAY ELEMENT");
-  console.log(picArrayElement);
+  // console.log("PIC ARRAY ELEMENT");
+  // console.log(picArrayElement);
   if (!picArrayElement) return null;
 
   //build pic title element
@@ -231,8 +231,8 @@ export const picDropDownContainer = async (inputArray, type) => {
 
   const picCollapseElement = await buildCollapseContainer(picCollapseObj);
 
-  console.log("PIC COLLAPSE ELEMENT");
-  console.log(picCollapseElement);
+  // console.log("PIC COLLAPSE ELEMENT");
+  // console.log(picCollapseElement);
 
   return picCollapseElement;
 };
