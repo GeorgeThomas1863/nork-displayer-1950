@@ -99,7 +99,7 @@ export const getBackendDataNew = async (inputObj) => {
   // const typeSuffix = isArticleFilter ? "sByType" : "s";
   // const methodName = `get${sortPrefix}Item${typeSuffix}Array`;
 
-  const sortPrefix = sortByInput === "newest-to-oldest" ? "Newest" : "Oldest";
+  const sortPrefix = sortByInput.includes("newest-to-oldest") ? "Newest" : "Oldest";
   const methodName = `get${sortPrefix}ItemsArray`;
 
   console.log("METHOD NAME");
