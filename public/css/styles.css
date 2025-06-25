@@ -968,7 +968,7 @@ h3 {
   background-color: rgb(200, 200, 200);
 }
 
-.picSet-pic-collapse .collapse-header {
+.pic-collapse .collapse-header {
   margin: 0 auto;
   margin-bottom: 1rem;
   width: fit-content;
@@ -977,13 +977,13 @@ h3 {
 }
 
 .article-pic-collapse .collapse-title,
-.picSet-pic-collapse .collapse-title {
+.pic-collapse .collapse-title {
   font-size: 1.5rem;
   max-width: calc(100% - 1rem);
 }
 
 .article-element-collapse .collapse-header,
-.pic-set-element-collapse .collapse-header,
+.pic-element-collapse .collapse-header,
 .vid-page-element-collapse .collapse-header {
   justify-content: left;
 }
