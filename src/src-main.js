@@ -46,8 +46,8 @@ export const getBackendDataDefault = async () => {
     // const dataArrayFixed = await fixDataByType(dataArrayValid, dataType);
 
     // console.log("DATA PULLED");
-    // console.log(dataType);
-    // console.dir(dataArrayValid.length);
+    console.log(dataType);
+    console.dir(dataArrayValid.length);
 
     const dataObj = {
       dataType: dataType,
