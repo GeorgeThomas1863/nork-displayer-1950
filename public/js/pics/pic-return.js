@@ -30,8 +30,8 @@ export const buildPicDisplay = async (inputArray) => {
 export const buildPicListItem = async (inputObj, isFirst) => {
   const { title, date } = inputObj;
 
-  const picSetListItem = document.createElement("li");
-  picSetListItem.className = "pic-list-item";
+  const picListItem = document.createElement("li");
+  picListItem.className = "pic-list-item";
 
   //builds a pic container for pic array
   const picContainerElement = await buildPicContainer(inputObj);
@@ -42,17 +42,17 @@ export const buildPicListItem = async (inputObj, isFirst) => {
   titleElement.innerHTML = `${titleElement.textContent} <span>[${dateElement.textContent}]</span>`;
 
   // Wrap the article content in a collapsible
-  const picSetCollapseObj = {
+  const picCollapseObj = {
     titleElement: titleElement,
     contentElement: picContainerElement,
     isExpanded: isFirst,
     className: "pic-element-collapse",
   };
 
-  const picSetCollapseContainer = await buildCollapseContainer(picSetCollapseObj);
-  picSetListItem.append(picSetCollapseContainer);
+  const picCollapseContainer = await buildCollapseContainer(picCollapseObj);
+  picListItem.append(picCollapseContainer);
 
-  return picSetListItem;
+  return picListItem;
 };
 
 export const buildPicContainer = async (inputObj) => {
@@ -62,7 +62,7 @@ export const buildPicContainer = async (inputObj) => {
   picContainerElement.id = "pic-container-element";
 
   //Add pics as collapse
-  const picContainerData = await picDropDownContainer(picArray, "");
+  const picContainerData = await picDropDownContainer(picArray, "container");
   if (picContainerData) {
     picContainerElement.append(picContainerData);
   }
