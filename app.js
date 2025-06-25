@@ -2,12 +2,6 @@
 
 //****************
 
-//DO FIRST: FINISH REPULLING VIDS, repullData in src-fix.js
-
-//**************
-
-//GET VID PAGE DISPLAY WORKING
-
 //UNFUCK PROBLEM WITH SCRAPE CLEAN FUNCTION
 
 //UNFUCK THE CSS / NAMES IN CSS
