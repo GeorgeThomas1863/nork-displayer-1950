@@ -84,6 +84,9 @@ export const buildBackendDisplay = async (inputArray) => {
     const dataObj = inputArray[0];
     const { dataType, dataArray } = dataObj;
 
+    console.log("NEW DATA OBJ");
+    console.log(dataObj);
+
     //get replace shit first
     // const currentBackendDataWrapper = document.getElementById("backend-data-wrapper");
     const replaceId = d.replaceTypeMap[dataType];
