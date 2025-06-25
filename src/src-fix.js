@@ -140,7 +140,7 @@ export const checkItemExists = async (inputObj, type = "pic") => {
 //[half assed answer below, might need to do same for picSets / assumes prob is newest shit not downloaded]
 //RE-GET / PULL DATA
 export const rePullData = async (dataType, howMany) => {
-  const { vidsDownloaded, vidPageContent, vidPath } = CONFIG;
+  const { vidPageContent, vidPath } = CONFIG;
 
   // console.log("RE-PULL DATA DATA TYPE TRIGGERED");
   // console.log(dataType);
@@ -152,51 +152,31 @@ export const rePullData = async (dataType, howMany) => {
       //get vid array on drive
       const vidArrayFS = fs.readdirSync(vidPath);
 
-      const latestVid = await getLatestVid(vidArrayFS);
+      const latestVidId = await getLatestVid(vidArrayFS);
       console.log("LATEST VID");
-      console.log(latestVid);
+      console.log(latestVidId);
 
-    //!!!!!!!!!!!!
-    //HERE (pull latest vidPage from vid)
-    //!!!!!!!!!!!!
+      const vidParams = {
+        sortKey: "date",
+        sortKey2: "vidPageId",
+        howMany: howMany,
+        filterKey: "vidData.vidId",
+        filterValue: { $lte: latestVidId },
+      };
 
-    //     const vidDataModel = new dbModel(vidParams, vidsDownloaded);
-    //     const vidDataObj = await vidDataModel.getNewestItemsArray();
-    //     if (!vidDataObj || !vidDataObj[0] || !vidDataObj[0].url) return null;
-    //     const { url } = vidDataObj[0];
+      console.log("VID PARAMS");
+      console.log(vidParams);
 
-    //     console.log("Vid Data Obj");
-    //     console.dir(vidDataObj);
+      const vidDataModel = new dbModel(vidParams, vidPageContent);
+      const vidDataArray = await vidDataModel.getNewestItemsByTypeArray();
 
-    //     const vidPageFindParams = {
-    //       keyToLookup: "vidURL",
-    //       itemValue: url,
-    //     };
-
-    //     //use url to get vid Page
-    //     const vidPageFindModel = new dbModel(vidPageFindParams, vidPageContent);
-    //     const vidPageObj = await vidPageFindModel.getUniqueItem();
-    //     if (!vidPageObj || !vidPageObj.vidPageId) return null;
-    //     const { vidPageId } = vidPageObj;
-
-    //     const vidPageGetParams = {
-    //       sortKey: "date",
-    //       sortKey2: "vidPageId",
-    //       howMany: howMany,
-    //       filterKey: "vidPageId",
-    //       filterValue: { $lte: vidPageId },
-    //     };
-
-    //     const vidPageGetModel = new dbModel(vidPageGetParams, vidPageContent);
-    //     const vidPageGetArray = await vidPageGetModel.getNewestItemsByTypeArray();
-
-    //     return vidPageGetArray;
-
-    //   default:
-    //     return null;
+      return vidDataArray;
   }
+
+  return null;
 };
 
+//return the vidId of latest vid on fs
 export const getLatestVid = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
   const { vidsDownloaded, vidPath } = CONFIG;
@@ -224,14 +204,14 @@ export const getLatestVid = async (inputArray) => {
     const dataModel = new dbModel(dataParams, vidsDownloaded);
     const vidDataObj = await dataModel.getUniqueItem();
     if (!vidDataObj || !vidDataObj.vidSizeBytes) return null;
-    const { vidSizeBytes } = vidDataObj;
+    const { vidSizeBytes, vidId } = vidDataObj;
 
     //check slightly smaller
     const checkSize = vidSizeBytes * 0.7;
     const fileSize = fs.statSync(vidFullPath).size;
     if (fileSize < checkSize) continue;
 
-    return vidFullPath;
+    return vidId;
   }
 
   return null;
