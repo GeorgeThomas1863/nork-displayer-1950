@@ -1,8 +1,6 @@
 //importing functions defined in map
 import { buildArticleDisplay } from "./articles/article-return.js";
-// import { buildPicAloneDisplay } from "./pics/pic-return-alone.js";
 import { buildPicDisplay } from "./pics/pic-return.js";
-// import { buildVidAloneDisplay } from "./vids/vid-return-alone.js";
 import { buildVidDisplay } from "./vids/vid-return.js";
 
 const d = {
@@ -11,7 +9,6 @@ const d = {
     pics: buildPicDisplay,
     vids: buildVidDisplay,
   },
-  // backendTypeArr: ["articles", "pics", "picSets", "vids", "vidPages"],
 
   //expand triggers
   expandTriggerArr: ["article-form-header", "pic-form-header", "vid-form-header"],
@@ -26,10 +23,8 @@ const d = {
     articleType: "fatboy",
     articleHowMany: 5,
     articleSortBy: "article-newest-to-oldest",
-    picType: "pic-alone",
     picHowMany: 6,
     picSortBy: "pic-newest-to-oldest",
-    vidType: "vid-pages",
     vidHowMany: 1,
     vidSortBy: "vid-newest-to-oldest",
   },
