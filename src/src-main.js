@@ -102,6 +102,9 @@ export const getBackendDataNew = async (inputObj) => {
   const sortPrefix = sortByInput === "newest-to-oldest" ? "Newest" : "Oldest";
   const methodName = `get${sortPrefix}ItemsArray`;
 
+  console.log("METHOD NAME");
+  console.log(methodName);
+
   const dataArrayRaw = await dataModel[methodName]();
 
   const dataArrayValid = await removeInvalidItems(dataArrayRaw, dataType, howManyInput);
