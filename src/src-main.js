@@ -82,15 +82,15 @@ export const getBackendDataNew = async (inputObj) => {
     typeKey = dataType.substring(0, dataType.length - 1);
   }
 
-  console.log("DATA LOADED");
-  console.log(dataLoaded[dataType]);
-
   const sortByInput = dataReq[`${typeKey}SortBy`];
   const howManyInput = dataReq[`${typeKey}HowMany`] || dataLoaded[dataType];
   const howManyBuffer = Math.ceil(+howManyInput * 1.2);
 
   params.sortBy = sortByInput;
   params.howMany = howManyBuffer;
+
+  console.log("PARAMS");
+  console.dir(params);
 
   //FIX ARTICLES HERE
 
