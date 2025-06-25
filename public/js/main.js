@@ -31,13 +31,13 @@ export const buildDisplay = async () => {
   const backendData = await sendToBack(state);
   if (!backendData) return null;
 
-  console.log("!!!!BACKEND DATA!!!");
-  console.log(backendData);
+  // console.log("!!!!BACKEND DATA!!!");
+  // console.log(backendData);
 
   const backendDataParsed = await buildBackendDisplay(backendData);
 
-  console.log("!!!!BACKEND DATA PARSED");
-  console.log(backendDataParsed);
+  // console.log("!!!!BACKEND DATA PARSED");
+  // console.log(backendDataParsed);
 
   if (!backendDataParsed) return null;
   // console.log("!!!!BACKEND DATA PARSED");
@@ -49,7 +49,7 @@ export const buildDisplay = async () => {
   await updateDataLoaded(backendData);
 
   console.log("STATE");
-  console.log(state);
+  console.dir(state);
 
   console.log("DISPLAY ELEMENT");
   console.log(displayElement);
@@ -84,8 +84,8 @@ export const buildBackendDisplay = async (inputArray) => {
     const dataObj = inputArray[0];
     const { dataType, dataArray } = dataObj;
 
-    console.log("NEW DATA OBJ");
-    console.log(dataObj);
+    // console.log("NEW DATA OBJ");
+    // console.log(dataObj);
 
     //get replace shit first
     // const currentBackendDataWrapper = document.getElementById("backend-data-wrapper");
