@@ -2,9 +2,9 @@
 
 //****************
 
-//REBUILD GET NEW DATA CAPABILITY (for 50th time)
+//ON PIC COLLAPSE CONTAINER in pic-return.js UNFUCK THE CSS
 
-//**************** 
+//****************
 
 //UNFUCK PROBLEM WITH SCRAPE CLEAN FUNCTION
 
