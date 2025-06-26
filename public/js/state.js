@@ -90,10 +90,10 @@ export const updateStateDataLoaded = async (inputArray) => {
 
     //UPDATE JUST THE INDIVIDUAL ITEM
     for (let k in dataLoaded) {
-      if (dataType === k) {
-        const numberLoaded = dataArray.length;
-        state.dataLoaded[k] = numberLoaded;
-      }
+      if (!dataType || dataType !== k) continue;
+
+      const numberLoaded = dataArray.length;
+      state.dataLoaded[k] = numberLoaded;
     }
   }
 
