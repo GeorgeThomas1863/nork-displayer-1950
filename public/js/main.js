@@ -88,11 +88,13 @@ export const buildBackendDisplay = async (inputArray) => {
       return backendDataWrapper;
     }
 
-    console.log("NEW DATA ELEMENT");
-    console.log(newDataElement);
+    // console.log("NEW DATA ELEMENT");
+    // console.log(newDataElement);
 
-    //     const container = document.getElementById('my-container');
-    // const elementsWithoutClass = container.querySelectorAll(':not(.my-class)');
+    const elementsNotHidden = newDataElement.querySelectorAll(":not(.hidden)");
+
+    console.log("ELEMENTS NOT HIDDEN");
+    console.log(elementsNotHidden);
 
     // console.log("REPLACE ELEMENT");
     // console.log(replaceElement);
