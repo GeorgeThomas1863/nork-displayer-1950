@@ -108,20 +108,24 @@ export const updateStateDataLoaded = async (inputArray) => {
 
 //basically return true except for how many
 export const checkNewDataNeeded = async () => {
-  const { isFirstLoad, dataReq, dataLoaded, trigger } = state;
+  const { isFirstLoad, dataReq, dataLoaded, dataType, trigger } = state;
 
   console.log("CHECK DATA NEEDED STATE");
   console.dir(state);
 
   if (isFirstLoad) return true;
 
-  //return true on all sorts (just assume not loaded)
-  if (trigger.includes("sort-by")) return true;
+  //return true on all sorts / article changes (just assume not loaded)
+  if (trigger.includes("sort-by") || trigger === "article-type") return true;
 
-  //REWRITE BELOW
+  //check how many
+  const itemsLoaded = dataLoaded[dataType];
+  const prefix = dataType.substring(0, dataType.length - 1);
+  const itemsNeeded = dataReq[`${prefix}HowMany`];
 
-  return true;
-  // return null;
+  if (itemsNeeded > itemsLoaded) return true;
+
+  return null;
 };
 
 // export const newDataTrigger = async () => {
