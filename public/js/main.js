@@ -97,8 +97,8 @@ export const buildBackendDisplay = async (inputArray) => {
     // const listArray = newDataElement.querySelectorAll(".article-list-item");
     // const elementsNotHidden = listItems.querySelectorAll(":not(.hidden)");
 
-    console.log("LIST ITEMS");
-    console.log(listItems);
+    // console.log("LIST ITEMS");
+    // console.log(listItems);
 
     // console.log("ELEMENTS NOT HIDDEN");
     // console.log(elementsNotHidden);
