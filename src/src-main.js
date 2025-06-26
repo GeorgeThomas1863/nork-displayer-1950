@@ -66,6 +66,7 @@ export const getBackendDataDefault = async () => {
 
 export const getBackendDataNew = async (inputObj) => {
   const { dataType, dataReq, dataLoaded } = inputObj;
+  const { articleType } = dataReq;
 
   console.log("GET BACKEND DATA NEW");
   console.dir(inputObj);
@@ -74,12 +75,7 @@ export const getBackendDataNew = async (inputObj) => {
   const { collection } = params;
 
   //get the type key
-  let typeKey = "";
-  if (dataType === "picSets" || dataType === "vidPages") {
-    typeKey = dataType.substring(0, 3);
-  } else {
-    typeKey = dataType.substring(0, dataType.length - 1);
-  }
+  const typeKey = dataType.substring(0, dataType.length - 1);
 
   const sortByInput = dataReq[`${typeKey}SortBy`];
   const howManyInput = dataReq[`${typeKey}HowMany`] || dataLoaded[dataType];
@@ -91,22 +87,21 @@ export const getBackendDataNew = async (inputObj) => {
   //FIX ARTICLES HERE
 
   const dataModel = new dbModel(params, collection);
-  // const isArticleFilter = dataType === "articles" && filterValue !== "all-type";
-  // const typeSuffix = isArticleFilter ? "sByType" : "s";
-  // const methodName = `get${sortPrefix}Item${typeSuffix}Array`;
+  const isArticleFilter = dataType === "articles" && articleType !== "all-type";
 
   const sortPrefix = sortByInput.includes("newest-to-oldest") ? "Newest" : "Oldest";
-  const methodName = `get${sortPrefix}ItemsArray`;
+  const typeSuffix = isArticleFilter ? "sByType" : "s";
+  const methodName = `get${sortPrefix}Item${typeSuffix}Array`;
 
   const dataArrayRaw = await dataModel[methodName]();
-
   const dataArrayValid = await removeInvalidItems(dataArrayRaw, dataType, howManyInput);
-  // const dataArrayFixed = await fixDataByType(dataArrayValid, dataType);
 
   const dataObj = {
     dataType: dataType,
     dataArray: dataArrayValid,
   };
+
+  if (dataType === "articles") dataObj.articleType = articleType;
 
   //return as array to match default
   const dataArray = [dataObj];
