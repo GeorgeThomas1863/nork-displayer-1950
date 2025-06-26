@@ -64,25 +64,28 @@ export const updateStateDataLoaded = async (inputArray) => {
   // console.dir(inputArray);
 
   //update data loop (will be 1 item if not first load)
-  const returnObj = {};
+  // const returnObj = {};
   for (let i = 0; i < inputArray.length; i++) {
     const inputItem = inputArray[i];
     const { dataType, dataArray } = inputItem;
+    const { dataLoaded } = state;
 
-    const numberLoaded = dataArray.length;
-    returnObj[dataType] = numberLoaded;
+    //UPDATE JUST THE INDIVIDUAL ITEM
+    for (let k in dataLoaded) {
+      if (dataType === k) {
+        const numberLoaded = dataArray.length;
+        state.dataLoaded[k] = numberLoaded;
+      }
+    }
   }
 
-  state.dataLoaded = returnObj;
+  // state.dataLoaded = returnObj;
   state.isFirstLoad = false;
 
   console.log("DATA LOADED STATE");
   console.dir(state);
 
-  console.log("RETURN OBJ");
-  console.dir(returnObj);
-
-  return returnObj;
+  return true;
 };
 
 //basically return true except for how many
