@@ -48,8 +48,7 @@ export const buildArticleListItem = async (inputObj, isFirst) => {
   const articleCollapseObj = {
     titleElement: titleElement,
     contentElement: articleElement,
-    // isExpanded:  isFirst,
-    isExpanded: state.isFirstLoad ? isFirst : false,
+    isExpanded:  isFirst,
     className: "article-element-collapse",
   };
 

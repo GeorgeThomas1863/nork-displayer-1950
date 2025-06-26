@@ -44,7 +44,7 @@ export const buildVidListItem = async (inputObj, isFirst) => {
   const vidCollapseObj = {
     titleElement: titleElement,
     contentElement: vidContainerElement,
-    // isExpanded: isFirst,
+    isExpanded: isFirst,
     className: "vid-element-collapse",
   };
 

@@ -45,7 +45,7 @@ export const buildPicListItem = async (inputObj, isFirst) => {
   const picCollapseObj = {
     titleElement: titleElement,
     contentElement: picContainerElement,
-    // isExpanded: isFirst,
+    isExpanded: isFirst,
     className: "pic-element-collapse",
   };
 
