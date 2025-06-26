@@ -2,7 +2,7 @@ import d from "./define-things.js";
 import { buildDropDown } from "./build-drop-down.js";
 import { buildInputForms } from "./build-forms.js";
 import { hideArray, unhideArray, sendToBack, buildFailElement } from "./util.js";
-import { state, updateDataLoaded, checkNewDataNeeded } from "./state.js";
+import { state, updateStateDataLoaded, checkNewDataNeeded } from "./state.js";
 
 //get display element
 const displayElement = document.getElementById("display-element");
@@ -46,7 +46,7 @@ export const buildDisplay = async () => {
   displayElement.append(backendDataParsed);
 
   //UPDATE THE STATE HERE
-  await updateDataLoaded(backendData);
+  await updateStateDataLoaded(backendData);
 
   console.log("STATE");
   console.dir(state);

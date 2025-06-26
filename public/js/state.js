@@ -5,7 +5,7 @@ export const state = {
   route: "/get-backend-data-route",
   isFirstLoad: true,
   dataType: "articles",
-  articleType: null,
+  articleType: "fatboy",
 
   //data already requested
   dataReq: d.defaultInputMap,
@@ -13,10 +13,42 @@ export const state = {
   trigger: null,
 };
 
+//IN responsive / click listener
+export const checkEventTriggered = async (changeId) => {
+  const { changeTriggerArr } = d;
+  console.log("CHANGE ID");
+  console.log(changeId);
+
+  for (let i = 0; i < changeTriggerArr.length; i++) {
+    const changeItem = changeTriggerArr[i];
+
+    //change event NOT found
+    if (changeId !== changeItem) continue;
+
+    //otherwise event triggered
+    return changeItem;
+  }
+
+  return null;
+};
+
+export const updateStateEventTriggered = async (changeId, eventTriggered) => {
+  //get data to update
+  const inputParams = await buildInputParams();
+  const newType = d.triggerTypeMap(changeId);
+  const newArticleType = document.getElementById("article-type").value;
+
+  //update state obj
+  state.trigger = eventTriggered;
+  state.dataReq = inputParams;
+  state.dataType = newType;
+  state.articleType = newArticleType;
+};
+
 //FUCKED, FIGURE OUT BELOW
 
 //MAKE MUCH MORE COMPLEX
-export const updateDataLoaded = async (inputArray) => {
+export const updateStateDataLoaded = async (inputArray) => {
   const { isFirstLoad, dataLoaded, dataType } = state;
 
   //if not first load only update one thing
@@ -50,26 +82,6 @@ export const updateDataLoaded = async (inputArray) => {
   state.dataLoaded = returnObj;
   state.isFirstLoad = false;
   return true;
-};
-
-export const checkEventTriggered = async (changeId) => {
-  const { changeTriggerArr } = d;
-  console.log("CHANGE ID");
-  console.log(changeId);
-
-  for (let i = 0; i < changeTriggerArr.length; i++) {
-    const changeItem = changeTriggerArr[i];
-
-    //change event NOT found
-    if (changeId !== changeItem) continue;
-
-    //otherwise change event triggered, update dataType first
-    const newType = d.triggerTypeMap(changeId);
-    state.dataType = newType;
-    return changeItem;
-  }
-
-  return null;
 };
 
 //basically return true except for how many

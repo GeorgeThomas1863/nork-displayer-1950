@@ -1,7 +1,8 @@
+import d from "./define-things.js";
 import { buildDisplay, toggleDropdown, expandForm } from "./main.js";
 import { getNewAdminData } from "./admin.js";
 import { debounce, buildInputParams } from "./util.js";
-import { state, checkEventTriggered } from "./state.js";
+import { state, checkEventTriggered, updateStateEventTriggered } from "./state.js";
 
 //MAIN / NORMAL RESPONSIVE
 
@@ -33,22 +34,15 @@ export const mainChangeHandler = async (e) => {
   // console.log(changeElement);
   // console.log(changeId);
 
+  //check if event triggered, move on if not
   const eventTriggered = await checkEventTriggered(changeId);
   if (!eventTriggered) return null;
 
-  //otherwise note current dataReq and change the trigger
-  const inputParams = await buildInputParams();
-  state.trigger = eventTriggered;
-  state.dataReq = inputParams;
+  //update the state
+  await updateStateEventTriggered(changeId, eventTriggered);
 
-  // console.log("EVENT TRIGGERED");
-  // console.log(eventTriggered);
-
+  //build display
   await buildDisplay();
-
-  //if needed get new data
-
-  //otherwise hide / unhide things
 };
 
 //create debounced function
