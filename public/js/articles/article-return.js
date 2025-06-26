@@ -1,5 +1,6 @@
 import { picDropDownContainer } from "../pics/pic-return.js";
 import { buildCollapseContainer, defineCollapseItems } from "../collapse.js";
+import { state } from "../state.js";
 
 //BUILD DEFAULT ARTICLE DISPLAY
 export const buildArticleDisplay = async (inputArray) => {
@@ -47,7 +48,8 @@ export const buildArticleListItem = async (inputObj, isFirst) => {
   const articleCollapseObj = {
     titleElement: titleElement,
     contentElement: articleElement,
-    isExpanded: isFirst,
+    // isExpanded:  isFirst,
+    isExpanded: state.isFirstLoad ? isFirst : false,
     className: "article-element-collapse",
   };
 
