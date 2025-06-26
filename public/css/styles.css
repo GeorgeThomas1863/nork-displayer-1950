@@ -572,6 +572,10 @@ h3 {
   width: 100%;
 }
 
+#article-array-element > div {
+  border-radius: 8px;
+}
+
 .article-list-item {
   margin-bottom: 1.5rem;
 }
@@ -625,6 +629,10 @@ h3 {
 
 #pic-array-element {
   width: 100%;
+}
+
+#pic-array-element > div {
+  border-radius: 8px;
 }
 
 .pic-list-item {
@@ -786,9 +794,12 @@ h3 {
   margin-bottom: 1.5rem;
 }
 
+#vid-array-element > div {
+  border-radius: 8px;
+}
+
 .vid-list-item {
   margin-bottom: 1.5rem;
-  border-radius: 8px;
 }
 
 .vid-list-item:last-child {
