@@ -34,8 +34,8 @@ export const checkChangeTriggered = async (changeId) => {
 
 export const checkInputTriggered = async (inputId) => {
   const { inputTriggerArr } = d;
-  console.log("INPUT ID");
-  console.log(inputId);
+  // console.log("INPUT ID");
+  // console.log(inputId);
 
   for (let i = 0; i < inputTriggerArr.length; i++) {
     const inputItem = inputTriggerArr[i];
@@ -110,8 +110,8 @@ export const updateStateDataLoaded = async (inputArray) => {
 export const checkNewDataNeeded = async () => {
   const { isFirstLoad, dataReq, dataLoaded, trigger } = state;
 
-  // console.log("STATE");
-  // console.dir(state);
+  console.log("STATE");
+  console.dir(state);
 
   if (isFirstLoad) return true;
 
