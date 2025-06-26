@@ -49,39 +49,34 @@ export const updateStateEventTriggered = async (changeId, eventTriggered) => {
 
 //MAKE MUCH MORE COMPLEX
 export const updateStateDataLoaded = async (inputArray) => {
-  const { isFirstLoad, dataLoaded, dataType } = state;
+  const { isFirstLoad, dataLoaded } = state;
 
   //if not first load only update one thing
-  if (!isFirstLoad) {
-    const updateItem = inputArray[0];
-    const { dataType, dataArray } = updateItem;
+  // if (!isFirstLoad) {
+  //   const updateItem = inputArray[0];s
+  //   const { dataType, dataArray } = updateItem;
 
-    dataLoaded[dataType] = dataArray.length;
-    return true;
-  }
+  //   dataLoaded[dataType] = dataArray.length;
+  //   return true;
+  // }
 
-  //otherwise first load, update all types
+  //update data loop (will be 1 item if not first load)
   const returnObj = {};
   for (let i = 0; i < inputArray.length; i++) {
     const inputItem = inputArray[i];
-    const { dataType, dataArray, dataReq } = inputItem;
-
-    console.log("UPDATE DATA TYPE");
-    console.log(dataType);
-
-    // //add in article type here
-    // if (dataType === "articles") {
-    //   console.log("AHHHHHHHHHH");
-    //   state.articleType = dataReq.articleType;
-    // }
+    const { dataType, dataArray } = inputItem;
 
     const numberLoaded = dataArray.length;
     returnObj[dataType] = numberLoaded;
   }
 
-  state.dataLoaded = returnObj;
-  state.isFirstLoad = false;
-  return true;
+  dataLoaded = returnObj;
+  isFirstLoad = false;
+
+  console.log("DATA LOADED STATE");
+  console.dir(state);
+
+  return returnObj;
 };
 
 //basically return true except for how many
