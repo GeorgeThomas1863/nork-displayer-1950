@@ -41,11 +41,11 @@ export const buildPicListItem = async (inputObj, isFirst) => {
   const titleElement = await buildPicContainerTitle(title);
   titleElement.innerHTML = `${titleElement.textContent} <span>[${dateElement.textContent}]</span>`;
 
-  // Wrap the article content in a collapsible
+  // Wrap in a collapsible
   const picCollapseObj = {
     titleElement: titleElement,
     contentElement: picContainerElement,
-    isExpanded: isFirst,
+    // isExpanded: isFirst,
     className: "pic-element-collapse",
   };
 
