@@ -788,6 +788,7 @@ h3 {
 
 .vid-list-item {
   margin-bottom: 1.5rem;
+  border-radius: 8px;
 }
 
 .vid-list-item:last-child {
@@ -828,7 +829,6 @@ h3 {
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem; */
   margin: 0 auto;
-  border-radius: 0 0 8px 8px;
 }
 
 #vid-element {
