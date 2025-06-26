@@ -46,9 +46,9 @@ export const removeInvalidItems = async (inputArray, dataType, howMany) => {
       break;
 
     case "vids":
-      console.log("REMOVE INVALID ITEMS DATA TYPE");
-      console.log(dataType);
-      console.log(inputArray);
+      // console.log("REMOVE INVALID ITEMS DATA TYPE");
+      // console.log(dataType);
+      // console.log(inputArray);
       for (let i = 0; i < inputArray.length; i++) {
         try {
           const dataObj = inputArray[i];
@@ -90,8 +90,8 @@ export const checkItemExists = async (inputObj, type = "pic") => {
   const { savePath } = inputObj;
   if (!savePath) return null;
 
-  // console.log("CHECK ITEM EXISTS");
-  // console.log(inputObj);
+  console.log("CHECK ITEM EXISTS");
+  console.log(inputObj);
 
   if (!fs.existsSync(savePath)) {
     const error = new Error("ITEM NOT DOWNLOADED");
