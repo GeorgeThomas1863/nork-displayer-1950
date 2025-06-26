@@ -2,7 +2,7 @@ import d from "./define-things.js";
 import { buildDisplay, toggleDropdown, expandForm } from "./main.js";
 import { getNewAdminData } from "./admin.js";
 import { debounce, buildInputParams } from "./util.js";
-import { state, checkEventTriggered, updateStateEventTriggered } from "./state.js";
+import { state, checkChangeTriggered, checkInputTriggered, updateStateEventTriggered } from "./state.js";
 
 //MAIN / NORMAL RESPONSIVE
 
@@ -29,13 +29,9 @@ export const mainChangeHandler = async (e) => {
   e.preventDefault();
   const changeElement = e.target;
   const changeId = changeElement.id;
-  // console.log("CHANGE ELEMENT");
-  // console.log(e);
-  // console.log(changeElement);
-  // console.log(changeId);
 
   //check if event triggered, move on if not
-  const eventTriggered = await checkEventTriggered(changeId);
+  const eventTriggered = await checkChangeTriggered(changeId);
   if (!eventTriggered) return null;
 
   //update the state
@@ -45,25 +41,22 @@ export const mainChangeHandler = async (e) => {
   await buildDisplay();
 };
 
-//create debounced function
-// const debouncedGetNewData = debounce(getNewData);
+// create debounced function for input
+const debouncedInputTriggered = debounce(checkInputTriggered);
 
 //input handler
-// export const mainInputHandler = async (e) => {
-//   const inputElement = e.target;
+export const mainInputHandler = async (e) => {
+  const inputElement = e.target;
 
-//   const inputId = inputElement.id;
+  const inputId = inputElement.id;
 
-//   const inputObj = {
-//     inputId: inputId,
-//   };
+  const eventTriggered = await debouncedInputTriggered(inputId);
+  if (!eventTriggered) return null;
 
-//   // const newBackendData = await debouncedGetNewData(inputObj);
-//   // if (!newBackendData) return null;
-//   // await buildBackendNew(newBackendData);
+  await updateStateEventTriggered(inputId, eventTriggered);
 
-//   return true;
-// };
+  await buildDisplay();
+};
 
 //-----------------------------------
 
@@ -93,7 +86,7 @@ const displayElement = document.getElementById("display-element");
 if (displayElement) {
   displayElement.addEventListener("click", mainClickHandler);
   displayElement.addEventListener("change", mainChangeHandler);
-  // displayElement.addEventListener("input", mainInputHandler);
+  displayElement.addEventListener("input", mainInputHandler);
 }
 
 if (adminDisplayElement) {

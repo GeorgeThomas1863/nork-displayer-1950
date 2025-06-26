@@ -14,7 +14,7 @@ export const state = {
 };
 
 //IN responsive / click listener
-export const checkEventTriggered = async (changeId) => {
+export const checkChangeTriggered = async (changeId) => {
   const { changeTriggerArr } = d;
   console.log("CHANGE ID");
   console.log(changeId);
@@ -27,6 +27,24 @@ export const checkEventTriggered = async (changeId) => {
 
     //otherwise event triggered
     return changeItem;
+  }
+
+  return null;
+};
+
+export const checkInputTriggered = async (inputId) => {
+  const { inputTriggerArr } = d;
+  console.log("INPUT ID");
+  console.log(inputId);
+
+  for (let i = 0; i < inputTriggerArr.length; i++) {
+    const inputItem = inputTriggerArr[i];
+
+    //change event NOT found
+    if (inputId !== inputItem) continue;
+
+    //otherwise event triggered
+    return inputItem;
   }
 
   return null;
