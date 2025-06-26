@@ -572,7 +572,7 @@ h3 {
   width: 100%;
 }
 
-#article-array-element > div {
+.article-element-collapse {
   border-radius: 8px;
 }
 
