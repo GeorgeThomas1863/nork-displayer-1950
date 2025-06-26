@@ -123,6 +123,9 @@ export const checkItemExists = async (inputObj, type = "pic") => {
   //GET FILE SIZE FRM FILE (TEST THIS)
   const fileSize = fs.statSync(savePath).size;
 
+  console.log("FILE SIZE");
+  console.log(fileSize);
+
   //check for slightly smaller file
   const checkSize = checkSizeRaw * 0.7;
   if (fileSize < checkSize) {
