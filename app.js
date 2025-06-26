@@ -6,6 +6,8 @@
 
 //****************
 
+//FIX PIC / VID CSS SHIT (esp article pic display)
+
 //UNFUCK PROBLEM WITH SCRAPE CLEAN FUNCTION
 
 //UNFUCK THE CSS / NAMES IN CSS
