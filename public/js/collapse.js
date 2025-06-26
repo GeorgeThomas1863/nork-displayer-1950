@@ -1,8 +1,12 @@
+import { state } from "./state.js";
+
 export const buildCollapseContainer = async (inputObj) => {
   if (!inputObj || !inputObj.titleElement || !inputObj.contentElement) return null;
   const { titleElement, contentElement, isExpanded = false, className = "", dataAttribute = "" } = inputObj;
+  const { isFirstLoad } = state;
 
-  //ADDING FUCKING DATA ATTRIBUTE TO ALL CLICKABLE ITEMS
+  //if not the first load all NOT expanded
+  if (!isFirstLoad) isExpanded = false;
 
   // Create container
   const collapseContainer = document.createElement("div");
