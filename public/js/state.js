@@ -110,8 +110,8 @@ export const updateStateDataLoaded = async (inputArray) => {
 export const checkNewDataNeeded = async () => {
   const { isFirstLoad, dataReq, dataLoaded, dataType, trigger } = state;
 
-  console.log("CHECK DATA NEEDED STATE");
-  console.dir(state);
+  // console.log("CHECK DATA NEEDED STATE");
+  // console.dir(state);
 
   if (isFirstLoad) return true;
 
