@@ -1,12 +1,11 @@
-// import { state } from "./state.js";
+
 
 export const buildCollapseContainer = async (inputObj) => {
   if (!inputObj || !inputObj.titleElement || !inputObj.contentElement) return null;
-  const { titleElement, contentElement, isExpanded = false, className = "", dataAttribute = "" } = inputObj;
-  // const { isFirstLoad } = state;
+  const { titleElement, contentElement, isExpanded = false, className = "", dataAttribute = "", isFirstLoad = false } = inputObj;
 
-  // //if not the first load all NOT expanded
-  // if (!state.isFirstLoad) isExpanded = false;
+  //if not the first load all NOT expanded
+  if (!isFirstLoad) isExpanded = false;
 
   // Create container
   const collapseContainer = document.createElement("div");
