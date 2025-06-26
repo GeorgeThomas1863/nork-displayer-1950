@@ -30,7 +30,7 @@ export const updateDataLoaded = async (inputArray) => {
   const returnObj = {};
   for (let i = 0; i < inputArray.length; i++) {
     const inputItem = inputArray[i];
-    const { dataType, dataArray } = inputItem;
+    const { dataType, dataArray, articleType } = inputItem;
 
     console.log("UPDATE DATA TYPE");
     console.log(dataType);
