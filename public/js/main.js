@@ -2,7 +2,7 @@ import d from "./define-things.js";
 import { buildDropDown } from "./build-drop-down.js";
 import { buildInputForms } from "./build-forms.js";
 import { hideArray, unhideArray, sendToBack, buildFailElement } from "./util.js";
-import { state, updateStateDataLoaded, checkNewDataNeeded } from "./state.js";
+import { state, updateStateDataLoaded, checkNewDataNeeded, checkHideUnhideData } from "./state.js";
 
 //get display element
 const displayElement = document.getElementById("display-element");
@@ -22,11 +22,11 @@ export const buildDisplay = async () => {
 
   //check if new data is needed [will pass on first load]
   const newDataNeeded = await checkNewDataNeeded();
-
-  console.log("NEW DATA NEEDED");
-  console.log(newDataNeeded);
-
-  if (!newDataNeeded) return null;
+  if (!newDataNeeded) {
+    //if new data not needed, check if hide / unhide data
+    await checkHideUnhideData();
+    return null;
+  }
 
   //get / parse backend data (returns array of objects)
   const backendData = await sendToBack(state);
@@ -37,12 +37,6 @@ export const buildDisplay = async () => {
 
   //UPDATE THE STATE HERE
   await updateStateDataLoaded(backendData);
-
-  // console.log("STATE");
-  // console.dir(state);
-
-  // console.log("DISPLAY ELEMENT");
-  // console.log(displayElement);
 
   return "#DONE";
 };
@@ -57,69 +51,48 @@ export const buildBackendDisplay = async (inputArray) => {
 
   //only need for loop on first load (could break this part out)
   //
-  if (isFirstLoad) {
-    for (let i = 0; i < inputArray.length; i++) {
-      const dataObj = inputArray[i];
-      const { dataType, dataArray } = dataObj;
-      const func = d.displayFunctionMap[dataType];
-      const defaultDataElement = await func(dataArray);
-      if (!defaultDataElement) continue;
-      //hide everything except pics on default
-      if (defaultDataElement.id !== "article-array-element") {
-        defaultDataElement.classList.add("hidden");
+  switch (isFirstLoad) {
+    case true:
+      //loop through each data type
+      for (let i = 0; i < inputArray.length; i++) {
+        const dataObj = inputArray[i];
+        const { dataType, dataArray } = dataObj;
+        const func = d.displayFunctionMap[dataType];
+        const defaultDataElement = await func(dataArray);
+        if (!defaultDataElement) continue;
+        //hide everything except pics on default
+        if (defaultDataElement.id !== "article-array-element") {
+          defaultDataElement.classList.add("hidden");
+        }
+        backendDataWrapper.append(defaultDataElement);
       }
-      backendDataWrapper.append(defaultDataElement);
-    }
-  } else {
-    const dataObj = inputArray[0];
-    const { dataType, dataArray } = dataObj;
+      break;
 
-    //get replace shit first
-    // const currentBackendDataWrapper = document.getElementById("backend-data-wrapper");
-    const replaceId = d.replaceTypeMap[dataType];
-    const replaceElement = document.getElementById(replaceId);
-    const backendDataWrapper = document.getElementById("backend-data-wrapper");
+    case false:
+      const dataObj = inputArray[0];
+      const { dataType, dataArray } = dataObj;
 
-    //format data
-    const func = d.displayFunctionMap[dataType];
-    const newDataElement = await func(dataArray);
-    if (!newDataElement) {
-      backendDataWrapper.replaceChild(failElement, replaceElement);
-      return backendDataWrapper;
-    }
+      //get replace shit first
+      const replaceId = d.replaceTypeMap[dataType];
+      const replaceElement = document.getElementById(replaceId);
+      const backendDataWrapper = document.getElementById("backend-data-wrapper");
 
-    // console.log("DATA OBJ");
-    // console.log(dataObj);
+      //format data
+      const func = d.displayFunctionMap[dataType];
+      const newDataElement = await func(dataArray);
+      if (!newDataElement) {
+        backendDataWrapper.replaceChild(failElement, replaceElement);
+        return backendDataWrapper;
+      }
 
-    // //HIDE FIRST COLLAPSE
-    const prefix = dataType.substring(0, dataType.length - 1);
-    const listArray = newDataElement.querySelectorAll(`.${prefix}-list-item`);
-    listArray[0].classList.add("hidden");
+      //HIDE FIRST COLLAPSE
+      const prefix = dataType.substring(0, dataType.length - 1);
+      const listArray = newDataElement.querySelectorAll(`.${prefix}-list-item`);
+      listArray[0].classList.add("hidden");
 
-
-
-    console.log("NEW DATA ELEMENT");
-    console.log(newDataElement);
-
-    // 
-    // const elementsNotHidden = listItems.querySelectorAll(":not(.hidden)");
-
-    // console.log("LIST ITEMS");
-    // console.log(listItems);
-
-    // console.log("ELEMENTS NOT HIDDEN");
-    // console.log(elementsNotHidden);
-
-    // console.log("REPLACE ELEMENT");
-    // console.log(replaceElement);
-
-    // console.log("BACKEND DATA WRAPPER BEFORE ");
-    // console.log(backendDataWrapper);
-
-    backendDataWrapper.replaceChild(newDataElement, replaceElement);
+      backendDataWrapper.replaceChild(newDataElement, replaceElement);
+      break;
   }
-
-  // if (!backendDataWrapper) return failElement;
 
   return backendDataWrapper;
 };
@@ -127,11 +100,6 @@ export const buildBackendDisplay = async (inputArray) => {
 //better version of expand backend data equation
 export const expandForm = async (dataType) => {
   const { expandIdsArr } = d;
-  // console.log("EXPAND BACKEND DATA");
-  // console.log(dataType);
-
-  // const picType = document.getElementById("pic-type").value;
-  // const vidType = document.getElementById("vid-type").value;
 
   //build array of expand form elements (defining id's in define-things.js)
   const expandElementsArr = [];

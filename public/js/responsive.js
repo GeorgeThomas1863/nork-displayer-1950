@@ -1,8 +1,7 @@
-import d from "./define-things.js";
 import { buildDisplay, toggleDropdown, expandForm } from "./main.js";
 import { getNewAdminData } from "./admin.js";
-import { debounce, buildInputParams } from "./util.js";
-import { state, checkChangeTriggered, checkInputTriggered, updateStateEventTriggered } from "./state.js";
+import { debounce } from "./util.js";
+import { checkChangeTriggered, checkInputTriggered, updateStateEventTriggered } from "./state.js";
 
 //MAIN / NORMAL RESPONSIVE
 
@@ -54,9 +53,6 @@ export const mainInputHandler = async (e) => {
   if (!eventTriggered) return null;
 
   await updateStateEventTriggered(inputId, eventTriggered);
-
-  // console.log("INPUT TRIGGERED STATE");
-  // console.dir(state);
 
   await buildDisplay();
 };

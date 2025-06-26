@@ -67,8 +67,6 @@ export const updateStateEventTriggered = async (changeId, eventTriggered) => {
 
 //MAKE MUCH MORE COMPLEX
 export const updateStateDataLoaded = async (inputArray) => {
-  //update data loop (will be 1 item if not first load)
-  // const returnObj = {};
   for (let i = 0; i < inputArray.length; i++) {
     const inputItem = inputArray[i];
     const { dataType, dataArray } = inputItem;
@@ -83,11 +81,7 @@ export const updateStateDataLoaded = async (inputArray) => {
     }
   }
 
-  // state.dataLoaded = returnObj;
   state.isFirstLoad = false;
-
-  // console.log("DATA LOADED STATE");
-  // console.dir(state);
 
   return true;
 };
@@ -95,9 +89,6 @@ export const updateStateDataLoaded = async (inputArray) => {
 //basically return true except for how many
 export const checkNewDataNeeded = async () => {
   const { isFirstLoad, dataReq, dataLoaded, dataType, trigger } = state;
-
-  // console.log("CHECK DATA NEEDED STATE");
-  // console.dir(state);
 
   if (isFirstLoad) return true;
 
@@ -114,38 +105,4 @@ export const checkNewDataNeeded = async () => {
   return null;
 };
 
-// export const newDataTrigger = async () => {
-//   const { isFirstLoad, dataReq } = state;
-
-//   //trigger new data on first load
-//   if (isFirstLoad) return true;
-
-//   const inputParams = await buildInputParams();
-//   // const defaultParams = d.defaultInputMap;
-
-//   // console.log("!!!!!!!DEFAULT PARAMS");
-//   // console.dir(defaultParams);
-
-//   for (let k in dataReq) {
-//     const defaultItem = dataReq[k];
-//     const inputItem = inputParams[k];
-
-//     //pass condition
-//     if (defaultItem === inputItem) continue;
-
-//     const moreDataNeeded = await checkMoreDataNeeded(k, inputItem);
-//     if (!moreDataNeeded) continue;
-
-//     // console.log("k");
-//     // console.log(k);
-
-//     //trigger new data, set the dataReq first
-//     // state.dataReq = inputParams;
-//     // state.trigger = k;
-//     // console.log("STATE");
-//     // console.dir(state);
-//     return true;
-//   }
-
-//   return false;
-// };s
+export const checkHideUnhideData = async () => {}
