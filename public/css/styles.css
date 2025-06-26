@@ -574,8 +574,8 @@ h3 {
 
 .article-list-item {
   margin-bottom: 1.5rem;
-  border-radius: 8px;
-  background-color: transparent;
+  /* border-radius: 8px;
+  background-color: transparent; */
 }
 
 /* .article-list-item:last-child {
