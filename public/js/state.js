@@ -100,8 +100,8 @@ export const updateStateDataLoaded = async (inputArray) => {
   // state.dataLoaded = returnObj;
   state.isFirstLoad = false;
 
-  console.log("DATA LOADED STATE");
-  console.dir(state);
+  // console.log("DATA LOADED STATE");
+  // console.dir(state);
 
   return true;
 };

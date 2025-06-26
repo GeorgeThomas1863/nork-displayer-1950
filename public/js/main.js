@@ -34,8 +34,8 @@ export const buildDisplay = async () => {
   //UPDATE THE STATE HERE
   await updateStateDataLoaded(backendData);
 
-  console.log("STATE");
-  console.dir(state);
+  // console.log("STATE");
+  // console.dir(state);
 
   // console.log("DISPLAY ELEMENT");
   // console.log(displayElement);
