@@ -15,7 +15,7 @@ export const state = {
 
 //MAKE MUCH MORE COMPLEX
 export const updateDataLoaded = async (inputArray) => {
-  const { isFirstLoad, dataLoaded } = state;
+  const { isFirstLoad, dataLoaded, dataType } = state;
 
   //if not first load only update one thing
   if (!isFirstLoad) {
@@ -26,14 +26,17 @@ export const updateDataLoaded = async (inputArray) => {
     return true;
   }
 
+  //add in article type here
+  if (dataType === "articles") {
+    console.log("AHHHHHHHHHH");
+    state.articleType = articleType;
+  }
+
   //otherwise first load, update all types
   const returnObj = {};
   for (let i = 0; i < inputArray.length; i++) {
     const inputItem = inputArray[i];
-    const { dataType, dataArray, articleType } = inputItem;
-
-    //add in article type here
-    if (dataType === "articles") state.articleType = articleType;
+    const { dataType, dataArray } = inputItem;
 
     const numberLoaded = dataArray.length;
     returnObj[dataType] = numberLoaded;
