@@ -60,6 +60,9 @@ export const updateStateDataLoaded = async (inputArray) => {
   //   return true;
   // }
 
+  console.log("INPUT ARRAY");
+  console.dir(inputArray.length);
+
   //update data loop (will be 1 item if not first load)
   const returnObj = {};
   for (let i = 0; i < inputArray.length; i++) {
