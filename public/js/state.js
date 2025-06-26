@@ -4,7 +4,7 @@ import { buildInputParams } from "./util.js";
 export const state = {
   route: "/get-backend-data-route",
   isFirstLoad: true,
-  dataType: "pics",
+  dataType: "articles",
   articleType: null,
 
   //data already requested
