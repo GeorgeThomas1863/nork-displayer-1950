@@ -90,8 +90,8 @@ export const checkItemExists = async (inputObj, type = "pic") => {
   const { savePath } = inputObj;
   if (!savePath) return null;
 
-  console.log("CHECK ITEM EXISTS");
-  console.log(inputObj);
+  // console.log("CHECK ITEM EXISTS");
+  // console.log(inputObj);
 
   if (!fs.existsSync(savePath)) {
     const error = new Error("ITEM NOT DOWNLOADED");
@@ -122,9 +122,6 @@ export const checkItemExists = async (inputObj, type = "pic") => {
 
   //GET FILE SIZE FRM FILE (TEST THIS)
   const fileSize = fs.statSync(savePath).size;
-
-  console.log("FILE SIZE");
-  console.log(fileSize);
 
   //check for slightly smaller file
   const checkSize = checkSizeRaw * 0.7;
