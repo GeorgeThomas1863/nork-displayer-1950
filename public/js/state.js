@@ -92,7 +92,7 @@ export const updateStateDataLoaded = async (inputArray) => {
     for (let k in dataLoaded) {
       if (!dataType || dataType !== k) continue;
 
-      const numberLoaded = dataArray.length;
+      const numberLoaded = dataArray?.length || 0;
       state.dataLoaded[k] = numberLoaded;
     }
   }
