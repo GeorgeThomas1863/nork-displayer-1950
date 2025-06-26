@@ -6,10 +6,6 @@ import dbModel from "../models/db-model.js";
 export const removeInvalidItems = async (inputArray, dataType, howMany) => {
   if (!inputArray || !inputArray.length || !dataType) return null;
 
-  console.log("REMOVE INVALID ITEMS DATA TYPE");
-  console.log(dataType);
-  console.log(inputArray);
-
   const dataReturnArray = [];
   switch (dataType) {
     //delete pics that dont exist from picArray
@@ -50,6 +46,9 @@ export const removeInvalidItems = async (inputArray, dataType, howMany) => {
       break;
 
     case "vids":
+      console.log("REMOVE INVALID ITEMS DATA TYPE");
+      console.log(dataType);
+      console.log(inputArray);
       for (let i = 0; i < inputArray.length; i++) {
         try {
           const dataObj = inputArray[i];
