@@ -1,5 +1,4 @@
 import { buildCollapseContainer } from "../collapse.js";
-import { state } from "../state.js";
 
 //ARTICLE FORM ELEMENTS
 export const buildArticleForm = async () => {
@@ -23,7 +22,7 @@ export const buildArticleForm = async () => {
   const articleCollapseObj = {
     titleElement: titleElement,
     contentElement: articleWrapper,
-    isExpanded: state.isFirstLoad,
+    isExpanded: true,
     className: "article-wrapper-collapse",
     dataAttribute: "article-form-header",
   };

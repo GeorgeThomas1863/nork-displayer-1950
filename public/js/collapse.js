@@ -1,11 +1,6 @@
-
-
 export const buildCollapseContainer = async (inputObj) => {
   if (!inputObj || !inputObj.titleElement || !inputObj.contentElement) return null;
-  const { titleElement, contentElement, isExpanded = false, className = "", dataAttribute = "", isFirstLoad = false } = inputObj;
-
-  //if not the first load all NOT expanded
-  if (!isFirstLoad) isExpanded = false;
+  const { titleElement, contentElement, isExpanded = false, className = "", dataAttribute = "" } = inputObj;
 
   // Create container
   const collapseContainer = document.createElement("div");
