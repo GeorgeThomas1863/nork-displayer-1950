@@ -92,9 +92,9 @@ export const buildBackendDisplay = async (inputArray) => {
     // console.log(dataObj);
 
     // //HIDE FIRST COLLAPSE
-    // const prefix = dataType.substring(0, dataType.length - 1);
-    // const listArray = newDataElement.querySelectorAll(`.${prefix}-list-item`);
-    // listArray[0].classList.add("hidden");
+    const prefix = dataType.substring(0, dataType.length - 1);
+    const listArray = newDataElement.querySelectorAll(`.${prefix}-list-item`);
+    listArray[0].classList.add("hidden");
 
 
 
