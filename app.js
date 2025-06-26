@@ -2,7 +2,7 @@
 
 //****************
 
-//UNFUCK ARTICLE TYPE WHEN GETTING NEW DATA [ON STATE.JS]
+//ON CHECKNEWDATANEEDED IN STATE.JS
 
 //****************
 

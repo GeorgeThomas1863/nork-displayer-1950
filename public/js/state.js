@@ -118,6 +118,8 @@ export const checkNewDataNeeded = async () => {
   //return true on all sorts (just assume not loaded)
   if (trigger.includes("sort-by")) return true;
 
+  //REWRITE BELOW
+
   switch (trigger) {
     case "pic-type":
       const { pics, picSets } = dataLoaded;
