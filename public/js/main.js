@@ -39,7 +39,7 @@ export const buildDisplay = async () => {
   // console.log("!!!!BACKEND DATA PARSED");
   // console.log(backendDataParsed);
 
-  if (!backendDataParsed) return null;
+  // if (!backendDataParsed) return null;
   // console.log("!!!!BACKEND DATA PARSED");
   // console.log(backendDataParsed);
 
