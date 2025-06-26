@@ -17,6 +17,9 @@ export const state = {
 export const updateDataLoaded = async (inputArray) => {
   const { isFirstLoad, dataLoaded } = state;
 
+  console.log("UPDATE DATA INPUT ARRAY");
+  console.dir(inputArray);
+
   //if not first load only update one thing
   if (!isFirstLoad) {
     const updateItem = inputArray[0];

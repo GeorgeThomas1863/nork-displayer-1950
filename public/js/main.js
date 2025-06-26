@@ -51,8 +51,8 @@ export const buildDisplay = async () => {
   console.log("STATE");
   console.dir(state);
 
-  console.log("DISPLAY ELEMENT");
-  console.log(displayElement);
+  // console.log("DISPLAY ELEMENT");
+  // console.log(displayElement);
 
   return "#DONE";
 };
