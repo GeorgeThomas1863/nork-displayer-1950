@@ -101,8 +101,6 @@ export const getBackendDataNew = async (inputObj) => {
     dataArray: dataArrayValid,
   };
 
-  if (dataType === "articles") dataObj.articleType = articleType;
-
   //return as array to match default
   const dataArray = [dataObj];
 

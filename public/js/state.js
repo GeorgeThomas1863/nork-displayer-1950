@@ -30,7 +30,7 @@ export const updateDataLoaded = async (inputArray) => {
   const returnObj = {};
   for (let i = 0; i < inputArray.length; i++) {
     const inputItem = inputArray[i];
-    const { dataType, dataArray, articleType } = inputItem;
+    const { dataType, dataArray, dataReq } = inputItem;
 
     console.log("UPDATE DATA TYPE");
     console.log(dataType);
@@ -38,7 +38,7 @@ export const updateDataLoaded = async (inputArray) => {
     //add in article type here
     if (dataType === "articles") {
       console.log("AHHHHHHHHHH");
-      state.articleType = articleType;
+      state.articleType = dataReq.articleType;
     }
 
     const numberLoaded = dataArray.length;
