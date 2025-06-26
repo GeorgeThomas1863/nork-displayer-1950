@@ -6,7 +6,7 @@
 
 //****************
 
-//FIX PIC / VID CSS SHIT (esp article pic display)
+//FIX PIC / VID CSS SHIT (esp article pic display) [wrongly wrapped in pic container]
 
 //UNFUCK PROBLEM WITH SCRAPE CLEAN FUNCTION
 
