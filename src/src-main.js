@@ -68,8 +68,8 @@ export const getBackendDataNew = async (inputObj) => {
   const { dataType, dataReq, dataLoaded } = inputObj;
   const { articleType } = dataReq;
 
-  console.log("GET BACKEND DATA NEW");
-  console.dir(inputObj);
+  // console.log("GET BACKEND DATA NEW");
+  // console.dir(inputObj);
 
   const params = await getParamsMap(dataType);
   const { collection } = params;
@@ -97,6 +97,9 @@ export const getBackendDataNew = async (inputObj) => {
 
   const dataArrayRaw = await dataModel[methodName]();
   const dataArrayValid = await removeInvalidItems(dataArrayRaw, dataType, howManyInput);
+
+  console.log(dataType);
+  console.log(dataArrayValid.length);
 
   const dataObj = {
     dataType: dataType,
