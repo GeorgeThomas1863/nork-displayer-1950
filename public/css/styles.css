@@ -781,19 +781,19 @@ h3 {
 /* ------------------------------ */
 
 /* VID PAGE STYLES */
-#vid-page-array-element {
+#vid-array-element {
   width: 100%;
 }
 
-.vid-page-list-item {
+.vid-list-item {
   margin-bottom: 1.5rem;
 }
 
-.vid-page-list-item:last-child {
+.vid-list-item:last-child {
   margin-bottom: 0;
 }
 
-#vid-page-title {
+#vid-title {
   font-size: 1.7rem;
   font-weight: 700;
   color: #2c3e50;
@@ -801,12 +801,12 @@ h3 {
   letter-spacing: -0.02em;
 }
 
-#vid-page-title span {
+#vid-title span {
   font-size: 1.5rem;
   vertical-align: middle;
 }
 
-#vid-page-date {
+#vid-date {
   margin: 1rem 0;
   padding: 0.5rem 0;
   padding-left: 1rem;
@@ -822,7 +822,7 @@ h3 {
 /* ------------------------------ */
 
 /* VID STYLES */
-#vid-array-element {
+#vid-container-element {
   /* display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem; */
