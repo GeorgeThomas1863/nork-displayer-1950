@@ -13,6 +13,8 @@ export const state = {
   trigger: null,
 };
 
+//FUCKED, FIGURE OUT BELOW
+
 //MAKE MUCH MORE COMPLEX
 export const updateDataLoaded = async (inputArray) => {
   const { isFirstLoad, dataLoaded, dataType } = state;
