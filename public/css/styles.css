@@ -1397,5 +1397,5 @@ h3 {
 
 .collapse-container {
   border-radius: 8px;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
