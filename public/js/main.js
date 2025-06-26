@@ -22,27 +22,13 @@ export const buildDisplay = async () => {
 
   //check if new data is needed [will pass on first load]
   const newDataNeeded = await checkNewDataNeeded();
-  // console.log("NEW DATA NEEDED");
-  // console.log(newDataNeeded);
-
   if (!newDataNeeded) return null;
 
   //get / parse backend data (returns array of objects)
   const backendData = await sendToBack(state);
   if (!backendData) return null;
 
-  // console.log("!!!!BACKEND DATA!!!");
-  // console.log(backendData);
-
   const backendDataParsed = await buildBackendDisplay(backendData);
-
-  // console.log("!!!!BACKEND DATA PARSED");
-  // console.log(backendDataParsed);
-
-  // if (!backendDataParsed) return null;
-  // console.log("!!!!BACKEND DATA PARSED");
-  // console.log(backendDataParsed);
-
   displayElement.append(backendDataParsed);
 
   //UPDATE THE STATE HERE
