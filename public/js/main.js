@@ -88,13 +88,20 @@ export const buildBackendDisplay = async (inputArray) => {
       return backendDataWrapper;
     }
 
-    console.log("DATA OBJ");
-    console.log(dataObj);
+    // console.log("DATA OBJ");
+    // console.log(dataObj);
 
-    // console.log("NEW DATA ELEMENT");
-    // console.log(newDataElement);
+    // //HIDE FIRST COLLAPSE
+    // const prefix = dataType.substring(0, dataType.length - 1);
+    // const listArray = newDataElement.querySelectorAll(`.${prefix}-list-item`);
+    // listArray[0].classList.add("hidden");
 
-    // const listArray = newDataElement.querySelectorAll(".article-list-item");
+
+
+    console.log("NEW DATA ELEMENT");
+    console.log(newDataElement);
+
+    // 
     // const elementsNotHidden = listItems.querySelectorAll(":not(.hidden)");
 
     // console.log("LIST ITEMS");
