@@ -67,7 +67,7 @@ export const buildBackendDisplay = async (inputArray) => {
         }
         backendDataWrapper.append(defaultDataElement);
       }
-      break;
+      return backendDataWrapper;
 
     case false:
       const dataObj = inputArray[0];
@@ -76,14 +76,14 @@ export const buildBackendDisplay = async (inputArray) => {
       //get replace shit first
       const replaceId = d.replaceTypeMap[dataType];
       const replaceElement = document.getElementById(replaceId);
-      const backendDataWrapper = document.getElementById("backend-data-wrapper");
+      const backendDataWrapperReplace = document.getElementById("backend-data-wrapper");
 
       //format data
       const func = d.displayFunctionMap[dataType];
       const newDataElement = await func(dataArray);
       if (!newDataElement) {
-        backendDataWrapper.replaceChild(failElement, replaceElement);
-        return backendDataWrapper;
+        backendDataWrapperReplace.replaceChild(failElement, replaceElement);
+        return backendDataWrapperReplace;
       }
 
       //HIDE FIRST COLLAPSE
@@ -91,11 +91,9 @@ export const buildBackendDisplay = async (inputArray) => {
       const listArray = newDataElement.querySelectorAll(`.${prefix}-list-item`);
       listArray[0].classList.add("hidden");
 
-      backendDataWrapper.replaceChild(newDataElement, replaceElement);
-      break;
+      backendDataWrapperReplace.replaceChild(newDataElement, replaceElement);
+      return backendDataWrapperReplace;
   }
-
-  return backendDataWrapper;
 };
 
 //better version of expand backend data equation
