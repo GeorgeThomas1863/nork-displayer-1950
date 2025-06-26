@@ -572,15 +572,8 @@ h3 {
   width: 100%;
 }
 
-/* .article-list-item {
+.article-list-item {
   margin-bottom: 1.5rem;
-  border-radius: 8px;
-  background-color: transparent;
-} */
-
-#article-list-item {
-  margin-bottom: 1.5rem;
-  border-radius: 8px;
 }
 
 /* .article-list-item:last-child {
@@ -882,6 +875,7 @@ h3 {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
   position: relative;
   overflow: hidden;
+  border-radius: 8px 8px 0 0;
 }
 
 .collapse-title {
@@ -947,6 +941,7 @@ h3 {
   background-color: #ffffff;
   position: relative;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border-radius: 0 0 8px 8px;
 }
 
 .collapse-content.hidden {
