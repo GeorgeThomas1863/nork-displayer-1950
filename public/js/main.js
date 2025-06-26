@@ -88,10 +88,13 @@ export const buildBackendDisplay = async (inputArray) => {
       return backendDataWrapper;
     }
 
+    console.log("DATA OBJ");
+    console.log(dataObj);
+
     // console.log("NEW DATA ELEMENT");
     // console.log(newDataElement);
 
-    const listItems = newDataElement.querySelectorAll(".article-list-item");
+    // const listArray = newDataElement.querySelectorAll(".article-list-item");
     // const elementsNotHidden = listItems.querySelectorAll(":not(.hidden)");
 
     console.log("LIST ITEMS");
