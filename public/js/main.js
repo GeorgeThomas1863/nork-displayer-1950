@@ -62,13 +62,13 @@ export const buildBackendDisplay = async (inputArray) => {
       const dataObj = inputArray[i];
       const { dataType, dataArray } = dataObj;
       const func = d.displayFunctionMap[dataType];
-      const dataElement = await func(dataArray);
-      if (!dataElement) continue;
+      const defaultDataElement = await func(dataArray);
+      if (!defaultDataElement) continue;
       //hide everything except pics on default
-      if (dataElement.id !== "article-array-element") {
-        dataElement.classList.add("hidden");
+      if (defaultDataElement.id !== "article-array-element") {
+        defaultDataElement.classList.add("hidden");
       }
-      backendDataWrapper.append(dataElement);
+      backendDataWrapper.append(defaultDataElement);
     }
   } else {
     const dataObj = inputArray[0];
@@ -82,14 +82,14 @@ export const buildBackendDisplay = async (inputArray) => {
 
     //format data
     const func = d.displayFunctionMap[dataType];
-    const dataElement = await func(dataArray);
-    if (!dataElement) {
+    const newDataElement = await func(dataArray);
+    if (!newDataElement) {
       backendDataWrapper.replaceChild(failElement, replaceElement);
       return backendDataWrapper;
     }
 
-    console.log("DATA ELEMENT");
-    console.log(dataElement);
+    console.log("NEW DATA ELEMENT");
+    console.log(newDataElement);
 
     // console.log("REPLACE ELEMENT");
     // console.log(replaceElement);
@@ -97,7 +97,7 @@ export const buildBackendDisplay = async (inputArray) => {
     // console.log("BACKEND DATA WRAPPER BEFORE ");
     // console.log(backendDataWrapper);
 
-    backendDataWrapper.replaceChild(dataElement, replaceElement);
+    backendDataWrapper.replaceChild(newDataElement, replaceElement);
   }
 
   // if (!backendDataWrapper) return failElement;
