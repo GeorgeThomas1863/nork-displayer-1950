@@ -91,6 +91,9 @@ export const buildBackendDisplay = async (inputArray) => {
     console.log("NEW DATA ELEMENT");
     console.log(newDataElement);
 
+    //     const container = document.getElementById('my-container');
+    // const elementsWithoutClass = container.querySelectorAll(':not(.my-class)');
+
     // console.log("REPLACE ELEMENT");
     // console.log(replaceElement);
 
