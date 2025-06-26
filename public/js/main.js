@@ -74,9 +74,6 @@ export const buildBackendDisplay = async (inputArray) => {
     const dataObj = inputArray[0];
     const { dataType, dataArray } = dataObj;
 
-    // console.log("NEW DATA OBJ");
-    // console.log(dataObj);
-
     //get replace shit first
     // const currentBackendDataWrapper = document.getElementById("backend-data-wrapper");
     const replaceId = d.replaceTypeMap[dataType];
@@ -86,10 +83,13 @@ export const buildBackendDisplay = async (inputArray) => {
     //format data
     const func = d.displayFunctionMap[dataType];
     const dataElement = await func(dataArray);
-    if (!dataElement) return failElement;
+    if (!dataElement) {
+      backendDataWrapper.replaceChild(failElement, replaceElement);
+      return backendDataWrapper;
+    }
 
-    // console.log("DATA ELEMENT");
-    // console.log(dataElement);
+    console.log("DATA ELEMENT");
+    console.log(dataElement);
 
     // console.log("REPLACE ELEMENT");
     // console.log(replaceElement);
@@ -98,18 +98,9 @@ export const buildBackendDisplay = async (inputArray) => {
     // console.log(backendDataWrapper);
 
     backendDataWrapper.replaceChild(dataElement, replaceElement);
-
-    // console.log("BACKEND DATA WRAPPER AFTER");
-    // console.log(backendDataWrapper);
-
-    //replace element
-
-    // return backendDataWrapper;
-
-    // return true;
   }
 
-  if (!backendDataWrapper) return failElement;
+  // if (!backendDataWrapper) return failElement;
 
   return backendDataWrapper;
 };

@@ -67,20 +67,6 @@ export const updateStateEventTriggered = async (changeId, eventTriggered) => {
 
 //MAKE MUCH MORE COMPLEX
 export const updateStateDataLoaded = async (inputArray) => {
-  // const { isFirstLoad, dataLoaded } = state;
-
-  //if not first load only update one thing
-  // if (!isFirstLoad) {
-  //   const updateItem = inputArray[0];s
-  //   const { dataType, dataArray } = updateItem;
-
-  //   dataLoaded[dataType] = dataArray.length;
-  //   return true;
-  // }
-
-  // console.log("INPUT ARRAY");
-  // console.dir(inputArray);
-
   //update data loop (will be 1 item if not first load)
   // const returnObj = {};
   for (let i = 0; i < inputArray.length; i++) {
