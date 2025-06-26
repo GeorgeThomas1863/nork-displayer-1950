@@ -26,6 +26,9 @@ export const updateDataLoaded = async (inputArray) => {
     return true;
   }
 
+  console.log("UPDATE DATA TYPE");
+  console.log(dataType);
+
   //add in article type here
   if (dataType === "articles") {
     console.log("AHHHHHHHHHH");
