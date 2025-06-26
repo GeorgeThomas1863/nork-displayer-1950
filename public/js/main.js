@@ -92,13 +92,13 @@ export const buildBackendDisplay = async (inputArray) => {
     // console.log(newDataElement);
 
     const listItems = newDataElement.querySelectorAll(".article-list-item");
-    const elementsNotHidden = listItems.querySelectorAll(":not(.hidden)");
+    // const elementsNotHidden = listItems.querySelectorAll(":not(.hidden)");
 
     console.log("LIST ITEMS");
     console.log(listItems);
 
-    console.log("ELEMENTS NOT HIDDEN");
-    console.log(elementsNotHidden);
+    // console.log("ELEMENTS NOT HIDDEN");
+    // console.log(elementsNotHidden);
 
     // console.log("REPLACE ELEMENT");
     // console.log(replaceElement);
