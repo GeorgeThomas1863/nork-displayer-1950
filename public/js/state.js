@@ -49,7 +49,7 @@ export const updateStateEventTriggered = async (changeId, eventTriggered) => {
 
 //MAKE MUCH MORE COMPLEX
 export const updateStateDataLoaded = async (inputArray) => {
-  const { isFirstLoad, dataLoaded } = state;
+  // const { isFirstLoad, dataLoaded } = state;
 
   //if not first load only update one thing
   // if (!isFirstLoad) {
@@ -70,8 +70,8 @@ export const updateStateDataLoaded = async (inputArray) => {
     returnObj[dataType] = numberLoaded;
   }
 
-  dataLoaded = returnObj;
-  isFirstLoad = false;
+  state.dataLoaded = returnObj;
+  state.isFirstLoad = false;
 
   console.log("DATA LOADED STATE");
   console.dir(state);
