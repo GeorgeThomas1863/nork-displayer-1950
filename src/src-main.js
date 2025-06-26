@@ -30,7 +30,7 @@ export const getBackendDataDefault = async () => {
     const { collection, howMany } = dataParams;
 
     // update how many (to account for fucked items)
-    const howManyBuffer = Math.ceil(+howMany * 1.2);
+    const howManyBuffer = Math.ceil(+howMany * 1.5);
     dataParams.howMany = howManyBuffer;
 
     const dataModel = new dbModel(dataParams, collection);
