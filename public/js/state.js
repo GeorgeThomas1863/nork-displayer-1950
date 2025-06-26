@@ -8,9 +8,9 @@ export const state = {
   articleType: "fatboy",
 
   //data already requested
-  dataReq: d.defaultInputMap,
-  dataLoaded: null,
   trigger: null,
+  dataReq: d.defaultInputMap,
+  dataLoaded: d.defaultDataLoadedMap,
 };
 
 //IN responsive / click listener

@@ -29,6 +29,12 @@ const d = {
     vidSortBy: "vid-newest-to-oldest",
   },
 
+  defaultDataLoadedMap: {
+    articles: 0,
+    pics: 0,
+    vids: 0,
+  },
+
   articleTriggerValues: ["article-type", "article-sort-by", "article-how-many"],
   picTriggerValues: ["pic-sort-by", "pic-how-many"],
   vidTriggerValues: ["vid-sort-by", "vid-how-many"],
