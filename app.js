@@ -2,11 +2,11 @@
 
 //****************
 
-//ONE SHORT ON NUMBER OF ITEMS RETURNING
-
-//ON CHECKHIDEUNHIDEDATA IN CHECK-DATA.JS
+//FIX: SHORT ON NUMBER OF ITEMS RETURNING [PROBLEM IS ON FRONTEND DISPLAY]
 
 //****************
+
+//ON CHECKHIDEUNHIDEDATA IN CHECK-DATA.JS
 
 //FIX PIC / VID CSS SHIT (esp article pic display) [wrongly wrapped in pic container]
 
