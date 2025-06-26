@@ -56,7 +56,7 @@ export const mainInputHandler = async (e) => {
   await updateStateEventTriggered(inputId, eventTriggered);
 
   console.log("INPUT TRIGGERED STATE");
-  console.log(state);
+  console.dir(state);
 
   await buildDisplay();
 };
