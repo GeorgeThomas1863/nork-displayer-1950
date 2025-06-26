@@ -69,11 +69,11 @@ export const updateStateDataLoaded = async (inputArray) => {
     console.log("UPDATE DATA TYPE");
     console.log(dataType);
 
-    //add in article type here
-    if (dataType === "articles") {
-      console.log("AHHHHHHHHHH");
-      state.articleType = dataReq.articleType;
-    }
+    // //add in article type here
+    // if (dataType === "articles") {
+    //   console.log("AHHHHHHHHHH");
+    //   state.articleType = dataReq.articleType;
+    // }
 
     const numberLoaded = dataArray.length;
     returnObj[dataType] = numberLoaded;
