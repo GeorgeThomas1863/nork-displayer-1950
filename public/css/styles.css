@@ -1394,3 +1394,8 @@ h3 {
     padding: 0.4rem 0;
   }
 }
+
+.collapse-container {
+  border-radius: 8px;
+  overflow: hidden;
+}
