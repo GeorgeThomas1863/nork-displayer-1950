@@ -26,20 +26,20 @@ export const updateDataLoaded = async (inputArray) => {
     return true;
   }
 
-  console.log("UPDATE DATA TYPE");
-  console.log(dataType);
-
-  //add in article type here
-  if (dataType === "articles") {
-    console.log("AHHHHHHHHHH");
-    state.articleType = articleType;
-  }
-
   //otherwise first load, update all types
   const returnObj = {};
   for (let i = 0; i < inputArray.length; i++) {
     const inputItem = inputArray[i];
     const { dataType, dataArray } = inputItem;
+
+    console.log("UPDATE DATA TYPE");
+    console.log(dataType);
+
+    //add in article type here
+    if (dataType === "articles") {
+      console.log("AHHHHHHHHHH");
+      state.articleType = articleType;
+    }
 
     const numberLoaded = dataArray.length;
     returnObj[dataType] = numberLoaded;
