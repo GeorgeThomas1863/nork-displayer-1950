@@ -60,8 +60,8 @@ export const updateStateDataLoaded = async (inputArray) => {
   //   return true;
   // }
 
-  console.log("INPUT ARRAY");
-  console.dir(inputArray);
+  // console.log("INPUT ARRAY");
+  // console.dir(inputArray);
 
   //update data loop (will be 1 item if not first load)
   const returnObj = {};
@@ -78,6 +78,9 @@ export const updateStateDataLoaded = async (inputArray) => {
 
   console.log("DATA LOADED STATE");
   console.dir(state);
+
+  console.log("RETURN OBJ");
+  console.dir(returnObj);
 
   return returnObj;
 };
