@@ -81,8 +81,10 @@ export const getBackendDataNew = async (inputObj) => {
   const howManyInput = dataReq[`${typeKey}HowMany`] || dataLoaded[dataType];
   const howManyBuffer = Math.ceil(+howManyInput * 1.2);
 
+  //update params based on input
   params.sortBy = sortByInput;
   params.howMany = howManyBuffer;
+  params.filterValue = articleType;
 
   //FIX ARTICLES HERE
 
