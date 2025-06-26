@@ -6,9 +6,9 @@ import dbModel from "../models/db-model.js";
 export const removeInvalidItems = async (inputArray, dataType, howMany) => {
   if (!inputArray || !inputArray.length || !dataType) return null;
 
-  // console.log("REMOVE INVALID ITEMS DATA TYPE");
-  // console.log(dataType);
-  // console.log(inputArray);
+  console.log("REMOVE INVALID ITEMS DATA TYPE");
+  console.log(dataType);
+  console.log(inputArray);
 
   const dataReturnArray = [];
   switch (dataType) {
