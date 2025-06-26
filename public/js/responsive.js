@@ -1,7 +1,8 @@
 import { buildDisplay, toggleDropdown, expandForm } from "./main.js";
 import { getNewAdminData } from "./admin.js";
 import { debounce } from "./util.js";
-import { checkChangeTriggered, checkInputTriggered, updateStateEventTriggered } from "./state.js";
+import { updateStateEventTriggered } from "./state.js";
+import { checkChangeTriggered, checkInputTriggered } from "./check-data.js";
 
 //MAIN / NORMAL RESPONSIVE
 

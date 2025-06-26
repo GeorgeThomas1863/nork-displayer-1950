@@ -2,7 +2,8 @@ import d from "./define-things.js";
 import { buildDropDown } from "./build-drop-down.js";
 import { buildInputForms } from "./build-forms.js";
 import { hideArray, unhideArray, sendToBack, buildFailElement } from "./util.js";
-import { state, updateStateDataLoaded, checkNewDataNeeded, checkHideUnhideData } from "./state.js";
+import { state, updateStateDataLoaded } from "./state.js";
+import { checkNewDataNeeded, checkHideUnhideData } from "./check-data.js";
 
 //get display element
 const displayElement = document.getElementById("display-element");
