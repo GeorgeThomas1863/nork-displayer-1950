@@ -31,7 +31,7 @@ export const buildVidListItem = async (inputObj, isFirst) => {
   const { title, date } = inputObj;
 
   const vidListItem = document.createElement("li");
-  vidListItem.className = "vid-list-item";
+  vidListItem.className = "vid-list-item wrapper";
 
   const vidContainerElement = await buildVidContainer(inputObj);
 

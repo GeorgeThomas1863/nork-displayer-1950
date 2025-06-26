@@ -31,7 +31,7 @@ export const buildPicListItem = async (inputObj, isFirst) => {
   const { title, date } = inputObj;
 
   const picListItem = document.createElement("li");
-  picListItem.className = "pic-list-item";
+  picListItem.className = "pic-list-item wrapper";
 
   //builds a pic container for pic array
   const picContainerElement = await buildPicContainer(inputObj);
