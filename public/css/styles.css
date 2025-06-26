@@ -984,7 +984,7 @@ h3 {
 
 .article-element-collapse .collapse-header,
 .pic-element-collapse .collapse-header,
-.vid-page-element-collapse .collapse-header {
+.vid-element-collapse .collapse-header {
   justify-content: left;
 }
 
