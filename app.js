@@ -2,7 +2,7 @@
 
 //****************
 
-//ON PIC COLLAPSE CONTAINER in pic-return.js UNFUCK THE CSS
+//UNFUCK ARTICLE TYPE WHEN GETTING NEW DATA [ON STATE.JS]
 
 //****************
 
