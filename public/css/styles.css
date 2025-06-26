@@ -572,10 +572,15 @@ h3 {
   width: 100%;
 }
 
-.article-list-item {
+/* .article-list-item {
   margin-bottom: 1.5rem;
-  /* border-radius: 8px;
-  background-color: transparent; */
+  border-radius: 8px;
+  background-color: transparent;
+} */
+
+#article-list-item {
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
 }
 
 /* .article-list-item:last-child {
@@ -1393,9 +1398,4 @@ h3 {
     font-size: 0.8rem;
     padding: 0.4rem 0;
   }
-}
-
-.collapse-container {
-  border-radius: 8px;
-  /* overflow: hidden; */
 }

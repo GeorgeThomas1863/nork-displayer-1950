@@ -34,6 +34,7 @@ export const buildArticleListItem = async (inputObj, isFirst) => {
 
   const articleListItem = document.createElement("li");
   articleListItem.className = "article-list-item";
+  articleListItem.id = "article-list-item";
 
   // Create the article element (now includes pictures inside)
   const articleElement = await buildArticleElement(inputObj);
