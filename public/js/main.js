@@ -33,6 +33,8 @@ export const buildDisplay = async () => {
   const backendData = await sendToBack(state);
   if (!backendData) return null;
 
+  console.log("!!!BACKEND DATA", backendData); 
+
   const backendDataParsed = await buildBackendDisplay(backendData);
   displayElement.append(backendDataParsed);
 
