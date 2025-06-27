@@ -952,7 +952,7 @@ h3 {
 
 /* makes collapse headers smaller for article pics */
 .article-pic-collapse .collapse-header,
-.container-pic-collapse .collapse-header {
+.pic-collapse .collapse-header {
   margin: 0 auto;
   margin-top: -1.5rem;
   margin-bottom: 1rem;
@@ -970,7 +970,7 @@ h3 {
 } */
 
 .article-pic-collapse .collapse-title,
-.container-pic-collapse .collapse-title {
+.pic-collapse .collapse-title {
   font-size: 1.5rem;
   max-width: calc(100% - 1rem);
 }
