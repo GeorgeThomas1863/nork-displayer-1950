@@ -467,6 +467,7 @@ h3 {
 
 #article-element {
   background-color: #ffffff;
+  padding: 0.5rem;
   /* padding: 1.5rem 2rem; */
   overflow: hidden;
   position: relative;
