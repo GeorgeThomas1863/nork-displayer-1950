@@ -457,12 +457,19 @@ h3 {
   /* display: flex;
   flex-direction: row;
   gap: 1rem; */
-  width: 80%;
+  width: 90%;
   /* align-items: flex-start; */
 }
 
 .article-list-item {
   margin-bottom: 2rem;
+}
+
+#article-element {
+  background-color: #ffffff;
+  /* padding: 1.5rem 2rem; */
+  overflow: hidden;
+  position: relative;
 }
 
 .pic-list-item {
