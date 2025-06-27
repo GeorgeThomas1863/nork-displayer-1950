@@ -2,11 +2,10 @@
 
 //****************
 
-//FIX: SHORT ON NUMBER OF ITEMS RETURNING [PROBLEM IS ON FRONTEND DISPLAY]
+//ON checkHideUnhideData IN CHECK-DATA.JS [last thing before css]
 
 //****************
 
-//ON CHECKHIDEUNHIDEDATA IN CHECK-DATA.JS
 
 //FIX PIC / VID CSS SHIT (esp article pic display) [wrongly wrapped in pic container]
 
