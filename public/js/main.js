@@ -93,7 +93,8 @@ export const buildBackendDisplay = async (inputArray) => {
       //HIDE FIRST COLLAPSE
       const prefix = dataType.substring(0, dataType.length - 1);
       const listArray = newDataElement.querySelectorAll(`.${prefix}-list-item`);
-      listArray[0].classList.add("hidden");
+      const content = listArray[0].querySelector(".collapse-content");
+      content.classList.add("hidden");
 
       backendDataWrapperReplace.replaceChild(newDataElement, replaceElement);
       return backendDataWrapperReplace;
