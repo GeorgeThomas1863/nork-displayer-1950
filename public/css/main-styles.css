@@ -1,0 +1,191 @@
+/* '''''''''''''''''''''''''''''''''''''''' */
+
+/* MAIN DEFAULT STYLES (styles.css) */
+
+/* '''''''''''''''''''''''''''''''''''''''' */
+
+body {
+  font-family: "Roboto Condensed", sans-serif;
+  margin: 0;
+  padding: 0;
+  /* box-sizing: border-box; */
+}
+
+#background-pic {
+  top: 0;
+  left: 0;
+  position: fixed;
+  object-fit: cover;
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+  opacity: 0.5;
+  transform: scale(1.2);
+  transform-origin: left;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+  display: block;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+button {
+  background: rgb(200, 200, 200);
+  color: inherit;
+  border: none;
+  padding: 0.5rem 2rem;
+  font: inherit;
+  font-size: 2rem;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+/* for error pages */
+h3 {
+  margin-top: 3rem;
+  padding: 0;
+  text-align: center;
+  font-size: 3rem;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+/* '''''''''''''''''''''''''''''''''''''''' */
+
+/* FORM STYLES (form-styles.css) */
+
+/* '''''''''''''''''''''''''''''''''''''''' */
+
+/* Form wrapper flexbox styling */
+#form-wrapper {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  gap: 5rem;
+  width: 80%;
+  align-items: flex-start;
+}
+
+/* Make each form take equal width */
+#form-wrapper > * {
+  flex: 1;
+  min-width: 0; /* Allows flex items to shrink below their content size */
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+  padding: 0;
+  background-color: transparent;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: none;
+}
+
+.wrapper:hover {
+  /* transform: translateY(-5px); */
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+}
+
+/* Style the collapse header within wrapper */
+.wrapper .collapse-header {
+  border-radius: 12px 12px 0 0;
+  margin-bottom: 0;
+}
+
+/* Style the collapse content (the form) within wrapper */
+.wrapper .collapse-content {
+  padding: 1.5rem;
+  background-color: rgb(235, 235, 235);
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  margin: 0;
+}
+
+.wrapper li {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+  list-style: none;
+}
+
+.wrapper li:last-child {
+  margin-bottom: 0;
+}
+
+.wrapper label {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #444;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.9rem;
+}
+
+.wrapper input {
+  width: 100%;
+  font-size: 1rem;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-family: inherit;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+  background-color: white;
+}
+
+.wrapper input:focus {
+  border-color: #666;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+  outline: none;
+}
+
+.wrapper input::placeholder {
+  color: #aaa;
+  font-style: italic;
+}
+
+.wrapper select {
+  width: 100%;
+  font-size: 1rem;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-family: inherit;
+  appearance: none;
+  background: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E")
+    no-repeat right 0.75rem center;
+  background-size: 0.8em;
+  background-color: white;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.wrapper select:focus {
+  border-color: #666;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+  outline: none;
+}
