@@ -227,7 +227,7 @@ h3 {
 }
 
 #drop-down:hover {
-  transform: scale(1.5);
+  transform: scale(1.1);
 }
 
 /* Don't scale when action buttons are visible */
