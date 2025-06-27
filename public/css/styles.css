@@ -453,8 +453,8 @@ h3 {
 /* '''''''''''''''''''''''''''''''''''''''' */
 
 #backend-data-wrapper {
-  /* margin: 0 auto;
-  display: flex;
+  margin: 0 auto;
+  /* display: flex;
   flex-direction: row;
   gap: 1rem; */
   width: 90%;
