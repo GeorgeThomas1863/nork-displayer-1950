@@ -460,3 +460,15 @@ h3 {
   width: 90%;
   /* align-items: flex-start; */
 }
+
+.article-list-item {
+  margin-bottom: 1.5rem;
+}
+
+.pic-list-item {
+  margin-bottom: 1.5rem;
+}
+
+.vid-list-item {
+  margin-bottom: 1.5rem;
+}
