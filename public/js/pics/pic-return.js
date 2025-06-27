@@ -62,7 +62,8 @@ export const buildPicContainer = async (inputObj) => {
   picContainerElement.id = "pic-container-element";
 
   //Add pics as collapse
-  const picContainerData = await picDropDownContainer(picArray, "container");
+  // const picContainerData = await picDropDownContainer(picArray, "container");
+  const picContainerData = await picDropDownContainer(picArray, "");
   if (picContainerData) {
     picContainerElement.append(picContainerData);
   }
