@@ -80,7 +80,7 @@ h3 {
   justify-content: center;
   align-items: center;
   padding: 16px 20px;
-  background-color: rgb(215, 215, 215);
+  background-color: rgb(200, 200, 200);
   cursor: pointer;
   user-select: none;
   transition: all 0.2s ease;
