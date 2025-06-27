@@ -61,15 +61,18 @@ export const buildPicContainer = async (inputObj) => {
   const picContainerElement = document.createElement("article");
   picContainerElement.id = "pic-container-element";
 
+  const picWrapper = await buildPicWrapper(picArray, true);
+
   //Add pics as collapse
-  const picContainerData = await picDropDownContainer(picArray, "total");
-  if (picContainerData) {
-    picContainerElement.append(picContainerData);
-  }
+  // const picContainerData = await picDropDownContainer(picArray, "total");
+  // if (picContainerData) {
+  //   picContainerElement.append(picContainerData);
+  // }
 
   //append pic set date
   const dateElement = await buildPicContainerDate(date);
-  picContainerElement.append(dateElement);
+
+  picContainerElement.append(picWrapper, dateElement);
 
   return picContainerElement;
 };
@@ -205,6 +208,8 @@ export const buildPicElementServer = async (headerData) => {
 
   return picServerElement;
 };
+
+//-------------------------------------
 
 export const picDropDownContainer = async (inputArray, type) => {
   if (!inputArray || !inputArray.length) return null;
