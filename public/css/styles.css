@@ -52,7 +52,7 @@ button {
   font-size: 2rem;
   font-weight: bold;
   cursor: pointer;
-  border-radius: 8px;
+  /* border-radius: 8px; */
 }
 
 /* for error pages */
