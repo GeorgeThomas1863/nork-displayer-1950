@@ -102,12 +102,12 @@
 
   #form-wrapper > * {
     flex: 0 0 auto;
-    width: 50%;
+    width: 40%;
     margin: 0 auto;
   }
 
   .collapse-title {
-    font-size: 1.7rem;
+    font-size: 1.5rem;
   }
 
   .article-pic-collapse .collapse-header {
@@ -147,7 +147,7 @@
   }
 
   #article-text {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     line-height: 1.1;
     letter-spacing: -0.02em;
   }
