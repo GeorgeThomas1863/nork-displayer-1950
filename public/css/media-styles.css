@@ -111,9 +111,14 @@
   }
 
   .article-pic-collapse .collapse-arrow {
-    width: 14px;
-    height: 14px;
-    margin-right: 7px;
+    width: 21px;
+    height: 21px;
+    margin-right: 10px;
+  }
+
+  .article-pic-collapse .collapse-arrow::before {
+    width: 6px;
+    height: 6px;
   }
 
   #pic-wrapper-element {
