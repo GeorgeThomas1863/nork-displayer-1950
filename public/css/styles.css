@@ -554,7 +554,7 @@ h3 {
   grid-template-columns: repeat(3, 1fr);
   gap: 0 1rem;
   margin: 0 auto;
-  margin-bottom: -1rem;
+  /* margin-bottom: -1rem; */
   padding: 1rem;
   list-style: none;
   width: 100%;
