@@ -61,9 +61,6 @@ export const checkNewDataNeeded = async () => {
 export const checkHideUnhideData = async () => {
   const { dataType, dataLoaded, dataReq } = state;
 
-  // console.log("AHHHHHHHHHHHHHH");
-  // console.log("!!!STATE", state);
-
   const itemsLoaded = dataLoaded[dataType];
   const prefix = dataType.substring(0, dataType.length - 1);
   const itemsNeeded = dataReq[`${prefix}HowMany`];
@@ -73,22 +70,13 @@ export const checkHideUnhideData = async () => {
   //get things to hide / unhide
   const listItemArray = Array.from(document.querySelectorAll(`.${prefix}-list-item`));
 
-  console.log("!!!LIST ITEM ARRAY");
-  console.log(listItemArray.length);
-
   //unhide entire array
   await unhideArray(listItemArray);
 
   //negative so last ones are hidden
   const itemsToHideArray = listItemArray.slice(-itemsToHide);
 
-  console.log("!!!ITEMS TO HIDE ARRAY");
-  console.log(itemsToHideArray);
-
   await hideArray(itemsToHideArray);
 
   return true;
-
-  // console.log("!!!LIST ITEM ARRAY");
-  // console.log(listItemArray);
 };

@@ -2,9 +2,9 @@
 
 //****************
 
-//ON MEDIA STYLES [do QUICKLY]
+//FIX BACKEND DATA FUCKED DISPLAY
 
-//FOR HOW MANY: checkHideUnhideData IN CHECK-DATA.JS [last thing before css]
+//FIX WHEN INPUT TOO MANY
 
 //PIC STATS STILL FUCKED
 

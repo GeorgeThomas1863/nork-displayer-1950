@@ -215,3 +215,12 @@ export const getLatestVid = async (inputArray) => {
 
   return null;
 };
+
+//--------------------
+
+//NOT DOING ANY LOOKUPS, just remove blank shit
+export const fixDataByType = async (inputArray, dataType) => {
+  console.log("FIX DATA BY TYPE");
+  console.log(dataType);
+  console.log(inputArray);
+};
