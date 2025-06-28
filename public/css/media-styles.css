@@ -104,11 +104,15 @@
 
   .article-pic-collapse .collapse-header {
     padding: 0.5rem 1rem;
-    max-width: calc(100% - 10rem);
   }
 
   .article-pic-collapse .collapse-title {
     font-size: 1rem;
+  }
+
+  .article-pic-collapse .collapse-arrow {
+    width: 6px;
+    height: 6px;
   }
 
   #pic-wrapper-element {
