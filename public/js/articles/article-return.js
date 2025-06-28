@@ -36,17 +36,17 @@ export const buildArticleListItem = async (inputObj, isFirst) => {
   articleListItem.className = "article-list-item wrapper";
 
   // Create the article element (now includes pictures inside)
-  const articleElement = await buildArticleElement(inputObj);
+  const articleContainer = await buildArticleContainer(inputObj);
 
   //build title element
-  const dateElement = await buildDate(date);
-  const titleElement = await buildTitle(title);
+  const dateElement = await buildArticleDate(date);
+  const titleElement = await buildArticleTitle(title);
   titleElement.innerHTML = `${titleElement.textContent} <span>[${dateElement.textContent}]</span>`;
 
   // Wrap the article content in a collapsible
   const articleCollapseObj = {
     titleElement: titleElement,
-    contentElement: articleElement,
+    contentElement: articleContainer,
     isExpanded: isFirst,
     className: "article-element-collapse",
   };
@@ -57,28 +57,41 @@ export const buildArticleListItem = async (inputObj, isFirst) => {
   return articleListItem;
 };
 
+//holds article and pics (if present)
+export const buildArticleContainer = async (inputObj) => {
+  const { picArray } = inputObj;
+
+  const articleContainer = document.createElement("div");
+  articleContainer.id = "article-container";
+
+  //Add pics as collapse (if present)
+  const articlePicData = await picDropDownContainer(picArray, "article");
+  if (articlePicData) {
+    articleContainer.append(articlePicData);
+  }
+
+  const articleElement = await buildArticleElement(inputObj);
+  articleContainer.append(articleElement);
+
+  return articleContainer;
+};
+
 export const buildArticleElement = async (inputObj) => {
-  const { date, text, picArray } = inputObj;
+  const { date, text } = inputObj;
 
   const articleElement = document.createElement("article");
   articleElement.id = "article-element";
 
-  //Add pics as collapse
-  const articlePicData = await picDropDownContainer(picArray, "article");
-  if (articlePicData) {
-    articleElement.append(articlePicData);
-  }
-
   // Then append date and text after pictures (title is handled by collapse header)
-  const dateElement = await buildDate(date);
-  const textElement = await buildText(text);
+  const dateElement = await buildArticleDate(date);
+  const textElement = await buildArticleText(text);
 
   articleElement.append(dateElement, textElement);
 
   return articleElement;
 };
 
-export const buildTitle = async (title) => {
+export const buildArticleTitle = async (title) => {
   const titleElement = document.createElement("h2");
   titleElement.id = "article-title";
   titleElement.textContent = title;
@@ -86,7 +99,7 @@ export const buildTitle = async (title) => {
   return titleElement;
 };
 
-export const buildDate = async (date) => {
+export const buildArticleDate = async (date) => {
   // Format and append date
   const dateElement = document.createElement("div");
   dateElement.id = "article-date";
@@ -100,7 +113,7 @@ export const buildDate = async (date) => {
   return dateElement;
 };
 
-export const buildText = async (text) => {
+export const buildArticleText = async (text) => {
   if (!text) return null;
 
   const textElement = document.createElement("div");
