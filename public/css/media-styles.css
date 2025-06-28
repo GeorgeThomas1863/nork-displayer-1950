@@ -97,17 +97,17 @@
     margin-bottom: 2rem;
     flex-direction: column;
     gap: 1rem;
-    width: 95%;
+    width: 100%;
   }
 
   #form-wrapper > * {
     flex: 0 0 auto;
-    width: 65%;
+    width: 50%;
     margin: 0 auto;
   }
 
   .collapse-title {
-    font-size: 2rem;
+    font-size: 1.7rem;
   }
 
   .article-pic-collapse .collapse-header {
