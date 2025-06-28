@@ -71,11 +71,11 @@ export const checkHideUnhideData = async () => {
   if (!itemsNeeded || !itemsLoaded || itemsNeeded === itemsLoaded) return null;
   const itemsToHide = itemsLoaded - itemsNeeded;
 
-  console.log("!!!ITEMS TO HIDE");
-  console.log(itemsToHide);
-
   //get things to hide / unhide
   const listItemArray = document.querySelectorAll(`.${prefix}-list-item`);
+
+  console.log("!!!LIST ITEM ARRAY");
+  console.log(listItemArray);
 
   //unhide entire array
   await unhideArray(listItemArray);
