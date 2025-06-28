@@ -104,6 +104,7 @@
 
   #pic-wrapper-element {
     grid-template-columns: 1fr;
+    gap: 0.5rem;
   }
 
   #article-title {
