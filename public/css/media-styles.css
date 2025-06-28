@@ -97,4 +97,12 @@
   .collapse-title {
     font-size: 1.2rem;
   }
+
+  #pic-wrapper-element {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+    /* width: 90%;
+    margin: 0 auto; */
+  }
+
 }
