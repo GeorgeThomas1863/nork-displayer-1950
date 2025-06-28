@@ -98,6 +98,10 @@
     margin: 0 auto;
   }
 
+  .collapse-header {
+    padding: 15rem 1rem;
+  }
+
   .collapse-title {
     font-size: 1.2rem;
   }
@@ -113,10 +117,6 @@
 
   #article-title span {
     font-size: 1rem;
-  }
-
-  button {
-    padding: 5rem 25rem;
   }
 
   /* Empty container */
