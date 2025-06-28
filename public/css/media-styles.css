@@ -64,6 +64,14 @@
     font-size: 1.5rem;
   }
 
+  #pic-container-title {
+    font-size: 1.5rem;
+  }
+
+  #vid-title {
+    font-size: 1.5rem;
+  }
+
   #drop-down-bars {
     width: 2.2rem; /* Reduced from 2.5rem */
     height: 2.2rem;
@@ -131,6 +139,22 @@
   }
 
   #article-title span {
+    font-size: 1rem;
+  }
+
+  #pic-container-title {
+    font-size: 1.2rem;
+  }
+
+  #pic-container-title span {
+    font-size: 1rem;
+  }
+
+  #vid-title {
+    font-size: 1.2rem;
+  }
+
+  #vid-title span {
     font-size: 1rem;
   }
 
