@@ -65,7 +65,7 @@
     margin: 0 auto;
   }
 
-  #drop-down:has(#action-button-element:not(.hidden)) {
+  #action-button-element {
     flex-direction: column;
   }
 
@@ -213,7 +213,7 @@
     margin: 0 auto;
   }
 
-  #drop-down:has(#action-button-element:not(.hidden)) {
+  #action-button-element {
     flex-direction: column;
   }
 
