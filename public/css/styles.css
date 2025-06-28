@@ -465,12 +465,12 @@ h3 {
   margin-bottom: 2rem;
 }
 
-#article-element {
+#article-container-element {
   background-color: #ffffff;
-  padding: 0.5rem;
+  padding: 0 0.5rem;
   /* padding: 1.5rem 2rem; */
-  overflow: hidden;
-  position: relative;
+  /* overflow: hidden;
+  position: relative; */
 }
 
 .pic-list-item {
