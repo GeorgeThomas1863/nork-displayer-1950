@@ -92,7 +92,7 @@ export const buildPicContainerDate = async (date) => {
   return dateElement;
 };
 
-export const buildPicWrapper = async (inputArray, fullStats = true) => {
+export const buildPicWrapper = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
 
   const picWrapperElement = document.createElement("li");
@@ -100,7 +100,7 @@ export const buildPicWrapper = async (inputArray, fullStats = true) => {
 
   //build pic / stat elements
   for (let i = 0; i < inputArray.length; i++) {
-    const picWrapperItem = await buildPicWrapperItem(inputArray[i], fullStats);
+    const picWrapperItem = await buildPicWrapperItem(inputArray[i]);
     if (!picWrapperItem) continue;
 
     picWrapperElement.append(picWrapperItem);
@@ -109,7 +109,7 @@ export const buildPicWrapper = async (inputArray, fullStats = true) => {
   return picWrapperElement;
 };
 
-export const buildPicWrapperItem = async (inputObj, fullStats = true) => {
+export const buildPicWrapperItem = async (inputObj) => {
   if (!inputObj || !inputObj.savePath) return null;
   const { savePath } = inputObj;
 
@@ -117,7 +117,7 @@ export const buildPicWrapperItem = async (inputObj, fullStats = true) => {
   picWrapperItem.id = "pic-wrapper-item";
 
   const picElement = await buildPicElement(savePath);
-  const picStatsElement = await buildPicElementStats(inputObj, fullStats);
+  const picStatsElement = await buildPicElementStats(inputObj);
 
   picWrapperItem.append(picElement, picStatsElement);
 
@@ -142,25 +142,16 @@ export const buildPicElement = async (savePath) => {
 };
 
 //build pic stats
-export const buildPicElementStats = async (inputObj, fullStats = true) => {
+export const buildPicElementStats = async (inputObj) => {
   if (!inputObj) return null;
   const { date, headerData } = inputObj;
-
-  // console.log("PIC ELEMENT STATS");
-  // console.log(inputObj);
 
   const picStatsElement = document.createElement("div");
   picStatsElement.id = "pic-element-stats";
 
-  //only include source on full stats
-  if (fullStats) {
-    const picDateElement = await buildPicElementDate(date);
-    // const picSourceElement = await buildPicElementSource(picSource);
-    picStatsElement.append(picDateElement);
-  }
-
+  const picDateElement = await buildPicElementDate(date);
   const picServerElement = await buildPicElementServer(headerData);
-  picStatsElement.append(picServerElement);
+  picStatsElement.append(picDateElement, picServerElement);
 
   return picStatsElement;
 };
@@ -182,17 +173,6 @@ export const buildPicElementDate = async (date) => {
 
   return dateElement;
 };
-
-//calc where pic from (do on backend)
-// export const buildPicElementSource = async (picSource) => {
-//   if (!picSource) return null;
-
-//   const picSourceElement = document.createElement("div");
-//   picSourceElement.id = "pic-element-source";
-//   picSourceElement.innerHTML = `<b>Pic From:</b> ${picSource}`;
-
-//   return picSourceElement;
-// };
 
 //EXTRACT PIC SERVER DATA
 export const buildPicElementServer = async (headerData) => {
