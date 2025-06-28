@@ -522,6 +522,11 @@ h3 {
   letter-spacing: -0.02em;
 }
 
+#pic-container-element {
+  background-color: #ffffff;
+  padding: 0;
+}
+
 #pic-container-title span {
   font-size: 1.2rem;
   font-weight: 500;
