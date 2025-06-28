@@ -613,6 +613,11 @@ h3 {
   margin-bottom: 2rem;
 }
 
+#vid-container-element {
+  background-color: #ffffff;
+  padding: 0;
+}
+
 #vid-title {
   font-size: 1.7rem;
   font-weight: 700;
