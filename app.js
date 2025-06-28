@@ -2,7 +2,11 @@
 
 //****************
 
-//ON checkHideUnhideData IN CHECK-DATA.JS [last thing before css]
+//ON MEDIA STYLES [do QUICKLY]
+
+//FOR HOW MANY: checkHideUnhideData IN CHECK-DATA.JS [last thing before css]
+
+//PIC STATS STILL FUCKED
 
 //****************
 
