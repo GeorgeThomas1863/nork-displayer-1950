@@ -63,12 +63,6 @@ export const buildPicContainer = async (inputObj) => {
 
   const picWrapper = await buildPicWrapper(picArray, true);
 
-  //Add pics as collapse
-  // const picContainerData = await picDropDownContainer(picArray, "total");
-  // if (picContainerData) {
-  //   picContainerElement.append(picContainerData);
-  // }
-
   //append pic set date
   const dateElement = await buildPicContainerDate(date);
 
@@ -151,6 +145,9 @@ export const buildPicElement = async (savePath) => {
 export const buildPicElementStats = async (inputObj, fullStats = true) => {
   if (!inputObj) return null;
   const { picDate, picSource, headerData } = inputObj;
+
+  console.log("PIC ELEMENT STATS");
+  console.log(inputObj);
 
   const picStatsElement = document.createElement("div");
   picStatsElement.id = "pic-element-stats";
