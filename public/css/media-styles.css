@@ -98,8 +98,8 @@
     margin: 0 auto;
   }
 
-  .collapse-header {
-    padding: 15rem 1rem;
+  .article-pic-collapse .collapse-header {
+    padding: 0.5rem 1rem;
   }
 
   .collapse-title {
