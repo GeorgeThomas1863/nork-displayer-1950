@@ -111,8 +111,9 @@
   }
 
   .article-pic-collapse .collapse-arrow {
-    width: 6px;
-    height: 6px;
+    width: 21px;
+    height: 21px;
+    margin-right: 10px;
   }
 
   #pic-wrapper-element {
