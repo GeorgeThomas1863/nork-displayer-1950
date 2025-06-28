@@ -68,7 +68,7 @@ export const checkHideUnhideData = async () => {
   const itemsNeeded = dataReq[`${prefix}HowMany`];
 
   if (itemsNeeded === itemsLoaded) return null;
-  const itemsToHide = itemsNeeded.length - itemsLoaded.length;
+  const itemsToHide = itemsNeeded - itemsLoaded;
 
   //get things to hide / unhide
   const listItemArray = document.querySelectorAll(`.${prefix}-list-item`);
