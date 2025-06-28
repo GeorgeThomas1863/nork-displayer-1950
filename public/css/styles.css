@@ -562,6 +562,17 @@ h3 {
   box-sizing: border-box;
 }
 
+#pic-wrapper-item {
+  position: relative;
+  background-color: transparent;
+  /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); */
+
+  overflow: hidden;
+  /* aspect-ratio: 3/2; */
+  display: flex;
+  flex-direction: column;
+}
+
 /* WANT TO MAKE BIGGER, BUT NOT WORTH FIGURING OUT OVERFLOW */
 #pic-wrapper-item:hover {
   transform: scale(1.05);
@@ -569,15 +580,8 @@ h3 {
   z-index: 10;
 }
 
-#pic-wrapper-item {
-  position: relative;
-  background-color: transparent;
-  /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); */
-  border-radius: 8px;
-  overflow: hidden;
-  /* aspect-ratio: 3/2; */
-  display: flex;
-  flex-direction: column;
+#pic-element {
+  border-radius: 8px 8px 0 0;
 }
 
 #pic-element-stats {
@@ -591,7 +595,7 @@ h3 {
   max-height: 3rem;
   overflow: hidden;
   flex-shrink: 0;
-  /* border-radius: 0 0 8px 8px; */
+  border-radius: 0 0 8px 8px;
 }
 
 /* Individual stat elements */
