@@ -96,6 +96,7 @@ export const getBackendDataNew = async (inputObj) => {
 
   const dataArrayRaw = await dataModel[methodName]();
   const dataArrayValid = await removeInvalidItems(dataArrayRaw, dataType, howManyInput);
+  if (!dataArrayValid) return null;
 
   console.log(dataType);
   console.log(dataArrayValid.length);
