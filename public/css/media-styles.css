@@ -95,10 +95,18 @@
   }
 
   .collapse-title {
-    font-size: 12rem;
+    font-size: 1.2rem;
   }
 
   #pic-wrapper-element {
     grid-template-columns: 1fr;
+  }
+
+  #article-title {
+    font-size: 1.2rem;
+  }
+
+  #article-title span {
+    font-size: 1rem;
   }
 }
