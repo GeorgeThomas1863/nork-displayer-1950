@@ -44,8 +44,25 @@
 /* ===== TABLET PORTRAIT ===== */
 @media (max-width: 768px) and (orientation: portrait) {
   /* ===== GENERAL & FORM STYLES ===== */
+
+  /* change background pic */
+  #background-pic {
+    content: url("/images/KJU2.jpg");
+  }
+
+  /* SWITCH TO COLUMN HERE */
   #form-wrapper {
-    gap: 0;
+    margin: 1rem auto;
+    margin-bottom: 2rem;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  #form-wrapper > * {
+    flex: 0 0 auto;
+    width: 50%;
+    margin: 0 auto;
   }
 
   #pic-wrapper-element {
@@ -86,25 +103,6 @@
 /* ===== PHONE PORTRAIT ===== */
 @media (max-width: 576px) and (orientation: portrait) {
   /* ===== GENERAL & FORM STYLES ===== */
-
-  /* change background pic */
-  #background-pic {
-    content: url("/images/KJU2.jpg");
-  }
-
-  #form-wrapper {
-    margin: 1rem auto;
-    margin-bottom: 2rem;
-    flex-direction: column;
-    gap: 1rem;
-    width: 100%;
-  }
-
-  #form-wrapper > * {
-    flex: 0 0 auto;
-    width: 50%;
-    margin: 0 auto;
-  }
 
   .collapse-title {
     font-size: 1.5rem;
@@ -187,9 +185,7 @@
 
 /* --------------------------------- */
 
-/* !!!!!! */
 /* LANDSCAPE STYLES */
-/* !!!!!! */
 
 /* ===== LARGE PHONES / TABLETS LANDSCAPE ===== */
 @media (max-width: 1024px) and (orientation: landscape) {
