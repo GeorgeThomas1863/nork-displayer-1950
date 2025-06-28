@@ -37,9 +37,10 @@ export const buildDisplay = async () => {
 
   const backendDataParsed = await buildBackendDisplay(backendData);
 
-  //on fail
+  //on fail (might want to break out)
   if (!backendDataParsed) {
-    displayElement.append(failElement);
+    const backendDataWrapperReplace = document.getElementById("backend-data-wrapper");
+    displayElement.replaceChild(failElement, backendDataWrapperReplace);
     return null;
   }
 
