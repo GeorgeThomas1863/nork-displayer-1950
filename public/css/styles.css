@@ -565,7 +565,6 @@ h3 {
 /* WANT TO MAKE BIGGER, BUT NOT WORTH FIGURING OUT OVERFLOW */
 #pic-wrapper-item:hover {
   transform: scale(1.05);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   z-index: 10;
 }
