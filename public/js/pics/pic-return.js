@@ -144,19 +144,19 @@ export const buildPicElement = async (savePath) => {
 //build pic stats
 export const buildPicElementStats = async (inputObj, fullStats = true) => {
   if (!inputObj) return null;
-  const { picDate, picSource, headerData } = inputObj;
+  const { date, headerData } = inputObj;
 
-  console.log("PIC ELEMENT STATS");
-  console.log(inputObj);
+  // console.log("PIC ELEMENT STATS");
+  // console.log(inputObj);
 
   const picStatsElement = document.createElement("div");
   picStatsElement.id = "pic-element-stats";
 
   //only include source on full stats
   if (fullStats) {
-    const picDateElement = await buildPicElementDate(picDate);
-    const picSourceElement = await buildPicElementSource(picSource);
-    picStatsElement.append(picDateElement, picSourceElement);
+    const picDateElement = await buildPicElementDate(date);
+    // const picSourceElement = await buildPicElementSource(picSource);
+    picStatsElement.append(picDateElement);
   }
 
   const picServerElement = await buildPicElementServer(headerData);
@@ -166,12 +166,12 @@ export const buildPicElementStats = async (inputObj, fullStats = true) => {
 };
 
 //extract / format pic date
-export const buildPicElementDate = async (picDate) => {
-  if (!picDate) return null;
+export const buildPicElementDate = async (date) => {
+  if (!date) return null;
 
   const dateElement = document.createElement("div");
   dateElement.id = "pic-element-date";
-  const dateObj = new Date(picDate);
+  const dateObj = new Date(date);
   const formattedDate = dateObj.toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
@@ -184,15 +184,15 @@ export const buildPicElementDate = async (picDate) => {
 };
 
 //calc where pic from (do on backend)
-export const buildPicElementSource = async (picSource) => {
-  if (!picSource) return null;
+// export const buildPicElementSource = async (picSource) => {
+//   if (!picSource) return null;
 
-  const picSourceElement = document.createElement("div");
-  picSourceElement.id = "pic-element-source";
-  picSourceElement.innerHTML = `<b>Pic From:</b> ${picSource}`;
+//   const picSourceElement = document.createElement("div");
+//   picSourceElement.id = "pic-element-source";
+//   picSourceElement.innerHTML = `<b>Pic From:</b> ${picSource}`;
 
-  return picSourceElement;
-};
+//   return picSourceElement;
+// };
 
 //EXTRACT PIC SERVER DATA
 export const buildPicElementServer = async (headerData) => {
