@@ -1,13 +1,12 @@
 import d from "./define-things.js";
 import { buildDropDown } from "./build-drop-down.js";
 import { buildInputForms } from "./build-forms.js";
-import { hideArray, unhideArray, sendToBack, buildFailElement } from "./util.js";
+import { hideArray, unhideArray, sendToBack } from "./util.js";
 import { state, updateStateDataLoaded } from "./state.js";
 import { checkNewDataNeeded, checkHideUnhideData } from "./check-data.js";
 
 //get display element
 const displayElement = document.getElementById("display-element");
-const failElement = await buildFailElement();
 
 //DEFAULT DISPLAY
 export const buildDisplay = async () => {
@@ -33,14 +32,11 @@ export const buildDisplay = async () => {
   const backendData = await sendToBack(state);
   if (!backendData) return null;
 
-  // console.log("!!!BACKEND DATA", backendData);
-
   const backendDataParsed = await buildBackendDisplay(backendData);
 
-  //on fail (might want to break out)
+  //on fail
   if (!backendDataParsed) {
-    const backendDataWrapperReplace = document.getElementById("backend-data-wrapper");
-    displayElement.replaceChild(failElement, backendDataWrapperReplace);
+    await displayFail();
     return null;
   }
 
@@ -149,6 +145,21 @@ export const toggleDropdown = async (toggleType) => {
   const isHidden = actionButtonElement.classList.contains("hidden");
 
   isHidden ? await unhideArray([actionButtonElement]) : await hideArray([actionButtonElement]);
+
+  return true;
+};
+
+export const displayFail = async () => {
+  const failElement = document.createElement("h1");
+  failElement.innerHTML = "BACKEND DATA LOOKUP FUCKED";
+  failElement.id = "backend-data-fail";
+
+  const backendDataWrapperReplace = document.getElementById("backend-data-wrapper");
+  if (!backendDataWrapperReplace) {
+    displayElement.append(failElement);
+  } else {
+    displayElement.replaceChild(failElement, backendDataWrapperReplace);
+  }
 
   return true;
 };

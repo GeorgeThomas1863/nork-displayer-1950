@@ -1,4 +1,4 @@
-import d from "./define-things.js";
+// import d from "./define-things.js";
 
 //CANNOT USE AXIOS HERE (just for backend / much harder, just use fetch)
 export const sendToBack = async (inputParams) => {
@@ -94,9 +94,9 @@ export const debounce = (func) => {
 
 //----------------------------------
 
-export const buildFailElement = async () => {
-  const failElement = document.createElement("h1");
-  failElement.innerHTML = "BACKEND DATA LOOKUP FUCKED";
-  failElement.id = "backend-data-fail";
-  return failElement;
-};
+// export const buildFailElement = async () => {
+//   const failElement = document.createElement("h1");
+//   failElement.innerHTML = "BACKEND DATA LOOKUP FUCKED";
+//   failElement.id = "backend-data-fail";
+//   return failElement;
+// };
