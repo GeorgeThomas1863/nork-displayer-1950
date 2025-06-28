@@ -488,6 +488,7 @@ h3 {
 }
 
 #article-date {
+  width: 100%;
   padding: 0.5rem 1rem;
   display: inline-block;
   font-size: 0.9rem;
@@ -495,7 +496,6 @@ h3 {
   font-weight: 500;
   border-top: 1px solid #e2e8f0;
   border-bottom: 1px solid #e2e8f0;
-  /* width: 95%; */
 }
 
 #article-text {
