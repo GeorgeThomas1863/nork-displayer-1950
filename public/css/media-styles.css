@@ -98,12 +98,17 @@
     margin: 0 auto;
   }
 
-  .article-pic-collapse .collapse-header {
-    padding: 0.1rem 0.5rem;
-  }
-
   .collapse-title {
     font-size: 1.2rem;
+  }
+
+  .article-pic-collapse .collapse-header {
+    padding: 0.5rem 1rem;
+  }
+
+  .article-pic-collapse .collapse-title {
+    font-size: 1rem;
+    max-width: calc(100% - 2rem);
   }
 
   #pic-wrapper-element {
