@@ -283,8 +283,8 @@ h3 {
 }
 
 /* makes collapse headers smaller for article pics */
-.article-pic-collapse .collapse-header,
-.total-pic-collapse .collapse-header {
+.article-pic-collapse .wrapper .collapse-header,
+.total-pic-collapse .wrapper .collapse-header {
   margin: 0 auto;
   /* margin-top: -1.5rem; */
   margin-bottom: 1rem;
