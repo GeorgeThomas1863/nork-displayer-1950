@@ -114,4 +114,24 @@
   #article-title span {
     font-size: 1rem;
   }
+
+  button {
+    padding: 0.5rem 25rem;
+  }
+
+  /* Empty container */
+  .empty-container {
+    margin-top: 2rem;
+  }
+
+  .empty-text {
+    padding: 0.8rem 1.2rem;
+    font-size: 1.5rem;
+    max-width: 90%;
+  }
+
+  .empty-text h2 {
+    margin-top: 1rem;
+    font-size: 1.2rem;
+  }
 }
