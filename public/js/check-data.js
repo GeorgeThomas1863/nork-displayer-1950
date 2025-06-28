@@ -1,5 +1,6 @@
 import d from "./define-things.js";
 import { state } from "./state.js";
+import { unhideArray, hideArray } from "./util.js";
 
 //IN responsive / click listener
 export const checkChangeTriggered = async (changeId) => {
@@ -67,7 +68,7 @@ export const checkHideUnhideData = async () => {
   const prefix = dataType.substring(0, dataType.length - 1);
   const itemsNeeded = dataReq[`${prefix}HowMany`];
 
-  if (itemsNeeded === itemsLoaded) return null;
+  if (!itemsNeeded || !itemsLoaded || itemsNeeded === itemsLoaded) return null;
   const itemsToHide = itemsNeeded - itemsLoaded;
 
   //get things to hide / unhide
