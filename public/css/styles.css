@@ -467,10 +467,7 @@ h3 {
 
 #article-container-element {
   background-color: #ffffff;
-  padding: 0 0.5rem;
-  /* padding: 1.5rem 2rem; */
-  /* overflow: hidden;
-  position: relative; */
+  padding: 0;
 }
 
 .pic-list-item {
