@@ -62,7 +62,7 @@ export const buildArticleContainer = async (inputObj) => {
   const { picArray } = inputObj;
 
   const articleContainer = document.createElement("div");
-  articleContainer.id = "article-container";
+  articleContainer.id = "article-container-element";
 
   //Add pics as collapse (if present)
   const articlePicData = await picDropDownContainer(picArray, "article");
