@@ -68,7 +68,6 @@ export const checkHideUnhideData = async () => {
   const prefix = dataType.substring(0, dataType.length - 1);
   const itemsNeeded = dataReq[`${prefix}HowMany`];
 
-  if (!itemsNeeded || !itemsLoaded || itemsNeeded === itemsLoaded) return null;
   const itemsToHide = itemsLoaded - itemsNeeded;
 
   //get things to hide / unhide
