@@ -60,6 +60,10 @@
     font-size: 0.9rem; /* Reduced from 1.5rem */
   }
 
+  #article-title {
+    font-size: 1.5rem;
+  }
+
   #drop-down-bars {
     width: 2.2rem; /* Reduced from 2.5rem */
     height: 2.2rem;
