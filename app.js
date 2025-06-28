@@ -1,42 +1,20 @@
-//TO DO:
-
 //****************
 
-//FIX BACKEND DATA FUCKED DISPLAY
+//TO DO:
+
+//MAKE IT SO IF LARGE NUMBER IS INPUT IT JSUT RETURNS 20 or something like that
 
 //FIX TOO MANY INPUTS, TEST various injections
 
+//UNFUCK PROBLEM WITH SCRAPE CLEAN FUNCTION
+
 //ADD VID STATS
 
-//****************
+//ADD IN CLEAN UP FS BASED ON ITEMS ON DISK
 
 //MAYBE ADD A BOTTOM BAR ON MEDIA STYLES TO SEPARATE FORMS FROM DATA RETURN
 
-//FIX PIC / VID CSS SHIT (esp article pic display) [wrongly wrapped in pic container]
-
-//UNFUCK PROBLEM WITH SCRAPE CLEAN FUNCTION
-
-//UNFUCK THE CSS / NAMES IN CSS
-
-//NEWEST TO OLDEST IS FUCKED ON THE BACKEND, GETTING THE WRONG DATA
-
-//LOGIC PROBLEM IN APPENDING NEW DATA
-
-//[VID CHECK FIXED]
-
-//MAKE NEW DATA WORK, USE STATE TO TRIGGER GETTING / LOADING NEW DATA
-
-//ADD LOGIC for WHETHER getting new data is necessary [key part]
-
-//KEEP GOING WIHT LOGIC FOR WHETHER TO GET NEW DATA
-
-//REDO EVENT LISTENERS FOR HOW MUCH
-
-// get rid of vids as separate thing
-
 //CONFIRM SCHEDULER WORKS
-
-//ADD AUTO SCRAPER / make it part of admin start / stop
 
 // continue building admin start / stop capabilities
 
@@ -46,20 +24,13 @@
 // 1. chronjob or some other way to auto delete pics / vids from server
 // 1. tracing
 
-//FUTURE BUG LIST:
-// - make article display better (3 across with pics, if present)
-// - "external articles" link seems to be constantly broken, check if right link
-// - border radius on pics is still weird, check collapse container border radius
-
 //STUFF TO DO AT THE END:
 // - write chronjob that deletes files after certain number on server
 // - as part of chronjob, look for pics / vids under certain size and delete them (bc errors)
 // - set the cors thing to just this port
+//- make scroll an event, load more pics / vids on scroll (esp on mobile)s
 
-//THINGS TO DO LATER:
-// - UNFUCK PIC DISPLAY WITH VERTICAL PICS
-// - add vid stats to vid display
-// - make scroll an event, load more pics / vids on scroll (esp on mobile)
+//****************
 
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
