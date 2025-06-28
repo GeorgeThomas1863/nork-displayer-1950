@@ -222,5 +222,5 @@ export const getLatestVid = async (inputArray) => {
 export const fixDataByType = async (inputArray, dataType) => {
   console.log("FIX DATA BY TYPE");
   console.log(dataType);
-  console.log(inputArray);
+  // console.log(inputArray);
 };
