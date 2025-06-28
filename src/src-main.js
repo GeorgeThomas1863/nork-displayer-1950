@@ -1,7 +1,7 @@
 import CONFIG from "../config/config.js";
 import { getParamsMap } from "../config/map-display.js";
 import dbModel from "../models/db-model.js";
-import { removeInvalidItems } from "./src-fix.js";
+import { removeInvalidItems, fixDataByType } from "./src-fix.js";
 
 //gets backend data from db
 export const runGetBackendData = async (inputObj) => {
