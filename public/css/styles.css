@@ -482,8 +482,8 @@ h3 {
 }
 
 #article-title span {
-  font-size: 1.4rem;
-  vertical-align: top;
+  font-size: 1.2rem;
+  vertical-align: center;
 }
 
 #article-date {
@@ -496,6 +496,14 @@ h3 {
   border-top: 1px solid #e2e8f0;
   border-bottom: 1px solid #e2e8f0;
   width: 100%;
+}
+
+#article-text {
+  margin-top: 1rem;
+  font-size: 1.05rem;
+  line-height: 1.3;
+  letter-spacing: -0.07em;
+  color: #334155;
 }
 
 .pic-list-item {
