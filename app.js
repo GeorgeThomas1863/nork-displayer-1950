@@ -10,6 +10,7 @@
 
 //****************
 
+//MAYBE ADD A BOTTOM BAR ON MEDIA STYLES TO SEPARATE FORMS FROM DATA RETURN
 
 //FIX PIC / VID CSS SHIT (esp article pic display) [wrongly wrapped in pic container]
 

@@ -59,4 +59,5 @@ export const checkNewDataNeeded = async () => {
 
 export const checkHideUnhideData = async () => {
   console.log("AHHHHHHHHHHHHHH");
+  console.log("!!!STATE", state);
 };
