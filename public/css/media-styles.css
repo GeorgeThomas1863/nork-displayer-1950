@@ -197,13 +197,12 @@
   #form-wrapper {
     margin: 0 auto;
     flex-direction: row;
-    gap: 2rem;
-    width: 10%;
     align-items: flex-start;
   }
 
   #form-wrapper > * {
     flex: 1;
     min-width: 0;
+    width: 100%;
   }
 }
