@@ -149,6 +149,10 @@
     font-size: 1rem;
   }
 
+  #article-date {
+    margin-top: 1rem;
+  }
+
   #article-text {
     font-size: 0.85rem;
     line-height: 1.1;
@@ -163,12 +167,20 @@
     font-size: 1rem;
   }
 
+  #pic-container-date {
+    margin-top: 1rem;
+  }
+
   #vid-title {
     font-size: 1.2rem;
   }
 
   #vid-title span {
     font-size: 1rem;
+  }
+
+  #vid-date {
+    margin-top: 1rem;
   }
 
   /* Empty container */
