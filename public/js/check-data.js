@@ -58,6 +58,14 @@ export const checkNewDataNeeded = async () => {
 };
 
 export const checkHideUnhideData = async () => {
+  const { dataType, dataLoaded, dataReq } = state;
+
   console.log("AHHHHHHHHHHHHHH");
   console.log("!!!STATE", state);
+
+  const itemsLoaded = dataLoaded[dataType];
+  const prefix = dataType.substring(0, dataType.length - 1);
+  const itemsNeeded = dataReq[`${prefix}HowMany`];
+
+  if (itemsNeeded === itemsLoaded) return null;
 };

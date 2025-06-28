@@ -42,7 +42,7 @@ export const buildDisplay = async () => {
   await updateStateDataLoaded(backendData);
 
   console.log("!!!DISPLAY ELEMENT");
-  console.dir(displayElement);
+  console.log(displayElement);
 
   return "#DONE";
 };
