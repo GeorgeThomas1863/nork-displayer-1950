@@ -10,7 +10,7 @@
     gap: 1rem; /* Reduced from 5rem */
   }
 
-  #pic-array-element {
+  #pic-wrapper-element {
     grid-template-columns: repeat(2, 1fr);
   }
 
