@@ -565,7 +565,9 @@ h3 {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   z-index: 10;
-  overflow: clip;
+  overflow: visible;
+  aspect-ratio: 3/2;  
+  position: relative;
 }
 
 #pic-wrapper-item {
