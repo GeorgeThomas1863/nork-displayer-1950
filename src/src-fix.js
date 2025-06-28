@@ -220,7 +220,18 @@ export const getLatestVid = async (inputArray) => {
 
 //NOT DOING ANY LOOKUPS, just remove blank shit
 export const fixDataByType = async (inputArray, dataType) => {
-  console.log("FIX DATA BY TYPE");
-  console.log(dataType);
+  switch (dataType) {
+    case "articles":
+      for (let i = 0; i < inputArray.length; i++) {
+        const dataObj = inputArray[i];
+        const { picArray } = dataObj;
+        if (!picArray) continue;
+        console.log("PIC ARRAY");
+        console.log(picArray);
+        // dataReturnArray.push(dataObj);
+      }
+      break;
+  }
+
   // console.log(inputArray);
 };
