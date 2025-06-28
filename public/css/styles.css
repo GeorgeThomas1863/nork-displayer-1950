@@ -470,7 +470,7 @@ h3 {
 }
 
 #article-element {
-  padding: 0 2rem;
+  padding: 0.5rem 3rem;
 }
 
 #article-title {
@@ -484,7 +484,7 @@ h3 {
 #article-title span {
   font-size: 1.2rem;
   font-weight: 500;
-  vertical-align: center;
+  vertical-align: middle;
 }
 
 #article-date {
@@ -525,8 +525,10 @@ h3 {
 #pic-container-title span {
   font-size: 1.2rem;
   font-weight: 500;
-  vertical-align: center;
+  vertical-align: middle;
 }
+
+/* ----------------------------------- */
 
 .vid-list-item {
   margin-bottom: 2rem;
