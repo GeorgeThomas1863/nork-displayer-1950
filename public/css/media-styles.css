@@ -1,0 +1,43 @@
+/* MEDIA STYLES (media-styles.css) */
+
+/* '''''''''''''''''''''''''''''''''''''''' */
+
+/* MEDIA QUERIES */
+
+/* ===== IPAD PORTRAIT ===== */
+@media (max-width: 1200px) and (orientation: portrait) {
+  #form-wrapper {
+    gap: 1rem; /* Reduced from 5rem */
+  }
+
+  #pic-array-element {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .wrapper {
+    margin: 0.8rem;
+  }
+
+  .wrapper .collapse-content {
+    padding: 1.2rem; /* Reduced from 1.5rem */
+  }
+
+  .wrapper label {
+    font-size: 0.85rem; /* Slightly smaller */
+  }
+
+  .wrapper input,
+  .wrapper select {
+    font-size: 0.85rem; /* Slightly smaller */
+    padding: 0.5rem; /* Reduced padding */
+  }
+
+  .collapse-title {
+    font-size: 1.2rem; /* Reduced from 1.7rem */
+  }
+
+  .article-pic-collapse .collapse-title,
+  .picSet-pic-collapse .collapse-title {
+    font-size: 1.1rem; /* Reduced from 1.5rem */
+  }
+}
