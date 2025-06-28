@@ -194,17 +194,17 @@
 /* ===== LARGE PHONES / TABLETS LANDSCAPE ===== */
 @media (max-width: 1024px) and (orientation: landscape) {
   /* Form wrapper adjustments */
-  #form-wrapper {
+  /* #form-wrapper {
     margin: 0 auto;
     flex-direction: row;
     align-items: flex-start;
   }
 
-  /* FIGURE OUT HOW TO MAKE FORMS WIDER LATER */
+
   #form-wrapper > * {
     flex: 1;
     min-width: 0;
-  }
+  } */
 
   #pic-wrapper-element {
     grid-template-columns: repeat(2, 1fr);
