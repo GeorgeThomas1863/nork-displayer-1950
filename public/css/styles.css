@@ -488,7 +488,8 @@ h3 {
 }
 
 #article-date {
-  padding: 0.5rem 1rem;
+  margin: 0 1rem;
+  padding: 0.5rem 0;
   display: block;
   font-size: 0.9rem;
   color: #64748b;
