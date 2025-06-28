@@ -36,8 +36,7 @@
     font-size: 1.2rem; /* Reduced from 1.7rem */
   }
 
-  .article-pic-collapse .collapse-title,
-  .picSet-pic-collapse .collapse-title {
+  .article-pic-collapse .collapse-title {
     font-size: 1.1rem; /* Reduced from 1.5rem */
   }
 }
@@ -51,5 +50,13 @@
 
   #pic-wrapper-element {
     gap: 0.5rem;
+  }
+
+  .collapse-title {
+    font-size: 1rem; /* Reduced from 1.7rem */
+  }
+
+  .article-pic-collapse .collapse-title {
+    font-size: 0.9rem; /* Reduced from 1.5rem */
   }
 }
