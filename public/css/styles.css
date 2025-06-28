@@ -8,7 +8,7 @@ body {
   font-family: "Roboto Condensed", sans-serif;
   margin: 0;
   padding: 0;
-  /* box-sizing: border-box; */
+  box-sizing: border-box;
 }
 
 #background-pic {
@@ -523,6 +523,7 @@ h3 {
   list-style: none;
   width: 100%;
   background-color: transparent;
+  /* box-sizing: border-box; */
 }
 
 #pic-wrapper-item {
