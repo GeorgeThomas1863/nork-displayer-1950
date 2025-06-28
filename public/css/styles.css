@@ -551,11 +551,12 @@ h3 {
 #pic-wrapper-element {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  /* gap: 1rem; */
+  gap: 1rem;
   padding: 1rem;
   margin: 0 auto;
   list-style: none;
   width: 100%;
+  height: 100%;
   background-color: transparent;
   box-sizing: border-box;
 }
