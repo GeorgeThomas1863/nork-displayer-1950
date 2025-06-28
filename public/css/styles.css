@@ -634,14 +634,14 @@ h3 {
 #vid-date {
   margin: 1rem auto;
   padding: 0.5rem 0;
-  padding-left: 0.5rem;
+  padding-left: 1rem;
   display: block;
   font-size: 0.9rem;
   color: #64748b;
   font-weight: 500;
   border-top: 1px solid #e2e8f0;
   border-bottom: 1px solid #e2e8f0;
-  width: 90%;
+  width: 98%;
 }
 
 #vid-element {
