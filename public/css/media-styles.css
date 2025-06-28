@@ -65,6 +65,10 @@
     margin: 0 auto;
   }
 
+  #drop-down:has(#action-button-element:not(.hidden)) {
+    flex-direction: column;
+  }
+
   #pic-wrapper-element {
     gap: 0.5rem;
   }
@@ -194,6 +198,7 @@
     content: url("/images/KJU2.jpg");
   }
 
+  /* ENSURE COLUMNS */
   #form-wrapper {
     margin: 1rem auto;
     margin-bottom: 2rem;
@@ -206,6 +211,10 @@
     flex: 0 0 auto;
     width: 50%;
     margin: 0 auto;
+  }
+
+  #drop-down:has(#action-button-element:not(.hidden)) {
+    flex-direction: column;
   }
 
   #pic-wrapper-element {
