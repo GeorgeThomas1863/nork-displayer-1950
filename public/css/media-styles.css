@@ -102,7 +102,7 @@
 
   #form-wrapper > * {
     flex: 0 0 auto;
-    width: 40%;
+    width: 50%;
     margin: 0 auto;
   }
 
@@ -182,5 +182,26 @@
   .empty-text h2 {
     margin-top: 1rem;
     font-size: 1.2rem;
+  }
+}
+
+/* --------------------------------- */
+
+/* !!!!!! */
+/* LANDSCAPE STYLES */
+/* !!!!!! */
+
+/* ===== LARGE PHONES / TABLETS LANDSCAPE ===== */
+@media (max-width: 1024px) and (orientation: landscape) {
+  /* Form wrapper adjustments */
+  #form-wrapper {
+    flex-direction: row;
+    gap: 2rem;
+    margin: 0 auto;
+  }
+
+  #form-wrapper > * {
+    flex: 1;
+    min-width: 0;
   }
 }
