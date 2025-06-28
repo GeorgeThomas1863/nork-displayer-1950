@@ -96,14 +96,13 @@ export const getBackendDataNew = async (inputObj) => {
 
   const dataArrayRaw = await dataModel[methodName]();
   const dataArrayValid = await removeInvalidItems(dataArrayRaw, dataType, howManyInput);
-  const dataArrayFixed = await fixDataByType(dataArrayValid, dataType);
 
   console.log(dataType);
-  console.log(dataArrayFixed.length);
+  console.log(dataArrayValid.length);
 
   const dataObj = {
     dataType: dataType,
-    dataArray: dataArrayFixed,
+    dataArray: dataArrayValid,
   };
 
   //return as array to match default
