@@ -551,8 +551,7 @@ h3 {
 #pic-wrapper-element {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  padding: -1rem 0;
+  gap: 0 1rem;
   margin: 0 auto;
   list-style: none;
   width: 100%;
