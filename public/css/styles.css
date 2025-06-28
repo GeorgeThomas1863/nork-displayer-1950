@@ -501,8 +501,8 @@ h3 {
 #article-text {
   margin-top: 1rem;
   font-size: 1.05rem;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
+  line-height: 1;
+  letter-spacing: -0.05em;
   color: #334155;
 }
 
