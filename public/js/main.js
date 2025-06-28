@@ -33,9 +33,17 @@ export const buildDisplay = async () => {
   const backendData = await sendToBack(state);
   if (!backendData) return null;
 
-  console.log("!!!BACKEND DATA", backendData);
+  // console.log("!!!BACKEND DATA", backendData);
 
   const backendDataParsed = await buildBackendDisplay(backendData);
+
+  //on fail
+  if (!backendDataParsed) {
+    displayElement.append(failElement);
+    return null;
+  }
+
+  //otherwise append data
   displayElement.append(backendDataParsed);
 
   //UPDATE THE STATE HERE
@@ -48,7 +56,7 @@ export const buildDisplay = async () => {
 };
 
 export const buildBackendDisplay = async (inputArray) => {
-  if (!inputArray || !inputArray.length) return failElement;
+  if (!inputArray || !inputArray.length) return null;
   const { isFirstLoad } = state;
 
   //build wrapper
@@ -87,8 +95,7 @@ export const buildBackendDisplay = async (inputArray) => {
       const func = d.displayFunctionMap[dataType];
       const newDataElement = await func(dataArray);
       if (!newDataElement) {
-        backendDataWrapperReplace.replaceChild(failElement, replaceElement);
-        return backendDataWrapperReplace;
+        return null;
       }
 
       //HIDE FIRST COLLAPSE
