@@ -67,6 +67,7 @@
 
   #action-button-element {
     flex-direction: column;
+    margin-bottom: 2rem;
   }
 
   #pic-wrapper-element {
@@ -215,6 +216,7 @@
 
   #action-button-element {
     flex-direction: column;
+    margin-bottom: 2rem;
   }
 
   #pic-wrapper-element {
