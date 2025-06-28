@@ -1,7 +1,7 @@
 import CONFIG from "../config/config.js";
 import { getParamsMap } from "../config/map-display.js";
 import dbModel from "../models/db-model.js";
-import { removeInvalidItems, fixDataByType } from "./src-fix.js";
+import { removeInvalidItems } from "./src-fix.js";
 
 //gets backend data from db
 export const runGetBackendData = async (inputObj) => {
@@ -43,14 +43,13 @@ export const getBackendDataDefault = async () => {
     }
 
     const dataArrayValid = await removeInvalidItems(dataArrayRaw, dataType, howMany);
-    const dataArrayFixed = await fixDataByType(dataArrayValid, dataType);
 
-    // console.log(dataType);
-    // console.log(dataArrayFixed.length);
+    console.log(dataType);
+    console.log(dataArrayValid.length);
 
     const dataObj = {
       dataType: dataType,
-      dataArray: dataArrayFixed,
+      dataArray: dataArrayValid,
     };
 
     defaultDataArray.push(dataObj);
