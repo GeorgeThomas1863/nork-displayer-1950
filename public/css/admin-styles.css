@@ -55,15 +55,15 @@
   display: flex;
   flex-direction: column;
   margin: 0;
-  padding: 10rem;
+  padding: 1rem;
   list-style: none;
   position: relative;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-/* #admin-form-wrapper li:first-child {
-  padding-top: 2rem;
-} */
+#admin-form-wrapper li:first-child {
+  padding-top: 0;
+}
 
 /* #admin-form-wrapper li:last-of-type {
   border-bottom: none;
