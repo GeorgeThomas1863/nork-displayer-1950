@@ -61,7 +61,6 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-
 /* Admin labels - follow wrapper label pattern */
 #admin-form-wrapper label {
   font-size: 1rem;
@@ -203,11 +202,14 @@
   padding: 0.5rem 1rem;
   border-bottom: 1px solid #e9ecef;
   font-size: 1.2rem;
+  font-weight: 600;
   line-height: 0.5;
   color: #495057;
   transition: background-color 0.2s ease;
   word-wrap: break-word;
   overflow-wrap: break-word;
+  text-align: left;
+  text-transform: uppercase;
 }
 
 .admin-default-list-item:last-child,
