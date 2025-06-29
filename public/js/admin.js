@@ -20,25 +20,18 @@ export const buildAdminDisplay = async () => {
   if (!newDataNeededAdmin) return null;
 
   const adminBackendData = await sendToBack(adminState);
-
-  console.log("ADMIN BACKEND DATA");
-  console.dir(adminBackendData);
-
   if (!adminBackendData) return null;
 
-  const adminBackendDataParsed = await buildAdminBackendDisplay(adminBackendData);
-
-  console.log("ADMIN BACKEND DATA PARSED");
-  console.log(adminBackendDataParsed);
+  const adminBackendDisplay = await buildAdminBackendDisplay(adminBackendData);
 
   //on fail
-  if (!adminBackendDataParsed) {
+  if (!adminBackendDisplay) {
     await adminDisplayFail();
     return null;
   }
 
-  adminDisplayElement.append(adminBackendDataParsed);
-
+  adminDisplayElement.append(adminBackendDisplay);
+  
   await updateAdminStateDataLoaded(adminBackendData);
 
   return "#DONE";

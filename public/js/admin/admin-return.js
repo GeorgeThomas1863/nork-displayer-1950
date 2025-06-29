@@ -1,21 +1,30 @@
 import { buildCollapseContainer } from "../collapse.js";
 
 export const buildAdminBackendDisplay = async (inputObj) => {
-  const { logObj, scrapeDataObj, scrapeId, isFirstLoad, textStr } = inputObj;
+  const { logObj, isFirstLoad } = inputObj;
 
-  console.log("BUILD ADMIN BACKEND DISPLAY");
-  console.dir(inputObj);
-
-  const adminBackendContainer = document.createElement("div");
-  adminBackendContainer.id = "admin-backend-container";
+  const adminBackendWrapper = document.createElement("div");
+  adminBackendWrapper.id = "admin-backend-wrapper";
 
   const defaultListData = await buildAdminDefaultList(logObj);
-  // defaultListData.className = "collapse-content";
+  adminBackendWrapper.append(defaultListData);
 
-  adminBackendContainer.append(defaultListData);
+  if (!isFirstLoad) {
+    const newListData = await buildAdminNewList(inputObj);
 
-  //if first load RETURN HERE
-  if (isFirstLoad) return adminBackendContainer;
+    //REPLACE SHIT HERE
+    adminBackendWrapper.append(newListData);
+  }
+
+  return adminBackendWrapper;
+
+  // console.log("BUILD ADMIN BACKEND DISPLAY");
+  // console.dir(inputObj);
+
+  // adminBackendContainer.append(defaultListData);
+
+  // //if first load RETURN HERE
+  // if (isFirstLoad) return adminBackendContainer;
 
   //HERE!!!!
 
@@ -88,8 +97,8 @@ export const buildAdminDefaultList = async (inputObj) => {
 export const buildAdminNewList = async (inputObj) => {
   const { startTime, endTime, textStr, scrapeId } = inputObj;
 
-  // console.log("BUILD ADMIN NEW DISPLAY");
-  // console.log(inputObj);
+  console.log("BUILD ADMIN NEW DISPLAY");
+  console.dir(inputObj);
 
   const adminNewList = document.createElement("ul");
   adminNewList.classList.add("admin-new-list");
