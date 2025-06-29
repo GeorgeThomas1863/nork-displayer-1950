@@ -199,7 +199,7 @@
 /* List item styling */
 .admin-default-list-item,
 .admin-new-list-item {
-  padding: 0.1rem 1rem;
+  padding: 0.3rem 1rem;
   border-bottom: 1px solid #e9ecef;
   font-size: 1.2rem;
   font-weight: 600;
