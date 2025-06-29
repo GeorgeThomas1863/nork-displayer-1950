@@ -6,10 +6,10 @@ export const buildAdminBackendDisplay = async (inputObj) => {
   const adminBackendWrapper = document.createElement("div");
   adminBackendWrapper.id = "admin-backend-wrapper";
 
-  const defaultListData = await buildAdminDefaultList(logObj);
-  adminBackendWrapper.append(defaultListData);
-
-  if (!isFirstLoad) {
+  if (isFirstLoad) {
+    const defaultListData = await buildAdminDefaultList(logObj);
+    adminBackendWrapper.append(defaultListData);
+  } else {
     const newListData = await buildAdminNewList(inputObj);
 
     //REPLACE SHIT HERE
@@ -17,41 +17,42 @@ export const buildAdminBackendDisplay = async (inputObj) => {
   }
 
   return adminBackendWrapper;
-
-  // console.log("BUILD ADMIN BACKEND DISPLAY");
-  // console.dir(inputObj);
-
-  // adminBackendContainer.append(defaultListData);
-
-  // //if first load RETURN HERE
-  // if (isFirstLoad) return adminBackendContainer;
-
-  //HERE!!!!
-
-  // const newListData = await buildAdminNewList(inputObj);
-  // newListData.className = "collapse-content";
-
-  // // console.log("NEW LIST DATA");
-  // // console.log(newListData);
-
-  // const newTitleElement = document.createElement("div");
-  // newTitleElement.innerHTML = "New Scrape Data";
-  // newTitleElement.className = "collapse-header admin-new-title";
-
-  // const newListCollapseObj = {
-  //   titleElement: newTitleElement,
-  //   contentElement: newListData,
-  //   isExpanded: true,
-  //   className: "admin-new-collapse",
-  //   dataAttribute: "admin-new-header",
-  // };
-
-  // const newListCollapseContainer = await buildCollapseContainer(newListCollapseObj);
-  // newListCollapseContainer.className = "wrapper";
-  // adminBackendContainer.append(newListCollapseContainer);
-
-  // return adminBackendContainer;
 };
+
+// console.log("BUILD ADMIN BACKEND DISPLAY");
+// console.dir(inputObj);
+
+// adminBackendContainer.append(defaultListData);
+
+// //if first load RETURN HERE
+// if (isFirstLoad) return adminBackendContainer;
+
+//HERE!!!!
+
+// const newListData = await buildAdminNewList(inputObj);
+// newListData.className = "collapse-content";
+
+// // console.log("NEW LIST DATA");
+// // console.log(newListData);
+
+// const newTitleElement = document.createElement("div");
+// newTitleElement.innerHTML = "New Scrape Data";
+// newTitleElement.className = "collapse-header admin-new-title";
+
+// const newListCollapseObj = {
+//   titleElement: newTitleElement,
+//   contentElement: newListData,
+//   isExpanded: true,
+//   className: "admin-new-collapse",
+//   dataAttribute: "admin-new-header",
+// };
+
+// const newListCollapseContainer = await buildCollapseContainer(newListCollapseObj);
+// newListCollapseContainer.className = "wrapper";
+// adminBackendContainer.append(newListCollapseContainer);
+
+// return adminBackendContainer;
+// };
 
 export const buildAdminDefaultList = async (inputObj) => {
   const adminDefaultList = document.createElement("ul");
