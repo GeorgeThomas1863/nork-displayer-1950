@@ -15,6 +15,10 @@ export const runGetAdminBackendData = async (inputObj) => {
 
   //run admin submit
   const adminSubmitObj = await sendAdminCommand(dataReq);
+
+  console.log("ADMIN SUBMIT OBJ");
+  console.dir(adminSubmitObj);
+
   if (!adminSubmitObj) return firstLoadObj;
 
   const returnObj = { ...firstLoadObj, ...adminSubmitObj };
