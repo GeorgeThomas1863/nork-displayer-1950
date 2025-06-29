@@ -8,7 +8,7 @@
   flex-direction: row;
   gap: 3rem;
   width: 90%;
-  margin: 2rem auto;
+  margin: 0 auto;
   align-items: flex-start;
 }
 
@@ -16,7 +16,7 @@
 #admin-display-element > * {
   flex: 1;
   min-width: 0; /* Allows flex items to shrink below their content size */
-  max-width: 30%;
+  max-width: 25%;
 }
 
 /* When admin-backend-container has 2 children, make it take up 2/3 of the space */
