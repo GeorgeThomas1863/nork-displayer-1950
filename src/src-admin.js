@@ -65,9 +65,12 @@ export const runGetAdminBackendData = async (inputObj) => {
 export const getDefaultLogObj = async () => {
   const { logArr } = CONFIG;
 
+  //sort logArr alphabetically a-z [so object is sorted by keys]
+  const sortedLogArr = logArr.sort();
+
   const defaultLogObj = {};
-  for (let i = 0; i < logArr.length; i++) {
-    const allItem = logArr[i];
+  for (let i = 0; i < sortedLogArr.length; i++) {
+    const allItem = sortedLogArr[i];
     const allModel = new dbModel("", CONFIG[allItem]);
     const allArray = await allModel.getAll();
     defaultLogObj[allItem] = allArray?.length || 0;
