@@ -1,5 +1,5 @@
 import d from "./define-things.js";
-import { state } from "./state.js";
+import { state, adminState } from "./state.js";
 import { unhideArray, hideArray } from "./util.js";
 
 //IN responsive / click listener
@@ -84,9 +84,12 @@ export const checkHideUnhideData = async () => {
 // -------------------------------
 
 export const checkNewDataNeededAdmin = async () => {
-  // const {  } = adminState;
-  
-  //BUILD; return true for now
+  const { isFirstLoad, trigger } = adminState;
 
-  return true
-}
+  if (isFirstLoad) return true;
+
+  //check trigger
+  if (trigger === "admin-submit") return true;
+
+  return null;
+};

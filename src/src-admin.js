@@ -23,7 +23,7 @@ export const sendAdminCommand = async (inputParams) => {
 
 //gets admin backend data
 export const runGetAdminBackendData = async (inputObj) => {
-  const { scrapeId, isFirstLoad } = inputObj;
+  const { scrapeId, dataReq, isFirstLoad } = inputObj;
 
   console.log("RUN GET ADMIN BACKEND DATA");
   console.log(inputObj);

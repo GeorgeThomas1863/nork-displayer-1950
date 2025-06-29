@@ -1,5 +1,5 @@
 import d from "./define-things.js";
-import { buildInputParams } from "./util.js";
+import { buildInputParams, buildAdminParams } from "./util.js";
 
 export const state = {
   route: "/get-backend-data-route",
@@ -65,8 +65,22 @@ export const adminState = {
   dataLoaded: d.defaultDataLoadedMap,
 };
 
+export const updateAdminStateEventTriggered = async (inputType) => {
+  if (!inputType) return null;
+
+  //get input data
+  const adminInputParams = await buildAdminParams();
+
+  //update state obj
+  adminState.dataReq = adminInputParams;
+  adminState.trigger = "admin-submit";
+
+  return true;
+};
+
+//BUILD, just return true for now
 export const updateAdminStateDataLoaded = async (inputArray) => {
-  //build return true for now
+  adminState.isFirstLoad = false;
 
   return true;
 };
