@@ -8,7 +8,7 @@ export const buildAdminBackendDisplay = async (inputObj) => {
 
   const adminBackendContainer = document.createElement("div");
   adminBackendContainer.id = "admin-backend-container";
-  adminBackendContainer.className = "wrapper";
+  // adminBackendContainer.className = "wrapper";
 
   const defaultListData = await buildAdminDefaultList(logObj);
   defaultListData.className = "collapse-content";
@@ -18,29 +18,29 @@ export const buildAdminBackendDisplay = async (inputObj) => {
   //if first load RETURN HERE
   if (isFirstLoad) return adminBackendContainer;
 
-  const newListData = await buildAdminNewList(inputObj);
-  newListData.className = "collapse-content";
+  // const newListData = await buildAdminNewList(inputObj);
+  // newListData.className = "collapse-content";
 
-  // console.log("NEW LIST DATA");
-  // console.log(newListData);
+  // // console.log("NEW LIST DATA");
+  // // console.log(newListData);
 
-  const newTitleElement = document.createElement("div");
-  newTitleElement.innerHTML = "New Scrape Data";
-  newTitleElement.className = "collapse-header admin-new-title";
+  // const newTitleElement = document.createElement("div");
+  // newTitleElement.innerHTML = "New Scrape Data";
+  // newTitleElement.className = "collapse-header admin-new-title";
 
-  const newListCollapseObj = {
-    titleElement: newTitleElement,
-    contentElement: newListData,
-    isExpanded: true,
-    className: "admin-new-collapse",
-    dataAttribute: "admin-new-header",
-  };
+  // const newListCollapseObj = {
+  //   titleElement: newTitleElement,
+  //   contentElement: newListData,
+  //   isExpanded: true,
+  //   className: "admin-new-collapse",
+  //   dataAttribute: "admin-new-header",
+  // };
 
-  const newListCollapseContainer = await buildCollapseContainer(newListCollapseObj);
-  newListCollapseContainer.className = "wrapper";
-  adminBackendContainer.append(newListCollapseContainer);
+  // const newListCollapseContainer = await buildCollapseContainer(newListCollapseObj);
+  // newListCollapseContainer.className = "wrapper";
+  // adminBackendContainer.append(newListCollapseContainer);
 
-  return adminBackendContainer;
+  // return adminBackendContainer;
 };
 
 export const buildAdminDefaultList = async (inputObj) => {
