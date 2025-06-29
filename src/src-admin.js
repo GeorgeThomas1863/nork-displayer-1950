@@ -66,19 +66,12 @@ export const getDefaultLogObj = async () => {
   const { logArr } = CONFIG;
 
   const defaultLogObj = {};
-  const unsortedArray = [];
   for (let i = 0; i < logArr.length; i++) {
     const allItem = logArr[i];
     const allModel = new dbModel("", CONFIG[allItem]);
     const allArray = await allModel.getAll();
     defaultLogObj[allItem] = allArray?.length || 0;
-
-    //put in array to sort later
-    unsortedArray.push(...defaultLogObj);
   }
 
-  //alphetize the object by keys
-  const sortedArray = unsortedArray.sort((a, b) => a.localeCompare(b));
-
-  return sortedArray;
+  return defaultLogObj;
 };
