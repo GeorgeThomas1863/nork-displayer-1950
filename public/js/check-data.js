@@ -80,3 +80,13 @@ export const checkHideUnhideData = async () => {
 
   return true;
 };
+
+// -------------------------------
+
+export const checkNewDataNeededAdmin = async () => {
+  // const {  } = adminState;
+  
+  //BUILD; return true for now
+
+  return true
+}

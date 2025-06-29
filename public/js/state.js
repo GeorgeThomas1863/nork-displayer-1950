@@ -48,3 +48,19 @@ export const updateStateDataLoaded = async (inputArray) => {
 
   return true;
 };
+
+//-----------------------------------------
+
+export const adminState = {
+  route: "/get-admin-backend-data-route",
+  isFirstLoad: true,
+  dataType: "articles",
+  articleType: "fatboy",
+
+  scrapeId: null,
+
+  //data already requested
+  trigger: null,
+  dataReq: d.defaultInputMap,
+  dataLoaded: d.defaultDataLoadedMap,
+};
