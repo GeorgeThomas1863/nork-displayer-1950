@@ -20,10 +20,6 @@ export const buildAdminDisplay = async () => {
   if (!newDataNeededAdmin) return null;
 
   const adminBackendData = await sendToBack(adminState);
-
-  // console.log("ADMIN BACKEND DATA");
-  // console.dir(adminBackendData);
-
   if (!adminBackendData) return null;
 
   const adminBackendDataParsed = await buildAdminBackendDisplay(adminBackendData);
@@ -41,33 +37,9 @@ export const buildAdminDisplay = async () => {
 
   await updateAdminStateDataLoaded(adminBackendData);
 
-  //if first laod just return appended data
-  // if (isFirstLoad) return adminDisplayElement.append(adminFormData, adminBackendData);
-
-  // if (adminDisplayElement.children[2]) {
-  //   adminDisplayElement.children[2].remove();
-  // }
-
-  // const existingBackendElement = document.getElementById("admin-backend-container");
-  // existingBackendElement.replaceWith(adminBackendData);
-
   return "#DONE";
 };
 
-export const getNewAdminData = async () => {
-  //get user input
-  const adminParams = await buildAdminParams();
-
-  //send submit first
-  adminParams.route = "/admin-submit-route";
-  const adminSubmitObj = await sendToBack(adminParams);
-  if (!adminSubmitObj || !adminSubmitObj.scrapeId) return null;
-
-  //build the display
-  await buildAdminDisplay(false, adminSubmitObj);
-};
-
-//HERE
 export const adminDisplayFail = async () => {
   const adminFailElement = document.createElement("h1");
   adminFailElement.innerHTML = "BACKEND DATA LOOKUP FUCKED";

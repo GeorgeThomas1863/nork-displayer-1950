@@ -2,15 +2,9 @@ import CONFIG from "../config/config.js";
 import dbModel from "../models/db-model.js";
 import { sendAdminCommand } from "./src-api.js";
 
-// export const runAdminSubmit = async (inputParams) => {
-//   const apiData = await sendAdminCommand(inputParams);
-//   console.log("API DATA", apiData);
-//   return apiData;
-// };
-
 //gets admin backend data
 export const runGetAdminBackendData = async (inputObj) => {
-  const { scrapeId, dataReq, isFirstLoad } = inputObj;
+  const { dataReq, isFirstLoad } = inputObj;
 
   const firstLoadObj = { ...inputObj };
 
@@ -29,36 +23,6 @@ export const runGetAdminBackendData = async (inputObj) => {
   console.dir(returnObj);
 
   return returnObj;
-
-  // const returnObj = {};
-  // const allDataObj = {};
-  // for (let i = 0; i < logArr.length; i++) {
-  //   const allItem = logArr[i];
-  //   const allModel = new dbModel("", CONFIG[allItem]);
-  //   const allArray = await allModel.getAll();
-  //   allDataObj[allItem] = allArray?.length || 0;
-  // }
-  // returnObj.allDataObj = allDataObj;
-
-  // //add is first load / scrapeId
-  // returnObj.isFirstLoad = isFirstLoad;
-  // returnObj.scrapeId = scrapeId;
-
-  // //return if no scrapeId (bc first load)
-  // if (isFirstLoad) return returnObj;
-
-  // console.log("INPUT OBJ!!!");
-  // console.log(inputObj);
-
-  // const scrapeDataModel = new dbModel({ scrapeId: scrapeId }, "log");
-  // const scrapeDataObj = await scrapeDataModel.getScrapeData();
-
-  // console.log("SCRAPE DATA ARRAY");
-  // console.log(scrapeDataObj);
-
-  // returnObj.scrapeDataObj = scrapeDataObj;
-
-  // return returnObj;
 };
 
 //default log from mongodb

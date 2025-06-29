@@ -5,13 +5,9 @@ import { getAdminBackendDataRoute, getBackendDataRoute } from "../controllers/da
 
 const router = express.Router();
 
-// router.post("/admin-submit-route", adminSubmitRoute);
-
 router.post("/get-admin-backend-data-route", getAdminBackendDataRoute);
 
 router.post("/get-backend-data-route", getBackendDataRoute);
-
-// router.post("/get-new-data-route", getNewDataRoute);
 
 router.get("/", indexDisplay);
 

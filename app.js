@@ -2,7 +2,7 @@
 
 //TO DO:
 
-//MAKE IT SO IF LARGE NUMBER IS INPUT IT JSUT RETURNS 20 or something like that
+//ADMIN NEW DATA DISPLAY (admin-return.js / alsom rebuild admin-form to make less retarded)
 
 //FIX TOO MANY INPUTS, TEST various injections
 
