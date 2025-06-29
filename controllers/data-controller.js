@@ -28,18 +28,6 @@ export const getBackendDataRoute = async (req, res) => {
   }
 };
 
-// export const getNewDataRoute = async (req, res) => {
-//   try {
-//     const inputParams = req.body;
-
-//     const data = await runGetNewData(inputParams);
-//     return res.json(data);
-//   } catch (error) {
-//     console.error(error);
-//     return res.status(500).json({ error: "Failed to get new data" });
-//   }
-// };
-
 export const getAdminBackendDataRoute = async (req, res) => {
   try {
     const inputParams = req.body;
@@ -51,41 +39,3 @@ export const getAdminBackendDataRoute = async (req, res) => {
     return res.status(500).json({ error: "Failed to get admin backend data" });
   }
 };
-
-//=---------------------------
-
-// export const getNewArticleDataRoute = async (req, res) => {
-//   try {
-//     const inputParams = req.body;
-
-//     const data = await getNewArticleData(inputParams);
-//     return res.json(data);
-//   } catch (error) {
-//     console.error(error);
-//     return res.status(500).json({ error: "Failed to process admin command" });
-//   }
-// };
-
-// export const getNewPicDataRoute = async (req, res) => {
-//   try {
-//     const inputParams = req.body;
-
-//     const data = await getNewPicData(inputParams);
-//     return res.json(data);
-//   } catch (error) {
-//     console.error(error);
-//     return res.status(500).json({ error: "Failed to process admin command" });
-//   }
-// };
-
-// export const getNewVidDataRoute = async (req, res) => {
-//   try {
-//     const inputParams = req.body;
-
-//     const data = await getNewVidData(inputParams);
-//     return res.json(data);
-//   } catch (error) {
-//     console.error(error);
-//     return res.status(500).json({ error: "Failed to process admin command" });
-//   }
-// };

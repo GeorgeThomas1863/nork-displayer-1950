@@ -26,6 +26,9 @@ export const runGetAdminBackendData = async (inputObj) => {
   const { scrapeId, isFirstLoad } = inputObj;
   const { logArr } = CONFIG;
 
+  console.log("RUN GET ADMIN BACKEND DATA");
+  console.log(inputObj);
+
   //get ALL DATA FIRST
   const returnObj = {};
   const allDataObj = {};
