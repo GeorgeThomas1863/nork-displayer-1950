@@ -62,11 +62,14 @@ export const mainInputHandler = async (e) => {
 
 //ADMIN RESPONSIVE
 
-export const adminSubmitClick = async (e) => {
+export const adminClickHandler = async (e) => {
   e.preventDefault();
 
   const clickElement = e.target;
   const clickType = clickElement.getAttribute("type");
+
+  console.log("CLICK TYPE");
+  console.log(clickType);
 
   if (clickType !== "submit") return null;
 
@@ -90,5 +93,5 @@ if (displayElement) {
 }
 
 if (adminDisplayElement) {
-  adminDisplayElement.addEventListener("click", adminSubmitClick);
+  adminDisplayElement.addEventListener("click", adminClickHandler);
 }
