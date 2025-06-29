@@ -8,10 +8,7 @@ const adminDisplayElement = document.getElementById("admin-display-element");
 
 //BREAK OUT INTO SEPARATE FUNCTIONS
 export const buildAdminDisplay = async () => {
-  // export const buildAdminDisplay = async (isFirstLoad = true, inputObj = null) => {
-  // export const buildAdminDisplay = async (isFirstLoad = true, scrapeId = null, textStr = null) => {
   if (!adminDisplayElement) return null;
-  // const { scrapeId, textStr } = inputObj ?? {}; //sets items to null if inputObj null
   const { isFirstLoad } = adminState;
 
   if (isFirstLoad) {
@@ -19,23 +16,14 @@ export const buildAdminDisplay = async () => {
     adminDisplayElement.append(adminFormData);
   }
 
-  //get data first
-  // const params = {
-  //   route: "/get-admin-backend-data-route",
-  //   isFirstLoad: isFirstLoad,
-  //   scrapeId: scrapeId,
-  // };
-
-  // const adminBackendRaw = await sendToBack(params);
-  // if (!adminBackendRaw) return null;
-  // adminBackendRaw.textStr = textStr;
-  // const adminBackendData = await buildAdminBackendDisplay(adminBackendRaw);
-
   const newDataNeededAdmin = await checkNewDataNeededAdmin();
   if (!newDataNeededAdmin) return null;
 
   const adminBackendData = await sendToBack(adminState);
   if (!adminBackendData) return null;
+
+  console.log("ADMIN BACKEND DATA");
+  console.log(adminBackendData);
 
   const adminBackendDataParsed = await buildAdminBackendDisplay(adminBackendData);
   //on fail
