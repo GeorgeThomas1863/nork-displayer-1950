@@ -12,23 +12,23 @@ import { sendAdminCommand } from "./src-api.js";
 export const runGetAdminBackendData = async (inputObj) => {
   const { scrapeId, dataReq, isFirstLoad } = inputObj;
 
-  // console.log("RUN GET ADMIN BACKEND DATA");
-  // console.log(inputObj);
+  const firstLoadObj = { ...inputObj };
 
-  //get ALL DATA FIRST
-  if (isFirstLoad) {
-    const defaultLogObj = await getDefaultLogObj();
-    const defaultReturnObj = { ...inputObj };
-    defaultReturnObj.defaultLogObj = defaultLogObj;
+  const logObj = await getDefaultLogObj();
+  firstLoadObj.logObj = logObj;
 
-    return defaultReturnObj;
-  }
+  if (isFirstLoad) return firstLoadObj;
 
   //run admin submit
-  const adminSubmitData = await sendAdminCommand(dataReq);
+  const adminSubmitObj = await sendAdminCommand(dataReq);
+  if (!adminSubmitObj) return firstLoadObj;
 
-  console.log("ADMIN SUBMIT DATA");
-  console.dir(adminSubmitData);
+  const returnObj = { ...firstLoadObj, ...adminSubmitObj };
+
+  console.log("RETURN OBJ");
+  console.dir(returnObj);
+
+  return returnObj;
 
   // const returnObj = {};
   // const allDataObj = {};
