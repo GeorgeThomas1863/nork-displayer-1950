@@ -1,7 +1,7 @@
 import { buildCollapseContainer } from "../collapse.js";
 
 export const buildAdminBackendDisplay = async (inputObj) => {
-  const { allDataObj, scrapeDataObj, scrapeId, isFirstLoad, textStr } = inputObj;
+  const { defaultLogObj, scrapeDataObj, scrapeId, isFirstLoad, textStr } = inputObj;
 
   // console.log("BUILD ADMIN BACKEND DISPLAY");
   // console.log(inputObj);
@@ -10,7 +10,7 @@ export const buildAdminBackendDisplay = async (inputObj) => {
   adminBackendContainer.id = "admin-backend-container";
   adminBackendContainer.className = "wrapper collapse-content";
 
-  const defaultListData = await buildAdminDefaultList(allDataObj);
+  const defaultListData = await buildAdminDefaultList(defaultLogObj);
   defaultListData.className = "collapse-content";
 
   const defaultTitleElement = document.createElement("div");
