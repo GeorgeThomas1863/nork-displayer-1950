@@ -31,7 +31,9 @@ export const runGetAdminBackendData = async (inputObj) => {
   //get ALL DATA FIRST
   if (isFirstLoad) {
     const defaultLogObj = await getDefaultLogObj();
-    const defaultReturnObj = { ...defaultLogObj, ...inputObj };
+    const defaultReturnObj = { ...inputObj };
+    defaultReturnObj.defaultLogObj = defaultLogObj;
+
     return defaultReturnObj;
   }
 
