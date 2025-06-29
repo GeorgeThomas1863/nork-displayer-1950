@@ -95,41 +95,71 @@ export const buildAdminDefaultList = async (inputObj) => {
 };
 
 export const buildAdminNewList = async (inputObj) => {
-  const { startTime, endTime, textStr, scrapeId } = inputObj;
-
-  console.log("BUILD ADMIN NEW DISPLAY");
-  console.dir(inputObj);
+  const { scrapeStartTime, scrapeEndTime, textStr, scrapeId } = inputObj;
+  const newDataArr = [scrapeStartTime, scrapeEndTime, textStr, scrapeId];
 
   const adminNewList = document.createElement("ul");
   adminNewList.classList.add("admin-new-list");
 
-  //scrape Id
-  const scrapeIdElement = document.createElement("li");
-  scrapeIdElement.innerHTML = `Scrape ID: ${scrapeId}`;
-  scrapeIdElement.classList.add("admin-new-list-item");
-  adminNewList.append(scrapeIdElement);
+  for (let i = 0; i < newDataArr.length; i++) {
+    const data = newDataArr[i];
+    if (!data) continue;
 
-  //scrape text
-  if (textStr) {
-    const scrapeTextElement = document.createElement("li");
-    scrapeTextElement.innerHTML = `Scrape Text: ${textStr}`;
-    scrapeTextElement.classList.add("admin-new-list-item");
-    adminNewList.append(scrapeTextElement);
+    const listItem = document.createElement("li");
+    listItem.innerHTML = `${data}`;
+    listItem.classList.add("admin-new-list-item");
+    adminNewList.append(listItem);
   }
 
-  if (startTime) {
-    const startTimeElement = document.createElement("li");
-    startTimeElement.innerHTML = `Start Time: ${startTime}`;
-    startTimeElement.classList.add("admin-new-list-item");
-    adminNewList.append(startTimeElement);
-  }
+  //MAKE IT COLLAPSE
+  const newTitleElement = document.createElement("div");
+  newTitleElement.innerHTML = "New Scrape Data";
+  newTitleElement.className = "collapse-header admin-new-title";
+  adminNewList.className = "collapse-content";
 
-  if (endTime) {
-    const endTimeElement = document.createElement("li");
-    endTimeElement.innerHTML = `End Time: ${endTime}`;
-    endTimeElement.classList.add("admin-new-list-item");
-    adminNewList.append(endTimeElement);
-  }
+  const newListCollapseObj = {
+    titleElement: newTitleElement,
+    contentElement: adminNewList,
+    isExpanded: true,
+    className: "admin-backend-new-collapse",
+    dataAttribute: "admin-new-header",
+  };
 
-  return adminNewList;
+  const newListCollapseContainer = await buildCollapseContainer(newListCollapseObj);
+  newListCollapseContainer.className = "wrapper";
+
+  return newListCollapseContainer;
+
+  // console.log("BUILD ADMIN NEW DISPLAY");
+  // console.dir(inputObj);
+
+  // //scrape Id
+  // const scrapeIdElement = document.createElement("li");
+  // scrapeIdElement.innerHTML = `Scrape ID: ${scrapeId}`;
+  // scrapeIdElement.classList.add("admin-new-list-item");
+  // adminNewList.append(scrapeIdElement);
+
+  // //scrape text
+  // if (textStr) {
+  //   const scrapeTextElement = document.createElement("li");
+  //   scrapeTextElement.innerHTML = `Scrape Text: ${textStr}`;
+  //   scrapeTextElement.classList.add("admin-new-list-item");
+  //   adminNewList.append(scrapeTextElement);
+  // }
+
+  // if (startTime) {
+  //   const startTimeElement = document.createElement("li");
+  //   startTimeElement.innerHTML = `Start Time: ${startTime}`;
+  //   startTimeElement.classList.add("admin-new-list-item");
+  //   adminNewList.append(startTimeElement);
+  // }
+
+  // if (endTime) {
+  //   const endTimeElement = document.createElement("li");
+  //   endTimeElement.innerHTML = `End Time: ${endTime}`;
+  //   endTimeElement.classList.add("admin-new-list-item");
+  //   adminNewList.append(endTimeElement);
+  // }
+
+  // return adminNewList;
 };
