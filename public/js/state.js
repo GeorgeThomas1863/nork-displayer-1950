@@ -64,3 +64,9 @@ export const adminState = {
   dataReq: d.defaultInputMap,
   dataLoaded: d.defaultDataLoadedMap,
 };
+
+export const updateAdminStateDataLoaded = async (inputArray) => {
+  //build return true for now
+
+  return true;
+};
