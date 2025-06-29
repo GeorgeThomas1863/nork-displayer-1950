@@ -4,7 +4,7 @@ export const buildAdminForm = async () => {
   //create the fucking element
   const adminFormWrapper = document.createElement("ul");
   adminFormWrapper.id = "admin-form-wrapper";
-  adminFormWrapper.className = "wrapper collapse-content";
+  adminFormWrapper.className = "collapse-content";
 
   const commandListItem = await buildCommandListItem();
   const howMuchListItem = await buildHowMuchListItem();
@@ -43,6 +43,7 @@ export const buildAdminForm = async () => {
   };
 
   const adminFormCollapseContainer = await buildCollapseContainer(adminFormCollapseParams);
+  adminFormCollapseContainer.className = "wrapper";
 
   return adminFormCollapseContainer;
 };
