@@ -1,32 +1,19 @@
-import axios from "axios";
 import CONFIG from "../config/config.js";
 import dbModel from "../models/db-model.js";
+import { sendAdminCommand } from "./src-api.js";
 
-export const runAdminSubmit = async (inputParams) => {
-  const apiData = await sendAdminCommand(inputParams);
-  console.log("API DATA", apiData);
-  return apiData;
-};
-
-//SENDS THE ADMIN COMMAND TO THE API
-export const sendAdminCommand = async (inputParams) => {
-  const { apiURL } = CONFIG;
-  try {
-    const res = await axios.post(apiURL, inputParams);
-
-    return res.data;
-  } catch (e) {
-    console.log(e);
-    return null;
-  }
-};
+// export const runAdminSubmit = async (inputParams) => {
+//   const apiData = await sendAdminCommand(inputParams);
+//   console.log("API DATA", apiData);
+//   return apiData;
+// };
 
 //gets admin backend data
 export const runGetAdminBackendData = async (inputObj) => {
   const { scrapeId, dataReq, isFirstLoad } = inputObj;
 
-  console.log("RUN GET ADMIN BACKEND DATA");
-  console.log(inputObj);
+  // console.log("RUN GET ADMIN BACKEND DATA");
+  // console.log(inputObj);
 
   //get ALL DATA FIRST
   if (isFirstLoad) {
@@ -36,6 +23,12 @@ export const runGetAdminBackendData = async (inputObj) => {
 
     return defaultReturnObj;
   }
+
+  //run admin submit
+  const adminSubmitData = await sendAdminCommand(dataReq);
+
+  console.log("ADMIN SUBMIT DATA");
+  console.dir(adminSubmitData);
 
   // const returnObj = {};
   // const allDataObj = {};
