@@ -8,7 +8,7 @@ export const buildAdminBackendDisplay = async (inputObj) => {
 
   const adminBackendContainer = document.createElement("div");
   adminBackendContainer.id = "admin-backend-container";
-  // adminBackendContainer.className = "wrapper";
+  adminBackendContainer.className = "wrapper";
 
   const defaultListData = await buildAdminDefaultList(logObj);
   defaultListData.className = "collapse-content";
