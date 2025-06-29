@@ -20,6 +20,10 @@ export const buildAdminDisplay = async () => {
   if (!newDataNeededAdmin) return null;
 
   const adminBackendData = await sendToBack(adminState);
+
+  console.log("ADMIN BACKEND DATA");
+  console.dir(adminBackendData);
+
   if (!adminBackendData) return null;
 
   const adminBackendDataParsed = await buildAdminBackendDisplay(adminBackendData);
