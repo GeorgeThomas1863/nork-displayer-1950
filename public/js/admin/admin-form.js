@@ -2,14 +2,32 @@ import { buildCollapseContainer } from "../collapse.js";
 
 export const buildAdminForm = async () => {
   //create the fucking element
-  const adminFormWrapper = document.createElement("div");
+  const adminFormWrapper = document.createElement("ul");
   adminFormWrapper.id = "admin-form-wrapper";
-  adminFormWrapper.className = "wrapper";
+  adminFormWrapper.className = "wrapper collapse-content";
 
-  const adminFormContent = await buildAdminFormContent();
-  // adminFormWrapper.append(adminFormContent);
+  const commandListItem = await buildCommandListItem();
+  const howMuchListItem = await buildHowMuchListItem();
+  const urlListItem = await buildUrlListItem();
+  const itemTypeListItem = await buildItemTypeListItem();
+  const articleTypeListItem = await buildArticleTypeListItem();
+  const uploadTgListItem = await buildUploadTgListItem();
+  const tgIdListItem = await buildTgIdListItem();
+  const buttonListItem = await buildButtonListItem();
 
-  // create title element for collapse container
+  //append everything
+  adminFormWrapper.append(
+    commandListItem,
+    howMuchListItem,
+    urlListItem,
+    itemTypeListItem,
+    articleTypeListItem,
+    uploadTgListItem,
+    tgIdListItem,
+    buttonListItem
+  );
+
+  //MAKE IT COLLAPSE HERE
   const titleElement = document.createElement("div");
   titleElement.textContent = "ADMIN FORM";
   titleElement.className = "collapse-header admin-form-title";
@@ -18,32 +36,18 @@ export const buildAdminForm = async () => {
   //build collapse container
   const adminFormCollapseParams = {
     titleElement: titleElement,
-    contentElement: adminFormContent,
+    contentElement: adminFormWrapper,
     isExpanded: true,
     className: "admin-form-wrapper-collapse",
     dataAttribute: "admin-form-header",
   };
 
   const adminFormCollapseContainer = await buildCollapseContainer(adminFormCollapseParams);
-  adminFormWrapper.append(adminFormCollapseContainer);
 
-  return adminFormWrapper;
+  return adminFormCollapseContainer;
 };
 
-export const buildAdminFormContent = async () => {
-  // Create main wrapper ul
-  const adminFormList = document.createElement("ul");
-  adminFormList.id = "admin-form-list";
-
-  // Command select options
-  const commandOptionArray = [
-    { value: "admin-start-scrape", id: "admin-start-scrape", text: "Scrape Start", selected: true },
-    { value: "admin-stop-scrape", id: "admin-stop-scrape", text: "Scrape Stop" },
-    { value: "admin-start-scheduler", id: "admin-start-scheduler", text: "Scheduler ON" },
-    { value: "admin-stop-scheduler", id: "admin-stop-scheduler", text: "Scheduler OFF" },
-    { value: "admin-scrape-status", id: "admin-scrape-status", text: "Get Scrape Status" },
-  ];
-
+export const buildCommandListItem = async () => {
   // Create Command list item
   const commandListItem = document.createElement("li");
   commandListItem.id = "admin-command-list-item";
@@ -55,6 +59,15 @@ export const buildAdminFormContent = async () => {
   const commandSelect = document.createElement("select");
   commandSelect.name = "admin-command-type";
   commandSelect.id = "admin-command-type";
+
+  // Command select options
+  const commandOptionArray = [
+    { value: "admin-start-scrape", id: "admin-start-scrape", text: "Scrape Start", selected: true },
+    { value: "admin-stop-scrape", id: "admin-stop-scrape", text: "Scrape Stop" },
+    { value: "admin-start-scheduler", id: "admin-start-scheduler", text: "Scheduler ON" },
+    { value: "admin-stop-scheduler", id: "admin-stop-scheduler", text: "Scheduler OFF" },
+    { value: "admin-scrape-status", id: "admin-scrape-status", text: "Get Scrape Status" },
+  ];
 
   for (let i = 0; i < commandOptionArray.length; i++) {
     const optionData = commandOptionArray[i];
@@ -71,13 +84,10 @@ export const buildAdminFormContent = async () => {
   commandListItem.appendChild(commandLabel);
   commandListItem.appendChild(commandSelect);
 
-  // How Much select options
-  const howMuchOptionArray = [
-    { value: "admin-scrape-new", id: "admin-scrape-new", text: "Scrape NEW", selected: true },
-    { value: "admin-scrape-all", id: "admin-scrape-all", text: "Scrape ALL" },
-    { value: "admin-scrape-url", id: "admin-scrape-url", text: "Scrape URL" },
-  ];
+  return commandListItem;
+};
 
+export const buildHowMuchListItem = async () => {
   // Create How Much list item
   const howMuchListItem = document.createElement("li");
   howMuchListItem.id = "admin-how-much-list-item";
@@ -89,6 +99,13 @@ export const buildAdminFormContent = async () => {
   const howMuchSelect = document.createElement("select");
   howMuchSelect.name = "admin-how-much";
   howMuchSelect.id = "admin-how-much";
+
+  // How Much select options
+  const howMuchOptionArray = [
+    { value: "admin-scrape-new", id: "admin-scrape-new", text: "Scrape NEW", selected: true },
+    { value: "admin-scrape-all", id: "admin-scrape-all", text: "Scrape ALL" },
+    { value: "admin-scrape-url", id: "admin-scrape-url", text: "Scrape URL" },
+  ];
 
   for (let i = 0; i < howMuchOptionArray.length; i++) {
     const optionData = howMuchOptionArray[i];
@@ -105,6 +122,10 @@ export const buildAdminFormContent = async () => {
   howMuchListItem.appendChild(howMuchLabel);
   howMuchListItem.appendChild(howMuchSelect);
 
+  return howMuchListItem;
+};
+
+export const buildUrlListItem = async () => {
   // Create URL input (hidden)
   const urlListItem = document.createElement("li");
   urlListItem.id = "admin-url-input-list-item";
@@ -122,14 +143,10 @@ export const buildAdminFormContent = async () => {
   urlListItem.appendChild(urlLabel);
   urlListItem.appendChild(urlInput);
 
-  // Item Type select options
-  const itemTypeOptionArray = [
-    { value: "admin-everything-select", id: "admin-everything-select", text: "Everything", selected: true },
-    { value: "admin-articles-select", id: "admin-articles-select", text: "Just Articles" },
-    { value: "admin-picSets-select", id: "admin-picSets-select", text: "Just Pic Sets" },
-    { value: "admin-vidPages-select", id: "admin-vidPages-select", text: "Just Vid Pages" },
-  ];
+  return urlListItem;
+};
 
+export const buildItemTypeListItem = async () => {
   // Create Item Type list item
   const itemTypeListItem = document.createElement("li");
   itemTypeListItem.id = "admin-item-type-list-item";
@@ -141,6 +158,14 @@ export const buildAdminFormContent = async () => {
   const itemTypeSelect = document.createElement("select");
   itemTypeSelect.name = "admin-item-type";
   itemTypeSelect.id = "admin-item-type";
+
+  // Item Type select options
+  const itemTypeOptionArray = [
+    { value: "admin-everything-select", id: "admin-everything-select", text: "Everything", selected: true },
+    { value: "admin-articles-select", id: "admin-articles-select", text: "Just Articles" },
+    { value: "admin-picSets-select", id: "admin-picSets-select", text: "Just Pic Sets" },
+    { value: "admin-vidPages-select", id: "admin-vidPages-select", text: "Just Vid Pages" },
+  ];
 
   for (let i = 0; i < itemTypeOptionArray.length; i++) {
     const optionData = itemTypeOptionArray[i];
@@ -157,17 +182,10 @@ export const buildAdminFormContent = async () => {
   itemTypeListItem.appendChild(itemTypeLabel);
   itemTypeListItem.appendChild(itemTypeSelect);
 
-  // Article Type select options
-  const articleTypeOptionArray = [
-    { value: "admin-all-type", id: "admin-all-type", text: "All", selected: true },
-    { value: "admin-fatboy", id: "admin-fatboy", text: "Revolutionary Activities" },
-    { value: "admin-top-news", id: "admin-top-news", text: "Top News" },
-    { value: "admin-latest-news", id: "admin-latest-news", text: "Latest News" },
-    { value: "admin-external-news", id: "admin-external-news", text: "External News" },
-    { value: "admin-anecdote", id: "admin-anecdote", text: "Revolutionary Anecdotes" },
-    { value: "admin-people", id: "admin-people", text: "Always in Memory of the People" },
-  ];
+  return itemTypeListItem;
+};
 
+export const buildArticleTypeListItem = async () => {
   // Create Article Type list item (hidden)
   const articleTypeListItem = document.createElement("li");
   articleTypeListItem.id = "admin-article-type-list-item";
@@ -180,6 +198,17 @@ export const buildAdminFormContent = async () => {
   const articleTypeSelect = document.createElement("select");
   articleTypeSelect.name = "admin-article-type";
   articleTypeSelect.id = "admin-article-type";
+
+  // Article Type select options
+  const articleTypeOptionArray = [
+    { value: "admin-all-type", id: "admin-all-type", text: "All", selected: true },
+    { value: "admin-fatboy", id: "admin-fatboy", text: "Revolutionary Activities" },
+    { value: "admin-top-news", id: "admin-top-news", text: "Top News" },
+    { value: "admin-latest-news", id: "admin-latest-news", text: "Latest News" },
+    { value: "admin-external-news", id: "admin-external-news", text: "External News" },
+    { value: "admin-anecdote", id: "admin-anecdote", text: "Revolutionary Anecdotes" },
+    { value: "admin-people", id: "admin-people", text: "Always in Memory of the People" },
+  ];
 
   for (let i = 0; i < articleTypeOptionArray.length; i++) {
     const optionData = articleTypeOptionArray[i];
@@ -196,12 +225,10 @@ export const buildAdminFormContent = async () => {
   articleTypeListItem.appendChild(articleTypeLabel);
   articleTypeListItem.appendChild(articleTypeSelect);
 
-  // Upload TG select options
-  const uploadTgOptionArray = [
-    { value: "admin-yes-tg", id: "admin-yes-tg", text: "Yes", selected: true },
-    { value: "admin-no-tg", id: "admin-no-tg", text: "No" },
-  ];
+  return articleTypeListItem;
+};
 
+export const buildUploadTgListItem = async () => {
   // Create Upload TG list item
   const uploadTgListItem = document.createElement("li");
   uploadTgListItem.id = "admin-upload-tg-list-item";
@@ -213,6 +240,12 @@ export const buildAdminFormContent = async () => {
   const uploadTgSelect = document.createElement("select");
   uploadTgSelect.name = "admin-upload-tg";
   uploadTgSelect.id = "admin-upload-tg";
+
+  // Upload TG select options
+  const uploadTgOptionArray = [
+    { value: "admin-yes-tg", id: "admin-yes-tg", text: "Yes", selected: true },
+    { value: "admin-no-tg", id: "admin-no-tg", text: "No" },
+  ];
 
   for (let i = 0; i < uploadTgOptionArray.length; i++) {
     const optionData = uploadTgOptionArray[i];
@@ -229,6 +262,10 @@ export const buildAdminFormContent = async () => {
   uploadTgListItem.appendChild(uploadTgLabel);
   uploadTgListItem.appendChild(uploadTgSelect);
 
+  return uploadTgListItem;
+};
+
+export const buildTgIdListItem = async () => {
   // Create TG Chat ID input
   const tgIdListItem = document.createElement("li");
   tgIdListItem.id = "admin-tgId-list-item";
@@ -245,6 +282,10 @@ export const buildAdminFormContent = async () => {
   tgIdListItem.appendChild(tgIdLabel);
   tgIdListItem.appendChild(tgIdInput);
 
+  return tgIdListItem;
+};
+
+export const buildButtonListItem = async () => {
   // Create submit button
   const button = document.createElement("button");
   button.id = "admin-submit-button";
@@ -256,16 +297,5 @@ export const buildAdminFormContent = async () => {
   buttonListItem.id = "admin-submit-list-item";
   buttonListItem.appendChild(button);
 
-  adminFormList.append(
-    commandListItem,
-    howMuchListItem,
-    urlListItem,
-    itemTypeListItem,
-    articleTypeListItem,
-    uploadTgListItem,
-    tgIdListItem,
-    buttonListItem
-  );
-
-  return adminFormList;
+  return buttonListItem;
 };
