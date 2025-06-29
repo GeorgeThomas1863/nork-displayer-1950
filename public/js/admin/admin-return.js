@@ -68,6 +68,7 @@ export const buildAdminDefaultList = async (inputObj) => {
   const defaultTitleElement = document.createElement("div");
   defaultTitleElement.innerHTML = "Data Already Scraped";
   defaultTitleElement.className = "collapse-header admin-default-title";
+  adminDefaultList.className = "collapse-content";
 
   const defaultListCollapseObj = {
     titleElement: defaultTitleElement,
