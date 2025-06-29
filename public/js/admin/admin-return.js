@@ -13,30 +13,12 @@ export const buildAdminBackendDisplay = async (inputObj) => {
   const defaultListData = await buildAdminDefaultList(logObj);
   defaultListData.className = "collapse-content";
 
-  const defaultTitleElement = document.createElement("div");
-  defaultTitleElement.innerHTML = "Data Already Scraped";
-  defaultTitleElement.className = "collapse-header admin-default-title";
-
-  //make default list drop down
-  const defaultListCollapseObj = {
-    titleElement: defaultTitleElement,
-    contentElement: defaultListData,
-    isExpanded: true,
-    className: "admin-backend-default-collapse",
-    dataAttribute: "admin-default-header",
-  };
-
-  const defaultListCollapseContainer = await buildCollapseContainer(defaultListCollapseObj);
-  defaultListCollapseContainer.className = "wrapper";
-  adminBackendContainer.append(defaultListCollapseContainer);
+  adminBackendContainer.append(defaultListData);
 
   //if first load RETURN HERE
   if (isFirstLoad) return adminBackendContainer;
 
-  //OTHERWISE get new list data
-  scrapeDataObj.scrapeId = scrapeId;
-  scrapeDataObj.textStr = textStr;
-  const newListData = await buildAdminNewList(scrapeDataObj);
+  const newListData = await buildAdminNewList(inputObj);
   newListData.className = "collapse-content";
 
   // console.log("NEW LIST DATA");
@@ -76,16 +58,29 @@ export const buildAdminDefaultList = async (inputObj) => {
     const listItem = document.createElement("li");
     listItem.classList.add("admin-default-list-item");
 
-    //ADD MAP FUNCTION HERE
-
     // Set the content
-    listItem.innerHTML = `${key}: ${value}`;
+    listItem.innerHTML = `${key}: ${value}`; //not adding mapObj bc frontend
 
-    // Append to your list (replace 'yourList' with your actual list element)
     adminDefaultList.append(listItem);
   }
 
-  return adminDefaultList;
+  //MAKE IT COLLAPSE
+  const defaultTitleElement = document.createElement("div");
+  defaultTitleElement.innerHTML = "Data Already Scraped";
+  defaultTitleElement.className = "collapse-header admin-default-title";
+
+  const defaultListCollapseObj = {
+    titleElement: defaultTitleElement,
+    contentElement: adminDefaultList,
+    isExpanded: true,
+    className: "admin-backend-default-collapse",
+    dataAttribute: "admin-default-header",
+  };
+
+  const defaultListCollapseContainer = await buildCollapseContainer(defaultListCollapseObj);
+  defaultListCollapseContainer.className = "wrapper";
+
+  return defaultListCollapseContainer;
 };
 
 export const buildAdminNewList = async (inputObj) => {
