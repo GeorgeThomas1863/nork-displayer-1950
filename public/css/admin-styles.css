@@ -61,14 +61,6 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-#admin-form-wrapper li:first-child {
-  padding-top: 0;
-}
-
-/* #admin-form-wrapper li:last-of-type {
-  border-bottom: none;
-  padding-bottom: 1.5rem;
-} */
 
 /* Admin labels - follow wrapper label pattern */
 #admin-form-wrapper label {
