@@ -78,7 +78,6 @@ export const buildAdminDefaultList = async (inputObj) => {
   };
 
   const defaultListCollapseContainer = await buildCollapseContainer(defaultListCollapseObj);
-  defaultListCollapseContainer.className = "wrapper";
 
   return defaultListCollapseContainer;
 };
