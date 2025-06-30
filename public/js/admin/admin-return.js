@@ -1,5 +1,7 @@
 import { buildCollapseContainer } from "../collapse.js";
 
+// const adminDisplayElement = document.getElementById("admin-display-element");
+
 export const buildAdminBackendDisplay = async (inputObj) => {
   const { logObj, isFirstLoad } = inputObj;
 
@@ -18,13 +20,15 @@ export const buildAdminBackendDisplay = async (inputObj) => {
   }
 
   const replaceElement = replaceElementId.parentElement;
+  replaceElement.remove();
+  // adminDisplayElement.replaceChild(newListData, replaceElement);
 
-  console.log("REPLACE ELEMENT");
-  console.log(replaceElement);
+  // console.log("REPLACE ELEMENT");
+  // console.log(replaceElement);
 
-  replaceElement.replaceWith(newListData);
+  // replaceElement.replaceWith(newListData);
 
-  return replaceElement;
+  return newListData;
 
   // //otherwise replace it
   // adminBackendWrapper.replaceChild(newListData, replaceElement);
