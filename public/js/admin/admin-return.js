@@ -1,3 +1,4 @@
+import { adminNewListMap } from "../../config/map-display.js";
 import { buildCollapseContainer } from "../collapse.js";
 
 export const buildAdminBackendDisplay = async (inputObj) => {
@@ -63,7 +64,7 @@ export const buildAdminDefaultList = async (inputObj) => {
 
 export const buildAdminNewList = async (inputObj) => {
   const { scrapeStartTime, scrapeEndTime, textStr, scrapeId } = inputObj;
-  const newDataArr = [scrapeStartTime, scrapeEndTime, textStr, scrapeId];
+  const newDataArr = [scrapeId, textStr, scrapeStartTime, scrapeEndTime];
 
   console.log("ADMIN NEW LIST");
   console.dir(inputObj);
@@ -78,7 +79,8 @@ export const buildAdminNewList = async (inputObj) => {
     if (!data) continue;
 
     const listItem = document.createElement("li");
-    listItem.innerHTML = `${i}: ${data}`;
+    const str = `${adminNewListMap[data]}: ${data}`;
+    listItem.innerHTML = str;
     listItem.classList.add("admin-new-list-item");
     adminNewList.append(listItem);
   }
