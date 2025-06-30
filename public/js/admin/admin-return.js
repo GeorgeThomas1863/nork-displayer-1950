@@ -19,6 +19,9 @@ export const buildAdminBackendDisplay = async (inputObj) => {
 
   const replaceElement = replaceElementId.parentElement;
 
+  console.log("REPLACE ELEMENT");
+  console.log(replaceElement);
+
   replaceElement.replaceWith(newListData);
 
   return replaceElement;
