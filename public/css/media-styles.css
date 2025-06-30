@@ -132,6 +132,11 @@
     height: 6px;
   }
 
+  #backend-data-wrapper {
+    margin: 0 auto;
+    width: 90%;
+  }
+
   #pic-wrapper-element {
     grid-template-columns: 1fr;
     gap: 0.5rem;
@@ -229,6 +234,11 @@
   #action-button-element {
     flex-direction: column;
     margin-bottom: 2rem;
+  }
+
+  #backend-data-wrapper {
+    margin: 0 auto;
+    width: 100%;
   }
 
   #pic-wrapper-element {
