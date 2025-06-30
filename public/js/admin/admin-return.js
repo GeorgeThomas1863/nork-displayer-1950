@@ -3,25 +3,28 @@ import { buildCollapseContainer } from "../collapse.js";
 export const buildAdminBackendDisplay = async (inputObj) => {
   const { logObj, isFirstLoad } = inputObj;
 
-  const adminBackendWrapper = document.createElement("div");
-  adminBackendWrapper.id = "admin-backend-wrapper";
+  // const adminBackendWrapper = document.createElement("div");
+  // adminBackendWrapper.id = "admin-backend-wrapper";
 
   if (isFirstLoad) {
-    const defaultListData = await buildAdminDefaultList(logObj);
-    adminBackendWrapper.append(defaultListData);
-    return adminBackendWrapper;
+    return await buildAdminDefaultList(logObj);
   }
 
   //try removing here
   const replaceElement = document.getElementById("admin-new-list");
-  if (replaceElement) replaceElement.remove();
 
   const newListData = await buildAdminNewList(inputObj);
-  adminBackendWrapper.append(newListData);
+  if (!replaceElement) {
+    return newListData;
+  }
+
+  replaceElement.replaceWith(newListData);
+
+  return true;
 
   // //otherwise replace it
   // adminBackendWrapper.replaceChild(newListData, replaceElement);
-  return adminBackendWrapper;
+  // return adminBackendWrapper;
 };
 
 // console.log("BUILD ADMIN BACKEND DISPLAY");
