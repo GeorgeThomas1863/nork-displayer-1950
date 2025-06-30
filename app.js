@@ -2,7 +2,7 @@
 
 //TO DO:
 
-//ADMIN NEW DATA DISPLAY (admin-return.js / alsom rebuild admin-form to make less retarded)
+//NOW THAT DATA IS DISPLAYING, FIGURE OUT IF API IS RETURNING RIGHT SHIT AND HOW TO RESTART THSI SHIT
 
 //FIX TOO MANY INPUTS, TEST various injections
 
