@@ -175,8 +175,8 @@
   width: 100%;
   text-align: center;
   box-shadow: none;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
+  /* word-wrap: break-word;
+  overflow-wrap: break-word; */
 }
 
 .admin-new-list {
@@ -205,11 +205,11 @@
   border-bottom: 1px solid #e9ecef;
   font-size: 1.2rem;
   font-weight: 600;
-  line-height: 0;
+  /* line-height: 0; */
   color: #495057;
   transition: background-color 0.2s ease;
-  /* word-wrap: break-word;
-  overflow-wrap: break-word; */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
   text-align: left;
   text-transform: uppercase;
 }
