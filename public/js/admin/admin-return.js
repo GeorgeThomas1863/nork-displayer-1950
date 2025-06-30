@@ -9,13 +9,21 @@ export const buildAdminBackendDisplay = async (inputObj) => {
   if (isFirstLoad) {
     const defaultListData = await buildAdminDefaultList(logObj);
     adminBackendWrapper.append(defaultListData);
-  } else {
-    const newListData = await buildAdminNewList(inputObj);
-
-    //REPLACE SHIT HERE
-    adminBackendWrapper.append(newListData);
+    return adminBackendWrapper;
   }
 
+  //do first before creating another new list
+  const replaceElement = document.getElementById("admin-new-list");
+
+  const newListData = await buildAdminNewList(inputObj);
+
+  if (!replaceElement) {
+    adminBackendWrapper.append(newListData);
+    return adminBackendWrapper;
+  }
+
+  //otherwise replace it
+  adminBackendWrapper.replaceChild(newListData, replaceElement);
   return adminBackendWrapper;
 };
 
@@ -100,6 +108,7 @@ export const buildAdminNewList = async (inputObj) => {
   const newDataArr = [scrapeStartTime, scrapeEndTime, textStr, scrapeId];
 
   const adminNewList = document.createElement("ul");
+  adminNewList.id = "admin-new-list";
   adminNewList.classList.add("admin-new-list");
 
   for (let i = 0; i < newDataArr.length; i++) {
