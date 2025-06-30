@@ -55,6 +55,12 @@ const d = {
     pics: "pic-array-element",
     vids: "vid-array-element",
   },
+
+  adminNewListMap: {
+    scrapeStartTime: "Scrape Start Time",
+    scrapeEndTime: "Scrape End Time",
+    scrapeId: "Scrape ID",
+  },
 };
 
 export default d;

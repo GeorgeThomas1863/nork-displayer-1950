@@ -1,4 +1,4 @@
-import { adminNewListMap } from "../../../config/map-display.js";
+import d from "../define-things.js";
 import { buildCollapseContainer } from "../collapse.js";
 
 export const buildAdminBackendDisplay = async (inputObj) => {
@@ -79,7 +79,7 @@ export const buildAdminNewList = async (inputObj) => {
     if (!data) continue;
 
     const listItem = document.createElement("li");
-    const str = `${adminNewListMap[data]}: ${data}`;
+    const str = `${d.adminNewListMap[data]}: ${data}`;
     listItem.innerHTML = str;
     listItem.classList.add("admin-new-list-item");
     adminNewList.append(listItem);
