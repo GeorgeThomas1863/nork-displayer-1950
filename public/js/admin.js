@@ -23,6 +23,7 @@ export const buildAdminDisplay = async () => {
   if (!adminBackendData) return null;
 
   const adminBackendDisplay = await buildAdminBackendDisplay(adminBackendData);
+  adminBackendDisplay.id = "admin-backend-display";
 
   //on fail
   if (!adminBackendDisplay) {
@@ -31,7 +32,7 @@ export const buildAdminDisplay = async () => {
   }
 
   adminDisplayElement.append(adminBackendDisplay);
-  
+
   await updateAdminStateDataLoaded(adminBackendData);
 
   return "#DONE";
