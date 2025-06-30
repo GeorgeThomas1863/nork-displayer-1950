@@ -57,10 +57,10 @@ const d = {
   },
 
   adminNewListMap: {
-    scrapeStartTime: "Scrape Start Time:",
-    textStr: "TextStr:",
-    scrapeEndTime: "Scrape End Time:",
-    scrapeId: "Scrape ID:",
+    scrapeStartTime: "Scrape Start Time",
+    textStr: "TextStr",
+    scrapeEndTime: "Scrape End Time",
+    scrapeId: "Scrape ID",
   },
 };
 
