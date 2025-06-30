@@ -64,7 +64,7 @@ export const buildAdminDefaultList = async (inputObj) => {
 
 export const buildAdminNewList = async (inputObj) => {
   const { scrapeStartTime, scrapeEndTime, textStr, scrapeId } = inputObj;
-  const newDataArr = [scrapeId, textStr, scrapeStartTime, scrapeEndTime];
+  const newDataArr = ["scrapeId", "textStr", "scrapeStartTime", "scrapeEndTime"];
 
   console.log("ADMIN NEW LIST");
   console.dir(inputObj);
@@ -74,23 +74,19 @@ export const buildAdminNewList = async (inputObj) => {
   // adminNewList.id = `admin-new-list`;
   adminNewList.classList.add("admin-new-list");
 
-  //dumb way of doing map
-  for (let i = 0; i < newDataArr.length; i++) {
-    const data = newDataArr[i];
-    if (!data) continue;
-    for (const k in inputObj) {
-      if (inputObj[k] !== data) continue;
+  for (const k in inputObj) {
+    if (!newDataArr.includes(k)) continue;
 
-      const str = `${d.adminNewListMap[k]}: ${data}`;
-      const listItem = document.createElement("li");
+    const str = `${d.adminNewListMap[k]}: ${inputObj[k]}`;
+    const listItem = document.createElement("li");
 
-      listItem.innerHTML = str;
-      listItem.classList.add("admin-new-list-item");
-      adminNewList.append(listItem);
-    }
+    listItem.innerHTML = str;
+    listItem.classList.add("admin-new-list-item");
+    adminNewList.append(listItem);
   }
+
   //add back in textStr
-  adminNewList.append(textStr);
+  // adminNewList.append(textStr);
 
   //MAKE IT COLLAPSE
   const newTitleElement = document.createElement("div");
