@@ -56,12 +56,12 @@ const d = {
     vids: "vid-array-element",
   },
 
-  adminNewListMap: {
-    scrapeStartTime: "Scrape Start Time: ",
-    textStr: "",
-    scrapeEndTime: "Scrape End Time: ",
-    scrapeId: "Scrape ID: ",
-  },
+  // adminNewListMap: {
+  //   scrapeStartTime: "Scrape Start Time: ",
+  //   textStr: "",
+  //   scrapeEndTime: "Scrape End Time: ",
+  //   scrapeId: "Scrape ID: ",
+  // },
 };
 
 export default d;

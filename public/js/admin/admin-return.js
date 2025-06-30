@@ -1,4 +1,4 @@
-import d from "../define-things.js";
+// import d from "../define-things.js";
 import { buildCollapseContainer } from "../collapse.js";
 
 export const buildAdminBackendDisplay = async (inputObj) => {
@@ -63,7 +63,7 @@ export const buildAdminDefaultList = async (inputObj) => {
 };
 
 export const buildAdminNewList = async (inputObj) => {
-  const { scrapeStartTime, scrapeEndTime, textStr, scrapeId } = inputObj;
+  const { scrapeId } = inputObj;
   const newDataArr = ["scrapeId", "textStr", "scrapeStartTime", "scrapeEndTime"];
 
   console.log("ADMIN NEW LIST");
@@ -77,7 +77,8 @@ export const buildAdminNewList = async (inputObj) => {
   for (const k in inputObj) {
     if (!newDataArr.includes(k)) continue;
 
-    const str = d.adminNewListMap[k] + inputObj[k];
+    // const str = d.adminNewListMap[k] + inputObj[k];
+    const str = `${k.toUpperCase()}: ${inputObj[k]}`;
     const listItem = document.createElement("li");
 
     listItem.innerHTML = str;
