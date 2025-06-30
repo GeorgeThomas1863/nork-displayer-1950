@@ -12,9 +12,9 @@ export const buildAdminBackendDisplay = async (inputObj) => {
     return adminBackendWrapper;
   }
 
-  //do first before creating another new list
-  // const replaceWrapper = document.getElementById("admin-backend-wrapper");
-  // const replaceElement = document.getElementById("admin-new-list");
+  //try removing here
+  const replaceElement = document.getElementById("admin-new-list");
+  if (replaceElement) replaceElement.remove();
 
   const newListData = await buildAdminNewList(inputObj);
   adminBackendWrapper.append(newListData);
@@ -105,7 +105,8 @@ export const buildAdminNewList = async (inputObj) => {
   const newDataArr = [scrapeStartTime, scrapeEndTime, textStr, scrapeId];
 
   const adminNewList = document.createElement("ul");
-  adminNewList.id = `admin-list-${scrapeId}`;
+  // adminNewList.id = `admin-list-${scrapeId}`;
+  adminNewList.id = `admin-new-list`;
   adminNewList.classList.add("admin-new-list");
 
   for (let i = 0; i < newDataArr.length; i++) {
@@ -135,18 +136,18 @@ export const buildAdminNewList = async (inputObj) => {
   const newListCollapseContainer = await buildCollapseContainer(newListCollapseObj);
   newListCollapseContainer.className = "wrapper";
 
-  const adminNewListArray = document.querySelectorAll(".admin-new-list");
+  // const adminNewListArray = document.querySelectorAll(".admin-new-list");
 
-  if (!adminNewListArray || !adminNewListArray.length) {
-    return newListCollapseContainer;
-  }
+  // if (!adminNewListArray || !adminNewListArray.length) {
+  //   return newListCollapseContainer;
+  // }
 
-  //remove the old list
-  adminNewListArray[0].remove();
+  // //remove the old list
+  // adminNewListArray[0].remove();
 
-  console.log("ALLAHU AKBAR");
-  console.log("ADMIN NEW LIST ARRAY");
-  console.dir(adminNewListArray);
+  // console.log("ALLAHU AKBAR");
+  // console.log("ADMIN NEW LIST ARRAY");
+  // console.dir(adminNewListArray);
 
   return newListCollapseContainer;
 
