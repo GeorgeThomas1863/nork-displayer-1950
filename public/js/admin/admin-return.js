@@ -75,7 +75,7 @@ export const buildAdminNewList = async (inputObj) => {
     if (!data) continue;
 
     const listItem = document.createElement("li");
-    listItem.innerHTML = `${i.toUpperCase()}: ${data}`;
+    listItem.innerHTML = `${i}: ${data}`;
     listItem.classList.add("admin-new-list-item");
     adminNewList.append(listItem);
   }
