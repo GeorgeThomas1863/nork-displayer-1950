@@ -11,7 +11,7 @@ export const buildAdminBackendDisplay = async (inputObj) => {
   }
 
   //try removing here
-  const replaceElement = document.getElementById("admin-new-list");
+  const replaceElement = document.getElementById("admin-new-list-collapse");
 
   const newListData = await buildAdminNewList(inputObj);
   if (!replaceElement) {
@@ -20,7 +20,7 @@ export const buildAdminBackendDisplay = async (inputObj) => {
 
   replaceElement.replaceWith(newListData);
 
-  return true;
+  return replaceElement;
 
   // //otherwise replace it
   // adminBackendWrapper.replaceChild(newListData, replaceElement);
@@ -127,6 +127,7 @@ export const buildAdminNewList = async (inputObj) => {
   newTitleElement.innerHTML = "New Scrape Data";
   newTitleElement.className = "collapse-header admin-new-title";
   adminNewList.className = "collapse-content";
+  adminNewList.id = "admin-new-list-collapse";
 
   const newListCollapseObj = {
     titleElement: newTitleElement,
