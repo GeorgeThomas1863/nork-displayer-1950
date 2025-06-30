@@ -174,12 +174,12 @@
 /* List item styling */
 .admin-default-list-item,
 .admin-new-list-item {
-  margin: 0;
+  /* margin: 0; */
   padding: 0 0.5rem;
   border-bottom: 1px solid #e9ecef;
   font-size: 1.2rem;
   font-weight: 600;
-  /* line-height: 0; */
+  line-height: 1;
   color: #495057;
   transition: background-color 0.2s ease;
   word-wrap: break-word;
