@@ -206,8 +206,8 @@
   line-height: 0;
   color: #495057;
   transition: background-color 0.2s ease;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
+  /* word-wrap: break-word;
+  overflow-wrap: break-word; */
   text-align: left;
   text-transform: uppercase;
 }
