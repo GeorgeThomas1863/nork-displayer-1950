@@ -14,17 +14,13 @@ export const buildAdminBackendDisplay = async (inputObj) => {
 
   //do first before creating another new list
   // const replaceWrapper = document.getElementById("admin-backend-wrapper");
-  const replaceElement = document.getElementById("admin-new-list");
+  // const replaceElement = document.getElementById("admin-new-list");
 
   const newListData = await buildAdminNewList(inputObj);
+  adminBackendWrapper.append(newListData);
 
-  if (!replaceElement) {
-    adminBackendWrapper.append(newListData);
-    return adminBackendWrapper;
-  }
-
-  //otherwise replace it
-  adminBackendWrapper.replaceChild(newListData, replaceElement);
+  // //otherwise replace it
+  // adminBackendWrapper.replaceChild(newListData, replaceElement);
   return adminBackendWrapper;
 };
 
@@ -141,6 +137,14 @@ export const buildAdminNewList = async (inputObj) => {
 
   const adminNewListArray = document.querySelectorAll(".admin-new-list");
 
+  if (!adminNewListArray || !adminNewListArray.length) {
+    return newListCollapseContainer;
+  }
+
+  //remove the old list
+  adminNewListArray[0].remove();
+
+  console.log("ALLAHU AKBAR");
   console.log("ADMIN NEW LIST ARRAY");
   console.dir(adminNewListArray);
 
