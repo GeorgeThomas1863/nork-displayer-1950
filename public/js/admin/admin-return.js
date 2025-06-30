@@ -65,6 +65,9 @@ export const buildAdminNewList = async (inputObj) => {
   const { scrapeStartTime, scrapeEndTime, textStr, scrapeId } = inputObj;
   const newDataArr = [scrapeStartTime, scrapeEndTime, textStr, scrapeId];
 
+  console.log("ADMIN NEW LIST");
+  console.dir(inputObj);
+
   const adminNewList = document.createElement("ul");
   adminNewList.id = `admin-new-list-${scrapeId}`;
   // adminNewList.id = `admin-new-list`;
