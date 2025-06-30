@@ -10,13 +10,14 @@ export const buildAdminBackendDisplay = async (inputObj) => {
     return await buildAdminDefaultList(logObj);
   }
 
-  //try removing here
-  const replaceElement = document.getElementById("admin-new-list-collapse");
+  const replaceElementId = document.getElementById("admin-new-list-collapse");
 
   const newListData = await buildAdminNewList(inputObj);
-  if (!replaceElement) {
+  if (!replaceElementId) {
     return newListData;
   }
+
+  const replaceElement = replaceElementId.parentElement;
 
   replaceElement.replaceWith(newListData);
 
