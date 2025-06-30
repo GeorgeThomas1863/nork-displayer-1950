@@ -58,6 +58,7 @@ const d = {
 
   adminNewListMap: {
     scrapeStartTime: "Scrape Start Time",
+    textStr: "",
     scrapeEndTime: "Scrape End Time",
     scrapeId: "Scrape ID",
   },
