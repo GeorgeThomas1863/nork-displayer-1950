@@ -13,18 +13,19 @@ export const buildAdminBackendDisplay = async (inputObj) => {
   }
 
   //do first before creating another new list
+  const replaceWrapper = document.getElementById("admin-backend-wrapper");
   const replaceElement = document.getElementById("admin-new-list");
 
   const newListData = await buildAdminNewList(inputObj);
 
-  if (!replaceElement) {
+  if (!replaceElement || !replaceWrapper) {
     adminBackendWrapper.append(newListData);
     return adminBackendWrapper;
   }
 
   //otherwise replace it
-  adminBackendWrapper.replaceChild(newListData, replaceElement);
-  return adminBackendWrapper;
+  replaceWrapper.replaceChild(newListData, replaceElement);
+  return replaceWrapper;
 };
 
 // console.log("BUILD ADMIN BACKEND DISPLAY");
