@@ -74,16 +74,23 @@ export const buildAdminNewList = async (inputObj) => {
   // adminNewList.id = `admin-new-list`;
   adminNewList.classList.add("admin-new-list");
 
+  //dumb way of doing map
   for (let i = 0; i < newDataArr.length; i++) {
     const data = newDataArr[i];
     if (!data) continue;
+    for (const k in inputObj) {
+      if (k !== data) continue;
 
-    const listItem = document.createElement("li");
-    const str = `${d.adminNewListMap[data]}: ${data}`;
-    listItem.innerHTML = str;
-    listItem.classList.add("admin-new-list-item");
-    adminNewList.append(listItem);
+      const str = `${d.adminNewListMap[k]}: ${data}`;
+      const listItem = document.createElement("li");
+
+      listItem.innerHTML = str;
+      listItem.classList.add("admin-new-list-item");
+      adminNewList.append(listItem);
+    }
   }
+  //add back in textStr
+  adminNewList.append(textStr);
 
   //MAKE IT COLLAPSE
   const newTitleElement = document.createElement("div");
