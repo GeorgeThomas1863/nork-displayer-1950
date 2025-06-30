@@ -1,4 +1,4 @@
-import { adminNewListMap } from "../../config/map-display.js";
+import { adminNewListMap } from "../../../config/map-display.js";
 import { buildCollapseContainer } from "../collapse.js";
 
 export const buildAdminBackendDisplay = async (inputObj) => {
