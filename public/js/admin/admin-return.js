@@ -79,7 +79,7 @@ export const buildAdminNewList = async (inputObj) => {
     const data = newDataArr[i];
     if (!data) continue;
     for (const k in inputObj) {
-      if (k !== data) continue;
+      if (inputObj[k] !== data) continue;
 
       const str = `${d.adminNewListMap[k]}: ${data}`;
       const listItem = document.createElement("li");
