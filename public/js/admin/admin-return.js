@@ -77,7 +77,7 @@ export const buildAdminNewList = async (inputObj) => {
   for (const k in inputObj) {
     if (!newDataArr.includes(k)) continue;
 
-    const str = d.adminNewListMap[k] + inputObj[k];
+    const str = `${d.adminNewListMap[k]}: ${inputObj[k]}`;
     // const str = `${k.toUpperCase()}: ${inputObj[k]}`;
     const listItem = document.createElement("li");
 
