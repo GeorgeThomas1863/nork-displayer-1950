@@ -13,8 +13,10 @@ export const runGetAdminBackendData = async (inputObj) => {
 
   if (isFirstLoad) return firstLoadObj;
 
-  //run admin submit
-  const adminSubmitObj = await sendAdminStart(dataReq);
+  //run admin submit (callback function)
+  const adminSubmitObj = await sendAdminStart(dataReq, (data) => {
+    handleAdminUpdate(data, firstLoadObj);
+  });
   if (!adminSubmitObj) return firstLoadObj;
 
   const returnObj = { ...firstLoadObj, ...adminSubmitObj };
@@ -41,4 +43,13 @@ export const getDefaultLogObj = async () => {
   }
 
   return defaultLogObj;
+};
+
+export const handleAdminUpdate = async (data, firstLoadObj) => {
+  console.log("ADMIN UPDATE");
+  console.dir(data);
+  if (!data) return null;
+
+  const returnObj = { ...firstLoadObj, ...data };
+  return returnObj;
 };
