@@ -2,10 +2,10 @@ import axios from "axios";
 import CONFIG from "../config/config.js";
 
 //SENDS THE ADMIN COMMAND TO THE API
-export const sendAdminCommand = async (inputParams) => {
-  const { apiURL } = CONFIG;
+export const sendAdminStart = async (inputParams) => {
+  const { apiStartURL } = CONFIG;
   try {
-    const res = await axios.post(apiURL, inputParams);
+    const res = await axios.post(apiStartURL, inputParams);
 
     return res.data;
   } catch (e) {
