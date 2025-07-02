@@ -5,17 +5,19 @@ import CONFIG from "../config/config.js";
 export const sendAdminStart = async (inputParams, onUpdate) => {
   const { apiStartURL, apiUpdateURL, updateInterval } = CONFIG;
   try {
-    await axios.post(apiStartURL, inputParams);
+    const res = await axios.post(apiStartURL, inputParams);
 
     // Poll for updates
     const pollInterval = setInterval(async () => {
-      const res = await axios.get(apiUpdateURL);
-      onUpdate(res.data);
+      const updateRes = await axios.get(apiUpdateURL);
+      onUpdate(updateRes.data);
 
-      if (res.data.complete) {
+      if (updateRes.data.complete) {
         clearInterval(pollInterval);
       }
     }, updateInterval);
+
+    return res.data;
   } catch (e) {
     console.log(e);
     return null;
