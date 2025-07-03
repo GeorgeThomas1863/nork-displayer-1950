@@ -17,7 +17,7 @@ export const sendAdminStart = async (inputParams, onUpdate) => {
         const updateRes = await axios.get(apiUpdateURL);
         onUpdate(updateRes.data);
 
-        if (updateRes.data.complete) {
+        if (updateRes.data.finished) {
           clearInterval(pollInterval);
         }
       } catch (e) {
