@@ -43,6 +43,7 @@ export const sendToBackAdmin = async (inputParams, onUpdate) => {
     // Start polling for updates from the frontend
     const pollInterval = setInterval(async () => {
       try {
+        console.log("AHHHHHHHHHHHHHHH")
         const updateRoute = "/get-update-data-admin-route";
         const updateRes = await fetch(updateRoute, {
           method: "GET",
