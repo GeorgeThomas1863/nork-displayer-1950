@@ -1,13 +1,13 @@
 import express from "express";
 
 import { indexDisplay, adminDisplay, display404, display500 } from "../controllers/display.js";
-import { getAdminDefaultDataRoute, getAdminUpdateDataRoute, getBackendDataRoute } from "../controllers/data-controller.js";
+import { getDefaultDataAdminRoute, getUpdateDataAdminRoute, getBackendDataRoute } from "../controllers/data-controller.js";
 
 const router = express.Router();
 
 //admin routes
-router.post("/get-admin-default-data-route", getAdminDefaultDataRoute);
-router.get("/get-admin-update-data-route", getAdminUpdateDataRoute);
+router.post("/get-default-data-admin-route", getDefaultDataAdminRoute);
+router.get("/get-update-data-admin-route", getUpdateDataAdminRoute);
 
 //main route handler
 router.post("/get-backend-data-route", getBackendDataRoute);

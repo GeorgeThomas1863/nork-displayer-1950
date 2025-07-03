@@ -2,31 +2,23 @@ import axios from "axios";
 import CONFIG from "../config/config.js";
 
 //SENDS THE ADMIN COMMAND TO THE API
-export const sendAdminStart = async (inputParams, onUpdate) => {
-  const { apiStartURL, apiUpdateURL, updateInterval } = CONFIG;
-
-  //TURN OFF
-  const testInterval = updateInterval / 60;
+export const sendAdminStart = async (inputParams) => {
+  const { apiStartURL } = CONFIG;
 
   try {
     const res = await axios.post(apiStartURL, inputParams);
+    return res.data;
+  } catch (e) {
+    console.log(e);
+    return null;
+  }
+};
 
-    // Poll for updates
-    const pollInterval = setInterval(async () => {
-      try {
-        
-        const updateRes = await axios.get(apiUpdateURL);
-        onUpdate(updateRes.data);
+export const sendAdminUpdate = async () => {
+  const { apiUpdateURL } = CONFIG;
 
-        if (updateRes.data.finished) {
-          clearInterval(pollInterval);
-        }
-      } catch (e) {
-        console.log("Error polling for updates");
-        console.log(e);
-      }
-    }, testInterval);
-
+  try {
+    const res = await axios.get(apiUpdateURL);
     return res.data;
   } catch (e) {
     console.log(e);

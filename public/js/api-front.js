@@ -1,6 +1,6 @@
 import d from "./define-things.js";
 
-//CANNOT USE AXIOS HERE (just for backend / much harder, just use fetch)
+//FOR MAIN
 export const sendToBack = async (inputParams) => {
   const { route } = inputParams;
 
@@ -21,6 +21,7 @@ export const sendToBack = async (inputParams) => {
   }
 };
 
+//FOR ADMIN
 export const sendToBackAdmin = async (inputParams, onUpdate) => {
   const { route } = inputParams;
 
@@ -39,7 +40,7 @@ export const sendToBackAdmin = async (inputParams, onUpdate) => {
     // Start polling for updates from the frontend
     const pollInterval = setInterval(async () => {
       try {
-        const updateRoute = "/get-admin-update-data-route";
+        const updateRoute = "/get-update-data-admin-route";
         const updateRes = await fetch(updateRoute, {
           method: "GET",
           headers: {

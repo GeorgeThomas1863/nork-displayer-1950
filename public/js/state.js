@@ -52,7 +52,7 @@ export const updateStateDataLoaded = async (inputArray) => {
 //-----------------------------------------
 
 export const adminState = {
-  route: "/get-admin-default-data-route",
+  route: "/get-default-data-admin-route",
   isFirstLoad: true,
   dataType: "articles",
   articleType: "fatboy",

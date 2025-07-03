@@ -1,8 +1,9 @@
 // import { runGetBackendData, runGetNewData, getNewArticleData, getNewPicData, getNewVidData } from "../src/src-main.js";
 import { runGetBackendData } from "../src/src-main.js";
-import { runAdminGetDefaultData, runAdminGetUpdateData } from "../src/src-admin.js";
+import { runGetDefaultDataAdmin } from "../src/src-admin.js";
+import { sendAdminUpdate } from "../src/api-back.js";
 
-//get data from backend for displa
+//get data from backend for display
 export const getBackendDataRoute = async (req, res) => {
   try {
     const inputParams = req.body;
@@ -15,11 +16,13 @@ export const getBackendDataRoute = async (req, res) => {
   }
 };
 
-export const getAdminDefaultDataRoute = async (req, res) => {
+//------------------------------------
+
+export const getDefaultDataAdminRoute = async (req, res) => {
   try {
     const inputParams = req.body;
 
-    const data = await runAdminGetDefaultData(inputParams);
+    const data = await runGetDefaultDataAdmin(inputParams);
     return res.json(data);
   } catch (error) {
     console.error(error);
@@ -27,9 +30,10 @@ export const getAdminDefaultDataRoute = async (req, res) => {
   }
 };
 
-export const getAdminUpdateDataRoute = async (req, res) => {
+//since get req just sen from here
+export const getUpdateDataAdminRoute = async (req, res) => {
   try {
-    const data = await runAdminGetUpdateData();
+    const data = await sendAdminUpdate();
     return res.json(data);
   } catch (e) {
     console.error(e);

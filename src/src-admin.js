@@ -3,7 +3,7 @@ import dbModel from "../models/db-model.js";
 import { sendAdminStart } from "./api-back.js";
 
 //gets admin backend data
-export const runGetAdminBackendData = async (inputObj) => {
+export const runGetDefaultDataAdmin = async (inputObj) => {
   const { dataReq, isFirstLoad } = inputObj;
 
   const firstLoadObj = { ...inputObj };
@@ -14,18 +14,25 @@ export const runGetAdminBackendData = async (inputObj) => {
   if (isFirstLoad) return firstLoadObj;
 
   //run admin submit (callback function)
-  const adminSubmitObj = await sendAdminStart(dataReq, (data) => {
-    handleAdminUpdate(data, firstLoadObj);
-  });
-  if (!adminSubmitObj) return firstLoadObj;
+  // const adminSubmitObj = await sendAdminStart(dataReq, (data) => {
+  //   handleAdminUpdate(data, firstLoadObj);
+  // });
+  const adminStartObj = await sendAdminStart(dataReq);
+  if (!adminStartObj) return firstLoadObj;
 
-  const returnObj = { ...firstLoadObj, ...adminSubmitObj };
+  const returnObj = { ...firstLoadObj, ...adminStartObj };
 
   console.log("RETURN OBJ");
   console.dir(returnObj);
 
   return returnObj;
 };
+
+// export const runGetUpdateDataAdmin = async () => {
+//   const updateObj = await sendAdminUpdate();
+
+//   return updateObj;
+// };
 
 //default log from mongodb
 export const getDefaultLogObj = async () => {
@@ -45,11 +52,11 @@ export const getDefaultLogObj = async () => {
   return defaultLogObj;
 };
 
-export const handleAdminUpdate = async (data, firstLoadObj) => {
-  console.log("ADMIN UPDATE");
-  console.dir(data);
-  if (!data) return null;
+// export const handleAdminUpdate = async (data, firstLoadObj) => {
+//   console.log("ADMIN UPDATE");
+//   console.dir(data);
+//   if (!data) return null;
 
-  const returnObj = { ...firstLoadObj, ...data };
-  return returnObj;
-};
+//   const returnObj = { ...firstLoadObj, ...data };
+//   return returnObj;
+// };
