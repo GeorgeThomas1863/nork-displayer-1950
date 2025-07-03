@@ -21,6 +21,12 @@ export const buildAdminBackendDisplay = async (inputObj) => {
   return newListData;
 };
 
+//unnecessary but dont feel like integrating
+export const buildAdminUpdateDisplay = async (inputObj) => {
+  console.log("ADMIN UPDATE DISPLAY");
+  console.dir(inputObj);
+};
+
 export const buildAdminDefaultList = async (inputObj) => {
   const adminDefaultList = document.createElement("ul");
   adminDefaultList.classList.add("admin-default-list");

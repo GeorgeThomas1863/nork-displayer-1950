@@ -2,7 +2,7 @@ import { adminState, updateAdminStateDataLoaded } from "./state.js";
 import { buildAdminForm } from "./admin/admin-form.js";
 // import { buildAdminParams } from "./util.js";
 import { sendToBackAdmin } from "./api-front.js";
-import { buildAdminBackendDisplay } from "./admin/admin-return.js";
+import { buildAdminBackendDisplay, buildAdminUpdateDisplay } from "./admin/admin-return.js";
 import { checkNewDataNeededAdmin } from "./check-data.js";
 
 const adminDisplayElement = document.getElementById("admin-display-element");
@@ -26,7 +26,7 @@ export const buildAdminDisplay = async () => {
     console.log("ADMIN BACKEND DATA");
     console.dir(updateData);
 
-    await buildAdminBackendDisplay(updateData);
+    await buildAdminUpdateDisplay(updateData);
   });
 
   if (!adminBackendData) return null;
