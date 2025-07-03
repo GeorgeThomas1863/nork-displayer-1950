@@ -1,6 +1,6 @@
 import { adminState, updateAdminStateDataLoaded } from "./state.js";
 import { buildAdminForm } from "./admin/admin-form.js";
-import { buildAdminParams, sendToBack } from "./util.js";
+import { buildAdminParams, sendToBack, sendToBackAdmin } from "./util.js";
 import { buildAdminBackendDisplay } from "./admin/admin-return.js";
 import { checkNewDataNeededAdmin } from "./check-data.js";
 
@@ -19,7 +19,13 @@ export const buildAdminDisplay = async () => {
   const newDataNeededAdmin = await checkNewDataNeededAdmin();
   if (!newDataNeededAdmin) return null;
 
-  const adminBackendData = await sendToBack(adminState);
+  const adminBackendData = await sendToBackAdmin(adminState, async (updateData) => {
+    console.log("ADMIN BACKEND DATA");
+    console.dir(updateData);
+
+    await buildAdminBackendDisplay(updateData);
+  });
+
   if (!adminBackendData) return null;
 
   const adminBackendDisplay = await buildAdminBackendDisplay(adminBackendData);

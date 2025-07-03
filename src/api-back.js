@@ -14,6 +14,7 @@ export const sendAdminStart = async (inputParams, onUpdate) => {
     // Poll for updates
     const pollInterval = setInterval(async () => {
       try {
+        
         const updateRes = await axios.get(apiUpdateURL);
         onUpdate(updateRes.data);
 

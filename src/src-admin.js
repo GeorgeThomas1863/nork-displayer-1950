@@ -1,6 +1,6 @@
 import CONFIG from "../config/config.js";
 import dbModel from "../models/db-model.js";
-import { sendAdminStart } from "./src-api.js";
+import { sendAdminStart } from "./api-back.js";
 
 //gets admin backend data
 export const runGetAdminBackendData = async (inputObj) => {
