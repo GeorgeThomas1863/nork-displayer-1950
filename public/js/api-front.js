@@ -25,6 +25,9 @@ export const sendToBack = async (inputParams) => {
 export const sendToBackAdmin = async (inputParams, onUpdate) => {
   const { route } = inputParams;
 
+  console.log("SEND TO BACK ADMIN");
+  console.dir(inputParams);
+
   // Send initial request to backend (starts the scraping process)
   try {
     const res = await fetch(route, {
@@ -49,6 +52,9 @@ export const sendToBackAdmin = async (inputParams, onUpdate) => {
         });
 
         const updateData = await updateRes.json();
+
+        console.log("UPDATE DATA");
+        console.dir(updateData);
 
         // Call the callback with update data
         onUpdate(updateData);

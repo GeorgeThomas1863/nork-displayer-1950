@@ -76,7 +76,7 @@ export const adminClickHandler = async (e) => {
   await updateAdminStateEventTriggered(clickType);
 
   //run thing
-  console.log("AHHHHHHHHHHH");
+  // console.log("AHHHHHHHHHHH");
   await buildAdminDisplay();
 
   return "DONE";

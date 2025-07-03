@@ -114,7 +114,7 @@ export const checkItemExists = async (inputObj, type = "pic") => {
   }
 
   if (!checkSizeRaw) {
-    console.log("AHHHHHHHHHHHHHHHHHHHH");
+    // console.log("AHHHHHHHHHHHHHHHHHHHH");
     const error = new Error("FILE CORRUPTED / WRONG SIZE");
     error.savePath = savePath;
     throw error;
@@ -126,7 +126,7 @@ export const checkItemExists = async (inputObj, type = "pic") => {
   //check for slightly smaller file
   const checkSize = checkSizeRaw * 0.7;
   if (!fileSize || fileSize < checkSize) {
-    console.log("AHHHHHHHHHHHHHHHHHHHH");
+    // console.log("AHHHHHHHHHHHHHHHHHHHH");
     const error = new Error("FILE CORRUPTED / WRONG SIZE");
     error.savePath = savePath;
     throw error;

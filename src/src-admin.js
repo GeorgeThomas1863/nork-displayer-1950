@@ -13,26 +13,16 @@ export const runGetDefaultDataAdmin = async (inputObj) => {
 
   if (isFirstLoad) return firstLoadObj;
 
-  //run admin submit (callback function)
-  // const adminSubmitObj = await sendAdminStart(dataReq, (data) => {
-  //   handleAdminUpdate(data, firstLoadObj);
-  // });
   const adminStartObj = await sendAdminStart(dataReq);
   if (!adminStartObj) return firstLoadObj;
 
   const returnObj = { ...firstLoadObj, ...adminStartObj };
 
-  console.log("RETURN OBJ");
-  console.dir(returnObj);
+  // console.log("RETURN OBJ");
+  // console.dir(returnObj);
 
   return returnObj;
 };
-
-// export const runGetUpdateDataAdmin = async () => {
-//   const updateObj = await sendAdminUpdate();
-
-//   return updateObj;
-// };
 
 //default log from mongodb
 export const getDefaultLogObj = async () => {
@@ -51,12 +41,3 @@ export const getDefaultLogObj = async () => {
 
   return defaultLogObj;
 };
-
-// export const handleAdminUpdate = async (data, firstLoadObj) => {
-//   console.log("ADMIN UPDATE");
-//   console.dir(data);
-//   if (!data) return null;
-
-//   const returnObj = { ...firstLoadObj, ...data };
-//   return returnObj;
-// };
