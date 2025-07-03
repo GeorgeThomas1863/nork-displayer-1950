@@ -81,6 +81,7 @@ export const updateAdminStateEventTriggered = async (inputType) => {
 //BUILD, just return true for now
 export const updateAdminStateDataLoaded = async (inputArray) => {
   adminState.isFirstLoad = false;
+  adminState.trigger = null;
 
   return true;
 };

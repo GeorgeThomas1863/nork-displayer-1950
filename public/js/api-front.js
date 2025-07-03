@@ -1,4 +1,5 @@
 import d from "./define-things.js";
+import { adminState } from "./state.js";
 
 //FOR MAIN
 export const sendToBack = async (inputParams) => {
@@ -24,6 +25,7 @@ export const sendToBack = async (inputParams) => {
 //FOR ADMIN
 export const sendToBackAdmin = async (inputParams, onUpdate) => {
   const { route } = inputParams;
+  const { trigger } = adminState;
 
   console.log("SEND TO BACK ADMIN");
   console.dir(inputParams);
@@ -39,11 +41,14 @@ export const sendToBackAdmin = async (inputParams, onUpdate) => {
     });
 
     const initialData = await res.json();
+    
+    //ensure poll only happens with sumbit click
+    if (!trigger) return initialData;
 
     // Start polling for updates from the frontend
     const pollInterval = setInterval(async () => {
       try {
-        console.log("AHHHHHHHHHHHHHHH")
+        console.log("AHHHHHHHHHHHHHHH");
         const updateRoute = "/get-update-data-admin-route";
         const updateRes = await fetch(updateRoute, {
           method: "GET",
