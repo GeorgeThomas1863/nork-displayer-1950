@@ -4,6 +4,11 @@ import CONFIG from "../config/config.js";
 //SENDS THE ADMIN COMMAND TO THE API
 export const sendAdminStart = async (inputParams, onUpdate) => {
   const { apiStartURL, apiUpdateURL, updateInterval } = CONFIG;
+
+  //TURN OFF
+  const testInterval = updateInterval / 60
+
+
   try {
     const res = await axios.post(apiStartURL, inputParams);
 
@@ -15,7 +20,7 @@ export const sendAdminStart = async (inputParams, onUpdate) => {
       if (updateRes.data.complete) {
         clearInterval(pollInterval);
       }
-    }, updateInterval);
+    }, testInterval);
 
     return res.data;
   } catch (e) {
