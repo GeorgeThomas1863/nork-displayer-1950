@@ -6,19 +6,23 @@ export const sendAdminStart = async (inputParams, onUpdate) => {
   const { apiStartURL, apiUpdateURL, updateInterval } = CONFIG;
 
   //TURN OFF
-  const testInterval = updateInterval / 60
-
+  const testInterval = updateInterval / 60;
 
   try {
     const res = await axios.post(apiStartURL, inputParams);
 
     // Poll for updates
     const pollInterval = setInterval(async () => {
-      const updateRes = await axios.get(apiUpdateURL);
-      onUpdate(updateRes.data);
+      try {
+        const updateRes = await axios.get(apiUpdateURL);
+        onUpdate(updateRes.data);
 
-      if (updateRes.data.complete) {
-        clearInterval(pollInterval);
+        if (updateRes.data.complete) {
+          clearInterval(pollInterval);
+        }
+      } catch (e) {
+        console.log("Error polling for updates");
+        console.log(e);
       }
     }, testInterval);
 
