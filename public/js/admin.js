@@ -9,6 +9,8 @@ const adminDisplayElement = document.getElementById("admin-display-element");
 
 //BREAK OUT INTO SEPARATE FUNCTIONS
 export const buildAdminDisplay = async () => {
+  console.log("START ADMIN DISPLAY");
+  
   if (!adminDisplayElement) return null;
   const { isFirstLoad } = adminState;
 
