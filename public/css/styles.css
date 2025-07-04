@@ -588,7 +588,7 @@ h3 {
 } */
 
 .article-type-button.active {
-  background-color: #2c3e50; /* Much darker blue */
+  background-color: rgb(85, 85, 85);
   /* border-color: #1e3d6f; */
   /* color: #ffffff;  */
   font-weight: 700;
