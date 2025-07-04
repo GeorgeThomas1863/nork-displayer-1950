@@ -523,7 +523,7 @@ h3 {
   max-width: 80%;
 }
 
-#article-type-button-list {
+/* #article-type-button-list {
   margin: 0 auto;
   padding: 0;
   display: grid;
@@ -534,6 +534,21 @@ h3 {
 
   justify-content: center;
   max-width: fit-content;
+} */
+
+#article-type-button-list {
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  list-style: none;
+  justify-content: center;
+  max-width: fit-content;
+}
+
+#article-type-button-list > * {
+  flex: 0 0 calc(25% - 0.75rem * 3 / 4);
 }
 
 .article-type-button-item {
@@ -585,19 +600,6 @@ h3 {
   background-color: #8bb9ff;
 }
 
-/* claudes r slur way to center bottom column */
-/* Make items 5, 6, 7 start at column 1, 2, 3 respectively to center them */
-.article-type-button-item:nth-child(5) {
-  grid-column: 1 / span 1;
-}
-
-.article-type-button-item:nth-child(6) {
-  grid-column: 2 / span 1;
-}
-
-.article-type-button-item:nth-child(7) {
-  grid-column: 3 / span 1;
-}
 /* ----------------------------------- */
 
 /* PIC STYLES */
