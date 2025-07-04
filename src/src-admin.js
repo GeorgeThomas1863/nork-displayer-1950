@@ -3,7 +3,8 @@ import dbModel from "../models/db-model.js";
 import { sendAdminStart } from "./api-back.js";
 
 //gets admin backend data
-export const runGetDefaultDataAdmin = async (inputObj) => {
+// export const runGetDefaultDataAdmin = async (inputObj) => {
+export const getAdminBackendDataRoute = async (inputObj) => {
   const { dataReq, isFirstLoad } = inputObj;
 
   const firstLoadObj = { ...inputObj };

@@ -127,49 +127,49 @@ export const buildAdminNewList = async (inputObj) => {
 };
 
 //HERE
-export const buildAdminUpdateList = async (inputObj) => {
-  // const { scrapeId } = inputObj;
-  // const updateDataArr = ["scrapeId", "textStr", "scrapeStartTime", "scrapeEndTime"];
+// export const buildAdminUpdateList = async (inputObj) => {
+//   // const { scrapeId } = inputObj;
+//   // const updateDataArr = ["scrapeId", "textStr", "scrapeStartTime", "scrapeEndTime"];
 
-  // console.log("ADMIN UPDATE LIST");
-  // console.dir(inputObj);
+//   // console.log("ADMIN UPDATE LIST");
+//   // console.dir(inputObj);
 
-  const adminUpdateList = document.createElement("ul");
-  adminUpdateList.id = `admin-update-list-${scrapeId}`;
-  adminUpdateList.classList.add("admin-update-list");
+//   const adminUpdateList = document.createElement("ul");
+//   adminUpdateList.id = `admin-update-list-${scrapeId}`;
+//   adminUpdateList.classList.add("admin-update-list");
 
-  const keys = Object.keys(inputObj);
+//   const keys = Object.keys(inputObj);
 
-  // Loop through each key
-  for (let i = 0; i < keys.length; i++) {
-    const key = keys[i];
-    const value = inputObj[key];
+//   // Loop through each key
+//   for (let i = 0; i < keys.length; i++) {
+//     const key = keys[i];
+//     const value = inputObj[key];
 
-    // Create list item element
-    const listItem = document.createElement("li");
-    listItem.classList.add("admin-update-list-item");
+//     // Create list item element
+//     const listItem = document.createElement("li");
+//     listItem.classList.add("admin-update-list-item");
 
-    // Set the content
-    listItem.innerHTML = `${key}: ${value}`; //not adding mapObj bc frontend
+//     // Set the content
+//     listItem.innerHTML = `${key}: ${value}`; //not adding mapObj bc frontend
 
-    adminUpdateList.append(listItem);
-  }
-  const updateTitleElement = document.createElement("div");
-  updateTitleElement.innerHTML = "Update Scrape Data";
-  updateTitleElement.className = "collapse-header admin-update-title";
-  adminUpdateList.className = "collapse-content";
-  adminUpdateList.id = "admin-update-list-collapse";
+//     adminUpdateList.append(listItem);
+//   }
+//   const updateTitleElement = document.createElement("div");
+//   updateTitleElement.innerHTML = "Update Scrape Data";
+//   updateTitleElement.className = "collapse-header admin-update-title";
+//   adminUpdateList.className = "collapse-content";
+//   adminUpdateList.id = "admin-update-list-collapse";
 
-  const updateListCollapseObj = {
-    titleElement: updateTitleElement,
-    contentElement: adminUpdateList,
-    isExpanded: true,
-    className: "admin-backend-new-collapse",
-    dataAttribute: "admin-new-header",
-  };
+//   const updateListCollapseObj = {
+//     titleElement: updateTitleElement,
+//     contentElement: adminUpdateList,
+//     isExpanded: true,
+//     className: "admin-backend-new-collapse",
+//     dataAttribute: "admin-new-header",
+//   };
 
-  const updateListCollapseContainer = await buildCollapseContainer(updateListCollapseObj);
-  updateListCollapseContainer.className = "wrapper";
+//   const updateListCollapseContainer = await buildCollapseContainer(updateListCollapseObj);
+//   updateListCollapseContainer.className = "wrapper";
 
-  return updateListCollapseContainer;
-};
+//   return updateListCollapseContainer;
+// };
