@@ -1,9 +1,18 @@
+import { buildArticleTypeButtons } from "./article-form.js";
 import { picDropDownContainer } from "../pics/pic-return.js";
 import { buildCollapseContainer, defineCollapseItems } from "../collapse.js";
 
 //BUILD DEFAULT ARTICLE DISPLAY
 export const buildArticleDisplay = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
+
+  // Create a container div that will hold both buttons and article list
+  const articleDisplayContainer = document.createElement("div");
+  articleDisplayContainer.id = "article-display-container";
+
+  // Add the article type buttons at the top
+  const articleButtonsElement = await buildArticleTypeButtons();
+  articleDisplayContainer.append(articleButtonsElement);
 
   const articleList = document.createElement("ul");
   articleList.id = "article-array-element";
@@ -26,7 +35,9 @@ export const buildArticleDisplay = async (inputArray) => {
   // Set up the collapse group behavior
   await defineCollapseItems(collapseArray);
 
-  return articleList;
+  articleDisplayContainer.append(articleList);
+
+  return articleDisplayContainer;
 };
 
 export const buildArticleListItem = async (inputObj, isFirst) => {
