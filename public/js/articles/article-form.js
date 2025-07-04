@@ -35,46 +35,7 @@ export const buildArticleForm = async () => {
   return articleCollapseContainer;
 };
 
-// export const buildArticleTypeListItem = async () => {
-//   const articleTypeListItem = document.createElement("li");
-//   articleTypeListItem.id = "article-type-list-item";
-//   articleTypeListItem.className = "form";
 
-//   const articleTypeLabel = document.createElement("label");
-//   articleTypeLabel.setAttribute("for", "article-type");
-//   articleTypeLabel.textContent = "Article Type";
-
-//   const articleTypeSelect = document.createElement("select");
-//   articleTypeSelect.name = "article-type";
-//   articleTypeSelect.id = "article-type";
-
-//   // Create options for article type select
-//   const optionArray = [
-//     { value: "fatboy", id: "fatboy", text: `"Revolutionary Activities"`, selected: true },
-//     { value: "all-type", id: "all-type", text: "All" },
-//     { value: "top", id: "top", text: "Top News" },
-//     { value: "latest", id: "latest", text: "Latest News" },
-//     { value: "external", id: "external", text: "External News" },
-//     { value: "anecdote", id: "anecdote", text: "Revolutionary Anecdotes" },
-//     { value: "people", id: "people", text: "Always in Memory of the People" },
-//   ];
-
-//   for (let i = 0; i < optionArray.length; i++) {
-//     const optionData = optionArray[i];
-//     const option = document.createElement("option");
-//     option.value = optionData.value;
-//     option.id = optionData.id;
-//     option.textContent = optionData.text;
-//     if (optionData.selected) {
-//       option.selected = true;
-//     }
-//     articleTypeSelect.append(option);
-//   }
-
-//   articleTypeListItem.append(articleTypeLabel, articleTypeSelect);
-
-//   return articleTypeListItem;
-// };
 
 export const buildArticleHowManyListItem = async () => {
   const articleHowManyListItem = document.createElement("li");
@@ -140,8 +101,8 @@ export const buildArticleTypeButtons = async () => {
 
   // Define button data matching your dropdown options
   const buttonData = [
-    { value: "fatboy", text: "Revolutionary Activities", active: true },
-    { value: "all-type", text: "All Articles" },
+    { value: "fatboy", text: `"Revolutionary Activities"\n[KJU's bullsh*t]`, active: true },
+    { value: "all-type", text: "ALL ARTICLES" },
     { value: "top", text: "Top News" },
     { value: "latest", text: "Latest News" },
     { value: "external", text: "External News" },
