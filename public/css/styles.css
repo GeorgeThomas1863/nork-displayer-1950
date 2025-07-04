@@ -588,8 +588,8 @@ h3 {
 } */
 
 .article-type-button.active {
-  background-color: #2c5aa0; /* Much darker blue */
-  border-color: #1e3d6f;
+  background-color: #1e3d6f; /* Much darker blue */
+  /* border-color: #1e3d6f; */
   color: #ffffff; /* White text for contrast */
   font-weight: 700;
   box-shadow: 0 3px 12px rgba(44, 90, 160, 0.4);
@@ -597,7 +597,7 @@ h3 {
 }
 
 .article-type-button.active:hover {
-  background-color: #1e3d6f; /* Even darker on hover */
+  /* background-color: #1e3d6f;  */
   transform: translateY(-2px);
 }
 
