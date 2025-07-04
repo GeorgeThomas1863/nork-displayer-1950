@@ -533,7 +533,7 @@ h3 {
   list-style: none;
 
   justify-content: center;
-  /* max-width: fit-content; */
+  max-width: fit-content;
 }
 
 .article-type-button-item {
