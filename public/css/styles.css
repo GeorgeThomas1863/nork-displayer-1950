@@ -588,9 +588,9 @@ h3 {
 } */
 
 .article-type-button.active {
-  background-color: #1e3d6f; /* Much darker blue */
+  background-color: #4a90e2; /* Much darker blue */
   /* border-color: #1e3d6f; */
-  color: #ffffff; /* White text for contrast */
+  /* color: #ffffff;  */
   font-weight: 700;
   box-shadow: 0 3px 12px rgba(44, 90, 160, 0.4);
   transform: translateY(-1px); /* Slight elevation */
