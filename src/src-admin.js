@@ -1,6 +1,6 @@
 import CONFIG from "../config/config.js";
 import dbModel from "../models/db-model.js";
-import { sendAdminStart } from "./api-back.js";
+import { sendAdminCommand } from "./api-back.js";
 
 //gets admin backend data
 // export const runGetDefaultDataAdmin = async (inputObj) => {
@@ -14,7 +14,8 @@ export const getAdminBackendDataRoute = async (inputObj) => {
 
   if (isFirstLoad) return firstLoadObj;
 
-  const adminStartObj = await sendAdminStart(dataReq);
+  // const adminStartObj = await sendAdminStart(dataReq);
+  const adminStartObj = await sendAdminCommand(dataReq);
   if (!adminStartObj) return firstLoadObj;
 
   const returnObj = { ...firstLoadObj, ...adminStartObj };
