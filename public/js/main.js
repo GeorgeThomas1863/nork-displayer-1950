@@ -73,7 +73,7 @@ export const buildBackendDisplay = async (inputArray) => {
         const defaultDataElement = await func(dataArray);
         if (!defaultDataElement) continue;
         //hide everything except pics on default
-        if (defaultDataElement.id !== "article-array-element") {
+        if (defaultDataElement.id !== "article-display-container") {
           defaultDataElement.classList.add("hidden");
         }
         backendDataWrapper.append(defaultDataElement);
