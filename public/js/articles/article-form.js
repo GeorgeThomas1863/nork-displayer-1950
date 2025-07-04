@@ -131,7 +131,7 @@ export const buildArticleTypeButtonItem = async (buttonInfo) => {
   const button = document.createElement("button");
   button.className = "article-type-button";
   button.setAttribute("data-article-type", buttonInfo.value);
-  button.textContent = buttonInfo.text;
+  button.innerHTML = buttonInfo.text;
 
   // // Set active state if specified
   // if (buttonInfo.active) {
