@@ -101,7 +101,7 @@ export const buildArticleTypeButtons = async () => {
 
   // Define button data matching your dropdown options
   const buttonData = [
-    { value: "fatboy", text: `"Revolutionary Activities"\n[KJU's bullsh*t]`, active: true },
+    { value: "fatboy", text: `"Revolutionary Activities"<br>[KJU's bullsh*t]`, active: true },
     { value: "all-type", text: "ALL ARTICLES" },
     { value: "top", text: "Top News" },
     { value: "latest", text: "Latest News" },
