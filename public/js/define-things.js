@@ -12,7 +12,7 @@ const d = {
 
   //expand triggers
   expandTriggerArr: ["article-form-header", "pic-form-header", "vid-form-header"],
-  expandIdsArr: ["article-array-element", "pic-array-element", "vid-array-element"],
+  expandIdsArr: ["article-display-container", "pic-array-element", "vid-array-element"],
   expandTypeArr: ["article", "pic", "vid"],
 
   //change triggers
@@ -51,7 +51,7 @@ const d = {
   },
 
   replaceTypeMap: {
-    articles: "article-array-element",
+    articles: "article-display-container",
     pics: "pic-array-element",
     vids: "vid-array-element",
   },
