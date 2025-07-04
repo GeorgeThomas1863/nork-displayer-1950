@@ -26,7 +26,7 @@ export const buildAdminDisplay = async () => {
     console.log("ADMIN BACKEND DATA");
     console.dir(updateData);
 
-    await buildAdminUpdateDisplay(updateData);
+    await buildAdminBackendDisplay(updateData);
   });
 
   if (!adminBackendData) return null;
