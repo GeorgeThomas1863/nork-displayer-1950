@@ -565,7 +565,8 @@ h3 {
 }
 
 .article-type-button:hover {
-  background-color: #b3d9ff;
+  /* background-color: #b3d9ff; */
+  background-color: #d3e9ff;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
@@ -588,7 +589,7 @@ h3 {
 } */
 
 .article-type-button.active {
-  background-color: #b3d9ff;
+  background-color: #d3e9ff;
   /* border-color: #1e3d6f; */
   /* color: #ffffff;  */
   font-weight: 700;
