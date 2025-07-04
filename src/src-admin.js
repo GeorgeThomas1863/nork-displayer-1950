@@ -4,7 +4,7 @@ import { sendAdminCommand } from "./api-back.js";
 
 //gets admin backend data
 // export const runGetDefaultDataAdmin = async (inputObj) => {
-export const getAdminBackendDataRoute = async (inputObj) => {
+export const runGetAdminBackendData = async (inputObj) => {
   const { dataReq, isFirstLoad } = inputObj;
 
   const firstLoadObj = { ...inputObj };
