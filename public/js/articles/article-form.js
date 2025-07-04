@@ -7,11 +7,11 @@ export const buildArticleForm = async () => {
   articleWrapper.className = "wrapper collapse-content";
 
   //build FORM list items
-  const articleTypeListItem = await buildArticleTypeListItem();
+  // const articleTypeListItem = await buildArticleTypeListItem();
   const articleHowManyListItem = await buildArticleHowManyListItem();
   const articleSortByListItem = await buildArticleSortByListItem();
 
-  articleWrapper.append(articleTypeListItem, articleHowManyListItem, articleSortByListItem);
+  articleWrapper.append(articleHowManyListItem, articleSortByListItem);
 
   // create title element for collapse container
   const titleElement = document.createElement("div");
@@ -35,46 +35,46 @@ export const buildArticleForm = async () => {
   return articleCollapseContainer;
 };
 
-export const buildArticleTypeListItem = async () => {
-  const articleTypeListItem = document.createElement("li");
-  articleTypeListItem.id = "article-type-list-item";
-  articleTypeListItem.className = "form";
+// export const buildArticleTypeListItem = async () => {
+//   const articleTypeListItem = document.createElement("li");
+//   articleTypeListItem.id = "article-type-list-item";
+//   articleTypeListItem.className = "form";
 
-  const articleTypeLabel = document.createElement("label");
-  articleTypeLabel.setAttribute("for", "article-type");
-  articleTypeLabel.textContent = "Article Type";
+//   const articleTypeLabel = document.createElement("label");
+//   articleTypeLabel.setAttribute("for", "article-type");
+//   articleTypeLabel.textContent = "Article Type";
 
-  const articleTypeSelect = document.createElement("select");
-  articleTypeSelect.name = "article-type";
-  articleTypeSelect.id = "article-type";
+//   const articleTypeSelect = document.createElement("select");
+//   articleTypeSelect.name = "article-type";
+//   articleTypeSelect.id = "article-type";
 
-  // Create options for article type select
-  const optionArray = [
-    { value: "fatboy", id: "fatboy", text: `"Revolutionary Activities"`, selected: true },
-    { value: "all-type", id: "all-type", text: "All" },
-    { value: "top", id: "top", text: "Top News" },
-    { value: "latest", id: "latest", text: "Latest News" },
-    { value: "external", id: "external", text: "External News" },
-    { value: "anecdote", id: "anecdote", text: "Revolutionary Anecdotes" },
-    { value: "people", id: "people", text: "Always in Memory of the People" },
-  ];
+//   // Create options for article type select
+//   const optionArray = [
+//     { value: "fatboy", id: "fatboy", text: `"Revolutionary Activities"`, selected: true },
+//     { value: "all-type", id: "all-type", text: "All" },
+//     { value: "top", id: "top", text: "Top News" },
+//     { value: "latest", id: "latest", text: "Latest News" },
+//     { value: "external", id: "external", text: "External News" },
+//     { value: "anecdote", id: "anecdote", text: "Revolutionary Anecdotes" },
+//     { value: "people", id: "people", text: "Always in Memory of the People" },
+//   ];
 
-  for (let i = 0; i < optionArray.length; i++) {
-    const optionData = optionArray[i];
-    const option = document.createElement("option");
-    option.value = optionData.value;
-    option.id = optionData.id;
-    option.textContent = optionData.text;
-    if (optionData.selected) {
-      option.selected = true;
-    }
-    articleTypeSelect.append(option);
-  }
+//   for (let i = 0; i < optionArray.length; i++) {
+//     const optionData = optionArray[i];
+//     const option = document.createElement("option");
+//     option.value = optionData.value;
+//     option.id = optionData.id;
+//     option.textContent = optionData.text;
+//     if (optionData.selected) {
+//       option.selected = true;
+//     }
+//     articleTypeSelect.append(option);
+//   }
 
-  articleTypeListItem.append(articleTypeLabel, articleTypeSelect);
+//   articleTypeListItem.append(articleTypeLabel, articleTypeSelect);
 
-  return articleTypeListItem;
-};
+//   return articleTypeListItem;
+// };
 
 export const buildArticleHowManyListItem = async () => {
   const articleHowManyListItem = document.createElement("li");
@@ -130,4 +130,56 @@ export const buildArticleSortByListItem = async () => {
   articleSortByListItem.append(articleSortByLabel, articleSortBySelect);
 
   return articleSortByListItem;
+};
+
+//-----------------------
+
+export const buildArticleTypeButtons = async () => {
+  const articleTypeButtonContainer = document.createElement("div");
+  articleTypeButtonContainer.id = "article-type-button-container";
+
+  // Define button data matching your dropdown options
+  const buttonData = [
+    { value: "fatboy", text: "Revolutionary Activities", active: true },
+    { value: "all-type", text: "All Articles" },
+    { value: "top", text: "Top News" },
+    { value: "latest", text: "Latest News" },
+    { value: "external", text: "External News" },
+    { value: "anecdote", text: "Revolutionary Anecdotes" },
+    { value: "people", text: "Always in Memory" },
+  ];
+
+  // Create button list
+  const buttonList = document.createElement("ul");
+  buttonList.id = "article-type-button-list";
+
+  // Build each button
+  for (let i = 0; i < buttonData.length; i++) {
+    const buttonItem = await buildArticleTypeButtonItem(buttonData[i]);
+    buttonList.append(buttonItem);
+  }
+
+  articleTypeButtonContainer.append(buttonList);
+  return articleTypeButtonContainer;
+};
+
+export const buildArticleTypeButtonItem = async (buttonInfo) => {
+  const buttonListItem = document.createElement("li");
+  buttonListItem.className = "article-type-button-item";
+
+  const button = document.createElement("button");
+  button.className = "article-type-button";
+  button.setAttribute("data-article-type", buttonInfo.value);
+  button.textContent = buttonInfo.text;
+
+  // // Set active state if specified
+  // if (buttonInfo.active) {
+  //   button.classList.add("active");
+  // }
+
+  // // Add click handler
+  // button.addEventListener("click", handleArticleTypeButtonClick);
+
+  buttonListItem.append(button);
+  return buttonListItem;
 };
