@@ -101,7 +101,7 @@ export const buildArticleTypeButtons = async () => {
 
   // Define button data matching your dropdown options
   const buttonData = [
-    { value: "fatboy", text: `"Revolutionary Activities"<br>[KJU's bullsh*t]`, active: true },
+    { value: "fatboy", text: `"Revolutionary Activities"<br>[KJU sh*t]`, active: true },
     { value: "all-type", text: "ALL ARTICLES" },
     { value: "top", text: "Top News" },
     { value: "latest", text: "Latest News" },
@@ -134,9 +134,9 @@ export const buildArticleTypeButtonItem = async (buttonInfo) => {
   button.innerHTML = buttonInfo.text;
 
   // // Set active state if specified
-  // if (buttonInfo.active) {
-  //   button.classList.add("active");
-  // }
+  if (buttonInfo.active) {
+    button.classList.add("active");
+  }
 
   // // Add click handler
   // button.addEventListener("click", handleArticleTypeButtonClick);
