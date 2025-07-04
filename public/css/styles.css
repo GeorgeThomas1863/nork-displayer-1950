@@ -517,8 +517,10 @@ h3 {
 }
 
 #article-type-button-container {
+  margin: 0 auto;
   margin-bottom: 2rem;
   padding: 0;
+  max-width: 50%;
 }
 
 #article-type-button-list {
