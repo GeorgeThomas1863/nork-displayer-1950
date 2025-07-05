@@ -1,4 +1,4 @@
-import { buildCollapseContainer } from "../collapse.js";
+import { buildCollapseContainer } from "../util/collapse.js";
 
 //PIC FORM ELEMENTS
 export const buildPicForm = async () => {

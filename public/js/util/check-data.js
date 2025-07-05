@@ -1,4 +1,4 @@
-import d from "../define-things.js";
+import d from "./define-things.js";
 import { state, adminState } from "./state.js";
 import { unhideArray, hideArray } from "./util.js";
 

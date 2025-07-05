@@ -1,8 +1,10 @@
-import { buildDisplay, toggleDropdown, expandForm } from "./main.js";
+import { buildDisplay } from "./main.js";
 import { buildAdminDisplay } from "./admin.js";
-import { debounce } from "./util/util.js";
+import { toggleDropdown, expandForm } from "./forms/display-change.js";
+import { changeArticleType } from "./articles/article-change.js";
 import { updateStateEventTriggered, updateAdminStateEventTriggered } from "./util/state.js";
 import { checkChangeTriggered, checkInputTriggered } from "./util/check-data.js";
+import { debounce } from "./util/util.js";
 
 //MAIN / NORMAL RESPONSIVE
 

@@ -1,6 +1,6 @@
-import d from "./define-things.js";
-import { buildDropDown } from "./build-drop-down.js";
-import { buildInputForms } from "./build-forms.js";
+import d from "./util/define-things.js";
+import { buildDropDown } from "./forms/build-drop-down.js";
+import { buildInputForms } from "./forms/build-forms.js";
 // import { hideArray, unhideArray } from "./util.js";
 import { sendToBack } from "./util/api-front.js";
 import { state, updateStateDataLoaded } from "./util/state.js";

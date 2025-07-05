@@ -1,7 +1,7 @@
-import { buildArticleForm } from "./articles/article-form.js";
-import { buildPicForm } from "./pics/pic-form.js";
-import { buildVidForm } from "./vids/vid-form.js";
-import { defineCollapseItems } from "./collapse.js";
+import { buildArticleForm } from "../articles/article-form.js";
+import { buildPicForm } from "../pics/pic-form.js";
+import { buildVidForm } from "../vids/vid-form.js";
+import { defineCollapseItems } from "../util/collapse.js";
 
 export const buildInputForms = async () => {
   const formWrapperElement = document.createElement("div");

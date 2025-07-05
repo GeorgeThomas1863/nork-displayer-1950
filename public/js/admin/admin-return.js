@@ -1,4 +1,4 @@
-import d from "../define-things.js";
+import d from "../util/define-things.js";
 import { buildCollapseContainer } from "../util/collapse.js";
 
 export const buildAdminBackendDisplay = async (inputObj) => {

@@ -1,7 +1,7 @@
 //importing functions defined in map
-import { buildArticleDisplay } from "./articles/article-return.js";
-import { buildPicDisplay } from "./pics/pic-return.js";
-import { buildVidDisplay } from "./vids/vid-return.js";
+import { buildArticleDisplay } from "../articles/article-return.js";
+import { buildPicDisplay } from "../pics/pic-return.js";
+import { buildVidDisplay } from "../vids/vid-return.js";
 
 const d = {
   displayFunctionMap: {

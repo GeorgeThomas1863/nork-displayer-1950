@@ -1,3 +1,6 @@
+import d from "../util/define-things.js";
+import { hideArray, unhideArray } from "../util/util.js";
+
 //better version of expand backend data equation
 export const expandForm = async (dataType) => {
   const { expandIdsArr } = d;
