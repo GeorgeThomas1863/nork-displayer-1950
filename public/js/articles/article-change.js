@@ -1,4 +1,4 @@
-import { state } from "../util/state.js";
+import { state, updateStateEventTriggered } from "../util/state.js";
 
 export const changeArticleType = async (articleType) => {
   if (!articleType || articleType === state.articleType) return null;
