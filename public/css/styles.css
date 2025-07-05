@@ -533,7 +533,7 @@ h3 {
 .article-type-button-item {
   margin: 0 auto;
   text-align: center;
-  justify-content: center;
+  /* justify-content: center; */
 }
 
 .article-type-button {
