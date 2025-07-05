@@ -115,6 +115,7 @@ export const checkItemExists = async (inputObj, type = "pic") => {
 
   if (!checkSizeRaw) {
     console.log("AHHHHHHHHHHHHHHHHHHHH");
+    console.log(downloadedSize);
     const error = new Error("FILE CORRUPTED / WRONG SIZE");
     error.savePath = savePath;
     throw error;
