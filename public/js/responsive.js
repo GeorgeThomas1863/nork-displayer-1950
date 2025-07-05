@@ -1,8 +1,8 @@
 import { buildDisplay, toggleDropdown, expandForm } from "./main.js";
 import { buildAdminDisplay } from "./admin.js";
-import { debounce } from "./util.js";
-import { updateStateEventTriggered, updateAdminStateEventTriggered } from "./state.js";
-import { checkChangeTriggered, checkInputTriggered } from "./check-data.js";
+import { debounce } from "./util/util.js";
+import { updateStateEventTriggered, updateAdminStateEventTriggered } from "./util/state.js";
+import { checkChangeTriggered, checkInputTriggered } from "./util/check-data.js";
 
 //MAIN / NORMAL RESPONSIVE
 
@@ -17,14 +17,14 @@ export const mainClickHandler = async (e) => {
   console.log("ARTICLE TYPE");
   console.log(articleType);
 
-  if (toggleType) {
-    await toggleDropdown(toggleType);
-  }
+  if (!expandType && !toggleType && !articleType) return null;
+
+  if (toggleType) await toggleDropdown(toggleType);
 
   //handle expand / collapse backend data
-  if (expandType) {
-    await expandForm(expandType);
-  }
+  if (expandType) await expandForm(expandType);
+
+  if (articleType) await changeArticleType(articleType);
 
   return true;
 };

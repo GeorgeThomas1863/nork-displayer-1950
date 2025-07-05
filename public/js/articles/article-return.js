@@ -1,6 +1,6 @@
 import { buildArticleTypeButtons } from "./article-form.js";
 import { picDropDownContainer } from "../pics/pic-return.js";
-import { buildCollapseContainer, defineCollapseItems } from "../collapse.js";
+import { buildCollapseContainer, defineCollapseItems } from "../util/collapse.js";
 
 //BUILD DEFAULT ARTICLE DISPLAY
 export const buildArticleDisplay = async (inputArray) => {

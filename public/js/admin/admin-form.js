@@ -1,4 +1,4 @@
-import { buildCollapseContainer } from "../collapse.js";
+import { buildCollapseContainer } from "../util/collapse.js";
 
 export const buildAdminForm = async () => {
   //create the fucking element

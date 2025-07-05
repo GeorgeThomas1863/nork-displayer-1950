@@ -1,4 +1,4 @@
-import { buildCollapseContainer, defineCollapseItems } from "../collapse.js";
+import { buildCollapseContainer, defineCollapseItems } from "../util/collapse.js";
 
 //PIC SET DISPLAY
 export const buildPicDisplay = async (inputArray) => {

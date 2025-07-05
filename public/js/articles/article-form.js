@@ -1,4 +1,4 @@
-import { buildCollapseContainer } from "../collapse.js";
+import { buildCollapseContainer } from "../util/collapse.js";
 
 //ARTICLE FORM ELEMENTS
 export const buildArticleForm = async () => {

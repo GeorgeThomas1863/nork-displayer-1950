@@ -1,10 +1,10 @@
 import d from "./define-things.js";
 import { buildDropDown } from "./build-drop-down.js";
 import { buildInputForms } from "./build-forms.js";
-import { hideArray, unhideArray } from "./util.js";
-import { sendToBack } from "./api-front.js";
-import { state, updateStateDataLoaded } from "./state.js";
-import { checkNewDataNeeded, checkHideUnhideData } from "./check-data.js";
+// import { hideArray, unhideArray } from "./util.js";
+import { sendToBack } from "./util/api-front.js";
+import { state, updateStateDataLoaded } from "./util/state.js";
+import { checkNewDataNeeded, checkHideUnhideData } from "./util/check-data.js";
 
 //get display element
 const displayElement = document.getElementById("display-element");
@@ -105,49 +105,6 @@ export const buildBackendDisplay = async (inputArray) => {
       backendDataWrapperReplace.replaceChild(newDataElement, replaceElement);
       return backendDataWrapperReplace;
   }
-};
-
-//better version of expand backend data equation
-export const expandForm = async (dataType) => {
-  const { expandIdsArr } = d;
-
-  //build array of expand form elements (defining id's in define-things.js)
-  const expandElementsArr = [];
-  for (let i = 0; i < expandIdsArr.length; i++) {
-    expandElementsArr.push(document.getElementById(expandIdsArr[i]));
-  }
-
-  //hide everything
-  await hideArray(expandElementsArr);
-
-  //unhide the one  being expanded
-  switch (dataType) {
-    case "article-form-header":
-      await unhideArray([expandElementsArr[0]]);
-      return true;
-
-    case "pic-form-header":
-      await unhideArray([expandElementsArr[1]]);
-      return true;
-
-    case "vid-form-header":
-      await unhideArray([expandElementsArr[2]]);
-      return true;
-  }
-  return null;
-};
-
-export const toggleDropdown = async (toggleType) => {
-  if (!toggleType || toggleType !== "dropdown") return null;
-
-  const actionButtonElement = document.getElementById("action-button-element");
-  if (!actionButtonElement) return null;
-
-  const isHidden = actionButtonElement.classList.contains("hidden");
-
-  isHidden ? await unhideArray([actionButtonElement]) : await hideArray([actionButtonElement]);
-
-  return true;
 };
 
 export const displayFail = async () => {

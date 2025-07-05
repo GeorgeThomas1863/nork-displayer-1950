@@ -1,5 +1,5 @@
 import d from "../define-things.js";
-import { buildCollapseContainer } from "../collapse.js";
+import { buildCollapseContainer } from "../util/collapse.js";
 
 export const buildAdminBackendDisplay = async (inputObj) => {
   const { logObj, isFirstLoad } = inputObj;

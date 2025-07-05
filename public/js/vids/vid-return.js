@@ -1,4 +1,4 @@
-import { buildCollapseContainer, defineCollapseItems } from "../collapse.js";
+import { buildCollapseContainer, defineCollapseItems } from "../util/collapse.js";
 
 //VID PAGE DISPLAY
 export const buildVidDisplay = async (inputArray) => {

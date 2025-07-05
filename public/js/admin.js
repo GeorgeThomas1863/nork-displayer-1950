@@ -1,9 +1,9 @@
-import { adminState, updateAdminStateDataLoaded } from "./state.js";
+import { adminState, updateAdminStateDataLoaded } from "./util/state.js";
 import { buildAdminForm } from "./admin/admin-form.js";
 // import { buildAdminParams } from "./util.js";
-import { sendToBack } from "./api-front.js";
+import { sendToBack } from "./util/api-front.js";
 import { buildAdminBackendDisplay } from "./admin/admin-return.js";
-import { checkNewDataNeededAdmin } from "./check-data.js";
+import { checkNewDataNeededAdmin } from "./util/check-data.js";
 
 const adminDisplayElement = document.getElementById("admin-display-element");
 
