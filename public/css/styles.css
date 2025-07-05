@@ -528,7 +528,10 @@ h3 {
 
 #article-type-button-container {
   margin: 0 auto;
-  padding: 0;
+}
+
+.article-type-button-item {
+  margin: 0 auto;
 }
 
 .article-type-button {
