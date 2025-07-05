@@ -21,13 +21,19 @@ export const updateStateEventTriggered = async (changeId, eventTriggered) => {
   //get data to update
   const inputParams = await buildInputParams();
   const newType = d.triggerTypeMap(changeId);
-  // const newArticleType = document.getElementById("article-type").value;
 
   //update state obj
   state.trigger = eventTriggered;
   state.dataReq = inputParams;
   state.dataType = newType;
-  // state.articleType = newArticleType;
+
+  //if chnage article type
+  if (changeId !== "article-type") return true;
+
+  //otherwise update article type
+  state.articleType = eventTriggered;
+
+  return true;
 };
 
 //FUCKED, FIGURE OUT BELOW

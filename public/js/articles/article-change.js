@@ -3,6 +3,11 @@ import { state } from "../util/state.js";
 export const changeArticleType = async (articleType) => {
   if (!articleType || articleType === state.articleType) return null;
 
-  console.log("ARTICLE TYPE");
-  console.log(articleType);
+  //otherwise article is different
+  const testData = await updateStateEventTriggered("article-type", articleType);
+
+  console.log("STATE AFTER ");
+  console.log(state);
+
+  return true;
 };

@@ -14,8 +14,8 @@ export const buildDisplay = async () => {
   if (!displayElement) return null;
   const { isFirstLoad } = state;
 
-  // console.log("STATE BEFORE");
-  // console.log(state);
+  console.log("STATE BEFORE");
+  console.log(state);
 
   //build drop down / form on first load
   if (isFirstLoad) {
