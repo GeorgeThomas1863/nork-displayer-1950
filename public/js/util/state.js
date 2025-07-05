@@ -28,10 +28,10 @@ export const updateStateEventTriggered = async (changeId, eventTriggered) => {
   state.dataType = newType;
 
   //if chnage article type
-  if (changeId !== "article-type") return true;
+  if (eventTriggered !== "article-type") return true;
 
   //otherwise update article type
-  state.articleType = eventTriggered;
+  state.articleType = changeId;
 
   return true;
 };

@@ -5,7 +5,7 @@ export const changeArticleType = async (articleType) => {
   if (!articleType || articleType === state.articleType) return null;
 
   //otherwise article is different
-  const testData = await updateStateEventTriggered("article-type", articleType);
+  const testData = await updateStateEventTriggered(articleType, "article-type");
 
   console.log("STATE AFTER ");
   console.dir(state);
