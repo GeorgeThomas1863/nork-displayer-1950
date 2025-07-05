@@ -35,8 +35,6 @@ export const buildArticleForm = async () => {
   return articleCollapseContainer;
 };
 
-
-
 export const buildArticleHowManyListItem = async () => {
   const articleHowManyListItem = document.createElement("li");
   articleHowManyListItem.id = "article-how-many-list-item";
@@ -124,18 +122,17 @@ export const buildArticleTypeButtons = async () => {
   return articleTypeButtonContainer;
 };
 
-export const buildArticleTypeButtonItem = async () => {
-// export const buildArticleTypeButtonItem = async (buttonInfo) => {
+export const buildArticleTypeButtonItem = async (buttonData) => {
   const buttonListItem = document.createElement("li");
   buttonListItem.className = "article-type-button-item";
 
   const button = document.createElement("button");
   button.className = "article-type-button";
-  button.setAttribute("data-article-type", buttonInfo.value);
-  button.innerHTML = buttonInfo.text;
+  button.setAttribute("data-article-type", buttonData.value);
+  button.innerHTML = buttonData.text;
 
   // // Set active state if specified
-  if (buttonInfo.active) {
+  if (buttonData.active) {
     button.classList.add("active");
   }
 
