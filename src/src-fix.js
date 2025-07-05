@@ -103,7 +103,6 @@ export const checkItemExists = async (inputObj, type = "pic") => {
   //adult would write this with ternary operator, change later
   switch (type) {
     case "pic":
-      console.log("FUCK MY FACE")
       const { downloadedSize } = inputObj;
       checkSizeRaw = downloadedSize;
       break;
@@ -116,6 +115,8 @@ export const checkItemExists = async (inputObj, type = "pic") => {
 
   if (!checkSizeRaw) {
     console.log("AHHHHHHHHHHHHHHHHHHHH");
+    console.log(inputObj);
+    console.log(type);
     const error = new Error("FILE CORRUPTED / WRONG SIZE");
     error.savePath = savePath;
     throw error;
