@@ -1,6 +1,6 @@
 //****************
 
-//CHANGE STYLES FOR ARTICLE BUTTONS (so allon left)
+//USE CLAUDE's STYPES, but ADD capability to change article button color on active (DO NOT HAVE THIS)
 
 //MAKE MEDIA STYLES FOR ARTICLE BUTTONS
 
