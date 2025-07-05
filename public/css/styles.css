@@ -526,13 +526,13 @@ h3 {
   flex: 0 0 calc(25% - 0.75rem * 3 / 4);
 }
 
-/* #article-type-button-container {
+#article-type-button-container {
   margin: 0 auto;
 }
 
 .article-type-button-item {
   margin: 0 auto;
-} */
+}
 
 .article-type-button {
   margin: 0 auto;
