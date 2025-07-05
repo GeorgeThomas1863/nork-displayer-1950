@@ -1,8 +1,6 @@
 //****************
 
-//BUILD responsive for article buttons
-
-//Build media styles for article buttons
+//CHANGE STYLES FOR ARTICLE BUTTONS
 
 // TEST NEW DATA COMING BACK AND THEN FIX IT IN SCRAPE
 
