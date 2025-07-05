@@ -510,8 +510,8 @@ h3 {
 
 /* ------------------------------ */
 
-/* ARTICLE BUTTONS */
-
+/* ARTICLE BUTTONS (MINE) */
+/* 
 #article-type-button-list {
   margin: 0 auto;
   margin-bottom: -0.5rem;
@@ -562,16 +562,95 @@ h3 {
 
 .article-type-button.active {
   background-color: #d3e9ff;
-  /* border-color: #1e3d6f; */
-  /* color: #ffffff;  */
   font-weight: 700;
   box-shadow: 0 3px 12px rgba(44, 62, 80, 0.3);
-  transform: translateY(-1px); /* Slight elevation */
+  transform: translateY(-1px); 
 }
 
 .article-type-button.active:hover {
   background-color: rgb(200, 200, 200);
   transform: translateY(-2px);
+} */
+
+/* -------------------------- */
+
+/* ARTICLE BUTTONS CLAUDE ATTEMPT */
+
+#article-type-button-list {
+  margin: 0 auto;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  width: fit-content;
+  max-width: 90%;
+  background-color: #f8fafc;
+  border-radius: 12px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+#article-type-button-container {
+  margin: 0 auto;
+  margin-bottom: 1.5rem;
+}
+
+.article-type-button-item {
+  margin: 0;
+  list-style: none;
+}
+
+.article-type-button {
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  background-color: transparent;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  transition: all 0.2s ease;
+  box-shadow: none;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.article-type-button:hover {
+  background-color: #ffffff;
+  color: #1e293b;
+  border-color: #cbd5e1;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.article-type-button:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.article-type-button.active {
+  background-color: #2563eb;
+  border-color: #2563eb;
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+  transform: none;
+}
+
+.article-type-button.active:hover {
+  background-color: #1d4ed8;
+  border-color: #1d4ed8;
+  transform: none;
+  box-shadow: 0 2px 8px rgba(29, 78, 216, 0.35);
+}
+
+/* Special styling for the "ALL ARTICLES" button to make it stand out */
+.article-type-button[data-article-type="all-type"] {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
 }
 
 /* ----------------------------------- */
