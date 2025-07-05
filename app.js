@@ -1,7 +1,5 @@
 //****************
 
-//TO DO: change styles so all drop downs are the same
-
 //BUILD responsive for article buttons
 
 //Build media styles for article buttons
