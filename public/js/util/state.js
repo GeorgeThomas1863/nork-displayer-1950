@@ -30,8 +30,10 @@ export const updateStateEventTriggered = async (changeId, eventTriggered) => {
   //if chnage article type
   if (eventTriggered !== "article-type") return true;
 
-  //otherwise update article type
+  //otherwise update article type (in dataReq too bc backend needs it [dumb design])
   state.articleType = changeId;
+  state.dataReq.articleType = changeId;
+  state.dataType = "articles";
 
   return true;
 };
