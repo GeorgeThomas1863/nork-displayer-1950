@@ -14,9 +14,9 @@ export const state = {
 };
 
 export const updateStateEventTriggered = async (changeId, eventTriggered) => {
-  console.log("UPDATE STATE EVENT TRIGGERED");
-  console.log(changeId);
-  console.log(eventTriggered);
+  // console.log("UPDATE STATE EVENT TRIGGERED");
+  // console.log(changeId);
+  // console.log(eventTriggered);
 
   //get data to update
   const inputParams = await buildInputParams();
