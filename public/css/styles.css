@@ -512,16 +512,14 @@ h3 {
 
 /* ARTICLE BUTTONS */
 
-
 #article-type-button-list {
   margin: 0 auto;
   padding: 0;
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
-  /* list-style: none; */
-  /* justify-content: center;
-  max-width: fit-content; */
+  justify-content: center;
+  /* max-width: fit-content; */
 }
 
 #article-type-button-list > * {
