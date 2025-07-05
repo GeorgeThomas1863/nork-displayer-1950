@@ -514,12 +514,13 @@ h3 {
 
 #article-type-button-list {
   margin: 0 auto;
+  margin-bottom: -1rem;
   padding: 0;
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
   justify-content: center;
-  width: 80%;
+  width: 90%;
 }
 
 #article-type-button-list > * {
@@ -538,7 +539,7 @@ h3 {
 .article-type-button {
   width: 100%;
   margin: 0 auto;
-  padding: 0.5rem 0;
+  padding: 0.25rem 0;
   font-size: 0.9rem;
   font-weight: 600;
   border: 2px solid transparent;
@@ -546,6 +547,31 @@ h3 {
   transition: all 0.2s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
   letter-spacing: -0.01em;
+}
+
+.article-type-button:hover {
+  background-color: #d3e9ff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.article-type-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.article-type-button.active {
+  background-color: #d3e9ff;
+  /* border-color: #1e3d6f; */
+  /* color: #ffffff;  */
+  font-weight: 700;
+  box-shadow: 0 3px 12px rgba(44, 62, 80, 0.3);
+  transform: translateY(-1px); /* Slight elevation */
+}
+
+.article-type-button.active:hover {
+  background-color: rgb(200, 200, 200);
+  transform: translateY(-2px);
 }
 
 /* ----------------------------------- */
