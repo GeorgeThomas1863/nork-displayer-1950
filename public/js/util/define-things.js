@@ -62,9 +62,6 @@ const d = {
     scrapeEndTime: "Scrape End Time",
     scrapeId: "Scrape ID",
   },
-
-  //updateInterval: 60 * 1000, //1 per minute
-  updateInterval: 2000, //1 per minute
 };
 
 export default d;

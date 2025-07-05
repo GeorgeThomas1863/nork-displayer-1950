@@ -4,12 +4,11 @@ import { state, updateStateEventTriggered } from "../util/state.js";
 export const changeArticleType = async (articleType) => {
   if (!articleType || articleType === state.articleType) return null;
 
-  //otherwise article is different
-  const testData = await updateStateEventTriggered(articleType, "article-type");
+  //otherwise article is different [always get new data]
+  const updateArticleState = await updateStateEventTriggered(articleType, "article-type");
+  if (!updateArticleState) return null;
 
-  console.log("STATE AFTER ");
-  console.dir(state);
-
+  //re-run build display
   await buildDisplay();
 
   return true;

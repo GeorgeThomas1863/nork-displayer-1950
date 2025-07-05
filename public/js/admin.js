@@ -22,14 +22,6 @@ export const buildAdminDisplay = async () => {
   const newDataNeededAdmin = await checkNewDataNeededAdmin();
   if (!newDataNeededAdmin) return null;
 
-  //HERE, check this
-  // const adminBackendData = await sendToBackAdmin(adminState, async (updateData) => {
-  //   console.log("ADMIN BACKEND DATA");
-  //   console.dir(updateData);
-
-  //   await buildAdminBackendDisplay(updateData);
-  // });
-
   const adminBackendData = await sendToBack(adminState);
   if (!adminBackendData) return null;
 

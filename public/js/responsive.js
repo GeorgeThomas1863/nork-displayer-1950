@@ -23,7 +23,6 @@ export const mainClickHandler = async (e) => {
 
   if (toggleType) await toggleDropdown(toggleType);
 
-  //handle expand / collapse backend data
   if (expandType) await expandForm(expandType);
 
   if (articleType) await changeArticleType(articleType);

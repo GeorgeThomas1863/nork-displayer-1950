@@ -14,10 +14,6 @@ export const state = {
 };
 
 export const updateStateEventTriggered = async (changeId, eventTriggered) => {
-  // console.log("UPDATE STATE EVENT TRIGGERED");
-  // console.log(changeId);
-  // console.log(eventTriggered);
-
   //get data to update
   const inputParams = await buildInputParams();
   const newType = d.triggerTypeMap(changeId);
@@ -27,7 +23,7 @@ export const updateStateEventTriggered = async (changeId, eventTriggered) => {
   state.dataReq = inputParams;
   state.dataType = newType;
 
-  //if chnage article type
+  //if change article type return
   if (eventTriggered !== "article-type") return true;
 
   //otherwise update article type (in dataReq too bc backend needs it [dumb design])
@@ -37,8 +33,6 @@ export const updateStateEventTriggered = async (changeId, eventTriggered) => {
 
   return true;
 };
-
-//FUCKED, FIGURE OUT BELOW
 
 //MAKE MUCH MORE COMPLEX
 export const updateStateDataLoaded = async (inputArray) => {

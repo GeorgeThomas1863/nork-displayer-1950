@@ -14,9 +14,6 @@ export const buildDisplay = async () => {
   if (!displayElement) return null;
   const { isFirstLoad } = state;
 
-  // console.log("STATE BEFORE");
-  // console.log(state);
-
   //build drop down / form on first load
   if (isFirstLoad) {
     const dropDownElement = await buildDropDown();
@@ -26,9 +23,6 @@ export const buildDisplay = async () => {
 
   //check if new data is needed [will pass on first load]
   const newDataNeeded = await checkNewDataNeeded();
-
-  console.log("NEW DATA NEEDED");
-  console.log(newDataNeeded);
   if (!newDataNeeded) {
     //if new data not needed, check if hide / unhide data
     await checkHideUnhideData();
@@ -102,7 +96,7 @@ export const buildBackendDisplay = async (inputArray) => {
         return null;
       }
 
-      //TURN ON TO HIDE FIRST COLLAPSE 
+      //TURN ON TO HIDE FIRST COLLAPSE
       // const prefix = dataType.substring(0, dataType.length - 1);
       // const listArray = newDataElement.querySelectorAll(`.${prefix}-list-item`);
       // const content = listArray[0].querySelector(".collapse-content");

@@ -55,9 +55,6 @@ export const getBackendDataDefault = async () => {
     defaultDataArray.push(dataObj);
   }
 
-  // console.log("DEFAULT DATA ARRAY");
-  // console.dir(defaultDataArray);
-
   return defaultDataArray;
 };
 
@@ -66,9 +63,6 @@ export const getBackendDataDefault = async () => {
 export const getBackendDataNew = async (inputObj) => {
   const { dataType, dataReq, dataLoaded } = inputObj;
   const { articleType } = dataReq;
-
-  // console.log("GET BACKEND DATA NEW");
-  // console.dir(inputObj);
 
   const params = await getParamsMap(dataType);
   const { collection } = params;
@@ -85,8 +79,6 @@ export const getBackendDataNew = async (inputObj) => {
   params.howMany = howManyBuffer;
   params.filterValue = articleType;
 
-  //FIX ARTICLES HERE
-
   const dataModel = new dbModel(params, collection);
   const isArticleFilter = dataType === "articles" && articleType !== "all-type";
 
@@ -98,6 +90,7 @@ export const getBackendDataNew = async (inputObj) => {
   const dataArrayValid = await removeInvalidItems(dataArrayRaw, dataType, howManyInput);
   if (!dataArrayValid) return null;
 
+  //leave on for tracking
   console.log(dataType);
   console.log(dataArrayValid.length);
 
@@ -109,8 +102,6 @@ export const getBackendDataNew = async (inputObj) => {
   //return as array to match default
   const dataArray = [dataObj];
 
-  // console.log("NEW DATA ARRAY");
-  // console.dir(dataArray);
 
   return dataArray;
 };
