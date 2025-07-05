@@ -102,11 +102,11 @@ export const buildBackendDisplay = async (inputArray) => {
         return null;
       }
 
-      //HIDE FIRST COLLAPSE
-      const prefix = dataType.substring(0, dataType.length - 1);
-      const listArray = newDataElement.querySelectorAll(`.${prefix}-list-item`);
-      const content = listArray[0].querySelector(".collapse-content");
-      content.classList.add("hidden");
+      //TURN ON TO HIDE FIRST COLLAPSE 
+      // const prefix = dataType.substring(0, dataType.length - 1);
+      // const listArray = newDataElement.querySelectorAll(`.${prefix}-list-item`);
+      // const content = listArray[0].querySelector(".collapse-content");
+      // content.classList.add("hidden");
 
       backendDataWrapperReplace.replaceChild(newDataElement, replaceElement);
       return backendDataWrapperReplace;
