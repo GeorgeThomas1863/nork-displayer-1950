@@ -14,16 +14,20 @@ export const state = {
 };
 
 export const updateStateEventTriggered = async (changeId, eventTriggered) => {
+  console.log("UPDATE STATE EVENT TRIGGERED");
+  console.log(changeId);
+  console.log(eventTriggered);
+
   //get data to update
   const inputParams = await buildInputParams();
   const newType = d.triggerTypeMap(changeId);
-  const newArticleType = document.getElementById("article-type").value;
+  // const newArticleType = document.getElementById("article-type").value;
 
   //update state obj
   state.trigger = eventTriggered;
   state.dataReq = inputParams;
   state.dataType = newType;
-  state.articleType = newArticleType;
+  // state.articleType = newArticleType;
 };
 
 //FUCKED, FIGURE OUT BELOW
