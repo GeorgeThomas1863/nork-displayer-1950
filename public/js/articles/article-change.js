@@ -1,3 +1,4 @@
+import { buildDisplay } from "../main.js";
 import { state, updateStateEventTriggered } from "../util/state.js";
 
 export const changeArticleType = async (articleType) => {
@@ -8,6 +9,8 @@ export const changeArticleType = async (articleType) => {
 
   console.log("STATE AFTER ");
   console.dir(state);
+
+  await buildDisplay();
 
   return true;
 };
