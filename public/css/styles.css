@@ -536,6 +536,7 @@ h3 {
 
 .article-type-button {
   margin: 0 auto;
+  text-align: center;
   font-size: 1rem;
   font-weight: 600;
 }
