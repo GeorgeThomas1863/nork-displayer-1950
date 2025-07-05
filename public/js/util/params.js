@@ -15,7 +15,7 @@ export const buildAdminParams = async () => {
 export const buildInputParams = async () => {
   const params = {
     route: "/new-data-route",
-    articleType: document.getElementById("article-type").value,
+    // articleType: document.getElementById("article-type").value,
     articleHowMany: Number(document.getElementById("article-how-many").value),
     articleSortBy: document.getElementById("article-sort-by").value,
     picHowMany: Number(document.getElementById("pic-how-many").value),
