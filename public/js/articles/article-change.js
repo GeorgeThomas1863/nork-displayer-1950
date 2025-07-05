@@ -7,7 +7,7 @@ export const changeArticleType = async (articleType) => {
   const testData = await updateStateEventTriggered("article-type", articleType);
 
   console.log("STATE AFTER ");
-  console.log(state);
+  console.dir(state);
 
   return true;
 };
