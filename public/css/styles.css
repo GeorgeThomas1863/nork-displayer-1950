@@ -512,6 +512,10 @@ h3 {
 
 /* ARTICLE BUTTONS */
 
+#article-type-button-list > * {
+  flex: 0 0 calc(25% - 0.75rem * 3 / 4);
+}
+
 /* ----------------------------------- */
 
 /* PIC STYLES */
