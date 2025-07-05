@@ -12,6 +12,10 @@ export const mainClickHandler = async (e) => {
   const clickElement = e.target;
   const expandType = clickElement.getAttribute("data-expand");
   const toggleType = clickElement.getAttribute("data-toggle");
+  const articleType = clickElement.getAttribute("data-article-type");
+
+  console.log("ARTICLE TYPE");
+  console.log(articleType);
 
   if (toggleType) {
     await toggleDropdown(toggleType);
