@@ -526,8 +526,13 @@ h3 {
   flex: 0 0 calc(25% - 0.75rem * 3 / 4);
 }
 
+#article-type-button-container {
+  margin: 0 auto;
+  padding: 0;
+}
+
 .article-type-button {
-  font-size: 0.8rem;
+  font-size: 1rem;
   font-weight: 600;
 }
 
