@@ -16,8 +16,8 @@ export const changeArticleType = async (articleType) => {
 
 //executes in STATE (updateStateDataLoaded)
 export const updateActiveArticle = async (stateInput) => {
-  if (!stateInput || !stateInput.dataReq || !stateInput.dataReq.articleType) return null;
-  const { articleType } = stateInput.dataReq;
+  if (!stateInput || !stateInput.articleType) return null;
+  const { articleType } = stateInput;
 
   const clickedArticleButton = document.querySelector(`[data-article-type="${articleType}"]`);
   const articleButtonArray = document.querySelectorAll(".article-type-button");
