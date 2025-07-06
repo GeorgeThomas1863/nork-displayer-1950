@@ -25,6 +25,9 @@ export const updateStateEventTriggered = async (changeId, eventTriggered) => {
   const inputParams = await buildInputParams();
   const newType = d.triggerTypeMap(changeId);
 
+  console.log("NEW TYPE");
+  console.log(newType);
+
   //update state obj
   state.trigger = eventTriggered;
   state.dataReq = inputParams;
