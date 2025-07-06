@@ -96,6 +96,9 @@ export const buildBackendDisplay = async (inputArray) => {
         return null;
       }
 
+      console.log("!!!NEW DATA ELEMENT");
+      console.log(newDataElement);
+
       //TURN ON TO HIDE FIRST COLLAPSE
       const prefix = dataType.substring(0, dataType.length - 1);
       const listArray = newDataElement.querySelectorAll(`.${prefix}-list-item`);
