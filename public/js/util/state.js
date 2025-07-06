@@ -16,6 +16,12 @@ export const state = {
 
 export const updateStateEventTriggered = async (changeId, eventTriggered) => {
   //get data to update
+  console.log("CHANGE ID");
+  console.log(changeId);
+
+  console.log("EVENT TRIGGERED");
+  console.log(eventTriggered);
+
   const inputParams = await buildInputParams();
   const newType = d.triggerTypeMap(changeId);
 

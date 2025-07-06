@@ -16,17 +16,17 @@ export const mainClickHandler = async (e) => {
   const toggleType = clickElement.getAttribute("data-toggle");
   const articleType = clickElement.getAttribute("data-article-type");
 
-  console.log("CLICK ELEMENT");
-  console.log(clickElement);
+  // console.log("CLICK ELEMENT");
+  // console.log(clickElement);
 
-  console.log("EXPAND TYPE");
-  console.log(expandType);
+  // console.log("EXPAND TYPE");
+  // console.log(expandType);
 
-  console.log("TOGGLE TYPE");
-  console.log(toggleType);
+  // console.log("TOGGLE TYPE");
+  // console.log(toggleType);
 
-  console.log("ARTICLE TYPE");
-  console.log(articleType);
+  // console.log("ARTICLE TYPE");
+  // console.log(articleType);
 
   if (!expandType && !toggleType && !articleType) return null;
 
@@ -44,18 +44,14 @@ export const mainChangeHandler = async (e) => {
   const changeElement = e.target;
   const changeId = changeElement.id;
 
-  console.log("CHANGE ELEMENT");
-  console.log(changeElement);
+  // console.log("CHANGE ELEMENT");
+  // console.log(changeElement);
 
-  console.log("CHANGE ID");
-  console.log(changeId);
+  // console.log("CHANGE ID");
+  // console.log(changeId);
 
   //check if event triggered, move on if not
   const eventTriggered = await checkChangeTriggered(changeId);
-
-  console.log("EVENT TRIGGERED");
-  console.log(eventTriggered);
-  
   if (!eventTriggered) return null;
 
   //update the state
