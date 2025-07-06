@@ -252,7 +252,7 @@
     padding: 0.5rem 0.75rem; /* Compact padding */
     font-size: 0.75rem; /* Small but readable */
     border-radius: 16px; /* Smaller radius */
-    letter-spacing: -0.02em; /* Tighter letter spacing */
+    letter-spacing: -0.01em; /* Tighter letter spacing */
   }
 
   /* Hover effects more subtle on mobile */
