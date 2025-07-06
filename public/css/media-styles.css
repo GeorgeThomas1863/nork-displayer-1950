@@ -39,6 +39,21 @@
   .article-pic-collapse .collapse-title {
     font-size: 1.1rem; /* Reduced from 1.5rem */
   }
+
+  #article-type-button-list {
+    padding: 0.6rem; /* Reduced from 0.75rem */
+    gap: 0.4rem; /* Reduced from 0.5rem */
+  }
+
+  .article-type-button {
+    padding: 0.45rem 0.9rem; /* Reduced from 0.5rem 1rem */
+    font-size: 0.8rem; /* Reduced from 0.85rem */
+  }
+
+  /* Special button stays proportionally smaller */
+  /* .article-type-button[data-article-type="all-type"] {
+    font-size: 0.75rem; 
+  } */
 }
 
 /* ===== TABLET PORTRAIT ===== */
@@ -103,6 +118,24 @@
     font-size: 2.2rem; /* Reduced from 3rem */
     padding: 0.7rem 1.8rem; /* Reduced padding */
   }
+
+  #article-type-button-list {
+    padding: 0.5rem; /* Further reduced */
+    gap: 0.35rem; /* Further reduced */
+    width: 90%; /* Constrain width on tablets */
+  }
+
+  .article-type-button {
+    padding: 0.4rem 0.8rem; /* Further reduced */
+    font-size: 0.75rem; /* Further reduced */
+    border-radius: 18px; /* Slightly smaller radius */
+  }
+
+  /* Special button */
+  /* .article-type-button[data-article-type="all-type"] {
+    font-size: 0.7rem; 
+    letter-spacing: 0.3px; 
+  } */
 }
 
 /* ===== PHONE PORTRAIT ===== */
@@ -203,6 +236,48 @@
     margin-top: 1rem;
     font-size: 1.2rem;
   }
+
+  #article-type-button-container {
+    margin-bottom: -0.25rem; /* Tighter spacing */
+  }
+
+  #article-type-button-list {
+    padding: 0.4rem; /* Minimal padding */
+    gap: 0.25rem; /* Tight gap */
+    width: 95%; /* Nearly full width */
+    border-radius: 8px; /* Smaller radius to match phone aesthetics */
+  }
+
+  /* .article-type-button-item {
+   
+  } */
+  /* Buttons will naturally wrap due to flex-wrap */
+
+  .article-type-button {
+    padding: 0.35rem 0.6rem; /* Compact padding */
+    font-size: 0.65rem; /* Small but readable */
+    border-radius: 16px; /* Smaller radius */
+    letter-spacing: -0.02em; /* Tighter letter spacing */
+  }
+
+  /* Hover effects more subtle on mobile */
+  .article-type-button:hover {
+    transform: translateY(-0.5px); /* Reduced from -1px */
+  }
+
+  /* Active state adjustments */
+  .article-type-button.active {
+    padding: 0.35rem 0.6rem; /* Keep same padding to prevent layout shift */
+    font-weight: 600; /* Keep bold */
+    box-shadow: 0 1px 4px rgba(37, 99, 235, 0.25); /* Lighter shadow */
+  }
+
+  /* Special button even smaller */
+  /* .article-type-button[data-article-type="all-type"] {
+    font-size: 0.6rem; 
+    letter-spacing: 0.2px; 
+    padding: 0.35rem 0.5rem; 
+  } */
 }
 
 /* --------------------------------- */
@@ -245,6 +320,16 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
   }
+
+  #article-type-button-list {
+    padding: 0.6rem; /* Slightly reduced */
+    gap: 0.4rem; /* Slightly reduced */
+  }
+
+  .article-type-button {
+    padding: 0.45rem 0.9rem; /* Slightly reduced */
+    font-size: 0.8rem; /* Slightly reduced */
+  }
 }
 
 /* ===== MEDIUM PHONES LANDSCAPE ===== */
@@ -254,8 +339,31 @@
     grid-template-columns: repeat(1, 1fr);
     gap: 0.8rem;
   }
+
+  #article-type-button-list {
+    padding: 0.5rem; /* Further reduced */
+    gap: 0.35rem; /* Tighter */
+    width: 85%; /* Constrain width */
+  }
+
+  .article-type-button {
+    padding: 0.4rem 0.7rem; /* More compact */
+    font-size: 0.7rem; /* Smaller */
+  }
 }
 
 /* ===== SMALL PHONES LANDSCAPE ===== */
 @media (max-width: 700px) and (orientation: landscape) {
+  #article-type-button-list {
+    padding: 0.4rem; /* Minimal */
+    gap: 0.25rem; /* Very tight */
+    max-height: 5rem; /* Prevent taking too much vertical space */
+    overflow-y: auto; /* Allow scroll if needed */
+  }
+
+  .article-type-button {
+    padding: 0.3rem 0.5rem; /* Very compact */
+    font-size: 0.65rem; /* Small */
+    border-radius: 14px; /* Smaller radius */
+  }
 }
