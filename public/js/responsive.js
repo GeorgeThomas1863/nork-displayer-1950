@@ -16,8 +16,14 @@ export const mainClickHandler = async (e) => {
   const toggleType = clickElement.getAttribute("data-toggle");
   const articleType = clickElement.getAttribute("data-article-type");
 
-  // console.log("ARTICLE TYPE");
-  // console.log(articleType);
+  console.log("EXPAND TYPE");
+  console.log(expandType);
+
+  console.log("TOGGLE TYPE");
+  console.log(toggleType);
+
+  console.log("ARTICLE TYPE");
+  console.log(articleType);
 
   if (!expandType && !toggleType && !articleType) return null;
 
@@ -34,6 +40,9 @@ export const mainChangeHandler = async (e) => {
   e.preventDefault();
   const changeElement = e.target;
   const changeId = changeElement.id;
+
+  console.log("CHANGE ID");
+  console.log(changeId);
 
   //check if event triggered, move on if not
   const eventTriggered = await checkChangeTriggered(changeId);
@@ -54,6 +63,9 @@ export const mainInputHandler = async (e) => {
   const inputElement = e.target;
 
   const inputId = inputElement.id;
+
+  console.log("INPUT ID");
+  console.log(inputId);
 
   const eventTriggered = await debouncedInputTriggered(inputId);
   if (!eventTriggered) return null;
