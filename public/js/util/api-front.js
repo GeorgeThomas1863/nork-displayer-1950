@@ -12,8 +12,6 @@ export const sendToBack = async (inputParams) => {
     });
 
     const data = await res.json();
-    console.log("DATA");
-    console.dir(data);
     return data;
   } catch (error) {
     console.log(error);
