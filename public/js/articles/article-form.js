@@ -1,3 +1,4 @@
+import { state } from "../util/state.js";
 import { buildCollapseContainer } from "../util/collapse.js";
 
 //ARTICLE FORM ELEMENTS
@@ -123,8 +124,11 @@ export const buildArticleTypeButtons = async () => {
 };
 
 export const buildArticleTypeButtonItem = async (buttonData) => {
-  console.log("BUTTON DATA");
-  console.log(buttonData);
+  const { dataRequest } = state;
+  const { articleType } = dataRequest;
+  console.log("ARTICLE TYPE");
+  console.log(articleType);
+
   const buttonListItem = document.createElement("li");
   buttonListItem.className = "article-type-button-item";
 
