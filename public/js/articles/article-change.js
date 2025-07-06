@@ -14,15 +14,12 @@ export const changeArticleType = async (articleType) => {
   return true;
 };
 
+//executes in STATE (updateStateDataLoaded)
 export const updateActiveArticle = async (stateInput) => {
   if (!stateInput || !stateInput.dataReq || !stateInput.dataReq.articleType) return null;
   const { articleType } = stateInput.dataReq;
 
   const clickedArticleButton = document.querySelector(`[data-article-type="${articleType}"]`);
-
-  console.log("CLICKED ARTICLE BUTTON");
-  console.log(clickedArticleButton);
-
   const articleButtonArray = document.querySelectorAll(".article-type-button");
 
   //remove active class from all buttons

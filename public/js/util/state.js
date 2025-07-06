@@ -1,5 +1,6 @@
 import d from "./define-things.js";
 import { buildInputParams, buildAdminParams } from "./params.js";
+import { updateActiveArticle } from "../articles/article-change.js";
 
 export const state = {
   route: "/get-backend-data-route",
@@ -51,6 +52,9 @@ export const updateStateDataLoaded = async (inputArray) => {
   }
 
   state.isFirstLoad = false;
+
+  //update active article (doing here instead of main)
+  await updateActiveArticle(state);
 
   return true;
 };
