@@ -12,10 +12,6 @@ export const checkChangeTriggered = async (changeId) => {
     //change event NOT found
     if (changeId !== changeItem) continue;
 
-    console.log("AHHHHHHHHHHHHHHHHHHHHHHHHHHH");
-    console.log("CHANGE ID");
-    console.log(changeId);
-
     //otherwise event triggered
     return changeItem;
   }

@@ -52,6 +52,10 @@ export const mainChangeHandler = async (e) => {
 
   //check if event triggered, move on if not
   const eventTriggered = await checkChangeTriggered(changeId);
+
+  console.log("EVENT TRIGGERED");
+  console.log(eventTriggered);
+  
   if (!eventTriggered) return null;
 
   //update the state
