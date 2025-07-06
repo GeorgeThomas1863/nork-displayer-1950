@@ -534,6 +534,7 @@ h3 {
 .article-type-button-item {
   margin: 0;
   list-style: none;
+  opacity: 1;
 }
 
 .article-type-button {
