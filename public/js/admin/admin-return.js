@@ -24,19 +24,6 @@ export const buildAdminBackendDisplay = async (inputObj) => {
   return newListData;
 };
 
-//unnecessary but dont feel like integrating
-// export const buildAdminUpdateDisplay = async (inputObj) => {
-//   const replaceElementId = document.getElementById("admin-new-list-collapse");
-
-//   const newListData = await buildAdminUpdateList(inputObj);
-//   if (!replaceElementId) {
-//     return newListData;
-//   }
-
-//   const replaceElement = replaceElementId.parentElement;
-//   replaceElement.remove();
-// };
-
 export const buildAdminDefaultList = async (inputObj) => {
   const adminDefaultList = document.createElement("ul");
   adminDefaultList.classList.add("admin-default-list");
@@ -93,9 +80,15 @@ export const buildAdminNewList = async (inputObj) => {
   for (const k in inputObj) {
     if (!newDataArr.includes(k)) continue;
 
-    const str = `${d.adminNewListMap[k]}: ${inputObj[k]}`;
-    // const str = `${k.toUpperCase()}: ${inputObj[k]}`;
     const listItem = document.createElement("li");
+
+    //custom for textStr
+    let str = "";
+    if (k === "textStr") {
+      str = inputObj[k];
+    } else {
+      str = `${d.adminNewListMap[k]}: ${inputObj[k]}`;
+    }
 
     listItem.innerHTML = str;
     listItem.classList.add("admin-new-list-item");
@@ -125,51 +118,3 @@ export const buildAdminNewList = async (inputObj) => {
 
   return newListCollapseContainer;
 };
-
-//HERE
-// export const buildAdminUpdateList = async (inputObj) => {
-//   // const { scrapeId } = inputObj;
-//   // const updateDataArr = ["scrapeId", "textStr", "scrapeStartTime", "scrapeEndTime"];
-
-//   // console.log("ADMIN UPDATE LIST");
-//   // console.dir(inputObj);
-
-//   const adminUpdateList = document.createElement("ul");
-//   adminUpdateList.id = `admin-update-list-${scrapeId}`;
-//   adminUpdateList.classList.add("admin-update-list");
-
-//   const keys = Object.keys(inputObj);
-
-//   // Loop through each key
-//   for (let i = 0; i < keys.length; i++) {
-//     const key = keys[i];
-//     const value = inputObj[key];
-
-//     // Create list item element
-//     const listItem = document.createElement("li");
-//     listItem.classList.add("admin-update-list-item");
-
-//     // Set the content
-//     listItem.innerHTML = `${key}: ${value}`; //not adding mapObj bc frontend
-
-//     adminUpdateList.append(listItem);
-//   }
-//   const updateTitleElement = document.createElement("div");
-//   updateTitleElement.innerHTML = "Update Scrape Data";
-//   updateTitleElement.className = "collapse-header admin-update-title";
-//   adminUpdateList.className = "collapse-content";
-//   adminUpdateList.id = "admin-update-list-collapse";
-
-//   const updateListCollapseObj = {
-//     titleElement: updateTitleElement,
-//     contentElement: adminUpdateList,
-//     isExpanded: true,
-//     className: "admin-backend-new-collapse",
-//     dataAttribute: "admin-new-header",
-//   };
-
-//   const updateListCollapseContainer = await buildCollapseContainer(updateListCollapseObj);
-//   updateListCollapseContainer.className = "wrapper";
-
-//   return updateListCollapseContainer;
-// };
