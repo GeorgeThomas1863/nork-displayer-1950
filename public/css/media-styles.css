@@ -269,7 +269,7 @@
 
   /* Special button even smaller */
   .article-type-button[data-article-type="all-type"] {
-    font-size: 0.65rem;
+    font-size: 0.7rem;
     letter-spacing: 0.3px;
     padding: 0.5rem 0.75rem;
   }
