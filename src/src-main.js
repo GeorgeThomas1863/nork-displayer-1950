@@ -66,8 +66,8 @@ export const getBackendDataNew = async (inputObj) => {
   const { dataType, dataReq, dataLoaded } = inputObj;
   const { articleType } = dataReq;
 
-  console.log("!!!GET BACKEND DATA NEW ");
-  console.dir(inputObj);
+  // console.log("!!!GET BACKEND DATA NEW ");
+  // console.dir(inputObj);
 
   const params = await getParamsMap(dataType);
   const { collection } = params;
@@ -83,6 +83,9 @@ export const getBackendDataNew = async (inputObj) => {
   params.sortBy = sortByInput;
   params.howMany = howManyBuffer;
   params.filterValue = articleType;
+
+  console.log("!!!PARAMS");
+  console.log(params);
 
   const dataModel = new dbModel(params, collection);
   const isArticleFilter = dataType === "articles" && articleType !== "all-type";
