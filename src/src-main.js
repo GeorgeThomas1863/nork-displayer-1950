@@ -8,9 +8,6 @@ export const runGetBackendData = async (inputObj) => {
   if (!inputObj || !inputObj.dataType) return null;
   const { isFirstLoad } = inputObj;
 
-  console.log("!!!!INPUT OBJ");
-  console.dir(inputObj);
-
   switch (isFirstLoad) {
     case true:
       return await getBackendDataDefault();
@@ -69,6 +66,9 @@ export const getBackendDataNew = async (inputObj) => {
   const { dataType, dataReq, dataLoaded } = inputObj;
   const { articleType } = dataReq;
 
+  console.log("!!!GET BACKEND DATA NEW ");
+  console.dir(inputObj);
+
   const params = await getParamsMap(dataType);
   const { collection } = params;
 
@@ -106,7 +106,6 @@ export const getBackendDataNew = async (inputObj) => {
 
   //return as array to match default
   const dataArray = [dataObj];
-
 
   return dataArray;
 };
