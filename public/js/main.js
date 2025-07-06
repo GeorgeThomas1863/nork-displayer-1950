@@ -84,6 +84,9 @@ export const buildBackendDisplay = async (inputArray) => {
       const dataObj = inputArray[0];
       const { dataType, dataArray } = dataObj;
 
+      console.log("!!!DATA OBJ");
+      console.dir(dataObj);
+
       //get replace shit first
       const replaceId = d.replaceTypeMap[dataType];
       const replaceElement = document.getElementById(replaceId);
@@ -96,8 +99,8 @@ export const buildBackendDisplay = async (inputArray) => {
         return null;
       }
 
-      console.log("!!!NEW DATA ELEMENT");
-      console.log(newDataElement);
+      // console.log("!!!NEW DATA ELEMENT");
+      // console.log(newDataElement);
 
       //TURN ON TO HIDE FIRST COLLAPSE
       const prefix = dataType.substring(0, dataType.length - 1);
