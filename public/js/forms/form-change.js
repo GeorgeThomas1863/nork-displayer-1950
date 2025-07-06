@@ -45,15 +45,17 @@ export const toggleDropdown = async (toggleType) => {
   return true;
 };
 
-//TURN ON TO HIDE FIRST COLLAPSE
+//HIDES FIRST COLLAPSE IF NOT ARTICLE TYPE CHANGE
 export const hideBackendReturnData = async (inputElement, dataType) => {
-  console.log("!!!HIDE BACKEND RETURN DATA");
-  console.log(inputElement);
-  console.log(dataType);
-  console.dir(state);
+  const { trigger } = state;
+
+  //dont hide if showing diff article type
+  if (trigger === "article-type") return null;
 
   const prefix = dataType.substring(0, dataType.length - 1);
   const listArray = inputElement.querySelectorAll(`.${prefix}-list-item`);
   const content = listArray[0].querySelector(".collapse-content");
   content.classList.add("hidden");
+
+  return true;
 };
