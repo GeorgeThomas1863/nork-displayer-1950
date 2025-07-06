@@ -286,11 +286,11 @@
   }
 
   .article-type-button {
-    font-size: 0.65rem; /* Small but readable */
+    font-size: 0.7rem; /* Small but readable */
   }
 
   .article-type-button[data-article-type="all-type"] {
-    font-size: 0.6rem;
+    font-size: 0.65rem;
   }
 }
 
