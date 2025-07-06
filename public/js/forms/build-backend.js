@@ -1,5 +1,6 @@
 import d from "../util/define-things.js";
 import { state } from "../util/state.js";
+import { hideBackendReturnData } from "./form-change.js";
 
 export const buildBackendDisplay = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
@@ -46,14 +47,11 @@ export const buildBackendDisplay = async (inputArray) => {
         return null;
       }
 
+      //hide backend return data if NOT article type change
+      await hideBackendReturnData(newDataElement, dataType);
+
       // console.log("!!!NEW DATA ELEMENT");
       // console.log(newDataElement);
-
-      //TURN ON TO HIDE FIRST COLLAPSE
-      const prefix = dataType.substring(0, dataType.length - 1);
-      const listArray = newDataElement.querySelectorAll(`.${prefix}-list-item`);
-      const content = listArray[0].querySelector(".collapse-content");
-      content.classList.add("hidden");
 
       backendDataWrapperReplace.replaceChild(newDataElement, replaceElement);
       return backendDataWrapperReplace;

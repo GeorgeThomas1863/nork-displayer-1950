@@ -43,3 +43,11 @@ export const toggleDropdown = async (toggleType) => {
 
   return true;
 };
+
+//TURN ON TO HIDE FIRST COLLAPSE
+export const hideBackendReturnData = async (inputElement, dataType) => {
+  const prefix = dataType.substring(0, dataType.length - 1);
+  const listArray = inputElement.querySelectorAll(`.${prefix}-list-item`);
+  const content = listArray[0].querySelector(".collapse-content");
+  content.classList.add("hidden");
+};
