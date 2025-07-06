@@ -15,6 +15,24 @@ export const changeArticleType = async (articleType) => {
 };
 
 export const updateActiveArticle = async (stateInput) => {
-  console.log("STATE INPUT");
-  console.log(stateInput);
+  if (!stateInput || !stateInput.dataReq || !stateInput.dataReq.articleType) return null;
+  const { articleType } = stateInput.dataReq;
+
+  const clickedArticleButton = document.querySelector(`[data-article-type="${articleType}"]`);
+
+  console.log("CLICKED ARTICLE BUTTON");
+  console.log(clickedArticleButton);
+
+  const articleButtonArray = document.querySelectorAll(".article-type-button");
+
+  //remove active class from all buttons
+  for (let i = 0; i < articleButtonArray.length; i++) {
+    const articleButton = articleButtonArray[i];
+    articleButton.classList.remove("active");
+    if (articleButton !== clickedArticleButton) continue;
+
+    articleButton.classList.add("active");
+  }
+
+  return true;
 };
