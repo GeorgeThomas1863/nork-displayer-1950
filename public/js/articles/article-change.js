@@ -19,8 +19,8 @@ export const changeArticleType = async (articleType) => {
   }
 
   //add active class to the new button
-  const newArticleButton = document.querySelector(`#article-type-button-list [value="${articleType}"]`);
-  
+  const newArticleButton = document.querySelector(`[data-article-type="${articleType}"]`);
+
   console.log("NEW ARTICLE BUTTON");
   console.log(newArticleButton);
   if (newArticleButton) newArticleButton.classList.add("active");
