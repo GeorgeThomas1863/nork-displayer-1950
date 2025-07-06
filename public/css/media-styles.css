@@ -242,8 +242,8 @@
   }
 
   #article-type-button-list {
-    padding: 0.5rem; /* Minimal padding */
-    gap: 0.3rem; /* Tight gap */
+    /* padding: 0.5rem; 
+    gap: 0.3rem;  */
     width: 90%; /* Nearly full width */
     border-radius: 8px; /* Smaller radius to match phone aesthetics */
   }
