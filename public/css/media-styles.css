@@ -242,15 +242,15 @@
   }
 
   #article-type-button-list {
-    padding: 0.4rem; /* Minimal padding */
-    gap: 0.25rem; /* Tight gap */
+    padding: 0.5rem; /* Minimal padding */
+    gap: 0.3rem; /* Tight gap */
     width: 90%; /* Nearly full width */
     border-radius: 8px; /* Smaller radius to match phone aesthetics */
   }
 
   .article-type-button {
-    padding: 0.35rem 0.6rem; /* Compact padding */
-    font-size: 0.65rem; /* Small but readable */
+    padding: 0.5rem 0.75rem; /* Compact padding */
+    font-size: 0.75rem; /* Small but readable */
     border-radius: 16px; /* Smaller radius */
     letter-spacing: -0.02em; /* Tighter letter spacing */
   }
@@ -262,16 +262,16 @@
 
   /* Active state adjustments */
   .article-type-button.active {
-    padding: 0.35rem 0.6rem; /* Keep same padding to prevent layout shift */
+    /* padding: 0.35rem 0.6rem;  */
     font-weight: 600; /* Keep bold */
     box-shadow: 0 1px 4px rgba(37, 99, 235, 0.25); /* Lighter shadow */
   }
 
   /* Special button even smaller */
   .article-type-button[data-article-type="all-type"] {
-    font-size: 0.6rem;
-    letter-spacing: 0.2px;
-    padding: 0.35rem 0.5rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.3px;
+    padding: 0.5rem 0.75rem;
   }
 }
 
