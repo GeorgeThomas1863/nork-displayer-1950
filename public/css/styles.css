@@ -529,7 +529,7 @@ h3 {
 
 #article-type-button-container {
   margin: 0 auto;
-  margin-bottom: -1rem;
+  margin-bottom: -0.5rem;
 }
 
 .article-type-button-item {
