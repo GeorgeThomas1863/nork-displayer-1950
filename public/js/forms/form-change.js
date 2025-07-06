@@ -1,4 +1,5 @@
 import d from "../util/define-things.js";
+import { state } from "../util/state.js";
 import { hideArray, unhideArray } from "../util/util.js";
 
 //better version of expand backend data equation
@@ -46,6 +47,11 @@ export const toggleDropdown = async (toggleType) => {
 
 //TURN ON TO HIDE FIRST COLLAPSE
 export const hideBackendReturnData = async (inputElement, dataType) => {
+  console.log("!!!HIDE BACKEND RETURN DATA");
+  console.log(inputElement);
+  console.log(dataType);
+  console.dir(state);
+
   const prefix = dataType.substring(0, dataType.length - 1);
   const listArray = inputElement.querySelectorAll(`.${prefix}-list-item`);
   const content = listArray[0].querySelector(".collapse-content");
