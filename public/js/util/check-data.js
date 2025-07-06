@@ -5,15 +5,16 @@ import { unhideArray, hideArray } from "./util.js";
 //IN responsive / click listener
 export const checkChangeTriggered = async (changeId) => {
   const { changeTriggerArr } = d;
-  console.log("AHHHHHHHHHHHHHHHHHHHHHHHHHHH")
-  console.log("CHANGE ID");
-  console.log(changeId);
 
   for (let i = 0; i < changeTriggerArr.length; i++) {
     const changeItem = changeTriggerArr[i];
 
     //change event NOT found
     if (changeId !== changeItem) continue;
+
+    console.log("AHHHHHHHHHHHHHHHHHHHHHHHHHHH");
+    console.log("CHANGE ID");
+    console.log(changeId);
 
     //otherwise event triggered
     return changeItem;
