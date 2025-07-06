@@ -275,6 +275,17 @@
   }
 }
 
+/* ===== EXTRA SMALL PHONES PORTRAIT ===== */
+@media (max-width: 405px) and (orientation: portrait) {
+  /* ===== GENERAL & FORM STYLES ===== */
+
+  #article-type-button-list {
+    width: 95%;
+    padding: 0.4rem; /* Minimal padding */
+    gap: 0.25rem; /* Tight gap */
+  }
+}
+
 /* --------------------------------- */
 
 /* LANDSCAPE STYLES */
