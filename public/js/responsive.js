@@ -44,6 +44,9 @@ export const mainChangeHandler = async (e) => {
   const changeElement = e.target;
   const changeId = changeElement.id;
 
+  console.log("CHANGE ELEMENT");
+  console.log(changeElement);
+
   console.log("CHANGE ID");
   console.log(changeId);
 
