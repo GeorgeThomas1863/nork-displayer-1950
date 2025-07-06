@@ -23,9 +23,6 @@ export const buildDisplay = async () => {
 
   //check if new data is needed [will pass on first load]
   const newDataNeeded = await checkNewDataNeeded();
-  console.log("NEW DATA NEEDED");
-  console.log(newDataNeeded);
-
   if (!newDataNeeded) {
     //if new data not needed, check if hide / unhide data
     await checkHideUnhideData();
@@ -34,6 +31,8 @@ export const buildDisplay = async () => {
 
   //get / parse backend data (returns array of objects)
   const backendData = await sendToBack(state);
+  console.log("BACKEND DATA");
+  console.dir(backendData);
   if (!backendData) return null;
 
   const backendDataParsed = await buildBackendDisplay(backendData);
