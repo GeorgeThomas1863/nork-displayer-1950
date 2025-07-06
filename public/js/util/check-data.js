@@ -43,7 +43,7 @@ export const checkNewDataNeeded = async () => {
 
   console.log("AHHHHHHHHHHHHHHHHHHHHHHHHHHH");
   console.log("STATE");
-  console.log(state);
+  console.dir(state);
 
   if (isFirstLoad) return true;
 
