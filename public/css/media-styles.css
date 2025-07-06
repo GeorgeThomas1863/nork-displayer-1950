@@ -286,12 +286,10 @@
   }
 
   .article-type-button {
-    padding: 0.3rem 0.5rem; /* Compact padding */
     font-size: 0.65rem; /* Small but readable */
   }
 
   .article-type-button[data-article-type="all-type"] {
-    padding: 0.3rem 0.5rem;
     font-size: 0.6rem;
   }
 }
