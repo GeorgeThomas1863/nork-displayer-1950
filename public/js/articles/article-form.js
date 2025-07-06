@@ -1,4 +1,3 @@
-import { state } from "../util/state.js";
 import { buildCollapseContainer } from "../util/collapse.js";
 
 //ARTICLE FORM ELEMENTS
@@ -100,7 +99,7 @@ export const buildArticleTypeButtons = async () => {
 
   // Define button data matching your dropdown options
   const buttonData = [
-    { value: "fatboy", text: `"Revolutionary Activities" [KJU sh*t]` },
+    { value: "fatboy", text: `"Revolutionary Activities" [KJU sh*t]`, active: true },
     { value: "all-type", text: "ALL ARTICLES" },
     { value: "top", text: "Top News" },
     { value: "latest", text: "Latest News" },
@@ -124,8 +123,6 @@ export const buildArticleTypeButtons = async () => {
 };
 
 export const buildArticleTypeButtonItem = async (buttonData) => {
-  const { dataRequest } = state;
-  const { articleType } = dataRequest;
   console.log("ARTICLE TYPE");
   console.log(articleType);
 
@@ -137,10 +134,10 @@ export const buildArticleTypeButtonItem = async (buttonData) => {
   button.setAttribute("data-article-type", buttonData.value);
   button.innerHTML = buttonData.text;
 
-  // // Set active state if specified
-  if (buttonData.active) {
-    button.classList.add("active");
-  }
+  // // // Set active state if specified
+  // if (buttonData.active) {
+  //   button.classList.add("active");
+  // }
 
   // // Add click handler
   // button.addEventListener("click", handleArticleTypeButtonClick);

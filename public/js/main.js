@@ -5,6 +5,7 @@ import { buildInputForms } from "./forms/build-forms.js";
 import { sendToBack } from "./util/api-front.js";
 import { state, updateStateDataLoaded } from "./util/state.js";
 import { checkNewDataNeeded, checkHideUnhideData } from "./util/check-data.js";
+import { updateActiveArticle } from "./articles/article-change.js";
 
 //get display element
 const displayElement = document.getElementById("display-element");
@@ -46,6 +47,9 @@ export const buildDisplay = async () => {
 
   //UPDATE THE STATE HERE
   await updateStateDataLoaded(backendData);
+
+  //update active article (dumb to do here)
+  await updateActiveArticle(state);
 
   console.log("!!!DISPLAY ELEMENT");
   console.log(displayElement);
