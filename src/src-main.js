@@ -63,8 +63,7 @@ export const getBackendDataDefault = async () => {
 //--------------------------------
 
 export const getBackendDataNew = async (inputObj) => {
-  const { dataType, dataReq, dataLoaded } = inputObj;
-  const { articleType } = dataReq;
+  const { dataType, dataReq, dataLoaded, articleType } = inputObj;
 
   console.log("!!!GET BACKEND DATA NEW ");
   console.dir(inputObj);
