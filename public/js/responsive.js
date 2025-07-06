@@ -16,6 +16,9 @@ export const mainClickHandler = async (e) => {
   const toggleType = clickElement.getAttribute("data-toggle");
   const articleType = clickElement.getAttribute("data-article-type");
 
+  console.log("CLICK ELEMENT");
+  console.log(clickElement);
+
   console.log("EXPAND TYPE");
   console.log(expandType);
 
