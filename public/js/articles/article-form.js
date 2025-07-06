@@ -123,9 +123,6 @@ export const buildArticleTypeButtons = async () => {
 };
 
 export const buildArticleTypeButtonItem = async (buttonData) => {
-  console.log("ARTICLE TYPE");
-  console.log(articleType);
-
   const buttonListItem = document.createElement("li");
   buttonListItem.className = "article-type-button-item";
 
