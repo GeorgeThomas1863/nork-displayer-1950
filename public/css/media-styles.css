@@ -51,9 +51,9 @@
   }
 
   /* Special button stays proportionally smaller */
-  /* .article-type-button[data-article-type="all-type"] {
-    font-size: 0.75rem; 
-  } */
+  .article-type-button[data-article-type="all-type"] {
+    font-size: 0.75rem;
+  }
 }
 
 /* ===== TABLET PORTRAIT ===== */
@@ -132,10 +132,10 @@
   }
 
   /* Special button */
-  /* .article-type-button[data-article-type="all-type"] {
-    font-size: 0.7rem; 
-    letter-spacing: 0.3px; 
-  } */
+  .article-type-button[data-article-type="all-type"] {
+    font-size: 0.7rem;
+    letter-spacing: 0.3px;
+  }
 }
 
 /* ===== PHONE PORTRAIT ===== */
@@ -244,14 +244,9 @@
   #article-type-button-list {
     padding: 0.4rem; /* Minimal padding */
     gap: 0.25rem; /* Tight gap */
-    width: 95%; /* Nearly full width */
+    width: 90%; /* Nearly full width */
     border-radius: 8px; /* Smaller radius to match phone aesthetics */
   }
-
-  /* .article-type-button-item {
-   
-  } */
-  /* Buttons will naturally wrap due to flex-wrap */
 
   .article-type-button {
     padding: 0.35rem 0.6rem; /* Compact padding */
@@ -273,11 +268,11 @@
   }
 
   /* Special button even smaller */
-  /* .article-type-button[data-article-type="all-type"] {
-    font-size: 0.6rem; 
-    letter-spacing: 0.2px; 
-    padding: 0.35rem 0.5rem; 
-  } */
+  .article-type-button[data-article-type="all-type"] {
+    font-size: 0.6rem;
+    letter-spacing: 0.2px;
+    padding: 0.35rem 0.5rem;
+  }
 }
 
 /* --------------------------------- */
