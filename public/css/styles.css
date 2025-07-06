@@ -520,8 +520,8 @@ h3 {
   gap: 0.5rem;
   justify-content: center;
   width: fit-content;
-  /* max-width: 90%; */
-  background-color: #f8fafc;
+  background-color: rgb(200, 200, 200);
+  /* background-color: #f8fafc; */
   border-radius: 12px;
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
 }
