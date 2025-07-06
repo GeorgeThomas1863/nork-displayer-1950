@@ -18,12 +18,12 @@ export const changeArticleType = async (articleType) => {
     articleButton.classList.remove("active");
   }
 
-  //add active class to the new button
-  // const newArticleButton = document.querySelector(`[data-article-type="${articleType}"]`);
+  // add active class to the new button
+  const newArticleButton = document.querySelector(`[data-article-type="${articleType}"]`);
 
-  // console.log("NEW ARTICLE BUTTON");
-  // console.log(newArticleButton);
-  // if (newArticleButton) newArticleButton.classList.add("active");
+  console.log("NEW ARTICLE BUTTON");
+  console.log(newArticleButton);
+  if (newArticleButton) newArticleButton.classList.add("active");
 
   //re-run build display
   await buildDisplay();
