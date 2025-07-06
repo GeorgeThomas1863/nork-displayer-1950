@@ -508,77 +508,13 @@ h3 {
   color: #334155;
 }
 
-/* ------------------------------ */
-
-/* ARTICLE BUTTONS (MINE) */
-/* 
-#article-type-button-list {
-  margin: 0 auto;
-  margin-bottom: -0.5rem;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  justify-content: center;
-  width: 85%;
-}
-
-#article-type-button-list > * {
-  flex: 0 0 calc(25% - 0.75rem * 3 / 4);
-}
-
-#article-type-button-container {
-  margin: 0 auto;
-}
-
-.article-type-button-item {
-  margin: 0 auto;
-  text-align: center;
-}
-
-.article-type-button {
-  width: 100%;
-  margin: 0 auto;
-  padding: 0.25rem 0;
-  font-size: 0.9rem;
-  font-weight: 600;
-  border: 2px solid transparent;
-  border-radius: 8px;
-  transition: all 0.2s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
-  letter-spacing: -0.01em;
-}
-
-.article-type-button:hover {
-  background-color: #d3e9ff;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.article-type-button:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
-}
-
-.article-type-button.active {
-  background-color: #d3e9ff;
-  font-weight: 700;
-  box-shadow: 0 3px 12px rgba(44, 62, 80, 0.3);
-  transform: translateY(-1px); 
-}
-
-.article-type-button.active:hover {
-  background-color: rgb(200, 200, 200);
-  transform: translateY(-2px);
-} */
-
 /* -------------------------- */
 
-/* ARTICLE BUTTONS CLAUDE ATTEMPT BELOW */
+/* ARTICLE BUTTONS CLAUDE */
 
 #article-type-button-list {
   margin: 0 auto;
-  /* margin-bottom: 1rem; */
+  margin-bottom: 1rem;
   padding: 0.75rem;
   display: flex;
   flex-wrap: wrap;
@@ -593,7 +529,7 @@ h3 {
 
 #article-type-button-container {
   margin: 0 auto;
-  /* margin-bottom: 1.5rem; */
+  margin-bottom: -0.5rem;
 }
 
 .article-type-button-item {

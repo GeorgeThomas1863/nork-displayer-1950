@@ -105,7 +105,7 @@ export const buildArticleTypeButtons = async () => {
     { value: "latest", text: "Latest News" },
     { value: "external", text: "External News" },
     { value: "anecdote", text: "Revolutionary Anecdotes" },
-    { value: "people", text: "Always in Memory" },
+    { value: "people", text: "Always in Memory of the People" },
   ];
 
   // Create button list
