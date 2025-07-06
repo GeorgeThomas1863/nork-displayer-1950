@@ -248,6 +248,12 @@
     border-radius: 8px; /* Smaller radius to match phone aesthetics */
   }
 
+  /* Force 2 per row with flex basis */
+  .article-type-button-item {
+    flex-basis: calc(50% - 0.15rem); /* Half width minus half the gap */
+    min-width: 0; /* Allow shrinking below content */
+  }
+
   .article-type-button {
     padding: 0.5rem 0.75rem; /* Compact padding */
     font-size: 0.75rem; /* Small but readable */
