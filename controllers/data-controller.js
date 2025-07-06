@@ -9,9 +9,6 @@ export const getBackendDataRoute = async (req, res) => {
   try {
     const inputParams = req.body;
 
-    console.log("INPUT PARAMS");
-    console.dir(inputParams);
-
     const data = await runGetBackendData(inputParams);
     return res.json(data);
   } catch (error) {
