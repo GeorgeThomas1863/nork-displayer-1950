@@ -2,6 +2,9 @@ import d from "../util/define-things.js";
 import { state } from "../util/state.js";
 import { hideBackendReturnData } from "./form-change.js";
 
+//get display element
+const displayElement = document.getElementById("display-element");
+
 export const buildBackendDisplay = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
   const { isFirstLoad } = state;
