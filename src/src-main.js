@@ -5,7 +5,8 @@ import { removeInvalidItems } from "./src-fix.js";
 
 //gets backend data from db
 export const runGetBackendData = async (inputObj) => {
-  if (!inputObj || !inputObj.dataType) return null;
+  //double check trigger doesnt fuck things here
+  if (!inputObj || !inputObj.trigger) return null;
   const { isFirstLoad } = inputObj;
 
   switch (isFirstLoad) {
