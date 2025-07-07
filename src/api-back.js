@@ -8,8 +8,10 @@ export const sendAdminCommand = async (inputParams) => {
 
   try {
     const res = await axios.post(apiURL, inputParams);
+
     console.log("API RESPONSE DATA");
     console.log(res.data);
+    
     return res.data;
   } catch (e) {
     console.log(e);
