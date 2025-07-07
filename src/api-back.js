@@ -11,7 +11,7 @@ export const sendAdminCommand = async (inputParams) => {
 
     console.log("API RESPONSE DATA");
     console.log(res.data);
-    
+
     return res.data;
   } catch (e) {
     console.log(e);
@@ -19,14 +19,3 @@ export const sendAdminCommand = async (inputParams) => {
   }
 };
 
-// export const sendAdminUpdate = async () => {
-//   const { apiUpdateURL } = CONFIG;
-
-//   try {
-//     const res = await axios.get(apiUpdateURL);
-//     return res.data;
-//   } catch (e) {
-//     console.log(e);
-//     return null;
-//   }
-// };

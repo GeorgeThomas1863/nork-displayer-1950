@@ -7,13 +7,26 @@ export const buildAdminBackendDisplay = async (inputObj) => {
   console.log("ADMIN BACKEND DISPLAY");
   console.dir(inputObj);
 
-  if (isFirstLoad) {
-    return await buildAdminDefaultList(logObj);
+  let displayData = null;
+  switch (isFirstLoad) {
+    case true:
+      displayData = await buildAdminMongoList(logObj);
+      break;
+
+    case false:
+      displayData = await buildAdminNewData(inputObj);
+      break;
   }
+
+  return displayData;
+};
+
+export const buildAdminNewData = async (inputObj) => {
+  //update the old list
 
   const replaceElementId = document.getElementById("admin-new-list-collapse");
 
-  const newListData = await buildAdminNewList(inputObj);
+  const newListData = await buildAdminCommandList(inputObj);
   if (!replaceElementId) {
     return newListData;
   }
@@ -24,7 +37,7 @@ export const buildAdminBackendDisplay = async (inputObj) => {
   return newListData;
 };
 
-export const buildAdminDefaultList = async (inputObj) => {
+export const buildAdminMongoList = async (inputObj) => {
   const adminDefaultList = document.createElement("ul");
   adminDefaultList.classList.add("admin-default-list");
 
@@ -65,7 +78,7 @@ export const buildAdminDefaultList = async (inputObj) => {
   return defaultListCollapseContainer;
 };
 
-export const buildAdminNewList = async (inputObj) => {
+export const buildAdminCommandList = async (inputObj) => {
   const { scrapeId } = inputObj;
   const newDataArr = ["scrapeId", "textStr", "scrapeStartTime", "scrapeEndTime"];
 
