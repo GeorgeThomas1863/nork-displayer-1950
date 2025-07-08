@@ -2,6 +2,8 @@
 
 //FIX ADMIN DISPLAY
 
+//PUT THE NEW SCRAPE DATA UNDER FORM (make form tighter), put new stats next to current stats (or in SAME collapse container)
+
 //FUCKING FIX THE GODDAMN SCHEDULER / TEST IT A BUNCH
 
 //FIX SCRAPE STATUS
