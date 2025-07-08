@@ -2,7 +2,7 @@ import d from "../util/define-things.js";
 import { buildCollapseContainer } from "../util/collapse.js";
 
 export const buildAdminBackendDisplay = async (inputObj) => {
-  const { logObj, isFirstLoad } = inputObj;
+  const { isFirstLoad } = inputObj;
 
   console.log("ADMIN BACKEND DISPLAY");
   console.dir(inputObj);
@@ -11,7 +11,7 @@ export const buildAdminBackendDisplay = async (inputObj) => {
   switch (isFirstLoad) {
     case true:
       //returns 1 thing
-      displayData = await buildAdminMongoList(logObj);
+      displayData = await buildAdminFirstLoad(inputObj);
       break;
 
     case false:
@@ -22,7 +22,17 @@ export const buildAdminBackendDisplay = async (inputObj) => {
   return displayData;
 };
 
-//HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+export const buildAdminFirstLoad = async (inputObj) => {
+  const { logObj } = inputObj;
+
+  const adminDefaultContainer = document.createElement("div");
+  adminDefaultContainer.id = "admin-default-container";
+
+  const adminDefaultList = await buildAdminMongoList(logObj);
+  adminDefaultContainer.append(adminDefaultList);
+
+  return adminDefaultContainer;
+};
 
 export const buildAdminNewData = async (inputObj) => {
   const newDataContainer = document.createElement("div");
