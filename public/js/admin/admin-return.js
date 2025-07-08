@@ -50,16 +50,18 @@ export const buildAdminNewData = async (inputObj) => {
     replaceCommandParent.remove();
   }
 
-  //update the old list
-  const replaceDefaultListId = document.getElementById("admin-default-list-collapse");
-  const newDefaultData = await buildAdminMongoList(logObj, "default");
+  newDataContainer.append(newCommandListData);
 
-  if (replaceDefaultListId) {
-    const replaceDefaultParent = replaceDefaultListId.parentElement;
-    replaceDefaultParent.remove();
-  }
+  // //update the old list
+  // const replaceDefaultListId = document.getElementById("admin-default-list-collapse");
+  // const newDefaultData = await buildAdminMongoList(logObj, "default");
 
-  newDataContainer.append(newCommandListData, newDefaultData);
+  // if (replaceDefaultListId) {
+  //   const replaceDefaultParent = replaceDefaultListId.parentElement;
+  //   replaceDefaultParent.remove();
+  // }
+
+  // newDataContainer.append(newCommandListData, newDefaultData);
 
   //get new list data
   const replaceNewListId = document.getElementById("admin-new-list-collapse");
