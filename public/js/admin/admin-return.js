@@ -35,6 +35,8 @@ export const buildAdminFirstLoad = async (inputObj) => {
 };
 
 export const buildAdminNewData = async (inputObj) => {
+  const { logObj } = inputObj;
+
   const newDataContainer = document.createElement("div");
   newDataContainer.id = "admin-new-data-container";
 
@@ -50,7 +52,7 @@ export const buildAdminNewData = async (inputObj) => {
 
   //update the old list
   const replaceDefaultListId = document.getElementById("admin-default-list-collapse");
-  const newDefaultData = await buildAdminMongoList(inputObj, "default");
+  const newDefaultData = await buildAdminMongoList(logObj, "default");
 
   if (replaceDefaultListId) {
     const replaceDefaultParent = replaceDefaultListId.parentElement;
@@ -61,7 +63,7 @@ export const buildAdminNewData = async (inputObj) => {
 
   //get new list data
   const replaceNewListId = document.getElementById("admin-new-list-collapse");
-  const newListData = await buildAdminMongoList(inputObj, "new");
+  const newListData = await buildAdminMongoList(logObj, "new");
 
   if (replaceNewListId) {
     const replaceNewParent = replaceNewListId.parentElement;
