@@ -28,7 +28,7 @@ export const buildAdminFirstLoad = async (inputObj) => {
   const adminDefaultContainer = document.createElement("div");
   adminDefaultContainer.id = "admin-default-container";
 
-  const adminDefaultList = await buildAdminMongoList(logObj);
+  const adminDefaultList = await buildAdminMongoList(logObj, "default");
   adminDefaultContainer.append(adminDefaultList);
 
   return adminDefaultContainer;
@@ -38,35 +38,44 @@ export const buildAdminNewData = async (inputObj) => {
   const newDataContainer = document.createElement("div");
   newDataContainer.id = "admin-new-data-container";
 
-  //update the old list
-  const replaceDefaultListId = document.getElementById("admin-default-list-collapse");
-  const newDefaultData = await buildAdminMongoList(inputObj);
-
-  if (replaceDefaultListId) {
-    const replaceDefaultElement = replaceDefaultListId.parentElement;
-    replaceDefaultElement.remove();
-  }
-
-  newDataContainer.append(newDefaultData);
-
   //update the new list
-  const replaceCommandElementId = document.getElementById("admin-new-list-collapse");
+  const replaceCommandElementId = document.getElementById("admin-command-list-collapse");
 
   const newCommandListData = await buildAdminCommandList(inputObj);
 
   if (replaceCommandElementId) {
-    const replaceCommandElement = replaceCommandElementId.parentElement;
-    replaceCommandElement.remove();
+    const replaceCommandParent = replaceCommandElementId.parentElement;
+    replaceCommandParent.remove();
   }
 
-  newDataContainer.append(newCommandListData);
+  //update the old list
+  const replaceDefaultListId = document.getElementById("admin-default-list-collapse");
+  const newDefaultData = await buildAdminMongoList(inputObj, "default");
+
+  if (replaceDefaultListId) {
+    const replaceDefaultParent = replaceDefaultListId.parentElement;
+    replaceDefaultParent.remove();
+  }
+
+  newDataContainer.append(newCommandListData, newDefaultData);
+
+  //get new list data
+  const replaceNewListId = document.getElementById("admin-new-list-collapse");
+  const newListData = await buildAdminMongoList(inputObj, "new");
+
+  if (replaceNewListId) {
+    const replaceNewParent = replaceNewListId.parentElement;
+    replaceNewParent.remove();
+  }
+
+  newDataContainer.append(newListData);
 
   return newDataContainer;
 };
 
-export const buildAdminMongoList = async (inputObj) => {
+export const buildAdminMongoList = async (inputObj, listType) => {
   const adminDefaultList = document.createElement("ul");
-  adminDefaultList.classList.add("admin-default-list");
+  adminDefaultList.classList.add(`admin-${listType}-list`);
 
   const keys = Object.keys(inputObj);
 
@@ -77,7 +86,7 @@ export const buildAdminMongoList = async (inputObj) => {
 
     // Create list item element
     const listItem = document.createElement("li");
-    listItem.classList.add("admin-default-list-item");
+    listItem.classList.add(`admin-${listType}-list-item`);
 
     // Set the content
     listItem.innerHTML = `${key}: ${value}`; //not adding mapObj bc frontend
@@ -85,18 +94,25 @@ export const buildAdminMongoList = async (inputObj) => {
     adminDefaultList.append(listItem);
   }
 
+  let headerStr = "";
+  if (listType === "default") {
+    headerStr = "CURRENT STATS";
+  } else if (listType === "new") {
+    headerStr = "NEW STATS";
+  }
+
   //MAKE IT COLLAPSE
   const defaultTitleElement = document.createElement("div");
-  defaultTitleElement.innerHTML = "Data Already Scraped";
-  defaultTitleElement.className = "collapse-header admin-default-title";
+  defaultTitleElement.innerHTML = headerStr;
+  defaultTitleElement.className = `collapse-header admin-${listType}-title`;
   adminDefaultList.className = "collapse-content";
 
   const defaultListCollapseObj = {
     titleElement: defaultTitleElement,
     contentElement: adminDefaultList,
     isExpanded: true,
-    className: "admin-backend-default-collapse",
-    dataAttribute: "admin-default-header",
+    className: `admin-backend-${listType}-collapse`,
+    dataAttribute: `admin-${listType}-header`,
   };
 
   const defaultListCollapseContainer = await buildCollapseContainer(defaultListCollapseObj);
