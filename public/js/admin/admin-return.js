@@ -2,7 +2,7 @@ import d from "../util/define-things.js";
 import { buildCollapseContainer } from "../util/collapse.js";
 
 export const buildAdminBackendDisplay = async (inputObj) => {
-  const { isFirstLoad } = inputObj;
+  const { logObj, isFirstLoad } = inputObj;
 
   console.log("ADMIN BACKEND DISPLAY");
   console.dir(inputObj);
@@ -10,13 +10,10 @@ export const buildAdminBackendDisplay = async (inputObj) => {
   let displayData = null;
   switch (isFirstLoad) {
     case true:
-      //returns 1 thing
-      displayData = await buildAdminFirstLoad(inputObj);
+      displayData = await buildAdminFirstLoad(logObj);
       break;
-
     case false:
       displayData = await buildAdminNewData(inputObj);
-      break;
   }
 
   return displayData;
@@ -28,58 +25,31 @@ export const buildAdminFirstLoad = async (inputObj) => {
   const adminDefaultContainer = document.createElement("div");
   adminDefaultContainer.id = "admin-default-container";
 
-  const adminDefaultList = await buildAdminMongoList(logObj, "default");
+  const adminDefaultList = await buildAdminDefaultList(logObj);
   adminDefaultContainer.append(adminDefaultList);
 
   return adminDefaultContainer;
 };
 
 export const buildAdminNewData = async (inputObj) => {
-  const { logObj } = inputObj;
+  const replaceElementId = document.getElementById("admin-new-list-collapse");
 
-  const newDataContainer = document.createElement("div");
-  newDataContainer.id = "admin-new-data-container";
-
-  //update the new list
-  const replaceCommandElementId = document.getElementById("admin-command-list-collapse");
-
-  const newCommandListData = await buildAdminCommandList(inputObj);
-
-  if (replaceCommandElementId) {
-    const replaceCommandParent = replaceCommandElementId.parentElement;
-    replaceCommandParent.remove();
+  const newListData = await buildAdminNewList(inputObj);
+  if (!replaceElementId) {
+    return newListData;
   }
 
-  newDataContainer.append(newCommandListData);
+  const replaceElement = replaceElementId.parentElement;
+  replaceElement.remove();
 
-  // //update the old list
-  // const replaceDefaultListId = document.getElementById("admin-default-list-collapse");
-  // const newDefaultData = await buildAdminMongoList(logObj, "default");
-
-  // if (replaceDefaultListId) {
-  //   const replaceDefaultParent = replaceDefaultListId.parentElement;
-  //   replaceDefaultParent.remove();
-  // }
-
-  // newDataContainer.append(newCommandListData, newDefaultData);
-
-  //get new list data
-  const replaceNewListId = document.getElementById("admin-new-list-collapse");
-  const newListData = await buildAdminMongoList(logObj, "new");
-
-  if (replaceNewListId) {
-    const replaceNewParent = replaceNewListId.parentElement;
-    replaceNewParent.remove();
-  }
-
-  newDataContainer.append(newListData);
-
-  return newDataContainer;
+  return newListData;
 };
 
-export const buildAdminMongoList = async (inputObj, listType) => {
+//--------------
+
+export const buildAdminDefaultList = async (inputObj) => {
   const adminDefaultList = document.createElement("ul");
-  adminDefaultList.classList.add(`admin-${listType}-list`);
+  adminDefaultList.classList.add("admin-default-list");
 
   const keys = Object.keys(inputObj);
 
@@ -90,7 +60,7 @@ export const buildAdminMongoList = async (inputObj, listType) => {
 
     // Create list item element
     const listItem = document.createElement("li");
-    listItem.classList.add(`admin-${listType}-list-item`);
+    listItem.classList.add("admin-default-list-item");
 
     // Set the content
     listItem.innerHTML = `${key}: ${value}`; //not adding mapObj bc frontend
@@ -98,25 +68,18 @@ export const buildAdminMongoList = async (inputObj, listType) => {
     adminDefaultList.append(listItem);
   }
 
-  let headerStr = "";
-  if (listType === "default") {
-    headerStr = "CURRENT STATS";
-  } else if (listType === "new") {
-    headerStr = "NEW STATS";
-  }
-
   //MAKE IT COLLAPSE
   const defaultTitleElement = document.createElement("div");
-  defaultTitleElement.innerHTML = headerStr;
-  defaultTitleElement.className = `collapse-header admin-${listType}-title`;
+  defaultTitleElement.innerHTML = "Data Already Scraped";
+  defaultTitleElement.className = "collapse-header admin-default-title";
   adminDefaultList.className = "collapse-content";
 
   const defaultListCollapseObj = {
     titleElement: defaultTitleElement,
     contentElement: adminDefaultList,
     isExpanded: true,
-    className: `admin-backend-${listType}-collapse`,
-    dataAttribute: `admin-${listType}-header`,
+    className: "admin-backend-default-collapse",
+    dataAttribute: "admin-default-header",
   };
 
   const defaultListCollapseContainer = await buildCollapseContainer(defaultListCollapseObj);
@@ -125,17 +88,17 @@ export const buildAdminMongoList = async (inputObj, listType) => {
   return defaultListCollapseContainer;
 };
 
-export const buildAdminCommandList = async (inputObj) => {
+export const buildAdminNewList = async (inputObj) => {
   const { scrapeId } = inputObj;
   const newDataArr = ["scrapeId", "textStr", "scrapeStartTime", "scrapeEndTime"];
 
   console.log("ADMIN NEW LIST");
   console.dir(inputObj);
 
-  const adminCommandList = document.createElement("ul");
-  adminCommandList.id = `admin-command-list-${scrapeId}`;
+  const adminNewList = document.createElement("ul");
+  adminNewList.id = `admin-new-list-${scrapeId}`;
   // adminNewList.id = `admin-new-list`;
-  adminCommandList.classList.add("admin-command-list");
+  adminNewList.classList.add("admin-new-list");
 
   for (const k in inputObj) {
     if (!newDataArr.includes(k)) continue;
@@ -152,7 +115,7 @@ export const buildAdminCommandList = async (inputObj) => {
 
     listItem.innerHTML = str;
     listItem.classList.add("admin-new-list-item");
-    adminCommandList.append(listItem);
+    adminNewList.append(listItem);
   }
 
   //add back in textStr
@@ -161,20 +124,20 @@ export const buildAdminCommandList = async (inputObj) => {
   //MAKE IT COLLAPSE
   const newTitleElement = document.createElement("div");
   newTitleElement.innerHTML = "New Scrape Data";
-  newTitleElement.className = "collapse-header admin-command-title";
-  adminCommandList.className = "collapse-content";
-  adminCommandList.id = "admin-command-list-collapse";
+  newTitleElement.className = "collapse-header admin-new-title";
+  adminNewList.className = "collapse-content";
+  adminNewList.id = "admin-new-list-collapse";
 
-  const commandListCollapseObj = {
+  const newListCollapseObj = {
     titleElement: newTitleElement,
-    contentElement: adminCommandList,
+    contentElement: adminNewList,
     isExpanded: true,
-    className: "admin-backend-command-collapse",
-    dataAttribute: "admin-command-header",
+    className: "admin-backend-new-collapse",
+    dataAttribute: "admin-new-header",
   };
 
-  const commandListCollapseContainer = await buildCollapseContainer(commandListCollapseObj);
-  commandListCollapseContainer.className = "wrapper";
+  const newListCollapseContainer = await buildCollapseContainer(newListCollapseObj);
+  newListCollapseContainer.className = "wrapper";
 
-  return commandListCollapseContainer;
+  return newListCollapseContainer;
 };
