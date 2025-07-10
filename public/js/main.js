@@ -28,16 +28,19 @@ export const buildDisplay = async () => {
     return null;
   }
 
+  console.log("!!!STATE");
+  console.log(state);
+
   //get / parse backend data (returns array of objects)
   const backendData = await sendToBack(state);
+  console.log("!!!BACKEND DATA");
+  console.log(backendData);
+  
   if (!backendData) {
     //ensure below doesnt fuck things
     await displayFail();
     return null;
   }
-
-  console.log("!!!BACKEND DATA");
-  console.log(backendData);
 
   const backendDataParsed = await buildBackendDisplay(backendData);
 
