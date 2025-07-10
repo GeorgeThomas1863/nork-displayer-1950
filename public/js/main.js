@@ -36,6 +36,9 @@ export const buildDisplay = async () => {
     return null;
   }
 
+  console.log("!!!BACKEND DATA");
+  console.log(backendData);
+
   const backendDataParsed = await buildBackendDisplay(backendData);
 
   //on fail
