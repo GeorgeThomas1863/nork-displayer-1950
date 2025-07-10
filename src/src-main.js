@@ -9,8 +9,8 @@ export const runGetBackendData = async (inputObj) => {
   if (!inputObj) return null;
   const { isFirstLoad } = inputObj;
 
-  console.log("!!!INPUT OBJ");
-  console.log(inputObj);
+  // console.log("!!!INPUT OBJ");
+  // console.log(inputObj);
 
   switch (isFirstLoad) {
     case true:

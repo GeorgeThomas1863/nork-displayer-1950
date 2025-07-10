@@ -18,8 +18,8 @@ export const buildDisplay = async () => {
     const dropDownElement = await buildDropDown();
     const inputFormWrapper = await buildInputForms();
     displayElement.append(dropDownElement, inputFormWrapper);
-    console.log("!!!DISPLAY ELEMENT");
-    console.log(displayElement);
+    // console.log("!!!DISPLAY ELEMENT");
+    // console.log(displayElement);
   }
 
   //check if new data is needed [will pass on first load]
@@ -30,18 +30,14 @@ export const buildDisplay = async () => {
     return null;
   }
 
-  console.log("!!!STATE");
-  console.log(state);
-
   //get / parse backend data (returns array of objects)
   const backendData = await sendToBack(state);
   // console.log("!!!BACKEND DATA");
   // console.log(backendData);
 
-  //NO BACKEND DATA ON FIRST LOAD
   if (!backendData) {
     //ensure below doesnt fuck things
-    // await displayFail();
+    await displayFail();
     return true;
   }
 
