@@ -18,6 +18,8 @@ export const buildDisplay = async () => {
     const dropDownElement = await buildDropDown();
     const inputFormWrapper = await buildInputForms();
     displayElement.append(dropDownElement, inputFormWrapper);
+    console.log("!!!DISPLAY ELEMENT");
+    console.log(displayElement);
   }
 
   //check if new data is needed [will pass on first load]
