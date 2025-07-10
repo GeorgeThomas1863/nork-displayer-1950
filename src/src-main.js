@@ -9,6 +9,9 @@ export const runGetBackendData = async (inputObj) => {
   if (!inputObj || !inputObj.trigger) return null;
   const { isFirstLoad } = inputObj;
 
+  console.log("!!!INPUT OBJ");
+  console.log(inputObj);
+
   switch (isFirstLoad) {
     case true:
       return await getBackendDataDefault();
