@@ -84,6 +84,9 @@ export const getBackendDataNew = async (inputObj) => {
   params.howMany = howManyBuffer;
   params.filterValue = articleType;
 
+  console.log("!!!PARAMS");
+  console.log(params);
+
   const dataModel = new dbModel(params, collection);
   const isArticleFilter = dataType === "articles" && articleType !== "all-type";
 
