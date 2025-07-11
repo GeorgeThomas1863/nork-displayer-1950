@@ -84,8 +84,8 @@ export const getBackendDataNew = async (inputObj) => {
   params.howMany = howManyBuffer;
   params.filterValue = articleType;
 
-  console.log("!!!PARAMS");
-  console.log(params);
+  // console.log("!!!PARAMS");
+  // console.log(params);
 
   const dataModel = new dbModel(params, collection);
   const isArticleFilter = dataType === "articles" && articleType !== "all-type";
@@ -95,6 +95,9 @@ export const getBackendDataNew = async (inputObj) => {
   const methodName = `get${sortPrefix}Item${typeSuffix}Array`;
 
   const dataArrayRaw = await dataModel[methodName]();
+  console.log("!!!DATA ARRAY RAW");
+  console.log(dataArrayRaw);
+  
   const dataArrayValid = await removeInvalidItems(dataArrayRaw, dataType, howManyInput);
   if (!dataArrayValid) return null;
 
