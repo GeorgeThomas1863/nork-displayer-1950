@@ -76,6 +76,9 @@ export const removeInvalidItems = async (inputArray, dataType, howMany) => {
       break;
   }
 
+  //needed if how many is stupidly high
+  if (dataReturnArray && dataReturnArray.length) return dataReturnArray;
+
   //half assed answer below, might need to redo
   const newDataArray = await rePullData(dataType, howMany);
 
