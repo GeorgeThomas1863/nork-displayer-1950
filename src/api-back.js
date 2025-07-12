@@ -19,7 +19,7 @@ export const sendAdminCommand = async (inputParams) => {
   }
 };
 
-export const sendKcnaWatchCommand = async () => {
+export const sendKcnaWatchCommand = async (inputParams) => {
   const { kcnaWatchURL } = CONFIG;
 
   try {
