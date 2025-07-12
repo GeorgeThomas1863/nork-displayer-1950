@@ -14,6 +14,9 @@ export const runGetAdminBackendData = async (inputObj) => {
 
   if (isFirstLoad) return firstLoadObj;
 
+  console.log("DATA REQ");
+  console.log(dataReq);
+
   const sendKcnaWatchObj = await sendKcnaWatchCommand(dataReq);
 
   //RE ENABLE
