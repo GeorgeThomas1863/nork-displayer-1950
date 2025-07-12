@@ -1,6 +1,6 @@
 import CONFIG from "../config/config.js";
 import dbModel from "../models/db-model.js";
-import { sendAdminCommand } from "./api-back.js";
+import { sendAdminCommand, sendKcnaWatchCommand } from "./api-back.js";
 
 //gets admin backend data
 // export const runGetDefaultDataAdmin = async (inputObj) => {
@@ -14,16 +14,17 @@ export const runGetAdminBackendData = async (inputObj) => {
 
   if (isFirstLoad) return firstLoadObj;
 
-  // const adminStartObj = await sendAdminStart(dataReq);
-  const adminStartObj = await sendAdminCommand(dataReq);
-  if (!adminStartObj) return firstLoadObj;
+  const sendKcnaWatchObj = await sendKcnaWatchCommand(dataReq);
 
-  const returnObj = { ...firstLoadObj, ...adminStartObj };
+  //RE ENABLE
+  // const adminStartObj = await sendAdminCommand(dataReq);
+  // if (!adminStartObj) return firstLoadObj;
 
-  // console.log("RETURN OBJ");
-  // console.dir(returnObj);
+  // const returnObj = { ...firstLoadObj, ...adminStartObj };
 
-  return returnObj;
+  // return returnObj;
+
+  return sendKcnaWatchObj;
 };
 
 //default log from mongodb
