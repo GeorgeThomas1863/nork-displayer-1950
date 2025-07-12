@@ -1,6 +1,7 @@
 export const buildAdminParams = async () => {
   const params = {
     route: "/admin-submit-route",
+    appType: document.getElementById("admin-app-type").value,
     commandType: document.getElementById("admin-command-type").value,
     howMuch: document.getElementById("admin-how-much").value,
     urlInput: document.getElementById("admin-url-input").value,
