@@ -104,6 +104,7 @@ export const buildCommandListItem = async () => {
     { value: "admin-stop-scrape", id: "admin-stop-scrape", text: "Scrape Stop" },
     { value: "admin-start-scheduler", id: "admin-start-scheduler", text: "Scheduler ON" },
     { value: "admin-stop-scheduler", id: "admin-stop-scheduler", text: "Scheduler OFF" },
+    { value: "admin-scrape-status", id: "admin-scrape-status", text: "Get Scrape Status" },
   ];
 
   for (let i = 0; i < commandOptionArray.length; i++) {
