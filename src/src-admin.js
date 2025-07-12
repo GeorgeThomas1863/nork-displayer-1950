@@ -6,6 +6,7 @@ import { sendAdminCommand, sendKcnaWatchCommand } from "./api-back.js";
 // export const runGetDefaultDataAdmin = async (inputObj) => {
 export const runGetAdminBackendData = async (inputObj) => {
   const { dataReq, isFirstLoad } = inputObj;
+  const { appType } = dataReq;
 
   const firstLoadObj = { ...inputObj };
 
@@ -14,20 +15,20 @@ export const runGetAdminBackendData = async (inputObj) => {
 
   if (isFirstLoad) return firstLoadObj;
 
-  console.log("DATA REQ");
-  console.log(dataReq);
+  let dataObj = {};
+  switch (appType) {
+    case "admin-scraper":
+      dataObj = await sendAdminCommand(dataReq);
+      break;
+    case "admin-kcna-watch":
+      dataObj = await sendKcnaWatchCommand(dataReq);
+      break;
+  }
+  if (!dataObj) return firstLoadObj;
 
-  const sendKcnaWatchObj = await sendKcnaWatchCommand(dataReq);
+  const returnObj = { ...firstLoadObj, ...dataObj };
 
-  //RE ENABLE
-  // const adminStartObj = await sendAdminCommand(dataReq);
-  // if (!adminStartObj) return firstLoadObj;
-
-  // const returnObj = { ...firstLoadObj, ...adminStartObj };
-
-  // return returnObj;
-
-  return sendKcnaWatchObj;
+  return returnObj;
 };
 
 //default log from mongodb
