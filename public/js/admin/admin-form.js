@@ -6,6 +6,7 @@ export const buildAdminForm = async () => {
   adminFormWrapper.id = "admin-form-wrapper";
   adminFormWrapper.className = "collapse-content";
 
+  const appListItem = await buildAppListItem();
   const commandListItem = await buildCommandListItem();
   const howMuchListItem = await buildHowMuchListItem();
   const urlListItem = await buildUrlListItem();
@@ -16,7 +17,17 @@ export const buildAdminForm = async () => {
   const buttonListItem = await buildButtonListItem();
 
   //append everything
-  adminFormWrapper.append(commandListItem, howMuchListItem, urlListItem, itemTypeListItem, articleTypeListItem, uploadTgListItem, tgIdListItem, buttonListItem);
+  adminFormWrapper.append(
+    appListItem,
+    commandListItem,
+    howMuchListItem,
+    urlListItem,
+    itemTypeListItem,
+    articleTypeListItem,
+    uploadTgListItem,
+    tgIdListItem,
+    buttonListItem
+  );
 
   //MAKE IT COLLAPSE HERE
   const titleElement = document.createElement("div");
@@ -39,6 +50,41 @@ export const buildAdminForm = async () => {
   return adminFormCollapseContainer;
 };
 
+export const buildAppListItem = async () => {
+  const appListItem = document.createElement("li");
+  appListItem.id = "admin-app-list-item";
+
+  const appLabel = document.createElement("label");
+  appLabel.setAttribute("for", "admin-app-type");
+  appLabel.textContent = "App Type";
+
+  const appSelect = document.createElement("select");
+  appSelect.name = "admin-app-type";
+  appSelect.id = "admin-app-type";
+
+  const appOptionArray = [
+    { value: "admin-scraper", id: "admin-scraper", text: "Scraper", selected: true },
+    { value: "admin-kcna-watch", id: "admin-kcna-watch", text: "KCNA Watch" },
+  ];
+
+  for (let i = 0; i < appOptionArray.length; i++) {
+    const optionData = appOptionArray[i];
+    const option = document.createElement("option");
+    option.value = optionData.value;
+    option.id = optionData.id;
+    option.textContent = optionData.text;
+    if (optionData.selected) {
+      option.selected = true;
+    }
+    appSelect.append(option);
+  }
+
+  appListItem.appendChild(appLabel);
+  appListItem.appendChild(appSelect);
+
+  return appListItem;
+};
+
 export const buildCommandListItem = async () => {
   // Create Command list item
   const commandListItem = document.createElement("li");
@@ -58,7 +104,6 @@ export const buildCommandListItem = async () => {
     { value: "admin-stop-scrape", id: "admin-stop-scrape", text: "Scrape Stop" },
     { value: "admin-start-scheduler", id: "admin-start-scheduler", text: "Scheduler ON" },
     { value: "admin-stop-scheduler", id: "admin-stop-scheduler", text: "Scheduler OFF" },
-    { value: "admin-scrape-status", id: "admin-scrape-status", text: "Get Scrape Status" },
   ];
 
   for (let i = 0; i < commandOptionArray.length; i++) {
