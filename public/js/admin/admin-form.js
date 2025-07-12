@@ -9,11 +9,11 @@ export const buildAdminForm = async () => {
   const appListItem = await buildAppListItem();
   const commandListItem = await buildCommandListItem();
   const howMuchListItem = await buildHowMuchListItem();
-  const urlListItem = await buildUrlListItem();
-  const itemTypeListItem = await buildItemTypeListItem();
-  const articleTypeListItem = await buildArticleTypeListItem();
-  const uploadTgListItem = await buildUploadTgListItem();
-  const tgIdListItem = await buildTgIdListItem();
+  // const urlListItem = await buildUrlListItem();
+  // const itemTypeListItem = await buildItemTypeListItem();
+  // const articleTypeListItem = await buildArticleTypeListItem();
+  // const uploadTgListItem = await buildUploadTgListItem();
+  // const tgIdListItem = await buildTgIdListItem();
   const buttonListItem = await buildButtonListItem();
 
   //append everything
@@ -21,11 +21,11 @@ export const buildAdminForm = async () => {
     appListItem,
     commandListItem,
     howMuchListItem,
-    urlListItem,
-    itemTypeListItem,
-    articleTypeListItem,
-    uploadTgListItem,
-    tgIdListItem,
+    // urlListItem,
+    // itemTypeListItem,
+    // articleTypeListItem,
+    // uploadTgListItem,
+    // tgIdListItem,
     buttonListItem
   );
 
