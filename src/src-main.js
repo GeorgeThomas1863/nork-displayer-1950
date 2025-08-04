@@ -9,8 +9,8 @@ export const runGetBackendData = async (inputObj) => {
   if (!inputObj) return null;
   const { isFirstLoad } = inputObj;
 
-  // console.log("!!!INPUT OBJ");
-  // console.log(inputObj);
+  console.log("!!!INPUT OBJ");
+  console.log(inputObj);
 
   switch (isFirstLoad) {
     case true:
@@ -44,8 +44,8 @@ export const getBackendDataDefault = async () => {
       dataArrayRaw = await dataModel.getNewestItemsByTypeArray();
     } else {
       dataArrayRaw = await dataModel.getNewestItemsArray();
-      console.log("!!!COLLECTION");
-      console.log(collection);
+      // console.log("!!!COLLECTION");
+      // console.log(collection);
     }
 
     const dataArrayValid = await removeInvalidItems(dataArrayRaw, dataType, howMany);
