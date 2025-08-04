@@ -59,7 +59,7 @@ import CONFIG from "./config/config.js";
 import routes from "./routes/routes.js";
 // import * as db from "./data/db.js";
 
-const { picPath, vidPath, expressPicPath, expressVidPath, displayPort } = CONFIG;
+const { picPath, vidPath, watchPath, expressPicPath, expressVidPath, expressWatchPath, displayPort } = CONFIG;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -89,6 +89,7 @@ app.use(express.static("public"));
 //path to pics / vids on fs
 app.use(expressPicPath, express.static(picPath));
 app.use(expressVidPath, express.static(vidPath));
+app.use(expressWatchPath, express.static(watchPath));
 
 //routes
 app.use(routes);

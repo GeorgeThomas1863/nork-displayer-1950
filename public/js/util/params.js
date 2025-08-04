@@ -22,6 +22,8 @@ export const buildInputParams = async () => {
     picSortBy: document.getElementById("pic-sort-by").value,
     vidHowMany: Number(document.getElementById("vid-how-many").value),
     vidSortBy: document.getElementById("vid-sort-by").value,
+    watchHowMany: Number(document.getElementById("watch-how-many").value),
+    watchSortBy: document.getElementById("watch-sort-by").value,
   };
 
   return params;

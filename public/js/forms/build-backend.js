@@ -74,6 +74,7 @@ export const displayFail = async () => {
   failElement.innerHTML = "BACKEND DATA LOOKUP FUCKED";
   failElement.id = "backend-data-fail";
 
+  //BUILD way to calculate if there is NO data, and show diff element
   const backendDataWrapperReplace = document.getElementById("backend-data-wrapper");
   if (!backendDataWrapperReplace) {
     displayElement.append(failElement);

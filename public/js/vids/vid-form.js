@@ -13,7 +13,7 @@ export const buildVidForm = async () => {
   vidWrapper.append(vidHowManyListItem, vidSortByListItem);
 
   const titleElement = document.createElement("div");
-  titleElement.textContent = "VIDEOS";
+  titleElement.textContent = "KCNA Vids";
   // titleElement.setAttribute("data-expand", "vid-dropdown"); //for click listener
 
   //build collapse container
@@ -32,42 +32,6 @@ export const buildVidForm = async () => {
 
   return vidCollapseContainer;
 };
-
-// export const buildVidTypeListItem = async () => {
-//   const vidTypeListItem = document.createElement("li");
-//   vidTypeListItem.id = "vid-type-list-item";
-//   vidTypeListItem.className = "form";
-
-//   const vidTypeLabel = document.createElement("label");
-//   vidTypeLabel.setAttribute("for", "vid-type");
-//   vidTypeLabel.textContent = "Video Type";
-
-//   const vidTypeSelect = document.createElement("select");
-//   vidTypeSelect.name = "vid-type";
-//   vidTypeSelect.id = "vid-type";
-
-//   // Create options for article type select
-//   const optionArray = [
-//     { value: "vid-pages", id: "vid-pages", text: "Vid Pages", selected: true },
-//     { value: "vid-alone", id: "vid-alone", text: "Just Vids" },
-//   ];
-
-//   for (let i = 0; i < optionArray.length; i++) {
-//     const optionData = optionArray[i];
-//     const option = document.createElement("option");
-//     option.value = optionData.value;
-//     option.id = optionData.id;
-//     option.textContent = optionData.text;
-//     if (optionData.selected) {
-//       option.selected = true;
-//     }
-//     vidTypeSelect.append(option);
-//   }
-
-//   vidTypeListItem.append(vidTypeLabel, vidTypeSelect);
-
-//   return vidTypeListItem;
-// };
 
 export const buildVidHowManyListItem = async () => {
   const vidHowManyListItem = document.createElement("li");
