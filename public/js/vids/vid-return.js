@@ -12,6 +12,7 @@ export const buildVidDisplay = async (inputArray) => {
 
   for (let i = 0; i < inputArray.length; i++) {
     const vidListItem = await buildVidListItem(inputArray[i], isFirst);
+    if (!vidListItem) continue;
     vidArrayElement.appendChild(vidListItem);
 
     // Store the collapse components for group functionality
@@ -28,6 +29,7 @@ export const buildVidDisplay = async (inputArray) => {
 };
 
 export const buildVidListItem = async (inputObj, isFirst) => {
+  if (!inputObj) return null;
   const { title, date } = inputObj;
 
   const vidListItem = document.createElement("li");
@@ -56,6 +58,7 @@ export const buildVidListItem = async (inputObj, isFirst) => {
 
 //changed the path to vids by nesting in vidData
 export const buildVidContainer = async (inputObj) => {
+  if (!inputObj || !inputObj.vidData) return null;
   const { vidData, date } = inputObj;
   const { savePath } = vidData;
 
@@ -71,6 +74,7 @@ export const buildVidContainer = async (inputObj) => {
 };
 
 export const buildVidTitle = async (title) => {
+  if (!title) return null;
   const titleElement = document.createElement("h2");
   titleElement.id = "vid-title";
   titleElement.textContent = title;
@@ -79,6 +83,7 @@ export const buildVidTitle = async (title) => {
 };
 
 export const buildVidDate = async (date) => {
+  if (!date) return null;
   const dateElement = document.createElement("div");
   dateElement.id = "vid-date";
   const dateObj = new Date(date);
