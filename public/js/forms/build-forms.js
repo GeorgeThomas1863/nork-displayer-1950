@@ -1,6 +1,7 @@
 import { buildArticleForm } from "../articles/article-form.js";
 import { buildPicForm } from "../pics/pic-form.js";
 import { buildVidForm } from "../vids/vid-form.js";
+import { buildWatchForm } from "../watch/watch-form.js";
 import { defineCollapseItems } from "../util/collapse.js";
 
 export const buildInputForms = async () => {
