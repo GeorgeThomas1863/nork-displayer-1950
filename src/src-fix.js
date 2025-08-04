@@ -74,6 +74,9 @@ export const removeInvalidItems = async (inputArray, dataType, howMany) => {
         }
       }
       break;
+
+    default:
+      return inputArray;
   }
 
   //needed if how many is stupidly high
@@ -157,8 +160,8 @@ export const rePullData = async (dataType, howMany) => {
       const vidArrayFS = fs.readdirSync(vidPath);
 
       const latestVidId = await getLatestVid(vidArrayFS);
-      console.log("LATEST VID");
-      console.log(latestVidId);
+      // console.log("LATEST VID");
+      // console.log(latestVidId);
 
       const vidParams = {
         sortKey: "date",
