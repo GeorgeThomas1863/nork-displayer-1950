@@ -1,5 +1,7 @@
 //****************
 
+//ADDING IN KCTV from kcnaWatch; ON get data, figure out how new data is returned (not returning any watch data)
+
 //FIX ADMIN DISPLAY
 
 //PERHAPS REVERT DISPLAY? AND MAKE TIMER THING

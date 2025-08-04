@@ -171,8 +171,8 @@ export const rePullData = async (dataType, howMany) => {
         filterValue: { $lte: latestVidId },
       };
 
-      console.log("VID PARAMS");
-      console.log(vidParams);
+      // console.log("VID PARAMS");
+      // console.log(vidParams);
 
       const vidDataModel = new dbModel(vidParams, vidPageContent);
       const vidDataArray = await vidDataModel.getNewestItemsByTypeArray();
