@@ -12,6 +12,7 @@ export const buildWatchDisplay = async (inputArray) => {
 
   for (let i = 0; i < inputArray.length; i++) {
     const watchListItem = await buildWatchListItem(inputArray[i], isFirst);
+    if (!watchListItem) continue;
     watchArrayElement.appendChild(watchListItem);
 
     // Store the collapse components for group functionality
@@ -28,6 +29,7 @@ export const buildWatchDisplay = async (inputArray) => {
 };
 
 export const buildWatchListItem = async (inputObj, isFirst) => {
+  if (!inputObj) return null;
   const { title, date } = inputObj;
 
   const watchListItem = document.createElement("li");
@@ -56,6 +58,7 @@ export const buildWatchListItem = async (inputObj, isFirst) => {
 
 //changed the path to vids by nesting in vidData
 export const buildWatchContainer = async (inputObj) => {
+  if (!inputObj || !inputObj.vidData) return null;
   const { vidData, date } = inputObj;
   const { savePath } = vidData;
 
@@ -71,6 +74,7 @@ export const buildWatchContainer = async (inputObj) => {
 };
 
 export const buildWatchTitle = async (title) => {
+  if (!title) return null;
   const titleElement = document.createElement("h2");
   titleElement.id = "watch-title";
   titleElement.textContent = title;
@@ -79,6 +83,7 @@ export const buildWatchTitle = async (title) => {
 };
 
 export const buildWatchDate = async (date) => {
+  if (!date) return null;
   const dateElement = document.createElement("div");
   dateElement.id = "watch-date";
   const dateObj = new Date(date);
