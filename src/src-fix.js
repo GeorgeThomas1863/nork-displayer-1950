@@ -119,19 +119,20 @@ export const checkItemExists = async (inputObj, type = "pic") => {
     throw error;
   }
 
-  //GET FILE SIZE FRM FILE (TEST THIS)
-  const fileSize = fs.statSync(itemSavePath).size;
+  //not worth checking below
+  // //GET FILE SIZE FRM FILE (TEST THIS)
+  // const fileSize = fs.statSync(itemSavePath).size;
 
-  //check for slightly smaller file
-  const checkSize = checkSizeRaw * 0.7;
-  if (!fileSize || fileSize < checkSize) {
-    // console.log("AHHHHHHHHHHHHHHHHHHHH");
-    const error = new Error("FILE CORRUPTED / WRONG SIZE");
-    error.savePath = itemSavePath;
-    throw error;
-  }
+  // //check for slightly smaller file
+  // const checkSize = checkSizeRaw * 0.7;
+  // if (!fileSize || fileSize < checkSize) {
+  //   // console.log("AHHHHHHHHHHHHHHHHHHHH");
+  //   const error = new Error("FILE CORRUPTED / WRONG SIZE");
+  //   error.savePath = itemSavePath;
+  //   throw error;
+  // }
 
-  //otherwise return true
+  // //otherwise return true
   return true;
 };
 
