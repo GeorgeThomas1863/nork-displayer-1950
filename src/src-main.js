@@ -47,8 +47,8 @@ export const getBackendDataDefault = async () => {
       dataArrayRaw = await dataModel.getNewestItemsByTypeArray();
     } else {
       dataArrayRaw = await dataModel.getNewestItemsArray();
-      console.log("!!!dataArrayRaw");
-      console.log(dataArrayRaw);
+      // console.log("!!!dataArrayRaw");
+      // console.log(dataArrayRaw);
     }
 
     const dataArrayValid = await removeInvalidItems(dataArrayRaw, dataType, howMany);
