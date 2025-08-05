@@ -46,12 +46,12 @@ export const removeInvalidItems = async (inputArray, dataType, howMany) => {
       break;
 
     case "vids":
-      // console.log("REMOVE INVALID ITEMS DATA TYPE");
-      // console.log(dataType);
-      // console.log(inputArray);
       for (let i = 0; i < inputArray.length; i++) {
         try {
           const dataObj = inputArray[i];
+
+          console.log("!!!DATA OBJ");
+          console.dir(dataObj);
 
           //check thumbnail first
           if (!dataObj || !dataObj.thumbnailData) continue;
