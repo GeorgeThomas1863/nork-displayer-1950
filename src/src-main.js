@@ -47,8 +47,8 @@ export const getBackendDataDefault = async () => {
       dataArrayRaw = await dataModel.getNewestItemsByTypeArray();
     } else {
       dataArrayRaw = await dataModel.getNewestItemsArray();
-      // console.log("!!!dataArrayRaw");
-      // console.log(dataArrayRaw);
+      console.log("!!!dataArrayRaw");
+      console.log(dataArrayRaw.length);
     }
 
     const dataArrayValid = await removeInvalidItems(dataArrayRaw, dataType, howMany);
@@ -98,8 +98,8 @@ export const getBackendDataNew = async (inputObj) => {
   const methodName = `get${sortPrefix}Item${typeSuffix}Array`;
 
   const dataArrayRaw = await dataModel[methodName]();
-  console.log("!!!DATA ARRAY RAW");
-  console.log(dataArrayRaw.length);
+  // console.log("!!!DATA ARRAY RAW");
+  // console.log(dataArrayRaw.length);
 
   const dataArrayValid = await removeInvalidItems(dataArrayRaw, dataType, howManyInput);
   if (!dataArrayValid) return null;
