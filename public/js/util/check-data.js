@@ -41,10 +41,6 @@ export const checkInputTriggered = async (inputId) => {
 export const checkNewDataNeeded = async () => {
   const { isFirstLoad, dataReq, dataLoaded, dataType, trigger } = state;
 
-  console.log("AHHHHHHHHHHHHHHHHHHHHHHHHHHH");
-  console.log("STATE");
-  console.dir(state);
-
   if (isFirstLoad) return true;
 
   //return true on all sorts / article changes (just assume not loaded)
