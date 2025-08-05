@@ -1,19 +1,26 @@
-//CLAUDE's custom vid streamer
+//CLAUDE's VID STREAMER, NEED TO INTEGRATE
 
 // Global state for video players
 const videoPlayers = new Map();
 
-// Create and initialize a video player
-export const createVideoPlayer = async (videoId, container) => {
+// Create and initialize a video player from data object
+const createVideoPlayer = async (videoData, container) => {
   try {
-    // Get video metadata
-    const response = await fetch(`/api/video/${videoId}/info`);
-    const videoInfo = await response.json();
+    // Extract video info from data object
+    const videoInfo = {
+      videoId: videoData.vidData.vidName,
+      totalChunks: videoData.vidData.totalChunks,
+      chunkDuration: 30, // You can adjust this or get from data if available
+      title: videoData.title,
+      date: videoData.date,
+      thumbnail: videoData.thumbnail,
+      vidSizeMB: videoData.vidData.vidSizeMB,
+      vidId: videoData.vidData.vidId,
+    };
 
     // Create player state
     const playerState = {
-      videoId,
-      container,
+      videoData,
       videoInfo,
       currentChunk: 0,
       videoElement: null,
@@ -21,6 +28,7 @@ export const createVideoPlayer = async (videoId, container) => {
       preloadedChunks: new Map(),
       loadingElement: null,
       progressElement: null,
+      container,
     };
 
     // Create DOM elements
@@ -36,7 +44,7 @@ export const createVideoPlayer = async (videoId, container) => {
     preloadNextChunks(playerState);
 
     // Store player state
-    videoPlayers.set(videoId, playerState);
+    videoPlayers.set(videoInfo.videoId, playerState);
 
     return playerState;
   } catch (error) {
@@ -45,118 +53,129 @@ export const createVideoPlayer = async (videoId, container) => {
   }
 };
 
-// Create video DOM elements
-function createVideoElements(playerState) {
-  const { container } = playerState;
+// Create video DOM elements with metadata
+const createVideoElements = ({ container, videoInfo, videoData }) => {
+  // Create main video item container
+  const videoItem = document.createElement("div");
+  videoItem.className = "video-item";
+
+  // Create thumbnail if available
+  if (videoData.thumbnail) {
+    const thumbnail = document.createElement("img");
+    thumbnail.src = videoData.thumbnail;
+    thumbnail.alt = videoInfo.title;
+    thumbnail.className = "video-thumbnail";
+    thumbnail.onerror = () => (thumbnail.style.display = "none");
+    videoItem.appendChild(thumbnail);
+  }
+
+  // Create info wrapper
+  const infoWrapper = document.createElement("div");
+  infoWrapper.className = "video-info-wrapper";
+
+  // Create title
+  const title = document.createElement("h3");
+  title.className = "video-title";
+  title.textContent = videoInfo.title;
+  infoWrapper.appendChild(title);
+
+  // Create metadata
+  const metaContainer = document.createElement("div");
+  metaContainer.className = "video-meta";
+
+  // Metadata items configuration
+  const metaItems = [
+    { label: "Date", value: formatDate(videoData.date) },
+    { label: "Size", value: `${videoInfo.vidSizeMB} MB` },
+    { label: "Duration", value: `~${Math.ceil((videoInfo.totalChunks * videoInfo.chunkDuration) / 60)} min` },
+    { label: "Chunks", value: videoInfo.totalChunks },
+  ];
+
+  // Create metadata items
+  metaItems.forEach(({ label, value }) => {
+    const item = document.createElement("div");
+    item.className = "video-meta-item";
+    item.innerHTML = `
+      <span class="video-meta-label">${label}:</span>
+      <span>${value}</span>
+    `;
+    metaContainer.appendChild(item);
+  });
+
+  infoWrapper.appendChild(metaContainer);
+  videoItem.appendChild(infoWrapper);
 
   // Create video container
   const videoContainer = document.createElement("div");
   videoContainer.className = "video-container";
-  videoContainer.style.cssText = `
-    position: relative;
-    width: 100%;
-    max-width: 800px;
-    background: #000;
-    border-radius: 8px;
-    overflow: hidden;
-  `;
 
   // Create video element
   const videoElement = document.createElement("video");
-  videoElement.controls = true;
-  videoElement.style.cssText = `
-    width: 100%;
-    height: auto;
-    display: block;
-  `;
+  Object.assign(videoElement, {
+    controls: true,
+    className: "video-element",
+    preload: "metadata",
+  });
 
   // Create loading indicator
   const loadingElement = document.createElement("div");
-  loadingElement.className = "loading-indicator";
-  loadingElement.textContent = "Loading...";
-  loadingElement.style.cssText = `
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    font-size: 18px;
-    background: rgba(0,0,0,0.8);
-    padding: 10px 20px;
-    border-radius: 5px;
-    display: none;
-  `;
+  Object.assign(loadingElement, {
+    className: "loading-indicator",
+    textContent: "Loading...",
+  });
 
   // Create progress info
   const progressElement = document.createElement("div");
   progressElement.className = "chunk-progress";
-  progressElement.style.cssText = `
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    background: rgba(0,0,0,0.7);
-    color: white;
-    padding: 5px 10px;
-    border-radius: 3px;
-    font-size: 12px;
-  `;
 
-  videoContainer.appendChild(videoElement);
-  videoContainer.appendChild(loadingElement);
-  videoContainer.appendChild(progressElement);
+  // Append all elements
+  [videoElement, loadingElement, progressElement].forEach((el) => videoContainer.appendChild(el));
 
-  container.appendChild(videoContainer);
+  videoItem.appendChild(videoContainer);
+  container.appendChild(videoItem);
 
   // Update player state
-  playerState.videoElement = videoElement;
-  playerState.loadingElement = loadingElement;
-  playerState.progressElement = progressElement;
-}
+  Object.assign(arguments[0], {
+    videoElement,
+    loadingElement,
+    progressElement,
+  });
+};
 
 // Set up event listeners for video
-function setupVideoEventListeners(playerState) {
+const setupVideoEventListeners = (playerState) => {
   const { videoElement } = playerState;
 
-  // Handle time updates to switch chunks
-  videoElement.addEventListener("timeupdate", () => {
-    handleVideoTimeUpdate(playerState);
-  });
+  // Event listener configurations
+  const eventListeners = [
+    { event: "timeupdate", handler: () => handleVideoTimeUpdate(playerState) },
+    { event: "seeking", handler: () => handleVideoSeeking(playerState) },
+    { event: "ended", handler: () => handleVideoChunkEnded(playerState) },
+    { event: "loadstart", handler: () => showVideoLoading(playerState, true) },
+    {
+      event: "canplay",
+      handler: () => {
+        showVideoLoading(playerState, false);
+        preloadNextChunks(playerState);
+      },
+    },
+    { event: "timeupdate", handler: () => updateVideoProgressDisplay(playerState) },
+    {
+      event: "error",
+      handler: (e) => {
+        console.error("Video error:", e);
+        showVideoError(playerState.container, "Error playing video");
+      },
+    },
+  ];
 
-  // Handle seeking
-  videoElement.addEventListener("seeking", () => {
-    handleVideoSeeking(playerState);
-  });
+  // Add all event listeners
+  eventListeners.forEach(({ event, handler }) => videoElement.addEventListener(event, handler));
+};
 
-  // Handle chunk ending
-  videoElement.addEventListener("ended", () => {
-    handleVideoChunkEnded(playerState);
-  });
-
-  // Handle loading states
-  videoElement.addEventListener("loadstart", () => {
-    showVideoLoading(playerState, true);
-  });
-
-  videoElement.addEventListener("canplay", () => {
-    showVideoLoading(playerState, false);
-    preloadNextChunks(playerState); // Preload when ready
-  });
-
-  // Update progress display
-  videoElement.addEventListener("timeupdate", () => {
-    updateVideoProgressDisplay(playerState);
-  });
-
-  // Handle errors
-  videoElement.addEventListener("error", (e) => {
-    console.error("Video error:", e);
-    showVideoError(playerState.container, "Error playing video");
-  });
-}
-
-// Load a specific video chunk
-async function loadVideoChunk(playerState, chunkIndex, seekTime = 0) {
-  const { videoElement, currentChunk, isLoading, videoId, preloadedChunks, videoInfo } = playerState;
+// Load a specific video chunk using data object
+const loadVideoChunk = async (playerState, chunkIndex, seekTime = 0) => {
+  const { videoElement, currentChunk, isLoading, videoInfo, preloadedChunks } = playerState;
 
   if (isLoading || chunkIndex === currentChunk || chunkIndex >= videoInfo.totalChunks) {
     return;
@@ -167,14 +186,9 @@ async function loadVideoChunk(playerState, chunkIndex, seekTime = 0) {
 
   try {
     const wasPlaying = !videoElement.paused;
-    const currentTime = getCurrentVideoTime(playerState);
 
-    // Check if chunk is preloaded
-    if (preloadedChunks.has(chunkIndex)) {
-      videoElement.src = preloadedChunks.get(chunkIndex);
-    } else {
-      videoElement.src = `/api/video/${videoId}/chunk/${chunkIndex}`;
-    }
+    // Set video source - check preloaded chunks first
+    videoElement.src = preloadedChunks.has(chunkIndex) ? preloadedChunks.get(chunkIndex) : `/api/video/${videoInfo.videoId}/chunk/${chunkIndex}`;
 
     playerState.currentChunk = chunkIndex;
 
@@ -226,117 +240,104 @@ async function loadVideoChunk(playerState, chunkIndex, seekTime = 0) {
     playerState.isLoading = false;
     showVideoLoading(playerState, false);
   }
-}
+};
 
 // Handle time updates for chunk switching
-function handleVideoTimeUpdate(playerState) {
-  const { videoElement, currentChunk, videoInfo } = playerState;
-  const currentTime = videoElement.currentTime;
-  const chunkDuration = videoInfo.chunkDuration;
+const handleVideoTimeUpdate = ({ videoElement, currentChunk, videoInfo }) => {
+  const { currentTime } = videoElement;
+  const { chunkDuration, totalChunks } = videoInfo;
 
   // Switch to next chunk 1 second before current chunk ends
-  if (currentTime >= chunkDuration - 1 && currentChunk < videoInfo.totalChunks - 1) {
-    loadVideoChunk(playerState, currentChunk + 1);
+  if (currentTime >= chunkDuration - 1 && currentChunk < totalChunks - 1) {
+    loadVideoChunk(arguments[0], currentChunk + 1);
   }
-}
+};
 
 // Handle seeking across chunks
-function handleVideoSeeking(playerState) {
+const handleVideoSeeking = (playerState) => {
   const totalVideoTime = getCurrentVideoTime(playerState);
-  const chunkDuration = playerState.videoInfo.chunkDuration;
+  const { chunkDuration, totalChunks } = playerState.videoInfo;
 
   // Calculate which chunk the seek time falls into
   const targetChunk = Math.floor(totalVideoTime / chunkDuration);
   const chunkSeekTime = totalVideoTime % chunkDuration;
 
-  if (targetChunk !== playerState.currentChunk && targetChunk < playerState.videoInfo.totalChunks) {
+  if (targetChunk !== playerState.currentChunk && targetChunk < totalChunks) {
     loadVideoChunk(playerState, targetChunk, chunkSeekTime);
   }
-}
+};
 
 // Handle when a chunk ends
-function handleVideoChunkEnded(playerState) {
-  const { currentChunk, videoInfo } = playerState;
-
+const handleVideoChunkEnded = ({ currentChunk, videoInfo }) => {
   if (currentChunk < videoInfo.totalChunks - 1) {
-    loadVideoChunk(playerState, currentChunk + 1);
+    loadVideoChunk(arguments[0], currentChunk + 1);
   }
-}
+};
 
 // Get current time across all chunks
-function getCurrentVideoTime(playerState) {
-  const { currentChunk, videoElement, videoInfo } = playerState;
-  return currentChunk * videoInfo.chunkDuration + videoElement.currentTime;
-}
+const getCurrentVideoTime = ({ currentChunk, videoElement, videoInfo }) => currentChunk * videoInfo.chunkDuration + videoElement.currentTime;
 
 // Preload next chunks for smooth playback
-async function preloadNextChunks(playerState) {
-  const { currentChunk, videoInfo, videoId, preloadedChunks } = playerState;
+const preloadNextChunks = async ({ currentChunk, videoInfo, preloadedChunks }) => {
   const chunksToPreload = 2;
+  const { totalChunks, videoId } = videoInfo;
 
-  for (let i = 1; i <= chunksToPreload; i++) {
-    const nextChunkIndex = currentChunk + i;
+  const preloadPromises = Array.from({ length: chunksToPreload }, (_, i) => {
+    const nextChunkIndex = currentChunk + i + 1;
 
-    if (nextChunkIndex < videoInfo.totalChunks && !preloadedChunks.has(nextChunkIndex)) {
-      try {
-        const response = await fetch(`/api/video/${videoId}/chunk/${nextChunkIndex}`);
-        if (!response.ok) continue;
-
-        const blob = await response.blob();
-        const url = URL.createObjectURL(blob);
-
-        preloadedChunks.set(nextChunkIndex, url);
-
-        // Clean up old preloaded chunks to save memory
-        cleanupOldChunks(playerState);
-      } catch (error) {
-        console.warn(`Failed to preload chunk ${nextChunkIndex}:`, error);
-      }
+    if (nextChunkIndex < totalChunks && !preloadedChunks.has(nextChunkIndex)) {
+      return fetch(`/api/video/${videoId}/chunk/${nextChunkIndex}`)
+        .then((response) => (response.ok ? response.blob() : null))
+        .then((blob) => {
+          if (blob) {
+            const url = URL.createObjectURL(blob);
+            preloadedChunks.set(nextChunkIndex, url);
+          }
+        })
+        .catch((error) => console.warn(`Failed to preload chunk ${nextChunkIndex}:`, error));
     }
-  }
-}
+    return Promise.resolve();
+  });
+
+  await Promise.allSettled(preloadPromises);
+
+  // Clean up old preloaded chunks
+  cleanupOldChunks(arguments[0]);
+};
 
 // Clean up old preloaded chunks
-function cleanupOldChunks(playerState) {
-  const { preloadedChunks, currentChunk } = playerState;
-
+const cleanupOldChunks = ({ preloadedChunks, currentChunk }) => {
   if (preloadedChunks.size > 4) {
-    for (const [chunkIndex, url] of preloadedChunks.entries()) {
-      if (chunkIndex < currentChunk - 1) {
+    [...preloadedChunks.entries()]
+      .filter(([chunkIndex]) => chunkIndex < currentChunk - 1)
+      .forEach(([chunkIndex, url]) => {
         URL.revokeObjectURL(url);
         preloadedChunks.delete(chunkIndex);
-      }
-    }
+      });
   }
-}
+};
 
 // Show/hide loading indicator
-function showVideoLoading(playerState, show) {
-  if (playerState.loadingElement) {
-    playerState.loadingElement.style.display = show ? "block" : "none";
+const showVideoLoading = ({ loadingElement }, show) => {
+  if (loadingElement) {
+    loadingElement.classList.toggle("show", show);
   }
-}
+};
 
 // Show error message
-function showVideoError(container, message) {
+const showVideoError = (container, message) => {
   const errorElement = document.createElement("div");
-  errorElement.style.cssText = `
-    padding: 20px;
-    background: #ffebee;
-    color: #c62828;
-    border: 1px solid #ef5350;
-    border-radius: 4px;
-    text-align: center;
-    font-family: Arial, sans-serif;
-  `;
-  errorElement.textContent = message;
+  Object.assign(errorElement, {
+    className: "video-error",
+    textContent: message,
+  });
 
   container.innerHTML = "";
   container.appendChild(errorElement);
-}
+};
 
 // Update progress display
-function updateVideoProgressDisplay(playerState) {
+const updateVideoProgressDisplay = (playerState) => {
   const { progressElement, videoInfo, currentChunk } = playerState;
 
   if (!progressElement) return;
@@ -345,110 +346,136 @@ function updateVideoProgressDisplay(playerState) {
   const totalDuration = videoInfo.totalChunks * videoInfo.chunkDuration;
 
   progressElement.textContent = `Chunk ${currentChunk + 1}/${videoInfo.totalChunks} | ` + `${formatTime(totalTime)} / ${formatTime(totalDuration)}`;
-}
+};
 
 // Format time as MM:SS
-function formatTime(seconds) {
+const formatTime = (seconds) => {
   const mins = Math.floor(seconds / 60);
   const secs = Math.floor(seconds % 60);
   return `${mins}:${secs.toString().padStart(2, "0")}`;
-}
+};
+
+// Format date for display
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+};
 
 // Clean up a video player
-function destroyVideoPlayer(videoId) {
+const destroyVideoPlayer = (videoId) => {
   const playerState = videoPlayers.get(videoId);
   if (!playerState) return;
 
   // Revoke all blob URLs to prevent memory leaks
-  for (const url of playerState.preloadedChunks.values()) {
-    URL.revokeObjectURL(url);
-  }
+  [...playerState.preloadedChunks.values()].forEach(URL.revokeObjectURL);
 
   playerState.preloadedChunks.clear();
   videoPlayers.delete(videoId);
-}
+};
 
-// Main function to display a single video
-async function displayVideo(videoId, containerId) {
+// Main function to display a single video from data object - EXPORTED
+export const displayVideoFromData = async (videoData, containerId) => {
   const container = document.getElementById(containerId);
   if (!container) {
     console.error(`Container '${containerId}' not found`);
     return null;
   }
 
+  const videoId = videoData.vidData.vidName;
+
   // Clean up existing player if any
   if (videoPlayers.has(videoId)) {
     destroyVideoPlayer(videoId);
   }
 
-  return await createVideoPlayer(videoId, container);
-}
+  return await createVideoPlayer(videoData, container);
+};
 
-// Function to display all available videos
-async function displayAllVideos(containerId = "videos-container") {
+// Function to display multiple videos from data array - EXPORTED
+export const displayVideosFromData = async (videosData, containerId = "videos-container") => {
   try {
-    const response = await fetch("/api/videos");
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-    }
-
-    const data = await response.json();
-
     let videosContainer = document.getElementById(containerId);
     if (!videosContainer) {
       videosContainer = document.createElement("div");
-      videosContainer.id = containerId;
+      Object.assign(videosContainer, {
+        id: containerId,
+        className: "videos-container",
+      });
       document.body.appendChild(videosContainer);
     }
 
     // Clear existing content
     videosContainer.innerHTML = "";
 
-    for (const videoId of data.videos) {
-      // Create container for each video
-      const videoContainer = document.createElement("div");
-      videoContainer.id = `video-${videoId}`;
-      videoContainer.style.cssText = `
-        margin: 20px 0;
-        padding: 20px;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        background: #f9f9f9;
-      `;
+    // Process each video data object with better error handling
+    const playerPromises = videosData.map(async (videoData, index) => {
+      try {
+        const videoId = videoData.vidData.vidName;
 
-      const title = document.createElement("h3");
-      title.textContent = `Video: ${videoId}`;
-      title.style.cssText = `
-        margin: 0 0 15px 0;
-        color: #333;
-        font-family: Arial, sans-serif;
-      `;
+        // Create container for each video
+        const videoContainer = document.createElement("div");
+        videoContainer.id = `video-${videoId}`;
+        videosContainer.appendChild(videoContainer);
 
-      videoContainer.appendChild(title);
-      videosContainer.appendChild(videoContainer);
+        // Initialize video player with data
+        return await createVideoPlayer(videoData, videoContainer);
+      } catch (error) {
+        console.error(`Error loading video ${index}:`, error);
+        return null;
+      }
+    });
 
-      // Initialize video player
-      await displayVideo(videoId, videoContainer.id);
+    const results = await Promise.allSettled(playerPromises);
+    const successCount = results.filter((result) => result.status === "fulfilled" && result.value).length;
+
+    console.log(`Successfully loaded ${successCount}/${videosData.length} videos`);
+  } catch (error) {
+    console.error("Error loading videos from data:", error);
+    showVideoError(document.getElementById(containerId) || document.body, "Failed to load videos from data.");
+  }
+};
+
+// Legacy function for backward compatibility - fetches from API - EXPORTED
+export const displayAllVideos = async (containerId = "videos-container") => {
+  try {
+    const response = await fetch("/api/videos-data");
+
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
     }
+
+    const videosData = await response.json();
+    await displayVideosFromData(videosData, containerId);
   } catch (error) {
     console.error("Error loading videos:", error);
     showVideoError(document.getElementById(containerId) || document.body, "Failed to load videos. Please check your connection.");
   }
-}
+};
 
-// Utility function to get player state
-function getVideoPlayer(videoId) {
-  return videoPlayers.get(videoId);
-}
+// Utility function to get player state - EXPORTED
+export const getVideoPlayer = (videoId) => videoPlayers.get(videoId);
 
-// Initialize when page loads
-document.addEventListener("DOMContentLoaded", () => {
-  displayAllVideos();
-});
+// Utility function to get all active players - EXPORTED
+export const getAllVideoPlayers = () => new Map(videoPlayers);
+
+// Utility function to destroy all players - EXPORTED
+export const destroyAllVideoPlayers = () => {
+  [...videoPlayers.keys()].forEach(destroyVideoPlayer);
+};
 
 // Clean up when page unloads
-window.addEventListener("beforeunload", () => {
-  for (const videoId of videoPlayers.keys()) {
-    destroyVideoPlayer(videoId);
+window.addEventListener("beforeunload", destroyAllVideoPlayers);
+
+// Auto-initialize when page loads (optional - can be removed if you want manual control)
+document.addEventListener("DOMContentLoaded", () => {
+  // Only auto-load if there's a videos container already in the DOM
+  if (document.getElementById("videos-container")) {
+    displayAllVideos();
   }
 });

@@ -1,6 +1,6 @@
 //****************
 
-//BUILD VID DISPLAY WITH CURRENT SUB FOLDER STRUCTURE
+//FIX VID STREAMER IN UTIL / GET WORKING
 
 //Fixed pic array display (had update db off in scraper)
 
