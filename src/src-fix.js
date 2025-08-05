@@ -76,10 +76,9 @@ export const removeInvalidItems = async (inputArray, dataType, howMany) => {
       for (let i = 0; i < inputArray.length; i++) {
         try {
           const dataObj = inputArray[i];
-          if (!dataObj || !dataObj.vidData) continue;
-          const { vidData } = dataObj;
+          if (!dataObj) continue;
 
-          const vidExists = await checkItemExists(vidData, "vid");
+          const vidExists = await checkItemExists(dataObj, "vid");
           if (!vidExists) continue;
 
           dataReturnArray.push(dataObj);
@@ -108,18 +107,18 @@ export const removeInvalidItems = async (inputArray, dataType, howMany) => {
 
 //re-write to use fs
 export const checkItemExists = async (inputObj, type = "pic") => {
-  const { savePath, downloadedSize, vidSizeBytes, vidSaveFolder } = inputObj;
+  const { savePath, vidSaveFolder } = inputObj;
 
   const itemSavePath = type === "pic" ? savePath : type === "vid" ? vidSaveFolder : 0;
-  const checkSizeRaw = type === "pic" ? downloadedSize : type === "vid" ? vidSizeBytes : 0;
 
-  if (!fs.existsSync(itemSavePath) || !checkSizeRaw) {
+  if (!fs.existsSync(itemSavePath)) {
     const error = new Error("ITEM NOT DOWNLOADED / CORRUPTED");
     error.savePath = itemSavePath;
     throw error;
   }
 
   //not worth checking below
+  // const checkSizeRaw = type === "pic" ? downloadedSize : type === "vid" ? vidSizeBytes : 0;
   // //GET FILE SIZE FRM FILE (TEST THIS)
   // const fileSize = fs.statSync(itemSavePath).size;
 
