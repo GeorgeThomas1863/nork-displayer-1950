@@ -54,17 +54,13 @@ export const removeInvalidItems = async (inputArray, dataType, howMany) => {
           console.dir(dataObj);
 
           //check thumbnail first
-          if (!dataObj || !dataObj.thumbnailData) continue;
-          const { thumbnailData } = dataObj;
+          if (!dataObj || !dataObj.thumbnailData || !dataObj.vidData) continue;
+          const { thumbnailData, vidData } = dataObj;
           const thumbnailExists = await checkItemExists(thumbnailData);
           if (!thumbnailExists) continue;
 
-          //check vid exists
-          if (!dataObj || !dataObj.vidData) continue;
-          const { vidData } = dataObj;
-
-          const itemExists = await checkItemExists(vidData, "vid");
-          if (!itemExists) continue;
+          const vidExists = await checkItemExists(vidData, "vid");
+          if (!vidExists) continue;
 
           dataReturnArray.push(dataObj);
           if (dataReturnArray.length === howMany) return dataReturnArray;
@@ -75,68 +71,63 @@ export const removeInvalidItems = async (inputArray, dataType, howMany) => {
       }
       break;
 
-    default:
-      return inputArray;
+    //only check vid (no thumbnail data)
+    case "watch":
+      for (let i = 0; i < inputArray.length; i++) {
+        try {
+          const dataObj = inputArray[i];
+          if (!dataObj || !dataObj.vidData) continue;
+          const { vidData } = dataObj;
+
+          const vidExists = await checkItemExists(vidData, "vid");
+          if (!vidExists) continue;
+
+          dataReturnArray.push(dataObj);
+          if (dataReturnArray.length === howMany) return dataReturnArray;
+        } catch (e) {
+          console.log(e.message + "; SAVE PATH: " + e.savePath);
+          continue;
+        }
+      }
+      break;
   }
 
   //needed if how many is stupidly high
-  if (dataReturnArray && dataReturnArray.length) return dataReturnArray;
+  if (!dataReturnArray || !dataReturnArray.length) return null;
 
-  //half assed answer below, might need to redo
-  const newDataArray = await rePullData(dataType, howMany);
+  return dataReturnArray;
+
+  // //half assed answer below, NEED TO REDO
+  // const newDataArray = await rePullData(dataType, howMany);
 
   // console.log("NEW DATA ARRAY");
   // console.log(newDataArray);
 
-  return newDataArray;
+  // return newDataArray;
 };
 
 //re-write to use fs
 export const checkItemExists = async (inputObj, type = "pic") => {
-  const { savePath } = inputObj;
-  if (!savePath) return null;
+  const { savePath, downloadedSize, vidSizeBytes, vidSaveFolder } = inputObj;
 
-  // console.log("CHECK ITEM EXISTS");
-  // console.log(inputObj);
+  const itemSavePath = type === "pic" ? savePath : type === "vid" ? vidSaveFolder : 0;
+  const checkSizeRaw = type === "pic" ? downloadedSize : type === "vid" ? vidSizeBytes : 0;
 
-  if (!fs.existsSync(savePath)) {
-    const error = new Error("ITEM NOT DOWNLOADED");
-    error.savePath = savePath;
-    throw error;
-  }
-
-  let checkSizeRaw = 0;
-  //adult would write this with ternary operator, change later
-  switch (type) {
-    case "pic":
-      const { downloadedSize } = inputObj;
-      checkSizeRaw = downloadedSize;
-      break;
-
-    case "vid":
-      const { vidSizeBytes } = inputObj;
-      checkSizeRaw = vidSizeBytes;
-      break;
-  }
-
-  if (!checkSizeRaw) {
-    // console.log("AHHHHHHHHHHHHHHHHHHHH");
-    // console.log(inputObj);
-    // console.log(type);
-    const error = new Error("FILE CORRUPTED / WRONG SIZE");
-    error.savePath = savePath;
+  if (!fs.existsSync(itemSavePath) || !checkSizeRaw) {
+    const error = new Error("ITEM NOT DOWNLOADED / CORRUPTED");
+    error.savePath = itemSavePath;
     throw error;
   }
 
   //GET FILE SIZE FRM FILE (TEST THIS)
-  const fileSize = fs.statSync(savePath).size;
+  const fileSize = fs.statSync(itemSavePath).size;
 
   //check for slightly smaller file
   const checkSize = checkSizeRaw * 0.7;
   if (!fileSize || fileSize < checkSize) {
     // console.log("AHHHHHHHHHHHHHHHHHHHH");
     const error = new Error("FILE CORRUPTED / WRONG SIZE");
-    error.savePath = savePath;
+    error.savePath = itemSavePath;
     throw error;
   }
 
