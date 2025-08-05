@@ -1,10 +1,8 @@
 //****************
 
-//ADDING IN KCTV from kcnaWatch; ON get data, figure out how new data is returned (not returning any watch data)
+//BUILD VID DISPLAY WITH CURRENT SUB FOLDER STRUCTURE
 
-//FIX ADMIN DISPLAY
-
-//PERHAPS REVERT DISPLAY? AND MAKE TIMER THING
+//Fixed pic array display (had update db off in scraper)
 
 //CREATE A TIMER ON FRONTEND TO REFRESH DATA IF SOMETHING IS ACTIVE (use the state)
 
