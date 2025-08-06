@@ -2,6 +2,19 @@ import fs from "fs";
 import CONFIG from "../config/config.js";
 import dbModel from "../models/db-model.js";
 
+export const getStreamData = async (inputArray) => {
+  if (!inputArray || !inputArray.length) return null;
+
+  const dataReturnArray = [];
+  for (let i = 0; i < inputArray.length; i++) {
+    const dataObj = inputArray[i];
+    console.log("!!!DATA OBJ");
+    console.log(dataObj);
+    // const { vidData } = dataObj;
+    // if (!vidData) continue;
+  }
+};
+
 //REMOVE INVALID ITEMS FROM RETURN
 export const removeInvalidItems = async (inputArray, dataType, howMany) => {
   if (!inputArray || !inputArray.length || !dataType) return null;

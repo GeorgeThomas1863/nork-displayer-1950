@@ -1,7 +1,7 @@
 import CONFIG from "../config/config.js";
 import { getParamsMap } from "../config/map-display.js";
 import dbModel from "../models/db-model.js";
-import { removeInvalidItems } from "./src-fix.js";
+import { removeInvalidItems, getStreamData } from "./src-fix.js";
 
 //gets backend data from db
 export const runGetBackendData = async (inputObj) => {
@@ -43,13 +43,28 @@ export const getBackendDataDefault = async () => {
     const dataModel = new dbModel(dataParams, collection);
 
     let dataArrayRaw = "";
-    if (dataType === "articles") {
-      dataArrayRaw = await dataModel.getNewestItemsByTypeArray();
-    } else {
-      dataArrayRaw = await dataModel.getNewestItemsArray();
-      // console.log("!!!dataArrayRaw");
-      // console.log(dataArrayRaw.length);
+    switch (dataType) {
+      case "articles":
+        dataArrayRaw = await dataModel.getNewestItemsByTypeArray();
+        break;
+      case "pics":
+        dataArrayRaw = await dataModel.getNewestItemsArray();
+        break;
+
+      case "vids":
+      case "watch":
+        const dataArrayRawVids = await dataModel.getNewestItemsArray();
+        dataArrayRaw = await getStreamData(dataArrayRawVids);
+        break;
     }
+
+    // if (dataType === "articles") {
+    //   dataArrayRaw = await dataModel.getNewestItemsByTypeArray();
+    // } else {
+    //   dataArrayRaw = await dataModel.getNewestItemsArray();
+    //   // console.log("!!!dataArrayRaw");
+    //   // console.log(dataArrayRaw.length);
+    // }
 
     const dataArrayValid = await removeInvalidItems(dataArrayRaw, dataType, howMany);
 
@@ -91,13 +106,29 @@ export const getBackendDataNew = async (inputObj) => {
   // console.log(params);
 
   const dataModel = new dbModel(params, collection);
-  const isArticleFilter = dataType === "articles" && articleType !== "all-type";
 
-  const sortPrefix = sortByInput.includes("newest-to-oldest") ? "Newest" : "Oldest";
-  const typeSuffix = isArticleFilter ? "sByType" : "s";
-  const methodName = `get${sortPrefix}Item${typeSuffix}Array`;
+  let dataArrayRaw = "";
+  switch (dataType) {
+    case "articles":
+      dataArrayRaw = await dataModel.getNewestItemsByTypeArray();
+      break;
+    case "pics":
+      dataArrayRaw = await dataModel.getNewestItemsArray();
+      break;
 
-  const dataArrayRaw = await dataModel[methodName]();
+    case "vids":
+    case "watch":
+      const dataArrayRawVids = await dataModel.getNewestItemsArray();
+      dataArrayRaw = await getStreamData(dataArrayRawVids);
+      break;
+  }
+
+  // const isArticleFilter = dataType === "articles" && articleType !== "all-type";
+  // const sortPrefix = sortByInput.includes("newest-to-oldest") ? "Newest" : "Oldest";
+  // const typeSuffix = isArticleFilter ? "sByType" : "s";
+  // const methodName = `get${sortPrefix}Item${typeSuffix}Array`;
+
+  // const dataArrayRaw = await dataModel[methodName]();
   // console.log("!!!DATA ARRAY RAW");
   // console.log(dataArrayRaw.length);
 
@@ -118,5 +149,3 @@ export const getBackendDataNew = async (inputObj) => {
 
   return dataArray;
 };
-
-//------------------------
