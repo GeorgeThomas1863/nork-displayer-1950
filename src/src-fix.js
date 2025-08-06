@@ -1,4 +1,5 @@
 import fs from "fs";
+import fsPromises from "fs/promises";
 import CONFIG from "../config/config.js";
 import dbModel from "../models/db-model.js";
 
@@ -7,12 +8,67 @@ export const getStreamData = async (inputArray) => {
 
   const dataReturnArray = [];
   for (let i = 0; i < inputArray.length; i++) {
-    const dataObj = inputArray[i];
-    console.log("!!!DATA OBJ");
-    console.log(dataObj);
-    // const { vidData } = dataObj;
-    // if (!vidData) continue;
+    try {
+      const dataObj = inputArray[i];
+      if (!dataObj || !dataObj.vidData) continue;
+      const { vidSaveFolder } = dataObj.vidData;
+
+      const chunkArray = await fsPromises.readdir(vidSaveFolder);
+      const streamData = await parseChunkArray(chunkArray, vidSaveFolder);
+      if (!streamData || !streamData.length) continue;
+
+      dataObj.streamData = streamData;
+      dataReturnArray.push(dataObj);
+    } catch (e) {
+      console.log(e.message + "; SAVE PATH: " + e.savePath);
+      continue;
+    }
   }
+  return dataReturnArray;
+};
+
+export const parseChunkArray = async (inputArray, vidSaveFolder) => {
+  if (!inputArray || !inputArray.length || !vidSaveFolder) {
+    const error = new Error("NO CHUNKS FOUND AT PATH");
+    error.savePath = vidSaveFolder;
+    throw error;
+  }
+
+  const streamData = [];
+  for (let i = 0; i < inputArray.length; i++) {
+    try {
+      const chunkName = await parseChunkName(inputArray[i]);
+      if (!chunkName) continue;
+
+      const chunkPath = vidSaveFolder + chunkName;
+
+      if (!fs.existsSync(chunkPath)) {
+        const error = new Error("CHUNK DOESNT EXIST");
+        error.savePath = chunkPath;
+        throw error;
+      }
+
+      //return other data about chunk if needed
+      const returnObj = {
+        chunkName: chunkName,
+        chunkPath: chunkPath,
+      };
+
+      streamData.push(returnObj);
+    } catch (e) {
+      console.log(e.message + "; SAVE PATH: " + e.savePath);
+      continue;
+    }
+  }
+
+  return streamData;
+};
+
+export const parseChunkName = async (inputName) => {
+  if (!inputName) return null;
+  if (!inputName.toLowerCase().endsWith(".mp4") || !inputName.toLowerCase().startsWith("chunk_")) return null;
+
+  return inputName;
 };
 
 //REMOVE INVALID ITEMS FROM RETURN
