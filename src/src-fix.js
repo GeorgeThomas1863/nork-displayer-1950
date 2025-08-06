@@ -3,18 +3,29 @@ import fsPromises from "fs/promises";
 import CONFIG from "../config/config.js";
 import dbModel from "../models/db-model.js";
 
-export const getStreamData = async (inputArray) => {
+export const getStreamData = async (inputArray, dataType) => {
   if (!inputArray || !inputArray.length) return null;
 
   const dataReturnArray = [];
   for (let i = 0; i < inputArray.length; i++) {
     try {
       const dataObj = inputArray[i];
-      if (!dataObj || !dataObj.vidData) continue;
-      const { vidSaveFolder } = dataObj.vidData;
+      if (!dataObj) continue;
 
-      const chunkArray = await fsPromises.readdir(vidSaveFolder);
-      const streamData = await parseChunkArray(chunkArray, vidSaveFolder);
+      //used different fucking vidSaveFolder format for watch
+      let folderInputPath = "";
+      switch (dataType) {
+        case "vids":
+          folderInputPath = dataObj.vidData.vidSaveFolder;
+          break;
+
+        case "watch":
+          folderInputPath = dataObj.vidSaveFolder;
+          break;
+      }
+
+      const chunkArray = await fsPromises.readdir(folderInputPath);
+      const streamData = await parseChunkArray(chunkArray, folderInputPath);
       if (!streamData || !streamData.length) continue;
 
       dataObj.streamData = streamData;
@@ -119,8 +130,8 @@ export const removeInvalidItems = async (inputArray, dataType, howMany) => {
         try {
           const dataObj = inputArray[i];
 
-          console.log("!!!DATA OBJ");
-          console.dir(dataObj);
+          // console.log("!!!DATA OBJ");
+          // console.dir(dataObj);
 
           //check thumbnail first
           if (!dataObj || !dataObj.thumbnailData || !dataObj.vidData) continue;

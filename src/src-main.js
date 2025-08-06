@@ -54,7 +54,7 @@ export const getBackendDataDefault = async () => {
       case "vids":
       case "watch":
         const dataArrayRawVids = await dataModel.getNewestItemsArray();
-        dataArrayRaw = await getStreamData(dataArrayRawVids);
+        dataArrayRaw = await getStreamData(dataArrayRawVids, dataType);
         break;
     }
 
