@@ -12,20 +12,10 @@ export const getStreamData = async (inputArray, dataType) => {
       const dataObj = inputArray[i];
       if (!dataObj) continue;
 
-      //used different fucking vidSaveFolder format for watch
-      let folderInputPath = "";
-      switch (dataType) {
-        case "vids":
-          folderInputPath = dataObj.vidData.vidSaveFolder;
-          break;
+      const vidSaveFolder = await fixVidSaveFolder(dataObj, dataType);
 
-        case "watch":
-          folderInputPath = dataObj.vidSaveFolder;
-          break;
-      }
-
-      const chunkArray = await fsPromises.readdir(folderInputPath);
-      const streamData = await parseChunkArray(chunkArray, folderInputPath);
+      const chunkArray = await fsPromises.readdir(vidSaveFolder);
+      const streamData = await parseChunkArray(chunkArray, vidSaveFolder);
       if (!streamData || !streamData.length) continue;
 
       dataObj.streamData = streamData;
@@ -36,6 +26,30 @@ export const getStreamData = async (inputArray, dataType) => {
     }
   }
   return dataReturnArray;
+};
+
+//used different fucking vidSaveFolder format for watch, fixing here
+export const fixVidSaveFolder = async (dataObj, dataType) => {
+  if (!dataObj || !dataType) return null;
+
+  let folderInputPath = "";
+  switch (dataType) {
+    case "vids":
+      folderInputPath = dataObj.vidData.vidSaveFolder;
+      break;
+
+    case "watch":
+      folderInputPath = dataObj.vidSaveFolder;
+      break;
+  }
+
+  if (!folderInputPath) {
+    const error = new Error("CANT FIND VID SAVE FOLDER");
+    error.savePath = dataObj;
+    throw error;
+  }
+
+  return folderInputPath;
 };
 
 export const parseChunkArray = async (inputArray, vidSaveFolder) => {
