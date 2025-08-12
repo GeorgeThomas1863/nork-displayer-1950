@@ -2,7 +2,7 @@
 // ===========================
 // STEP 1: MAIN FUNCTION - Start here with your chunks array and container ID
 
-export const displayChunkedVideo = async (inputArray, containerElementId) => {
+export const buildChunkedVideo = async (inputArray) => {
   // Validate inputs
   if (!inputArray || !inputArray.length) {
     const error = new Error("No video chunks provided");
@@ -10,10 +10,11 @@ export const displayChunkedVideo = async (inputArray, containerElementId) => {
     throw error;
   }
 
-  const container = document.getElementById(containerElementId);
-  if (!container) {
-    throw new Error(`Container element with id '${containerElementId}' not found`);
-  }
+  console.log("!!!BUILD CHUNKED VIDEO");
+  console.dir(inputArray);
+
+  const container = document.createElement("div");
+  container.id = "vid-player-container";
 
   console.log(`Creating dynamic player for ${inputArray.length} chunks`);
 
@@ -147,5 +148,3 @@ export const formatTime = (seconds) => {
   const secs = Math.floor(seconds % 60);
   return `${mins}:${secs.toString().padStart(2, "0")}`;
 };
-
-
