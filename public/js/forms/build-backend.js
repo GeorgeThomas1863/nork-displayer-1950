@@ -6,6 +6,9 @@ export const buildBackendDisplay = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
   const { isFirstLoad } = state;
 
+  console.log("!!!BUILD BACKEND DISPLAY");
+  console.log(inputArray);
+
   //only need for loop on first load (could break this part out)
   let displayData = null;
   switch (isFirstLoad) {
