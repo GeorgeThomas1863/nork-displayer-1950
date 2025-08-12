@@ -1,11 +1,12 @@
+import { displayChunkedVideo } from "../util/vid-builder.js";
 import { buildCollapseContainer, defineCollapseItems } from "../util/collapse.js";
 
 //VID PAGE DISPLAY
 export const buildVidDisplay = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
 
-  console.log("!!!BUILD VID DISPLAY");
-  console.dir(inputArray);
+  // console.log("!!!BUILD VID DISPLAY");
+  // console.dir(inputArray);
 
   const vidArrayElement = document.createElement("ul");
   vidArrayElement.id = "vid-array-element";
@@ -35,10 +36,15 @@ export const buildVidListItem = async (inputObj, isFirst) => {
   if (!inputObj) return null;
   const { title, date } = inputObj;
 
+  console.log("!!!BUILD VID LIST ITEM");
+  console.dir(inputObj);
+
   const vidListItem = document.createElement("li");
   vidListItem.className = "vid-list-item wrapper";
 
   const vidContainerElement = await buildVidContainer(inputObj);
+
+  // const vidPlayerElement = await displayChunkedVideo(inputObj, "vid-container-element");
 
   //build title element
   const dateElement = await buildVidDate(date);
