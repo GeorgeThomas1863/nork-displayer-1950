@@ -1,481 +1,315 @@
-//CLAUDE's VID STREAMER, NEED TO INTEGRATE
+// DYNAMIC VIDEO CHUNK PLAYER
+// ===========================
+// STEP 1: MAIN FUNCTION - Start here with your chunks array and container ID
 
-// Global state for video players
-const videoPlayers = new Map();
-
-// Create and initialize a video player from data object
-const createVideoPlayer = async (videoData, container) => {
-  try {
-    // Extract video info from data object
-    const videoInfo = {
-      videoId: videoData.vidData.vidName,
-      totalChunks: videoData.vidData.totalChunks,
-      chunkDuration: 30, // You can adjust this or get from data if available
-      title: videoData.title,
-      date: videoData.date,
-      thumbnail: videoData.thumbnail,
-      vidSizeMB: videoData.vidData.vidSizeMB,
-      vidId: videoData.vidData.vidId,
-    };
-
-    // Create player state
-    const playerState = {
-      videoData,
-      videoInfo,
-      currentChunk: 0,
-      videoElement: null,
-      isLoading: false,
-      preloadedChunks: new Map(),
-      loadingElement: null,
-      progressElement: null,
-      container,
-    };
-
-    // Create DOM elements
-    createVideoElements(playerState);
-
-    // Load first chunk
-    await loadVideoChunk(playerState, 0);
-
-    // Set up event listeners
-    setupVideoEventListeners(playerState);
-
-    // Start preloading
-    preloadNextChunks(playerState);
-
-    // Store player state
-    videoPlayers.set(videoInfo.videoId, playerState);
-
-    return playerState;
-  } catch (error) {
-    console.error("Error initializing video player:", error);
-    showVideoError(container, "Failed to load video");
+export const displayChunkedVideo = async (inputArray, containerElementId) => {
+  // Validate inputs
+  if (!inputArray || !inputArray.length) {
+    const error = new Error("No video chunks provided");
+    error.function = "displayChunkedVideo";
+    throw error;
   }
+
+  const container = document.getElementById(containerElementId);
+  if (!container) {
+    throw new Error(`Container element with id '${containerElementId}' not found`);
+  }
+
+  console.log(`Creating dynamic player for ${inputArray.length} chunks`);
+
+  // Process chunks and create player
+  const processedData = await calculateChunkTiming(inputArray);
+  return await createVideoPlayer(processedData, container);
 };
 
-// Create video DOM elements with metadata
-const createVideoElements = ({ container, videoInfo, videoData }) => {
-  // Create main video item container
-  const videoItem = document.createElement("div");
-  videoItem.className = "video-item";
+// ===========================
+// STEP 2: CHUNK PROCESSING - Calculate timing information
 
-  // Create thumbnail if available
-  if (videoData.thumbnail) {
-    const thumbnail = document.createElement("img");
-    thumbnail.src = videoData.thumbnail;
-    thumbnail.alt = videoInfo.title;
-    thumbnail.className = "video-thumbnail";
-    thumbnail.onerror = () => (thumbnail.style.display = "none");
-    videoItem.appendChild(thumbnail);
+const calculateChunkTiming = async (inputArray) => {
+  if (!inputArray || !inputArray.length) return null;
+
+  const sortArray = await sortChunksByOrder(inputArray);
+  if (!sortArray || !sortArray.length) return null;
+
+  let cumulativeTime = 0;
+  const processedChunks = [];
+  for (let i = 0; i < sortArray.length; i++) {
+    const chunk = sortArray[i];
+    const duration = chunk.duration || chunk.endTime - chunk.startTime || 0;
+
+    processedChunks.push({
+      ...chunk,
+      globalStartTime: cumulativeTime,
+      globalEndTime: cumulativeTime + duration,
+      duration: duration,
+      chunkIndex: i,
+    });
+
+    cumulativeTime += duration;
   }
 
-  // Create info wrapper
-  const infoWrapper = document.createElement("div");
-  infoWrapper.className = "video-info-wrapper";
+  const returnObj = {
+    chunks: processedChunks,
+    totalDuration: cumulativeTime,
+  };
 
-  // Create title
-  const title = document.createElement("h3");
-  title.className = "video-title";
-  title.textContent = videoInfo.title;
-  infoWrapper.appendChild(title);
+  return returnObj;
+};
 
-  // Create metadata
-  const metaContainer = document.createElement("div");
-  metaContainer.className = "video-meta";
+const sortChunksByOrder = async (inputArray) => {
+  const sortedChunks = [...chunksArray];
 
-  // Metadata items configuration
-  const metaItems = [
-    { label: "Date", value: formatDate(videoData.date) },
-    { label: "Size", value: `${videoInfo.vidSizeMB} MB` },
-    { label: "Duration", value: `~${Math.ceil((videoInfo.totalChunks * videoInfo.chunkDuration) / 60)} min` },
-    { label: "Chunks", value: videoInfo.totalChunks },
-  ];
+  // Bubble sort by order property
+  for (let i = 0; i < sortedChunks.length - 1; i++) {
+    for (let j = 0; j < sortedChunks.length - i - 1; j++) {
+      const orderA = sortedChunks[j].order || sortedChunks[j].index || j;
+      const orderB = sortedChunks[j + 1].order || sortedChunks[j + 1].index || j + 1;
 
-  // Create metadata items
-  metaItems.forEach(({ label, value }) => {
-    const item = document.createElement("div");
-    item.className = "video-meta-item";
-    item.innerHTML = `
-      <span class="video-meta-label">${label}:</span>
-      <span>${value}</span>
-    `;
-    metaContainer.appendChild(item);
-  });
+      if (orderA > orderB) {
+        const temp = sortedChunks[j];
+        sortedChunks[j] = sortedChunks[j + 1];
+        sortedChunks[j + 1] = temp;
+      }
+    }
+  }
 
-  infoWrapper.appendChild(metaContainer);
-  videoItem.appendChild(infoWrapper);
+  return sortedChunks;
+};
 
-  // Create video container
-  const videoContainer = document.createElement("div");
-  videoContainer.className = "video-container";
+// ===========================
+// STEP 3: DOM CREATION - Build the video player interface
+
+const createVideoPlayer = (processedData, container) => {
+  const { chunks: processedChunks, totalDuration } = processedData;
+
+  // Clear container
+  container.innerHTML = "";
+  container.className = "video-player-container";
 
   // Create video element
   const videoElement = document.createElement("video");
-  Object.assign(videoElement, {
-    controls: true,
-    className: "video-element",
-    preload: "metadata",
-  });
+  videoElement.controls = true;
+  videoElement.className = "video-player-video";
+  videoElement.id = `${container.id}-video`;
 
-  // Create loading indicator
-  const loadingElement = document.createElement("div");
-  Object.assign(loadingElement, {
-    className: "loading-indicator",
-    textContent: "Loading...",
-  });
+  // Create progress container
+  const progressContainer = document.createElement("div");
+  progressContainer.className = "video-player-progress-container";
 
-  // Create progress info
-  const progressElement = document.createElement("div");
-  progressElement.className = "chunk-progress";
+  // Create progress bar
+  const progressBar = document.createElement("div");
+  progressBar.className = "video-player-progress-bar";
 
-  // Append all elements
-  [videoElement, loadingElement, progressElement].forEach((el) => videoContainer.appendChild(el));
+  // Create time display
+  const timeDisplay = document.createElement("div");
+  timeDisplay.className = "video-player-time-display";
 
-  videoItem.appendChild(videoContainer);
-  container.appendChild(videoItem);
+  // Assemble DOM
+  progressContainer.appendChild(progressBar);
+  container.appendChild(videoElement);
+  container.appendChild(progressContainer);
+  container.appendChild(timeDisplay);
 
-  // Update player state
-  Object.assign(arguments[0], {
-    videoElement,
-    loadingElement,
-    progressElement,
-  });
+  // Initialize player logic
+  return initializePlayerLogic(videoElement, progressContainer, progressBar, timeDisplay, processedChunks, totalDuration);
 };
 
-// Set up event listeners for video
-const setupVideoEventListeners = (playerState) => {
-  const { videoElement } = playerState;
+// ===========================
+// STEP 4: PLAYER LOGIC - Handle playback and chunk switching
 
-  // Event listener configurations
-  const eventListeners = [
-    { event: "timeupdate", handler: () => handleVideoTimeUpdate(playerState) },
-    { event: "seeking", handler: () => handleVideoSeeking(playerState) },
-    { event: "ended", handler: () => handleVideoChunkEnded(playerState) },
-    { event: "loadstart", handler: () => showVideoLoading(playerState, true) },
-    {
-      event: "canplay",
-      handler: () => {
-        showVideoLoading(playerState, false);
-        preloadNextChunks(playerState);
-      },
-    },
-    { event: "timeupdate", handler: () => updateVideoProgressDisplay(playerState) },
-    {
-      event: "error",
-      handler: (e) => {
-        console.error("Video error:", e);
-        showVideoError(playerState.container, "Error playing video");
-      },
-    },
-  ];
+const initializePlayerLogic = (videoElement, progressContainer, progressBar, timeDisplay, processedChunks, totalDuration) => {
+  // Player state
+  let currentChunkIndex = -1;
+  let globalCurrentTime = 0;
+  let isUserSeeking = false;
+  let animationFrameId = null;
 
-  // Add all event listeners
-  eventListeners.forEach(({ event, handler }) => videoElement.addEventListener(event, handler));
-};
+  // Set up event listeners
+  setupVideoEvents(videoElement, processedChunks);
+  setupProgressEvents(progressContainer, totalDuration, processedChunks);
 
-// Load a specific video chunk using data object
-const loadVideoChunk = async (playerState, chunkIndex, seekTime = 0) => {
-  const { videoElement, currentChunk, isLoading, videoInfo, preloadedChunks } = playerState;
+  // Start update loop
+  startUpdateLoop();
 
-  if (isLoading || chunkIndex === currentChunk || chunkIndex >= videoInfo.totalChunks) {
-    return;
+  // Load first chunk
+  if (processedChunks.length > 0) {
+    loadChunk(0, 0);
   }
 
-  playerState.isLoading = true;
-  showVideoLoading(playerState, true);
+  // Return player API
+  return createPlayerAPI();
 
-  try {
-    const wasPlaying = !videoElement.paused;
+  // ===========================
+  // NESTED FUNCTIONS for player logic
 
-    // Set video source - check preloaded chunks first
-    videoElement.src = preloadedChunks.has(chunkIndex) ? preloadedChunks.get(chunkIndex) : `/api/video/${videoInfo.videoId}/chunk/${chunkIndex}`;
+  function loadChunk(chunkIndex, seekTime = 0) {
+    if (chunkIndex < 0 || chunkIndex >= processedChunks.length) return;
 
-    playerState.currentChunk = chunkIndex;
+    const chunk = processedChunks[chunkIndex];
 
-    // Wait for the video to load
-    await new Promise((resolve, reject) => {
-      const timeout = setTimeout(() => {
-        cleanup();
-        reject(new Error("Timeout loading chunk"));
-      }, 10000);
+    if (currentChunkIndex !== chunkIndex) {
+      currentChunkIndex = chunkIndex;
+      const chunkUrl = chunk.url || chunk.path || chunk.filename;
 
-      const onCanPlay = () => {
-        cleanup();
-        resolve();
-      };
+      videoElement.src = chunkUrl;
 
-      const onError = (e) => {
-        cleanup();
-        reject(new Error(`Failed to load chunk: ${e.message}`));
-      };
-
-      const cleanup = () => {
-        clearTimeout(timeout);
-        videoElement.removeEventListener("canplay", onCanPlay);
-        videoElement.removeEventListener("error", onError);
-      };
-
-      videoElement.addEventListener("canplay", onCanPlay);
-      videoElement.addEventListener("error", onError);
-      videoElement.load();
-    });
-
-    // Set seek time if specified
-    if (seekTime > 0) {
+      videoElement.addEventListener(
+        "loadeddata",
+        () => {
+          videoElement.currentTime = seekTime;
+        },
+        { once: true }
+      );
+    } else {
       videoElement.currentTime = seekTime;
     }
+  }
 
-    // Resume playing if it was playing before
-    if (wasPlaying) {
-      try {
-        await videoElement.play();
-      } catch (playError) {
-        console.warn("Autoplay prevented:", playError);
+  function updateProgress() {
+    if (isUserSeeking) return;
+
+    const chunkInfo = findChunkForTime(processedChunks, globalCurrentTime);
+
+    if (chunkInfo) {
+      const { chunk, localTime } = chunkInfo;
+
+      // Switch chunk if needed
+      if (currentChunkIndex !== chunk.chunkIndex) {
+        loadChunk(chunk.chunkIndex, localTime);
       }
+
+      // Update progress bar
+      const progressPercent = (globalCurrentTime / totalDuration) * 100;
+      progressBar.style.width = `${Math.min(progressPercent, 100)}%`;
+
+      // Update time display
+      timeDisplay.textContent = `${formatTime(globalCurrentTime)} / ${formatTime(totalDuration)}`;
     }
-  } catch (error) {
-    console.error("Error loading chunk:", error);
-    showVideoError(playerState.container, `Failed to load video segment ${chunkIndex + 1}`);
-  } finally {
-    playerState.isLoading = false;
-    showVideoLoading(playerState, false);
+
+    animationFrameId = requestAnimationFrame(updateProgress);
   }
-};
 
-// Handle time updates for chunk switching
-const handleVideoTimeUpdate = ({ videoElement, currentChunk, videoInfo }) => {
-  const { currentTime } = videoElement;
-  const { chunkDuration, totalChunks } = videoInfo;
+  function setupVideoEvents(videoElement, processedChunks) {
+    videoElement.addEventListener("timeupdate", () => {
+      if (currentChunkIndex >= 0 && !isUserSeeking) {
+        const chunk = processedChunks[currentChunkIndex];
+        const videoCurrentTime = videoElement.currentTime;
+        globalCurrentTime = chunk.globalStartTime + videoCurrentTime;
 
-  // Switch to next chunk 1 second before current chunk ends
-  if (currentTime >= chunkDuration - 1 && currentChunk < totalChunks - 1) {
-    loadVideoChunk(arguments[0], currentChunk + 1);
+        // Check if we need to move to next chunk
+        if (globalCurrentTime >= chunk.globalEndTime && currentChunkIndex < processedChunks.length - 1) {
+          loadChunk(currentChunkIndex + 1, 0);
+        }
+      }
+    });
   }
-};
 
-// Handle seeking across chunks
-const handleVideoSeeking = (playerState) => {
-  const totalVideoTime = getCurrentVideoTime(playerState);
-  const { chunkDuration, totalChunks } = playerState.videoInfo;
+  function setupProgressEvents(progressContainer, totalDuration, processedChunks) {
+    progressContainer.addEventListener("click", (e) => {
+      const rect = progressContainer.getBoundingClientRect();
+      const clickPercent = (e.clientX - rect.left) / rect.width;
+      const seekTime = clickPercent * totalDuration;
 
-  // Calculate which chunk the seek time falls into
-  const targetChunk = Math.floor(totalVideoTime / chunkDuration);
-  const chunkSeekTime = totalVideoTime % chunkDuration;
-
-  if (targetChunk !== playerState.currentChunk && targetChunk < totalChunks) {
-    loadVideoChunk(playerState, targetChunk, chunkSeekTime);
+      seekToTime(seekTime);
+    });
   }
-};
 
-// Handle when a chunk ends
-const handleVideoChunkEnded = ({ currentChunk, videoInfo }) => {
-  if (currentChunk < videoInfo.totalChunks - 1) {
-    loadVideoChunk(arguments[0], currentChunk + 1);
-  }
-};
+  function seekToTime(time) {
+    globalCurrentTime = Math.max(0, Math.min(time, totalDuration));
+    const chunkInfo = findChunkForTime(processedChunks, globalCurrentTime);
 
-// Get current time across all chunks
-const getCurrentVideoTime = ({ currentChunk, videoElement, videoInfo }) => currentChunk * videoInfo.chunkDuration + videoElement.currentTime;
+    if (chunkInfo) {
+      isUserSeeking = true;
+      loadChunk(chunkInfo.chunk.chunkIndex, chunkInfo.localTime);
 
-// Preload next chunks for smooth playback
-const preloadNextChunks = async ({ currentChunk, videoInfo, preloadedChunks }) => {
-  const chunksToPreload = 2;
-  const { totalChunks, videoId } = videoInfo;
-
-  const preloadPromises = Array.from({ length: chunksToPreload }, (_, i) => {
-    const nextChunkIndex = currentChunk + i + 1;
-
-    if (nextChunkIndex < totalChunks && !preloadedChunks.has(nextChunkIndex)) {
-      return fetch(`/api/video/${videoId}/chunk/${nextChunkIndex}`)
-        .then((response) => (response.ok ? response.blob() : null))
-        .then((blob) => {
-          if (blob) {
-            const url = URL.createObjectURL(blob);
-            preloadedChunks.set(nextChunkIndex, url);
-          }
-        })
-        .catch((error) => console.warn(`Failed to preload chunk ${nextChunkIndex}:`, error));
+      videoElement.addEventListener(
+        "seeked",
+        () => {
+          isUserSeeking = false;
+        },
+        { once: true }
+      );
     }
-    return Promise.resolve();
-  });
+  }
 
-  await Promise.allSettled(preloadPromises);
+  function startUpdateLoop() {
+    updateProgress();
+  }
 
-  // Clean up old preloaded chunks
-  cleanupOldChunks(arguments[0]);
-};
-
-// Clean up old preloaded chunks
-const cleanupOldChunks = ({ preloadedChunks, currentChunk }) => {
-  if (preloadedChunks.size > 4) {
-    [...preloadedChunks.entries()]
-      .filter(([chunkIndex]) => chunkIndex < currentChunk - 1)
-      .forEach(([chunkIndex, url]) => {
-        URL.revokeObjectURL(url);
-        preloadedChunks.delete(chunkIndex);
-      });
+  function createPlayerAPI() {
+    return {
+      videoElement,
+      play: () => videoElement.play(),
+      pause: () => videoElement.pause(),
+      seekTo: seekToTime,
+      getCurrentTime: () => globalCurrentTime,
+      getTotalDuration: () => totalDuration,
+      destroy: () => {
+        if (animationFrameId) {
+          cancelAnimationFrame(animationFrameId);
+        }
+        container.innerHTML = "";
+      },
+    };
   }
 };
 
-// Show/hide loading indicator
-const showVideoLoading = ({ loadingElement }, show) => {
-  if (loadingElement) {
-    loadingElement.classList.toggle("show", show);
+// ===========================
+// STEP 5: UTILITY FUNCTIONS - Helper functions for calculations
+
+const findChunkForTime = (processedChunks, currentTime) => {
+  for (let i = 0; i < processedChunks.length; i++) {
+    const chunk = processedChunks[i];
+    if (currentTime >= chunk.globalStartTime && currentTime < chunk.globalEndTime) {
+      return {
+        chunk: chunk,
+        localTime: currentTime - chunk.globalStartTime,
+      };
+    }
   }
+
+  // If we're past the end, return the last chunk
+  if (processedChunks.length > 0) {
+    const lastChunk = processedChunks[processedChunks.length - 1];
+    return {
+      chunk: lastChunk,
+      localTime: lastChunk.duration,
+    };
+  }
+
+  return null;
 };
 
-// Show error message
-const showVideoError = (container, message) => {
-  const errorElement = document.createElement("div");
-  Object.assign(errorElement, {
-    className: "video-error",
-    textContent: message,
-  });
-
-  container.innerHTML = "";
-  container.appendChild(errorElement);
-};
-
-// Update progress display
-const updateVideoProgressDisplay = (playerState) => {
-  const { progressElement, videoInfo, currentChunk } = playerState;
-
-  if (!progressElement) return;
-
-  const totalTime = getCurrentVideoTime(playerState);
-  const totalDuration = videoInfo.totalChunks * videoInfo.chunkDuration;
-
-  progressElement.textContent = `Chunk ${currentChunk + 1}/${videoInfo.totalChunks} | ` + `${formatTime(totalTime)} / ${formatTime(totalDuration)}`;
-};
-
-// Format time as MM:SS
 const formatTime = (seconds) => {
   const mins = Math.floor(seconds / 60);
   const secs = Math.floor(seconds % 60);
   return `${mins}:${secs.toString().padStart(2, "0")}`;
 };
 
-// Format date for display
-const formatDate = (dateString) => {
-  const date = new Date(dateString);
-  return date.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-};
+// ===========================
+// USAGE EXAMPLE:
+/*
+// 1. Include the CSS file in your HTML:
+// <link rel="stylesheet" href="video-player.css">
 
-// Clean up a video player
-const destroyVideoPlayer = (videoId) => {
-  const playerState = videoPlayers.get(videoId);
-  if (!playerState) return;
+// 2. Create a container in your HTML:
+// <div id="videoContainer"></div>
 
-  // Revoke all blob URLs to prevent memory leaks
-  [...playerState.preloadedChunks.values()].forEach(URL.revokeObjectURL);
+// 3. Define your chunks array:
+const videoChunks = [
+  { url: '/videos/chunk1.mp4', duration: 30, order: 1 },
+  { url: '/videos/chunk2.mp4', duration: 25, order: 2 },
+  { url: '/videos/chunk3.mp4', duration: 40, order: 3 }
+];
 
-  playerState.preloadedChunks.clear();
-  videoPlayers.delete(videoId);
-};
+// 4. Create the player:
+const player = displayChunkedVideo(videoChunks, 'videoContainer');
 
-// Main function to display a single video from data object - EXPORTED
-export const displayVideoFromData = async (videoData, containerId) => {
-  const container = document.getElementById(containerId);
-  if (!container) {
-    console.error(`Container '${containerId}' not found`);
-    return null;
-  }
+// 5. Use player controls:
+player.play();
+player.pause();
+player.seekTo(45);
 
-  const videoId = videoData.vidData.vidName;
-
-  // Clean up existing player if any
-  if (videoPlayers.has(videoId)) {
-    destroyVideoPlayer(videoId);
-  }
-
-  return await createVideoPlayer(videoData, container);
-};
-
-// Function to display multiple videos from data array - EXPORTED
-export const displayVideosFromData = async (videosData, containerId = "videos-container") => {
-  try {
-    let videosContainer = document.getElementById(containerId);
-    if (!videosContainer) {
-      videosContainer = document.createElement("div");
-      Object.assign(videosContainer, {
-        id: containerId,
-        className: "videos-container",
-      });
-      document.body.appendChild(videosContainer);
-    }
-
-    // Clear existing content
-    videosContainer.innerHTML = "";
-
-    // Process each video data object with better error handling
-    const playerPromises = videosData.map(async (videoData, index) => {
-      try {
-        const videoId = videoData.vidData.vidName;
-
-        // Create container for each video
-        const videoContainer = document.createElement("div");
-        videoContainer.id = `video-${videoId}`;
-        videosContainer.appendChild(videoContainer);
-
-        // Initialize video player with data
-        return await createVideoPlayer(videoData, videoContainer);
-      } catch (error) {
-        console.error(`Error loading video ${index}:`, error);
-        return null;
-      }
-    });
-
-    const results = await Promise.allSettled(playerPromises);
-    const successCount = results.filter((result) => result.status === "fulfilled" && result.value).length;
-
-    console.log(`Successfully loaded ${successCount}/${videosData.length} videos`);
-  } catch (error) {
-    console.error("Error loading videos from data:", error);
-    showVideoError(document.getElementById(containerId) || document.body, "Failed to load videos from data.");
-  }
-};
-
-// Legacy function for backward compatibility - fetches from API - EXPORTED
-export const displayAllVideos = async (containerId = "videos-container") => {
-  try {
-    const response = await fetch("/api/videos-data");
-
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-    }
-
-    const videosData = await response.json();
-    await displayVideosFromData(videosData, containerId);
-  } catch (error) {
-    console.error("Error loading videos:", error);
-    showVideoError(document.getElementById(containerId) || document.body, "Failed to load videos. Please check your connection.");
-  }
-};
-
-// Utility function to get player state - EXPORTED
-export const getVideoPlayer = (videoId) => videoPlayers.get(videoId);
-
-// Utility function to get all active players - EXPORTED
-export const getAllVideoPlayers = () => new Map(videoPlayers);
-
-// Utility function to destroy all players - EXPORTED
-export const destroyAllVideoPlayers = () => {
-  [...videoPlayers.keys()].forEach(destroyVideoPlayer);
-};
-
-// Clean up when page unloads
-window.addEventListener("beforeunload", destroyAllVideoPlayers);
-
-// Auto-initialize when page loads (optional - can be removed if you want manual control)
-document.addEventListener("DOMContentLoaded", () => {
-  // Only auto-load if there's a videos container already in the DOM
-  if (document.getElementById("videos-container")) {
-    displayAllVideos();
-  }
-});
+// 6. Clean up when done:
+// player.destroy();
+*/
