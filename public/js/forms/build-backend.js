@@ -6,8 +6,8 @@ export const buildBackendDisplay = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
   const { isFirstLoad } = state;
 
-  console.log("!!!BUILD BACKEND DISPLAY");
-  console.dir(inputArray);
+  // console.log("!!!BUILD BACKEND DISPLAY");
+  // console.dir(inputArray);
 
   //only need for loop on first load (could break this part out)
   let displayData = null;
@@ -27,6 +27,9 @@ export const buildBackendFirstLoad = async (inputArray) => {
   //build wrapper
   const backendDataWrapper = document.createElement("div");
   backendDataWrapper.id = "backend-data-wrapper";
+
+  console.log("!!!BUILD BACKEND FIRST LOAD INPUT ARRAY");
+  console.dir(inputArray);
 
   for (let i = 0; i < inputArray.length; i++) {
     const dataObj = inputArray[i];
