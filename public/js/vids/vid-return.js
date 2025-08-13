@@ -5,10 +5,6 @@ import { buildCollapseContainer, defineCollapseItems } from "../util/collapse.js
 export const buildVidDisplay = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
 
-  console.log("AHHHHHHHHHHHHHHHHH")
-  console.log("!!!BUILD VID DISPLAY");
-  console.dir(inputArray);
-
   const vidArrayElement = document.createElement("ul");
   vidArrayElement.id = "vid-array-element";
 
@@ -47,83 +43,83 @@ export const buildVidListItem = async (inputObj, isFirst) => {
   console.log("!!!VID PLAYER ELEMENT");
   console.dir(vidPlayerElement);
 
-  //unsure if best way to do this
-  // const vidContainerElement = await buildVidContainer(inputObj, vidPlayerElement);
+  // unsure if best way to do this
+  const vidContainerElement = await buildVidContainer(inputObj, vidPlayerElement);
 
-  // //build title element
-  // const dateElement = await buildVidDate(date);
-  // const titleElement = await buildVidTitle(title);
-  // titleElement.innerHTML = `${titleElement.textContent} <span>[${dateElement.textContent}]</span>`;
+  //build title element
+  const dateElement = await buildVidDate(date);
+  const titleElement = await buildVidTitle(title);
+  titleElement.innerHTML = `${titleElement.textContent} <span>[${dateElement.textContent}]</span>`;
 
-  // // Wrap the article content in a collapsible
-  // const vidCollapseObj = {
-  //   titleElement: titleElement,
-  //   contentElement: vidContainerElement,
-  //   isExpanded: isFirst,
-  //   className: "vid-element-collapse",
-  // };
+  // Wrap the article content in a collapsible
+  const vidCollapseObj = {
+    titleElement: titleElement,
+    contentElement: vidContainerElement,
+    isExpanded: isFirst,
+    className: "vid-element-collapse",
+  };
 
-  // const vidCollapseContainer = await buildCollapseContainer(vidCollapseObj);
-  // vidListItem.append(vidCollapseContainer);
+  const vidCollapseContainer = await buildCollapseContainer(vidCollapseObj);
+  vidListItem.append(vidCollapseContainer);
 
-  // return vidListItem;
+  return vidListItem;
 };
 
-// //changed the path to vids by nesting in vidData
-// export const buildVidContainer = async (inputObj) => {
-//   if (!inputObj || !inputObj.vidData) return null;
-//   const { vidData, date } = inputObj;
-//   const { savePath } = vidData;
+//changed the path to vids by nesting in vidData
+export const buildVidContainer = async (inputObj) => {
+  if (!inputObj || !inputObj.vidData) return null;
+  const { vidData, date } = inputObj;
+  const { savePath } = vidData;
 
-//   const vidContainerElement = document.createElement("article");
-//   vidContainerElement.id = "vid-container-element";
+  const vidContainerElement = document.createElement("article");
+  vidContainerElement.id = "vid-container-element";
 
-//   const vidElement = await buildVidElement(savePath);
-//   const dateElement = await buildVidDate(date);
+  const vidElement = await buildVidElement(savePath);
+  const dateElement = await buildVidDate(date);
 
-//   vidContainerElement.append(vidElement, dateElement);
+  vidContainerElement.append(vidElement, dateElement);
 
-//   return vidContainerElement;
-// };
+  return vidContainerElement;
+};
 
-// export const buildVidTitle = async (title) => {
-//   if (!title) return null;
-//   const titleElement = document.createElement("h2");
-//   titleElement.id = "vid-title";
-//   titleElement.textContent = title;
+export const buildVidTitle = async (title) => {
+  if (!title) return null;
+  const titleElement = document.createElement("h2");
+  titleElement.id = "vid-title";
+  titleElement.textContent = title;
 
-//   return titleElement;
-// };
+  return titleElement;
+};
 
-// export const buildVidDate = async (date) => {
-//   if (!date) return null;
-//   const dateElement = document.createElement("div");
-//   dateElement.id = "vid-date";
-//   const dateObj = new Date(date);
-//   dateElement.textContent = dateObj.toLocaleDateString("en-US", {
-//     year: "numeric",
-//     month: "long",
-//     day: "numeric",
-//   });
+export const buildVidDate = async (date) => {
+  if (!date) return null;
+  const dateElement = document.createElement("div");
+  dateElement.id = "vid-date";
+  const dateObj = new Date(date);
+  dateElement.textContent = dateObj.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
 
-//   return dateElement;
-// };
+  return dateElement;
+};
 
-// export const buildVidElement = async (savePath) => {
-//   if (!savePath) return null;
+export const buildVidElement = async (savePath) => {
+  if (!savePath) return null;
 
-//   const vidElement = document.createElement("video");
-//   vidElement.id = "vid-element";
-//   vidElement.controls = true;
+  const vidElement = document.createElement("video");
+  vidElement.id = "vid-element";
+  vidElement.controls = true;
 
-//   const sourceElement = document.createElement("source");
-//   const fileName = savePath.split("/").pop();
-//   const vidPath = "/kcna-vids/" + fileName;
+  const sourceElement = document.createElement("source");
+  const fileName = savePath.split("/").pop();
+  const vidPath = "/kcna-vids/" + fileName;
 
-//   sourceElement.src = vidPath;
-//   sourceElement.type = "video/mp4";
+  sourceElement.src = vidPath;
+  sourceElement.type = "video/mp4";
 
-//   vidElement.appendChild(sourceElement);
+  vidElement.appendChild(sourceElement);
 
-//   return vidElement;
-// };
+  return vidElement;
+};
