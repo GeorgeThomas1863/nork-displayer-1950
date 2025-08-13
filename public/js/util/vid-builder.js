@@ -24,12 +24,12 @@ export const buildChunkedVideo = async (inputArray) => {
   console.log("PROCESSED DATA CALCULATE CHUNK TIMING");
   console.log(processedData);
 
-  const videoPlayerElement = await createVideoPlayer(processedData);
-  if (!videoPlayerElement) return null;
+  const { playerInstance, videoPlayerElement } = await createVideoPlayer(processedData);
+  if (!playerInstance) return null;
 
   vidContainer.appendChild(videoPlayerElement);
 
-  return videoPlayerElement;
+  return playerInstance;
 };
 
 // ===========================
@@ -144,7 +144,13 @@ export const createVideoPlayer = async (processedData) => {
   };
 
   // Initialize player logic
-  return await initializePlayer(videoObj);
+  const playerInstance = await initializePlayer(videoObj);
+
+  // Return both the DOM element and the player instance
+  return {
+    playerInstance,
+    videoPlayerElement,
+  };
 };
 
 // ===========================
