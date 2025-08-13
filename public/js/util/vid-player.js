@@ -1,4 +1,4 @@
-import { state } from "./state";
+import { state } from "./state.js";
 
 // Global player state - each player instance will have its own state object
 
