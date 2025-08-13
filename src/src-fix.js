@@ -82,15 +82,12 @@ export const parseChunkArray = async (inputArray, vidSaveFolder) => {
       const chunkStats = await fsPromises.stat(chunkPath);
       const chunkSizeBytes = chunkStats.size;
 
-      console.log("CHUNK DATA");
-      console.log(chunkStats);
-      console.log(duration);
-      console.log(chunkSizeBytes);
-
       //return other data about chunk if needed
       const returnObj = {
         chunkName: chunkName,
         chunkPath: chunkPath,
+        duration: duration,
+        chunkSizeBytes: chunkSizeBytes,
       };
 
       streamData.push(returnObj);
