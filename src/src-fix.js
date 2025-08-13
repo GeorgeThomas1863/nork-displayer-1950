@@ -77,13 +77,13 @@ export const parseChunkArray = async (inputArray, vidSaveFolder) => {
       }
 
       //use ffprobe to get info on chunk
-      const chunkData = await ffprobe(chunkPath, { path: ffprobeStatic.path });
+      const chunkData = await ffprobe(chunkPath, { path: ffprobeStatic.path, options: ["-show_format"] });
       const duration = +chunkData.streams[0].duration; // duration in seconds
       // const chunkSizeBytes = chunkData.format // file size in bytes
 
       console.log("CHUNK DATA");
       console.log(chunkData);
-      console.log(duration);
+      // console.log(duration);
 
       //return other data about chunk if needed
       const returnObj = {
