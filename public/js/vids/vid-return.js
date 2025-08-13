@@ -5,6 +5,7 @@ import { buildCollapseContainer, defineCollapseItems } from "../util/collapse.js
 export const buildVidDisplay = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
 
+  console.log("AHHHHHHHHHHHHHHHHH")
   console.log("!!!BUILD VID DISPLAY");
   console.dir(inputArray);
 
