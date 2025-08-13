@@ -1,4 +1,4 @@
-import { initializePlayer } from "./vid-player";
+import { initializePlayer } from "./vid-player.js";
 
 // ===========================
 // STEP 1: MAIN FUNCTION - Start here with your chunks array and container ID
