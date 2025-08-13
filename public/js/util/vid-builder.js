@@ -1,4 +1,5 @@
-// DYNAMIC VIDEO CHUNK PLAYER
+import { initializePlayer } from "./vid-player";
+
 // ===========================
 // STEP 1: MAIN FUNCTION - Start here with your chunks array and container ID
 
@@ -10,23 +11,28 @@ export const buildChunkedVideo = async (inputArray) => {
     throw error;
   }
 
-  console.log("!!!BUILD CHUNKED VIDEO");
-  console.dir(inputArray);
+  // console.log("!!!BUILD CHUNKED VIDEO");
+  // console.dir(inputArray);
 
-  // const container = document.createElement("div");
-  // container.id = "vid-player-container";
+  const vidContainer = document.createElement("div");
+  vidContainer.id = "vid-container";
 
-  // console.log(`Creating dynamic player for ${inputArray.length} chunks`);
+  console.log(`Creating dynamic player for ${inputArray.length} chunks`);
 
-  // // Process chunks and create player
-  // const processedData = await calculateChunkTiming(inputArray);
-  // return await createVideoPlayer(processedData, container);
+  // Process chunks and create player
+  const processedData = await calculateChunkTiming(inputArray);
+  const videoPlayerElement = await createVideoPlayer(processedData);
+  if (!videoPlayerElement) return null;
+
+  vidContainer.appendChild(videoPlayerElement);
+
+  return videoPlayerElement;
 };
 
 // ===========================
 // STEP 2: CHUNK PROCESSING - Calculate timing information
 
-const calculateChunkTiming = async (inputArray) => {
+export const calculateChunkTiming = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
 
   const sortArray = await sortChunksByOrder(inputArray);
@@ -50,14 +56,14 @@ const calculateChunkTiming = async (inputArray) => {
   }
 
   const returnObj = {
-    chunks: processedChunks,
+    processedChunks: processedChunks,
     totalDuration: cumulativeTime,
   };
 
   return returnObj;
 };
 
-const sortChunksByOrder = async (inputArray) => {
+export const sortChunksByOrder = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
 
   const sortedChunks = [...inputArray];
@@ -82,18 +88,20 @@ const sortChunksByOrder = async (inputArray) => {
 // ===========================
 // STEP 3: DOM CREATION - Build the video player interface
 
-export const createVideoPlayer = async (processedData, container) => {
-  const { chunks: processedChunks, totalDuration } = processedData;
+export const createVideoPlayer = async (processedData) => {
+  const { processedChunks, totalDuration } = processedData;
+
+  const videoPlayerElement = document.createElement("div");
+  videoPlayerElement.className = "video-player-element";
 
   // Clear container
-  container.innerHTML = "";
-  container.className = "video-player-container";
+  videoPlayerElement.innerHTML = "";
 
   // Create video element
   const videoElement = document.createElement("video");
   videoElement.controls = true;
-  videoElement.className = "video-player-video";
-  videoElement.id = `${container.id}-video`;
+  videoElement.className = "video-element";
+  // videoElement.id = `${container.id}-video`;
 
   // Create progress container
   const progressContainer = document.createElement("div");
@@ -109,12 +117,19 @@ export const createVideoPlayer = async (processedData, container) => {
 
   // Assemble DOM
   progressContainer.appendChild(progressBar);
-  container.appendChild(videoElement);
-  container.appendChild(progressContainer);
-  container.appendChild(timeDisplay);
+  videoPlayerElement.append(videoElement, progressContainer, timeDisplay);
+
+  const videoObj = {
+    videoElement: videoElement,
+    progressContainer: progressContainer,
+    progressBar: progressBar,
+    timeDisplay: timeDisplay,
+    processedChunks: processedChunks,
+    totalDuration: totalDuration,
+  };
 
   // Initialize player logic
-  return initializePlayerLogic(videoElement, progressContainer, progressBar, timeDisplay, processedChunks, totalDuration);
+  return initializePlayer(videoObj);
 };
 
 // ===========================

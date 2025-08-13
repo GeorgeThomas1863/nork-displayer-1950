@@ -12,6 +12,10 @@ export const state = {
   trigger: null,
   dataReq: d.defaultInputMap,
   dataLoaded: d.defaultDataLoadedMap,
+  currentChunkIndex: -1,
+  globalCurrentTime: 0,
+  isUserSeeking: false,
+  animationFrameId: null,
 };
 
 export const updateStateEventTriggered = async (changeId, eventTriggered) => {
