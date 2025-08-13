@@ -1,34 +1,35 @@
 import { initializePlayer } from "./vid-player.js";
 
 // ===========================
-// STEP 1: MAIN FUNCTION - Start here with your chunks array and container ID
+// STEP 1: MAIN FUNCTION - Start here with your chunks array
 
 export const buildChunkedVideo = async (inputArray) => {
   // Validate inputs
   if (!inputArray || !inputArray.length) {
     const error = new Error("No video chunks provided");
-    error.function = "displayChunkedVideo";
+    error.function = "buildChunkedVideo";
     throw error;
   }
 
   console.log("!!!BUILD CHUNKED VIDEO");
   console.dir(inputArray);
 
-//   const vidContainer = document.createElement("div");
-//   vidContainer.id = "vid-container";
+  const vidContainer = document.createElement("div");
+  vidContainer.id = "vid-container";
 
-//   console.log(`Creating dynamic player for ${inputArray.length} chunks`);
+  console.log(`Creating dynamic player for ${inputArray.length} chunks`);
 
-//   // Process chunks and create player
-//   const processedData = await calculateChunkTiming(inputArray);
-//   console.log("PROCESSED DATA CALCULATE CHUNK TIMING");
-//   console.log(processedData);
-//   const videoPlayerElement = await createVideoPlayer(processedData);
-//   if (!videoPlayerElement) return null;
+  // Process chunks and create player
+  const processedData = await calculateChunkTiming(inputArray);
+  console.log("PROCESSED DATA CALCULATE CHUNK TIMING");
+  console.log(processedData);
 
-//   vidContainer.appendChild(videoPlayerElement);
+  const videoPlayerElement = await createVideoPlayer(processedData);
+  if (!videoPlayerElement) return null;
 
-//   return videoPlayerElement;
+  vidContainer.appendChild(videoPlayerElement);
+
+  return videoPlayerElement;
 };
 
 // ===========================
@@ -40,49 +41,45 @@ export const calculateChunkTiming = async (inputArray) => {
   const sortArray = await sortChunksByOrder(inputArray);
   if (!sortArray || !sortArray.length) return null;
 
-  let cumulativeTime = 0;
   const processedChunks = [];
+  let cumulativeTime = 0;
+
   for (let i = 0; i < sortArray.length; i++) {
     const chunk = sortArray[i];
-    const duration = chunk.duration || chunk.endTime - chunk.startTime || 0;
 
     processedChunks.push({
-      ...chunk,
+      chunkName: chunk.chunkName,
+      chunkPath: chunk.chunkPath,
+      url: `/video/${encodeURIComponent(chunk.chunkName)}`, // Server endpoint for video
       globalStartTime: cumulativeTime,
-      globalEndTime: cumulativeTime + duration,
-      duration: duration,
+      globalEndTime: cumulativeTime + chunk.duration,
+      duration: chunk.duration,
+      chunkSizeBytes: chunk.chunkSizeBytes,
       chunkIndex: i,
     });
 
-    cumulativeTime += duration;
+    cumulativeTime += chunk.duration;
   }
 
-  const returnObj = {
+  return {
     processedChunks: processedChunks,
     totalDuration: cumulativeTime,
   };
-
-  return returnObj;
 };
 
 export const sortChunksByOrder = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
 
-  const sortedChunks = [...inputArray];
+  // Sort by chunk name (chunk_000, chunk_001, etc.)
+  const sortedChunks = [...inputArray].sort((a, b) => {
+    // Extract number from chunk name (e.g., "chunk_000.mp4" -> 0)
+    const getChunkNumber = (chunkName) => {
+      const match = chunkName.match(/chunk_(\d+)/);
+      return match ? parseInt(match[1], 10) : 0;
+    };
 
-  // Bubble sort by order property
-  for (let i = 0; i < sortedChunks.length - 1; i++) {
-    for (let j = 0; j < sortedChunks.length - i - 1; j++) {
-      const orderA = sortedChunks[j].order || sortedChunks[j].index || j;
-      const orderB = sortedChunks[j + 1].order || sortedChunks[j + 1].index || j + 1;
-
-      if (orderA > orderB) {
-        const temp = sortedChunks[j];
-        sortedChunks[j] = sortedChunks[j + 1];
-        sortedChunks[j + 1] = temp;
-      }
-    }
-  }
+    return getChunkNumber(a.chunkName) - getChunkNumber(b.chunkName);
+  });
 
   return sortedChunks;
 };
@@ -103,19 +100,35 @@ export const createVideoPlayer = async (processedData) => {
   const videoElement = document.createElement("video");
   videoElement.controls = true;
   videoElement.className = "video-element";
-  // videoElement.id = `${container.id}-video`;
 
   // Create progress container
   const progressContainer = document.createElement("div");
   progressContainer.className = "video-player-progress-container";
+  progressContainer.style.cssText = `
+    width: 100%;
+    height: 10px;
+    background-color: #ddd;
+    cursor: pointer;
+    margin: 10px 0;
+  `;
 
   // Create progress bar
   const progressBar = document.createElement("div");
   progressBar.className = "video-player-progress-bar";
+  progressBar.style.cssText = `
+    height: 100%;
+    background-color: #007bff;
+    width: 0%;
+    transition: width 0.1s;
+  `;
 
   // Create time display
   const timeDisplay = document.createElement("div");
   timeDisplay.className = "video-player-time-display";
+  timeDisplay.style.cssText = `
+    font-family: monospace;
+    margin-top: 5px;
+  `;
 
   // Assemble DOM
   progressContainer.appendChild(progressBar);
@@ -131,11 +144,11 @@ export const createVideoPlayer = async (processedData) => {
   };
 
   // Initialize player logic
-  return initializePlayer(videoObj);
+  return await initializePlayer(videoObj);
 };
 
 // ===========================
-// STEP 5: UTILITY FUNCTIONS - Helper functions for calculations
+// STEP 4: UTILITY FUNCTIONS - Helper functions for calculations
 
 export const findChunkForTime = (processedChunks, currentTime) => {
   for (let i = 0; i < processedChunks.length; i++) {
@@ -161,6 +174,7 @@ export const findChunkForTime = (processedChunks, currentTime) => {
 };
 
 export const formatTime = (seconds) => {
+  if (isNaN(seconds)) return "0:00";
   const mins = Math.floor(seconds / 60);
   const secs = Math.floor(seconds % 60);
   return `${mins}:${secs.toString().padStart(2, "0")}`;

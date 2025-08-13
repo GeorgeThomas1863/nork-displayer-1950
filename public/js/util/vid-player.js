@@ -1,22 +1,32 @@
-import { state } from "./state.js";
+import { findChunkForTime, formatTime } from "./vid-builder.js";
 
-// Global player state - each player instance will have its own state object
+// ===========================
+// PLAYER INITIALIZATION
 
 export const initializePlayer = async (inputObj) => {
   const { videoElement, progressContainer, progressBar, timeDisplay, processedChunks, totalDuration } = inputObj;
 
   // Create player state for this instance
+  const playerState = {
+    currentChunkIndex: -1,
+    globalCurrentTime: 0,
+    isUserSeeking: false,
+    animationFrameId: null,
+  };
+
+  // Add playerState to the input object so other functions can access it
+  inputObj.playerState = playerState;
 
   // Set up all event listeners
   await setupVideoEvents(inputObj);
   await setupProgressEvents(inputObj);
 
   // Start the main update loop
-  await updateProgress(inputObj);
+  updateProgress(inputObj);
 
   // Load the first chunk to start
   if (processedChunks.length > 0) {
-    await loadChunk(inputObj, 0);
+    await loadChunk(inputObj, 0, 0);
   }
 
   // Return public API for controlling the player
@@ -24,7 +34,7 @@ export const initializePlayer = async (inputObj) => {
     videoElement,
     play: () => videoElement.play(),
     pause: () => videoElement.pause(),
-    seekTo: (time) => seekToTime(time, processedChunks, state, videoElement),
+    seekTo: (time) => seekToTime(time, inputObj),
     getCurrentTime: () => playerState.globalCurrentTime,
     getTotalDuration: () => totalDuration,
     destroy: () => {
@@ -40,29 +50,32 @@ export const initializePlayer = async (inputObj) => {
   };
 };
 
+// ===========================
+// CHUNK LOADING
+
 // Load a specific video chunk into the video element
-export const loadChunk = async (videoObj, seekTime = 0) => {
-  if (chunkIndex < 0 || chunkIndex >= processedChunks.length) return;
+export const loadChunk = async (videoObj, chunkIndex, seekTime = 0) => {
   const { videoElement, processedChunks, playerState } = videoObj;
+
+  if (chunkIndex < 0 || chunkIndex >= processedChunks.length) return;
 
   const chunk = processedChunks[chunkIndex];
 
   // Only change source if we're switching to a different chunk
   if (playerState.currentChunkIndex !== chunkIndex) {
     playerState.currentChunkIndex = chunkIndex;
-    const chunkUrl = chunk.url || chunk.path || chunk.filename;
+    const chunkUrl = chunk.url;
 
     console.log(`Loading chunk ${chunkIndex + 1}: ${chunkUrl}`);
     videoElement.src = chunkUrl;
 
     // Seek to the correct time once the video loads
-    videoElement.addEventListener(
-      "loadeddata",
-      () => {
-        videoElement.currentTime = seekTime;
-      },
-      { once: true }
-    );
+    const handleLoadedData = () => {
+      videoElement.currentTime = seekTime;
+      videoElement.removeEventListener("loadeddata", handleLoadedData);
+    };
+
+    videoElement.addEventListener("loadeddata", handleLoadedData);
   } else {
     // Same chunk, just seek to different time
     videoElement.currentTime = seekTime;
@@ -73,10 +86,14 @@ export const loadChunk = async (videoObj, seekTime = 0) => {
 // PROGRESS UPDATE FUNCTIONS
 
 // Main update loop that runs on every animation frame
-export const updateProgress = async (inputObj) => {
-  const { progressBar, timeDisplay, processedChunks, totalDuration, playerState, videoElement } = inputObj;
+export const updateProgress = (inputObj) => {
+  const { videoElement, progressBar, timeDisplay, processedChunks, totalDuration, playerState } = inputObj;
+
   // Skip updates if user is currently seeking
-  if (playerState.isUserSeeking) return;
+  if (playerState.isUserSeeking) {
+    playerState.animationFrameId = requestAnimationFrame(() => updateProgress(inputObj));
+    return;
+  }
 
   const chunkInfo = findChunkForTime(processedChunks, playerState.globalCurrentTime);
 
@@ -85,33 +102,31 @@ export const updateProgress = async (inputObj) => {
 
     // Switch to correct chunk if needed
     if (playerState.currentChunkIndex !== chunk.chunkIndex) {
-      await loadChunk(inputObj, localTime);
+      loadChunk(inputObj, chunk.chunkIndex, localTime);
     }
 
     // Update progress bar visual
-    await updateProgressBar(inputObj);
+    updateProgressBar(inputObj);
 
     // Update time display text
-    await updateTimeDisplay(inputObj);
+    updateTimeDisplay(inputObj);
   }
 
   // Continue the update loop
-  playerState.animationFrameId = requestAnimationFrame(() => {
-    updateProgress(progressBar, timeDisplay, processedChunks, totalDuration, playerState, videoElement);
-  });
+  playerState.animationFrameId = requestAnimationFrame(() => updateProgress(inputObj));
 };
 
 // Update the visual progress bar
-export const updateProgressBar = async (inputObj) => {
-  const { progressBar, currentTime, totalDuration } = videoObj;
-  const progressPercent = (currentTime / totalDuration) * 100;
+export const updateProgressBar = (inputObj) => {
+  const { progressBar, playerState, totalDuration } = inputObj;
+  const progressPercent = (playerState.globalCurrentTime / totalDuration) * 100;
   progressBar.style.width = `${Math.min(progressPercent, 100)}%`;
 };
 
 // Update the time display text
-export const updateTimeDisplay = async (inputObj) => {
-  const { timeDisplay, currentTime, totalDuration } = inputObj;
-  timeDisplay.textContent = `${formatTime(currentTime)} / ${formatTime(totalDuration)}`;
+export const updateTimeDisplay = (inputObj) => {
+  const { timeDisplay, playerState, totalDuration } = inputObj;
+  timeDisplay.textContent = `${formatTime(playerState.globalCurrentTime)} / ${formatTime(totalDuration)}`;
 };
 
 // ===========================
@@ -131,15 +146,24 @@ export const setupVideoEvents = async (videoObj) => {
 
       // Auto-advance to next chunk when current chunk ends
       if (playerState.globalCurrentTime >= chunk.globalEndTime && playerState.currentChunkIndex < processedChunks.length - 1) {
-        loadChunk(videoElement, processedChunks, playerState, playerState.currentChunkIndex + 1, 0);
+        loadChunk(videoObj, playerState.currentChunkIndex + 1, 0);
       }
+    }
+  });
+
+  // Handle when video ends
+  videoElement.addEventListener("ended", () => {
+    // If there's a next chunk, load it
+    if (playerState.currentChunkIndex < processedChunks.length - 1) {
+      loadChunk(videoObj, playerState.currentChunkIndex + 1, 0);
+      videoElement.play(); // Continue playing the next chunk
     }
   });
 };
 
 // Set up progress bar click events for seeking
 export const setupProgressEvents = async (videoObj) => {
-  const { progressContainer, totalDuration, processedChunks, playerState, videoElement } = videoObj;
+  const { progressContainer, totalDuration } = videoObj;
 
   progressContainer.addEventListener("click", (e) => {
     // Calculate click position as percentage of total duration
@@ -148,19 +172,22 @@ export const setupProgressEvents = async (videoObj) => {
     const seekTime = clickPercent * totalDuration;
 
     console.log(`Seeking to ${formatTime(seekTime)}`);
-    seekToTime(seekTime, processedChunks, playerState, videoElement);
+    seekToTime(seekTime, videoObj);
   });
 };
 
 // ===========================
-// SEEKING FUNCTIONSs
+// SEEKING FUNCTIONS
 
 // Seek to a specific time in the overall video timeline
-export const seekToTime = async (time, processedChunks, playerState, videoElement) => {
+export const seekToTime = async (time, videoObj) => {
+  const { processedChunks, playerState, videoElement } = videoObj;
+
   // Clamp time to valid range
   const totalDuration = processedChunks.length > 0 ? processedChunks[processedChunks.length - 1].globalEndTime : 0;
+  const clampedTime = Math.max(0, Math.min(time, totalDuration));
 
-  playerState.globalCurrentTime = Math.max(0, Math.min(time, totalDuration));
+  playerState.globalCurrentTime = clampedTime;
   const chunkInfo = findChunkForTime(processedChunks, playerState.globalCurrentTime);
 
   if (chunkInfo) {
@@ -168,15 +195,14 @@ export const seekToTime = async (time, processedChunks, playerState, videoElemen
     playerState.isUserSeeking = true;
 
     // Load the correct chunk and seek to local time
-    loadChunk(videoElement, processedChunks, playerState, chunkInfo.chunk.chunkIndex, chunkInfo.localTime);
+    await loadChunk(videoObj, chunkInfo.chunk.chunkIndex, chunkInfo.localTime);
 
     // Clear seeking flag once seek is complete
-    videoElement.addEventListener(
-      "seeked",
-      () => {
-        playerState.isUserSeeking = false;
-      },
-      { once: true }
-    );
+    const handleSeeked = () => {
+      playerState.isUserSeeking = false;
+      videoElement.removeEventListener("seeked", handleSeeked);
+    };
+
+    videoElement.addEventListener("seeked", handleSeeked);
   }
 };
