@@ -1,6 +1,8 @@
 //****************
 
-//FIX VID STREAMER IN UTIL / GET WORKING
+//FROM BACKEND ALSO RETURN VID CHUNK SIZE AND VID CHUNK DURATION (in seconds prob); REQUIRED FOR DISPLAY
+
+//------
 
 //Fixed pic array display (had update db off in scraper)
 
