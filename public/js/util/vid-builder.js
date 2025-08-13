@@ -13,14 +13,14 @@ export const buildChunkedVideo = async (inputArray) => {
   console.log("!!!BUILD CHUNKED VIDEO");
   console.dir(inputArray);
 
-  const container = document.createElement("div");
-  container.id = "vid-player-container";
+  // const container = document.createElement("div");
+  // container.id = "vid-player-container";
 
-  console.log(`Creating dynamic player for ${inputArray.length} chunks`);
+  // console.log(`Creating dynamic player for ${inputArray.length} chunks`);
 
-  // Process chunks and create player
-  const processedData = await calculateChunkTiming(inputArray);
-  return await createVideoPlayer(processedData, container);
+  // // Process chunks and create player
+  // const processedData = await calculateChunkTiming(inputArray);
+  // return await createVideoPlayer(processedData, container);
 };
 
 // ===========================
