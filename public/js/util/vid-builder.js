@@ -11,8 +11,8 @@ export const buildChunkedVideo = async (inputArray) => {
     throw error;
   }
 
-  // console.log("!!!BUILD CHUNKED VIDEO");
-  // console.dir(inputArray);
+  console.log("!!!BUILD CHUNKED VIDEO");
+  console.dir(inputArray);
 
   const vidContainer = document.createElement("div");
   vidContainer.id = "vid-container";
@@ -21,8 +21,8 @@ export const buildChunkedVideo = async (inputArray) => {
 
   // Process chunks and create player
   const processedData = await calculateChunkTiming(inputArray);
-  console.log("PROCESSED DATA CALCULATE CHUNK TIMING");
-  console.log(processedData);
+  // console.log("PROCESSED DATA CALCULATE CHUNK TIMING");
+  // console.log(processedData);
   // const videoPlayerElement = await createVideoPlayer(processedData);
   // if (!videoPlayerElement) return null;
 
