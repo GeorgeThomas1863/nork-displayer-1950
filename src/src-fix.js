@@ -1,5 +1,8 @@
 import fs from "fs";
 import fsPromises from "fs/promises";
+import ffprobe from "ffprobe";
+import ffprobeStatic from "ffprobe-static";
+
 import CONFIG from "../config/config.js";
 import dbModel from "../models/db-model.js";
 
@@ -72,6 +75,11 @@ export const parseChunkArray = async (inputArray, vidSaveFolder) => {
         error.savePath = chunkPath;
         throw error;
       }
+
+      //use ffprobe to get info on chunk
+      const chunkData = await ffprobe(chunkPath, { path: ffprobeStatic.path });
+      console.log("CHUNK DATA");
+      console.log(chunkData);
 
       //return other data about chunk if needed
       const returnObj = {
