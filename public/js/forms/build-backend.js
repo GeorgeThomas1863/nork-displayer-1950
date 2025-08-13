@@ -28,8 +28,8 @@ export const buildBackendFirstLoad = async (inputArray) => {
   const backendDataWrapper = document.createElement("div");
   backendDataWrapper.id = "backend-data-wrapper";
 
-  console.log("!!!BUILD BACKEND FIRST LOAD INPUT ARRAY");
-  console.dir(inputArray);
+  // console.log("!!!BUILD BACKEND FIRST LOAD INPUT ARRAY");
+  // console.dir(inputArray);
 
   for (let i = 0; i < inputArray.length; i++) {
     const dataObj = inputArray[i];
@@ -41,6 +41,10 @@ export const buildBackendFirstLoad = async (inputArray) => {
     if (defaultDataElement.id !== "article-display-container") {
       defaultDataElement.classList.add("hidden");
     }
+
+    console.log("!!!DEFAULT DATA ELEMENT");
+    console.dir(defaultDataElement);
+
     backendDataWrapper.append(defaultDataElement);
   }
   return backendDataWrapper;
