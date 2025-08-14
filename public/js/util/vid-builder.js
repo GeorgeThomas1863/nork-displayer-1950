@@ -29,7 +29,8 @@ export const buildChunkedVideo = async (inputArray) => {
 
   vidContainer.appendChild(videoPlayerElement);
 
-  return playerInstance;
+  // return playerInstance;
+  return vidContainer;
 };
 
 // ===========================

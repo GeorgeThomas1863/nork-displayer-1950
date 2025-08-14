@@ -33,8 +33,8 @@ export const buildVidListItem = async (inputObj, isFirst) => {
   if (!inputObj || !inputObj.streamData) return null;
   const { title, date, streamData } = inputObj;
 
-  console.log("!!!BUILD VID LIST ITEM");
-  console.dir(inputObj);
+  // console.log("!!!BUILD VID LIST ITEM");
+  // console.dir(inputObj);
 
   const vidListItem = document.createElement("li");
   vidListItem.className = "vid-list-item wrapper";
