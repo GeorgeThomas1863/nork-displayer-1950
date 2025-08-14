@@ -11,8 +11,8 @@ export const buildChunkedVideo = async (inputArray) => {
     throw error;
   }
 
-  console.log("!!!BUILD CHUNKED VIDEO");
-  console.dir(inputArray);
+  // console.log("!!!BUILD CHUNKED VIDEO");
+  // console.dir(inputArray);
 
   const vidContainer = document.createElement("div");
   vidContainer.id = "vid-container";
@@ -28,8 +28,8 @@ export const buildChunkedVideo = async (inputArray) => {
   if (!playerInstance) return null;
 
   vidContainer.appendChild(videoPlayerElement);
-  console.log("!!!VID CONTAINER");
-  console.dir(vidContainer);
+  // console.log("!!!VID CONTAINER");
+  // console.dir(vidContainer);
 
   // return playerInstance;
   return vidContainer;
@@ -107,31 +107,14 @@ export const createVideoPlayer = async (processedData) => {
   // Create progress container
   const progressContainer = document.createElement("div");
   progressContainer.className = "video-player-progress-container";
-  progressContainer.style.cssText = `
-    width: 100%;
-    height: 10px;
-    background-color: #ddd;
-    cursor: pointer;
-    margin: 10px 0;
-  `;
 
   // Create progress bar
   const progressBar = document.createElement("div");
   progressBar.className = "video-player-progress-bar";
-  progressBar.style.cssText = `
-    height: 100%;
-    background-color: #007bff;
-    width: 0%;
-    transition: width 0.1s;
-  `;
 
   // Create time display
   const timeDisplay = document.createElement("div");
   timeDisplay.className = "video-player-time-display";
-  timeDisplay.style.cssText = `
-    font-family: monospace;
-    margin-top: 5px;
-  `;
 
   // Assemble DOM
   progressContainer.appendChild(progressBar);
