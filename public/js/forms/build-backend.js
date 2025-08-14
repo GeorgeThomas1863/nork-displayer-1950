@@ -1,7 +1,6 @@
 import d from "../util/define-things.js";
 import { state } from "../util/state.js";
 import { hideBackendReturnData } from "./form-change.js";
-import CONFIG from "../../../../config/config.js";
 
 export const buildBackendDisplay = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
@@ -25,14 +24,13 @@ export const buildBackendDisplay = async (inputArray) => {
 };
 
 export const buildBackendFirstLoad = async (inputArray) => {
-  const { typeArray } = CONFIG;
   //build wrapper
   const backendDataWrapper = document.createElement("div");
   backendDataWrapper.id = "backend-data-wrapper";
 
   //unnecessarily complex, but keeps items in right order
-  for (let i = 0; i < typeArray.length; i++) {
-    const typeItem = inputArray[i];
+  for (let i = 0; i < d.frontTypeArr.length; i++) {
+    const typeItem = d.frontTypeArr[i];
     for (let j = 0; j < inputArray.length; j++) {
       const { dataType, dataArray } = inputArray[j];
       if (dataType !== typeItem) continue;
