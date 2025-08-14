@@ -1,7 +1,7 @@
 import d from "../util/define-things.js";
 import { state } from "../util/state.js";
 import { hideBackendReturnData } from "./form-change.js";
-import CONFIG from "../../config.js";
+import CONFIG from "../../../config/config.js";
 
 export const buildBackendDisplay = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
