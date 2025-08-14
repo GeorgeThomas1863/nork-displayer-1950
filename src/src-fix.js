@@ -21,6 +21,8 @@ export const getStreamData = async (inputArray, dataType) => {
       const streamData = await parseChunkArray(chunkArray, vidSaveFolder);
       if (!streamData || !streamData.length) continue;
 
+      const manifestData = await buildManifest(streamData);
+
       dataObj.streamData = streamData;
       dataReturnArray.push(dataObj);
     } catch (e) {
@@ -29,6 +31,11 @@ export const getStreamData = async (inputArray, dataType) => {
     }
   }
   return dataReturnArray;
+};
+
+export const buildManifest = async (inputObj) => {
+  console.log("BUILD MANIFEST INPUT BACKEND");
+  console.log(inputObj);
 };
 
 //used different fucking vidSaveFolder format for watch, fixing here
@@ -106,6 +113,8 @@ export const parseChunkName = async (inputName) => {
 
   return inputName;
 };
+
+//-----------------------------------------
 
 //REMOVE INVALID ITEMS FROM RETURN
 export const removeInvalidItems = async (inputArray, dataType, howMany) => {
