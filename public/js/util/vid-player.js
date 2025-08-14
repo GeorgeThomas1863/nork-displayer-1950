@@ -12,6 +12,7 @@ export const initializePlayer = async (inputObj) => {
     globalCurrentTime: 0,
     isUserSeeking: false,
     animationFrameId: null,
+    isDestroyed: false,
   };
 
   // Add playerState to the input object so other functions can access it
@@ -31,18 +32,20 @@ export const initializePlayer = async (inputObj) => {
 
   // Return public API for controlling the player
   return {
-    videoElement,
+    ...inputObj, // Spread all properties
     play: () => videoElement.play(),
     pause: () => videoElement.pause(),
     seekTo: (time) => seekToTime(time, inputObj),
     getCurrentTime: () => playerState.globalCurrentTime,
     getTotalDuration: () => totalDuration,
     destroy: () => {
-      // Clean up animation frame and clear container
+      playerState.isDestroyed = true; // Set flag
       if (playerState.animationFrameId) {
         cancelAnimationFrame(playerState.animationFrameId);
       }
-      const container = videoElement.closest(".video-player-container");
+      videoElement.src = "";
+      videoElement.load();
+      const container = videoElement.closest(".video-player-element");
       if (container) {
         container.innerHTML = "";
       }
@@ -61,25 +64,57 @@ export const loadChunk = async (videoObj, chunkIndex, seekTime = 0) => {
 
   const chunk = processedChunks[chunkIndex];
 
-  // Only change source if we're switching to a different chunk
-  if (playerState.currentChunkIndex !== chunkIndex) {
-    playerState.currentChunkIndex = chunkIndex;
-    const chunkUrl = chunk.url;
+  try {
+    if (playerState.currentChunkIndex !== chunkIndex) {
+      playerState.currentChunkIndex = chunkIndex;
+      const chunkUrl = chunk.url;
 
-    console.log(`Loading chunk ${chunkIndex + 1}: ${chunkUrl}`);
-    videoElement.src = chunkUrl;
+      console.log(`Loading chunk ${chunkIndex + 1}: ${chunkUrl}`);
 
-    // Seek to the correct time once the video loads
-    const handleLoadedData = () => {
+      // CHANGE: Remove existing listeners
+      videoElement.onloadeddata = null;
+
+      videoElement.src = chunkUrl;
+
+      const handleLoadedData = () => {
+        videoElement.currentTime = seekTime;
+        videoElement.onloadeddata = null; // Clean up
+      };
+
+      // FIX: Check readyState to prevent race condition
+      if (videoElement.readyState >= 2) {
+        videoElement.currentTime = seekTime;
+      } else {
+        videoElement.onloadeddata = handleLoadedData;
+      }
+    } else {
       videoElement.currentTime = seekTime;
-      videoElement.removeEventListener("loadeddata", handleLoadedData);
-    };
-
-    videoElement.addEventListener("loadeddata", handleLoadedData);
-  } else {
-    // Same chunk, just seek to different time
-    videoElement.currentTime = seekTime;
+    }
+  } catch (e) {
+    console.log("ERROR LOADING CHUNK:");
+    console.log(e);
+    playerState.isUserSeeking = false; // Reset flag on error
   }
+
+  // Only change source if we're switching to a different chunk
+  // if (playerState.currentChunkIndex !== chunkIndex) {
+  //   playerState.currentChunkIndex = chunkIndex;
+  //   const chunkUrl = chunk.url;
+
+  //   console.log(`Loading chunk ${chunkIndex + 1}: ${chunkUrl}`);
+  //   videoElement.src = chunkUrl;
+
+  //   // Seek to the correct time once the video loads
+  //   const handleLoadedData = () => {
+  //     videoElement.currentTime = seekTime;
+  //     videoElement.removeEventListener("loadeddata", handleLoadedData);
+  //   };
+
+  //   videoElement.addEventListener("loadeddata", handleLoadedData);
+  // } else {
+  //   // Same chunk, just seek to different time
+  //   videoElement.currentTime = seekTime;
+  // }
 };
 
 // ===========================
@@ -88,6 +123,8 @@ export const loadChunk = async (videoObj, chunkIndex, seekTime = 0) => {
 // Main update loop that runs on every animation frame
 export const updateProgress = (inputObj) => {
   const { videoElement, progressBar, timeDisplay, processedChunks, totalDuration, playerState } = inputObj;
+
+  if (playerState.isDestroyed) return;
 
   // Skip updates if user is currently seeking
   if (playerState.isUserSeeking) {

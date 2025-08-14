@@ -19,20 +19,43 @@ export const buildChunkedVideo = async (inputArray) => {
 
   console.log(`Creating dynamic player for ${inputArray.length} chunks`);
 
+  try {
+    const processedData = await calculateChunkTiming(inputArray);
+    if (!processedData) {
+      throw new Error("Failed to process chunk timing");
+    }
+
+    const { playerInstance, videoPlayerElement } = await createVideoPlayer(processedData);
+    if (!playerInstance) {
+      throw new Error("Failed to create video player");
+    }
+
+    vidContainer.appendChild(videoPlayerElement);
+
+    // ADD: Store player instance for external access
+    vidContainer.playerInstance = playerInstance;
+
+    return vidContainer;
+  } catch (e) {
+    console.log("ERROR BUILDING CHUNKED VIDEO:");
+    console.log(e);
+    return null;
+  }
+
   // Process chunks and create player
-  const processedData = await calculateChunkTiming(inputArray);
-  // console.log("PROCESSED DATA CALCULATE CHUNK TIMING");
-  // console.log(processedData);
+  // const processedData = await calculateChunkTiming(inputArray);
+  // // console.log("PROCESSED DATA CALCULATE CHUNK TIMING");
+  // // console.log(processedData);
 
-  const { playerInstance, videoPlayerElement } = await createVideoPlayer(processedData);
-  if (!playerInstance) return null;
+  // const { playerInstance, videoPlayerElement } = await createVideoPlayer(processedData);
+  // if (!playerInstance) return null;
 
-  vidContainer.appendChild(videoPlayerElement);
-  // console.log("!!!VID CONTAINER");
-  // console.dir(vidContainer);
+  // vidContainer.appendChild(videoPlayerElement);
+  // // console.log("!!!VID CONTAINER");
+  // // console.dir(vidContainer);
 
-  // return playerInstance;
-  return vidContainer;
+  // // return playerInstance;
+  // return vidContainer;
 };
 
 // ===========================
@@ -49,6 +72,12 @@ export const calculateChunkTiming = async (inputArray) => {
 
   for (let i = 0; i < sortArray.length; i++) {
     const chunk = sortArray[i];
+
+    // ADD: Validate chunk data
+    if (!chunk.duration || chunk.duration <= 0) {
+      console.log(`Invalid duration for chunk ${chunk.chunkName}`);
+      continue;
+    }
 
     processedChunks.push({
       chunkName: chunk.chunkName,
@@ -103,6 +132,10 @@ export const createVideoPlayer = async (processedData) => {
   const videoElement = document.createElement("video");
   videoElement.controls = true;
   videoElement.className = "video-element";
+
+  videoElement.onerror = (e) => {
+    console.error("Video error:", e);
+  };
 
   // Create progress container
   const progressContainer = document.createElement("div");
@@ -166,7 +199,7 @@ export const findChunkForTime = (processedChunks, currentTime) => {
 };
 
 export const formatTime = (seconds) => {
-  if (isNaN(seconds)) return "0:00";
+  if (isNaN(seconds) || seconds < 0) return "0:00";
   const mins = Math.floor(seconds / 60);
   const secs = Math.floor(seconds % 60);
   return `${mins}:${secs.toString().padStart(2, "0")}`;
