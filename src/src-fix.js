@@ -23,6 +23,8 @@ export const getStreamData = async (inputArray, dataType) => {
 
       const manifestData = await buildManifest(streamData);
 
+      //BUILD OUT HLS MANIFEST AND SAVE TO FS
+
       dataObj.streamData = streamData;
       dataReturnArray.push(dataObj);
     } catch (e) {
