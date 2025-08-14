@@ -1,6 +1,7 @@
 import d from "../util/define-things.js";
 import { state } from "../util/state.js";
 import { hideBackendReturnData } from "./form-change.js";
+import CONFIG from "../../config.js";
 
 export const buildBackendDisplay = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
@@ -24,28 +25,31 @@ export const buildBackendDisplay = async (inputArray) => {
 };
 
 export const buildBackendFirstLoad = async (inputArray) => {
+  const { typeArray } = CONFIG;
   //build wrapper
   const backendDataWrapper = document.createElement("div");
   backendDataWrapper.id = "backend-data-wrapper";
 
-  // console.log("!!!BUILD BACKEND FIRST LOAD INPUT ARRAY");
-  // console.dir(inputArray);
+  //unnecessarily complex, but keeps items in right order
+  for (let i = 0; i < typeArray.length; i++) {
+    const typeItem = inputArray[i];
+    for (let j = 0; j < inputArray.length; j++) {
+      const { dataType, dataArray } = inputArray[j];
+      if (dataType !== typeItem) continue;
 
-  for (let i = 0; i < inputArray.length; i++) {
-    const dataObj = inputArray[i];
-    const { dataType, dataArray } = dataObj;
-    const func = d.displayFunctionMap[dataType];
-    const defaultDataElement = await func(dataArray);
-    if (!defaultDataElement) continue;
-    //hide everything except pics on default
-    if (defaultDataElement.id !== "article-display-container") {
-      defaultDataElement.classList.add("hidden");
+      const func = d.displayFunctionMap[dataType];
+      const defaultDataElement = await func(dataArray);
+      if (!defaultDataElement) continue;
+      //hide everything except pics on default
+      if (defaultDataElement.id !== "article-display-container") {
+        defaultDataElement.classList.add("hidden");
+      }
+
+      console.log("!!!DEFAULT DATA ELEMENT");
+      console.dir(defaultDataElement);
+
+      backendDataWrapper.append(defaultDataElement);
     }
-
-    console.log("!!!DEFAULT DATA ELEMENT");
-    console.dir(defaultDataElement);
-
-    backendDataWrapper.append(defaultDataElement);
   }
   return backendDataWrapper;
 };
