@@ -21,13 +21,15 @@ export const buildChunkedVideo = async (inputArray) => {
 
   // Process chunks and create player
   const processedData = await calculateChunkTiming(inputArray);
-  console.log("PROCESSED DATA CALCULATE CHUNK TIMING");
-  console.log(processedData);
+  // console.log("PROCESSED DATA CALCULATE CHUNK TIMING");
+  // console.log(processedData);
 
   const { playerInstance, videoPlayerElement } = await createVideoPlayer(processedData);
   if (!playerInstance) return null;
 
   vidContainer.appendChild(videoPlayerElement);
+  console.log("!!!VID CONTAINER");
+  console.dir(vidContainer);
 
   // return playerInstance;
   return vidContainer;
