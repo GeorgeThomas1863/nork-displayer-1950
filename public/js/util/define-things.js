@@ -16,7 +16,6 @@ const d = {
   expandTriggerArr: ["article-form-header", "pic-form-header", "vid-form-header", "watch-form-header"],
   expandIdsArr: ["article-display-container", "pic-array-element", "vid-array-element", "watch-array-element"],
   expandTypeArr: ["article", "pic", "vid", "watch"],
-  frontTypeArr: ["articles", "pics", "vids", "watch"],
 
   //change triggers
   changeTriggerArr: ["article-type", "article-sort-by", "pic-sort-by", "vid-sort-by", "watch-sort-by"],

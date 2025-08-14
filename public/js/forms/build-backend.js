@@ -28,27 +28,21 @@ export const buildBackendFirstLoad = async (inputArray) => {
   const backendDataWrapper = document.createElement("div");
   backendDataWrapper.id = "backend-data-wrapper";
 
-  //unnecessarily complex, but keeps items in right order
-  for (let i = 0; i < d.frontTypeArr.length; i++) {
-    const typeItem = d.frontTypeArr[i];
-    for (let j = 0; j < inputArray.length; j++) {
-      const { dataType, dataArray } = inputArray[j];
-      if (dataType !== typeItem) continue;
+  for (let j = 0; j < inputArray.length; j++) {
+    const { dataType, dataArray } = inputArray[j];
+    const func = d.displayFunctionMap[dataType];
 
-      const func = d.displayFunctionMap[dataType];
-      const defaultDataElement = await func(dataArray);
-      if (!defaultDataElement) continue;
-      //hide everything except pics on default
-      if (defaultDataElement.id !== "article-display-container") {
-        defaultDataElement.classList.add("hidden");
-      }
+    const defaultDataElement = await func(dataArray);
+    if (!defaultDataElement) continue;
 
-      console.log("!!!DEFAULT DATA ELEMENT");
-      console.dir(defaultDataElement);
-
-      backendDataWrapper.append(defaultDataElement);
+    //hide everything except pics on default
+    if (defaultDataElement.id !== "article-display-container") {
+      defaultDataElement.classList.add("hidden");
     }
+
+    backendDataWrapper.append(defaultDataElement);
   }
+
   return backendDataWrapper;
 };
 

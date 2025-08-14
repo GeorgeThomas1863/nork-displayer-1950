@@ -17,9 +17,9 @@ export const buildInputForms = async () => {
   const vidFormWrapper = await buildVidForm();
 
   //try adding as collapse "group"
-  await defineCollapseItems([articleFormWrapper, picFormWrapper, watchFormWrapper, vidFormWrapper]);
+  await defineCollapseItems([articleFormWrapper, picFormWrapper, vidFormWrapper, watchFormWrapper]);
 
-  formWrapperElement.append(articleFormWrapper, picFormWrapper, watchFormWrapper, vidFormWrapper);
+  formWrapperElement.append(articleFormWrapper, picFormWrapper, vidFormWrapper, watchFormWrapper);
 
   return formWrapperElement;
 };
