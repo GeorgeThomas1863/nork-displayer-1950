@@ -1,7 +1,10 @@
-import { buildChunkedVideo } from "../util/OLD_VID_FAILS/OLD-vid-builder.js";
+// video-display.js
+// Updated video display module that works with HLS player
+
+import { createHLSPlayer, cleanupAllHLSInstances } from "../util/vid-player-hls.js";
 import { buildCollapseContainer, defineCollapseItems } from "../util/collapse.js";
 
-//VID PAGE DISPLAY
+// VID PAGE DISPLAY
 export const buildVidDisplay = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
 
@@ -30,28 +33,34 @@ export const buildVidDisplay = async (inputArray) => {
 };
 
 export const buildVidListItem = async (inputObj, isFirst) => {
-  if (!inputObj || !inputObj.streamData) return null;
-  const { title, date, streamData } = inputObj;
+  if (!inputObj || !inputObj.manifestPath) {
+    console.log("Video item missing manifestPath:", inputObj);
+    return null;
+  }
 
-  // console.log("!!!BUILD VID LIST ITEM");
-  // console.dir(inputObj);
+  const { title, date, type } = inputObj;
 
   const vidListItem = document.createElement("li");
   vidListItem.className = "vid-list-item wrapper";
 
-  const vidPlayerElement = await buildChunkedVideo(streamData);
-  console.log("!!!VID PLAYER ELEMENT");
-  console.dir(vidPlayerElement);
+  // Create the HLS video player element
+  const vidPlayerElement = await createHLSPlayer(inputObj);
 
-  // unsure if best way to do this
-  // const vidContainerElement = await buildVidContainer(inputObj, vidPlayerElement);
+  if (!vidPlayerElement) {
+    console.error("Failed to create video player for:", title);
+    return null;
+  }
 
-  //build title element
+  // Build title element with date
+  const titleElement = await buildVidTitle(title, type);
   const dateElement = await buildVidDate(date);
-  const titleElement = await buildVidTitle(title);
-  titleElement.innerHTML = `${titleElement.textContent} <span>[${dateElement.textContent}]</span>`;
 
-  // Wrap the article content in a collapsible
+  // Combine title and date
+  if (dateElement) {
+    titleElement.innerHTML = `${titleElement.innerHTML} <span class="vid-date-span">[${dateElement.textContent}]</span>`;
+  }
+
+  // Wrap the video player in a collapsible container
   const vidCollapseObj = {
     titleElement: titleElement,
     contentElement: vidPlayerElement,
@@ -65,36 +74,28 @@ export const buildVidListItem = async (inputObj, isFirst) => {
   return vidListItem;
 };
 
-//changed the path to vids by nesting in vidData
-// export const buildVidContainer = async (inputObj) => {
-//   if (!inputObj || !inputObj.vidData) return null;
-//   const { vidData, date } = inputObj;
-//   const { savePath } = vidData;
-
-//   const vidContainerElement = document.createElement("article");
-//   vidContainerElement.id = "vid-container-element";
-
-//   // const vidElement = await buildVidElement(savePath);
-//   const dateElement = await buildVidDate(date);
-
-//   vidContainerElement.append(vidElement, dateElement);
-
-//   return vidContainerElement;
-// };
-
-export const buildVidTitle = async (title) => {
-  if (!title) return null;
+export const buildVidTitle = async (title, type) => {
   const titleElement = document.createElement("h2");
-  titleElement.id = "vid-title";
-  titleElement.textContent = title;
+  titleElement.className = "vid-title";
 
+  // Create title text based on what's available
+  let titleText = title || "Untitled Video";
+
+  // Add type indicator if available
+  if (type) {
+    titleText = `${titleText} (${type})`;
+  }
+
+  titleElement.textContent = titleText;
   return titleElement;
 };
 
 export const buildVidDate = async (date) => {
   if (!date) return null;
-  const dateElement = document.createElement("div");
-  dateElement.id = "vid-date";
+
+  const dateElement = document.createElement("span");
+  dateElement.className = "vid-date";
+
   const dateObj = new Date(date);
   dateElement.textContent = dateObj.toLocaleDateString("en-US", {
     year: "numeric",
@@ -105,21 +106,57 @@ export const buildVidDate = async (date) => {
   return dateElement;
 };
 
-// export const buildVidElement = async (savePath) => {
-//   if (!savePath) return null;
+// Main function to build the complete video display from backend data
+export const buildCompleteVideoDisplay = async (backendData) => {
+  if (!backendData || !Array.isArray(backendData)) {
+    console.error("Invalid backend data provided");
+    return null;
+  }
 
-//   const vidElement = document.createElement("video");
-//   vidElement.id = "vid-element";
-//   vidElement.controls = true;
+  // Create main container for all videos
+  const mainContainer = document.createElement("div");
+  mainContainer.className = "video-display-container";
 
-//   const sourceElement = document.createElement("source");
-//   const fileName = savePath.split("/").pop();
-//   const vidPath = "/kcna-vids/" + fileName;
+  // Extract video items from the backend data structure
+  const videoItems = [];
 
-//   sourceElement.src = vidPath;
-//   sourceElement.type = "video/mp4";
+  for (let i = 0; i < backendData.length; i++) {
+    const dataGroup = backendData[i];
 
-//   vidElement.appendChild(sourceElement);
+    // Check if this group contains video data
+    if (dataGroup.dataType === "vids" || dataGroup.dataType === "watch") {
+      if (dataGroup.dataArray && Array.isArray(dataGroup.dataArray)) {
+        // Add all video items from this group
+        for (let j = 0; j < dataGroup.dataArray.length; j++) {
+          const videoItem = dataGroup.dataArray[j];
+          // Add a type indicator based on the dataType
+          videoItem.sourceType = dataGroup.dataType;
+          videoItems.push(videoItem);
+        }
+      }
+    }
+  }
 
-//   return vidElement;
-// };
+  if (videoItems.length === 0) {
+    console.warn("No video items found in backend data");
+    const noVideosMessage = document.createElement("p");
+    noVideosMessage.className = "no-videos-message";
+    noVideosMessage.textContent = "No videos available";
+    mainContainer.appendChild(noVideosMessage);
+    return mainContainer;
+  }
+
+  // Build the video display with all found video items
+  const videoDisplay = await buildVidDisplay(videoItems);
+
+  if (videoDisplay) {
+    mainContainer.appendChild(videoDisplay);
+  }
+
+  return mainContainer;
+};
+
+// Cleanup function to call when removing the video display
+export const cleanupVideoDisplay = () => {
+  cleanupAllHLSInstances();
+};

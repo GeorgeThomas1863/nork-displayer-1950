@@ -1,419 +1,267 @@
-// HLS Video Player - Vanilla JavaScript with Dynamic HTML Creation
-// Works with your backend data structure
+// hls-player.js
+// Simplified HLS player that creates just the video element and controls
+// Works with your collapse structure
 
-// Global variables
-let hls = null;
-let elements = {};
-let videoData = null;
+// Store HLS instances by video element ID
+const hlsInstances = new Map();
 
-// Initialize the player when DOM is loaded
-// document.addEventListener('DOMContentLoaded', () => {
-//     // Check if HLS.js is loaded
-//     if (!window.Hls) {
-//         showError('HLS.js library not found. Make sure to include it in your HTML.');
-//         return;
-//     }
-    
-//     createPlayerHLS();
-//     bindEvents();
-// });
+// Create a simple video player element with HLS support
+export const createHLSPlayer = async (videoData) => {
+  if (!videoData || !videoData.manifestPath) {
+    console.error("No manifest path provided for video");
+    return null;
+  }
 
-// Create all HTML elements dynamically
-export const createPlayerHLS = () => {
-    // Create main video container
-    const vidContainer = document.createElement('div');
-    vidContainer.className = 'vid-container';
+  // Generate unique ID for this player - simple timestamp is sufficient
+  const playerId = `hls-player-${Date.now()}`;
 
-    // Create title
-    const title = document.createElement('h1');
-    title.textContent = 'Video Player';
-    vidContainer.appendChild(title);
+  // Create container for the player
+  const playerContainer = document.createElement("div");
+  playerContainer.className = "hls-player-container";
+  playerContainer.id = playerId;
 
-    // Create video selector dropdown
-    const selectorGroup = document.createElement('div');
-    selectorGroup.className = 'input-group';
+  // Create video element
+  const video = document.createElement("video");
+  video.className = "hls-video-player";
+  video.controls = true;
+  video.id = `${playerId}-video`;
 
-    const videoSelect = document.createElement('select');
-    videoSelect.id = 'videoSelector';
-    videoSelect.onchange = loadSelectedVideo;
+  // Create status div for messages
+  const statusDiv = document.createElement("div");
+  statusDiv.className = "hls-status";
+  statusDiv.style.display = "none";
 
-    // Add default option
-    const defaultOption = document.createElement('option');
-    defaultOption.value = '';
-    defaultOption.textContent = 'Select a video...';
-    videoSelect.appendChild(defaultOption);
-    
-    elements.videoSelect = videoSelect;
+  // Create video info section
+  const infoDiv = document.createElement("div");
+  infoDiv.className = "hls-video-info";
 
-    const loadBtn = document.createElement('button');
-    loadBtn.className = 'btn btn-primary';
-    loadBtn.textContent = 'Load Video';
-    loadBtn.onclick = loadSelectedVideo;
+  // Add video information if available
+  let infoHtml = "";
+  if (videoData.title) {
+    infoHtml += `<div class="info-item"><strong>Title:</strong> ${videoData.title}</div>`;
+  }
+  if (videoData.type) {
+    infoHtml += `<div class="info-item"><strong>Type:</strong> ${videoData.type}</div>`;
+  }
+  if (videoData.vidData) {
+    if (videoData.vidData.vidSizeMB) {
+      infoHtml += `<div class="info-item"><strong>Size:</strong> ${videoData.vidData.vidSizeMB}MB</div>`;
+    }
+    if (videoData.vidData.totalChunks || videoData.vidData.downloadChunks) {
+      const chunks = videoData.vidData.totalChunks || videoData.vidData.downloadChunks;
+      infoHtml += `<div class="info-item"><strong>Chunks:</strong> ${chunks}</div>`;
+    }
+  }
+  if (videoData.streamData && videoData.streamData.length > 0) {
+    infoHtml += `<div class="info-item"><strong>Stream segments:</strong> ${videoData.streamData.length}</div>`;
+  }
 
-    selectorGroup.appendChild(videoSelect);
-    selectorGroup.appendChild(loadBtn);
-    vidContainer.appendChild(selectorGroup);
+  if (infoHtml) {
+    infoDiv.innerHTML = infoHtml;
+  }
 
-    // Create video element
-    const video = document.createElement('video');
-    video.id = 'videoPlayer';
-    video.className = 'video-player';
-    video.controls = true;
-    video.textContent = 'Your browser does not support the video tag.';
-    elements.video = video;
-    vidContainer.appendChild(video);
+  // Create quality selector
+  const qualityContainer = document.createElement("div");
+  qualityContainer.className = "hls-quality-selector";
+  qualityContainer.style.display = "none"; // Hide initially, show if multiple qualities available
 
-    // Create controls container
-    const controls = document.createElement('div');
-    controls.className = 'controls';
+  const qualityLabel = document.createElement("label");
+  qualityLabel.textContent = "Quality: ";
 
-    // Create control buttons
-    const playBtn = document.createElement('button');
-    playBtn.className = 'btn btn-secondary';
-    playBtn.textContent = 'Play';
-    playBtn.onclick = playVideo;
+  const qualitySelect = document.createElement("select");
+  qualitySelect.className = "hls-quality-select";
+  qualitySelect.id = `${playerId}-quality`;
 
-    const pauseBtn = document.createElement('button');
-    pauseBtn.className = 'btn btn-secondary';
-    pauseBtn.textContent = 'Pause';
-    pauseBtn.onclick = pauseVideo;
+  // Add auto option
+  const autoOption = document.createElement("option");
+  autoOption.value = "-1";
+  autoOption.textContent = "Auto";
+  qualitySelect.appendChild(autoOption);
 
-    const reloadBtn = document.createElement('button');
-    reloadBtn.className = 'btn btn-secondary';
-    reloadBtn.textContent = 'Reload';
-    reloadBtn.onclick = reloadVideo;
+  qualityContainer.appendChild(qualityLabel);
+  qualityContainer.appendChild(qualitySelect);
 
-    // Create quality selector
-    const qualitySelector = document.createElement('div');
-    qualitySelector.className = 'quality-selector';
+  // Assemble the player container
+  playerContainer.appendChild(statusDiv);
+  playerContainer.appendChild(video);
+  playerContainer.appendChild(qualityContainer);
+  if (infoHtml) {
+    playerContainer.appendChild(infoDiv);
+  }
 
-    const qualityLabel = document.createElement('label');
-    qualityLabel.textContent = 'Quality: ';
-    qualityLabel.htmlFor = 'qualitySelect';
+  // Initialize HLS after a short delay to ensure DOM is ready
+  setTimeout(() => {
+    const hlsConfig = {
+      videoElement: video,
+      manifestPath: videoData.manifestPath,
+      statusDiv: statusDiv,
+      qualitySelect: qualitySelect,
+      qualityContainer: qualityContainer,
+    };
+    initializeHLS(hlsConfig);
+  }, 100);
 
-    const qualitySelect = document.createElement('select');
-    qualitySelect.id = 'qualitySelect';
-    qualitySelect.onchange = changeQuality;
-    
-    const autoOption = document.createElement('option');
-    autoOption.value = '-1';
-    autoOption.textContent = 'Auto';
-    qualitySelect.appendChild(autoOption);
-    
-    elements.qualitySelect = qualitySelect;
-
-    qualitySelector.appendChild(qualityLabel);
-    qualitySelector.appendChild(qualitySelect);
-
-    // Append controls
-    controls.appendChild(playBtn);
-    controls.appendChild(pauseBtn);
-    controls.appendChild(reloadBtn);
-    controls.appendChild(qualitySelector);
-    videoContainer.appendChild(controls);
-
-    // Create status div
-    const statusDiv = document.createElement('div');
-    statusDiv.id = 'status';
-    statusDiv.className = 'status';
-    elements.statusDiv = statusDiv;
-    videoContainer.appendChild(statusDiv);
-
-    // Create video info container
-    const videoInfo = document.createElement('div');
-    videoInfo.id = 'videoInfo';
-    videoInfo.className = 'video-info';
-
-    const infoTitle = document.createElement('h3');
-    infoTitle.textContent = 'Video Information';
-
-    const infoContent = document.createElement('div');
-    infoContent.id = 'infoContent';
-    elements.infoContent = infoContent;
-
-    videoInfo.appendChild(infoTitle);
-    videoInfo.appendChild(infoContent);
-    videoContainer.appendChild(videoInfo);
-
-    elements.videoInfo = videoInfo;
-
-    // Append to body
-    document.body.appendChild(videoContainer);
+  return playerContainer;
 };
 
-// Function to populate video selector with your data
-const populateVideoSelector = (data) => {
-    videoData = data;
-    
-    data.forEach(dataGroup => {
-        if (dataGroup.dataType === 'vids' || dataGroup.dataType === 'watch') {
-            dataGroup.dataArray.forEach(videoItem => {
-                const option = document.createElement('option');
-                option.value = JSON.stringify(videoItem);
-                
-                // Create display text based on data type
-                let displayText = '';
-                if (dataGroup.dataType === 'vids') {
-                    displayText = `KCNA: ${videoItem.title}`;
-                } else if (dataGroup.dataType === 'watch') {
-                    displayText = `Watch: ${videoItem.title} (${videoItem.type})`;
-                }
-                
-                option.textContent = displayText;
-                elements.videoSelect.appendChild(option);
-            });
-        }
+// Initialize HLS for a specific video element
+const initializeHLS = (config) => {
+  const { videoElement, manifestPath, statusDiv, qualitySelect, qualityContainer } = config;
+
+  // Construct the full URL for the manifest
+  // Assuming your Express server serves the manifest files from the root
+  // Adjust this if your server structure is different
+  const manifestUrl = manifestPath.startsWith("http") ? manifestPath : `${window.location.origin}${manifestPath}`;
+
+  console.log("Loading HLS manifest from:", manifestUrl);
+
+  // Check if HLS.js is available
+  if (typeof Hls === "undefined") {
+    console.error("HLS.js library not loaded. Make sure to include it in your HTML.");
+    showStatus({ statusDiv, message: "HLS.js library not found", type: "error" });
+    return;
+  }
+
+  // Check for HLS support
+  if (Hls.isSupported()) {
+    // Clean up any existing HLS instance for this video
+    const existingHls = hlsInstances.get(videoElement.id);
+    if (existingHls) {
+      existingHls.destroy();
+      hlsInstances.delete(videoElement.id);
+    }
+
+    // Create new HLS instance
+    const hls = new Hls({
+      debug: false,
+      enableWorker: true,
+      lowLatencyMode: true,
+      backBufferLength: 90,
     });
-};
 
-// Bind events after elements are created
-const bindEvents = () => {
-    setupVideoEvents();
-};
+    // Store the instance
+    hlsInstances.set(videoElement.id, hls);
 
-// Check if HLS is supported
-const isHLSSupported = () => window.Hls && window.Hls.isSupported();
+    // Load the manifest
+    hls.loadSource(manifestUrl);
+    hls.attachMedia(videoElement);
 
-// Show status message
-const showStatus = (message, type = 'info') => {
-    elements.statusDiv.textContent = message;
-    elements.statusDiv.className = `status ${type}`;
-    elements.statusDiv.style.display = 'block';
-    
-    if (type !== 'error') {
-        setTimeout(() => {
-            elements.statusDiv.style.display = 'none';
-        }, 5000);
-    }
-};
-
-// Load selected video from dropdown
-const loadSelectedVideo = () => {
-    const selectedValue = elements.videoSelect.value;
-    if (!selectedValue) {
-        showStatus('Please select a video', 'error');
-        return;
-    }
-
-    try {
-        const videoItem = JSON.parse(selectedValue);
-        const manifestPath = videoItem.manifestPath;
-        
-        if (!manifestPath) {
-            showStatus('No manifest path found for this video', 'error');
-            return;
-        }
-
-        // Construct full URL - adjust this based on how your Express serves the manifest files
-        const manifestUrl = `${window.location.origin}${manifestPath}`;
-        loadHLSVideo(manifestUrl, videoItem);
-        
-    } catch (error) {
-        console.error('Error parsing video data:', error);
-        showStatus('Error loading video data', 'error');
-    }
-};
-
-// Main function to load HLS video
-const loadHLSVideo = (manifestUrl, videoItem = null) => {
-    // Clean up existing HLS instance
-    if (hls) {
-        hls.destroy();
-        hls = null;
-    }
-
-    // Clear quality selector
-    elements.qualitySelect.innerHTML = '';
-    const autoOption = document.createElement('option');
-    autoOption.value = '-1';
-    autoOption.textContent = 'Auto';
-    elements.qualitySelect.appendChild(autoOption);
-    
-    elements.videoInfo.style.display = 'none';
-
-    if (!isHLSSupported()) {
-        // Check if the browser supports HLS natively (Safari)
-        if (elements.video.canPlayType('application/vnd.apple.mpegurl')) {
-            showStatus('Using native HLS support', 'success');
-            elements.video.src = manifestUrl;
-        } else {
-            showStatus('HLS is not supported in this browser', 'error');
-            return;
-        }
-    } else {
-        // Use HLS.js
-        hls = new Hls({
-            debug: false,
-            enableWorker: true,
-            lowLatencyMode: true,
-            backBufferLength: 90
-        });
-
-        hls.loadSource(manifestUrl);
-        hls.attachMedia(elements.video);
-        setupHLSEvents();
-        
-        showStatus('Loading HLS video...', 'info');
-    }
-
-    // Update video info if we have video data
-    if (videoItem) {
-        updateVideoInfoFromData(videoItem);
-    }
-};
-
-// Setup HLS.js specific events
-const setupHLSEvents = () => {
+    // Set up HLS events
     hls.on(Hls.Events.MANIFEST_PARSED, (event, data) => {
-        showStatus(`Manifest loaded. Found ${data.levels.length} quality level(s)`, 'success');
-        
-        // Populate quality selector
-        data.levels.forEach((level, index) => {
-            const option = document.createElement('option');
-            option.value = index;
-            option.textContent = `${level.height}p (${Math.round(level.bitrate / 1000)}k)`;
-            elements.qualitySelect.appendChild(option);
-        });
+      console.log(`Manifest loaded for ${videoElement.id}. Found ${data.levels.length} quality level(s)`);
+
+      // Show quality selector if multiple levels available
+      if (data.levels.length > 1) {
+        // Clear existing options except Auto (first option)
+        const optionsToRemove = qualitySelect.options.length - 1;
+        for (let i = 0; i < optionsToRemove; i++) {
+          qualitySelect.remove(1); // Always remove index 1 since we're keeping index 0
+        }
+
+        // Add quality levels
+        for (let i = 0; i < data.levels.length; i++) {
+          const level = data.levels[i];
+          const option = document.createElement("option");
+          option.value = i.toString();
+          const height = level.height || "Unknown";
+          const bitrate = level.bitrate ? `${Math.round(level.bitrate / 1000)}k` : "";
+          option.textContent = `${height}p ${bitrate}`.trim();
+          qualitySelect.appendChild(option);
+        }
+
+        qualityContainer.style.display = "block";
+
+        // Handle quality change
+        qualitySelect.onchange = () => {
+          const selectedLevel = parseInt(qualitySelect.value);
+          hls.currentLevel = selectedLevel;
+          console.log(`Quality changed to level ${selectedLevel} for ${videoElement.id}`);
+        };
+      }
+
+      showStatus({ statusDiv, message: "Video ready", type: "success", autoHide: true });
     });
 
     hls.on(Hls.Events.ERROR, (event, data) => {
-        console.error('HLS Error:', data);
-        
-        if (data.fatal) {
-            switch (data.type) {
-                case Hls.ErrorTypes.NETWORK_ERROR:
-                    showStatus('Network error occurred. Trying to recover...', 'error');
-                    hls.startLoad();
-                    break;
-                case Hls.ErrorTypes.MEDIA_ERROR:
-                    showStatus('Media error occurred. Trying to recover...', 'error');
-                    hls.recoverMediaError();
-                    break;
-                default:
-                    showStatus(`Fatal error: ${data.details}`, 'error');
-                    hls.destroy();
-                    break;
-            }
-        } else {
-            console.warn('Non-fatal HLS error:', data.details);
+      console.error(`HLS Error for ${videoElement.id}:`, data);
+
+      if (data.fatal) {
+        switch (data.type) {
+          case Hls.ErrorTypes.NETWORK_ERROR:
+            showStatus({ statusDiv, message: "Network error - retrying...", type: "error" });
+            hls.startLoad();
+            break;
+          case Hls.ErrorTypes.MEDIA_ERROR:
+            showStatus({ statusDiv, message: "Media error - recovering...", type: "error" });
+            hls.recoverMediaError();
+            break;
+          default:
+            showStatus({ statusDiv, message: `Fatal error: ${data.details}`, type: "error" });
+            hls.destroy();
+            hlsInstances.delete(videoElement.id);
+            break;
         }
+      }
     });
 
-    hls.on(Hls.Events.LEVEL_SWITCHED, (event, data) => {
-        console.log(`Quality switched to level ${data.level}`);
+    // Video element events
+    videoElement.addEventListener("loadstart", () => {
+      showStatus({ statusDiv, message: "Loading video...", type: "info" });
     });
+
+    videoElement.addEventListener("waiting", () => {
+      showStatus({ statusDiv, message: "Buffering...", type: "info" });
+    });
+
+    videoElement.addEventListener("playing", () => {
+      statusDiv.style.display = "none";
+    });
+
+    videoElement.addEventListener("error", (e) => {
+      console.error(`Video error for ${videoElement.id}:`, e);
+      showStatus({ statusDiv, message: "Playback error", type: "error" });
+    });
+  } else if (videoElement.canPlayType("application/vnd.apple.mpegurl")) {
+    // Native HLS support (Safari)
+    console.log(`Using native HLS support for ${videoElement.id}`);
+    videoElement.src = manifestUrl;
+    showStatus({ statusDiv, message: "Using native HLS support", type: "info", autoHide: true });
+  } else {
+    showStatus({ statusDiv, message: "HLS not supported in this browser", type: "error" });
+    console.error("HLS is not supported in this browser");
+  }
 };
 
-// Setup video element events
-const setupVideoEvents = () => {
-    elements.video.addEventListener('loadstart', () => {
-        showStatus('Starting to load video...', 'info');
-    });
+// Show status messages
+const showStatus = (config) => {
+  const { statusDiv, message, type = "info", autoHide = false } = config;
 
-    elements.video.addEventListener('loadedmetadata', () => {
-        showStatus('Video metadata loaded', 'success');
-    });
+  if (!statusDiv) return;
 
-    elements.video.addEventListener('canplay', () => {
-        showStatus('Video ready to play', 'success');
-    });
+  statusDiv.textContent = message;
+  statusDiv.className = `hls-status hls-status-${type}`;
+  statusDiv.style.display = "block";
 
-    elements.video.addEventListener('error', (e) => {
-        console.error('Video error:', e);
-        showStatus('Video playback error occurred', 'error');
-    });
-
-    elements.video.addEventListener('waiting', () => {
-        showStatus('Buffering...', 'info');
-    });
-
-    elements.video.addEventListener('playing', () => {
-        elements.statusDiv.style.display = 'none';
-    });
+  if (autoHide && type !== "error") {
+    setTimeout(() => {
+      statusDiv.style.display = "none";
+    }, 3000);
+  }
 };
 
-// Update video information display from your data
-const updateVideoInfoFromData = (videoItem) => {
-    let infoHtml = `<strong>Title:</strong> ${videoItem.title}<br>`;
-    
-    if (videoItem.vidData) {
-        infoHtml += `<strong>Size:</strong> ${videoItem.vidData.vidSizeMB}MB<br>`;
-        if (videoItem.vidData.totalChunks) {
-            infoHtml += `<strong>Chunks:</strong> ${videoItem.vidData.totalChunks}<br>`;
-        }
-        if (videoItem.vidData.downloadChunks) {
-            infoHtml += `<strong>Chunks:</strong> ${videoItem.vidData.downloadChunks}<br>`;
-        }
-    }
-    
-    if (videoItem.date) {
-        const date = new Date(videoItem.date);
-        infoHtml += `<strong>Date:</strong> ${date.toLocaleDateString()}<br>`;
-    }
-    
-    if (videoItem.type) {
-        infoHtml += `<strong>Type:</strong> ${videoItem.type}<br>`;
-    }
-    
-    elements.infoContent.innerHTML = infoHtml;
-    elements.videoInfo.style.display = 'block';
+// Clean up all HLS instances (call this when leaving the page or cleaning up)
+export const cleanupAllHLSInstances = () => {
+  for (const [id, hls] of hlsInstances) {
+    hls.destroy();
+  }
+  hlsInstances.clear();
 };
 
-// Control functions
-const playVideo = () => {
-    elements.video.play().catch(error => {
-        console.error('Error playing video:', error);
-        showStatus('Error playing video', 'error');
-    });
-};
-
-const pauseVideo = () => {
-    elements.video.pause();
-};
-
-const reloadVideo = () => {
-    const selectedValue = elements.videoSelect.value;
-    if (selectedValue) {
-        loadSelectedVideo();
-    } else {
-        showStatus('No video selected to reload', 'error');
-    }
-};
-
-const changeQuality = () => {
-    if (!hls) return;
-    
-    const selectedLevel = parseInt(elements.qualitySelect.value);
-    hls.currentLevel = selectedLevel;
-    
-    if (selectedLevel === -1) {
-        console.log('Auto quality selection enabled');
-    } else {
-        console.log(`Manual quality changed to level ${selectedLevel}`);
-    }
-};
-
-// Export function for external use
-window.initVideoPlayer = (data) => {
-    if (elements.videoSelect) {
-        populateVideoSelector(data);
-    } else {
-        // If elements aren't ready yet, wait and try again
-        setTimeout(() => window.initVideoPlayer(data), 100);
-    }
-};
-
-// Utility function to show error
-const showError = (message) => {
-    const errorDiv = document.createElement('div');
-    errorDiv.style.cssText = `
-        background: #f8d7da;
-        color: #721c24;
-        padding: 15px;
-        border-radius: 4px;
-        margin: 20px;
-        border: 1px solid #f5c6cb;
-    `;
-    errorDiv.textContent = message;
-    document.body.appendChild(errorDiv);
+// Clean up a specific HLS instance
+export const cleanupHLSInstance = (videoElementId) => {
+  const hls = hlsInstances.get(videoElementId);
+  if (hls) {
+    hls.destroy();
+    hlsInstances.delete(videoElementId);
+  }
 };

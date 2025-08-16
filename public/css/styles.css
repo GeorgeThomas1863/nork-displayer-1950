@@ -766,146 +766,121 @@ h3 {
 
 /* VID STYLES FROM CLAUDE TO ADD */
 
-/* Main container for the video player */
-.video-player-element {
+/* vid-styles.css */
+/* HLS Video Player Styles */
+
+/* Main player container */
+.hls-player-container {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  background: #000;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Video element */
+.hls-video-player {
+  width: 100%;
+  height: auto;
+  max-height: 720px;
+  background-color: #000;
   border-radius: 8px;
-  overflow: hidden;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* The video element itself */
-.video-element {
-  width: 100%;
-  display: block;
-  max-height: 80vh;
-  background: #000;
-}
-
-/* Progress bar container */
-.video-player-progress-container {
-  width: 100%;
-  height: 6px;
-  background: rgba(255, 255, 255, 0.2);
-  cursor: pointer;
-  position: relative;
-  transition: height 0.2s ease;
-}
-
-.video-player-progress-container:hover {
-  height: 10px;
-}
-
-/* Progress bar fill */
-.video-player-progress-bar {
-  height: 100%;
-  background: linear-gradient(90deg, #ff0000, #ff4444);
-  width: 0%;
-  transition: width 0.1s linear;
-  position: relative;
-}
-
-.video-player-progress-bar::after {
-  content: "";
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 12px;
-  height: 12px;
-  background: #fff;
-  border-radius: 50%;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.video-player-progress-container:hover .video-player-progress-bar::after {
-  opacity: 1;
-}
-
-/* Time display */
-.video-player-time-display {
-  padding: 8px 12px;
-  color: #fff;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+/* Status messages */
+.hls-status {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
   font-size: 14px;
-  background: rgba(0, 0, 0, 0.8);
   text-align: center;
 }
 
-/* Collapse Container Styles */
-
-/* .collapse-container {
-  margin-bottom: 16px;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  overflow: hidden;
-  background: #fff;
+.hls-status-info {
+  background-color: #d1ecf1;
+  color: #0c5460;
+  border: 1px solid #bee5eb;
 }
 
-.collapse-header {
+.hls-status-success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.hls-status-error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+/* Quality selector */
+.hls-quality-selector {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
   display: flex;
   align-items: center;
-  padding: 16px;
-  cursor: pointer;
-  background: #f5f5f5;
-  transition: background-color 0.2s ease;
-  user-select: none;
+  gap: 10px;
 }
 
-.collapse-header:hover {
-  background: #ebebeb;
-}
-
-.collapse-arrow {
-  width: 0;
-  height: 0;
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-top: 10px solid #666;
-  margin-right: 12px;
-  transition: transform 0.3s ease;
-  transform-origin: center 40%;
-}
-
-.collapse-arrow.expanded {
-  transform: rotate(180deg);
-}
-
-.collapse-title {
-  flex: 1;
-  margin: 0;
-  font-size: 18px;
+.hls-quality-selector label {
   font-weight: 600;
-  color: #333;
+  color: #495057;
 }
 
-.collapse-title span {
-  font-weight: 400;
-  color: #666;
+.hls-quality-select {
+  padding: 5px 10px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  background-color: white;
+  cursor: pointer;
   font-size: 14px;
-  margin-left: 8px;
 }
 
-.collapse-content {
-  padding: 16px;
-  background: #fff;
-  max-height: 2000px;
-  overflow: hidden;
-  transition: max-height 0.3s ease, padding 0.3s ease, opacity 0.3s ease;
-  opacity: 1;
+.hls-quality-select:hover {
+  border-color: #80bdff;
 }
 
-.collapse-content.hidden {
-  max-height: 0;
-  padding: 0 16px;
-  opacity: 0;
-} */
+.hls-quality-select:focus {
+  outline: none;
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
 
-/* Video list styles */
+/* Video information display */
+.hls-video-info {
+  margin-top: 15px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  border-left: 4px solid #007bff;
+}
+
+.hls-video-info .info-item {
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #495057;
+}
+
+.hls-video-info .info-item:last-child {
+  margin-bottom: 0;
+}
+
+.hls-video-info strong {
+  color: #212529;
+  margin-right: 8px;
+}
+
+/* Video Display Container */
+.video-display-container {
+  width: 100%;
+  padding: 20px;
+}
+
+/* Video list */
 #vid-array-element {
   list-style: none;
   padding: 0;
@@ -914,151 +889,53 @@ h3 {
 
 .vid-list-item {
   margin-bottom: 20px;
-}
-
-.vid-list-item.wrapper {
-  padding: 0;
-}
-
-#vid-container {
-  padding: 20px;
-  background: #fafafa;
-}
-
-#vid-title {
-  margin: 0;
-  padding: 0;
-}
-
-#vid-date {
-  color: #666;
-  font-size: 14px;
-}
-
-/* Loading and error states */
-.video-loading {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 200px;
-  color: #666;
-}
-
-.video-error {
-  padding: 20px;
-  background: #fee;
-  color: #c00;
-  text-align: center;
-  border-radius: 4px;
-}
-
-/* Responsive design */
-/* @media (max-width: 768px) {
-  .video-player-element {
-    border-radius: 0;
-  }
-  
-  .collapse-header {
-    padding: 12px;
-  }
-  
-  .collapse-title {
-    font-size: 16px;
-  }
-  
-  .video-player-time-display {
-    font-size: 12px;
-    padding: 6px 10px;
-  }
-} */
-
-/* .video-player-progress-container {
-  width: 100%;
-  height: 10px;
-  background-color: #ddd;
-  cursor: pointer;
-  margin: 10px 0;
-}
-
-.video-player-progress-bar {
-  height: 100%;
-  background-color: #007bff;
-  width: 0%;
-  transition: width 0.1s;
-}
-
-.video-player-time-display {
-  font-family: monospace;
-  margin-top: 5px;
-} */
-
-/* .video-player-container {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-  font-family: Arial, sans-serif;
-}
-
-.video-player-video {
-  width: 100%;
-  height: auto;
+  background-color: white;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.video-player-progress-container {
-  width: 100%;
-  height: 20px;
-  background: #ddd;
-  margin-top: 10px;
-  position: relative;
-  cursor: pointer;
-  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
 
-.video-player-progress-container:hover {
-  background: #ccc;
-}
-
-.video-player-progress-bar {
-  height: 100%;
-  background: #007bff;
-  width: 0%;
-  border-radius: 10px;
-  transition: width 0.1s ease;
-}
-
-.video-player-time-display {
-  margin-top: 8px;
-  font-family: 'Courier New', monospace;
-  font-size: 14px;
-  color: #333;
-  text-align: center;
-}
-
-.video-player-controls {
-  margin-top: 10px;
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-}
-
-.video-player-btn {
-  padding: 8px 16px;
-  background: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
+/* Video title */
+.vid-title {
+  margin: 0;
+  padding: 15px 20px;
+  font-size: 18px;
+  color: #212529;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
   cursor: pointer;
+  user-select: none;
+}
+
+.vid-date-span {
   font-size: 14px;
+  color: #6c757d;
+  font-weight: normal;
+  margin-left: 10px;
 }
 
-.video-player-btn:hover {
-  background: #0056b3;
+/* No videos message */
+.no-videos-message {
+  text-align: center;
+  padding: 40px;
+  color: #6c757d;
+  font-size: 16px;
 }
 
-.video-player-btn:disabled {
-  background: #ccc;
-  cursor: not-allowed;
-} */
+/* Collapse container integration */
+.vid-element-collapse .collapse-header {
+  background-color: #f8f9fa;
+  transition: background-color 0.2s;
+}
+
+.vid-element-collapse .collapse-header:hover {
+  background-color: #e9ecef;
+}
+
+.vid-element-collapse .collapse-content {
+  padding: 0;
+}
+
+.vid-element-collapse .collapse-content.hidden {
+  display: none;
+}
