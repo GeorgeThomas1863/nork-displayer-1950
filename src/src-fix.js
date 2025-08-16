@@ -134,7 +134,7 @@ export const buildManifestPath = async (dataObj, dataType) => {
       return `${vidPath}${vidName}_manifest.m3u8`;
 
     case "watch":
-      const watchName = dataObj.watchName;
+      const watchName = dataObj.vidName;
       return `${watchPath}${watchName}_manifest.m3u8`;
   }
 };
