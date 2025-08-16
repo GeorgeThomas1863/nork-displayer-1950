@@ -27,16 +27,13 @@ export const getStreamData = async (inputArray, dataType) => {
 
       //check if manifest exists, skip if it does
       const manifestPath = vidSaveFolder + "manifest.m3u8";
-      // console.log("MANIFEST PATH");
-      // console.log(manifestPath);
-      const testData = fs.existsSync(manifestPath);
-      console.log("TEST DATA");
-      console.log(testData);
+      console.log("MANIFEST PATH");
+      console.log(manifestPath);
+      if (await fsPromises.readdir(manifestPath)) continue;
 
       //BUILD OUT HLS MANIFEST AND SAVE TO FS
       const manifest = await buildManifest(streamData);
-      console.log("MANIFEST");
-      console.log(manifest);
+
       if (!manifest) continue;
       await fsPromises.writeFile(manifestPath, manifest);
     } catch (e) {
@@ -48,9 +45,6 @@ export const getStreamData = async (inputArray, dataType) => {
 };
 
 export const buildManifest = async (inputArray) => {
-  console.log("BUILD MANIFEST INPUT ARRAY");
-  console.log(inputArray);
-
   if (!inputArray || !inputArray.length) return null;
 
   let manifest = "#EXTM3U\n";
