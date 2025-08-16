@@ -29,7 +29,9 @@ export const getStreamData = async (inputArray, dataType) => {
       const manifestPath = vidSaveFolder + "manifest.m3u8";
       // console.log("MANIFEST PATH");
       // console.log(manifestPath);
-      if (fs.existsSync(manifestPath)) continue;
+      const testData = fs.existsSync(manifestPath);
+      console.log("TEST DATA");
+      console.log(testData);
 
       //BUILD OUT HLS MANIFEST AND SAVE TO FS
       const manifest = await buildManifest(streamData);
