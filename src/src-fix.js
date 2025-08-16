@@ -142,9 +142,12 @@ export const buildManifestPath = async (dataObj, dataType) => {
 export const buildManifest = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
 
+  const maxDuration = await getMaxDuration(inputArray);
+  if (!maxDuration) return null;
+
   let manifest = "#EXTM3U\n";
   manifest += "#EXT-X-VERSION:3\n";
-  manifest += "#EXT-X-TARGETDURATION:40\n";
+  manifest += `#EXT-X-TARGETDURATION:${maxDuration}\n`;
   manifest += "#EXT-X-MEDIA-SEQUENCE:0\n";
 
   for (let i = 0; i < inputArray.length; i++) {
@@ -158,6 +161,24 @@ export const buildManifest = async (inputArray) => {
 
   manifest += "#EXT-X-ENDLIST\n";
   return manifest;
+};
+
+export const getMaxDuration = async (inputArray) => {
+  let maxDuration = 0;
+  for (let i = 0; i < inputArray.length; i++) {
+    const { duration } = inputArray[i];
+    if (duration < maxDuration) continue;
+    maxDuration = duration;
+  }
+
+  //throw error if cant find
+  if (!maxDuration) {
+    const error = new Error("NO MAX DURATION FOUND");
+    error.savePath = inputArray;
+    throw error;
+  }
+
+  return Math.ceil(maxDuration);
 };
 
 //-----------------------------------------
