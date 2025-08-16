@@ -768,6 +768,8 @@ h3 {
 
 /* vid-styles.css */
 /* HLS Video Player Styles */
+/* vid-styles.css */
+/* HLS Video Player Styles */
 
 /* Main player container */
 .hls-player-container {
@@ -815,64 +817,7 @@ h3 {
   border: 1px solid #f5c6cb;
 }
 
-/* Quality selector */
-.hls-quality-selector {
-  margin-top: 10px;
-  padding: 10px;
-  background-color: #f8f9fa;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.hls-quality-selector label {
-  font-weight: 600;
-  color: #495057;
-}
-
-.hls-quality-select {
-  padding: 5px 10px;
-  border: 1px solid #ced4da;
-  border-radius: 4px;
-  background-color: white;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-.hls-quality-select:hover {
-  border-color: #80bdff;
-}
-
-.hls-quality-select:focus {
-  outline: none;
-  border-color: #80bdff;
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-}
-
-/* Video information display */
-.hls-video-info {
-  margin-top: 15px;
-  padding: 15px;
-  background-color: #f8f9fa;
-  border-radius: 4px;
-  border-left: 4px solid #007bff;
-}
-
-.hls-video-info .info-item {
-  margin-bottom: 8px;
-  font-size: 14px;
-  color: #495057;
-}
-
-.hls-video-info .info-item:last-child {
-  margin-bottom: 0;
-}
-
-.hls-video-info strong {
-  color: #212529;
-  margin-right: 8px;
-}
+/* Video Display Container */
 
 /* Video Display Container */
 .video-display-container {

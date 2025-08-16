@@ -1,13 +1,12 @@
 // hls-player.js
-// Simplified HLS player that creates just the video element and controls
-// Works with your collapse structure
+// Simplified HLS player that just handles video playback
 
 // Store HLS instances by video element ID
 const hlsInstances = new Map();
 
 // Create a simple video player element with HLS support
-export const createHLSPlayer = async (videoData) => {
-  if (!videoData || !videoData.manifestPath) {
+export const createHLSPlayer = async (manifestPath) => {
+  if (!manifestPath) {
     console.error("No manifest path provided for video");
     return null;
   }
@@ -31,74 +30,17 @@ export const createHLSPlayer = async (videoData) => {
   statusDiv.className = "hls-status";
   statusDiv.style.display = "none";
 
-  // Create video info section
-  const infoDiv = document.createElement("div");
-  infoDiv.className = "hls-video-info";
-
-  // Add video information if available
-  let infoHtml = "";
-  if (videoData.title) {
-    infoHtml += `<div class="info-item"><strong>Title:</strong> ${videoData.title}</div>`;
-  }
-  if (videoData.type) {
-    infoHtml += `<div class="info-item"><strong>Type:</strong> ${videoData.type}</div>`;
-  }
-  if (videoData.vidData) {
-    if (videoData.vidData.vidSizeMB) {
-      infoHtml += `<div class="info-item"><strong>Size:</strong> ${videoData.vidData.vidSizeMB}MB</div>`;
-    }
-    if (videoData.vidData.totalChunks || videoData.vidData.downloadChunks) {
-      const chunks = videoData.vidData.totalChunks || videoData.vidData.downloadChunks;
-      infoHtml += `<div class="info-item"><strong>Chunks:</strong> ${chunks}</div>`;
-    }
-  }
-  if (videoData.streamData && videoData.streamData.length > 0) {
-    infoHtml += `<div class="info-item"><strong>Stream segments:</strong> ${videoData.streamData.length}</div>`;
-  }
-
-  if (infoHtml) {
-    infoDiv.innerHTML = infoHtml;
-  }
-
-  // Create quality selector
-  const qualityContainer = document.createElement("div");
-  qualityContainer.className = "hls-quality-selector";
-  qualityContainer.style.display = "none"; // Hide initially, show if multiple qualities available
-
-  const qualityLabel = document.createElement("label");
-  qualityLabel.textContent = "Quality: ";
-
-  const qualitySelect = document.createElement("select");
-  qualitySelect.className = "hls-quality-select";
-  qualitySelect.id = `${playerId}-quality`;
-
-  // Add auto option
-  const autoOption = document.createElement("option");
-  autoOption.value = "-1";
-  autoOption.textContent = "Auto";
-  qualitySelect.appendChild(autoOption);
-
-  qualityContainer.appendChild(qualityLabel);
-  qualityContainer.appendChild(qualitySelect);
-
   // Assemble the player container
   playerContainer.appendChild(statusDiv);
   playerContainer.appendChild(video);
-  playerContainer.appendChild(qualityContainer);
-  if (infoHtml) {
-    playerContainer.appendChild(infoDiv);
-  }
 
   // Initialize HLS after a short delay to ensure DOM is ready
   setTimeout(() => {
-    const hlsConfig = {
+    initializeHLS({
       videoElement: video,
-      manifestPath: videoData.manifestPath,
+      manifestPath: manifestPath,
       statusDiv: statusDiv,
-      qualitySelect: qualitySelect,
-      qualityContainer: qualityContainer,
-    };
-    initializeHLS(hlsConfig);
+    });
   }, 100);
 
   return playerContainer;
@@ -106,7 +48,7 @@ export const createHLSPlayer = async (videoData) => {
 
 // Initialize HLS for a specific video element
 const initializeHLS = (config) => {
-  const { videoElement, manifestPath, statusDiv, qualitySelect, qualityContainer } = config;
+  const { videoElement, manifestPath, statusDiv } = config;
 
   // Construct the full URL for the manifest
   // Assuming your Express server serves the manifest files from the root
@@ -150,34 +92,8 @@ const initializeHLS = (config) => {
     hls.on(Hls.Events.MANIFEST_PARSED, (event, data) => {
       console.log(`Manifest loaded for ${videoElement.id}. Found ${data.levels.length} quality level(s)`);
 
-      // Show quality selector if multiple levels available
-      if (data.levels.length > 1) {
-        // Clear existing options except Auto (first option)
-        const optionsToRemove = qualitySelect.options.length - 1;
-        for (let i = 0; i < optionsToRemove; i++) {
-          qualitySelect.remove(1); // Always remove index 1 since we're keeping index 0
-        }
-
-        // Add quality levels
-        for (let i = 0; i < data.levels.length; i++) {
-          const level = data.levels[i];
-          const option = document.createElement("option");
-          option.value = i.toString();
-          const height = level.height || "Unknown";
-          const bitrate = level.bitrate ? `${Math.round(level.bitrate / 1000)}k` : "";
-          option.textContent = `${height}p ${bitrate}`.trim();
-          qualitySelect.appendChild(option);
-        }
-
-        qualityContainer.style.display = "block";
-
-        // Handle quality change
-        qualitySelect.onchange = () => {
-          const selectedLevel = parseInt(qualitySelect.value);
-          hls.currentLevel = selectedLevel;
-          console.log(`Quality changed to level ${selectedLevel} for ${videoElement.id}`);
-        };
-      }
+      // Auto-select best quality
+      hls.currentLevel = -1; // -1 means auto
 
       showStatus({ statusDiv, message: "Video ready", type: "success", autoHide: true });
     });

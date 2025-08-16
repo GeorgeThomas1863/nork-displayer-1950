@@ -34,20 +34,17 @@ export const buildVidDisplay = async (inputArray) => {
 
 export const buildVidListItem = async (inputObj, isFirst) => {
   if (!inputObj || !inputObj.manifestPath) {
-    console.log("Video item missing manifestPath:", inputObj);
+    console.warn("Video item missing manifestPath:", inputObj);
     return null;
   }
 
-  console.log("BUILDING VID LIST ITEM");
-  console.log(inputObj);
-
-  const { title, date, type } = inputObj;
+  const { title, date, manifestPath } = inputObj;
 
   const vidListItem = document.createElement("li");
   vidListItem.className = "vid-list-item wrapper";
 
-  // Create the HLS video player element
-  const vidPlayerElement = await createHLSPlayer(inputObj);
+  // Create the HLS video player element - only pass the manifest path
+  const vidPlayerElement = await createHLSPlayer(manifestPath);
 
   if (!vidPlayerElement) {
     console.error("Failed to create video player for:", title);
@@ -55,7 +52,7 @@ export const buildVidListItem = async (inputObj, isFirst) => {
   }
 
   // Build title element with date
-  const titleElement = await buildVidTitle(title, type);
+  const titleElement = await buildVidTitle(title);
   const dateElement = await buildVidDate(date);
 
   // Combine title and date
@@ -77,28 +74,19 @@ export const buildVidListItem = async (inputObj, isFirst) => {
   return vidListItem;
 };
 
-export const buildVidTitle = async (title, type) => {
+export const buildVidTitle = async (title) => {
+  if (!title) return null;
   const titleElement = document.createElement("h2");
-  titleElement.className = "vid-title";
+  titleElement.id = "vid-title";
+  titleElement.textContent = title;
 
-  // Create title text based on what's available
-  let titleText = title || "Untitled Video";
-
-  // Add type indicator if available
-  if (type) {
-    titleText = `${titleText} (${type})`;
-  }
-
-  titleElement.textContent = titleText;
   return titleElement;
 };
 
 export const buildVidDate = async (date) => {
   if (!date) return null;
-
-  const dateElement = document.createElement("span");
-  dateElement.className = "vid-date";
-
+  const dateElement = document.createElement("div");
+  dateElement.id = "vid-date";
   const dateObj = new Date(date);
   dateElement.textContent = dateObj.toLocaleDateString("en-US", {
     year: "numeric",
@@ -110,54 +98,54 @@ export const buildVidDate = async (date) => {
 };
 
 // Main function to build the complete video display from backend data
-export const buildCompleteVideoDisplay = async (backendData) => {
-  if (!backendData || !Array.isArray(backendData)) {
-    console.error("Invalid backend data provided");
-    return null;
-  }
+// export const buildCompleteVideoDisplay = async (backendData) => {
+//   if (!backendData || !Array.isArray(backendData)) {
+//     console.error("Invalid backend data provided");
+//     return null;
+//   }
 
-  // Create main container for all videos
-  const mainContainer = document.createElement("div");
-  mainContainer.className = "video-display-container";
+//   // Create main container for all videos
+//   const mainContainer = document.createElement("div");
+//   mainContainer.className = "video-display-container";
 
-  // Extract video items from the backend data structure
-  const videoItems = [];
+//   // Extract video items from the backend data structure
+//   const videoItems = [];
 
-  for (let i = 0; i < backendData.length; i++) {
-    const dataGroup = backendData[i];
+//   for (let i = 0; i < backendData.length; i++) {
+//     const dataGroup = backendData[i];
 
-    // Check if this group contains video data
-    if (dataGroup.dataType === "vids" || dataGroup.dataType === "watch") {
-      if (dataGroup.dataArray && Array.isArray(dataGroup.dataArray)) {
-        // Add all video items from this group
-        for (let j = 0; j < dataGroup.dataArray.length; j++) {
-          const videoItem = dataGroup.dataArray[j];
-          // Add a type indicator based on the dataType
-          videoItem.sourceType = dataGroup.dataType;
-          videoItems.push(videoItem);
-        }
-      }
-    }
-  }
+//     // Check if this group contains video data
+//     if (dataGroup.dataType === "vids" || dataGroup.dataType === "watch") {
+//       if (dataGroup.dataArray && Array.isArray(dataGroup.dataArray)) {
+//         // Add all video items from this group
+//         for (let j = 0; j < dataGroup.dataArray.length; j++) {
+//           const videoItem = dataGroup.dataArray[j];
+//           // Add a type indicator based on the dataType
+//           videoItem.sourceType = dataGroup.dataType;
+//           videoItems.push(videoItem);
+//         }
+//       }
+//     }
+//   }
 
-  if (videoItems.length === 0) {
-    console.warn("No video items found in backend data");
-    const noVideosMessage = document.createElement("p");
-    noVideosMessage.className = "no-videos-message";
-    noVideosMessage.textContent = "No videos available";
-    mainContainer.appendChild(noVideosMessage);
-    return mainContainer;
-  }
+//   if (videoItems.length === 0) {
+//     console.warn("No video items found in backend data");
+//     const noVideosMessage = document.createElement("p");
+//     noVideosMessage.className = "no-videos-message";
+//     noVideosMessage.textContent = "No videos available";
+//     mainContainer.appendChild(noVideosMessage);
+//     return mainContainer;
+//   }
 
-  // Build the video display with all found video items
-  const videoDisplay = await buildVidDisplay(videoItems);
+//   // Build the video display with all found video items
+//   const videoDisplay = await buildVidDisplay(videoItems);
 
-  if (videoDisplay) {
-    mainContainer.appendChild(videoDisplay);
-  }
+//   if (videoDisplay) {
+//     mainContainer.appendChild(videoDisplay);
+//   }
 
-  return mainContainer;
-};
+//   return mainContainer;
+// };
 
 // Cleanup function to call when removing the video display
 export const cleanupVideoDisplay = () => {
