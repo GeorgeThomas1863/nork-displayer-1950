@@ -23,13 +23,17 @@ export const getStreamData = async (inputArray, dataType) => {
 
       //MIGHT NOT NEED
       dataObj.streamData = streamData;
+
+      const manifestPath = await buildManifestPath(dataObj, dataType);
+      dataObj.manifestPath = manifestPath;
+
+      //add to return array HERE
       dataReturnArray.push(dataObj);
 
       //check if manifest exists, skip if it does
-      const manifestPath = vidSaveFolder + "manifest.m3u8";
       if (await fsPromises.stat(manifestPath)) continue;
 
-      //BUILD OUT HLS MANIFEST AND SAVE TO FS
+      //BUILD HLS MANIFEST AND SAVE TO FS
       console.log("BUILDING MANIFEST");
       console.log(manifestPath);
       const manifest = await buildManifest(streamData);
@@ -42,27 +46,6 @@ export const getStreamData = async (inputArray, dataType) => {
     }
   }
   return dataReturnArray;
-};
-
-export const buildManifest = async (inputArray) => {
-  if (!inputArray || !inputArray.length) return null;
-
-  let manifest = "#EXTM3U\n";
-  manifest += "#EXT-X-VERSION:3\n";
-  manifest += "#EXT-X-TARGETDURATION:40\n";
-  manifest += "#EXT-X-MEDIA-SEQUENCE:0\n";
-
-  for (let i = 0; i < inputArray.length; i++) {
-    const chunkObj = inputArray[i];
-    const { chunkPath, duration } = chunkObj;
-
-    manifest += `#EXTINF:${duration.toFixed(2)},\n`;
-    // Convert file path to URL
-    manifest += `${chunkPath}\n`;
-  }
-
-  manifest += "#EXT-X-ENDLIST\n";
-  return manifest;
 };
 
 //used different fucking vidSaveFolder format for watch, fixing here
@@ -139,6 +122,42 @@ export const parseChunkName = async (inputName) => {
   if (!inputName.toLowerCase().endsWith(".mp4") || !inputName.toLowerCase().startsWith("chunk_")) return null;
 
   return inputName;
+};
+
+export const buildManifestPath = async (dataObj, dataType) => {
+  if (!dataObj || !dataType) return null;
+  const { vidPath, watchPath } = CONFIG;
+
+  switch (dataType) {
+    case "vids":
+      const vidName = dataObj.vidData.vidName;
+      return `${vidPath}${vidName}_manifest.m3u8`;
+
+    case "watch":
+      const watchName = dataObj.watchName;
+      return `${watchPath}${watchName}_manifest.m3u8`;
+  }
+};
+
+export const buildManifest = async (inputArray) => {
+  if (!inputArray || !inputArray.length) return null;
+
+  let manifest = "#EXTM3U\n";
+  manifest += "#EXT-X-VERSION:3\n";
+  manifest += "#EXT-X-TARGETDURATION:40\n";
+  manifest += "#EXT-X-MEDIA-SEQUENCE:0\n";
+
+  for (let i = 0; i < inputArray.length; i++) {
+    const chunkObj = inputArray[i];
+    const { chunkPath, duration } = chunkObj;
+
+    manifest += `#EXTINF:${duration.toFixed(2)},\n`;
+    // Convert file path to URL
+    manifest += `${chunkPath}\n`;
+  }
+
+  manifest += "#EXT-X-ENDLIST\n";
+  return manifest;
 };
 
 //-----------------------------------------
