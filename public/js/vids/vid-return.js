@@ -38,6 +38,9 @@ export const buildVidListItem = async (inputObj, isFirst) => {
     return null;
   }
 
+  console.log("BUILDING VID LIST ITEM");
+  console.log(inputObj);
+
   const { title, date, type } = inputObj;
 
   const vidListItem = document.createElement("li");

@@ -34,8 +34,8 @@ export const getStreamData = async (inputArray, dataType) => {
       if (await checkFileExists(manifestPath)) continue;
 
       //BUILD HLS MANIFEST AND SAVE TO FS
-      console.log("BUILDING MANIFEST");
-      console.log(manifestPath);
+      // console.log("BUILDING MANIFEST");
+      // console.log(manifestPath);
       const manifest = await buildManifest(streamData);
       if (!manifest) continue;
 
