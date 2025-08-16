@@ -30,8 +30,8 @@ export const getStreamData = async (inputArray, dataType) => {
       //add to return array HERE
       dataReturnArray.push(dataObj);
 
-      //check if manifest exists, skip if it does
-      if (await fsPromises.stat(manifestPath)) continue;
+      //custom function to check if file exists, returns null if it doesnt
+      if (await checkFileExists(manifestPath)) continue;
 
       //BUILD HLS MANIFEST AND SAVE TO FS
       console.log("BUILDING MANIFEST");
@@ -179,6 +179,17 @@ export const getMaxDuration = async (inputArray) => {
   }
 
   return Math.ceil(maxDuration);
+};
+
+//r slur level of unnecessary, fixes async throwing error rather than just returning null
+export const checkFileExists = async (inputPath) => {
+  if (!inputPath) return null;
+
+  try {
+    return await fsPromises.stat(inputPath);
+  } catch {
+    return null;
+  }
 };
 
 //-----------------------------------------
