@@ -1,4 +1,4 @@
-import { findChunkForTime, formatTime } from "./vid-builder.js";
+import { findChunkForTime, formatTime } from "../OLD-vid-builder.js";
 
 // ===========================
 // PLAYER INITIALIZATION

@@ -1,4 +1,4 @@
-import { buildChunkedVideo } from "../util/vid-builder.js";
+import { buildChunkedVideo } from "../util/OLD_VID_FAILS/OLD-vid-builder.js";
 import { buildCollapseContainer, defineCollapseItems } from "../util/collapse.js";
 
 //VID PAGE DISPLAY
