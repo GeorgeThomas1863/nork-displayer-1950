@@ -15,21 +15,27 @@ export const buildVidDisplay = async (inputArray) => {
   const collapseArray = [];
 
   for (let i = 0; i < inputArray.length; i++) {
-    const vidListItem = await buildVidListItem(inputArray[i], isFirst);
-    if (!vidListItem) continue;
-    vidArrayElement.appendChild(vidListItem);
+    try {
+      const vidListItem = await buildVidListItem(inputArray[i], isFirst);
+      if (!vidListItem) continue;
+      vidArrayElement.appendChild(vidListItem);
 
-    // Store the collapse components for group functionality
-    const collapseItem = vidListItem.querySelector(".collapse-container");
-    if (collapseItem) collapseArray.push(collapseItem);
+      // Store the collapse components for group functionality
+      const collapseItem = vidListItem.querySelector(".collapse-container");
+      if (collapseItem) collapseArray.push(collapseItem);
 
-    isFirst = false;
+      isFirst = false;
+
+      // Set up the collapse group behavior
+      await defineCollapseItems(collapseArray);
+
+      return vidArrayElement;
+    } catch (e) {
+      console.log("VID BUILD FUCKED, ERROR MESSAGE: ", e.message);
+      console.log("FUNCTION: ", e.function);
+      console.dir("ERROR INPUT OBJ: ", e.inputObj);
+    }
   }
-
-  // Set up the collapse group behavior
-  await defineCollapseItems(collapseArray);
-
-  return vidArrayElement;
 };
 
 export const buildVidListItem = async (inputObj, isFirst) => {

@@ -1,5 +1,4 @@
-// hls-player.js
-// Simplified HLS player that just handles video playback
+import Hls from "hls.js";
 
 // Store HLS instances by video element ID
 const hlsInstances = new Map();
@@ -63,91 +62,97 @@ export const startHLS = async (inputObj) => {
   // }
 
   // Check for HLS support
-  if (Hls.isSupported()) {
-    // Clean up any existing HLS instance for this video
-    const existingHls = hlsInstances.get(videoElement.id);
-    if (existingHls) {
-      existingHls.destroy();
-      hlsInstances.delete(videoElement.id);
-    }
-
-    // Create new HLS instance
-    const hls = new Hls({
-      debug: false,
-      enableWorker: true,
-      lowLatencyMode: true,
-      backBufferLength: 90,
-    });
-
-    // Store the instance
-    hlsInstances.set(videoElement.id, hls);
-
-    // Load the manifest
-    hls.loadSource(manifestUrl);
-    hls.attachMedia(videoElement);
-
-    // Set up HLS events
-    hls.on(Hls.Events.MANIFEST_PARSED, (event, data) => {
-      console.log(`Manifest loaded for ${videoElement.id}. Found ${data.levels.length} quality level(s)`);
-
-      // Auto-select best quality
-      hls.currentLevel = -1; // -1 means auto
-
-      showStatus({ statusDiv, message: "Video ready", type: "success", autoHide: true });
-    });
-
-    hls.on(Hls.Events.ERROR, (event, data) => {
-      console.error(`HLS Error for ${videoElement.id}:`, data);
-
-      if (data.fatal) {
-        switch (data.type) {
-          case Hls.ErrorTypes.NETWORK_ERROR:
-            showStatus({ statusDiv, message: "Network error - retrying...", type: "error" });
-            hls.startLoad();
-            break;
-          case Hls.ErrorTypes.MEDIA_ERROR:
-            showStatus({ statusDiv, message: "Media error - recovering...", type: "error" });
-            hls.recoverMediaError();
-            break;
-          default:
-            showStatus({ statusDiv, message: `Fatal error: ${data.details}`, type: "error" });
-            hls.destroy();
-            hlsInstances.delete(videoElement.id);
-            break;
-        }
-      }
-    });
-
-    // Video element events
-    videoElement.addEventListener("loadstart", () => {
-      showStatus({ statusDiv, message: "Loading video...", type: "info" });
-    });
-
-    videoElement.addEventListener("waiting", () => {
-      showStatus({ statusDiv, message: "Buffering...", type: "info" });
-    });
-
-    videoElement.addEventListener("playing", () => {
-      statusDiv.style.display = "none";
-    });
-
-    videoElement.addEventListener("error", (e) => {
-      console.error(`Video error for ${videoElement.id}:`, e);
-      showStatus({ statusDiv, message: "Playback error", type: "error" });
-    });
-  } else if (videoElement.canPlayType("application/vnd.apple.mpegurl")) {
-    // Native HLS support (Safari)
-    console.log(`Using native HLS support for ${videoElement.id}`);
-    videoElement.src = manifestUrl;
-    showStatus({ statusDiv, message: "Using native HLS support", type: "info", autoHide: true });
-  } else {
-    showStatus({ statusDiv, message: "HLS not supported in this browser", type: "error" });
-    console.error("HLS is not supported in this browser");
+  if (!Hls.isSupported()) {
+    const error = new Error("HLS is not supported in this browser");
+    error.function = "startHLS";
+    error.inputObj = inputObj;
+    throw error;
   }
+
+  // Clean up any existing HLS instance for this video
+  const existingHls = hlsInstances.get(videoElement.id);
+  if (existingHls) {
+    existingHls.destroy();
+    hlsInstances.delete(videoElement.id);
+  }
+
+  // Create new HLS instance
+  const hls = new Hls({
+    debug: false,
+    enableWorker: true,
+    lowLatencyMode: true,
+    backBufferLength: 90,
+  });
+
+  // Store the instance
+  hlsInstances.set(videoElement.id, hls);
+
+  // Load the manifest
+  hls.loadSource(manifestPath);
+  hls.attachMedia(videoElement);
+
+  // Set up HLS events
+  hls.on(Hls.Events.MANIFEST_PARSED, (event, data) => {
+    console.log(`Manifest loaded for ${videoElement.id}. Found ${data.levels.length} quality level(s)`);
+
+    // Auto-select best quality
+    hls.currentLevel = -1; // -1 means auto
+
+    showStatus({ statusDiv, message: "Video ready", type: "success", autoHide: true });
+  });
+
+  hls.on(Hls.Events.ERROR, (event, data) => {
+    console.error(`HLS Error for ${videoElement.id}:`, data);
+
+    if (data.fatal) {
+      switch (data.type) {
+        case Hls.ErrorTypes.NETWORK_ERROR:
+          showStatus({ statusDiv, message: "Network error - retrying...", type: "error" });
+          hls.startLoad();
+          break;
+        case Hls.ErrorTypes.MEDIA_ERROR:
+          showStatus({ statusDiv, message: "Media error - recovering...", type: "error" });
+          hls.recoverMediaError();
+          break;
+        default:
+          showStatus({ statusDiv, message: `Fatal error: ${data.details}`, type: "error" });
+          hls.destroy();
+          hlsInstances.delete(videoElement.id);
+          break;
+      }
+    }
+  });
+
+  // Video element events
+  videoElement.addEventListener("loadstart", () => {
+    showStatus({ statusDiv, message: "Loading video...", type: "info" });
+  });
+
+  videoElement.addEventListener("waiting", () => {
+    showStatus({ statusDiv, message: "Buffering...", type: "info" });
+  });
+
+  videoElement.addEventListener("playing", () => {
+    statusDiv.style.display = "none";
+  });
+
+  videoElement.addEventListener("error", (e) => {
+    console.error(`Video error for ${videoElement.id}:`, e);
+    showStatus({ statusDiv, message: "Playback error", type: "error" });
+  });
 };
+// if (videoElement.canPlayType("application/vnd.apple.mpegurl")) {
+//   // Native HLS support (Safari)
+//   console.log(`Using native HLS support for ${videoElement.id}`);
+//   videoElement.src = manifestUrl;
+//   showStatus({ statusDiv, message: "Using native HLS support", type: "info", autoHide: true });
+// } else {
+//   showStatus({ statusDiv, message: "HLS not supported in this browser", type: "error" });
+//   console.error("HLS is not supported in this browser");
+// }
 
 // Show status messages
-export const showStatus = (inputObj) => {
+export const showStatus = async (inputObj) => {
   const { statusDiv, message, type = "info", autoHide = false } = inputObj;
 
   if (!statusDiv) return;
@@ -164,7 +169,7 @@ export const showStatus = (inputObj) => {
 };
 
 // Clean up all HLS instances (call this when leaving the page or cleaning up)
-export const cleanupAllHLSInstances = () => {
+export const cleanupAllHLSInstances = async () => {
   for (const [id, hls] of hlsInstances) {
     hls.destroy();
   }
@@ -172,7 +177,7 @@ export const cleanupAllHLSInstances = () => {
 };
 
 // Clean up a specific HLS instance
-export const cleanupHLSInstance = (videoElementId) => {
+export const cleanupHLSInstance = async (videoElementId) => {
   const hls = hlsInstances.get(videoElementId);
   if (hls) {
     hls.destroy();
