@@ -1,4 +1,4 @@
-import Hls from "hls.js";
+import Hls from "/hls.js";
 
 // Store HLS instances by video element ID
 const hlsInstances = new Map();
