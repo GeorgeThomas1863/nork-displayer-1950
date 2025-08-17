@@ -1,10 +1,11 @@
-import d from "../util/define-things.js";
+// import d from "../util/define-things.js";
+import CONFIG from "/config-public.js";
 import { state } from "../util/state.js";
 import { hideArray, unhideArray } from "../util/util.js";
 
 //better version of expand backend data equation
 export const expandForm = async (dataType) => {
-  const { expandIdsArr } = d;
+  const { expandIdsArr } = CONFIG;
 
   //build array of expand form elements (defining id's in define-things.js)
   const expandElementsArr = [];

@@ -1,4 +1,5 @@
-import d from "../util/define-things.js";
+// import d from "../util/define-things.js";
+import CONFIG from "/config-public.js";
 import { buildCollapseContainer } from "../util/collapse.js";
 
 export const buildAdminBackendDisplay = async (inputObj) => {
@@ -110,7 +111,7 @@ export const buildAdminNewList = async (inputObj) => {
     if (k === "textStr") {
       str = inputObj[k];
     } else {
-      str = `${d.adminNewListMap[k]}: ${inputObj[k]}`;
+      str = `${CONFIG.adminNewListMap[k]}: ${inputObj[k]}`;
     }
 
     listItem.innerHTML = str;

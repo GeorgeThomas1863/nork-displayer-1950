@@ -1,6 +1,12 @@
-import d from "../util/define-things.js";
+// import d from "../util/define-things.js";
+import CONFIG from "/config-public.js";
 import { state } from "../util/state.js";
 import { hideBackendReturnData } from "./form-change.js";
+
+import { buildArticleDisplay } from "../articles/article-return.js";
+import { buildPicDisplay } from "../pics/pic-return.js";
+import { buildVidDisplay } from "../vids/vid-return.js";
+import { buildWatchDisplay } from "../watch/watch-return.js";
 
 export const buildBackendDisplay = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
@@ -30,7 +36,7 @@ export const buildBackendFirstLoad = async (inputArray) => {
 
   for (let j = 0; j < inputArray.length; j++) {
     const { dataType, dataArray } = inputArray[j];
-    const func = d.displayFunctionMap[dataType];
+    const func = backendDisplayFunctionMap[dataType];
 
     const defaultDataElement = await func(dataArray);
     if (!defaultDataElement) continue;
@@ -51,12 +57,12 @@ export const buildBackendNewData = async (inputArray) => {
   const { dataType, dataArray } = dataObj;
 
   //get replace shit first
-  const replaceId = d.replaceTypeMap[dataType];
+  const replaceId = CONFIG.replaceTypeMap[dataType];
   const replaceElement = document.getElementById(replaceId);
   const backendDataWrapperReplace = document.getElementById("backend-data-wrapper");
 
   //format data
-  const func = d.displayFunctionMap[dataType];
+  const func = backendDisplayFunctionMap[dataType];
   const newDataElement = await func(dataArray);
   if (!newDataElement) {
     return null;
@@ -89,4 +95,11 @@ export const displayFail = async () => {
   }
 
   return true;
+};
+
+export const backendDisplayFunctionMap = {
+  articles: buildArticleDisplay,
+  pics: buildPicDisplay,
+  vids: buildVidDisplay,
+  watch: buildWatchDisplay,
 };

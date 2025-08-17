@@ -1,4 +1,5 @@
-import d from "./define-things.js";
+// import d from "./define-things.js";
+import CONFIG from "/config-public.js";
 import { state, adminState } from "./state.js";
 import { unhideArray, hideArray } from "./util.js";
 
@@ -20,7 +21,7 @@ export const checkChangeTriggered = async (changeId) => {
 };
 
 export const checkInputTriggered = async (inputId) => {
-  const { inputTriggerArr } = d;
+  const { inputTriggerArr } = CONFIG;
   // console.log("INPUT ID");
   // console.log(inputId);
 

@@ -76,7 +76,7 @@ app.use(expressPicPath, express.static(picPath));
 app.use(expressVidPath, express.static(vidPath));
 app.use(expressWatchPath, express.static(watchPath));
 app.use(expressConfigPublicPath, express.static("config/config-public.js"));
-app.use("/hls.js", express.static("node_modules/hls.js/dist/hls.min.js"));
+app.use("/hls.js", express.static("node_modules/hls.js/dist/hls.mjs"));
 
 //standard public path
 app.use(express.static("public"));

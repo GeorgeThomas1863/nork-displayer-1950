@@ -1,4 +1,5 @@
-import d from "./define-things.js";
+// import d from "./define-things.js";
+import CONFIG from "/config-public.js";
 import { buildInputParams, buildAdminParams } from "./params.js";
 import { updateActiveArticle } from "../articles/article-change.js";
 
@@ -10,8 +11,8 @@ export const state = {
 
   //data already requested
   trigger: null,
-  dataReq: d.defaultInputMap,
-  dataLoaded: d.defaultDataLoadedMap,
+  dataReq: CONFIG.defaultInputMap,
+  dataLoaded: CONFIG.defaultDataLoadedMap,
 };
 
 export const updateStateEventTriggered = async (changeId, eventTriggered) => {
@@ -23,7 +24,7 @@ export const updateStateEventTriggered = async (changeId, eventTriggered) => {
   // console.log(eventTriggered);
 
   const inputParams = await buildInputParams();
-  const newType = d.triggerTypeMap(changeId);
+  const newType = CONFIG.triggerTypeMap(changeId);
 
   //update state obj
   state.trigger = eventTriggered;
@@ -77,8 +78,8 @@ export const adminState = {
 
   //data already requested
   trigger: null,
-  dataReq: d.defaultInputMap,
-  dataLoaded: d.defaultDataLoadedMap,
+  dataReq: CONFIG.defaultInputMap,
+  dataLoaded: CONFIG.defaultDataLoadedMap,
 };
 
 export const updateAdminStateEventTriggered = async (inputType) => {
