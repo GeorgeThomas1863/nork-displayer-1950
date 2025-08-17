@@ -1,4 +1,4 @@
-import Hls from "./node_modules/hls.js/dist/hls.min.js";
+import Hls from "../../node_modules/hls.js/dist/hls.min.js";
 
 // Store HLS instances by video element ID
 const hlsInstances = new Map();
