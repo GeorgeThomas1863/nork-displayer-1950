@@ -1,7 +1,7 @@
 // video-display.js
 // Updated video display module that works with HLS player
 
-import { createHLSPlayer, cleanupAllHLSInstances } from "../util/vid-player-hls.js";
+import { buildHLSPlayer, cleanupAllHLSInstances } from "../util/vid-player-hls.js";
 import { buildCollapseContainer, defineCollapseItems } from "../util/collapse.js";
 
 // VID PAGE DISPLAY
@@ -38,8 +38,8 @@ export const buildVidListItem = async (inputObj, isFirst) => {
     return null;
   }
 
-  console.log("VID LIST ITEM INPUT OBJ");
-  console.dir(inputObj);
+  // console.log("VID LIST ITEM INPUT OBJ");
+  // console.dir(inputObj);
 
   const { title, date, manifestPath } = inputObj;
 
@@ -47,7 +47,7 @@ export const buildVidListItem = async (inputObj, isFirst) => {
   vidListItem.className = "vid-list-item wrapper";
 
   // Create the HLS video player element - only pass the manifest path
-  const vidPlayerElement = await createHLSPlayer(manifestPath);
+  const vidPlayerElement = await buildHLSPlayer(manifestPath);
 
   if (!vidPlayerElement) {
     console.error("Failed to create video player for:", title);
