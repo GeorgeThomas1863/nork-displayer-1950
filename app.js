@@ -1,12 +1,8 @@
 //****************
 
-// GET vid-player-hls.js WORKING. Note .get thing happening, way data is passed doesnt make sense;
-// prob WRONGLY trying to get from backend (rather than using fucking manifestPath as instructed a billion times)
+//STOP RETURNING VIDS FROM BACKEND TO FRONTEND (change streamData return) bc no longer needed
 
-//GO BACK TO SOME LIBRARY ANSWER FOR VID DISPLAY (SAVE OLD VERISONS OF WHAT YOU HAVE BUT THIS IS NOT WORTH IT)
-
-//ADD VID CSS FIRST, THEN SEE IF IT WORKS
-//UNFUCK WITH CLAUDE
+//UNFUCK PATH on vid-player-hls.js, get working
 
 //------
 
