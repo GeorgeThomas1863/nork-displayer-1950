@@ -67,17 +67,19 @@ import CONFIG from "./config/config.js";
 import routes from "./routes/routes.js";
 // import * as db from "./data/db.js";
 
-const { picPath, vidPath, watchPath, expressPicPath, expressVidPath, expressWatchPath, displayPort } = CONFIG;
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const { picPath, vidPath, watchPath, expressPicPath, expressVidPath, expressWatchPath, displayPort, expressConfigPublicPath } = CONFIG;
 
 const app = express();
 
-app.use(express.static("public"));
+//custom paths to expose to frontend
+app.use(expressPicPath, express.static(picPath));
+app.use(expressVidPath, express.static(vidPath));
+app.use(expressWatchPath, express.static(watchPath));
+app.use(expressConfigPublicPath, express.static("config/config-public.js"));
+app.use("hls.js", express.static("node_modules/hls.js/dist/hls.min.js"));
 
-// app.set("views", join(__dirname, "html"));
-// app.set("view engine", "ejs");
+//standard public path
+app.use(express.static("public"));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -86,18 +88,13 @@ app.use(express.json());
 app.use(cors());
 
 // CONFIGURE BELOW LATER
-// app.use(cors({
-//   origin: 'http://localhost:1951', // Allow only the display app
-//   methods: ['GET', 'POST'],
-//   allowedHeaders: ['Content-Type', 'Authorization']
-// }));
-
-app.use(express.static("public"));
-
-//path to pics / vids on fs
-app.use(expressPicPath, express.static(picPath));
-app.use(expressVidPath, express.static(vidPath));
-app.use(expressWatchPath, express.static(watchPath));
+app.use(
+  cors({
+    origin: ["http://localhost:1951", "http://localhost:1952"],
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
 //routes
 app.use(routes);
