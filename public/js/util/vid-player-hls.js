@@ -47,22 +47,8 @@ export const buildHLSPlayer = async (manifestPath) => {
 export const startHLS = async (inputObj) => {
   const { videoElement, manifestPath, statusDiv } = inputObj;
 
-  console.log("START HLS");
-  console.dir(inputObj);
-
-  // Construct the full URL for the manifest
-  // Assuming your Express server serves the manifest files from the root
-  // Adjust this if your server structure is different
-  // const manifestUrl = manifestPath.startsWith("http") ? manifestPath : `${window.location.origin}${manifestPath}`;
-
-  // console.log("Loading HLS manifest from:", manifestUrl);
-
-  // // Check if HLS.js is available
-  // if (typeof Hls === "undefined") {
-  //   console.error("HLS.js library not loaded. Make sure to include it in your HTML.");
-  //   showStatus({ statusDiv, message: "HLS.js library not found", type: "error" });
-  //   return;
-  // }
+  // console.log("START HLS");
+  // console.dir(inputObj);
 
   // Check for HLS support
   if (!Hls.isSupported()) {
