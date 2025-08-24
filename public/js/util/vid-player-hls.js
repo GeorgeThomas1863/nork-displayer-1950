@@ -47,6 +47,9 @@ export const buildHLSPlayer = async (manifestPath) => {
 export const startHLS = async (inputObj) => {
   const { videoElement, manifestPath, statusDiv } = inputObj;
 
+  console.log("START HLS");
+  console.dir(inputObj);
+
   // Construct the full URL for the manifest
   // Assuming your Express server serves the manifest files from the root
   // Adjust this if your server structure is different

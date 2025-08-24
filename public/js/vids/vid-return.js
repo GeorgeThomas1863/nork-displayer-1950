@@ -44,8 +44,8 @@ export const buildVidListItem = async (inputObj, isFirst) => {
     return null;
   }
 
-  console.log("VID LIST ITEM INPUT OBJ");
-  console.dir(inputObj);
+  // console.log("VID LIST ITEM INPUT OBJ");
+  // console.dir(inputObj);
 
   const { title, date, manifestPath } = inputObj;
 
