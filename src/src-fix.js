@@ -132,11 +132,11 @@ export const buildManifestPath = async (dataObj, dataType) => {
   switch (dataType) {
     case "vids":
       const vidName = dataObj.vidData.vidName;
-      return `${expressVidPath}${vidName}_manifest.m3u8`;
+      return `${expressVidPath}/${vidName}_manifest.m3u8`;
 
     case "watch":
       const watchName = dataObj.vidName;
-      return `${expressWatchPath}${watchName}_manifest.m3u8`;
+      return `${expressWatchPath}/${watchName}_manifest.m3u8`;
   }
 };
 
