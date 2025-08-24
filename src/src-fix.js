@@ -126,16 +126,17 @@ export const parseChunkName = async (inputName) => {
 
 export const buildManifestPath = async (dataObj, dataType) => {
   if (!dataObj || !dataType) return null;
-  const { vidPath, watchPath } = CONFIG;
+  //WANT TO LOAD EXPRESS SERVER PATHS
+  const { expressVidPath, expressWatchPath } = CONFIG;
 
   switch (dataType) {
     case "vids":
       const vidName = dataObj.vidData.vidName;
-      return `${vidPath}${vidName}_manifest.m3u8`;
+      return `${expressVidPath}${vidName}_manifest.m3u8`;
 
     case "watch":
       const watchName = dataObj.vidName;
-      return `${watchPath}${watchName}_manifest.m3u8`;
+      return `${expressWatchPath}${watchName}_manifest.m3u8`;
   }
 };
 
