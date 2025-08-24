@@ -1,8 +1,10 @@
 //****************
 
+//UNFUCK PATH on vid-player-hls.js, get working; only play with a bit longer
+
 //STOP RETURNING VIDS FROM BACKEND TO FRONTEND (change streamData return) bc no longer needed
 
-//UNFUCK PATH on vid-player-hls.js, get working
+//SPOOF HEADERS FOR KCTV
 
 //------
 
