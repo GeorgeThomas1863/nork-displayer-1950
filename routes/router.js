@@ -1,7 +1,7 @@
 import express from "express";
 
 import { mainDisplay, adminDisplay, display404, display500 } from "../controllers/display-controller.js";
-import { getBackendDataRoute, getAdminBackendDataRoute } from "../controllers/data-controller.js";
+// import { getBackendDataRoute, getAdminBackendDataRoute } from "../controllers/data-controller.js";
 
 const router = express.Router();
 
