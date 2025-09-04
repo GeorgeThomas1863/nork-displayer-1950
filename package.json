@@ -1,0 +1,25 @@
+{
+  "name": "nork-displayer-1950",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GeorgeThomas1863/nork-displayer-1950.git"
+  },
+  "author": "George H. Thomas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GeorgeThomas1863/nork-displayer-1950/issues"
+  },
+  "homepage": "https://github.com/GeorgeThomas1863/nork-displayer-1950#readme",
+  "dependencies": {
+    "express": "^5.1.0",
+    "mongodb": "^6.19.0",
+    "nodemon": "^3.1.10"
+  }
+}
