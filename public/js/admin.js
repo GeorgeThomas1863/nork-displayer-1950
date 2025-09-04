@@ -1,6 +1,6 @@
 // import { adminState, updateAdminStateDataLoaded } from "./util/state.js";
 import { adminState } from "./util/state.js";
-// import { buildAdminForm } from "./admin/admin-form.js";
+import { buildAdminForm } from "./forms/admin-form.js";
 // // import { buildAdminParams } from "./util.js";
 // import { sendToBack } from "./util/api-front.js";
 // import { buildAdminBackendDisplay } from "./admin/admin-return.js";
