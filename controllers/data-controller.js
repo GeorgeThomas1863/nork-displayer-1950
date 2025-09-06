@@ -1,4 +1,4 @@
-import { sendAdminCommand } from "../../src/api-back.js";
+import { sendAdminCommand } from "../src/api-back.js";
 
 export const adminDataRouteController = async (req, res) => {
   try {
