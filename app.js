@@ -5,7 +5,6 @@ import express from "express";
 import CONFIG from "./config/config.js";
 import routes from "./routes/router.js";
 
-
 const app = express();
 
 //custom paths to expose to frontend
@@ -23,10 +22,10 @@ app.use(express.json());
 // Basic usage - allows all origins
 // app.use(cors());
 
-// // CONFIGURE BELOW LATER
+// // // CONFIGURE BELOW LATER
 // app.use(
 //     cors({
-//         origin: ["http://localhost:1951", "http://localhost:1952"],
+//         origin: ["http://localhost:1951", "http://localhost:1950"],
 //         methods: ["GET", "POST"],
 //         allowedHeaders: ["Content-Type", "Authorization"],
 //     })

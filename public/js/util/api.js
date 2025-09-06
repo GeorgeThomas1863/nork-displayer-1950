@@ -1,10 +1,23 @@
-import axios from "axios";
-import CONFIG_PUBLIC from "../../config/config-public.js";
+import CONFIG_PUBLIC from "/config-public.js";
 
 export const sendScrapeCommand = async (params) => {
+  const { api } = CONFIG_PUBLIC;
+
   console.log("PARAMS");
   console.dir(params);
-  
-  console.log("CONFIG PUBLIC");
-  console.dir(CONFIG_PUBLIC);
+
+  try {
+    const res = await fetch(api, {
+      method: "POST",
+      body: JSON.stringify(params),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
 };

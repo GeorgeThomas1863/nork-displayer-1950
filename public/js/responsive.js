@@ -1,5 +1,6 @@
 import { getAdminInputParams } from "./util/params.js";
 import { changeAdminForm } from "./forms/form-change.js";
+import { sendScrapeCommand } from "./util/api.js";
 
 export const adminClickHandler = async (e) => {
   e.preventDefault();
