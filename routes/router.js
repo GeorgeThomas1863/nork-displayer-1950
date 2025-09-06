@@ -1,7 +1,7 @@
 import express from "express";
 
 import { mainDisplay, adminDisplay, display404, display500 } from "../controllers/display-controller.js";
-// import { getBackendDataRoute, getAdminBackendDataRoute } from "../controllers/data-controller.js";
+import { adminDataRouteController } from "../controllers/data-controller.js";
 
 const router = express.Router();
 
@@ -9,7 +9,7 @@ const router = express.Router();
 // router.post("/get-default-data-admin-route", getDefaultDataAdminRoute);
 // router.get("/get-update-data-admin-route", getUpdateDataAdminRoute);
 
-// router.post("/get-admin-backend-data-route", getAdminBackendDataRoute);
+router.post("/admin-data-route", adminDataRouteController);
 
 // router.post("/get-backend-data-route", getBackendDataRoute);
 

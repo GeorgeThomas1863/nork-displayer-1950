@@ -1,6 +1,6 @@
 import { getAdminInputParams } from "./util/params.js";
 import { changeAdminForm } from "./forms/form-change.js";
-import { sendScrapeCommand } from "./util/api.js";
+import { sendToBack } from "./util/api-front.js";
 
 export const adminClickHandler = async (e) => {
   e.preventDefault();
@@ -18,7 +18,7 @@ export const adminClickHandler = async (e) => {
   console.log("ADMIN INPUT PARAMS");
   console.dir(adminInputParams);
 
-  await sendScrapeCommand(adminInputParams);
+  const data = await sendToBack(adminInputParams);
 
   //   await updateAdminStateEventTriggered(clickType);
 
