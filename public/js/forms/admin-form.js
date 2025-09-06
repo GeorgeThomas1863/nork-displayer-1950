@@ -8,10 +8,11 @@ export const buildAdminForm = async () => {
   const appListItem = await buildAppListItem();
   const commandListItem = await buildCommandListItem();
   const howMuchListItem = await buildHowMuchListItem();
+  const urlListItem = await buildUrlListItem();
   const buttonListItem = await buildButtonListItem();
 
   //append everything
-  adminFormWrapper.append(appListItem, commandListItem, howMuchListItem, buttonListItem);
+  adminFormWrapper.append(appListItem, commandListItem, howMuchListItem, urlListItem, buttonListItem);
 
   //MAKE IT COLLAPSE HERE
   const titleElement = document.createElement("div");
@@ -175,6 +176,27 @@ export const buildHowMuchListItem = async () => {
   howMuchListItem.appendChild(howMuchSelect);
 
   return howMuchListItem;
+};
+
+export const buildUrlListItem = async () => {
+  // Create URL input (hidden)
+  const urlListItem = document.createElement("li");
+  urlListItem.id = "admin-url-input-list-item";
+  urlListItem.className = "hidden";
+
+  const urlLabel = document.createElement("label");
+  urlLabel.setAttribute("for", "admin-url-input");
+  urlLabel.textContent = "URL";
+
+  const urlInput = document.createElement("input");
+  urlInput.type = "text";
+  urlInput.name = "admin-url-input";
+  urlInput.id = "admin-url-input";
+
+  urlListItem.appendChild(urlLabel);
+  urlListItem.appendChild(urlInput);
+
+  return urlListItem;
 };
 
 export const buildButtonListItem = async () => {
