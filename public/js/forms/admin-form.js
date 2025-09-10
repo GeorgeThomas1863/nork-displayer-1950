@@ -5,14 +5,14 @@ export const buildAdminForm = async () => {
   adminFormWrapper.id = "admin-form-wrapper";
   adminFormWrapper.className = "collapse-content";
 
-  const appListItem = await buildAppListItem();
+  const targetListItem = await buildTargetListItem();
   const commandListItem = await buildCommandListItem();
   const howMuchListItem = await buildHowMuchListItem();
   const urlListItem = await buildUrlListItem();
   const buttonListItem = await buildButtonListItem();
 
   //append everything
-  adminFormWrapper.append(appListItem, commandListItem, howMuchListItem, urlListItem, buttonListItem);
+  adminFormWrapper.append(targetListItem, commandListItem, howMuchListItem, urlListItem, buttonListItem);
 
   //MAKE IT COLLAPSE HERE
   const titleElement = document.createElement("div");
@@ -34,30 +34,25 @@ export const buildAdminForm = async () => {
   return adminFormCollapseContainer;
 };
 
-export const buildAppListItem = async () => {
-  const appListItem = document.createElement("li");
-  appListItem.id = "admin-app-list-item";
+export const buildTargetListItem = async () => {
+  const targetListItem = document.createElement("li");
+  targetListItem.id = "admin-target-list-item";
 
-  const appLabel = document.createElement("label");
-  appLabel.setAttribute("for", "admin-app-type");
-  appLabel.textContent = "App Type";
+  const targetLabel = document.createElement("label");
+  targetLabel.setAttribute("for", "admin-target-type");
+  targetLabel.textContent = "Target Site";
 
-  const appSelect = document.createElement("select");
-  appSelect.name = "admin-app-type";
-  appSelect.id = "admin-app-type";
+  const targetSelect = document.createElement("select");
+  targetSelect.name = "admin-target-type";
+  targetSelect.id = "admin-target-type";
 
-  const appOptionArray = [
-    {
-      value: "admin-scraper",
-      id: "admin-scraper",
-      text: "Scraper",
-      selected: true,
-    },
-    { value: "admin-kcna-watch", id: "admin-kcna-watch", text: "KCNA Watch" },
+  const targetOptionArray = [
+    { value: "scrape-kcna", id: "scrape-kcna", text: "KCNA", selected: true },
+    { value: "scrape-kcna-watch", id: "scrape-kcna-watch", text: "KCNA Watch" },
   ];
 
-  for (let i = 0; i < appOptionArray.length; i++) {
-    const optionData = appOptionArray[i];
+  for (let i = 0; i < targetOptionArray.length; i++) {
+    const optionData = targetOptionArray[i];
     const option = document.createElement("option");
     option.value = optionData.value;
     option.id = optionData.id;
@@ -65,13 +60,13 @@ export const buildAppListItem = async () => {
     if (optionData.selected) {
       option.selected = true;
     }
-    appSelect.append(option);
+    targetSelect.append(option);
   }
 
-  appListItem.appendChild(appLabel);
-  appListItem.appendChild(appSelect);
+  targetListItem.appendChild(targetLabel);
+  targetListItem.appendChild(targetSelect);
 
-  return appListItem;
+  return targetListItem;
 };
 
 export const buildCommandListItem = async () => {
