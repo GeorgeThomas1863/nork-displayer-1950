@@ -8,8 +8,8 @@ export const adminClickHandler = async (e) => {
   const clickElement = e.target;
   const clickType = clickElement.getAttribute("type");
 
-  //   console.log("CLICK TYPE");
-  //   console.log(clickType);
+    console.log("CLICK TYPE");
+    console.log(clickType);
 
   if (clickType !== "submit") return null;
 
