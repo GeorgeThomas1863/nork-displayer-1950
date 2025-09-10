@@ -5,14 +5,14 @@ export const buildAdminForm = async () => {
   adminFormWrapper.id = "admin-form-wrapper";
   adminFormWrapper.className = "collapse-content";
 
-  const targetListItem = await buildTargetListItem();
   const commandListItem = await buildCommandListItem();
+  const targetListItem = await buildTargetListItem();
   const howMuchListItem = await buildHowMuchListItem();
   const urlListItem = await buildUrlListItem();
   const buttonListItem = await buildButtonListItem();
 
   //append everything
-  adminFormWrapper.append(targetListItem, commandListItem, howMuchListItem, urlListItem, buttonListItem);
+  adminFormWrapper.append(commandListItem, targetListItem, howMuchListItem, urlListItem, buttonListItem);
 
   //MAKE IT COLLAPSE HERE
   const titleElement = document.createElement("div");
@@ -32,41 +32,6 @@ export const buildAdminForm = async () => {
   adminFormCollapseContainer.className = "wrapper";
 
   return adminFormCollapseContainer;
-};
-
-export const buildTargetListItem = async () => {
-  const targetListItem = document.createElement("li");
-  targetListItem.id = "admin-target-list-item";
-
-  const targetLabel = document.createElement("label");
-  targetLabel.setAttribute("for", "admin-target-type");
-  targetLabel.textContent = "Target Site";
-
-  const targetSelect = document.createElement("select");
-  targetSelect.name = "admin-target-type";
-  targetSelect.id = "admin-target-type";
-
-  const targetOptionArray = [
-    { value: "scrape-kcna", id: "scrape-kcna", text: "KCNA", selected: true },
-    { value: "scrape-kcna-watch", id: "scrape-kcna-watch", text: "KCNA Watch" },
-  ];
-
-  for (let i = 0; i < targetOptionArray.length; i++) {
-    const optionData = targetOptionArray[i];
-    const option = document.createElement("option");
-    option.value = optionData.value;
-    option.id = optionData.id;
-    option.textContent = optionData.text;
-    if (optionData.selected) {
-      option.selected = true;
-    }
-    targetSelect.append(option);
-  }
-
-  targetListItem.appendChild(targetLabel);
-  targetListItem.appendChild(targetSelect);
-
-  return targetListItem;
 };
 
 export const buildCommandListItem = async () => {
@@ -128,6 +93,41 @@ export const buildCommandListItem = async () => {
   commandListItem.appendChild(commandSelect);
 
   return commandListItem;
+};
+
+export const buildTargetListItem = async () => {
+  const targetListItem = document.createElement("li");
+  targetListItem.id = "admin-target-list-item";
+
+  const targetLabel = document.createElement("label");
+  targetLabel.setAttribute("for", "admin-target-type");
+  targetLabel.textContent = "Target Site";
+
+  const targetSelect = document.createElement("select");
+  targetSelect.name = "admin-target-type";
+  targetSelect.id = "admin-target-type";
+
+  const targetOptionArray = [
+    { value: "kcna", id: "kcna", text: "KCNA", selected: true },
+    { value: "kcna-watch", id: "kcna-watch", text: "KCNA Watch" },
+  ];
+
+  for (let i = 0; i < targetOptionArray.length; i++) {
+    const optionData = targetOptionArray[i];
+    const option = document.createElement("option");
+    option.value = optionData.value;
+    option.id = optionData.id;
+    option.textContent = optionData.text;
+    if (optionData.selected) {
+      option.selected = true;
+    }
+    targetSelect.append(option);
+  }
+
+  targetListItem.appendChild(targetLabel);
+  targetListItem.appendChild(targetSelect);
+
+  return targetListItem;
 };
 
 export const buildHowMuchListItem = async () => {
