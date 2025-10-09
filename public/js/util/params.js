@@ -1,8 +1,7 @@
 import { adminState } from "./state.js";
 
-export const getAdminInputParams = async () => {
+export const getAdminCommandParams = async () => {
   const params = {
-    route: "/admin-data-route",
     site: document.getElementById("admin-target-type").value,
     command: document.getElementById("admin-command-type").value,
     howMuch: document.getElementById("admin-how-much").value,

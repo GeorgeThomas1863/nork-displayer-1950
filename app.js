@@ -19,17 +19,13 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Basic usage - allows all origins
-// app.use(cors());
-
-// // // CONFIGURE BELOW LATER
-// app.use(
-//     cors({
-//         origin: ["http://localhost:1951", "http://localhost:1950"],
-//         methods: ["GET", "POST"],
-//         allowedHeaders: ["Content-Type", "Authorization"],
-//     })
-// );
+app.use(
+  cors({
+    origin: [`http://localhost:${CONFIG.scrapePort}`],
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
 //routes
 app.use(routes);

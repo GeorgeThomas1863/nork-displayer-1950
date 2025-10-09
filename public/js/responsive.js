@@ -1,4 +1,4 @@
-import { getAdminInputParams } from "./util/params.js";
+import { getAdminCommandParams } from "./util/params.js";
 import { changeAdminForm } from "./forms/form-change.js";
 import { sendToBack } from "./util/api-front.js";
 
@@ -8,17 +8,22 @@ export const adminClickHandler = async (e) => {
   const clickElement = e.target;
   const clickType = clickElement.getAttribute("type");
 
-    console.log("CLICK TYPE");
-    console.log(clickType);
+  console.log("CLICK TYPE");
+  console.log(clickType);
 
   if (clickType !== "submit") return null;
 
-  const adminInputParams = await getAdminInputParams();
-  if (!adminInputParams) return null;
-  console.log("ADMIN INPUT PARAMS");
-  console.dir(adminInputParams);
+  const adminCommandParams = await getAdminCommandParams();
+  const apiOutgoingRoute = await sendToBack({ route: "/get-backend-value-route", key: "apiOutgoingRoute" });
+  if (!adminCommandParams || !apiOutgoingRoute) return null;
 
-  const data = await sendToBack(adminInputParams);
+  adminCommandParams.route = apiOutgoingRoute;
+  console.log("ADMIN COMMAND PARAMS");
+  console.dir(adminCommandParams);
+
+  const data = await sendToBack(adminCommandParams);
+  console.log("ADMIN COMMAND DATA");
+  console.dir(data);
 
   //   await updateAdminStateEventTriggered(clickType);
 
