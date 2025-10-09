@@ -17,7 +17,7 @@ export const adminClickHandler = async (e) => {
   const apiOutgoingRoute = await sendToBack({ route: "/get-backend-value-route", key: "apiOutgoingRoute" });
   if (!adminCommandParams || !apiOutgoingRoute) return null;
 
-  adminCommandParams.route = apiOutgoingRoute;
+  adminCommandParams.route = apiOutgoingRoute.value;
   console.log("ADMIN COMMAND PARAMS");
   console.dir(adminCommandParams);
 
