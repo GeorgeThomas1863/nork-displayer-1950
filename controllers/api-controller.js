@@ -1,6 +1,6 @@
 import axios from "axios";
 import CONFIG from "../config/config.js";
-import { handleIncomingAPI } from "../src/control.js";
+import { handleIncomingAPI, handleOutgoingAPI } from "../src/control.js";
 
 export const getBackendValueController = async (req, res) => {
   const { key } = req.body;
