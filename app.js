@@ -1,8 +1,10 @@
+//TODO: ROUTES FUCKED, NEED TO UNFUCK
+
 import CONFIG from "./config/config.js";
 import express from "express";
 import cors from "cors";
 import routes from "./routes/router.js";
-
+ 
 const app = express();
 
 //custom paths to expose to frontend
