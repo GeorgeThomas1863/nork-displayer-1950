@@ -6,8 +6,8 @@ export const handleIncomingAPI = async (inputParams) => {
 };
 
 export const handleOutgoingAPI = async (inputParams) => {
-  const { apiOutgoingRoute } = CONFIG;
-  const url = `https://localhost:${apiOutgoingRoute}`;
+  const { apiOutgoingRoute, scrapePort } = CONFIG;
+  const url = `https://localhost:${scrapePort}${apiOutgoingRoute}`;
 
   try {
     const res = await axios.post(url, inputParams);
