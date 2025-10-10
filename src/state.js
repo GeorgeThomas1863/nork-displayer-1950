@@ -9,7 +9,7 @@ const state = {
   scrapeLengthMinutes: null,
   scrapeError: null,
   scrapeMessage: null,
-  scrapeStep: null
+  scrapeStep: null,
 };
 
 export default state;
