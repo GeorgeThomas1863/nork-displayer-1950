@@ -3,16 +3,18 @@ import express from "express";
 import CONFIG from "../config/config.js";
 import { mainDisplay, adminDisplay, display404, display500 } from "../controllers/display-controller.js";
 // import { adminDataRouteController } from "../controllers/data-controller.js";
-import { getBackendValueController, apiSendController, apiReceiveController } from "../controllers/api-controller.js";
+import { getBackendValueController, apiEndpointController, sendAdminCommandController } from "../controllers/api-controller.js";
 
 const router = express.Router();
 
-// router.post("/get-backend-value-route", requireAuth, getBackendValueController);
-router.post("/get-backend-value-route", getBackendValueController);
+//api receive endpoint
+router.post(CONFIG.apiDisplayer, apiEndpointController);
 
-router.post(CONFIG.apiDisplayerSendRoute, apiSendController);
-router.post(CONFIG.apiDisplayerReceiveRoute, apiReceiveController);
-// router.post("/api-outgoing-route", adminDataRouteController);
+//send data to scraper
+router.post("/send-admin-command-route", sendAdminCommandController);
+
+router.post("/get-backend-value-route", getBackendValueController);
+// router.post("/get-backend-value-route", requireAuth, getBackendValueController);
 
 router.get("/", mainDisplay);
 
