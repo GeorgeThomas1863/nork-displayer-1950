@@ -1,6 +1,6 @@
 import axios from "axios";
 import CONFIG from "../config/config.js";
-import { handleIncomingAPI, handleOutgoingAPI } from "../src/control.js";
+import { handleIncomingAPI } from "../src/control.js";
 
 export const getBackendValueController = async (req, res) => {
   const { key } = req.body;
@@ -11,7 +11,7 @@ export const getBackendValueController = async (req, res) => {
   return res.json({ value });
 };
 
-export const apiIncomingController = async (req, res) => {
+export const apiReceiveController = async (req, res) => {
   try {
     const inputParams = req.body;
     console.log("API INCOMING DATA");
