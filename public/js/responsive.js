@@ -14,10 +14,12 @@ export const adminClickHandler = async (e) => {
   if (clickType !== "submit") return null;
 
   const adminCommandParams = await getAdminCommandParams();
-  const apiOutgoingRoute = await sendToBack({ route: "/get-backend-value-route", key: "apiOutgoingRoute" });
-  if (!adminCommandParams || !apiOutgoingRoute) return null;
+  const apiSendRoute = await sendToBack({ route: "/get-backend-value-route", key: "apiDisplayerSendRoute" });
+  const apiTargetRoute = await sendToBack({ route: "/get-backend-value-route", key: "apiScraperReceiveRoute" });
+  if (!adminCommandParams || !apiSendRoute || !apiTargetRoute) return null;
 
-  adminCommandParams.route = apiOutgoingRoute.value;
+  adminCommandParams.route = apiSendRoute.value;
+  adminCommandParams.target = apiTargetRoute.value;
   console.log("ADMIN COMMAND PARAMS");
   console.dir(adminCommandParams);
 

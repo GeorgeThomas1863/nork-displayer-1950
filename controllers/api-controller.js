@@ -28,20 +28,31 @@ export const apiIncomingController = async (req, res) => {
   }
 };
 
-export const apiOutgoingController = async (req, res) => {
+export const apiSendController = async (req, res) => {
+  const inputParams = req.body;
+  if (!inputParams) return null;
+
+  const { target } = inputParams;
+  const { scrapePort } = CONFIG;
+
   try {
+    const url = `https://localhost:${scrapePort}${target}`;
+    console.log(`SENDING API REQ TO ${url}`);
+
     const inputParams = req.body;
     console.log("API OUTGOING DATA");
     console.log(inputParams);
 
-    const data = await handleOutgoingAPI(inputParams);
-    console.log("API OUTGOING RESPONSE");
-    console.log(data);
+    const apiRes = await axios.post(url, inputParams);
+    if (!apiRes) return null;
+    const data = apiRes.data;
 
+    // console.log("API OUTGOING RESPONSE");
+    // console.log(data);
     return res.json(data);
   } catch (e) {
     console.error(e);
-    return res.status(500).json({ e: "DISPLAYER FAILED TO GET OUTGOING API DATA" });
+    return res.status(500).json({ e: "Failed to get admin backend data" });
   }
 };
 
