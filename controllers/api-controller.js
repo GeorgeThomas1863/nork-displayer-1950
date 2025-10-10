@@ -36,7 +36,7 @@ export const apiSendController = async (req, res) => {
   const { scrapePort } = CONFIG;
 
   try {
-    const url = `https://localhost:${scrapePort}${target}`;
+    const url = `http://localhost:${scrapePort}${target}`;
     console.log(`SENDING API REQ TO ${url}`);
 
     const inputParams = req.body;
