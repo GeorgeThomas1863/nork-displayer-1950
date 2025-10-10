@@ -11,6 +11,7 @@ const state = {
   scrapeStatus: null,
   scrapeError: null,
   scrapeMessage: null,
+  scrapeStep: null
 };
 
 export default state;
