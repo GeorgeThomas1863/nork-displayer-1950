@@ -33,9 +33,12 @@ export const keyHandler = async (e) => {
 
   // Determine which button to trigger based on context
   const authButton = document.getElementById("auth-button");
+  const adminAuthButton = document.getElementById("admin-auth-button");
 
   // Check if auth button is visible and enabled (user is on auth screen)
   if (authButton && authButton.offsetParent !== null && !authButton.disabled) return await runAuth();
+
+  if (adminAuthButton && adminAuthButton.offsetParent !== null && !adminAuthButton.disabled) return await runAdminAuth();
 
   //make so only submits on click
   // if (visitSubmitButton && visitSubmitButton.offsetParent !== null && !visitSubmitButton.disabled) return await runSetDataWS();

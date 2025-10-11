@@ -24,6 +24,9 @@ export const runAdminAuth = async () => {
     if (!authParams || !adminAuthRoute) return null;
     authParams.route = adminAuthRoute.value;
 
+    console.log("ADMIN AUTH PARAMS");
+    console.dir(authParams);
+
     const authData = await sendToBack(authParams);
     if (!authData || !authData.redirect) return null;
 
