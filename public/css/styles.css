@@ -100,23 +100,20 @@ h3 {
 }
 
 /* Updated list item IDs to match your JS */
-#auth-pw-list-item,
-#auth-button-list-item {
+#auth-pw-list-item {
   margin-bottom: 1.5rem;
 }
 
-#auth-button-list-item {
-  margin-bottom: 0;
-}
-
 #auth-label {
-  margin: 0 auto;
   display: block;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
   font-weight: 700;
   font-size: 1.2rem;
   color: #374151;
   letter-spacing: 0.025em;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
 }
 
 #auth-button {
