@@ -60,12 +60,18 @@ export const changeHandler = async (e) => {
 };
 
 const authElement = document.getElementById("auth-element");
+const adminAuthElement = document.getElementById("admin-auth-element");
 const adminDisplayElement = document.getElementById("admin-display-element");
 const displayElement = document.getElementById("display-element");
 
 if (authElement) {
   authElement.addEventListener("click", clickHandler);
   authElement.addEventListener("keydown", keyHandler);
+}
+
+if (adminAuthElement) {
+  adminAuthElement.addEventListener("click", clickHandler);
+  adminAuthElement.addEventListener("keydown", keyHandler);
 }
 
 if (adminDisplayElement) {
