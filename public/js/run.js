@@ -20,14 +20,7 @@ export const runAuth = async () => {
 export const runAdminAuth = async () => {
   try {
     const adminAuthParams = await getAdminAuthParams();
-    console.log("ADMIN AUTH PARAMS");
-    console.dir(adminAuthParams);
-
     const adminAuthRoute = await sendToBack({ route: "/get-backend-value-route", key: "adminAuthRoute" });
-
-    console.log("ADMIN AUTH ROUTE");
-    console.dir(adminAuthRoute);
-
     if (!adminAuthParams || !adminAuthRoute) return null;
     adminAuthParams.route = adminAuthRoute.value;
 
@@ -45,8 +38,9 @@ export const runAdminAuth = async () => {
 export const runAdminCommand = async () => {
   try {
     const adminCommandParams = await getAdminCommandParams();
-    if (!adminCommandParams) return null;
-    adminCommandParams.route = "/send-admin-command-route";
+    const adminCommandRoute = await sendToBack({ route: "/get-backend-value-route", key: "adminCommandRoute" });
+    if (!adminCommandParams || !adminCommandRoute) return null;
+    adminCommandParams.route = adminCommandRoute.value;
 
     console.log("ADMIN COMMAND PARAMS");
     console.dir(adminCommandParams);
