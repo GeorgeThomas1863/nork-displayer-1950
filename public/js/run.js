@@ -20,12 +20,16 @@ export const runAuth = async () => {
 export const runAdminAuth = async () => {
   try {
     const authParams = await getAdminAuthParams();
-    const adminAuthRoute = await sendToBack({ route: "/get-backend-value-route", key: "adminAuthRoute" });
-    if (!authParams || !adminAuthRoute) return null;
-    authParams.route = adminAuthRoute.value;
-
     console.log("ADMIN AUTH PARAMS");
     console.dir(authParams);
+
+    const adminAuthRoute = await sendToBack({ route: "/get-backend-value-route", key: "adminAuthRoute" });
+
+    console.log("ADMIN AUTH ROUTE");
+    console.dir(adminAuthRoute);
+
+    if (!authParams || !adminAuthRoute) return null;
+    authParams.route = adminAuthRoute.value;
 
     const authData = await sendToBack(authParams);
     if (!authData || !authData.redirect) return null;
