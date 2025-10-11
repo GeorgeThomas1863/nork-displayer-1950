@@ -15,10 +15,10 @@ router.post("/site-auth-route", authController);
 router.post(adminAuthRoute, adminAuthController);
 router.get("/401", display401);
 
-//-----------------------------
-
 //api receive endpoint
-router.post(apiDisplayer, requireAuth, apiEndpointController);
+router.post(apiDisplayer, apiEndpointController);
+
+//-----------------------------
 
 //poll backend
 router.post("/polling-route", requireAuth, pollingController);
