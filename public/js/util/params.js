@@ -22,7 +22,7 @@ export const getAdminAuthParams = async () => {
   try {
     const params = {
       //REMOVE PLACEHOLDER BELOW
-      pw: adminAuthPwInput.value || adminAuthPwInput.placeholder,
+      pwAdmin: adminAuthPwInput.value || adminAuthPwInput.placeholder,
     };
 
     return params;
