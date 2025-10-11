@@ -89,8 +89,8 @@ h3 {
 
 #auth-form-wrapper {
   list-style: none;
-  margin: 1rem auto;
-  padding: 1.5rem 3rem;
+  margin: 0.5rem auto;
+  padding: 1rem 2rem;
   max-width: 400px;
   background: #ffffff;
   border-radius: 8px;
@@ -116,7 +116,7 @@ h3 {
 #auth-button {
   margin-top: 0;
   width: 100%;
-  padding: 0.5rem 1rem;
+  padding: 0.75rem 1.5rem;
   background-color: #3b82f6;
   color: #ffffff;
   border: none;
