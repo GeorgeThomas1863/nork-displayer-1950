@@ -84,11 +84,6 @@ export const buildAdminAuthPwListItem = async () => {
   const adminAuthPwListItem = document.createElement("li");
   adminAuthPwListItem.id = "admin-auth-pw-list-item";
 
-  const adminAuthPwLabel = document.createElement("label");
-  adminAuthPwLabel.id = "admin-auth-label";
-  adminAuthPwLabel.setAttribute("for", "admin-auth-pw-input");
-  adminAuthPwLabel.textContent = "Admin Auth";
-
   const adminAuthPwWrapper = document.createElement("div");
   adminAuthPwWrapper.className = "password-input-wrapper";
 
@@ -111,7 +106,7 @@ export const buildAdminAuthPwListItem = async () => {
   toggleAdminAuthPwButton.innerHTML = EYE_CLOSED_SVG;
 
   adminAuthPwWrapper.append(adminAuthPwInput, toggleAdminAuthPwButton);
-  adminAuthPwListItem.append(adminAuthPwLabel, adminAuthPwWrapper);
+  adminAuthPwListItem.append(adminAuthPwWrapper);
 
   return adminAuthPwListItem;
 };
