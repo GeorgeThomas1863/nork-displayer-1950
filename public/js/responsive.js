@@ -1,10 +1,7 @@
 import { runAuth, runAdminCommand, runPwToggle } from "./run.js";
-
-import { getAdminCommandParams } from "./util/params.js";
 import { changeAdminForm } from "./forms/form-change.js";
-import { sendToBack } from "./util/api-front.js";
 
-export const adminClickHandler = async (e) => {
+export const clickHandler = async (e) => {
   e.preventDefault();
 
   const clickElement = e.target;
@@ -29,7 +26,23 @@ export const adminClickHandler = async (e) => {
   //   return "DONE";
 };
 
-export const adminChangeHandler = async (e) => {
+export const keyHandler = async (e) => {
+  if (e.key !== "Enter") return null;
+  e.preventDefault();
+
+  // Determine which button to trigger based on context
+  const authButton = document.getElementById("auth-button");
+
+  // Check if auth button is visible and enabled (user is on auth screen)
+  if (authButton && authButton.offsetParent !== null && !authButton.disabled) return await runAuth();
+
+  //make so only submits on click
+  // if (visitSubmitButton && visitSubmitButton.offsetParent !== null && !visitSubmitButton.disabled) return await runSetDataWS();
+
+  return null;
+};
+
+export const changeHandler = async (e) => {
   e.preventDefault();
   const changeElement = e.target;
   const changeId = changeElement.id;
@@ -43,16 +56,6 @@ export const adminChangeHandler = async (e) => {
   if (changeId !== "admin-how-much") return null;
 
   await changeAdminForm();
-
-  //check if event triggered, move on if not
-  // const eventTriggered = await checkChangeTriggered(changeId);
-  // if (!eventTriggered) return null;
-
-  // //update the state
-  // await updateStateEventTriggered(changeId, eventTriggered);
-
-  // //build display
-  // await buildDisplay();
 };
 
 const authElement = document.getElementById("auth-element");
@@ -65,8 +68,8 @@ if (authElement) {
 }
 
 if (adminDisplayElement) {
-  adminDisplayElement.addEventListener("click", adminClickHandler);
-  adminDisplayElement.addEventListener("change", adminChangeHandler);
+  adminDisplayElement.addEventListener("click", clickHandler);
+  adminDisplayElement.addEventListener("change", changeHandler);
 }
 
 if (displayElement) {
