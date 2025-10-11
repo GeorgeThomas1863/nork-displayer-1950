@@ -31,24 +31,32 @@ export const buildAdminDisplay = async () => {
 export const pollBackend = async () => {
   const pollInterval = await sendToBack({ route: "/get-backend-value-route", key: "pollInterval" });
 
-  await getPollData();
+  setInterval(async () => {
+    const data = await sendToBack({ route: "/polling-route" });
+    console.log("POLL DATA");
+    console.dir(data);
+    return data;
+  }, pollInterval.value);
 
-  // Set up interval
-  setInterval(getPollData, pollInterval.value);
   console.log(`Polling started - checking every ${pollInterval.value / 1000}s`);
 };
 
-// Main polling function
-export const getPollData = async () => {
-  console.log("GETTING POLL DATA");
+//   const pollInterval = await sendToBack({ route: "/get-backend-value-route", key: "pollInterval" });
 
-  // Option 1: Simple polling - always fetch all data
-  const data = await sendToBack({ route: "/polling-route" });
-  console.log("POLL DATA");
-  console.dir(data);
+//   // Set up interval
+//   setInterval(getPollData, pollInterval.value);
+//   console.log(`Polling started - checking every ${pollInterval.value / 1000}s`);
+// };
 
-  return data;
-};
+// // Main polling function
+// export const getPollData = async () => {
+//   // Option 1: Simple polling - always fetch all data
+//   const data = await sendToBack({ route: "/polling-route" });
+//   console.log("POLL DATA");
+//   console.dir(data);
+
+//   return data;
+// };
 
 buildAdminDisplay();
 
