@@ -1,4 +1,4 @@
-import { buildAuthForm } from "./display/auth-form.js";
+import { buildAuthForm } from "./forms/auth-form.js";
 
 const authElement = document.getElementById("auth-element");
 
