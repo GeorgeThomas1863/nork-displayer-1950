@@ -36,7 +36,7 @@ export const apiEndpointController = async (req, res) => {
   }
 };
 
-export const sendAdminCommandController = async (req, res) => {
+export const adminCommandController = async (req, res) => {
   const inputParams = req.body;
   if (!inputParams) return null;
   const { scrapePort, apiScraper } = CONFIG;
