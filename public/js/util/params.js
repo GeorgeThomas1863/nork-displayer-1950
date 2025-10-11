@@ -11,7 +11,6 @@ export const getAuthParams = async () => {
     }
 
     const params = {
-      route: "/site-auth-route",
       //REMOVE PLACEHOLDER BELOW
       pw: authPwInput.value || authPwInput.placeholder,
     };

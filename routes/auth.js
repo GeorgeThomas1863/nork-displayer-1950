@@ -1,6 +1,6 @@
 import path from "path";
 
-const requireAuth = (req, res, next) => {
+export const requireAuth = (req, res, next) => {
   if (req.session.authenticated) {
     next();
   } else {
@@ -8,4 +8,10 @@ const requireAuth = (req, res, next) => {
   }
 };
 
-export default requireAuth;
+export const requireAdminAuth = (req, res, next) => {
+  if (req.session.adminAuthenticated) {
+    next();
+  } else {
+    res.sendFile(path.join(process.cwd(), "html", "admin-auth.html"));
+  }
+};

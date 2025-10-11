@@ -16,6 +16,23 @@ export const runAuth = async () => {
   }
 };
 
+//PUT ON BACKEND
+// route: "/site-auth-route",
+
+export const runAdminAuth = async () => {
+  try {
+    const authParams = await getAdminAuthParams();
+    const authData = await sendToBack(authParams);
+    if (!authData || !authData.redirect) return null;
+
+    window.location.href = authData.redirect;
+    return authData;
+  } catch (e) {
+    console.log("ERROR: " + e.message + "; FUNCTION: " + e.function);
+    return null;
+  }
+};
+
 export const runAdminCommand = async () => {
   try {
     const adminCommandParams = await getAdminCommandParams();
