@@ -5,6 +5,7 @@ import { EYE_OPEN_SVG, EYE_CLOSED_SVG } from "./util/define-things.js";
 export const runAuth = async () => {
   try {
     const authParams = await getAuthParams();
+    authParams.route = "/site-auth-route";
     const authData = await sendToBack(authParams);
     if (!authData || !authData.redirect) return null;
 
@@ -16,12 +17,13 @@ export const runAuth = async () => {
   }
 };
 
-//PUT ON BACKEND
-// route: "/site-auth-route",
-
 export const runAdminAuth = async () => {
   try {
     const authParams = await getAdminAuthParams();
+    const adminAuthRoute = await sendToBack({ route: "/get-backend-value-route", key: "adminAuthRoute" });
+    if (!authParams || !adminAuthRoute) return null;
+    authParams.route = adminAuthRoute.value;
+
     const authData = await sendToBack(authParams);
     if (!authData || !authData.redirect) return null;
 
