@@ -110,6 +110,7 @@ h3 {
 }
 
 #auth-label {
+  margin: 0 auto;
   display: block;
   font-weight: 700;
   font-size: 1.2rem;

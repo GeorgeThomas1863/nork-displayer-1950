@@ -20,7 +20,7 @@ export const buildAuthPwListItem = async () => {
   const authPwLabel = document.createElement("label");
   authPwLabel.id = "auth-label";
   authPwLabel.setAttribute("for", "auth-pw-input");
-  authPwLabel.textContent = "AngelAI Password";
+  authPwLabel.textContent = "Welcome to the Nork Tracker 5000";
 
   const authPwWrapper = document.createElement("div");
   authPwWrapper.className = "password-input-wrapper";
@@ -32,7 +32,8 @@ export const buildAuthPwListItem = async () => {
   authPwInput.className = "password-input";
 
   // REMOVE LATER / ALSO REMOVE FROM PARAMS
-  authPwInput.placeholder = "wellskysucks";
+  authPwInput.placeholder = "Please input the site password to continue";
+  //authPwInput.placeholder = "nork";
 
   const toggleAuthPwButton = document.createElement("button");
   toggleAuthPwButton.type = "button";
@@ -53,7 +54,7 @@ export const buildAuthButtonListItem = async () => {
   authButtonListItem.id = "auth-button-list-item";
 
   const authButton = document.createElement("button");
-  authButton.id = "auth-submit";
+  authButton.id = "auth-button";
   authButton.textContent = "SUBMIT";
   authButton.setAttribute("type", "auth-submit");
 
