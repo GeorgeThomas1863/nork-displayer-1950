@@ -24,7 +24,10 @@ export const apiEndpointController = async (req, res) => {
 
     //update state
     const { [inputParams.source]: _, ...updateObj } = inputParams;
-    state = { ...updateObj };
+    for (let key in updateObj) {
+      if (updateObj[key] === null) continue;
+      state[key] = updateObj[key];
+    }
 
     return res.json(state);
   } catch (e) {
