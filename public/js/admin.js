@@ -29,7 +29,7 @@ export const buildAdminDisplay = async () => {
 };
 
 export const pollBackend = async () => {
-  const pollInterval = await getBackendValue({ key: "pollInterval" });
+  const pollInterval = await sendToBack({ route: "/get-backend-value-route", key: "pollInterval" });
 
   await getPollData();
 
