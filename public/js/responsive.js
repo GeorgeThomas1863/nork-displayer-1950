@@ -6,7 +6,7 @@ export const clickHandler = async (e) => {
 
   const clickElement = e.target;
   const clickId = clickElement.id;
-  const clickType = clickElement.getAttribute("type");
+  const clickType = clickElement.getAttribute("data-label");
 
   console.log("CLICK ID");
   console.log(clickId);

@@ -56,7 +56,7 @@ export const buildAuthButtonListItem = async () => {
   const authButton = document.createElement("button");
   authButton.id = "auth-button";
   authButton.textContent = "SUBMIT";
-  authButton.setAttribute("type", "auth-submit");
+  authButton.setAttribute("data-label", "auth-submit");
 
   authButtonListItem.append(authButton);
 
