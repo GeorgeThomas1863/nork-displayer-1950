@@ -1,29 +1,33 @@
 import axios from "axios";
 import CONFIG from "../config/config.js";
-import { handleIncomingAPI } from "../src/control.js";
-import state from "../src/state.js";
+import state from "../src/state-back.js";
 
-// export const getBackendValueController = async (req, res) => {
-//   const { key } = req.body;
-//   if (!key) return null;
+export const getBackendValueController = async (req, res) => {
+  const { key } = req.body;
+  if (!key) return null;
 
-//   const value = CONFIG[key];
+  const value = CONFIG[key];
 
-//   return res.json({ value });
-// };
+  return res.json({ value });
+};
 
 //api receive endpoint for displayer
 export const apiEndpointController = async (req, res) => {
   try {
     const inputParams = req.body;
+    const { source } = inputParams;
+
     console.log("API INCOMING DATA");
     console.log(inputParams);
 
-    const data = await handleIncomingAPI(inputParams);
-    console.log("API INCOMING RESPONSE");
-    console.log(data);
+    //ignore everything not from scraper
+    if (source !== "scraper") return null;
 
-    return res.json(data);
+    //update state
+    const { [source]: _, ...updateObj } = inputParams;
+    state = { ...updateObj };
+
+    return res.json(state);
   } catch (e) {
     console.error(e);
     return res.status(500).json({ e: "DISPLAYER FAILED TO GET INCOMING API DATA" });

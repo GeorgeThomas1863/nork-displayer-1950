@@ -1,8 +1,9 @@
 // import { adminState, updateAdminStateDataLoaded } from "./util/state.js";
-import { adminState } from "./util/state.js";
+import { adminState } from "./util/state-front.js";
 import { buildAdminForm } from "./forms/admin-form.js";
+import { sendToBack } from "./util/api-front.js";
 // // import { buildAdminParams } from "./util.js";
-// import { sendToBack } from "./util/api-front.js";
+
 // import { buildAdminBackendDisplay } from "./admin/admin-return.js";
 // import { checkNewDataNeededAdmin } from "./util/check-data.js";
 
@@ -22,26 +23,32 @@ export const buildAdminDisplay = async () => {
   const adminFormData = await buildAdminForm();
   adminDisplayElement.append(adminFormData);
 
-  //   const newDataNeededAdmin = await checkNewDataNeededAdmin();
-  //   if (!newDataNeededAdmin) return null;
-
-  //   const adminBackendData = await sendToBack(adminState);
-  //   if (!adminBackendData) return null;
-
-  //   const adminBackendDisplay = await buildAdminBackendDisplay(adminBackendData);
-
-  //   //on fail
-  //   if (!adminBackendDisplay) {
-  //     await adminDisplayFail();
-  //     return null;
-  //   }
-
-  //   adminDisplayElement.append(adminBackendDisplay);
-
-  //   await updateAdminStateDataLoaded(adminBackendData);
-
-  //   return "#DONE";
+  const pollData = await sendToBack({ route: "/polling-route" });
+  console.log("POLL DATA");
+  console.dir(pollData);
 };
+
+buildAdminDisplay();
+
+//   const newDataNeededAdmin = await checkNewDataNeededAdmin();
+//   if (!newDataNeededAdmin) return null;
+
+//   const adminBackendData = await sendToBack(adminState);
+//   if (!adminBackendData) return null;
+
+//   const adminBackendDisplay = await buildAdminBackendDisplay(adminBackendData);
+
+//   //on fail
+//   if (!adminBackendDisplay) {
+//     await adminDisplayFail();
+//     return null;
+//   }
+
+//   adminDisplayElement.append(adminBackendDisplay);
+
+//   await updateAdminStateDataLoaded(adminBackendData);
+
+//   return "#DONE";
 
 // export const adminDisplayFail = async () => {
 //   const adminFailElement = document.createElement("h1");
@@ -57,5 +64,3 @@ export const buildAdminDisplay = async () => {
 
 //   return true;
 // };
-
-buildAdminDisplay();
