@@ -2,14 +2,18 @@
 
 //POLLING WORKING
 
-import CONFIG from "./config/config.js";
 import express from "express";
+import session from "express-session";
 import cors from "cors";
 import routes from "./routes/router.js";
+
+import CONFIG from "./config/config.js";
 
 const { expressPicPath, expressVidPath, expressWatchPath, expressConfigPublicPath, picPath, vidPath, watchPath, scrapePort, displayPort } = CONFIG;
 
 const app = express();
+
+app.use(session(CONFIG.buildSessionConfig()));
 
 //custom paths to expose to frontend
 app.use(expressPicPath, express.static(picPath));
