@@ -97,6 +97,10 @@ h3 {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
+#auth-pw-list-item {
+  margin-bottom: 1.5rem;
+}
+
 #auth-label {
   display: block;
   text-align: center;
@@ -106,10 +110,6 @@ h3 {
   font-size: 1.6rem;
   color: #374151;
   letter-spacing: 0.025em;
-  margin-bottom: 1.5rem;
-}
-
-#auth-pw-input {
   margin-bottom: 1.5rem;
 }
 
