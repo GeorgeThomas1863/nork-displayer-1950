@@ -15,16 +15,15 @@ export const getBackendValueController = async (req, res) => {
 export const apiEndpointController = async (req, res) => {
   try {
     const inputParams = req.body;
-    const { source } = inputParams;
 
     console.log("API INCOMING DATA");
     console.log(inputParams);
 
     //ignore everything not from scraper
-    if (source !== "scraper") return null;
+    if (inputParams.source !== "scraper") return null;
 
     //update state
-    const { [source]: _, ...updateObj } = inputParams;
+    const { [inputParams.source]: _, ...updateObj } = inputParams;
     state = { ...updateObj };
 
     return res.json(state);
