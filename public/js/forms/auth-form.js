@@ -87,7 +87,7 @@ export const buildAdminAuthPwListItem = async () => {
   const adminAuthPwLabel = document.createElement("label");
   adminAuthPwLabel.id = "admin-auth-label";
   adminAuthPwLabel.setAttribute("for", "admin-auth-pw-input");
-  adminAuthPwLabel.textContent = "Welcome to the Nork Tracker 5000";
+  adminAuthPwLabel.textContent = "Admin Auth";
 
   const adminAuthPwWrapper = document.createElement("div");
   adminAuthPwWrapper.className = "password-input-wrapper";
@@ -99,7 +99,7 @@ export const buildAdminAuthPwListItem = async () => {
   adminAuthPwInput.className = "password-input";
 
   // REMOVE LATER / ALSO REMOVE FROM PARAMS
-  adminAuthPwInput.placeholder = "Input the site password here";
+  adminAuthPwInput.placeholder = "Admin Password";
   //authPwInput.placeholder = "nork";
 
   const toggleAdminAuthPwButton = document.createElement("button");
