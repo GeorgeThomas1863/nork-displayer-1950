@@ -178,7 +178,7 @@ export const buildButtonListItem = async () => {
   const button = document.createElement("button");
   button.id = "admin-submit-button";
   button.textContent = "Submit";
-  button.setAttribute("type", "submit");
+  button.setAttribute("type", "admin-command-submit");
 
   // Create list item for button
   const buttonListItem = document.createElement("li");

@@ -1,3 +1,5 @@
+import { runAuth, runAdminCommand, runPwToggle } from "./run.js";
+
 import { getAdminCommandParams } from "./util/params.js";
 import { changeAdminForm } from "./forms/form-change.js";
 import { sendToBack } from "./util/api-front.js";
@@ -6,23 +8,17 @@ export const adminClickHandler = async (e) => {
   e.preventDefault();
 
   const clickElement = e.target;
+  const clickId = clickElement.id;
   const clickType = clickElement.getAttribute("type");
 
+  console.log("CLICK ID");
+  console.log(clickId);
   console.log("CLICK TYPE");
   console.log(clickType);
 
-  if (clickType !== "submit") return null;
-
-  const adminCommandParams = await getAdminCommandParams();
-  if (!adminCommandParams) return null;
-  adminCommandParams.route = "/send-admin-command-route";
- 
-  console.log("ADMIN COMMAND PARAMS");
-  console.dir(adminCommandParams);
-
-  const data = await sendToBack(adminCommandParams);
-  console.log("ADMIN COMMAND DATA");
-  console.dir(data);
+  if (clickType === "pwToggle") await runPwToggle();
+  if (clickType === "auth-submit") await runAuth();
+  if (clickType === "admin-command-submit") await runAdminCommand();
 
   //   await updateAdminStateEventTriggered(clickType);
 
@@ -59,9 +55,20 @@ export const adminChangeHandler = async (e) => {
   // await buildDisplay();
 };
 
+const authElement = document.getElementById("auth-element");
 const adminDisplayElement = document.getElementById("admin-display-element");
+const displayElement = document.getElementById("display-element");
+
+if (authElement) {
+  authElement.addEventListener("click", clickHandler);
+  authElement.addEventListener("keydown", keyHandler);
+}
 
 if (adminDisplayElement) {
   adminDisplayElement.addEventListener("click", adminClickHandler);
   adminDisplayElement.addEventListener("change", adminChangeHandler);
+}
+
+if (displayElement) {
+  //BUILD
 }
