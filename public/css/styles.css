@@ -98,7 +98,7 @@ h3 {
 }
 
 #auth-pw-list-item {
-  margin-bottom: 2cap;
+  margin-bottom: 2rem;
 }
 
 #auth-label {
@@ -114,6 +114,7 @@ h3 {
 }
 
 #auth-button {
+  margin-top: 0;
   width: 100%;
   padding: 0.75rem 1.5rem;
   background-color: #3b82f6;
