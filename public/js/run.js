@@ -1,4 +1,4 @@
-import { getAuthParams, getAdminCommandParams } from "./util/params.js";
+import { getAuthParams, getAdminAuthParams, getAdminCommandParams } from "./util/params.js";
 import { sendToBack } from "./util/api-front.js";
 import { EYE_OPEN_SVG, EYE_CLOSED_SVG } from "./util/define-things.js";
 

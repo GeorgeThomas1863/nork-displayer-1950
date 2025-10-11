@@ -151,6 +151,76 @@ h3 {
 
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
+/* ----------------------------------- */
+
+/* ADMIN AUTH FORM STYLES [MAKE REDUNDANT AND DELETE]*/
+
+/* ------------------------------------- */
+
+#admin-auth-form-wrapper {
+  list-style: none;
+  margin: 1rem auto;
+  padding: 1.5rem 3rem;
+  max-width: 400px;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+#admin-auth-pw-list-item {
+  margin-bottom: 1.5rem;
+}
+
+#admin-auth-label {
+  display: block;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  font-size: 1.7rem;
+  color: #374151;
+  letter-spacing: 0.025em;
+  margin-bottom: 1rem;
+}
+
+#admin-auth-button {
+  margin-top: 0;
+  width: 100%;
+  padding: 0.75rem 1.5rem;
+  background-color: #3b82f6;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: inherit;
+  letter-spacing: 0.025em;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+#admin-auth-pw-list-item:hover {
+  cursor: pointer;
+}
+
+#admin-auth-button:hover {
+  background-color: #2563eb;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+}
+
+#admin-auth-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.15);
+}
+
+#admin-auth-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+}
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
 /* '''''''''''''''''''''''''''''''''''''''' */
 
 /* MAIN FORM STYLESs */
