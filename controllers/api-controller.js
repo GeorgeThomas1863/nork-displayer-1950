@@ -1,6 +1,6 @@
 import axios from "axios";
 import CONFIG from "../config/config.js";
-import kcnaState from "../src/state-back.js";
+import kcnaState from "../src/state-kcna.js";
 
 export const getBackendValueController = async (req, res) => {
   const { key } = req.body;
