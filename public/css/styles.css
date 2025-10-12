@@ -86,7 +86,7 @@ h3 {
 
 /* ------------------------------------- */
 
-#auth-form-wrapper {
+/* #auth-form-wrapper {
   list-style: none;
   margin: 1rem auto;
   padding: 1.5rem 3rem;
@@ -114,4 +114,4 @@ h3 {
 
 #auth-pw-list-item:hover {
   cursor: pointer;
-}
+} */
