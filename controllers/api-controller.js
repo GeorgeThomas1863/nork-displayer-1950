@@ -1,6 +1,6 @@
 import axios from "axios";
 import CONFIG from "../config/config.js";
-import state from "../src/state-back.js";
+import kcnaState from "../src/state-back.js";
 
 export const getBackendValueController = async (req, res) => {
   const { key } = req.body;
@@ -22,11 +22,15 @@ export const apiEndpointController = async (req, res) => {
     //ignore everything not from scraper
     if (inputParams.source !== "scraper") return null;
 
-    //update state
+    // other update method, could be easier / better
+    // delete inputParams.source;
+    // kcnaState = inputParams;
+
+    //update state with loop
     const { [inputParams.source]: _, ...updateObj } = inputParams;
     for (let key in updateObj) {
       if (updateObj[key] === null) continue;
-      state[key] = updateObj[key];
+      kcnaState[key] = updateObj[key];
     }
 
     return res.json(state);
