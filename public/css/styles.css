@@ -120,7 +120,6 @@ h3 {
   letter-spacing: -0.01em;
   line-height: 1.4;
   text-align: center;
-  /* flex: 1;  */
 }
 
 .collapse-arrow {
@@ -129,7 +128,7 @@ h3 {
   align-items: center;
   width: 28px;
   height: 28px;
-  margin-right: 14px;
+  margin-right: 1rem;
   background-color: #f2f3f5;
   border-radius: 50%;
   flex-shrink: 0;
