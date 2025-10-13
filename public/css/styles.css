@@ -170,6 +170,7 @@ h3 {
 }
 
 .wrapper .collapse-header {
+  margin: 0 auto;
   padding: 1rem 2rem;
   border-radius: 12px 12px 0 0;
   margin-bottom: 0;
@@ -467,7 +468,7 @@ h3 {
   display: flex;
   flex-direction: column;
   margin: 0;
-  padding: 2rem;
+  padding: 1rem;
   background-color: #ffffff;
   /* border-radius: 12px; */
   transition: all 0.3s ease;
