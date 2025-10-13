@@ -1,4 +1,4 @@
-import { runAuth, runAdminAuth, runAdminCommand, runPwToggle } from "./run.js";
+import { runAuth, runAdminAuth, runAdminCommand, runPwToggle, runDropDownToggle } from "./run.js";
 import { changeAdminForm } from "./forms/form-change.js";
 
 export const clickHandler = async (e) => {
@@ -13,10 +13,28 @@ export const clickHandler = async (e) => {
   console.log("CLICK TYPE");
   console.log(clickType);
 
-  if (clickType === "pwToggle") await runPwToggle();
-  if (clickType === "auth-submit") await runAuth();
-  if (clickType === "admin-auth-submit") await runAdminAuth();
-  if (clickType === "admin-command-submit") await runAdminCommand();
+  switch (clickType) {
+    case "auth-submit":
+      await runAuth();
+      break;
+    case "admin-auth-submit":
+      await runAdminAuth();
+      break;
+    case "admin-command-submit":
+      await runAdminCommand();
+      break;
+    case "pwToggle":
+      await runPwToggle();
+      break;
+    case "dropdown":
+      await runDropDownToggle();
+      break;
+  }
+
+  // if (clickType === "pwToggle") await runPwToggle();
+  // if (clickType === "auth-submit") await runAuth();
+  // if (clickType === "admin-auth-submit") await runAdminAuth();
+  // if (clickType === "admin-command-submit") await runAdminCommand();
 
   //   //run thing
   //   // console.log("AHHHHHHHHHHH");

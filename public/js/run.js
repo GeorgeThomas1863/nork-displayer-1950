@@ -1,5 +1,6 @@
 import { getAuthParams, getAdminAuthParams, getAdminCommandParams } from "./util/params.js";
 import { sendToBack } from "./util/api-front.js";
+import { hideArray, unhideArray } from "./util/util.js";
 import { EYE_OPEN_SVG, EYE_CLOSED_SVG } from "./util/define-things.js";
 
 export const runAuth = async () => {
@@ -69,6 +70,17 @@ export const runPwToggle = async () => {
     pwButton.innerHTML = EYE_CLOSED_SVG;
     pwInput.type = "password";
   }
+
+  return true;
+};
+
+export const runDropDownToggle = async () => {
+  const dropDownButtonWrapper = document.getElementById("drop-down-button-wrapper");
+  if (!dropDownButtonWrapper) return null;
+
+  const isHidden = dropDownButtonWrapper.classList.contains("hidden");
+
+  isHidden ? await unhideArray([dropDownButtonWrapper]) : await hideArray([dropDownButtonWrapper]);
 
   return true;
 };
