@@ -86,6 +86,6 @@ export const runDropDownToggle = async () => {
 };
 
 export const runAdminTrigger = async () => {
-  const data = await sendToBack({ route: "/admin" });
-  return data;
+  await sendToBack({ route: "/admin" });
+  return true;
 };
