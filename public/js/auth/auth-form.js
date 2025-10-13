@@ -1,6 +1,6 @@
 import { EYE_CLOSED_SVG } from "../util/define-things.js";
 
-export const buildAuthForm = async () => {
+export const buildAuthMainForm = async () => {
   const authFormWrapper = document.createElement("ul");
   authFormWrapper.id = "auth-form-wrapper";
 
@@ -68,7 +68,7 @@ export const buildAuthButtonListItem = async () => {
 
 //MAKE REDUNDANT
 
-export const buildAdminAuthForm = async () => {
+export const buildAuthAdminForm = async () => {
   const adminAuthFormWrapper = document.createElement("ul");
   adminAuthFormWrapper.id = "admin-auth-form-wrapper";
 
