@@ -28,7 +28,7 @@ router.post(adminCommandRoute, requireAuth, adminCommandController);
 
 router.post("/get-backend-value-route", requireAuth, getBackendValueController);
 
-router.post("/admin", adminDisplay);
+router.post("/admin", requireAdminAuth, adminDisplay);
 
 router.get("/", requireAuth, mainDisplay);
 
