@@ -196,18 +196,18 @@ h3 {
   transition: all 0.2s ease;
 }
 
-/* .password-input:hover {
-  border-color: #a0aec0;
-} */
+.password-input:hover {
+  border-color: #3b82f6;
+}
 
 .password-input:focus {
-  border-color: #4a90e2;
+  border-color: #3b82f6;
   box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
 }
 
-/* .password-input::placeholder {
+.password-input::placeholder {
   color: #a0aec0;
-} */
+}
 
 /* === PASSWORD TOGGLE BUTTON === */
 .password-toggle-btn {
@@ -226,8 +226,31 @@ h3 {
   transition: color 0.2s ease;
 }
 
+/* OLD VERSION */
+/* .password-toggle-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+  transition: color 0.15s ease;
+} */
+
 .password-toggle-btn:hover {
-  color: #4a5568;
+  color: #374151;
+}
+
+.password-toggle-btn:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
 }
 
 .password-toggle-btn svg {
@@ -277,9 +300,9 @@ h3 {
 
 #auth-form-wrapper,
 #admin-auth-form-wrapper {
-  margin: 1rem auto;
+  margin: 1.5rem auto;
   max-width: 400px;
-  padding: 1rem 2rem;
+  padding: 1.5rem 2rem;
   background: #fafbfc;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -287,25 +310,26 @@ h3 {
 
 #auth-form-wrapper li,
 #admin-auth-form-wrapper li {
-  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 1.5rem;
 }
 
-#auth-form-wrapper li:last-child,
+#auth-pw-list-item {
+  margin-bottom: 2rem;
+}
+
+/* #auth-form-wrapper li:last-child,
 #admin-auth-form-wrapper li:last-child {
   margin-bottom: 0;
   margin-top: 28px;
-}
+} */
 
 #auth-label {
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 1.8rem;
+  font-weight: 700;
   text-align: center;
   color: #2d3748;
-  margin-bottom: 12px;
-  line-height: 1.5;
 }
 
 /* +++++++++++++++++++++++++++++++++++++++ */
