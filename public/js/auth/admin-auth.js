@@ -1,4 +1,4 @@
-import { buildAdminAuthForm } from "./forms/auth-form.js";
+import { buildAdminAuthForm } from "../auth-form.js";
 
 const adminAuthElement = document.getElementById("admin-auth-element");
 

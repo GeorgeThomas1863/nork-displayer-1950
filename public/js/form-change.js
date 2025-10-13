@@ -1,4 +1,4 @@
-import { hideArray, unhideArray } from "../util/util.js";
+import { hideArray, unhideArray } from "./util/util.js";
 
 export const changeAdminForm = async () => {
   const howMuchElement = document.getElementById("admin-how-much");

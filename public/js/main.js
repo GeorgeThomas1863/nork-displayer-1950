@@ -1,6 +1,6 @@
 import stateFront from "./util/state-front.js";
-import { buildDropDownForm } from "./forms/drop-down-form.js";
-// import { buildInputForms } from "./forms/input-forms.js";
+import { buildDropDownForm } from "./util/drop-down-form.js";
+import { buildInputForms } from "./input-forms.js";
 
 const displayElement = document.getElementById("display-element");
 
@@ -10,7 +10,7 @@ export const buildDisplay = async () => {
 
   if (isFirstLoad) {
     const dropDownElement = await buildDropDownForm();
-    // const inputFormWrapper = await buildInputForms();
+    const inputFormWrapper = await buildInputForms();
 
     displayElement.append(dropDownElement);
 

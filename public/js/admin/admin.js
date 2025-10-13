@@ -1,6 +1,6 @@
-import stateFront from "./util/state-front.js";
-import { buildAdminForm } from "./forms/admin-form.js";
-import { sendToBack } from "./util/api-front.js";
+import stateFront from "../util/state-front.js";
+import { buildAdminForm } from "./admin-form.js";
+import { sendToBack } from "../util/api-front.js";
 // // import { buildAdminParams } from "./util.js";
 
 // import { buildAdminBackendDisplay } from "./admin/admin-return.js";
