@@ -343,12 +343,10 @@ h3 {
   padding: 1.5rem 2rem;
 }
 
-/* === FORM LIST ITEMS === */
 #admin-form-wrapper li {
   margin-bottom: 1.5rem;
   display: flex;
   flex-direction: column;
-  /* gap: 8px; */
 }
 
 #admin-form-wrapper li.hidden {
