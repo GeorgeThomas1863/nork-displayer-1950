@@ -460,11 +460,11 @@ h3 {
 
 #input-form-wrapper > * {
   flex: 1;
+  max-width: 300px;
   min-width: 0;
 }
 
 .input-type-wrapper {
-  max-width: 300px;
   display: flex;
   flex-direction: column;
   margin: 0;
