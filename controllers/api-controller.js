@@ -33,7 +33,7 @@ export const apiEndpointController = async (req, res) => {
       kcnaState[key] = updateObj[key];
     }
 
-    return res.json(state);
+    return res.json(kcnaState);
   } catch (e) {
     console.error(e);
     return res.status(500).json({ e: "DISPLAYER FAILED TO GET INCOMING API DATA" });
