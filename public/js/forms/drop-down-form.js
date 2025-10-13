@@ -54,7 +54,8 @@ export const buildDropDownButtons = async () => {
 
     //add admin link
     if (dropDownButtonArray[i].id === "admin-drop-down-button") {
-      button.appendChild(adminLink);
+      adminLink.appendChild(button);
+      li.appendChild(adminLink);
     }
 
     li.appendChild(button);
