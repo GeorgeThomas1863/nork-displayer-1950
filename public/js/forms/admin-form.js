@@ -3,7 +3,6 @@ import { buildCollapseContainer } from "../util/collapse.js";
 export const buildAdminForm = async () => {
   const adminFormWrapper = document.createElement("ul");
   adminFormWrapper.id = "admin-form-wrapper";
-  adminFormWrapper.className = "collapse-content";
 
   const commandListItem = await buildCommandListItem();
   const targetListItem = await buildTargetListItem();
@@ -29,7 +28,8 @@ export const buildAdminForm = async () => {
   };
 
   const adminFormCollapseContainer = await buildCollapseContainer(adminFormCollapseParams);
-  adminFormCollapseContainer.className = "admin-wrapper";
+  adminFormCollapseContainer.className = "wrapper";
+  adminFormCollapseContainer.id = "admin-form-collapse-container";
 
   return adminFormCollapseContainer;
 };
