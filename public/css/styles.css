@@ -120,7 +120,7 @@ h3 {
   max-width: calc(100% - 3rem);
   letter-spacing: -0.01em;
   line-height: 1.4;
-  text-align: left;
+  text-align: center;
   flex: 1; /* MIGHT NEED TO REMOVE */
 }
 
