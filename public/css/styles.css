@@ -447,6 +447,22 @@ h3 {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
+/* -------------------------------------------------- */
+
+#input-form-wrapper {
+  margin: 1.5rem auto;
+  display: flex;
+  flex-direction: row;
+  gap: 5rem;
+  width: 80%;
+  align-items: flex-start;
+}
+
+#input-form-wrapper > * {
+  flex: 1;
+  min-width: 0;
+}
+
 /* +++++++++++++++++++++++++++++++++++++++ */
 
 /* -------------------------------------------------- */
