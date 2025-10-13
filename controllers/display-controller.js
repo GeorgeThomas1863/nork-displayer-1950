@@ -9,8 +9,12 @@ export const mainDisplay = async (req, res) => {
   res.sendFile(path.join(__dirname, "../html/index.html"));
 };
 
+// export const adminDisplay = (req, res) => {
+//   res.sendFile(path.join(__dirname, "../html/admin.html"));
+// };
+
 export const adminDisplay = (req, res) => {
-  res.sendFile(path.join(__dirname, "../html/admin.html"));
+  res.redirect(path.join(__dirname, "../html/admin.html"));
 };
 
 export const display401 = (req, res) => {
