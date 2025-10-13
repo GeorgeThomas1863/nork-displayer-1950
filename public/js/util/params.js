@@ -1,4 +1,4 @@
-import { adminState } from "./state-front.js";
+import stateFront from "./state-front.js";
 
 export const getAuthParams = async () => {
   const authPwInput = document.getElementById("auth-pw-input");
@@ -39,7 +39,7 @@ export const getAdminCommandParams = async () => {
       command: document.getElementById("admin-command-type").value,
       howMuch: document.getElementById("admin-how-much").value,
       scrapeURL: document.getElementById("admin-url-input").value,
-      scrapeId: adminState.scrapeId,
+      scrapeId: stateFront.scrapeId,
     };
 
     return params;
