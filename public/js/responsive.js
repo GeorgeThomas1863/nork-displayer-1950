@@ -18,8 +18,6 @@ export const clickHandler = async (e) => {
   if (clickType === "admin-auth-submit") await runAdminAuth();
   if (clickType === "admin-command-submit") await runAdminCommand();
 
-  //   await updateAdminStateEventTriggered(clickType);
-
   //   //run thing
   //   // console.log("AHHHHHHHHHHH");
   //   await buildAdminDisplay();
