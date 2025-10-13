@@ -87,7 +87,6 @@ h3 {
 /* ----------------------------------------------------- */
 
 .collapse-header {
-  margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -121,7 +120,7 @@ h3 {
   letter-spacing: -0.01em;
   line-height: 1.4;
   text-align: center;
-  flex: 1; /* MIGHT NEED TO REMOVE */
+  /* flex: 1;  */
 }
 
 .collapse-arrow {
