@@ -1,6 +1,6 @@
-import { buildArticleForm } from "../articles/article-form.js";
-import { buildPicForm } from "../pics/pic-form.js";
-import { buildVidForm } from "../vids/vid-form.js";
+import { buildArticleForm } from "../articles/articles-form.js";
+import { buildPicForm } from "../pics/pics-form.js";
+import { buildVidForm } from "../vids/vids-form.js";
 // import { buildWatchForm } from "../watch/watch-form.js";
 import { defineCollapseItems } from "../util/collapse-display.js";
 
