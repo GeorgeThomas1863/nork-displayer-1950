@@ -1,8 +1,8 @@
 import { buildArticleForm } from "../articles/article-form.js";
 import { buildPicForm } from "../pics/pic-form.js";
 import { buildVidForm } from "../vids/vid-form.js";
-import { buildWatchForm } from "../watch/watch-form.js";
-import { defineCollapseItems } from "./util/collapse.js";
+// import { buildWatchForm } from "../watch/watch-form.js";
+import { defineCollapseItems } from "../util/collapse-display.js";
 
 export const buildInputForms = async () => {
   const inputFormWrapper = document.createElement("div");
@@ -17,9 +17,10 @@ export const buildInputForms = async () => {
   const vidFormWrapper = await buildVidForm();
 
   //try adding as collapse "group"
-  await defineCollapseItems([articleFormWrapper, picFormWrapper, vidFormWrapper, watchFormWrapper]);
+  // await defineCollapseItems([articleFormWrapper, picFormWrapper, vidFormWrapper, watchFormWrapper]);
+  await defineCollapseItems([articleFormWrapper, picFormWrapper, vidFormWrapper]);
 
-  formWrapperElement.append(articleFormWrapper, picFormWrapper, vidFormWrapper, watchFormWrapper);
+  inputFormWrapper.append(articleFormWrapper, picFormWrapper, vidFormWrapper);
 
-  return formWrapperElement;
+  return inputFormWrapper;
 };

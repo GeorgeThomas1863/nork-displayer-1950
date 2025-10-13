@@ -1,4 +1,4 @@
-import { runAuth, runAdminAuth, runAdminCommand, runPwToggle, runDropDownToggle, runAdminRedirect, runAdminToggleURL } from "./run.js";
+import { runAuth, runAdminAuth, runAdminCommand, runPwToggle, runDropDownToggle, runAdminToggleURL } from "./run.js";
 
 export const clickHandler = async (e) => {
   e.preventDefault();

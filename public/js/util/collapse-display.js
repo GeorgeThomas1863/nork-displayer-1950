@@ -1,3 +1,17 @@
+export const hideArray = async (inputs) => {
+  for (const input of inputs) {
+    if (!input) continue;
+    input.classList.add("hidden");
+  }
+};
+
+export const unhideArray = async (inputs) => {
+  for (const input of inputs) {
+    if (!input) continue;
+    input.classList.remove("hidden");
+  }
+};
+
 export const buildCollapseContainer = async (inputObj) => {
   if (!inputObj || !inputObj.titleElement || !inputObj.contentElement) return null;
   const { titleElement, contentElement, isExpanded = false, className = "", dataAttribute = "" } = inputObj;

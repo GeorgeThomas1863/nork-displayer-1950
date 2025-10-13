@@ -1,6 +1,6 @@
 import { getAuthParams, getAdminAuthParams, getAdminCommandParams } from "./util/params.js";
 import { sendToBack } from "./util/api-front.js";
-import { hideArray, unhideArray } from "./util/util.js";
+import { hideArray, unhideArray } from "./util/collapse-display.js";
 import { EYE_OPEN_SVG, EYE_CLOSED_SVG } from "./util/define-things.js";
 
 export const runAuth = async () => {

@@ -1,4 +1,4 @@
-import { buildCollapseContainer } from "../util/collapse.js";
+import { buildCollapseContainer } from "../util/collapse-display.js";
 
 export const buildAdminForm = async () => {
   const adminFormWrapper = document.createElement("ul");
