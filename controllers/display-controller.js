@@ -14,7 +14,7 @@ export const mainDisplay = async (req, res) => {
 // };
 
 export const adminDisplay = (req, res) => {
-  res.redirect(path.join(__dirname, "../html/admin.html"));
+  res.redirect("/admin.html");
 };
 
 export const display401 = (req, res) => {
