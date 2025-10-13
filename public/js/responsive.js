@@ -62,8 +62,8 @@ export const changeHandler = async (e) => {
 
 const authElement = document.getElementById("auth-element");
 const adminAuthElement = document.getElementById("admin-auth-element");
-const adminDisplayElement = document.getElementById("admin-display-element");
 const displayElement = document.getElementById("display-element");
+const adminDisplayElement = document.getElementById("admin-display-element");
 
 if (authElement) {
   authElement.addEventListener("click", clickHandler);
@@ -75,11 +75,12 @@ if (adminAuthElement) {
   adminAuthElement.addEventListener("keydown", keyHandler);
 }
 
+if (displayElement) {
+  displayElement.addEventListener("click", clickHandler);
+  displayElement.addEventListener("keydown", keyHandler);
+}
+
 if (adminDisplayElement) {
   adminDisplayElement.addEventListener("click", clickHandler);
   adminDisplayElement.addEventListener("change", changeHandler);
-}
-
-if (displayElement) {
-  //BUILD
 }
