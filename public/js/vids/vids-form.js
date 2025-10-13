@@ -4,7 +4,7 @@ import { buildCollapseContainer } from "../util/collapse-display.js";
 export const buildVidsForm = async () => {
   const vidWrapper = document.createElement("ul");
   vidWrapper.id = "vid-wrapper";
-  vidWrapper.className = "wrapper collapse-content";
+  vidWrapper.className = "input-type-wrapper";
 
   // const vidTypeListItem = await buildVidTypeListItem();
   const vidHowManyListItem = await buildVidHowManyListItem();
@@ -13,7 +13,7 @@ export const buildVidsForm = async () => {
   vidWrapper.append(vidHowManyListItem, vidSortByListItem);
 
   const titleElement = document.createElement("div");
-  titleElement.textContent = "KCNA Vids";
+  titleElement.textContent = "Vids";
   // titleElement.setAttribute("data-expand", "vid-dropdown"); //for click listener
 
   //build collapse container

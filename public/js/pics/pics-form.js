@@ -4,7 +4,7 @@ import { buildCollapseContainer } from "../util/collapse-display.js";
 export const buildPicsForm = async () => {
   const picWrapper = document.createElement("ul");
   picWrapper.id = "pic-wrapper";
-  picWrapper.className = "wrapper collapse-content";
+  picWrapper.className = "input-type-wrapper";
 
   const titleElement = document.createElement("div");
   titleElement.textContent = "PICS";

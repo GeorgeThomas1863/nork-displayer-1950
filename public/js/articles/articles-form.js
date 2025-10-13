@@ -4,7 +4,7 @@ import { buildCollapseContainer } from "../util/collapse-display.js";
 export const buildArticlesForm = async () => {
   const articleWrapper = document.createElement("ul");
   articleWrapper.id = "article-wrapper";
-  articleWrapper.className = "wrapper collapse-content";
+  articleWrapper.className = "input-type-wrapper";
 
   //build FORM list items
   // const articleTypeListItem = await buildArticleTypeListItem();
