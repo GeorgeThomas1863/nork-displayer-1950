@@ -40,10 +40,6 @@ export const buildDropDownButtons = async () => {
     { id: "track-crypto-drop-down-button", text: "Track Crypto", class: "drop-down-button" },
   ];
 
-  //define admin link
-  const adminLink = document.createElement("a");
-  adminLink.href = "/admin";
-
   for (let i = 0; i < dropDownButtonArray.length; i++) {
     const li = document.createElement("li");
     const button = document.createElement("button");
@@ -52,10 +48,14 @@ export const buildDropDownButtons = async () => {
     button.textContent = dropDownButtonArray[i].text;
     button.className = dropDownButtonArray[i].class;
 
-    //add admin link
+    //add admin link HERE
     if (dropDownButtonArray[i].id === "admin-drop-down-button") {
+      const adminLink = document.createElement("a");
+      adminLink.href = "/admin";
       adminLink.appendChild(button);
       li.appendChild(adminLink);
+      dropDownButtonWrapper.appendChild(li);
+      continue;
     }
 
     li.appendChild(button);
