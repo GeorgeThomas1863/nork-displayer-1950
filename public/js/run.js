@@ -84,3 +84,8 @@ export const runDropDownToggle = async () => {
 
   return true;
 };
+
+export const runAdminRedirect = async () => {
+  window.location.href = "/admin";
+  return true;
+};

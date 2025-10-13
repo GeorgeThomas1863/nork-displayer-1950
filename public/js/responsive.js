@@ -1,4 +1,4 @@
-import { runAuth, runAdminAuth, runAdminCommand, runPwToggle, runDropDownToggle } from "./run.js";
+import { runAuth, runAdminAuth, runAdminCommand, runPwToggle, runDropDownToggle, runAdminRedirect } from "./run.js";
 import { changeAdminForm } from "./forms/form-change.js";
 
 export const clickHandler = async (e) => {
@@ -18,6 +18,7 @@ export const clickHandler = async (e) => {
   if (clickType === "admin-auth-submit") await runAdminAuth();
   if (clickType === "admin-command-submit") await runAdminCommand();
   if (clickType === "dropdown") await runDropDownToggle();
+  if (clickType === "admin-redirect") await runAdminRedirect();
 
   //   await updateAdminStateEventTriggered(clickType);
 

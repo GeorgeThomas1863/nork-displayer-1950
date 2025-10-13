@@ -48,6 +48,10 @@ export const buildDropDownButtons = async () => {
     button.textContent = dropDownButtonArray[i].text;
     button.className = dropDownButtonArray[i].class;
 
+    if (dropDownButtonArray[i].id === "admin-drop-down-button") {
+      button.setAttribute("data-label", "admin-redirect");
+    }
+
     li.appendChild(button);
     dropDownButtonWrapper.appendChild(li);
   }
