@@ -13,6 +13,8 @@ export const buildDisplay = async () => {
   if (isFirstLoad) {
     const dropDownElement = await buildDropDownForm();
     // const inputFormWrapper = await buildInputForms();
+    console.log("DROP DOWN ELEMENT");
+    console.dir(dropDownElement);
 
     displayElement.append(dropDownElement);
 
