@@ -1,4 +1,4 @@
-import { buildCollapseContainer } from "../util/collapse-displays.js";
+import { buildCollapseContainer } from "../util/collapse-display.js";
 
 //VID FORM ELEMENTS
 export const buildVidsForm = async () => {
