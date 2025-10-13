@@ -24,12 +24,12 @@ export const buildAdminForm = async () => {
     titleElement: titleElement,
     contentElement: adminFormWrapper,
     isExpanded: true,
-    className: "admin-form-wrapper-collapse",
+    className: "admin-form-collapse",
     dataAttribute: "admin-form-header",
   };
 
   const adminFormCollapseContainer = await buildCollapseContainer(adminFormCollapseParams);
-  adminFormCollapseContainer.className = "wrapper";
+  adminFormCollapseContainer.className = "admin-wrapper";
 
   return adminFormCollapseContainer;
 };
