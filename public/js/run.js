@@ -85,7 +85,18 @@ export const runDropDownToggle = async () => {
   return true;
 };
 
-export const runAdminRedirect = async () => {
-  window.location.href = "/admin";
+// export const runAdminRedirect = async () => {
+//   window.location.href = "/admin";
+//   return true;
+// };
+
+export const runAdminToggleURL = async () => {
+  const howMuchElement = document.getElementById("admin-how-much");
+  const urlListItem = document.getElementById("admin-url-input-list-item");
+  if (!howMuchElement || !urlListItem) return null;
+
+  howMuchElement.value === "admin-scrape-url" ? unhideArray([urlListItem]) : hideArray([urlListItem]);
+
   return true;
+  s;
 };

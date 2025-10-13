@@ -1,5 +1,7 @@
+//MAIN PAGE
+
 import stateFront from "./util/state-front.js";
-import { buildDropDownForm } from "./util/drop-down-form.js";
+import { buildDropDownForm } from "./main-display/drop-down-form.js";
 import { buildInputForms } from "./input-forms.js";
 
 const displayElement = document.getElementById("display-element");

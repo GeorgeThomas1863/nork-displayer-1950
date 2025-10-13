@@ -1,5 +1,4 @@
-import { runAuth, runAdminAuth, runAdminCommand, runPwToggle, runDropDownToggle, runAdminRedirect } from "./run.js";
-import { changeAdminForm } from "./forms/form-change.js";
+import { runAuth, runAdminAuth, runAdminCommand, runPwToggle, runDropDownToggle, runAdminRedirect, runAdminToggleURL } from "./run.js";
 
 export const clickHandler = async (e) => {
   e.preventDefault();
@@ -18,7 +17,7 @@ export const clickHandler = async (e) => {
   if (clickType === "admin-auth-submit") await runAdminAuth();
   if (clickType === "admin-command-submit") await runAdminCommand();
   if (clickType === "dropdown") await runDropDownToggle();
-  if (clickType === "admin-redirect") await runAdminRedirect();
+  if (clickType === "admin-redirect") window.location.href = "/admin";
 
   //   await updateAdminStateEventTriggered(clickType);
 
@@ -61,7 +60,7 @@ export const changeHandler = async (e) => {
 
   if (changeId !== "admin-how-much") return null;
 
-  await changeAdminForm();
+  await runAdminToggleURL();
 };
 
 const authElement = document.getElementById("auth-element");
