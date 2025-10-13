@@ -331,6 +331,126 @@ h3 {
 
 /* -------------------------------------------------- */
 
+/* MAIN FORM STYLES */
+
+/* ------------------------------------- */
+
+#drop-down {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  margin-left: 0.5rem;
+  z-index: 100;
+  transition: all 0.3s ease;
+}
+
+/* When drop down buttons are visible, dropdown becomes part of document flow */
+#drop-down:has(#drop-down-button-wrapper:not(.hidden)) {
+  position: relative;
+  top: 0;
+  left: 0;
+  margin: 1rem;
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  width: fit-content;
+}
+
+#drop-down a span {
+  width: 100%;
+  height: 0.25rem;
+  background-color: black;
+}
+
+#drop-down:hover {
+  transform: scale(1.1);
+}
+
+/* Don't scale when action buttons are visible */
+#drop-down:has(#drop-down-button-wrapper:not(.hidden)):hover {
+  transform: none;
+}
+
+#drop-down-bars {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 2.5rem;
+  height: 2.5rem;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+#drop-down-menu-display {
+  box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.5);
+  background-color: white;
+  border-radius: 10px;
+  display: none;
+}
+
+#drop-down-menu-display h2 {
+  font-size: 3rem;
+  font-weight: bold;
+  padding: 1rem 2.5rem;
+  border: none;
+}
+
+#drop-down-menu-display h2:hover {
+  background-color: rgb(215, 215, 215);
+  border-radius: 10px;
+}
+
+/* -------------------------------------------------- */
+
+#drop-down-button-wrapper {
+  background-color: rgb(235, 235, 235);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+}
+
+#drop-down-button-wrapper li {
+  margin-bottom: 0;
+}
+
+.drop-down-button {
+  width: 100%;
+  min-width: 180px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  background-color: #b3d9ff;
+  color: #2c3e50;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.1s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.drop-down-button:hover {
+  background-color: #9cc9ff;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+}
+
+.drop-down-button:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* +++++++++++++++++++++++++++++++++++++++ */
+
+/* -------------------------------------------------- */
+
 /* ADMIN FORM STYLES */
 
 /* ------------------------------------- */

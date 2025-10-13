@@ -1,4 +1,3 @@
-// import { adminState, updateAdminStateDataLoaded } from "./util/state.js";
 import stateFront from "./util/state-front.js";
 import { buildAdminForm } from "./forms/admin-form.js";
 import { sendToBack } from "./util/api-front.js";
