@@ -1,6 +1,7 @@
-import { stateFront } from "./util/state-front.js";
+// import { adminState, updateAdminStateDataLoaded } from "./util/state.js";
+import { adminState } from "./util/state-front.js";
 import { buildAdminForm } from "./forms/admin-form.js";
-import { sendToBackPOST } from "./util/api-front.js";
+import { sendToBack } from "./util/api-front.js";
 // // import { buildAdminParams } from "./util.js";
 
 // import { buildAdminBackendDisplay } from "./admin/admin-return.js";
@@ -12,7 +13,7 @@ const adminDisplayElement = document.getElementById("admin-display-element");
 export const buildAdminDisplay = async () => {
   if (!adminDisplayElement) return null;
 
-  const { isFirstLoad } = stateFront;
+  const { isFirstLoad } = adminState;
 
   //if not first load, just append data
   if (!isFirstLoad) {
@@ -28,10 +29,10 @@ export const buildAdminDisplay = async () => {
 };
 
 export const pollBackend = async () => {
-  const pollInterval = await sendToBackPOST({ route: "/get-backend-value-route", key: "pollInterval" });
+  const pollInterval = await sendToBack({ route: "/get-backend-value-route", key: "pollInterval" });
 
   setInterval(async () => {
-    const data = await sendToBackPOST({ route: "/polling-route" });
+    const data = await sendToBack({ route: "/polling-route" });
     console.log("POLL DATA");
     console.dir(data);
     return data;

@@ -12,13 +12,9 @@ export const buildDisplay = async () => {
 
   if (isFirstLoad) {
     const dropDownElement = await buildDropDownForm();
-    // const inputFormWrapper = await buildInputForms();
-    console.log("DROP DOWN ELEMENT");
-    console.dir(dropDownElement);
+    const inputFormWrapper = await buildInputForms();
 
-    displayElement.append(dropDownElement);
-
-    // displayElement.append(dropDownElement, inputFormWrapper);
+    displayElement.append(dropDownElement, inputFormWrapper);
 
     // FIGURE OUT NON RETARDED WAY TO GET FIRST DATA
     // stateFront.isFirstLoad = false;

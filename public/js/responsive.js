@@ -1,4 +1,4 @@
-import { runAuth, runAdminAuth, runAdminCommand, runPwToggle, runDropDownToggle, runAdminTrigger } from "./run.js";
+import { runAuth, runAdminAuth, runAdminCommand, runPwToggle } from "./run.js";
 import { changeAdminForm } from "./forms/form-change.js";
 
 export const clickHandler = async (e) => {
@@ -13,31 +13,12 @@ export const clickHandler = async (e) => {
   console.log("CLICK TYPE");
   console.log(clickType);
 
-  switch (clickType) {
-    case "auth-submit":
-      await runAuth();
-      break;
-    case "admin-auth-submit":
-      await runAdminAuth();
-      break;
-    case "admin-command-submit":
-      await runAdminCommand();
-      break;
-    case "pwToggle":
-      await runPwToggle();
-      break;
-    case "dropdown":
-      await runDropDownToggle();
-      break;
-    case "admin-trigger":
-      await runAdminTrigger();
-      break;
-  }
+  if (clickType === "pwToggle") await runPwToggle();
+  if (clickType === "auth-submit") await runAuth();
+  if (clickType === "admin-auth-submit") await runAdminAuth();
+  if (clickType === "admin-command-submit") await runAdminCommand();
 
-  // if (clickType === "pwToggle") await runPwToggle();
-  // if (clickType === "auth-submit") await runAuth();
-  // if (clickType === "admin-auth-submit") await runAdminAuth();
-  // if (clickType === "admin-command-submit") await runAdminCommand();
+  //   await updateAdminStateEventTriggered(clickType);
 
   //   //run thing
   //   // console.log("AHHHHHHHHHHH");
@@ -83,8 +64,8 @@ export const changeHandler = async (e) => {
 
 const authElement = document.getElementById("auth-element");
 const adminAuthElement = document.getElementById("admin-auth-element");
-const displayElement = document.getElementById("display-element");
 const adminDisplayElement = document.getElementById("admin-display-element");
+const displayElement = document.getElementById("display-element");
 
 if (authElement) {
   authElement.addEventListener("click", clickHandler);
@@ -96,12 +77,11 @@ if (adminAuthElement) {
   adminAuthElement.addEventListener("keydown", keyHandler);
 }
 
-if (displayElement) {
-  displayElement.addEventListener("click", clickHandler);
-  displayElement.addEventListener("keydown", keyHandler);
-}
-
 if (adminDisplayElement) {
   adminDisplayElement.addEventListener("click", clickHandler);
   adminDisplayElement.addEventListener("change", changeHandler);
+}
+
+if (displayElement) {
+  //BUILD
 }
