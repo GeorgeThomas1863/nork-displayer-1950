@@ -72,3 +72,14 @@ export const runPwToggle = async () => {
 
   return true;
 };
+
+export const runDropDownToggle = async () => {
+  const dropDownButtonWrapper = document.getElementById("drop-down-button-wrapper");
+  if (!dropDownButtonWrapper) return null;
+
+  const isHidden = dropDownButtonWrapper.classList.contains("hidden");
+
+  isHidden ? await unhideArray([dropDownButtonWrapper]) : await hideArray([dropDownButtonWrapper]);
+
+  return true;
+};
