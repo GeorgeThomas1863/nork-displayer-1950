@@ -1,5 +1,5 @@
 import { getAuthParams, getAdminAuthParams, getAdminCommandParams } from "./util/params.js";
-import { sendToBack } from "./util/api-front.js";
+import { sendToBackGET, sendToBackPOST } from "./util/api-front.js";
 import { hideArray, unhideArray } from "./util/util.js";
 import { EYE_OPEN_SVG, EYE_CLOSED_SVG } from "./util/define-things.js";
 
@@ -7,7 +7,7 @@ export const runAuth = async () => {
   try {
     const authParams = await getAuthParams();
     authParams.route = "/site-auth-route";
-    const authData = await sendToBack(authParams);
+    const authData = await sendToBackPOST(authParams);
     if (!authData || !authData.redirect) return null;
 
     window.location.href = authData.redirect;
@@ -21,11 +21,11 @@ export const runAuth = async () => {
 export const runAdminAuth = async () => {
   try {
     const adminAuthParams = await getAdminAuthParams();
-    const adminAuthRoute = await sendToBack({ route: "/get-backend-value-route", key: "adminAuthRoute" });
+    const adminAuthRoute = await sendToBackPOST({ route: "/get-backend-value-route", key: "adminAuthRoute" });
     if (!adminAuthParams || !adminAuthRoute) return null;
     adminAuthParams.route = adminAuthRoute.value;
 
-    const authData = await sendToBack(adminAuthParams);
+    const authData = await sendToBackPOST(adminAuthParams);
     if (!authData || !authData.redirect) return null;
 
     window.location.href = authData.redirect;
@@ -39,14 +39,14 @@ export const runAdminAuth = async () => {
 export const runAdminCommand = async () => {
   try {
     const adminCommandParams = await getAdminCommandParams();
-    const adminCommandRoute = await sendToBack({ route: "/get-backend-value-route", key: "adminCommandRoute" });
+    const adminCommandRoute = await sendToBackPOST({ route: "/get-backend-value-route", key: "adminCommandRoute" });
     if (!adminCommandParams || !adminCommandRoute) return null;
     adminCommandParams.route = adminCommandRoute.value;
 
     console.log("ADMIN COMMAND PARAMS");
     console.dir(adminCommandParams);
 
-    const data = await sendToBack(adminCommandParams);
+    const data = await sendToBackPOST(adminCommandParams);
     console.log("ADMIN COMMAND DATA");
     console.dir(data);
   } catch (e) {
@@ -86,6 +86,6 @@ export const runDropDownToggle = async () => {
 };
 
 export const runAdminTrigger = async () => {
-  await sendToBack({ route: "/admin" });
+  await sendToBackGET({ route: "/admin" });
   return true;
 };

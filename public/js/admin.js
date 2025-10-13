@@ -1,6 +1,6 @@
 import { stateFront } from "./util/state-front.js";
 import { buildAdminForm } from "./forms/admin-form.js";
-import { sendToBack } from "./util/api-front.js";
+import { sendToBackPOST } from "./util/api-front.js";
 // // import { buildAdminParams } from "./util.js";
 
 // import { buildAdminBackendDisplay } from "./admin/admin-return.js";
@@ -28,10 +28,10 @@ export const buildAdminDisplay = async () => {
 };
 
 export const pollBackend = async () => {
-  const pollInterval = await sendToBack({ route: "/get-backend-value-route", key: "pollInterval" });
+  const pollInterval = await sendToBackPOST({ route: "/get-backend-value-route", key: "pollInterval" });
 
   setInterval(async () => {
-    const data = await sendToBack({ route: "/polling-route" });
+    const data = await sendToBackPOST({ route: "/polling-route" });
     console.log("POLL DATA");
     console.dir(data);
     return data;
