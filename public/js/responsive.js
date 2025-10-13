@@ -1,4 +1,4 @@
-import { runAuth, runAdminAuth, runAdminCommand, runPwToggle, runDropDownToggle } from "./run.js";
+import { runAuth, runAdminAuth, runAdminCommand, runPwToggle, runDropDownToggle, runAdminTrigger } from "./run.js";
 import { changeAdminForm } from "./forms/form-change.js";
 
 export const clickHandler = async (e) => {
@@ -28,6 +28,9 @@ export const clickHandler = async (e) => {
       break;
     case "dropdown":
       await runDropDownToggle();
+      break;
+    case "admin-trigger":
+      await runAdminTrigger();
       break;
   }
 

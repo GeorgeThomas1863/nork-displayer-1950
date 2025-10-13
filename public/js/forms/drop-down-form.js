@@ -50,12 +50,7 @@ export const buildDropDownButtons = async () => {
 
     //add admin link HERE
     if (dropDownButtonArray[i].id === "admin-drop-down-button") {
-      const adminLink = document.createElement("a");
-      adminLink.href = "/admin";
-      adminLink.appendChild(button);
-      li.appendChild(adminLink);
-      dropDownButtonWrapper.appendChild(li);
-      continue;
+      dropDownButtonArray[i].setAttribute("data-label", "admin-trigger");
     }
 
     li.appendChild(button);
