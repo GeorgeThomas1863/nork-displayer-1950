@@ -177,6 +177,7 @@ export const buildButtonListItem = async () => {
   // Create submit button
   const button = document.createElement("button");
   button.id = "admin-submit-button";
+  button.className = "btn-submit";
   button.textContent = "Submit";
   button.setAttribute("data-label", "admin-command-submit");
 
