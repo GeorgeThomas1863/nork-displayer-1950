@@ -466,8 +466,8 @@ h3 {
 .input-type-wrapper {
   display: flex;
   flex-direction: column;
-  margin: 1rem;
-  padding: 0;
+  margin: 0;
+  padding: 2rem;
   background-color: #ffffff;
   /* border-radius: 12px; */
   transition: all 0.3s ease;
@@ -477,24 +477,24 @@ h3 {
 }
 
 .input-type-wrapper:hover {
-  /* transform: translateY(-5px); */
+  transform: translateY(-5px);
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
 }
 
 /* Style the collapse header within wrapper */
-.input-type-wrapper .collapse-header {
+/* .input-type-wrapper .collapse-header {
   border-radius: 12px 12px 0 0;
   margin-bottom: 0;
-}
+} */
 
 /* Style the collapse content (the form) within wrapper */
-.input-type-wrapper .collapse-content {
+/* .input-type-wrapper .collapse-content {
   padding: 1.5rem;
   background-color: rgb(235, 235, 235);
   border-radius: 0 0 12px 12px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   margin: 0;
-}
+} */
 
 .input-type-wrapper li {
   display: flex;
