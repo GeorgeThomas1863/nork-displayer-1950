@@ -6,7 +6,7 @@ export const runUpdateData = async (inputParams) => {
   const { trigger, isFirstLoad } = inputParams;
 
   if (isFirstLoad) {
-    return await runFirstLoad();
+    return await runFirstLoad(inputParams);
   }
 
   const newDataNeeded = await checkNewDataNeeded(inputParams);
