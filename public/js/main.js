@@ -25,7 +25,9 @@ export const buildDisplay = async () => {
 };
 
 export const getUpdateData = async () => {
+  console.log("GET UPDATE DATA");
   const data = await sendToBack({ route: "/update-data-route", stateFront: stateFront });
+
   if (!data) return null;
 
   console.log("UPDATE DATA");

@@ -18,6 +18,9 @@ export const runFirstLoad = async (inputParams) => {
   const { articleType } = inputParams;
   const { defaultDataLoad } = CONFIG;
 
+  console.log("RUN FIRST LOAD");
+  console.log(inputParams);
+
   const params = {
     filterKey: "articleType",
     filterValue: articleType,
@@ -27,6 +30,10 @@ export const runFirstLoad = async (inputParams) => {
 
   const dataModel = new dbModel(params, "articleList");
   const dataArray = await dataModel.getNewestItemsByTypeArray();
+
+  console.log("DATA ARRAY");
+  console.dir(dataArray);
+
   return dataArray;
 };
 
