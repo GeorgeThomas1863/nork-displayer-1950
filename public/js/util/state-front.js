@@ -1,9 +1,12 @@
 const stateFront = {
   isFirstLoad: true,
   scrapeId: null,
+  trigger: null,
 
-  // dataReq: CONFIG.defaultInputMap,
-  // dataLoaded: CONFIG.defaultDataLoadedMap,
+  articleType: "fatboy",
+  picType: "pics",
+  vidType: "vids",
+  dataLoaded: null,
 };
 
 export default stateFront;

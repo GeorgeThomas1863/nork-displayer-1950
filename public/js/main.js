@@ -14,11 +14,26 @@ export const buildDisplay = async () => {
     const inputFormWrapper = await buildInputForms();
 
     displayElement.append(dropDownElement, inputFormWrapper);
-
-    // FIGURE OUT NON RETARDED WAY TO GET FIRST DATA
-    // stateFront.isFirstLoad = false;
-    return;
   }
+
+  const updateData = await getUpdateData();
+  if (!updateData) return displayElement;
+
+  displayElement.append(updateData);
+  return displayElement;
+};
+
+export const getUpdateData = async () => {
+  const data = await sendToBack({ route: "/update-data-route", stateFront: stateFront });
+  if (!data) return null;
+
+  console.log("UPDATE DATA");
+  console.dir(data);
+
+  //parse update data
+  //update stateFront
+
+  return data;
 };
 
 buildDisplay();

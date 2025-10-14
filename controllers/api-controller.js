@@ -1,6 +1,13 @@
 import axios from "axios";
 import CONFIG from "../config/config.js";
 import kcnaState from "../src/state-kcna.js";
+import { runUpdateData } from "../src/control.js";
+
+export const updateDataController = async (req, res) => {
+  const { stateFront } = req.body;
+  const data = await runUpdateData(stateFront);
+  return res.json(data);
+};
 
 export const getBackendValueController = async (req, res) => {
   const { key } = req.body;
