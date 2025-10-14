@@ -28,7 +28,7 @@ export const runFirstLoad = async (inputParams) => {
     sortKey: "date",
   };
 
-  const dataModel = new dbModel(params, "articleList");
+  const dataModel = new dbModel(params, "articles");
   const dataArray = await dataModel.getNewestItemsByTypeArray();
 
   console.log("DATA ARRAY");
