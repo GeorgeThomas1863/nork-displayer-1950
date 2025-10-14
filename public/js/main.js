@@ -33,7 +33,9 @@ export const getUpdateData = async () => {
   console.log("UPDATE DATA");
   console.dir(data);
 
-  //parse update data
+  //parse update data BY TYPE (use stateFRONT)
+  //parse articleReturn / picReturn / picSetReturn / vidPageReturn / vidReturn, etc
+
   //update stateFront
 
   return data;
