@@ -5,6 +5,8 @@ import { runUpdateData } from "../src/control.js";
 
 export const updateDataController = async (req, res) => {
   const { stateFront } = req.body;
+  console.log("UPDATE DATA CONTROLLER");
+  console.log(stateFront);
   const data = await runUpdateData(stateFront);
   return res.json(data);
 };
