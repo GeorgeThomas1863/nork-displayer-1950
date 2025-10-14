@@ -3,7 +3,8 @@ const stateFront = {
   scrapeId: null,
   trigger: null,
 
-  articleType: "fatboy",
+  typeTrigger: "articles", //default articles
+  articleType: "fatboy", //default fatboy
   picType: "pics",
   vidType: "vids",
   dataLoaded: null,
