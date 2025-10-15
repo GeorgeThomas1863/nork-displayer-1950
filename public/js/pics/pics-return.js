@@ -144,8 +144,8 @@ export const buildPicWrapperItem = async (inputObj) => {
   if (!inputObj || !inputObj.savePath) return null;
   const { savePath } = inputObj;
 
-  console.log("PIC WRAPPER ITEM");
-  console.log(inputObj);
+  // console.log("PIC WRAPPER ITEM");
+  // console.log(inputObj);
 
   const picWrapperItem = document.createElement("li");
   picWrapperItem.id = "pic-wrapper-item";
@@ -178,13 +178,13 @@ export const buildPicElement = async (savePath) => {
 //build pic stats
 export const buildPicElementStats = async (inputObj) => {
   if (!inputObj) return null;
-  const { date, headerData } = inputObj;
+  const { date, headers } = inputObj;
 
   const picStatsElement = document.createElement("div");
   picStatsElement.id = "pic-element-stats";
 
   const picDateElement = await buildPicElementDate(date);
-  const picServerElement = await buildPicElementServer(headerData);
+  const picServerElement = await buildPicElementServer(headers);
   picStatsElement.append(picDateElement, picServerElement);
 
   return picStatsElement;
@@ -209,9 +209,9 @@ export const buildPicElementDate = async (date) => {
 };
 
 //EXTRACT PIC SERVER DATA
-export const buildPicElementServer = async (headerData) => {
-  if (!headerData || !headerData.server) return null;
-  const serverData = headerData.server;
+export const buildPicElementServer = async (headers) => {
+  if (!headers || !headers.server) return null;
+  const serverData = headers.server;
 
   const picServerElement = document.createElement("div");
   picServerElement.id = "pic-element-server";
