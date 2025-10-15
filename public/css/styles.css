@@ -650,7 +650,8 @@ h3 {
 
 #article-type-button-container {
   margin: 0 auto;
-  margin-bottom: -0.5rem;
+  /* margin-bottom: -0.5rem; */
+  margin-bottom: 1.5rem;
 }
 
 #article-type-button-list {
