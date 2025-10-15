@@ -803,12 +803,11 @@ h3 {
   margin: 0 auto;
   width: fit-content;
   border-radius: 0 0 8px 8px;
-  background-color: #f8fafc;
+  background-color: #b3d9ff;
 }
 
 .article-pic-collapse .collapse-title {
-  /* color: #2c3e50; */
-  color: #475569;
+  color: #2c3e50;
   font-size: 1.5rem;
   max-width: calc(100% - 1rem);
 }
