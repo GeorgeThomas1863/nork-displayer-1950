@@ -762,6 +762,11 @@ h3 {
   padding: 0.5rem 3rem 0.5rem 2rem;
 }
 
+#article-title {
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+
 #article-title span {
   font-size: 1.2rem;
   font-weight: 500;
@@ -769,7 +774,7 @@ h3 {
 }
 
 #article-date {
-  margin: 0.5rem auto;
+  margin: 0 auto;
   /* margin-top: -1rem; */
   padding: 0.5rem 0;
   padding-left: 0.5rem;
