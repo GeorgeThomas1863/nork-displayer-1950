@@ -650,7 +650,7 @@ h3 {
 
 #return-display-wrapper {
   margin: 1.5rem auto;
-  width: 90%;
+  width: 95%;
 }
 
 /* -------------------------- */
@@ -749,6 +749,7 @@ h3 {
 
 .article-list-item {
   margin-bottom: 2rem;
+  width: 100%;
 }
 
 #article-container-element {
