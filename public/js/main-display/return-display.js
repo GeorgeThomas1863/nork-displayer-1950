@@ -8,16 +8,25 @@ export const buildReturnDisplay = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
   const { typeTrigger } = stateFront;
 
+  const returnDisplayWrapper = document.createElement("div");
+  returnDisplayWrapper.id = "return-display-wrapper";
+
+  let data = "";
   switch (typeTrigger) {
     case "articles":
-      return await buildArticlesReturnDisplay(inputArray);
+      data = await buildArticlesReturnDisplay(inputArray);
+      break;
     case "pics":
-      return await buildPicsReturnDisplay(inputArray);
+      data = await buildPicsReturnDisplay(inputArray);
+      break;
     case "vids":
-      return await buildVidsReturnDisplay(inputArray);
+      data = await buildVidsReturnDisplay(inputArray);
+      break;
     default:
       return null;
   }
 
-  return true;
+  returnDisplayWrapper.append(data);
+
+  return returnDisplayWrapper;
 };
