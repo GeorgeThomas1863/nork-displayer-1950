@@ -803,7 +803,7 @@ h3 {
   margin: 0 auto;
   width: fit-content;
   border-radius: 0 0 8px 8px;
-  background-color: #b3d9ff;
+  background-color: rgb(215, 215, 215);
 }
 
 .article-pic-collapse .collapse-title {
