@@ -53,25 +53,26 @@ export const buildCollapseContainer = async (inputObj) => {
   return collapseContainer;
 };
 
-// export const defineCollapseItems = async (inputArray) => {
-//   if (!inputArray || !inputArray.length) return null;
+export const defineCollapseItems = async (inputArray) => {
+  if (!inputArray || !inputArray.length) return null;
 
-//   for (let i = 0; i < inputArray.length; i++) {
-//     const collapseElement = inputArray[i];
-//     const header = collapseElement.querySelector(".collapse-header");
+  for (let i = 0; i < inputArray.length; i++) {
+    const collapseElement = inputArray[i];
+    const header = collapseElement.querySelector(".collapse-header");
+    if (!header) continue;
 
-//     header.addEventListener("click", () => {
-//       // collapse shit
-//       for (let j = 0; j < inputArray.length; j++) {
-//         if (i !== j) {
-//           const otherCollapse = inputArray[j];
-//           const otherContent = otherCollapse.querySelector(".collapse-content");
-//           const otherArrow = otherCollapse.querySelector(".collapse-arrow");
+    header.addEventListener("click", () => {
+      // collapse shit
+      for (let j = 0; j < inputArray.length; j++) {
+        if (i !== j) {
+          const otherCollapse = inputArray[j];
+          const otherContent = otherCollapse.querySelector(".collapse-content");
+          const otherArrow = otherCollapse.querySelector(".collapse-arrow");
 
-//           otherContent.classList.add("hidden");
-//           otherArrow.classList.remove("expanded");
-//         }
-//       }
-//     });
-//   }
-// };
+          otherContent.classList.add("hidden");
+          otherArrow.classList.remove("expanded");
+        }
+      }
+    });
+  }
+};
