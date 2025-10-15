@@ -2,7 +2,7 @@ import { picDropDownContainer } from "../pics/pic-return.js";
 import { buildCollapseContainer, defineCollapseItems } from "../util/collapse-display.js";
 
 //BUILD DEFAULT ARTICLE DISPLAY
-export const buildArticleDisplay = async (inputArray) => {
+export const buildArticlesReturnDisplay = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
 
   // Create a container div that will hold both buttons and article list

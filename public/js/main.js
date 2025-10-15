@@ -2,6 +2,7 @@
 import stateFront from "./util/state-front.js";
 import { buildDropDownForm } from "./main-display/drop-down-form.js";
 import { buildInputForms } from "./main-display/input-forms.js";
+import { buildReturnDisplay } from "./main-display/return-display.js";
 import { sendToBack } from "./util/api-front.js";
 
 const displayElement = document.getElementById("display-element");
@@ -15,30 +16,38 @@ export const buildDisplay = async () => {
     const inputFormWrapper = await buildInputForms();
 
     displayElement.append(dropDownElement, inputFormWrapper);
+    stateFront.isFirstLoad = false;
   }
 
   const updateData = await getUpdateData();
   if (!updateData) return displayElement;
 
   displayElement.append(updateData);
+
+  //update stateFront
   return displayElement;
 };
 
 export const getUpdateData = async () => {
+  if (!displayElement) return null;
+  const { typeTrigger, articleType } = stateFront;
+
   console.log("GET UPDATE DATA");
-  const data = await sendToBack({ route: "/update-data-route", stateFront: stateFront });
+  const updateArray = await sendToBack({ route: "/update-data-route", stateFront: stateFront });
 
-  if (!data) return null;
+  if (!updateArray || !updateArray.length) return null;
 
-  console.log("UPDATE DATA");
-  console.dir(data);
+  const returnDisplay = await buildReturnDisplay(updateArray);
 
-  //parse update data BY TYPE (use stateFRONT)
-  //parse articleReturn / picReturn / picSetReturn / vidPageReturn / vidReturn, etc
+  //UPDATE STATE FRONT HERE
+  if (typeTrigger === "articles") {
+    stateFront.dataObj.articles[articleType] = updateArray.length;
+    return returnDisplay;
+  }
 
-  //update stateFront
+  stateFront.dataObj[typeTrigger] = updateArray.length;
 
-  return data;
+  return returnDisplay;
 };
 
 buildDisplay();

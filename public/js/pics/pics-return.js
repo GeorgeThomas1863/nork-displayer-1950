@@ -1,7 +1,7 @@
 import { buildCollapseContainer, defineCollapseItems } from "../util/collapse-display.js";
 
 //PIC SET DISPLAY
-export const buildPicDisplay = async (inputArray) => {
+export const buildPicsReturnDisplay = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
 
   const picArrayElement = document.createElement("ul");

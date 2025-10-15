@@ -1,7 +1,7 @@
 import { buildCollapseContainer, defineCollapseItems } from "../util/collapse-display.js";
 
 // VID PAGE DISPLAY
-export const buildVidDisplay = async (inputArray) => {
+export const buildVidsReturnDisplay = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
 
   const vidArrayElement = document.createElement("ul");

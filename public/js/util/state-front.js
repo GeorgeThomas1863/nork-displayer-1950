@@ -1,13 +1,13 @@
 const stateFront = {
   isFirstLoad: true,
   scrapeId: null,
-  trigger: null,
+  eventTrigger: null,
 
   typeTrigger: "articles", //default articles
   articleType: "fatboy", //default fatboy
   picType: "pics",
   vidType: "vids",
-  dataLoaded: null,
+  dataObj: null,
 };
 
 export default stateFront;
