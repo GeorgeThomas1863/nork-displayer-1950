@@ -8,7 +8,14 @@ const stateFront = {
   picType: "pics",
   vidType: "vids",
   dataObj: {
-    articles: null,
+    articles: {
+      fatboy: null,
+      topNews: null,
+      latestNews: null,
+      externalNews: null,
+      anecdote: null,
+      people: null,
+    },
     pics: null,
     vids: null,
   },
