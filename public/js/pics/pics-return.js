@@ -1,5 +1,36 @@
 import { buildCollapseContainer, defineCollapseItems } from "../util/collapse-display.js";
 
+export const picDropDownContainer = async (inputArray, type) => {
+  if (!inputArray || !inputArray.length) return null;
+
+  const picArrayElement = await buildPicWrapper(inputArray, false);
+  if (!picArrayElement) return null;
+
+  //build pic title element
+  const picTitleElement = document.createElement("div");
+  picTitleElement.id = `${type}-pic-header`;
+  picTitleElement.textContent = `${inputArray.length} ${type.toUpperCase()} PIC${inputArray.length > 1 ? "S" : ""}`;
+
+  //EXTRACT PIC DATE?
+
+  //build collapse container
+  const picCollapseObj = {
+    titleElement: picTitleElement,
+    contentElement: picArrayElement,
+    isExpanded: true,
+    className: `${type}-pic-collapse`,
+  };
+
+  const picCollapseElement = await buildCollapseContainer(picCollapseObj);
+
+  // console.log("PIC COLLAPSE ELEMENT");
+  // console.log(picCollapseElement);
+
+  return picCollapseElement;
+};
+
+//--------------------------------
+
 //PIC SET DISPLAY
 export const buildPicsReturnDisplay = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
@@ -113,6 +144,9 @@ export const buildPicWrapperItem = async (inputObj) => {
   if (!inputObj || !inputObj.savePath) return null;
   const { savePath } = inputObj;
 
+  console.log("PIC WRAPPER ITEM");
+  console.log(inputObj);
+
   const picWrapperItem = document.createElement("li");
   picWrapperItem.id = "pic-wrapper-item";
 
@@ -184,37 +218,4 @@ export const buildPicElementServer = async (headerData) => {
   picServerElement.innerHTML = `<b>Server Data:</b> ${serverData}`;
 
   return picServerElement;
-};
-
-//-------------------------------------
-
-export const picDropDownContainer = async (inputArray, type) => {
-  if (!inputArray || !inputArray.length) return null;
-
-  const picArrayElement = await buildPicWrapper(inputArray, false);
-  // console.log("PIC ARRAY ELEMENT");
-  // console.log(picArrayElement);
-  if (!picArrayElement) return null;
-
-  //build pic title element
-  const picTitleElement = document.createElement("div");
-  picTitleElement.id = `${type}-pic-header`;
-  picTitleElement.textContent = `${inputArray.length} ${type.toUpperCase()} PIC${inputArray.length > 1 ? "S" : ""}`;
-
-  //EXTRACT PIC DATE?
-
-  //build collapse container
-  const picCollapseObj = {
-    titleElement: picTitleElement,
-    contentElement: picArrayElement,
-    isExpanded: true,
-    className: `${type}-pic-collapse`,
-  };
-
-  const picCollapseElement = await buildCollapseContainer(picCollapseObj);
-
-  // console.log("PIC COLLAPSE ELEMENT");
-  // console.log(picCollapseElement);
-
-  return picCollapseElement;
 };
