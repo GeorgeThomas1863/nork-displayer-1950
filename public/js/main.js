@@ -14,9 +14,7 @@ export const buildDisplay = async () => {
   if (isFirstLoad) {
     const dropDownElement = await buildDropDownForm();
     const inputFormWrapper = await buildInputForms();
-
     displayElement.append(dropDownElement, inputFormWrapper);
-    stateFront.isFirstLoad = false;
   }
 
   const updateData = await getUpdateData();
@@ -43,6 +41,7 @@ export const getUpdateData = async () => {
   console.dir(updateArray);
 
   const returnDisplay = await buildReturnDisplay(updateArray);
+  stateFront.isFirstLoad = false;
 
   //UPDATE STATE FRONT HERE
   if (typeTrigger === "articles") {
