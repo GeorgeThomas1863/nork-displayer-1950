@@ -314,7 +314,7 @@ h3 {
 #admin-auth-form-wrapper li {
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
+  gap: 0.5rem;
 }
 
 #auth-pw-list-item,
@@ -717,7 +717,7 @@ h3 {
 }
 
 /* Special styling for the "ALL ARTICLES" button to make it stand out */
-.article-type-button[data-article-type="all-type"] {
+.article-type-button[data-label="all-type"] {
   font-weight: 600;
   text-transform: uppercase;
   font-size: 0.8rem;

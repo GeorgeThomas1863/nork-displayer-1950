@@ -173,7 +173,7 @@ export const buildArticleTypeButtonItem = async (buttonData) => {
 
   const button = document.createElement("button");
   button.className = "article-type-button";
-  button.setAttribute("data-article-type", buttonData.value);
+  button.setAttribute("data-label", buttonData.value);
   button.innerHTML = buttonData.text;
 
   buttonListItem.append(button);
