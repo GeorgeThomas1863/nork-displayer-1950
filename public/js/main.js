@@ -22,6 +22,9 @@ export const buildDisplay = async () => {
   const updateData = await getUpdateData();
   if (!updateData) return displayElement;
 
+  console.log("UPDATE DATA");
+  console.dir(updateData);
+
   displayElement.append(updateData);
 
   //update stateFront
@@ -34,8 +37,10 @@ export const getUpdateData = async () => {
 
   console.log("GET UPDATE DATA");
   const updateArray = await sendToBack({ route: "/update-data-route", stateFront: stateFront });
-
   if (!updateArray || !updateArray.length) return null;
+
+  console.log("UPDATE ARRAY");
+  console.dir(updateArray);
 
   const returnDisplay = await buildReturnDisplay(updateArray);
 
