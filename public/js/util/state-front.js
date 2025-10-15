@@ -7,7 +7,11 @@ const stateFront = {
   articleType: "fatboy", //default fatboy
   picType: "pics",
   vidType: "vids",
-  dataObj: null,
+  dataObj: {
+    articles: null,
+    pics: null,
+    vids: null,
+  },
 };
 
 export default stateFront;
