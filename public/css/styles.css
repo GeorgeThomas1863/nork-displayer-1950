@@ -725,14 +725,14 @@ h3 {
   letter-spacing: 0.5px;
 }
 
-.article-type-button:not(.active) {
+/* .article-type-button:not(.active) {
   background-color: transparent;
   border-color: #e2e8f0;
   color: #475569;
   font-weight: 500;
   box-shadow: none;
   transform: none;
-}
+} */
 
 /* ----------------------------------- */
 
