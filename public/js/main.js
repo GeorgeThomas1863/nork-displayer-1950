@@ -17,19 +17,12 @@ export const buildDisplay = async () => {
     displayElement.append(dropDownElement, inputFormWrapper);
   }
 
-  const updateData = await getUpdateData();
-  if (!updateData) return displayElement;
+  await updateDisplay();
 
-  console.log("UPDATE DATA");
-  console.dir(updateData);
-
-  displayElement.append(updateData);
-
-  //update stateFront
-  return displayElement;
+  return true;
 };
 
-export const getUpdateData = async () => {
+export const updateDisplay = async () => {
   if (!displayElement) return null;
 
   console.log("GET UPDATE DATA");
@@ -39,11 +32,16 @@ export const getUpdateData = async () => {
   console.log("UPDATE ARRAY");
   console.dir(updateArray);
 
-  const returnDisplay = await buildReturnDisplay(updateArray);
-
   await updateStateFront(updateArray);
 
-  return returnDisplay;
+  const returnDisplay = await buildReturnDisplay(updateArray);
+  if (!returnDisplay) return null;
+  console.log("RETURN DISPLAY");
+  console.dir(returnDisplay);
+
+  displayElement.append(returnDisplay);
+
+  return true;
 };
 
 export const updateStateFront = async (inputArray) => {

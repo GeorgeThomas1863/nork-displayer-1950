@@ -100,7 +100,12 @@ export const runAdminToggleURL = async () => {
 export const runUpdateDisplay = async (clickUpdate) => {
   console.log("RUN UPDATE DISPLAY");
   console.log(clickUpdate);
- 
+
+  if (clickUpdate.includes("article-type-button")) {
+    const articleTypeId = clickUpdate.split("-").pop();
+    stateFront.articleType = articleTypeId;
+  }
+
   //update the state
   // if (clickUpdate === "article-type-button") {
   //   const articleTypeId = clickUpdate.id.split("-")[2];
