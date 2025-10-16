@@ -72,8 +72,8 @@ export const runUpdateLoad = async (inputParams) => {
     sortKey: "date",
   };
 
-  console.log("UPDATE PARAMS");
-  console.dir(params);
+  // console.log("UPDATE PARAMS");
+  // console.dir(params);
 
   // const dataModel = new dbModel(params, typeTrigger);
   const dataModel = new dbModel(params, "articles");
