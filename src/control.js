@@ -68,7 +68,10 @@ export const runUpdateLoad = async (inputParams) => {
   console.log("UPDATE PARAMS");
   console.dir(params);
 
-  const dataModel = new dbModel(params, typeTrigger);
+  // const dataModel = new dbModel(params, typeTrigger);
+  const dataModel = new dbModel(params, "articles");
   const dataArray = await dataModel.getNewestItemsByTypeArray();
+  console.log("DATA ARRAY");
+  console.dir(dataArray.length);
   return dataArray;
 };
