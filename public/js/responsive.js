@@ -1,4 +1,4 @@
-import { runAuth, runAdminAuth, runAdminCommand, runPwToggle, runDropDownToggle, runAdminToggleURL } from "./run.js";
+import { runAuth, runAdminAuth, runAdminCommand, runPwToggle, runDropDownToggle, runAdminToggleURL, runUpdateDisplay } from "./run.js";
 
 export const clickHandler = async (e) => {
   e.preventDefault();
@@ -7,10 +7,16 @@ export const clickHandler = async (e) => {
   const clickId = clickElement.id;
   const clickType = clickElement.getAttribute("data-label");
 
+  const clickUpdate = clickElement.getAttribute("data-update");
+
+  console.log("CLICK ELEMENT");
+  console.log(clickElement);
   console.log("CLICK ID");
   console.log(clickId);
   console.log("CLICK TYPE");
   console.log(clickType);
+  console.log("CLICK UPDATE");
+  console.log(clickUpdate);
 
   if (clickType === "pwToggle") await runPwToggle();
   if (clickType === "auth-submit") await runAuth();
@@ -18,6 +24,8 @@ export const clickHandler = async (e) => {
   if (clickType === "admin-command-submit") await runAdminCommand();
   if (clickType === "dropdown") await runDropDownToggle();
   if (clickType === "admin-redirect") window.location.href = "/admin";
+
+  if (clickUpdate) await runUpdateDisplay(clickUpdate);
 
   //   await updateAdminStateEventTriggered(clickType);
 

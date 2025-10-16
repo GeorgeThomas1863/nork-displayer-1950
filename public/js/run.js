@@ -85,11 +85,6 @@ export const runDropDownToggle = async () => {
   return true;
 };
 
-// export const runAdminRedirect = async () => {
-//   window.location.href = "/admin";
-//   return true;
-// };
-
 export const runAdminToggleURL = async () => {
   const howMuchElement = document.getElementById("admin-how-much");
   const urlListItem = document.getElementById("admin-url-input-list-item");
@@ -98,5 +93,20 @@ export const runAdminToggleURL = async () => {
   howMuchElement.value === "admin-scrape-url" ? unhideArray([urlListItem]) : hideArray([urlListItem]);
 
   return true;
-  s;
+};
+
+//--------------------------------
+
+export const runUpdateDisplay = async (clickUpdate) => {
+  console.log("RUN UPDATE DISPLAY");
+  console.log(clickUpdate);
+
+  //update the state
+  // if (clickUpdate === "article-type-button") {
+  //   const articleTypeId = clickUpdate.id.split("-")[2];
+  //   const articleTypeButton = document.querySelector(".article-type-button.active");
+  //   if (!articleTypeButton) return null;
+
+  //   stateFront.articleType = articleType;
+  // }
 };
