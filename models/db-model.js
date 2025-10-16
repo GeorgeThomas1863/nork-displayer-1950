@@ -85,6 +85,9 @@ class dbModel {
   async getNewestItemsByTypeArray() {
     const { sortKey, howMany, filterKey, filterValue } = this.dataObject;
 
+    console.log("INPUT OBJECT");
+    console.log(this.dataObject);
+
     //get data
     const dataArray = await dbGet().collection(this.collection).find({ [filterKey]: filterValue }).sort({ [sortKey]: -1}).limit(+howMany).toArray(); //prettier-ignore
 
