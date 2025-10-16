@@ -101,6 +101,9 @@ export const runUpdateDisplay = async (clickUpdate) => {
   console.log("RUN UPDATE DISPLAY");
   console.log(clickUpdate);
 
+  console.log("CLICK UPDATE ID");
+  console.log(clickUpdate.id);
+
   //update the state
   // if (clickUpdate === "article-type-button") {
   //   const articleTypeId = clickUpdate.id.split("-")[2];
