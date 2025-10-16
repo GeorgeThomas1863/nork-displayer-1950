@@ -1,5 +1,6 @@
 import { picDropDownContainer } from "../pics/pics-return.js";
 import { buildCollapseContainer, defineCollapseItems } from "../util/collapse-display.js";
+import stateFront from "../util/state-front.js";
 
 //BUILD DEFAULT ARTICLE DISPLAY
 export const buildArticlesReturnDisplay = async (inputArray) => {
@@ -144,13 +145,13 @@ export const buildArticleTypeButtons = async () => {
 
   // Define button data matching your dropdown options
   const buttonData = [
-    { value: "fatboy", text: `"Revolutionary Activities" [KJU sh*t]`, active: true },
-    { value: "all-type", text: "ALL ARTICLES" },
-    { value: "top", text: "Top News" },
-    { value: "latest", text: "Latest News" },
-    { value: "external", text: "External News" },
-    { value: "anecdote", text: "Revolutionary Anecdotes" },
-    { value: "people", text: "Always in Memory of the People" },
+    { buttonValue: "fatboy", buttonText: `"Revolutionary Activities" [KJU sh*t]` },
+    { buttonValue: "all-type", buttonText: "ALL ARTICLES" },
+    { buttonValue: "top", buttonText: "Top News" },
+    { buttonValue: "latest", buttonText: "Latest News" },
+    { buttonValue: "external", buttonText: "External News" },
+    { buttonValue: "anecdote", buttonText: "Revolutionary Anecdotes" },
+    { buttonValue: "people", buttonText: "Always in Memory of the People" },
   ];
 
   // Create button list
@@ -168,14 +169,20 @@ export const buildArticleTypeButtons = async () => {
 };
 
 export const buildArticleTypeButtonItem = async (buttonData) => {
+  const { articleType } = stateFront;
+  const { buttonValue, buttonText } = buttonData;
+
   const buttonListItem = document.createElement("li");
   buttonListItem.className = "article-type-button-item";
 
   const button = document.createElement("button");
-  button.id = `${buttonData.value}-article-type-button`;
+  button.id = `article-type-button-${buttonValue}`;
   button.className = "article-type-button";
   button.setAttribute("data-label", "article-type-button");
-  button.innerHTML = buttonData.text;
+  button.innerHTML = buttonText;
+
+  //update active type
+  if (articleType === buttonValue) button.classList.add("active");
 
   buttonListItem.append(button);
   return buttonListItem;

@@ -31,7 +31,6 @@ export const buildDisplay = async () => {
 
 export const getUpdateData = async () => {
   if (!displayElement) return null;
-  const { typeTrigger, articleType } = stateFront;
 
   console.log("GET UPDATE DATA");
   const updateArray = await sendToBack({ route: "/update-data-route", stateFront: stateFront });
@@ -41,17 +40,25 @@ export const getUpdateData = async () => {
   console.dir(updateArray);
 
   const returnDisplay = await buildReturnDisplay(updateArray);
+
+  await updateStateFront(updateArray);
+
+  return returnDisplay;
+};
+
+export const updateStateFront = async (inputArray) => {
+  const { typeTrigger, articleType } = stateFront;
   stateFront.isFirstLoad = false;
 
   //UPDATE STATE FRONT HERE
   if (typeTrigger === "articles") {
-    stateFront.dataObj.articles[articleType] = updateArray.length;
-    return returnDisplay;
+    stateFront.dataObj.articles[articleType] = inputArray.length;
+    return true;
   }
 
-  stateFront.dataObj[typeTrigger] = updateArray.length;
+  stateFront.dataObj[typeTrigger] = inputArray.length;
 
-  return returnDisplay;
+  return true;
 };
 
 buildDisplay();
