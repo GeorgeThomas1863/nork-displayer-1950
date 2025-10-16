@@ -146,7 +146,7 @@ export const buildArticleTypeButtons = async () => {
   // Define button data matching your dropdown options
   const buttonData = [
     { buttonValue: "fatboy", buttonText: `"Revolutionary Activities" [KJU sh*t]` },
-    { buttonValue: "all-type", buttonText: "ALL ARTICLES" },
+    { buttonValue: "all", buttonText: "ALL ARTICLES" },
     { buttonValue: "top", buttonText: "Top News" },
     { buttonValue: "latest", buttonText: "Latest News" },
     { buttonValue: "external", buttonText: "External News" },
