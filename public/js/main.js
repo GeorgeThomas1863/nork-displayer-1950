@@ -25,6 +25,10 @@ export const buildDisplay = async () => {
 export const updateDisplay = async () => {
   if (!displayElement) return null;
 
+  //remove current data element
+  const currentDataElement = document.getElementById("return-display-wrapper");
+  if (currentDataElement) currentDataElement.remove();
+
   console.log("GET UPDATE DATA");
   const updateArray = await sendToBack({ route: "/update-data-route", stateFront: stateFront });
   if (!updateArray || !updateArray.length) return null;
