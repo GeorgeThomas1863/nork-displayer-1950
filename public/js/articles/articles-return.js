@@ -181,7 +181,7 @@ export const buildArticleTypeButtonItem = async (buttonData) => {
   button.setAttribute("data-label", "article-type-button");
   button.innerHTML = buttonText;
 
-  //update active type
+  //add active type
   if (articleType === buttonValue) button.classList.add("active");
 
   buttonListItem.append(button);
