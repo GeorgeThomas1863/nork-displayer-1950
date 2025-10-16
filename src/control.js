@@ -15,7 +15,10 @@ export const runUpdateData = async (inputParams) => {
   const newDataNeeded = await checkNewDataNeeded(inputParams);
   if (!newDataNeeded) return null;
 
-  return await runUpdateLoad(inputParams);
+  const dataArray = await runUpdateLoad(inputParams);
+  console.log("DATA ARRAY");
+  console.dir(dataArray.length);
+  return dataArray;
 };
 
 export const runFirstLoad = async (inputParams) => {
