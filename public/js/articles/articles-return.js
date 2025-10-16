@@ -147,9 +147,9 @@ export const buildArticleTypeButtons = async () => {
   const buttonData = [
     { buttonValue: "fatboy", buttonText: `"Revolutionary Activities" [KJU sh*t]` },
     { buttonValue: "all", buttonText: "ALL ARTICLES" },
-    { buttonValue: "top", buttonText: "Top News" },
-    { buttonValue: "latest", buttonText: "Latest News" },
-    { buttonValue: "external", buttonText: "External News" },
+    { buttonValue: "topNews", buttonText: "Top News" },
+    { buttonValue: "latestNews", buttonText: "Latest News" },
+    { buttonValue: "externalNews", buttonText: "External News" },
     { buttonValue: "anecdote", buttonText: "Revolutionary Anecdotes" },
     { buttonValue: "people", buttonText: "Always in Memory of the People" },
   ];

@@ -55,22 +55,24 @@ export const runUpdateLoad = async (inputParams) => {
   const { typeTrigger, articleType, howMany } = inputParams;
   const { defaultDataLoad } = CONFIG;
 
-  // let params = {};
-  // if (typeTrigger === "articles") {
-  //   params = {
-  //     filterKey: "articleType",
-  //     filterValue: articleType,
-  //     howMany: howMany || defaultDataLoad.articles,
-  //     sortKey: "date",
-  //   };
-  // }
+  //DEAL WITH ARTICLES ALL
 
-  const params = {
-    filterKey: "articleType",
-    filterValue: articleType,
-    howMany: howMany || defaultDataLoad.articles,
-    sortKey: "date",
-  };
+  let params = {};
+  if (typeTrigger === "articles") {
+    params = {
+      filterKey: "articleType",
+      filterValue: articleType,
+      howMany: howMany || defaultDataLoad.articles,
+      sortKey: "date",
+    };
+  }
+
+  // const params = {
+  //   filterKey: "articleType",
+  //   filterValue: articleType,
+  //   howMany: howMany || defaultDataLoad.articles,
+  //   sortKey: "date",
+  // };
 
   // console.log("UPDATE PARAMS");
   // console.dir(params);
