@@ -36,8 +36,6 @@ export const updateDisplay = async () => {
 
   const returnDisplay = await buildReturnDisplay(updateArray);
   if (!returnDisplay) return null;
-  console.log("RETURN DISPLAY");
-  console.dir(returnDisplay);
 
   displayElement.append(returnDisplay);
 

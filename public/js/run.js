@@ -97,8 +97,8 @@ export const runAdminToggleURL = async () => {
 
 //--------------------------------
 
-export const runUpdateDisplay = async (clickUpdate) => {
-  console.log("RUN UPDATE DISPLAY");
+export const runUpdateStateDisplay = async (clickUpdate) => {
+  console.log("RUN UPDATE STATE DISPLAY");
   console.log(clickUpdate);
 
   if (clickUpdate.includes("article-type-button")) {
@@ -106,12 +106,6 @@ export const runUpdateDisplay = async (clickUpdate) => {
     stateFront.articleType = articleTypeId;
   }
 
-  //update the state
-  // if (clickUpdate === "article-type-button") {
-  //   const articleTypeId = clickUpdate.id.split("-")[2];
-  //   const articleTypeButton = document.querySelector(".article-type-button.active");
-  //   if (!articleTypeButton) return null;
-
-  //   stateFront.articleType = articleType;
-  // }
+  await updateDisplay();
+  return true;
 };
