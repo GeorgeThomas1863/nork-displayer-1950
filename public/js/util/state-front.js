@@ -7,6 +7,7 @@ const stateFront = {
   articleType: "fatboy", //default fatboy
   picType: "pics",
   vidType: "vids",
+  howMany: null,
   dataObj: {
     articles: {
       fatboy: null,

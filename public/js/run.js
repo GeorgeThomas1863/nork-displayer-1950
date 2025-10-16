@@ -106,6 +106,7 @@ export const runUpdateStateDisplay = async (clickUpdate) => {
   if (clickUpdate.includes("article-type-button")) {
     const articleTypeId = clickUpdate.split("-").pop();
     stateFront.articleType = articleTypeId;
+    stateFront.eventTrigger = "article-type-click";
   }
 
   await updateDisplay();

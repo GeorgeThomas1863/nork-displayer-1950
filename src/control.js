@@ -14,6 +14,8 @@ export const runUpdateData = async (inputParams) => {
 
   const newDataNeeded = await checkNewDataNeeded(inputParams);
   if (!newDataNeeded) return null;
+
+  return await runUpdateLoad(inputParams);
 };
 
 export const runFirstLoad = async (inputParams) => {
@@ -40,4 +42,27 @@ export const runFirstLoad = async (inputParams) => {
   return dataArray;
 };
 
-export const checkNewDataNeeded = async (inputParams) => {};
+//BUILD
+export const checkNewDataNeeded = async (inputParams) => {
+  return true;
+};
+
+export const runUpdateLoad = async (inputParams) => {
+  if (!inputParams) return null;
+  const { typeTrigger, articleType, howMany } = inputParams;
+  const { defaultDataLoad } = CONFIG;
+
+  let params = {};
+  if (typeTrigger === "articles") {
+    params = {
+      filterKey: "articleType",
+      filterValue: articleType,
+      howMany: howMany || defaultDataLoad.articles,
+      sortKey: "date",
+    };
+  }
+
+  const dataModel = new dbModel(params, typeTrigger);
+  const dataArray = await dataModel.getNewestItemsByTypeArray();
+  return dataArray;
+};
