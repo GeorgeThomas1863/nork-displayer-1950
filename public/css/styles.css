@@ -88,7 +88,7 @@ h3 {
 
 .collapse-header {
   display: flex;
-  /* justify-content: center; */
+  justify-content: center;
   align-items: center;
   text-align: left;
   padding: 0.5rem 1rem;
