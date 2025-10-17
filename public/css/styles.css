@@ -112,6 +112,7 @@ h3 {
 
 .collapse-title {
   /* text-align: center; */
+  text-align: left;
   font-size: 1.7rem;
   font-weight: 600;
   text-transform: uppercase;
