@@ -1,4 +1,5 @@
 import { buildCollapseContainer } from "../util/collapse-display.js";
+import stateFront from "../util/state-front.js";
 
 //ARTICLE FORM ELEMENTS
 export const buildArticlesForm = async () => {
@@ -88,4 +89,55 @@ export const buildArticleSortByListItem = async () => {
   articleSortByListItem.append(articleSortByLabel, articleSortBySelect);
 
   return articleSortByListItem;
+};
+
+//-----------------------------
+
+export const buildArticleTypeButtons = async () => {
+  const articleTypeButtonContainer = document.createElement("div");
+  articleTypeButtonContainer.id = "article-type-button-container";
+
+  // Define button data matching your dropdown options
+  const buttonData = [
+    { buttonValue: "fatboy", buttonText: `"Revolutionary Activities" [KJU sh*t]` },
+    { buttonValue: "all", buttonText: "ALL ARTICLES" },
+    { buttonValue: "topNews", buttonText: "Top News" },
+    { buttonValue: "latestNews", buttonText: "Latest News" },
+    { buttonValue: "externalNews", buttonText: "External News" },
+    { buttonValue: "anecdote", buttonText: "Revolutionary Anecdotes" },
+    { buttonValue: "people", buttonText: "Always in Memory of the People" },
+  ];
+
+  // Create button list
+  const buttonList = document.createElement("ul");
+  buttonList.id = "article-type-button-list";
+
+  // Build each button
+  for (let i = 0; i < buttonData.length; i++) {
+    const buttonItem = await buildArticleTypeButtonItem(buttonData[i]);
+    buttonList.append(buttonItem);
+  }
+
+  articleTypeButtonContainer.append(buttonList);
+  return articleTypeButtonContainer;
+};
+
+export const buildArticleTypeButtonItem = async (buttonData) => {
+  const { articleType } = stateFront;
+  const { buttonValue, buttonText } = buttonData;
+
+  const buttonListItem = document.createElement("li");
+  buttonListItem.className = "article-type-button-item";
+
+  const button = document.createElement("button");
+  button.id = `article-type-button-${buttonValue}`;
+  button.className = "article-type-button";
+  button.setAttribute("data-update", `article-type-button-${buttonValue}`);
+  button.innerHTML = buttonText;
+
+  //add active type
+  if (articleType === buttonValue) button.classList.add("active");
+
+  buttonListItem.append(button);
+  return buttonListItem;
 };

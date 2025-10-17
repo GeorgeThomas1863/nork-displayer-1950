@@ -2,6 +2,7 @@
 import stateFront from "./util/state-front.js";
 import { buildDropDownForm } from "./main-display/drop-down-form.js";
 import { buildInputForms } from "./main-display/input-forms.js";
+import { buildArticleTypeButtons } from "./articles/articles-form.js";
 import { buildReturnDisplay } from "./main-display/return-display.js";
 import { sendToBack } from "./util/api-front.js";
 
@@ -14,7 +15,8 @@ export const buildDisplay = async () => {
   if (isFirstLoad) {
     const dropDownElement = await buildDropDownForm();
     const inputFormWrapper = await buildInputForms();
-    displayElement.append(dropDownElement, inputFormWrapper);
+    const articleTypeButtons = await buildArticleTypeButtons();
+    displayElement.append(dropDownElement, inputFormWrapper, articleTypeButtons);
   }
 
   await updateDisplay();
