@@ -9,10 +9,6 @@ export const buildArticlesReturnDisplay = async (inputArray) => {
   const articleDisplayContainer = document.createElement("div");
   articleDisplayContainer.id = "article-display-container";
 
-  // Add the article type buttons at the top
-  const articleButtonsElement = await buildArticleTypeButtons();
-  articleDisplayContainer.append(articleButtonsElement);
-
   const articleList = document.createElement("ul");
   articleList.id = "article-array-element";
   articleList.className = "article-list data-return";
