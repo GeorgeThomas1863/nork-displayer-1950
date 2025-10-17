@@ -190,6 +190,7 @@ h3 {
 
 #return-display-wrapper .collapse-header {
   justify-content: left;
+  line-height: 1.5;
 }
 
 #return-display-wrapper .collapse-title {

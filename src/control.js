@@ -57,30 +57,52 @@ export const runUpdateLoad = async (inputParams) => {
 
   //DEAL WITH ARTICLES ALL
 
-  let params = {};
+  let data = null;
   if (typeTrigger === "articles") {
-    params = {
-      filterKey: "articleType",
-      filterValue: articleType,
-      howMany: howMany || defaultDataLoad.articles,
-      sortKey: "date",
-    };
+    data = await getArticlesData(inputParams);
+    return data;
+  }
+};
+
+export const getArticlesData = async (inputParams) => {
+  if (!inputParams) return null;
+  const { articleType } = inputParams;
+
+  const articleParams = await buildArticleParams(inputParams);
+  if (!articleParams) return null;
+
+  const dataModel = new dbModel(articleParams, "articles");
+
+  let dataArray = null;
+  if (articleType === "all") {
+    dataArray = await dataModel.getNewestItemsArray();
+    return dataArray;
   }
 
-  // const params = {
-  //   filterKey: "articleType",
-  //   filterValue: articleType,
-  //   howMany: howMany || defaultDataLoad.articles,
-  //   sortKey: "date",
-  // };
-
-  // console.log("UPDATE PARAMS");
-  // console.dir(params);
-
-  // const dataModel = new dbModel(params, typeTrigger);
-  const dataModel = new dbModel(params, "articles");
-  const dataArray = await dataModel.getNewestItemsByTypeArray();
-  console.log("DATA ARRAY");
-  console.dir(dataArray.length);
+  dataArray = await dataModel.getNewestItemsByTypeArray();
   return dataArray;
+};
+
+export const buildArticleParams = async (inputParams) => {
+  if (!inputParams) return null;
+  const { articleType, howMany } = inputParams;
+  const { defaultDataLoad } = CONFIG;
+
+  if (articleType === "all") {
+    const allParams = {
+      sortKey: "date",
+      sortKey2: "articleId",
+      howMany: howMany || defaultDataLoad.articles,
+    };
+    return allParams;
+  }
+
+  const articleParams = {
+    filterKey: "articleType",
+    filterValue: articleType,
+    howMany: howMany || defaultDataLoad.articles,
+    sortKey: "date",
+  };
+
+  return articleParams;
 };
