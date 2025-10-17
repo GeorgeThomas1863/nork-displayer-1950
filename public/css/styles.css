@@ -111,7 +111,6 @@ h3 {
 }
 
 .collapse-title {
-  /* text-align: center; */
   text-align: left;
   font-size: 1.7rem;
   font-weight: 600;
@@ -174,7 +173,7 @@ h3 {
 .wrapper .collapse-header {
   padding: 1rem 2rem;
   border-radius: 12px 12px 0 0;
-  margin-bottom: 20rem;
+  margin-bottom: 0;
 }
 
 .wrapper .collapse-content {
@@ -187,6 +186,10 @@ h3 {
   max-height: 0;
   opacity: 0;
   padding: 0;
+}
+
+#return-display-wrapper .collapse-header {
+  justify-content: left;
 }
 
 /* +++++++++++++++++++++++++++++++++++++++ */
