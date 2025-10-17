@@ -192,6 +192,10 @@ h3 {
   justify-content: left;
 }
 
+#return-display-wrapper .collapse-title {
+  margin-left: 1rem;
+}
+
 /* +++++++++++++++++++++++++++++++++++++++ */
 
 /* -------------------------------------------------- */
