@@ -15,7 +15,7 @@ export const buildDisplay = async () => {
   if (isFirstLoad) {
     const dropDownElement = await buildDropDownForm();
     const inputFormWrapper = await buildInputForms();
-    const articleTypeButtons = await buildArticleTypeButtons();
+    // const articleTypeButtons = await buildArticleTypeButtons();
     displayElement.append(dropDownElement, inputFormWrapper, articleTypeButtons);
   }
 
