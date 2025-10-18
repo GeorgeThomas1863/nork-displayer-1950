@@ -4,7 +4,7 @@ import { buildPicWrapper } from "./pics-return.js";
 export const buildPicsCollapseContainer = async (inputArray, type) => {
   if (!inputArray || !inputArray.length) return null;
 
-  const picArrayElement = await buildPicWrapper(inputArray, false);
+  const picArrayElement = await buildPicWrapper(inputArray);
   if (!picArrayElement) return null;
 
   //build pic title element

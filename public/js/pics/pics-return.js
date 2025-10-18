@@ -7,19 +7,32 @@ export const buildPicsReturnDisplay = async (inputArray) => {
 
   switch (picType) {
     case "all":
-      return buildPicsAllDisplay(inputArray);
+      return await buildPicsAllDisplay(inputArray);
     case "picSets":
-      return buildPicSetsDisplay(inputArray);
+      return await buildPicSetsDisplay(inputArray);
     default:
+      return null;
   }
 };
 
 export const buildPicsAllDisplay = async (inputArray) => {
-  //BUILD
+  if (!inputArray || !inputArray.length) return null;
+
+  const picAllWrapper = document.createElement("ul");
+  picAllWrapper.id = "pic-all-wrapper";
+
+  const picArrayElement = await buildPicWrapper(inputArray);
+  if (!picArrayElement) return null;
+
+  picAllWrapper.append(picArrayElement);
+
+  return picAllWrapper;
 };
 
 //PIC SET DISPLAY
 export const buildPicSetsDisplay = async (inputArray) => {
+  if (!inputArray || !inputArray.length) return null;
+
   const picArrayElement = document.createElement("ul");
   picArrayElement.id = "pic-array-element";
 
@@ -107,6 +120,8 @@ export const buildPicContainerDate = async (date) => {
 
   return dateElement;
 };
+
+//--------------------------
 
 export const buildPicWrapper = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
