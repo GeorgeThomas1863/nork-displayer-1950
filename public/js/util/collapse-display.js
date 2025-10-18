@@ -28,10 +28,10 @@ export const buildCollapseContainer = async (inputObj) => {
   const arrow = document.createElement("div");
   arrow.id = "collapse-arrow";
   arrow.className = isExpanded ? "collapse-arrow expanded" : "collapse-arrow";
-  arrow.setAttribute("data-expand", dataAttribute);
+  arrow.setAttribute("data-update", dataAttribute);
 
   titleElement.className = "collapse-title";
-  titleElement.setAttribute("data-expand", dataAttribute);
+  titleElement.setAttribute("data-update", dataAttribute);
 
   //add arrow / title to header
   collapseHeader.append(arrow, titleElement);
