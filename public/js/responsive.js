@@ -1,4 +1,4 @@
-import { runAuth, runAdminAuth, runAdminCommand, runPwToggle, runDropDownToggle, runAdminToggleURL, runChangeArticleType, runChangeDataType } from "./run.js";
+import { runAuth, runAdminAuth, runAdminCommand, runPwToggle, runDropDownToggle, runAdminToggleURL, runChangeButtonType, runChangeDataType } from "./run.js";
 
 export const clickHandler = async (e) => {
   e.preventDefault();
@@ -28,7 +28,7 @@ export const clickHandler = async (e) => {
   //----------
 
   // if (clickUpdate) await runUpdateStateDisplay(clickUpdate);
-  if (clickUpdate && clickUpdate.includes("article-type-button")) await runChangeArticleType(clickUpdate);
+  if (clickUpdate && clickUpdate.includes("-type-button-")) await runChangeButtonType(clickUpdate);
   if (clickUpdate && clickUpdate.includes("get-")) await runChangeDataType(clickUpdate);
 
   //   await updateAdminStateEventTriggered(clickType);

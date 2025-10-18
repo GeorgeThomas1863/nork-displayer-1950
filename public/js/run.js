@@ -99,22 +99,23 @@ export const runAdminToggleURL = async () => {
 
 //--------------------------------
 
-export const runChangeArticleType = async (clickUpdate) => {
+export const runChangeButtonType = async (clickUpdate) => {
   console.log("RUN UPDATE STATE DISPLAY");
   console.log(clickUpdate);
 
-  const articleTypeId = clickUpdate.split("-").pop();
+  const typePrefix = clickUpdate.split("-")[0];
+  const typeId = clickUpdate.split("-").pop();
 
-  const currentArticleType = stateFront.articleType;
-  const currentArticleTypeButton = document.getElementById(`article-type-button-${currentArticleType}`);
-  if (currentArticleTypeButton) currentArticleTypeButton.classList.remove("active");
+  const currentActiveButton = document.querySelector(`#${typePrefix}-type-button-list .button-type-item.active`);
+  if (currentActiveButton) currentActiveButton.classList.remove("active");
 
-  stateFront.articleType = articleTypeId;
-  stateFront.eventTrigger = "article-type-click";
+  stateFront[`${typePrefix}Type`] = typeId;
+  stateFront.eventTrigger = `${typePrefix}-type-button-click`;
+  stateFront.typeTrigger = `${typePrefix}s`;
 
   await updateDisplay();
 
-  const newArticleTypeButton = document.getElementById(`article-type-button-${articleTypeId}`);
+  const newArticleTypeButton = document.getElementById(`${typePrefix}-type-button-${typeId}`);
   if (newArticleTypeButton) newArticleTypeButton.classList.add("active");
   return true;
 };
