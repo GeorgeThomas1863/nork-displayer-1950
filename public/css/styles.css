@@ -222,11 +222,11 @@ h3 {
 }
 
 .article-pic-collapse .collapse-header:hover {
-  background-color: rgb(190, 190, 190);
+  background-color: rgb(170, 170, 170);
 }
 
 .article-pic-collapse .collapse-header:active {
-  background-color: rgb(160, 160, 160);
+  background-color: rgb(170, 170, 170);
   transform: scale(0.99);
 }
 
