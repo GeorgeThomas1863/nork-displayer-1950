@@ -204,6 +204,43 @@ h3 {
   margin-left: 0.5rem;
 }
 
+/* --------------------- */
+
+/* ARTICLE PIC COLLAPSE */
+
+/* makes collapse headers smaller for article pics */
+.article-pic-collapse .collapse-header {
+  margin: 0 auto;
+  width: fit-content;
+  border-radius: 0 0 8px 8px;
+  background-color: rgb(215, 215, 215);
+  transition: background-color 0.3s ease;
+}
+
+.article-pic-collapse .collapse-header:has(.collapse-arrow.expanded) {
+  border-radius: 0 0 8px 8px;
+}
+
+.article-pic-collapse .collapse-header:hover {
+  background-color: rgb(190, 190, 190);
+}
+
+.article-pic-collapse .collapse-header:active {
+  background-color: rgb(160, 160, 160);
+  transform: scale(0.99);
+}
+
+.article-pic-collapse .collapse-title {
+  color: #2c3e50;
+  font-size: 1.5rem;
+  max-width: calc(100% - 1rem);
+}
+
+.article-pic-collapse .collapse-content {
+  background-color: transparent;
+  box-shadow: none;
+}
+
 /* +++++++++++++++++++++++++++++++++++++++ */
 
 /* -------------------------------------------------- */
@@ -803,35 +840,6 @@ h3 {
   line-height: 1.2;
   letter-spacing: -0.05em;
   color: #334155;
-}
-
-/* makes collapse headers smaller for article pics */
-.article-pic-collapse .collapse-header {
-  margin: 0 auto;
-  width: fit-content;
-  border-radius: 0 0 8px 8px;
-  background-color: rgb(215, 215, 215);
-}
-
-.article-pic-collapse .collapse-header:has(.collapse-arrow.expanded) {
-  border-radius: 0 0 8px 8px;
-}
-
-.article-pic-collapse .collapse-title {
-  color: #2c3e50;
-  font-size: 1.5rem;
-  max-width: calc(100% - 1rem);
-}
-
-/* .article-element-collapse .collapse-header,
-.pic-element-collapse .collapse-header,
-.vid-element-collapse .collapse-header {
-  justify-content: left;
-} */
-
-.article-pic-collapse .collapse-content {
-  background-color: transparent;
-  box-shadow: none;
 }
 
 /* ----------------------------------- */
