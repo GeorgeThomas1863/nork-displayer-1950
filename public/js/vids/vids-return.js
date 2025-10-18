@@ -1,5 +1,5 @@
 import { buildCollapseContainer, defineCollapseItems } from "../util/collapse-display.js";
-import stateFront from "../util/state-front.js";
+// import stateFront from "../util/state-front.js";
 
 //ONLY NEED 1 VID DISPLAY FOR NOW
 export const buildVidsReturnDisplay = async (inputArray) => {
@@ -66,7 +66,8 @@ export const buildVidListItem = async (inputObj, isFirst) => {
 };
 
 export const buildVidContainer = async (inputObj) => {
-  const { savePath, date } = inputObj;
+  const { vidData, date } = inputObj;
+  const { savePath } = vidData;
 
   const vidContainerElement = document.createElement("article");
   vidContainerElement.id = "vid-container-element";
