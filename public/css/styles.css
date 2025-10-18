@@ -824,7 +824,8 @@ h3 {
 /* PIC STYLES */
 
 .pic-list-item {
-  margin-bottom: 2rem;
+  margin-top: 1.5rem;
+  /* margin-bottom: 2rem; */
 }
 
 #pic-container-title {
@@ -926,7 +927,8 @@ h3 {
 /* ----------------------------------- */
 
 .vid-list-item {
-  margin-bottom: 2rem;
+  margin-top: 1.5rem;
+  /* margin-bottom: 2rem; */
 }
 
 #vid-container-element {
