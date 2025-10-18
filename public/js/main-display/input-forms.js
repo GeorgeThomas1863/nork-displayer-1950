@@ -1,4 +1,4 @@
-import { buildArticlesForm, buildArticleTypeButtons } from "../articles/articles-form.js";
+import { buildArticlesForm } from "../articles/articles-form.js";
 import { buildPicsForm } from "../pics/pics-form.js";
 import { buildVidsForm } from "../vids/vids-form.js";
 import { defineCollapseItems } from "../util/collapse-display.js";
@@ -18,9 +18,7 @@ export const buildInputForms = async () => {
   //try adding as collapse "group"
   await defineCollapseItems([articleFormWrapper, picFormWrapper, vidFormWrapper]);
 
-  const articleTypeButtons = await buildArticleTypeButtons();
-
-  inputFormWrapper.append(articleFormWrapper, articleTypeButtons, picFormWrapper, vidFormWrapper);
+  inputFormWrapper.append(articleFormWrapper, picFormWrapper, vidFormWrapper);
 
   return inputFormWrapper;
 };

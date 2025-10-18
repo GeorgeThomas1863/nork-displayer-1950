@@ -1,5 +1,6 @@
 import { buildPicsCollapseContainer } from "../pics/pics-container.js";
 import { buildCollapseContainer, defineCollapseItems } from "../util/collapse-display.js";
+import { buildArticleTypeButtons } from "./articles-form.js";
 
 //BUILD DEFAULT ARTICLE DISPLAY
 export const buildArticlesReturnDisplay = async (inputArray) => {
@@ -8,6 +9,9 @@ export const buildArticlesReturnDisplay = async (inputArray) => {
   // Create a container div that will hold both buttons and article list
   const articleDisplayContainer = document.createElement("div");
   articleDisplayContainer.id = "article-display-container";
+
+  const articleTypeButtons = await buildArticleTypeButtons();
+  articleDisplayContainer.append(articleTypeButtons);
 
   const articleList = document.createElement("ul");
   articleList.id = "article-array-element";
