@@ -1,14 +1,63 @@
 import { buildCollapseContainer, defineCollapseItems } from "../util/collapse-display.js";
-// import stateFront from "../util/state-front.js";
+import stateFront from "../util/state-front.js";
 
 //ONLY NEED 1 VID DISPLAY FOR NOW
 export const buildVidsReturnDisplay = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
 
-  const vidDisplay = await buildVidPagesDisplay(inputArray);
-  if (!vidDisplay) return null;
+  const vidDisplayContainer = document.createElement("div");
+  vidDisplayContainer.id = "vid-display-container";
 
-  return vidDisplay;
+  const vidTypeButtons = await buildVidTypeButtons();
+  vidDisplayContainer.append(vidTypeButtons);
+
+  //ADD SWITCH HERE LATER
+
+  const vidPagesDisplay = await buildVidPagesDisplay(inputArray);
+  vidDisplayContainer.append(vidPagesDisplay);
+
+  return vidDisplayContainer;
+};
+
+export const buildVidTypeButtons = async () => {
+  const vidTypeButtonContainer = document.createElement("div");
+  vidTypeButtonContainer.id = "vid-type-button-container";
+
+  // Only vid pages to start
+  const buttonData = [{ buttonValue: "vidPages", buttonText: "KCNA Vid Pages" }];
+
+  // Create button list
+  const buttonList = document.createElement("ul");
+  buttonList.id = "vid-type-button-list";
+
+  // Build each button
+  for (let i = 0; i < buttonData.length; i++) {
+    const buttonItem = await buildVidTypeButtonItem(buttonData[i]);
+    buttonList.append(buttonItem);
+  }
+
+  vidTypeButtonContainer.append(buttonList);
+  return vidTypeButtonContainer;
+};
+
+export const buildVidTypeButtonItem = async (buttonData) => {
+  const { vidType } = stateFront;
+  const { buttonValue, buttonText } = buttonData;
+
+  const buttonListItem = document.createElement("li");
+  buttonListItem.className = "vid-type-button-item";
+
+  const button = document.createElement("button");
+  button.id = `vid-type-button-${buttonValue}`;
+  button.className = "vid-type-button";
+  button.setAttribute("data-update", `vid-type-button-${buttonValue}`);
+  button.innerHTML = buttonText;
+
+  //add active type
+  if (vidType === buttonValue) button.classList.add("active");
+
+  buttonListItem.append(button);
+  return buttonListItem;
 };
 
 // FIX

@@ -5,15 +5,77 @@ export const buildPicsReturnDisplay = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
   const { picType } = stateFront;
 
+  const picDisplayContainer = document.createElement("div");
+  picDisplayContainer.id = "pic-display-container";
+
+  //append the buttons first
+  const picTypeButtons = await buildPicTypeButtons();
+  picDisplayContainer.append(picTypeButtons);
+
+  let data = "";
   switch (picType) {
     case "all":
-      return await buildPicsAllDisplay(inputArray);
+      data = await buildPicsAllDisplay(inputArray);
+      break;
+
     case "picSets":
-      return await buildPicSetsDisplay(inputArray);
+      data = await buildPicSetsDisplay(inputArray);
+      break;
+
     default:
       return null;
   }
+
+  picDisplayContainer.append(data);
+
+  return picDisplayContainer;
 };
+
+export const buildPicTypeButtons = async () => {
+  const picTypeButtonContainer = document.createElement("div");
+  picTypeButtonContainer.id = "pic-type-button-container";
+
+  // Define button data matching your dropdown options
+  const buttonData = [
+    { buttonValue: "all", buttonText: "All Pics" },
+    { buttonValue: "picSets", buttonText: "Pic Sets" },
+  ];
+
+  // Create button list
+  const buttonList = document.createElement("ul");
+  buttonList.id = "pic-type-button-list";
+
+  // Build each button
+  for (let i = 0; i < buttonData.length; i++) {
+    const buttonItem = await buildPicTypeButtonItem(buttonData[i]);
+    buttonList.append(buttonItem);
+  }
+
+  picTypeButtonContainer.append(buttonList);
+  return picTypeButtonContainer;
+};
+
+export const buildPicTypeButtonItem = async (buttonData) => {
+  const { picType } = stateFront;
+  const { buttonValue, buttonText } = buttonData;
+
+  const buttonListItem = document.createElement("li");
+  buttonListItem.className = "pic-type-button-item";
+
+  const button = document.createElement("button");
+  button.id = `pic-type-button-${buttonValue}`;
+  button.className = "pic-type-button";
+  button.setAttribute("data-update", `pic-type-button-${buttonValue}`);
+  button.innerHTML = buttonText;
+
+  //add active type
+  if (picType === buttonValue) button.classList.add("active");
+
+  buttonListItem.append(button);
+  return buttonListItem;
+};
+
+//--------------------
 
 export const buildPicsAllDisplay = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
@@ -208,7 +270,6 @@ export const buildPicElementDate = async (date) => {
   return dateElement;
 };
 
-//EXTRACT PIC SERVER DATA
 export const buildPicElementServer = async (headers) => {
   if (!headers || !headers.server) return null;
   const serverData = headers.server;
