@@ -17,6 +17,7 @@ export const buildArticlesForm = async () => {
   // create title element for collapse container
   const titleElement = document.createElement("div");
   titleElement.textContent = "ARTICLES";
+  titleElement.setAttribute("data-update", "get-articles");
 
   //build collapse container
   const articleCollapseObj = {

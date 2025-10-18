@@ -14,7 +14,7 @@ export const buildVidsForm = async () => {
 
   const titleElement = document.createElement("div");
   titleElement.textContent = "Vids";
-  // titleElement.setAttribute("data-expand", "vid-dropdown"); //for click listener
+  titleElement.setAttribute("data-update", "get-vids");
 
   //build collapse container
   const vidCollapseObj = {

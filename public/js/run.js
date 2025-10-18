@@ -118,3 +118,16 @@ export const runChangeArticleType = async (clickUpdate) => {
   if (newArticleTypeButton) newArticleTypeButton.classList.add("active");
   return true;
 };
+
+export const runChangeDataType = async (clickUpdate) => {
+  console.log("RUN CHANGE DATA TYPE");
+  console.log(clickUpdate);
+
+  const dataType = clickUpdate.split("-").pop();
+
+  stateFront.typeTrigger = dataType;
+  stateFront.eventTrigger = "data-type-click";
+
+  await updateDisplay();
+  return true;
+};

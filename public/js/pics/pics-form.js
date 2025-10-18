@@ -8,6 +8,7 @@ export const buildPicsForm = async () => {
 
   const titleElement = document.createElement("div");
   titleElement.textContent = "PICS";
+  titleElement.setAttribute("data-update", "get-pics");
 
   // const picTypeListItem = await buildPicTypeListItem();
   const picHowManyListItem = await buildPicHowManyListItem();
