@@ -730,8 +730,8 @@ h3 {
 }
 
 .button-type-item.active {
-  background-color: linear-gradient(135deg, #1d5398 0%, #164388 100%);
-  border-color: linear-gradient(135deg, #1d5398 0%, #164388 100%);
+  background-color: #2563a8;
+  border-color: #2563a8;
   color: #ffffff;
   font-weight: 600;
   box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
@@ -739,8 +739,8 @@ h3 {
 }
 
 .button-type-item.active:hover {
-  background-color: linear-gradient(135deg, #3573b8 0%, #2563a8 100%);
-  border-color: linear-gradient(135deg, #3573b8 0%, #2563a8 100%);
+  background-color: #1d5398;
+  border-color: #1d5398;
   transform: none;
   box-shadow: 0 2px 8px rgba(29, 78, 216, 0.35);
 }
