@@ -87,3 +87,49 @@ export const buildPicSortByListItem = async () => {
 
   return picSortByListItem;
 };
+
+//-----------------------------
+
+export const buildPicTypeButtons = async () => {
+  const picTypeButtonContainer = document.createElement("div");
+  picTypeButtonContainer.id = "pic-type-button-container";
+
+  // Define button data matching your dropdown options
+  const buttonData = [
+    { buttonValue: "all", buttonText: "All Pics" },
+    { buttonValue: "picSets", buttonText: "Pic Sets" },
+  ];
+
+  // Create button list
+  const buttonList = document.createElement("ul");
+  buttonList.id = "pic-type-button-list";
+
+  // Build each button
+  for (let i = 0; i < buttonData.length; i++) {
+    const buttonItem = await buildPicTypeButtonItem(buttonData[i]);
+    buttonList.append(buttonItem);
+  }
+
+  picTypeButtonContainer.append(buttonList);
+  return picTypeButtonContainer;
+};
+
+export const buildPicTypeButtonItem = async (buttonData) => {
+  const { picType } = stateFront;
+  const { buttonValue, buttonText } = buttonData;
+
+  const buttonListItem = document.createElement("li");
+  buttonListItem.className = "pic-type-button-item";
+
+  const button = document.createElement("button");
+  button.id = `pic-type-button-${buttonValue}`;
+  button.className = "pic-type-button";
+  button.setAttribute("data-update", `pic-type-button-${buttonValue}`);
+  button.innerHTML = buttonText;
+
+  //add active type
+  if (picType === buttonValue) button.classList.add("active");
+
+  buttonListItem.append(button);
+  return buttonListItem;
+};
