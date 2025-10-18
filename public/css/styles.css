@@ -730,8 +730,8 @@ h3 {
 }
 
 .button-type-item.active {
-  background-color: #2563a8;
-  border-color: #2563a8;
+  background-color: #2563eb;
+  border-color: #2563eb;
   color: #ffffff;
   font-weight: 600;
   box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
@@ -739,8 +739,8 @@ h3 {
 }
 
 .button-type-item.active:hover {
-  background-color: #1d5398;
-  border-color: #1d5398;
+  background-color: #1d4ed8;
+  border-color: #1d4ed8;
   transform: none;
   box-shadow: 0 2px 8px rgba(29, 78, 216, 0.35);
 }
