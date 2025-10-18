@@ -663,15 +663,19 @@ h3 {
 
 /* -------------------------- */
 
-/* ARTICLE BUTTONS */
+/* TYPE BUTTONS */
 
-#article-type-button-container {
+/* #article-type-button-container {
   margin: 0 auto;
-  /* margin-bottom: -0.5rem; */
+  margin-bottom: 1.5rem;
+} */
+
+.button-type-container {
+  margin: 0 auto;
   margin-bottom: 1.5rem;
 }
 
-#article-type-button-list {
+.button-type-list {
   margin: 0 auto;
   padding: 0.75rem;
   display: flex;
@@ -685,12 +689,26 @@ h3 {
   opacity: 0.9;
 }
 
-.article-type-button-item {
+/* #article-type-button-list {
+  margin: 0 auto;
+  padding: 0.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  width: fit-content;
+  background-color: #8fafc;
+  border-radius: 12px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+  opacity: 0.9;
+} */
+
+.button-type-list-item {
   margin: 0;
   list-style: none;
 }
 
-.article-type-button {
+.button-type-item {
   padding: 0.5rem 1rem;
   font-size: 0.85rem;
   font-weight: 500;
@@ -705,7 +723,22 @@ h3 {
   line-height: 1;
 }
 
-.article-type-button:hover {
+/* .article-type-button {
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  background-color: transparent;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  transition: all 0.2s ease, background-color 0.3s ease, color 0.3s ease;
+  box-shadow: none;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  line-height: 1;
+} */
+
+.button-type-item:hover {
   background-color: #ffffff;
   color: #1e293b;
   border-color: #cbd5e1;
@@ -713,12 +746,12 @@ h3 {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-.article-type-button:active {
+.button-type-item:active {
   transform: translateY(0);
   box-shadow: none;
 }
 
-.article-type-button.active {
+.button-type-item.active {
   background-color: #2563eb;
   border-color: #2563eb;
   color: #ffffff;
@@ -727,7 +760,7 @@ h3 {
   transform: none;
 }
 
-.article-type-button.active:hover {
+.button-type-item.active:hover {
   background-color: #1d4ed8;
   border-color: #1d4ed8;
   transform: none;
@@ -735,7 +768,7 @@ h3 {
 }
 
 /* Special styling for the "ALL ARTICLES" button to make it stand out */
-.article-type-button[data-label="all-type"] {
+.button-type-item[data-label="all-type"] {
   font-weight: 600;
   text-transform: uppercase;
   font-size: 0.8rem;

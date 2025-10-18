@@ -34,6 +34,7 @@ export const buildPicsReturnDisplay = async (inputArray) => {
 export const buildPicTypeButtons = async () => {
   const picTypeButtonContainer = document.createElement("div");
   picTypeButtonContainer.id = "pic-type-button-container";
+  picTypeButtonContainer.className = "button-type-container";
 
   // Define button data matching your dropdown options
   const buttonData = [
@@ -44,6 +45,7 @@ export const buildPicTypeButtons = async () => {
   // Create button list
   const buttonList = document.createElement("ul");
   buttonList.id = "pic-type-button-list";
+  buttonList.className = "button-type-list";
 
   // Build each button
   for (let i = 0; i < buttonData.length; i++) {
@@ -60,11 +62,11 @@ export const buildPicTypeButtonItem = async (buttonData) => {
   const { buttonValue, buttonText } = buttonData;
 
   const buttonListItem = document.createElement("li");
-  buttonListItem.className = "pic-type-button-item";
+  buttonListItem.className = "button-type-list-item";
 
   const button = document.createElement("button");
   button.id = `pic-type-button-${buttonValue}`;
-  button.className = "pic-type-button";
+  button.className = "button-type-item";
   button.setAttribute("data-update", `pic-type-button-${buttonValue}`);
   button.innerHTML = buttonText;
 

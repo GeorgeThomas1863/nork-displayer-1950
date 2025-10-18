@@ -22,6 +22,7 @@ export const buildVidsReturnDisplay = async (inputArray) => {
 export const buildVidTypeButtons = async () => {
   const vidTypeButtonContainer = document.createElement("div");
   vidTypeButtonContainer.id = "vid-type-button-container";
+  vidTypeButtonContainer.className = "button-type-container";
 
   // Only vid pages to start
   const buttonData = [{ buttonValue: "vidPages", buttonText: "KCNA Vid Pages" }];
@@ -29,6 +30,7 @@ export const buildVidTypeButtons = async () => {
   // Create button list
   const buttonList = document.createElement("ul");
   buttonList.id = "vid-type-button-list";
+  buttonList.className = "button-type-list";
 
   // Build each button
   for (let i = 0; i < buttonData.length; i++) {
@@ -45,11 +47,11 @@ export const buildVidTypeButtonItem = async (buttonData) => {
   const { buttonValue, buttonText } = buttonData;
 
   const buttonListItem = document.createElement("li");
-  buttonListItem.className = "vid-type-button-item";
+  buttonListItem.className = "button-type-list-item";
 
   const button = document.createElement("button");
   button.id = `vid-type-button-${buttonValue}`;
-  button.className = "vid-type-button";
+  button.className = "button-type-item";
   button.setAttribute("data-update", `vid-type-button-${buttonValue}`);
   button.innerHTML = buttonText;
 

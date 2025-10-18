@@ -44,6 +44,7 @@ export const buildArticlesReturnDisplay = async (inputArray) => {
 export const buildArticleTypeButtons = async () => {
   const articleTypeButtonContainer = document.createElement("div");
   articleTypeButtonContainer.id = "article-type-button-container";
+  articleTypeButtonContainer.className = "button-type-container";
 
   // Define button data matching your dropdown options
   const buttonData = [
@@ -59,6 +60,7 @@ export const buildArticleTypeButtons = async () => {
   // Create button list
   const buttonList = document.createElement("ul");
   buttonList.id = "article-type-button-list";
+  buttonList.className = "button-type-list";
 
   // Build each button
   for (let i = 0; i < buttonData.length; i++) {
@@ -75,11 +77,12 @@ export const buildArticleTypeButtonItem = async (buttonData) => {
   const { buttonValue, buttonText } = buttonData;
 
   const buttonListItem = document.createElement("li");
-  buttonListItem.className = "article-type-button-item";
+  // buttonListItem.className = "article-type-button-item";
+  buttonListItem.className = "button-type-list-item";
 
   const button = document.createElement("button");
   button.id = `article-type-button-${buttonValue}`;
-  button.className = "article-type-button";
+  button.className = "button-type-item";
   button.setAttribute("data-update", `article-type-button-${buttonValue}`);
   button.innerHTML = buttonText;
 
