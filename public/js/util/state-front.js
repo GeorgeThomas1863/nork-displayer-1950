@@ -22,4 +22,9 @@ const stateFront = {
   },
 };
 
+//BUILD
+export const checkUpdateNeeded = async (inputObj) => {
+  if (!inputObj) return null;
+};
+
 export default stateFront;

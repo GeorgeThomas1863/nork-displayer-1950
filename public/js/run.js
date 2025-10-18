@@ -1,4 +1,5 @@
 import stateFront from "./util/state-front.js";
+import { checkUpdateNeeded } from "./util/state-front.js";
 import { updateDisplay } from "./main.js";
 import { getAuthParams, getAdminAuthParams, getAdminCommandParams } from "./util/params.js";
 import { sendToBack } from "./util/api-front.js";
@@ -134,6 +135,12 @@ export const runChangeDataType = async (clickUpdate) => {
 };
 
 export const runChangeDataInput = async (inputId) => {
-  console.log("RUN CHANGE DATA INPUT");
-  console.log(inputId);
+  const inputElement = document.getElementById(inputId);
+  if (!inputElement) return null;
+
+  //BUILD
+  const inputValue = inputElement.value;
+  await checkUpdateNeeded({ inputId, inputValue });
+
+  return true;
 };
