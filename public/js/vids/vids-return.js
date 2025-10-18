@@ -1,20 +1,14 @@
 import { buildCollapseContainer, defineCollapseItems } from "../util/collapse-display.js";
+import stateFront from "../util/state-front.js";
 
+//ONLY NEED 1 VID DISPLAY FOR NOW
 export const buildVidsReturnDisplay = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
-  const { vidType } = stateFront;
 
-  switch (vidType) {
-    case "all":
-      return buildVidsAllDisplay(inputArray);
-    case "vidPages":
-      return buildVidPagesDisplay(inputArray);
-    default:
-  }
-};
+  const vidDisplay = await buildVidPagesDisplay(inputArray);
+  if (!vidDisplay) return null;
 
-export const buildVidsAllDisplay = async (inputArray) => {
-  //BUILD
+  return vidDisplay;
 };
 
 // FIX
@@ -172,4 +166,24 @@ export const buildVidDate = async (date) => {
 // // Cleanup function to call when removing the video display
 // export const cleanupVideoDisplay = () => {
 //   cleanupAllHLSInstances();
+// };
+
+// export const buildVidsReturnDisplay = async (inputArray) => {
+//   if (!inputArray || !inputArray.length) return null;
+//   const { vidType } = stateFront;
+
+//   switch (vidType) {
+//     case "all":
+//       return buildVidsAllDisplay(inputArray);
+
+//     case "vidPages":
+//       return buildVidPagesDisplay(inputArray);
+
+//     default:
+//       return null;
+//   }
+// };
+
+// export const buildVidsAllDisplay = async (inputArray) => {
+//   //BUILD
 // };
