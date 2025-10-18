@@ -53,9 +53,16 @@ export const updateStateFront = async (inputArray) => {
   const { typeTrigger, articleType } = stateFront;
   stateFront.isFirstLoad = false;
 
-  //UPDATE STATE FRONT HERE
+  //Handle article type counts
   if (typeTrigger === "articles") {
-    stateFront.dataObj.articles[articleType] = inputArray.length;
+    for (const key in stateFront.dataObj.articles) {
+      if (key === articleType) {
+        stateFront.dataObj.articles[key] = inputArray.length;
+        continue;
+      }
+      //reset all others
+      stateFront.dataObj.articles[key] = null;
+    }
     return true;
   }
 
