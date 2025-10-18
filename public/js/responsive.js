@@ -1,4 +1,4 @@
-import { runAuth, runAdminAuth, runAdminCommand, runPwToggle, runDropDownToggle, runAdminToggleURL, runUpdateStateDisplay } from "./run.js";
+import { runAuth, runAdminAuth, runAdminCommand, runPwToggle, runDropDownToggle, runAdminToggleURL, runChangeArticleType } from "./run.js";
 
 export const clickHandler = async (e) => {
   e.preventDefault();
@@ -25,7 +25,10 @@ export const clickHandler = async (e) => {
   if (clickType === "dropdown") await runDropDownToggle();
   if (clickType === "admin-redirect") window.location.href = "/admin";
 
-  if (clickUpdate) await runUpdateStateDisplay(clickUpdate);
+  //----------
+
+  // if (clickUpdate) await runUpdateStateDisplay(clickUpdate);
+  if (clickUpdate.includes("article-type-button")) await runChangeArticleType(clickUpdate)
 
   //   await updateAdminStateEventTriggered(clickType);
 
