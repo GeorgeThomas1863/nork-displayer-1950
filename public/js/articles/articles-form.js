@@ -29,11 +29,7 @@ export const buildArticlesForm = async () => {
 
   const articleCollapseContainer = await buildCollapseContainer(articleCollapseObj);
 
-  const articleTypeButtons = await buildArticleTypeButtons();
-
-  articleCollapseContainer.append(articleTypeButtons);
-
-  // Apply the wrapper class to the collapse container instead
+  // Apply the wrapper class to the collapse container
   articleCollapseContainer.className = "wrapper";
 
   return articleCollapseContainer;
