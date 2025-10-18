@@ -104,14 +104,16 @@ export const runChangeArticleType = async (clickUpdate) => {
   console.log(clickUpdate);
 
   const articleTypeId = clickUpdate.split("-").pop();
+
+  const currentArticleType = stateFront.articleType;
+  const currentArticleTypeButton = document.getElementById(`article-type-button-${currentArticleType}`);
+  if (currentArticleTypeButton) currentArticleTypeButton.classList.remove("active");
+
   stateFront.articleType = articleTypeId;
   stateFront.eventTrigger = "article-type-click";
 
   await updateDisplay();
 
-  const currentArticleType = stateFront.articleType;
-  const currentArticleTypeButton = document.getElementById(`article-type-button-${currentArticleType}`);
-  if (currentArticleTypeButton) currentArticleTypeButton.classList.remove("active");
   const newArticleTypeButton = document.getElementById(`article-type-button-${articleTypeId}`);
   if (newArticleTypeButton) newArticleTypeButton.classList.add("active");
   return true;
