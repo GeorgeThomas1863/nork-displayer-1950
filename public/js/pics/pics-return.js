@@ -1,40 +1,25 @@
 import { buildCollapseContainer, defineCollapseItems } from "../util/collapse-display.js";
+import stateFront from "../util/state-front.js";
 
-export const picDropDownContainer = async (inputArray, type) => {
-  if (!inputArray || !inputArray.length) return null;
-
-  const picArrayElement = await buildPicWrapper(inputArray, false);
-  if (!picArrayElement) return null;
-
-  //build pic title element
-  const picTitleElement = document.createElement("div");
-  picTitleElement.id = `${type}-pic-header`;
-  picTitleElement.textContent = `${inputArray.length} ${type.toUpperCase()} PIC${inputArray.length > 1 ? "S" : ""}`;
-
-  //EXTRACT PIC DATE?
-
-  //build collapse container
-  const picCollapseObj = {
-    titleElement: picTitleElement,
-    contentElement: picArrayElement,
-    isExpanded: true,
-    className: `${type}-pic-collapse`,
-  };
-
-  const picCollapseElement = await buildCollapseContainer(picCollapseObj);
-
-  // console.log("PIC COLLAPSE ELEMENT");
-  // console.log(picCollapseElement);
-
-  return picCollapseElement;
-};
-
-//--------------------------------
-
-//PIC SET DISPLAY
 export const buildPicsReturnDisplay = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
+  const { picType } = stateFront;
 
+  switch (picType) {
+    case "all":
+      return buildPicsAllDisplay(inputArray);
+    case "picSets":
+      return buildPicSetsDisplay(inputArray);
+    default:
+  }
+};
+
+export const buildPicsAllDisplay = async (inputArray) => {
+  //BUILD
+};
+
+//PIC SET DISPLAY
+export const buildPicSetsDisplay = async (inputArray) => {
   const picArrayElement = document.createElement("ul");
   picArrayElement.id = "pic-array-element";
 

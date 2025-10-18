@@ -1,7 +1,24 @@
 import { buildCollapseContainer, defineCollapseItems } from "../util/collapse-display.js";
 
-// VID PAGE DISPLAY
 export const buildVidsReturnDisplay = async (inputArray) => {
+  if (!inputArray || !inputArray.length) return null;
+  const { vidType } = stateFront;
+
+  switch (vidType) {
+    case "all":
+      return buildVidsAllDisplay(inputArray);
+    case "vidPages":
+      return buildVidPagesDisplay(inputArray);
+    default:
+  }
+};
+
+export const buildVidsAllDisplay = async (inputArray) => {
+  //BUILD
+};
+
+// FIX
+export const buildVidPagesDisplay = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
 
   const vidArrayElement = document.createElement("ul");
