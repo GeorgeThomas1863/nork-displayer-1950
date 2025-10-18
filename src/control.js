@@ -3,68 +3,35 @@ import dbModel from "../models/db-model.js";
 
 export const runUpdateData = async (inputParams) => {
   if (!inputParams) return null;
-  const { trigger, isFirstLoad } = inputParams;
-
-  console.log("RUN UPDATE DATA");
-  console.log(inputParams);
-
-  if (isFirstLoad) {
-    return await runFirstLoad(inputParams);
-  }
+  const { trigger, typeTrigger } = inputParams;
 
   const newDataNeeded = await checkNewDataNeeded(inputParams);
   if (!newDataNeeded) return null;
 
-  const dataArray = await runUpdateLoad(inputParams);
+  console.log("RUN UPDATE DATA");
+  console.log(inputParams);
+
+  let dataArray = null;
+  if (typeTrigger === "articles") {
+    dataArray = await getNewArticles(inputParams);
+  }
+
   console.log("DATA ARRAY");
   console.dir(dataArray.length);
   return dataArray;
 };
 
-export const runFirstLoad = async (inputParams) => {
-  if (!inputParams) return null;
-  const { articleType } = inputParams;
-  const { defaultDataLoad } = CONFIG;
-
-  console.log("RUN FIRST LOAD");
-  console.log(inputParams);
-
-  const params = {
-    filterKey: "articleType",
-    filterValue: articleType,
-    howMany: defaultDataLoad.articles,
-    sortKey: "date",
-  };
-
-  const dataModel = new dbModel(params, "articles");
-  const dataArray = await dataModel.getNewestItemsByTypeArray();
-
-  console.log("DATA ARRAY");
-  console.dir(dataArray);
-
-  return dataArray;
-};
-
 //BUILD
 export const checkNewDataNeeded = async (inputParams) => {
+  const { isFirstLoad } = inputParams;
+
+  if (isFirstLoad) return true;
+
+  //BUILD
   return true;
 };
 
-export const runUpdateLoad = async (inputParams) => {
-  if (!inputParams) return null;
-  const { typeTrigger, articleType, howMany } = inputParams;
-  const { defaultDataLoad } = CONFIG;
-
-  //DEAL WITH ARTICLES ALL
-
-  let data = null;
-  if (typeTrigger === "articles") {
-    data = await getArticlesData(inputParams);
-    return data;
-  }
-};
-
-export const getArticlesData = async (inputParams) => {
+export const getNewArticles = async (inputParams) => {
   if (!inputParams) return null;
   const { articleType } = inputParams;
 
