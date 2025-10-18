@@ -943,6 +943,11 @@ h3 {
   padding: 0;
 }
 
+#vid-title {
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+
 #vid-title span {
   font-size: 1.5rem;
   vertical-align: middle;
