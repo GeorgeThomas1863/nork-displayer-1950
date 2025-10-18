@@ -746,7 +746,8 @@ h3 {
 /* ARTICLES */
 
 .article-list-item {
-  margin-bottom: 2rem;
+  margin-top: 1.5rem;
+  /* margin-bottom: 2rem; */
   width: 100%;
 }
 
