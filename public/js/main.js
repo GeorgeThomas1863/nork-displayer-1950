@@ -2,7 +2,7 @@
 import stateFront from "./util/state-front.js";
 import { buildDropDownForm } from "./main-display/drop-down-form.js";
 import { buildInputForms } from "./main-display/input-forms.js";
-import { buildArticleTypeButtons } from "./articles/articles-form.js";
+// import { buildArticleTypeButtons } from "./articles/articles-form.js";
 import { buildReturnDisplay } from "./main-display/return-display.js";
 import { sendToBack } from "./util/api-front.js";
 
