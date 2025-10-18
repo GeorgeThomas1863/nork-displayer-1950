@@ -8,7 +8,6 @@ export const buildPicsForm = async () => {
 
   const titleElement = document.createElement("div");
   titleElement.textContent = "PICS";
-  titleElement.setAttribute("data-update", "get-pics");
 
   // const picTypeListItem = await buildPicTypeListItem();
   const picHowManyListItem = await buildPicHowManyListItem();
@@ -22,7 +21,7 @@ export const buildPicsForm = async () => {
     contentElement: picWrapper,
     isExpanded: false,
     className: "pic-wrapper-collapse",
-    dataAttribute: "pic-form-header",
+    dataAttribute: "get-pics",
   };
 
   const picCollapseContainer = await buildCollapseContainer(picCollapseObj);

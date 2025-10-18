@@ -14,7 +14,6 @@ export const buildVidsForm = async () => {
 
   const titleElement = document.createElement("div");
   titleElement.textContent = "Vids";
-  titleElement.setAttribute("data-update", "get-vids");
 
   //build collapse container
   const vidCollapseObj = {
@@ -22,7 +21,7 @@ export const buildVidsForm = async () => {
     contentElement: vidWrapper,
     isExpanded: false,
     className: "vid-wrapper-collapse",
-    dataAttribute: "vid-form-header",
+    dataAttribute: "get-vids",
   };
 
   const vidCollapseContainer = await buildCollapseContainer(vidCollapseObj);

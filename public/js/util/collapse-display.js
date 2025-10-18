@@ -22,7 +22,7 @@ export const buildCollapseContainer = async (inputObj) => {
 
   // Create header with arrow and title
   const collapseHeader = document.createElement("div");
-  collapseHeader.setAttribute("data-expand", dataAttribute);
+  collapseHeader.setAttribute("data-update", dataAttribute);
   collapseHeader.className = "collapse-header";
 
   const arrow = document.createElement("div");
