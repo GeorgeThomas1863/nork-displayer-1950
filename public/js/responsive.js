@@ -1,4 +1,5 @@
-import { runAuth, runAdminAuth, runAdminCommand, runPwToggle, runDropDownToggle, runAdminToggleURL, runChangeButtonType, runChangeDataType } from "./run.js";
+import { runAuth, runAdminAuth, runAdminCommand, runPwToggle, runDropDownToggle, runAdminToggleURL, runChangeButtonType, runChangeDataType, runChangeDataInput } from "./run.js";
+import debounce from "./util/debounce.js";
 
 export const clickHandler = async (e) => {
   e.preventDefault();
@@ -75,6 +76,19 @@ export const changeHandler = async (e) => {
   await runAdminToggleURL();
 };
 
+// create debounced function for input
+const debouncedInputTriggered = debounce(runChangeDataInput);
+
+//input handler
+export const inputHandler = async (e) => {
+  const inputElement = e.target;
+
+  const inputId = inputElement.id;
+
+  const eventTriggered = await debouncedInputTriggered(inputId);
+  if (!eventTriggered) return null;
+};
+
 const authElement = document.getElementById("auth-element");
 const adminAuthElement = document.getElementById("admin-auth-element");
 const displayElement = document.getElementById("display-element");
@@ -93,6 +107,7 @@ if (adminAuthElement) {
 if (displayElement) {
   displayElement.addEventListener("click", clickHandler);
   displayElement.addEventListener("keydown", keyHandler);
+  displayElement.addEventListener("input", inputHandler);
 }
 
 if (adminDisplayElement) {

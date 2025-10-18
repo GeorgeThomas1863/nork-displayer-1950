@@ -132,3 +132,8 @@ export const runChangeDataType = async (clickUpdate) => {
   await updateDisplay();
   return true;
 };
+
+export const runChangeDataInput = async (inputId) => {
+  console.log("RUN CHANGE DATA INPUT");
+  console.log(inputId);
+};
