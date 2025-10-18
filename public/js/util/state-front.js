@@ -5,8 +5,8 @@ const stateFront = {
 
   typeTrigger: "articles", //default articles
   articleType: "fatboy", //default fatboy
-  picType: "pics",
-  vidType: "vids",
+  picType: "all",
+  vidType: "all",
   howMany: null,
   dataObj: {
     articles: {
