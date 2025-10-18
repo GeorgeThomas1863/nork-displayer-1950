@@ -96,9 +96,14 @@ h3 {
   cursor: pointer;
   user-select: none;
   transition: all 0.2s ease;
+  border-radius: 12px;
   /* box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
   position: relative;
   overflow: hidden; */
+}
+
+.collapse-header:has(.collapse-arrow.expanded) {
+  border-radius: 12px 12px 0 0; /* Only round top when expanded */
 }
 
 .collapse-header:hover {
@@ -172,7 +177,7 @@ h3 {
 
 .wrapper .collapse-header {
   padding: 1rem 2rem;
-  border-radius: 12px 12px 0 0;
+  /* border-radius: 12px 12px 0 0; */
   margin-bottom: 0;
 }
 
