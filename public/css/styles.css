@@ -109,13 +109,10 @@ h3 {
 }
 
 .collapse-header:hover {
-  /* background: linear-gradient(135deg, #5a9fe5 0%, #458acd 100%); */
-  /* background: linear-gradient(135deg, #3573b8 0%, #2563a8 100%); */
   background: #3573b8;
 }
 
 .collapse-header:active {
-  /* background: linear-gradient(135deg, #3a80d2 0%, #256aad 100%); */
   background: #164388;
   /* background: linear-gradient(135deg, #1d5398 0%, #164388 100%); */
   transform: scale(0.99);
@@ -152,8 +149,6 @@ h3 {
   content: "";
   width: 10px;
   height: 10px;
-  /* border-right: 2.5px solid #2c3e50;
-  border-bottom: 2.5px solid #2c3e50; */
   border-right: 2.5px solid #164388;
   border-bottom: 2.5px solid #164388;
   transform: rotate(-45deg) translate(-1px, -1px);
@@ -171,7 +166,7 @@ h3 {
 
 .collapse-content {
   max-height: 100000px;
-  /* transition: max-height 0.5s cubic-bezier(0, 1, 0, 1), opacity 0.3s ease, padding 0.3s ease; */
+  transition: max-height 0.5s cubic-bezier(0, 1, 0, 1), opacity 0.3s ease, padding 0.3s ease;
   opacity: 1;
   overflow: hidden;
   background-color: #ffffff;
