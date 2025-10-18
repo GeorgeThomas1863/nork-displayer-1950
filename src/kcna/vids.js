@@ -8,21 +8,25 @@ export const getNewVids = async (inputParams) => {
   const vidParams = await buildVidParams(inputParams);
   if (!vidParams) return null;
 
-  let dataArray = null;
-  let dataModel = null;
-  switch (vidType) {
-    case "all":
-      dataModel = new dbModel(vidParams, "vids");
-      dataArray = await dataModel.getNewestItemsArray();
-      break;
+  //ONLY get vidPages for now
+  const dataModel = new dbModel(vidParams, "vidPages");
+  const dataArray = await dataModel.getNewestItemsArray();
 
-    case "vidPages":
-      dataModel = new dbModel(vidParams, "vidPages");
-      dataArray = await dataModel.getNewestItemsArray();
-      break;
-    default:
-      return null;
-  }
+  // let dataArray = null;
+  // let dataModel = null;
+  // switch (vidType) {
+  //   case "all":
+  //     dataModel = new dbModel(vidParams, "vids");
+  //     dataArray = await dataModel.getNewestItemsArray();
+  //     break;
+
+  //   case "vidPages":
+  //     dataModel = new dbModel(vidParams, "vidPages");
+  //     dataArray = await dataModel.getNewestItemsArray();
+  //     break;
+  //   default:
+  //     return null;
+  // }
 
   return dataArray;
 };
