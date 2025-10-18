@@ -6,8 +6,8 @@ export const runUpdateData = async (inputParams) => {
   if (!inputParams) return null;
   const { typeTrigger } = inputParams;
 
-  const newDataNeeded = await checkNewDataNeeded(inputParams);
-  if (!newDataNeeded) return null;
+  // const newDataNeeded = await checkNewDataNeeded(inputParams);
+  // if (!newDataNeeded) return null;
 
   console.log("RUN UPDATE PARAMS");
   console.log(inputParams);
@@ -31,12 +31,12 @@ export const runUpdateData = async (inputParams) => {
   return dataArray;
 };
 
-//BUILD
-export const checkNewDataNeeded = async (inputParams) => {
-  const { isFirstLoad } = inputParams;
+//DO ON FRONTEND
+// export const checkNewDataNeeded = async (inputParams) => {
+//   const { isFirstLoad } = inputParams;
 
-  if (isFirstLoad) return true;
+//   if (isFirstLoad) return true;
 
-  //BUILD
-  return true;
-};
+//   //BUILD
+//   return true;
+// };

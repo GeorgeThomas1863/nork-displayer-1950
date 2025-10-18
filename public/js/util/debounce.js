@@ -1,7 +1,7 @@
 //debounce function (to add delay to input / only send to back when user stops typing)
 const debounce = (func) => {
   let timer;
-  const DELAY = 1000; //300 milliseconds
+  const DELAY = 500; //500 milliseconds
 
   //method for creating new promise, so can use with async await
   return (...args) => {

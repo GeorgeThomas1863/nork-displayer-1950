@@ -19,6 +19,9 @@ export const buildDisplay = async () => {
 
   await updateDisplay();
 
+  console.log("STATE FRONT");
+  console.dir(stateFront);
+
   return true;
 };
 
