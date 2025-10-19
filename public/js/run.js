@@ -143,9 +143,10 @@ export const runChangeDataType = async (clickUpdate) => {
   stateFront.howMany = howManyElement?.value || null;
 
   const sortByElement = document.getElementById(`${dataType.slice(0, -1)}-sort-by`);
+  const sortBy = `${sortByElement.value.slice(0, -1)} || "newest-to-oldest"}`;
   console.log("CHANGE DATA TYPE SORT BY ELEMENT");
   console.log(sortByElement);
-  console.log(sortByElement?.value || "blank");
+  console.log(sortBy || "blank");
   // stateFront.orderBy = sortByElement?.value || "newest-to-oldest";
 
   await updateDisplay();
