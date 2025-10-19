@@ -140,9 +140,10 @@ export const runChangeDataType = async (clickUpdate) => {
 
   //if howMany Element blank, reset dataObj (need to remove s from dataType)
   const howManyElement = document.getElementById(`${dataType.slice(0, -1)}-how-many`);
-  console.log(howManyElement);
-  console.log(howManyElement?.value || "blank");
-  if (!howManyElement || !howManyElement.value) await resetDataObj();
+  if (howManyElement && howManyElement.value) stateFront.howMany = howManyElement.value;
+  // console.log(howManyElement);
+  // console.log(howManyElement?.value || "blank");
+  // if (!howManyElement || !howManyElement.value) await resetDataObj();
 
   await updateDisplay();
   return true;
