@@ -137,7 +137,10 @@ export const runChangeDataType = async (clickUpdate) => {
 
   stateFront.typeTrigger = dataType;
   stateFront.eventTrigger = "data-type-click";
-  await resetDataObj();
+
+  //if howMany Element blank, reset dataObj
+  const howManyElement = document.getElementById(`${dataType}-how-many`);
+  if (!howManyElement || !howManyElement.value) await resetDataObj();
 
   await updateDisplay();
   return true;
