@@ -1,4 +1,4 @@
-import { runAuth, runAdminAuth, runAdminCommand, runPwToggle, runDropDownToggle, runAdminToggleURL, runChangeButtonType, runChangeDataType, runChangeDataInput } from "./run.js";
+import { runAuth, runAdminAuth, runAdminCommand, runPwToggle, runDropDownToggle, runAdminToggleURL, runChangeButtonType, runChangeDataType, runChangeDataInput, runChangeSortBy } from "./run.js";
 import debounce from "./util/debounce.js";
 
 export const clickHandler = async (e) => {
@@ -67,6 +67,8 @@ export const changeHandler = async (e) => {
   console.log("CHANGE HANDLER");
   console.log(changeElement);
   console.log(changeId);
+
+  if (changeId && changeId.includes("-sort-by")) return await runChangeSortBy(changeElement);
 
   if (changeId !== "admin-how-much") return null;
 

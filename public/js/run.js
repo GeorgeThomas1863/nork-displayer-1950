@@ -157,3 +157,20 @@ export const runChangeDataInput = async (inputElement) => {
   await updateDisplay();
   return true;
 };
+
+export const runChangeSortBy = async (changeElement) => {
+  if (!changeElement) return null;
+
+  const changeId = changeElement.id;
+  const sortBy = changeElement.value;
+  const typePrefix = changeId.split("-")[0];
+
+  if (!sortBy || sortBy === stateFront.orderBy) return null;
+
+  stateFront.eventTrigger = changeId;
+  stateFront.typeTrigger = `${typePrefix}s`;
+  stateFront.orderBy = sortBy;
+
+  await updateDisplay();
+  return true;
+};
