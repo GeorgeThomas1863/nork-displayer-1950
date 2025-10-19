@@ -3,32 +3,13 @@ import dbModel from "../../models/db-model.js";
 
 export const getNewVids = async (inputParams) => {
   if (!inputParams) return null;
-  const { vidType } = inputParams;
+  // const { vidType } = inputParams;
 
   const vidParams = await buildVidParams(inputParams);
   if (!vidParams) return null;
 
   //ONLY get vidPages for now
-  const dataModel = new dbModel(vidParams, "vidPages");
-  const dataArray = await dataModel.getNewestItemsArray();
-
-  // let dataArray = null;
-  // let dataModel = null;
-  // switch (vidType) {
-  //   case "all":
-  //     dataModel = new dbModel(vidParams, "vids");
-  //     dataArray = await dataModel.getNewestItemsArray();
-  //     break;
-
-  //   case "vidPages":
-  //     dataModel = new dbModel(vidParams, "vidPages");
-  //     dataArray = await dataModel.getNewestItemsArray();
-  //     break;
-  //   default:
-  //     return null;
-  // }
-
-  return dataArray;
+  return await dataLookup(vidParams, "vidPages", orderBy, false);
 };
 
 export const buildVidParams = async (inputParams) => {

@@ -1,23 +1,17 @@
 import CONFIG from "../../config/config.js";
-import dbModel from "../../models/db-model.js";
+// import dbModel from "../../models/db-model.js";
+import { dataLookup } from "../control.js";
 
 export const getNewArticles = async (inputParams) => {
   if (!inputParams) return null;
-  const { articleType } = inputParams;
+  const { articleType, orderBy } = inputParams;
 
   const articleParams = await buildArticleParams(inputParams);
   if (!articleParams) return null;
 
-  const dataModel = new dbModel(articleParams, "articles");
+  if (articleType === "all") return await dataLookup(articleParams, "articles", orderBy, false);
 
-  let dataArray = null;
-  if (articleType === "all") {
-    dataArray = await dataModel.getNewestItemsArray();
-    return dataArray;
-  }
-
-  dataArray = await dataModel.getNewestItemsByTypeArray();
-  return dataArray;
+  return await dataLookup(articleParams, "articles", orderBy, true);
 };
 
 export const buildArticleParams = async (inputParams) => {

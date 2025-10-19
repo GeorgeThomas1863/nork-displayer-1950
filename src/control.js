@@ -1,6 +1,7 @@
 import { getNewArticles } from "./kcna/articles.js";
 import { getNewPics } from "./kcna/pics.js";
 import { getNewVids } from "./kcna/vids.js";
+import dbModel from "../models/db-model.js";
 
 export const runUpdateData = async (inputParams) => {
   if (!inputParams) return null;
@@ -31,12 +32,42 @@ export const runUpdateData = async (inputParams) => {
   return dataArray;
 };
 
-//DO ON FRONTEND
-// export const checkNewDataNeeded = async (inputParams) => {
-//   const { isFirstLoad } = inputParams;
+export const dataLookup = async (params, collection, orderBy, typeIncluded = false) => {
+  if (!params || !collection || !orderBy) return null;
 
-//   if (isFirstLoad) return true;
+  const dataModel = new dbModel(params, collection);
 
-//   //BUILD
-//   return true;
-// };
+  let dataArray = null;
+  switch (typeIncluded) {
+    case true:
+      switch (orderBy) {
+        case "newest-to-oldest":
+          dataArray = await dataModel.getNewestItemsByTypeArray();
+          break;
+        case "oldest-to-newest":
+          dataArray = await dataModel.getOldestItemsByTypeArray();
+          break;
+        default:
+          return null;
+      }
+      break;
+
+    case false:
+      switch (orderBy) {
+        case "newest-to-oldest":
+          dataArray = await dataModel.getNewestItemsArray();
+          break;
+        case "oldest-to-newest":
+          dataArray = await dataModel.getOldestItemsArray();
+          break;
+        default:
+          return null;
+      }
+      break;
+
+    default:
+      return null;
+  }
+
+  return dataArray;
+};
