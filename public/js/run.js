@@ -142,7 +142,9 @@ export const runChangeDataType = async (clickUpdate) => {
   const howManyElement = document.getElementById(`${dataType.slice(0, -1)}-how-many`);
   stateFront.howMany = howManyElement?.value || null;
 
-  // const sortByElement = document.getElementById(`${dataType.slice(0, -1)}-sort-by`);
+  const sortByElement = document.getElementById(`${dataType.slice(0, -1)}-sort-by`);
+  console.log(sortByElement);
+  console.log(sortByElement?.value || "blank");
   // stateFront.orderBy = sortByElement?.value || "newest-to-oldest";
 
   await updateDisplay();
