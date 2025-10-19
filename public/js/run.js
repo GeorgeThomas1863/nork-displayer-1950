@@ -1,5 +1,5 @@
 import stateFront from "./util/state-front.js";
-import { checkUpdateNeeded } from "./util/state-front.js";
+import { resetDataObj } from "./util/state-front.js";
 import { updateDisplay } from "./main.js";
 import { getAuthParams, getAdminAuthParams, getAdminCommandParams } from "./util/params.js";
 import { sendToBack } from "./util/api-front.js";
@@ -137,6 +137,7 @@ export const runChangeDataType = async (clickUpdate) => {
 
   stateFront.typeTrigger = dataType;
   stateFront.eventTrigger = "data-type-click";
+  await resetDataObj();
 
   await updateDisplay();
   return true;

@@ -23,33 +23,19 @@ const stateFront = {
   },
 };
 
-//BUILD
-export const checkUpdateNeeded = async () => {
-  const { howMany } = stateFront;
-
-  const currentData = await getCurrentData();
-  if (!currentData || !howMany) {
-    const error = new Error("CANT GET CURRENT DATA");
-    error.function = "checkUpdateNeeded";
-    throw error;
-  }
-
-  // if (currentData === howMany || currentData > howMany) return false;
-
-  //reload for everything not equal
-  if (currentData === howMany) return false;
-
-  return true;
-};
-
-export const getCurrentData = async () => {
-  const { typeTrigger, dataObj, articleType } = stateFront;
-
-  if (typeTrigger === "articles") {
-    return dataObj.articles[articleType];
-  }
-
-  return dataObj[typeTrigger];
+export const resetDataObj = async () => {
+  stateFront.dataObj = {
+    articles: {
+      fatboy: null,
+      topNews: null,
+      latestNews: null,
+      externalNews: null,
+      anecdote: null,
+      people: null,
+    },
+    pics: null,
+    vids: null,
+  };
 };
 
 export default stateFront;
