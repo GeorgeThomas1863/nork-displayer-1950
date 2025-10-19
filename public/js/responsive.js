@@ -7,17 +7,16 @@ export const clickHandler = async (e) => {
   const clickElement = e.target;
   const clickId = clickElement.id;
   const clickType = clickElement.getAttribute("data-label");
-
   const clickUpdate = clickElement.getAttribute("data-update");
 
-  // console.log("CLICK ELEMENT");
-  // console.log(clickElement);
-  // console.log("CLICK ID");
-  // console.log(clickId);
-  // console.log("CLICK TYPE");
-  // console.log(clickType);
-  // console.log("CLICK UPDATE");
-  // console.log(clickUpdate);
+  console.log("CLICK HANDLER");
+  console.log(clickElement);
+  console.log("CLICK ID");
+  console.log(clickId);
+
+  console.log("CLICK DATA TYPE");
+  if (clickType) console.log(clickType);
+  if (clickUpdate) console.log(clickUpdate);
 
   if (clickType === "pwToggle") await runPwToggle();
   if (clickType === "auth-submit") await runAuth();
@@ -45,6 +44,9 @@ export const keyHandler = async (e) => {
   if (e.key !== "Enter") return null;
   e.preventDefault();
 
+  console.log("KEY HANDLER");
+  console.log(e.key);
+
   // Determine which button to trigger based on context
   const authButton = document.getElementById("auth-button");
   const adminAuthButton = document.getElementById("admin-auth-button");
@@ -54,9 +56,6 @@ export const keyHandler = async (e) => {
 
   if (adminAuthButton && adminAuthButton.offsetParent !== null && !adminAuthButton.disabled) return await runAdminAuth();
 
-  //make so only submits on click
-  // if (visitSubmitButton && visitSubmitButton.offsetParent !== null && !visitSubmitButton.disabled) return await runSetDataWS();
-
   return null;
 };
 
@@ -64,6 +63,10 @@ export const changeHandler = async (e) => {
   e.preventDefault();
   const changeElement = e.target;
   const changeId = changeElement.id;
+
+  console.log("CHANGE HANDLER");
+  console.log(changeElement);
+  console.log(changeId);
 
   if (changeId !== "admin-how-much") return null;
 
@@ -76,11 +79,13 @@ const debouncedInputTriggered = debounce(runChangeDataInput);
 //input handler
 export const inputHandler = async (e) => {
   const inputElement = e.target;
-  // console.log("INPUT ELEMENT");
-  // console.log(inputElement);
 
-  const eventTriggered = await debouncedInputTriggered(inputElement);
-  if (!eventTriggered) return null;
+  console.log("INPUT HANDLER");
+  console.log(inputElement.id);
+  console.log("INPUT VALUE");
+  console.log(inputElement.value);
+
+  await debouncedInputTriggered(inputElement);
 };
 
 const authElement = document.getElementById("auth-element");

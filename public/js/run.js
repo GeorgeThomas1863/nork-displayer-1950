@@ -69,11 +69,11 @@ export const runPwToggle = async () => {
   if (currentSvgId === "eye-closed-icon") {
     pwButton.innerHTML = EYE_OPEN_SVG;
     pwInput.type = "text";
-  } else {
-    pwButton.innerHTML = EYE_CLOSED_SVG;
-    pwInput.type = "password";
+    return true;
   }
 
+  pwButton.innerHTML = EYE_CLOSED_SVG;
+  pwInput.type = "password";
   return true;
 };
 
@@ -101,8 +101,7 @@ export const runAdminToggleURL = async () => {
 //--------------------------------
 
 export const runChangeButtonType = async (clickUpdate) => {
-  console.log("RUN UPDATE STATE DISPLAY");
-  console.log(clickUpdate);
+  if (!clickUpdate) return null;
 
   const typePrefix = clickUpdate.split("-")[0];
   const typeId = clickUpdate.split("-").pop();
@@ -111,10 +110,7 @@ export const runChangeButtonType = async (clickUpdate) => {
   if (currentActiveButton) currentActiveButton.classList.remove("active");
 
   //same type clicked
-  if (!typeId || stateFront.articleType === typeId) {
-    console.log("AHHHHHHHHH");
-    return null;
-  }
+  if (!typeId || stateFront.articleType === typeId) return null;
 
   stateFront[`${typePrefix}Type`] = typeId;
   stateFront.eventTrigger = `${typePrefix}-type-button-click`;
@@ -128,8 +124,7 @@ export const runChangeButtonType = async (clickUpdate) => {
 };
 
 export const runChangeDataType = async (clickUpdate) => {
-  console.log("RUN CHANGE DATA TYPE");
-  console.log(clickUpdate);
+  if (!clickUpdate) return null;
 
   const dataType = clickUpdate.split("-").pop();
 
@@ -145,15 +140,6 @@ export const runChangeDataType = async (clickUpdate) => {
 
 export const runChangeDataInput = async (inputElement) => {
   if (!inputElement) return null;
-
-  // console.log("RUN CHANGE DATA INPUT");
-
-  // console.log("INPUT ELEMENT");
-  // console.log(inputElement);
-  // console.log("INPUT ID");
-  // console.log(inputElement.id);
-  // console.log("INPUT VALUE");
-  // console.log(inputElement.value);
 
   const typePrefix = inputElement.id.split("-")[0];
 
