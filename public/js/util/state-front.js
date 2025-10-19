@@ -34,7 +34,10 @@ export const checkUpdateNeeded = async () => {
     throw error;
   }
 
-  if (currentData === howMany || currentData > howMany) return false;
+  // if (currentData === howMany || currentData > howMany) return false;
+
+  //reload for everything not equal
+  if (currentData === howMany) return false;
 
   return true;
 };
