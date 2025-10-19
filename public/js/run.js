@@ -138,12 +138,14 @@ export const runChangeDataInput = async (inputId) => {
   const inputElement = document.getElementById(inputId);
   if (!inputElement) return null;
 
-  const updateParams = {
-    updateTrigger: inputId,
-    updateValue: inputElement.value,
-  };
+  console.log("INPUT ID");
+  console.log(inputId);
+  console.log("INPUT ELEMENT");
+  console.log(inputElement);
+  console.log("INPUT VALUE");
+  console.log(inputElement.value);
 
-  await checkUpdateNeeded(updateParams);
+  await checkUpdateNeeded();
 
   return true;
 };

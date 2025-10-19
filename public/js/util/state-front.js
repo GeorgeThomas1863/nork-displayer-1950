@@ -23,11 +23,11 @@ const stateFront = {
 };
 
 //BUILD
-export const checkUpdateNeeded = async (inputObj) => {
+export const checkUpdateNeeded = async () => {
   // if (!inputObj) return null;
 
-  console.log("CHECK UPDATE NEEDED");
-  console.log(inputObj);
+  console.log("STATE FRONT");
+  console.log(stateFront);
 };
 
 export default stateFront;

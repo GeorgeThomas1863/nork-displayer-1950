@@ -10,14 +10,14 @@ export const clickHandler = async (e) => {
 
   const clickUpdate = clickElement.getAttribute("data-update");
 
-  console.log("CLICK ELEMENT");
-  console.log(clickElement);
-  console.log("CLICK ID");
-  console.log(clickId);
-  console.log("CLICK TYPE");
-  console.log(clickType);
-  console.log("CLICK UPDATE");
-  console.log(clickUpdate);
+  // console.log("CLICK ELEMENT");
+  // console.log(clickElement);
+  // console.log("CLICK ID");
+  // console.log(clickId);
+  // console.log("CLICK TYPE");
+  // console.log(clickType);
+  // console.log("CLICK UPDATE");
+  // console.log(clickUpdate);
 
   if (clickType === "pwToggle") await runPwToggle();
   if (clickType === "auth-submit") await runAuth();
