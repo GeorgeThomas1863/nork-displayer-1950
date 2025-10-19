@@ -138,17 +138,12 @@ export const runChangeDataType = async (clickUpdate) => {
   stateFront.typeTrigger = dataType;
   stateFront.eventTrigger = `${dataType}-click`;
 
-  //keep selections
+  //update / keep selections
   const howManyElement = document.getElementById(`${dataType.slice(0, -1)}-how-many`);
   stateFront.howMany = howManyElement?.value || null;
 
   const sortByElement = document.getElementById(`${dataType.slice(0, -1)}-sort-by`);
-  const sortByValue = sortByElement?.value.substring(sortByElement?.value.indexOf("-") + 1) || "newest-to-oldest";
-
-  console.log("CHANGE DATA TYPE SORT BY ELEMENT");
-  console.log(sortByElement);
-  console.log(sortByValue || "blank");
-  // stateFront.orderBy = sortByElement?.value || "newest-to-oldest";
+  stateFront.orderBy = sortByElement?.value.substring(sortByElement?.value.indexOf("-") + 1) || "newest-to-oldest";
 
   await updateDisplay();
   return true;
