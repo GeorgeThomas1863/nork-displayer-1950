@@ -138,6 +138,8 @@ export const runChangeDataInput = async (inputId) => {
   const inputElement = document.getElementById(inputId);
   if (!inputElement) return null;
 
+  console.log("RUN CHANGE DATA INPUT");
+
   console.log("INPUT ID");
   console.log(inputId);
   console.log("INPUT ELEMENT");

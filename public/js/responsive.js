@@ -76,12 +76,12 @@ const debouncedInputTriggered = debounce(runChangeDataInput);
 //input handler
 export const inputHandler = async (e) => {
   const inputElement = e.target;
-  console.log("INPUT ELEMENT");
-  console.log(inputElement);
+  // console.log("INPUT ELEMENT");
+  // console.log(inputElement);
 
   const inputId = inputElement.id;
-  console.log("INPUT ID");
-  console.log(inputId);
+  // console.log("INPUT ID");
+  // console.log(inputId);
 
   const eventTriggered = await debouncedInputTriggered(inputId);
   if (!eventTriggered) return null;
