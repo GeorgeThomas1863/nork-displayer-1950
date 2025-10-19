@@ -136,10 +136,10 @@ export const runChangeDataType = async (clickUpdate) => {
   if (!dataType || dataType === stateFront.typeTrigger) return null;
 
   stateFront.typeTrigger = dataType;
-  stateFront.eventTrigger = "data-type-click";
+  stateFront.eventTrigger = `${dataType}-click`;
 
-  //if howMany Element blank, reset dataObj
-  const howManyElement = document.getElementById(`${dataType}-how-many`);
+  //if howMany Element blank, reset dataObj (need to remove s from dataType)
+  const howManyElement = document.getElementById(`${dataType.slice(0, -1)}-how-many`);
   console.log(howManyElement);
   console.log(howManyElement?.value || "blank");
   if (!howManyElement || !howManyElement.value) await resetDataObj();
