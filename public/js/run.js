@@ -163,7 +163,7 @@ export const runChangeSortBy = async (changeElement) => {
 
   const changeId = changeElement.id;
   const sortByRaw = changeElement.value;
-  const sortBy = sortByRaw.split("-")[1];
+  const sortBy = sortByRaw.substring(sortByRaw.indexOf("-") + 1);
   const typePrefix = changeId.split("-")[0];
 
   console.log("RUN CHANGE SORT BY");
