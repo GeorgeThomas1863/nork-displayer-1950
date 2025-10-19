@@ -106,6 +106,10 @@ export const runChangeButtonType = async (clickUpdate) => {
   const typePrefix = clickUpdate.split("-")[0];
   const typeId = clickUpdate.split("-").pop();
 
+  console.log("RUN CHANGE BUTTON TYPE");
+  console.log(typePrefix);
+  console.log(typeId);
+
   const currentActiveButton = document.querySelector(`#${typePrefix}-type-button-list .button-type-item.active`);
   if (currentActiveButton) currentActiveButton.classList.remove("active");
 
