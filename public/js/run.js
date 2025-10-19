@@ -166,6 +166,11 @@ export const runChangeSortBy = async (changeElement) => {
   const sortBy = sortByRaw.split("-")[1];
   const typePrefix = changeId.split("-")[0];
 
+  console.log("RUN CHANGE SORT BY");
+
+  console.log(sortBy);
+  console.log(typePrefix);
+
   if (!sortBy || sortBy === stateFront.orderBy) return null;
 
   stateFront.eventTrigger = changeId;
