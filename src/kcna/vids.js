@@ -1,9 +1,10 @@
 import CONFIG from "../../config/config.js";
-import dbModel from "../../models/db-model.js";
+// import dbModel from "../../models/db-model.js";
+import { dataLookup } from "../control.js";
 
 export const getNewVids = async (inputParams) => {
   if (!inputParams) return null;
-  // const { vidType } = inputParams;
+  const { orderBy } = inputParams;
 
   const vidParams = await buildVidParams(inputParams);
   if (!vidParams) return null;
