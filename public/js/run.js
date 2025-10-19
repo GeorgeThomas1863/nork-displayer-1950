@@ -138,12 +138,9 @@ export const runChangeDataType = async (clickUpdate) => {
   stateFront.typeTrigger = dataType;
   stateFront.eventTrigger = `${dataType}-click`;
 
-  //if howMany Element blank, reset dataObj (need to remove s from dataType)
+  //get howMany from element (keeps selections)
   const howManyElement = document.getElementById(`${dataType.slice(0, -1)}-how-many`);
-  if (howManyElement && howManyElement.value) stateFront.howMany = howManyElement.value;
-  // console.log(howManyElement);
-  // console.log(howManyElement?.value || "blank");
-  // if (!howManyElement || !howManyElement.value) await resetDataObj();
+  stateFront.howMany = howManyElement?.value || null;
 
   await updateDisplay();
   return true;
