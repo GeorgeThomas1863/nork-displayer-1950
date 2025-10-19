@@ -141,7 +141,7 @@ export const runChangeDataType = async (clickUpdate) => {
   //if howMany Element blank, reset dataObj
   const howManyElement = document.getElementById(`${dataType}-how-many`);
   console.log(howManyElement);
-  console.log(howManyElement.value);
+  console.log(howManyElement?.value || "blank");
   if (!howManyElement || !howManyElement.value) await resetDataObj();
 
   await updateDisplay();
