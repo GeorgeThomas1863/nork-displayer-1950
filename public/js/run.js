@@ -162,7 +162,8 @@ export const runChangeSortBy = async (changeElement) => {
   if (!changeElement) return null;
 
   const changeId = changeElement.id;
-  const sortBy = changeElement.value;
+  const sortByRaw = changeElement.value;
+  const sortBy = sortByRaw.split("-")[1];
   const typePrefix = changeId.split("-")[0];
 
   if (!sortBy || sortBy === stateFront.orderBy) return null;
