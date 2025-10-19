@@ -8,6 +8,7 @@ const stateFront = {
   picType: "all",
   vidType: "vidPages",
   howMany: null,
+  orderBy: "newest-to-oldest",
   dataObj: {
     articles: {
       fatboy: null,
@@ -26,8 +27,8 @@ const stateFront = {
 export const checkUpdateNeeded = async () => {
   // if (!inputObj) return null;
 
-  console.log("STATE FRONT");
-  console.log(stateFront);
+  // console.log("STATE FRONT");
+  // console.log(stateFront);
 };
 
 export default stateFront;

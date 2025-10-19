@@ -134,16 +134,15 @@ export const runChangeDataType = async (clickUpdate) => {
   return true;
 };
 
-export const runChangeDataInput = async (inputId) => {
-  const inputElement = document.getElementById(inputId);
+export const runChangeDataInput = async (inputElement) => {
   if (!inputElement) return null;
 
   console.log("RUN CHANGE DATA INPUT");
 
-  console.log("INPUT ID");
-  console.log(inputId);
   console.log("INPUT ELEMENT");
   console.log(inputElement);
+  console.log("INPUT ID");
+  console.log(inputElement.id);
   console.log("INPUT VALUE");
   console.log(inputElement.value);
 

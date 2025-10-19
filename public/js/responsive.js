@@ -79,11 +79,7 @@ export const inputHandler = async (e) => {
   // console.log("INPUT ELEMENT");
   // console.log(inputElement);
 
-  const inputId = inputElement.id;
-  // console.log("INPUT ID");
-  // console.log(inputId);
-
-  const eventTriggered = await debouncedInputTriggered(inputId);
+  const eventTriggered = await debouncedInputTriggered(inputElement);
   if (!eventTriggered) return null;
 };
 
