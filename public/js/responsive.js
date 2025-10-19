@@ -107,6 +107,7 @@ if (displayElement) {
   displayElement.addEventListener("click", clickHandler);
   displayElement.addEventListener("keydown", keyHandler);
   displayElement.addEventListener("input", inputHandler);
+  displayElement.addEventListener("change", changeHandler);
 }
 
 if (adminDisplayElement) {
