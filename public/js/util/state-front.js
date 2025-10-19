@@ -25,10 +25,28 @@ const stateFront = {
 
 //BUILD
 export const checkUpdateNeeded = async () => {
-  // if (!inputObj) return null;
+  const { howMany } = stateFront;
 
-  // console.log("STATE FRONT");
-  // console.log(stateFront);
+  const currentData = await getCurrentData();
+  if (!currentData || !howMany) {
+    const error = new Error("CANT GET CURRENT DATA");
+    error.function = "checkUpdateNeeded";
+    throw error;
+  }
+
+  if (currentData === howMany || currentData > howMany) return false;
+
+  return true;
+};
+
+export const getCurrentData = async () => {
+  const { typeTrigger, dataObj, articleType } = stateFront;
+
+  if (typeTrigger === "articles") {
+    return dataObj.articles[articleType];
+  }
+
+  return dataObj[typeTrigger];
 };
 
 export default stateFront;

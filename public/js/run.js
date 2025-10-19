@@ -110,6 +110,9 @@ export const runChangeButtonType = async (clickUpdate) => {
   const currentActiveButton = document.querySelector(`#${typePrefix}-type-button-list .button-type-item.active`);
   if (currentActiveButton) currentActiveButton.classList.remove("active");
 
+  //same type clicked
+  // if (!typePrefix || stateFront.typeTrigger === `${typePrefix}s`) return null;
+
   stateFront[`${typePrefix}Type`] = typeId;
   stateFront.eventTrigger = `${typePrefix}-type-button-click`;
   stateFront.typeTrigger = `${typePrefix}s`;
@@ -127,6 +130,9 @@ export const runChangeDataType = async (clickUpdate) => {
 
   const dataType = clickUpdate.split("-").pop();
 
+  //same type clicked
+  if (!dataType || dataType === stateFront.typeTrigger) return null;
+
   stateFront.typeTrigger = dataType;
   stateFront.eventTrigger = "data-type-click";
 
@@ -137,16 +143,24 @@ export const runChangeDataType = async (clickUpdate) => {
 export const runChangeDataInput = async (inputElement) => {
   if (!inputElement) return null;
 
-  console.log("RUN CHANGE DATA INPUT");
+  // console.log("RUN CHANGE DATA INPUT");
 
-  console.log("INPUT ELEMENT");
-  console.log(inputElement);
-  console.log("INPUT ID");
-  console.log(inputElement.id);
-  console.log("INPUT VALUE");
-  console.log(inputElement.value);
+  // console.log("INPUT ELEMENT");
+  // console.log(inputElement);
+  // console.log("INPUT ID");
+  // console.log(inputElement.id);
+  // console.log("INPUT VALUE");
+  // console.log(inputElement.value);
 
-  await checkUpdateNeeded();
+  const typePrefix = inputElement.id.split("-")[0];
 
+  stateFront.eventTrigger = inputElement.id;
+  stateFront.howMany = inputElement.value;
+  stateFront.typeTrigger = `${typePrefix}s`;
+
+  const updateNeeded = await checkUpdateNeeded();
+  if (!updateNeeded) return false;
+
+  await updateDisplay();
   return true;
 };
