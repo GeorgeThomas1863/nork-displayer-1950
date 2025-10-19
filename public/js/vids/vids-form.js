@@ -45,7 +45,7 @@ export const buildVidHowManyListItem = async () => {
   vidHowManyInput.type = "text";
   vidHowManyInput.name = "vid-how-many";
   vidHowManyInput.id = "vid-how-many";
-  vidHowManyInput.placeholder = "[Defaults to 1 (most recent)]";
+  vidHowManyInput.placeholder = "[Defaults to 2 (most recent)]";
 
   vidHowManyListItem.append(vidHowManyLabel, vidHowManyInput);
 

@@ -47,7 +47,7 @@ export const buildArticleHowManyListItem = async () => {
   articleHowManyInput.type = "text";
   articleHowManyInput.name = "article-how-many";
   articleHowManyInput.id = "article-how-many";
-  articleHowManyInput.placeholder = "[Defaults to 5 (most recent)]";
+  articleHowManyInput.placeholder = "[Defaults to 3 (most recent)]";
 
   articleHowManyListItem.append(articleHowManyLabel, articleHowManyInput);
 
