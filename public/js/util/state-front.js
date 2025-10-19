@@ -24,7 +24,10 @@ const stateFront = {
 
 //BUILD
 export const checkUpdateNeeded = async (inputObj) => {
-  if (!inputObj) return null;
+  // if (!inputObj) return null;
+
+  console.log("CHECK UPDATE NEEDED");
+  console.log(inputObj);
 };
 
 export default stateFront;

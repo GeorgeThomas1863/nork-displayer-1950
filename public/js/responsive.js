@@ -65,12 +65,6 @@ export const changeHandler = async (e) => {
   const changeElement = e.target;
   const changeId = changeElement.id;
 
-  //   console.log("CHANGE ELEMENT");
-  //   console.log(changeElement);
-
-  //   console.log("CHANGE ID");
-  //   console.log(changeId);
-
   if (changeId !== "admin-how-much") return null;
 
   await runAdminToggleURL();
