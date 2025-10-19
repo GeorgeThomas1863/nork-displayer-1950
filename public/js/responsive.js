@@ -1,4 +1,4 @@
-import { runAuth, runAdminAuth, runAdminCommand, runPwToggle, runDropDownToggle, runAdminToggleURL, runChangeButtonType, runChangeDataType, runChangeDataInput, runChangeSortBy } from "./run.js";
+import { runAuth, runAdminAuth, runAdminCommand, runPwToggle, runDropDownToggle, runAdminToggleURL, runChangeButtonType, runChangeDataType, runChangeHowMany, runChangeSortBy } from "./run.js";
 import debounce from "./util/debounce.js";
 
 export const clickHandler = async (e) => {
@@ -76,7 +76,7 @@ export const changeHandler = async (e) => {
 };
 
 // create debounced function for input
-const debouncedInputTriggered = debounce(runChangeDataInput);
+const debouncedInputTriggered = debounce(runChangeHowMany);
 
 //input handler
 export const inputHandler = async (e) => {

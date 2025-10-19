@@ -142,17 +142,26 @@ export const runChangeDataType = async (clickUpdate) => {
   return true;
 };
 
-export const runChangeDataInput = async (inputElement) => {
+export const runChangeHowMany = async (inputElement) => {
   if (!inputElement) return null;
 
   const typePrefix = inputElement.id.split("-")[0];
+  const inputHowMany = inputElement.value;
+
+  //get current data
+  if (stateFront.typeTrigger === "articles") {
+    const currentArticles = stateFront.dataObj.articles[stateFront.articleType];
+    if (currentArticles && currentArticles === inputHowMany) return null;
+  }
+  const currentItems = stateFront.dataObj[stateFront.typeTrigger];
+  if (currentItems && currentItems === inputHowMany) return null;
 
   stateFront.eventTrigger = inputElement.id;
-  stateFront.howMany = inputElement.value;
+  stateFront.howMany = inputHowMany;
   stateFront.typeTrigger = `${typePrefix}s`;
 
-  const updateNeeded = await checkUpdateNeeded();
-  if (!updateNeeded) return false;
+  // const updateNeeded = await checkUpdateNeeded();
+  // if (!updateNeeded) return false;
 
   await updateDisplay();
   return true;
