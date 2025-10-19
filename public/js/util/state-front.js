@@ -36,6 +36,7 @@ export const resetDataObj = async () => {
     pics: null,
     vids: null,
   };
+  stateFront.howMany = null;
 };
 
 export default stateFront;
