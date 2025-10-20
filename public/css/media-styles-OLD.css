@@ -1,0 +1,385 @@
+/* BUILD */
+
+/* MEDIA STYLES (media-styles.css) */
+
+/* '''''''''''''''''''''''''''''''''''''''' */
+
+/* MEDIA QUERIES */
+
+/* ===== IPAD PORTRAIT ===== */
+@media (max-width: 1200px) and (orientation: portrait) {
+  #form-wrapper {
+    gap: 1rem; /* Reduced from 5rem */
+  }
+
+  #pic-wrapper-element {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .wrapper {
+    margin: 0.8rem;
+  }
+
+  .wrapper .collapse-content {
+    padding: 1.2rem; /* Reduced from 1.5rem */
+  }
+
+  .wrapper label {
+    font-size: 0.85rem; /* Slightly smaller */
+  }
+
+  .wrapper input,
+  .wrapper select {
+    font-size: 0.85rem; /* Slightly smaller */
+    padding: 0.5rem; /* Reduced padding */
+  }
+
+  .collapse-title {
+    font-size: 1.2rem; /* Reduced from 1.7rem */
+  }
+
+  .article-pic-collapse .collapse-title {
+    font-size: 1.1rem; /* Reduced from 1.5rem */
+  }
+
+  #article-type-button-list {
+    padding: 0.6rem; /* Reduced from 0.75rem */
+    gap: 0.4rem; /* Reduced from 0.5rem */
+  }
+
+  .article-type-button {
+    padding: 0.45rem 0.9rem; /* Reduced from 0.5rem 1rem */
+    font-size: 0.8rem; /* Reduced from 0.85rem */
+  }
+
+  /* Special button stays proportionally smaller */
+  .article-type-button[data-article-type="all-type"] {
+    font-size: 0.75rem;
+  }
+}
+
+/* ===== TABLET PORTRAIT ===== */
+@media (max-width: 768px) and (orientation: portrait) {
+  /* ===== GENERAL & FORM STYLES ===== */
+
+  /* change background pic */
+  #background-pic {
+    content: url("/images/KJU2.jpg");
+  }
+
+  /* SWITCH TO COLUMN HERE */
+  #form-wrapper {
+    margin: 1rem auto;
+    margin-bottom: 2rem;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  #form-wrapper > * {
+    flex: 0 0 auto;
+    width: 50%;
+    margin: 0 auto;
+  }
+
+  #action-button-element {
+    flex-direction: column;
+    margin-bottom: 2rem;
+  }
+
+  #pic-wrapper-element {
+    gap: 0.5rem;
+  }
+
+  .collapse-title {
+    font-size: 1rem; /* Reduced from 1.7rem */
+  }
+
+  .article-pic-collapse .collapse-title {
+    font-size: 0.9rem; /* Reduced from 1.5rem */
+  }
+
+  #article-title {
+    font-size: 1.5rem;
+  }
+
+  #pic-container-title {
+    font-size: 1.5rem;
+  }
+
+  #vid-title {
+    font-size: 1.5rem;
+  }
+
+  #drop-down-bars {
+    width: 2.2rem; /* Reduced from 2.5rem */
+    height: 2.2rem;
+  }
+
+  #drop-down-menu-display h2 {
+    font-size: 2.2rem; /* Reduced from 3rem */
+    padding: 0.7rem 1.8rem; /* Reduced padding */
+  }
+
+  #article-type-button-list {
+    padding: 0.5rem; /* Further reduced */
+    gap: 0.35rem; /* Further reduced */
+    width: 90%; /* Constrain width on tablets */
+  }
+
+  .article-type-button {
+    padding: 0.4rem 0.8rem; /* Further reduced */
+    font-size: 0.75rem; /* Further reduced */
+    border-radius: 18px; /* Slightly smaller radius */
+  }
+
+  /* Special button */
+  .article-type-button[data-article-type="all-type"] {
+    font-size: 0.7rem;
+    letter-spacing: 0.3px;
+  }
+}
+
+/* ===== PHONE PORTRAIT ===== */
+@media (max-width: 576px) and (orientation: portrait) {
+  /* ===== GENERAL & FORM STYLES ===== */
+
+  .collapse-title {
+    font-size: 1.5rem;
+  }
+
+  .article-pic-collapse .collapse-header {
+    padding: 0.75rem 1rem;
+  }
+
+  .article-pic-collapse .collapse-title {
+    font-size: 1rem;
+  }
+
+  .article-pic-collapse .collapse-arrow {
+    width: 21px;
+    height: 21px;
+    margin-right: 8px;
+  }
+
+  .article-pic-collapse .collapse-arrow::before {
+    width: 6px;
+    height: 6px;
+  }
+
+  #backend-data-wrapper {
+    margin: 0 auto;
+    width: 90%;
+  }
+
+  #pic-wrapper-element {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  #article-element {
+    padding: 0 1rem;
+  }
+
+  #article-title {
+    font-size: 1.2rem;
+  }
+
+  #article-title span {
+    font-size: 1rem;
+  }
+
+  #article-date {
+    margin-top: 1rem;
+  }
+
+  #article-text {
+    font-size: 0.85rem;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  #pic-container-title {
+    font-size: 1.2rem;
+  }
+
+  #pic-container-title span {
+    font-size: 1rem;
+  }
+
+  #pic-container-date {
+    margin-top: 1rem;
+  }
+
+  #vid-title {
+    font-size: 1.2rem;
+  }
+
+  #vid-title span {
+    font-size: 1rem;
+  }
+
+  #vid-date {
+    margin-top: 1rem;
+  }
+
+  /* Empty container */
+  .empty-container {
+    margin-top: 2rem;
+  }
+
+  .empty-text {
+    padding: 0.8rem 1.2rem;
+    font-size: 1.5rem;
+    max-width: 90%;
+  }
+
+  .empty-text h2 {
+    margin-top: 1rem;
+    font-size: 1.2rem;
+  }
+
+  #article-type-button-container {
+    margin-bottom: -0.25rem; /* Tighter spacing */
+  }
+
+  #article-type-button-list {
+    /* padding: 0.5rem; 
+      gap: 0.3rem;  */
+    width: 90%; /* Nearly full width */
+    border-radius: 8px; /* Smaller radius to match phone aesthetics */
+  }
+
+  .article-type-button {
+    padding: 0.5rem 0.75rem; /* Compact padding */
+    font-size: 0.75rem; /* Small but readable */
+    border-radius: 16px; /* Smaller radius */
+    letter-spacing: -0.01em; /* Tighter letter spacing */
+  }
+
+  /* Hover effects more subtle on mobile */
+  .article-type-button:hover {
+    transform: translateY(-0.5px); /* Reduced from -1px */
+  }
+
+  /* Active state adjustments */
+  .article-type-button.active {
+    /* padding: 0.35rem 0.6rem;  */
+    font-weight: 600; /* Keep bold */
+    box-shadow: 0 1px 4px rgba(37, 99, 235, 0.25); /* Lighter shadow */
+  }
+
+  /* Special button even smaller */
+  .article-type-button[data-article-type="all-type"] {
+    font-size: 0.7rem;
+    letter-spacing: 0.3px;
+    padding: 0.5rem 0.75rem;
+  }
+}
+
+/* ===== EXTRA SMALL PHONES PORTRAIT ===== */
+@media (max-width: 405px) and (orientation: portrait) {
+  /* ===== GENERAL & FORM STYLES ===== */
+
+  #article-type-button-list {
+    width: 95%;
+    padding: 0.4rem; /* Minimal padding */
+    gap: 0.25rem; /* Tight gap */
+  }
+
+  .article-type-button {
+    font-size: 0.7rem; /* Small but readable */
+  }
+
+  .article-type-button[data-article-type="all-type"] {
+    font-size: 0.65rem;
+  }
+}
+
+/* --------------------------------- */
+
+/* LANDSCAPE STYLES */
+
+/* ===== LARGE PHONES / TABLETS LANDSCAPE ===== */
+@media (max-width: 1024px) and (orientation: landscape) {
+  /* ensure change background pic */
+  #background-pic {
+    content: url("/images/KJU2.jpg");
+  }
+
+  /* ENSURE COLUMNS */
+  #form-wrapper {
+    margin: 1rem auto;
+    margin-bottom: 2rem;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  #form-wrapper > * {
+    flex: 0 0 auto;
+    width: 50%;
+    margin: 0 auto;
+  }
+
+  #action-button-element {
+    flex-direction: column;
+    margin-bottom: 2rem;
+  }
+
+  #backend-data-wrapper {
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  #pic-wrapper-element {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  #article-type-button-list {
+    padding: 0.6rem; /* Slightly reduced */
+    gap: 0.4rem; /* Slightly reduced */
+  }
+
+  .article-type-button {
+    padding: 0.45rem 0.9rem; /* Slightly reduced */
+    font-size: 0.8rem; /* Slightly reduced */
+  }
+}
+
+/* ===== MEDIUM PHONES LANDSCAPE ===== */
+@media (max-width: 876px) and (orientation: landscape) {
+  /* Pic grid adjustments */
+  #pic-wrapper-element {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 0.8rem;
+  }
+
+  #article-type-button-list {
+    padding: 0.5rem; /* Further reduced */
+    gap: 0.35rem; /* Tighter */
+    width: 85%; /* Constrain width */
+  }
+
+  .article-type-button {
+    padding: 0.4rem 0.7rem; /* More compact */
+    font-size: 0.7rem; /* Smaller */
+  }
+}
+
+/* ===== SMALL PHONES LANDSCAPE ===== */
+@media (max-width: 700px) and (orientation: landscape) {
+  #article-type-button-list {
+    padding: 0.4rem; /* Minimal */
+    gap: 0.25rem; /* Very tight */
+    max-height: 5rem; /* Prevent taking too much vertical space */
+    overflow-y: auto; /* Allow scroll if needed */
+  }
+
+  .article-type-button {
+    padding: 0.3rem 0.5rem; /* Very compact */
+    font-size: 0.65rem; /* Small */
+    border-radius: 14px; /* Smaller radius */
+  }
+}
