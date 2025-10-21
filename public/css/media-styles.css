@@ -287,9 +287,6 @@
   }
 }
 
-/* !!!!!!!!!!!!!!!
-STILL NEED TO REVIEW BELOW */
-
 /* --------------------------------- */
 
 /* LANDSCAPE STYLES */
@@ -302,7 +299,7 @@ STILL NEED TO REVIEW BELOW */
   }
 
   /* ENSURE COLUMNS */
-  #form-wrapper {
+  #input-form-wrapper {
     margin: 1rem auto;
     margin-bottom: 2rem;
     flex-direction: column;
@@ -310,18 +307,23 @@ STILL NEED TO REVIEW BELOW */
     width: 100%;
   }
 
-  #form-wrapper > * {
+  #input-form-wrapper > * {
     flex: 0 0 auto;
     width: 50%;
     margin: 0 auto;
   }
 
-  #action-button-element {
+  #drop-down-button-wrapper {
     flex-direction: column;
     margin-bottom: 2rem;
   }
 
-  #backend-data-wrapper {
+  /* .drop-down-button {
+    flex-direction: column;
+    margin-bottom: 2rem;
+  } */
+
+  #return-display-wrapper {
     margin: 0 auto;
     width: 100%;
   }
@@ -331,12 +333,12 @@ STILL NEED TO REVIEW BELOW */
     gap: 1rem;
   }
 
-  #article-type-button-list {
+  .button-type-list {
     padding: 0.6rem; /* Slightly reduced */
     gap: 0.4rem; /* Slightly reduced */
   }
 
-  .article-type-button {
+  .button-type-item {
     padding: 0.45rem 0.9rem; /* Slightly reduced */
     font-size: 0.8rem; /* Slightly reduced */
   }
@@ -350,13 +352,13 @@ STILL NEED TO REVIEW BELOW */
     gap: 0.8rem;
   }
 
-  #article-type-button-list {
+  .button-type-list {
     padding: 0.5rem; /* Further reduced */
     gap: 0.35rem; /* Tighter */
     width: 85%; /* Constrain width */
   }
 
-  .article-type-button {
+  .button-type-item {
     padding: 0.4rem 0.7rem; /* More compact */
     font-size: 0.7rem; /* Smaller */
   }
@@ -364,14 +366,14 @@ STILL NEED TO REVIEW BELOW */
 
 /* ===== SMALL PHONES LANDSCAPE ===== */
 @media (max-width: 700px) and (orientation: landscape) {
-  #article-type-button-list {
+  .button-type-list {
     padding: 0.4rem; /* Minimal */
     gap: 0.25rem; /* Very tight */
     max-height: 5rem; /* Prevent taking too much vertical space */
     overflow-y: auto; /* Allow scroll if needed */
   }
 
-  .article-type-button {
+  .button-type-item {
     padding: 0.3rem 0.5rem; /* Very compact */
     font-size: 0.65rem; /* Small */
     border-radius: 14px; /* Smaller radius */
