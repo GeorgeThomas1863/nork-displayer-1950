@@ -21,6 +21,9 @@ const { expressPicPath, expressVidPath, expressWatchPath, expressConfigPublicPat
 
 const app = express();
 
+//claude solution to auth problem
+app.set("trust proxy", 1);
+
 app.use(session(CONFIG.buildSessionConfig()));
 
 //custom paths to expose to frontend
