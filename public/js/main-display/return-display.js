@@ -1,5 +1,6 @@
 //BUILD
 import stateFront from "../util/state-front.js";
+import { dataObjExistsCheck } from "../util/state-front.js";
 import { buildArticlesReturnDisplay } from "../articles/articles-return.js";
 import { buildPicsReturnDisplay } from "../pics/pics-return.js";
 import { buildVidsReturnDisplay } from "../vids/vids-return.js";
@@ -7,6 +8,10 @@ import { buildVidsReturnDisplay } from "../vids/vids-return.js";
 export const buildReturnDisplay = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
   const { typeTrigger } = stateFront;
+
+  //returns empty display if no data
+  const dataObjExists = await dataObjExistsCheck();
+  if (!dataObjExists) return await buildEmptyDisplay();
 
   const returnDisplayWrapper = document.createElement("div");
   returnDisplayWrapper.id = "return-display-wrapper";

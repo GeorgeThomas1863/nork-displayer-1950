@@ -62,7 +62,7 @@ export const resetDataObj = async () => {
 };
 
 //returns true if dataObj is NOT empty, false if it is
-export const dataObjExistsCheck = () => {
+export const dataObjExistsCheck = async () => {
   if (!stateFront || !stateFront.dataObj) return false;
   const { dataObj } = stateFront;
 

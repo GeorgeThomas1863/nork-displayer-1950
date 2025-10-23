@@ -30,24 +30,13 @@ export const updateDisplay = async () => {
   const currentDataElement = document.getElementById("return-display-wrapper");
   if (currentDataElement) currentDataElement.remove();
 
-  console.log("GET UPDATE DATA");
   const updateArray = await sendToBack({ route: "/update-data-route", stateFront: stateFront });
   await updateStateFront(updateArray);
 
-  console.log("UPDATE ARRAY");
-  console.dir(updateArray);
+  console.log("UPDATE DATA");
+  console.dir(updateArray || "NO UPDATE DATA");
 
-  // if (!updateArray || !updateArray.length)
-
-  //empty display
-  const dataObjExists = dataObjExistsCheck();
-
-  if (!dataObjExists) {
-    const emptyDisplay = await buildEmptyDisplay();
-    displayElement.append(emptyDisplay);
-    return true;
-  }
-
+  // also handles empty display
   const returnDisplay = await buildReturnDisplay(updateArray);
   if (!returnDisplay) return null;
 
