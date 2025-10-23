@@ -22,9 +22,19 @@ export const buildAdminDisplay = async () => {
   const adminFormData = await buildAdminForm();
   adminDisplayElement.append(adminFormData);
 
+  const adminStartData = await getAdminStartData();
+
   const pollData = await pollBackend();
   console.log("POLL DATA");
   console.dir(pollData);
+};
+
+export const getAdminStartData = async () => {
+  const adminStartRoute = await sendToBack({ route: "/get-backend-value-route", key: "currentDataRoute" });
+  if (!adminStartRoute) return null;
+
+  const data = await sendToBack({ route: adminStartRoute.value });
+  return data;
 };
 
 export const pollBackend = async () => {

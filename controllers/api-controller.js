@@ -74,6 +74,8 @@ export const adminCommandController = async (req, res) => {
   }
 };
 
+export const adminCurrentDataController = async (req, res) => {};
+
 export const pollingController = async (req, res) => {
   // const inputParams = req.body;
   // if (!inputParams) return null;
