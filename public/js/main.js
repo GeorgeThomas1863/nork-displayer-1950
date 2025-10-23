@@ -30,7 +30,9 @@ export const updateDisplay = async () => {
   const currentDataElement = document.getElementById("return-display-wrapper");
   if (currentDataElement) currentDataElement.remove();
 
-  const updateArray = await sendToBack({ route: "/update-data-route", stateFront: stateFront });
+  const updateDataRoute = await sendToBack({ route: "/get-backend-value-route", key: "updateMainDisplayDataRoute" });
+
+  const updateArray = await sendToBack({ route: updateDataRoute.value, stateFront: stateFront });
   await updateStateFront(updateArray);
 
   console.log("UPDATE DATA");

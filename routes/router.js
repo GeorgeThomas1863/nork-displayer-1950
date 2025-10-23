@@ -2,15 +2,14 @@ import express from "express";
 
 import CONFIG from "../config/config.js";
 import { requireAuth, requireAdminAuth } from "./auth.js";
-import { authController, adminAuthController, adminCurrentDataController } from "../controllers/auth-controller.js";
+import { authController, adminAuthController } from "../controllers/auth-controller.js";
 import { mainDisplay, adminDisplay, display404, display500, display401 } from "../controllers/display-controller.js";
-import { getBackendValueController, updateDataController, apiEndpointController, adminCommandController, pollingController } from "../controllers/api-controller.js";
+import { getBackendValueController, updateMainDisplayDataController, adminCommandController, adminCurrentDataController, pollingController } from "../controllers/data-controller.js"; //prettier-ignore
+import { apiEndpointController } from "../controllers/api-controller.js";
 
-const { adminAuthRoute, adminCommandRoute, apiDisplayer, adminCurrentDataRoute } = CONFIG;
+const { updateMainDisplayDataRoute, adminAuthRoute, adminCommandRoute, apiDisplayer, adminCurrentDataRoute } = CONFIG;
 
 const router = express.Router();
-
-//CLEAN UP BELOW
 
 // Login AUTH route
 router.post("/site-auth-route", authController);
@@ -22,12 +21,10 @@ router.post(apiDisplayer, apiEndpointController);
 
 //-----------------------------
 
+router.post(updateMainDisplayDataRoute, requireAuth, updateMainDisplayDataController);
+
 //poll backend
 router.post("/polling-route", requireAuth, pollingController);
-
-
-
-router.post("/update-data-route", requireAuth, updateDataController);
 
 router.post("/get-backend-value-route", requireAuth, getBackendValueController);
 
