@@ -6,7 +6,6 @@ import { buildPicsReturnDisplay } from "../pics/pics-return.js";
 import { buildVidsReturnDisplay } from "../vids/vids-return.js";
 
 export const buildReturnDisplay = async (inputArray) => {
-  if (!inputArray || !inputArray.length) return null;
   const { typeTrigger } = stateFront;
 
   //returns empty display if no data
