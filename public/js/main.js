@@ -31,10 +31,13 @@ export const updateDisplay = async () => {
 
   console.log("GET UPDATE DATA");
   const updateArray = await sendToBack({ route: "/update-data-route", stateFront: stateFront });
-  if (!updateArray || !updateArray.length) return null;
+  // if (!updateArray || !updateArray.length) return null;
 
   console.log("UPDATE ARRAY");
   console.dir(updateArray);
+
+  console.log("STATE FRONT");
+  console.dir(stateFront);
 
   await updateStateFront(updateArray);
 
