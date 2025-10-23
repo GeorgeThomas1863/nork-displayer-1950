@@ -25,6 +25,8 @@ const stateFront = {
 };
 
 export const updateStateFront = async (inputArray) => {
+  if (!inputArray || !inputArray.length) return null;
+
   const { typeTrigger, articleType } = stateFront;
   stateFront.isFirstLoad = false;
 
