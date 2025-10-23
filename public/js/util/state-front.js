@@ -54,6 +54,7 @@ export const resetDataObj = async () => {
       externalNews: null,
       anecdote: null,
       people: null,
+      all: null,
     },
     pics: null,
     vids: null,
