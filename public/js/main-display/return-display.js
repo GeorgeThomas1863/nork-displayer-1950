@@ -8,14 +8,14 @@ import { buildVidsReturnDisplay } from "../vids/vids-return.js";
 export const buildReturnDisplay = async (inputArray) => {
   const { typeTrigger } = stateFront;
 
-  //returns empty display if no data
-  const dataObjExists = await dataObjExistsCheck();
-  if (!dataObjExists) return await buildEmptyDisplay();
-
+  let data = "";
   const returnDisplayWrapper = document.createElement("div");
   returnDisplayWrapper.id = "return-display-wrapper";
 
-  let data = "";
+  //returns empty display if no data
+  const dataObjExists = await dataObjExistsCheck();
+  if (!dataObjExists) data = await buildEmptyDisplay();
+
   switch (typeTrigger) {
     case "articles":
       data = await buildArticlesReturnDisplay(inputArray);
