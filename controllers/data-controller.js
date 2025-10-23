@@ -12,7 +12,7 @@ export const getBackendValueController = async (req, res) => {
   return res.json({ value });
 };
 
-export const updateMainDisplayDataController = async (req, res) => {
+export const updateDisplayDataController = async (req, res) => {
   const { stateFront } = req.body;
 
   const data = await runUpdateData(stateFront);

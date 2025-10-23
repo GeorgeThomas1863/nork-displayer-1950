@@ -4,10 +4,10 @@ import CONFIG from "../config/config.js";
 import { requireAuth, requireAdminAuth } from "./auth.js";
 import { authController, adminAuthController } from "../controllers/auth-controller.js";
 import { mainDisplay, adminDisplay, display404, display500, display401 } from "../controllers/display-controller.js";
-import { getBackendValueController, updateMainDisplayDataController, adminCommandController, adminCurrentDataController, pollingController } from "../controllers/data-controller.js"; //prettier-ignore
+import { getBackendValueController, updateDisplayDataController, adminCommandController, adminCurrentDataController, pollingController } from "../controllers/data-controller.js"; //prettier-ignore
 import { apiEndpointController } from "../controllers/api-controller.js";
 
-const { updateMainDisplayDataRoute, adminAuthRoute, adminCommandRoute, apiDisplayer, adminCurrentDataRoute } = CONFIG;
+const { updateDisplayDataRoute, adminAuthRoute, adminCommandRoute, apiDisplayer, adminCurrentDataRoute } = CONFIG;
 
 const router = express.Router();
 
@@ -21,7 +21,7 @@ router.post(apiDisplayer, apiEndpointController);
 
 //-----------------------------
 
-router.post(updateMainDisplayDataRoute, requireAuth, updateMainDisplayDataController);
+router.post(updateDisplayDataRoute, requireAuth, updateDisplayDataController);
 
 //poll backend
 router.post("/polling-route", requireAuth, pollingController);
