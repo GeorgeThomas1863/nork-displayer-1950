@@ -29,6 +29,7 @@ export const runUpdateData = async (inputParams) => {
   }
 
   const sortArray = await sortDataReturn(dataArray, typeTrigger);
+  if (!sortArray || !sortArray.length) return null;
 
   console.log(`${sortArray?.length} NEW ${typeTrigger} ITEMS`);
   return sortArray;
