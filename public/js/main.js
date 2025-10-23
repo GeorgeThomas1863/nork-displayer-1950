@@ -32,15 +32,16 @@ export const updateDisplay = async () => {
 
   console.log("GET UPDATE DATA");
   const updateArray = await sendToBack({ route: "/update-data-route", stateFront: stateFront });
+  await updateStateFront(updateArray);
 
-  if (!updateArray || !updateArray.length) await updateStateFront(updateArray);
+  console.log("UPDATE ARRAY");
+  console.dir(updateArray);
+
+  // if (!updateArray || !updateArray.length)
 
   //empty display
   const dataObjExists = dataObjExistsCheck();
-  console.log("DATA OBJ EXISTS");
-  console.dir(dataObjExists);
-  console.log("STATE FRONT");
-  console.dir(stateFront);
+
   if (!dataObjExists) {
     const emptyDisplay = await buildEmptyDisplay();
     displayElement.append(emptyDisplay);
