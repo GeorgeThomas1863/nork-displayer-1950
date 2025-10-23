@@ -1,4 +1,4 @@
-import kcnaState from "../src/state-kcna.js";
+import kcnaState from "../src/kcna/state-kcna.js";
 
 //api receive endpoint for displayer
 export const apiEndpointController = async (req, res) => {

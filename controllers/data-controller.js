@@ -1,7 +1,8 @@
 import axios from "axios";
 import CONFIG from "../config/config.js";
-import kcnaState from "../src/state-kcna.js";
-import { runUpdateData } from "../src/control.js";
+import kcnaState from "../src/kcna/state-kcna.js";
+import { runUpdateData } from "../src/main-back.js";
+import { runAdminCommand, runAdminCurrentData } from "../src/admin-back.js";
 
 export const getBackendValueController = async (req, res) => {
   const { key } = req.body;
@@ -49,7 +50,7 @@ export const adminCommandController = async (req, res) => {
   }
 };
 
-export const pollingController = async (req, res) => {
+export const adminPollingController = async (req, res) => {
   // const inputParams = req.body;
   // if (!inputParams) return null;
   const stateData = kcnaState;

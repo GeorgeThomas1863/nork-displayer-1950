@@ -30,7 +30,7 @@ export const buildAdminDisplay = async () => {
 };
 
 export const getAdminStartData = async () => {
-  const adminStartRoute = await sendToBack({ route: "/get-backend-value-route", key: "currentDataRoute" });
+  const adminStartRoute = await sendToBack({ route: "/get-backend-value-route", key: "adminCurrentDataRoute" });
   if (!adminStartRoute) return null;
 
   const data = await sendToBack({ route: adminStartRoute.value });

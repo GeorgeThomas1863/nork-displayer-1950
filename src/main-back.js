@@ -3,7 +3,7 @@ import { getNewPics } from "./kcna/pics.js";
 import { getNewVids } from "./kcna/vids.js";
 import dbModel from "../models/db-model.js";
 
-export const runUpdateData = async (inputParams) => {
+export const runUpdateDisplayData = async (inputParams) => {
   if (!inputParams) return null;
   const { typeTrigger } = inputParams;
 
