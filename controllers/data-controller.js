@@ -1,7 +1,7 @@
 import axios from "axios";
 import CONFIG from "../config/config.js";
 import kcnaState from "../src/kcna/state-kcna.js";
-import { runUpdateData } from "../src/main-back.js";
+import { runUpdateDisplayData } from "../src/main-back.js";
 import { runAdminCommand, runAdminCurrentData } from "../src/admin-back.js";
 
 export const getBackendValueController = async (req, res) => {
@@ -16,7 +16,7 @@ export const getBackendValueController = async (req, res) => {
 export const updateDisplayDataController = async (req, res) => {
   const { stateFront } = req.body;
 
-  const data = await runUpdateData(stateFront);
+  const data = await runUpdateDisplayData(stateFront);
   return res.json(data);
 };
 
