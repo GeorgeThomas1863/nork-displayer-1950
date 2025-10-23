@@ -23,6 +23,28 @@ const stateFront = {
   },
 };
 
+export const updateStateFront = async (inputArray) => {
+  const { typeTrigger, articleType } = stateFront;
+  stateFront.isFirstLoad = false;
+
+  //Handle article type counts
+  if (typeTrigger === "articles") {
+    for (const key in stateFront.dataObj.articles) {
+      if (key === articleType) {
+        stateFront.dataObj.articles[key] = inputArray.length;
+        continue;
+      }
+      //reset all others
+      stateFront.dataObj.articles[key] = null;
+    }
+    return true;
+  }
+
+  stateFront.dataObj[typeTrigger] = inputArray.length;
+
+  return true;
+};
+
 export const resetDataObj = async () => {
   stateFront.dataObj = {
     articles: {
@@ -37,6 +59,22 @@ export const resetDataObj = async () => {
     vids: null,
   };
   stateFront.howMany = null;
+};
+
+//returns true if dataObj is NOT empty, false if it is
+export const dataObjExistsCheck = () => {
+  if (!stateFront || !stateFront.dataObj) return false;
+  const { dataObj } = stateFront;
+
+  if (dataObj.pics !== null || dataObj.vids !== null) return true;
+
+  for (let key in dataObj.articles) {
+    if (dataObj.articles[key] && dataObj.articles[key] > 0) {
+      return true;
+    }
+  }
+
+  return false;
 };
 
 export default stateFront;

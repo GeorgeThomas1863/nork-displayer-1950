@@ -1,8 +1,9 @@
 //MAIN PAGE
 import stateFront from "./util/state-front.js";
+import { dataObjExistsCheck, updateStateFront } from "./util/state-front.js";
 import { buildDropDownForm } from "./main-display/drop-down-form.js";
 import { buildInputForms } from "./main-display/input-forms.js";
-import { buildReturnDisplay } from "./main-display/return-display.js";
+import { buildReturnDisplay, buildEmptyDisplay } from "./main-display/return-display.js";
 import { sendToBack } from "./util/api-front.js";
 
 const displayElement = document.getElementById("display-element");
@@ -31,15 +32,20 @@ export const updateDisplay = async () => {
 
   console.log("GET UPDATE DATA");
   const updateArray = await sendToBack({ route: "/update-data-route", stateFront: stateFront });
-  // if (!updateArray || !updateArray.length) return null;
 
-  console.log("UPDATE ARRAY");
-  console.dir(updateArray);
+  if (!updateArray || !updateArray.length) await updateStateFront(updateArray);
 
+  //empty display
+  const dataObjExists = dataObjExistsCheck();
+  console.log("DATA OBJ EXISTS");
+  console.dir(dataObjExists);
   console.log("STATE FRONT");
   console.dir(stateFront);
-
-  await updateStateFront(updateArray);
+  if (!dataObjExists) {
+    const emptyDisplay = await buildEmptyDisplay();
+    displayElement.append(emptyDisplay);
+    return true;
+  }
 
   const returnDisplay = await buildReturnDisplay(updateArray);
   if (!returnDisplay) return null;
@@ -48,28 +54,6 @@ export const updateDisplay = async () => {
 
   console.log("STATE FRONT");
   console.dir(stateFront);
-
-  return true;
-};
-
-export const updateStateFront = async (inputArray) => {
-  const { typeTrigger, articleType } = stateFront;
-  stateFront.isFirstLoad = false;
-
-  //Handle article type counts
-  if (typeTrigger === "articles") {
-    for (const key in stateFront.dataObj.articles) {
-      if (key === articleType) {
-        stateFront.dataObj.articles[key] = inputArray.length;
-        continue;
-      }
-      //reset all others
-      stateFront.dataObj.articles[key] = null;
-    }
-    return true;
-  }
-
-  stateFront.dataObj[typeTrigger] = inputArray.length;
 
   return true;
 };
