@@ -1,5 +1,5 @@
 import CONFIG from "../../config/config.js";
-import { dataLookup } from "../main-back.js";
+import { dataLookup } from "../run-main.js";
 // import dbModel from "../../models/db-model.js";
 
 export const getNewPics = async (inputParams) => {

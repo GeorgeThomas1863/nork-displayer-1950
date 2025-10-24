@@ -1,8 +1,8 @@
 import axios from "axios";
 import CONFIG from "../config/config.js";
 import kcnaState from "../src/kcna/state-kcna.js";
-import { runUpdateDisplayData } from "../src/main-back.js";
-import { runAdminCommand, runAdminCurrentData } from "../src/admin-back.js";
+import { runUpdateDisplayData } from "../src/run-main.js";
+import { runAdminCommand, runAdminCurrentData } from "../src/run-admin.js";
 
 export const getBackendValueController = async (req, res) => {
   const { key } = req.body;

@@ -1,6 +1,6 @@
 import CONFIG from "../../config/config.js";
 // import dbModel from "../../models/db-model.js";
-import { dataLookup } from "../main-back.js";
+import { dataLookup } from "../run-main.js";
 
 export const getNewArticles = async (inputParams) => {
   if (!inputParams) return null;

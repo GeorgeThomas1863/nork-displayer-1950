@@ -136,6 +136,15 @@
 @media (max-width: 576px) and (orientation: portrait) {
   /* ===== GENERAL & FORM STYLES ===== */
 
+  #auth-form-wrapper,
+  #admin-auth-form-wrapper {
+    margin: 1rem;
+  }
+
+  #auth-label {
+    font-size: 1.4rem;
+  }
+
   .collapse-title {
     font-size: 1.5rem;
   }
@@ -271,6 +280,10 @@
 /* ===== EXTRA SMALL PHONES PORTRAIT ===== */
 @media (max-width: 405px) and (orientation: portrait) {
   /* ===== GENERAL & FORM STYLES ===== */
+
+  #auth-label {
+    font-size: 1.2rem;
+  }
 
   .button-type-list {
     width: 95%;
