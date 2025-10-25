@@ -36,6 +36,17 @@ export const buildLogHistorySection = async (inputArray) => {
 
   const logData = logCollection.data;
 
+  // Create the main container for the entire section
+  const logHistorySection = document.createElement("div");
+  logHistorySection.id = "log-history-section";
+  logHistorySection.className = "stats-section";
+
+  // Create static title (not collapsible)
+  const sectionTitle = document.createElement("h2");
+  sectionTitle.className = "stats-section-title";
+  sectionTitle.textContent = "SCRAPE LOG HISTORY";
+  logHistorySection.append(sectionTitle);
+
   // Create the log list
   const logList = document.createElement("ul");
   logList.id = "log-history-list";
@@ -48,37 +59,18 @@ export const buildLogHistorySection = async (inputArray) => {
 
   // Build each log entry
   let isFirst = true;
-  const collapseArray = [];
 
   for (let i = 0; i < sortedLogs.length; i++) {
     const logEntry = sortedLogs[i];
     const logListItem = await buildLogListItem(logEntry, i + 1, isFirst);
     logList.append(logListItem);
 
-    // Store collapse items for group behavior
-    const collapseItem = logListItem.querySelector(".collapse-container");
-    if (collapseItem) collapseArray.push(collapseItem);
-
     isFirst = false;
   }
 
-  // Create title for collapse
-  const titleElement = document.createElement("div");
-  titleElement.textContent = "SCRAPE LOG HISTORY";
+  logHistorySection.append(logList);
 
-  // Wrap in collapse container
-  const logCollapseObj = {
-    titleElement: titleElement,
-    contentElement: logList,
-    isExpanded: true,
-    className: "log-history-collapse",
-  };
-
-  const logCollapseContainer = await buildCollapseContainer(logCollapseObj);
-  logCollapseContainer.className = "wrapper stats-section";
-  logCollapseContainer.id = "log-history-section";
-
-  return logCollapseContainer;
+  return logHistorySection;
 };
 
 export const buildLogListItem = async (logEntry, sessionNumber, isFirst) => {
@@ -140,7 +132,7 @@ export const buildLogDetailsContainer = async (logEntry, sessionNumber) => {
   // Build detail rows
   const details = [
     { label: "Session ID", value: _id },
-    { label: "Start Time", value: formatDateTime(scrapeStartTime) },
+    { label: "Start Time", value: await formatDateTime(scrapeStartTime) },
   ];
 
   for (const detail of details) {
@@ -178,7 +170,18 @@ export const buildDatabaseStatsSection = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
 
   // Calculate all the counts
-  const stats = calculateStats(inputArray);
+  const stats = await calculateStats(inputArray);
+
+  // Create the main container for the entire section
+  const dbStatsSection = document.createElement("div");
+  dbStatsSection.id = "db-stats-section";
+  dbStatsSection.className = "stats-section";
+
+  // Create static title (not collapsible)
+  const sectionTitle = document.createElement("h2");
+  sectionTitle.className = "stats-section-title";
+  sectionTitle.textContent = "DATABASE STATISTICS";
+  dbStatsSection.append(sectionTitle);
 
   // Create the stats content
   const statsContent = document.createElement("div");
@@ -200,23 +203,9 @@ export const buildDatabaseStatsSection = async (inputArray) => {
     statsContent.append(recentActivitySection);
   }
 
-  // Create title for collapse
-  const titleElement = document.createElement("div");
-  titleElement.textContent = "DATABASE STATISTICS";
+  dbStatsSection.append(statsContent);
 
-  // Wrap in collapse container
-  const statsCollapseObj = {
-    titleElement: titleElement,
-    contentElement: statsContent,
-    isExpanded: true,
-    className: "db-stats-collapse",
-  };
-
-  const statsCollapseContainer = await buildCollapseContainer(statsCollapseObj);
-  statsCollapseContainer.className = "wrapper stats-section";
-  statsCollapseContainer.id = "db-stats-section";
-
-  return statsCollapseContainer;
+  return dbStatsSection;
 };
 
 export const buildCollectionTotalsSection = async (stats) => {
@@ -270,7 +259,7 @@ export const buildArticleBreakdownSection = async (stats) => {
   const sortedTypes = Object.entries(stats.articlesByType).sort((a, b) => b[1] - a[1]);
 
   for (const [type, count] of sortedTypes) {
-    const label = formatArticleType(type);
+    const label = await formatArticleType(type);
     const statItem = await buildStatItem(label, count);
     statsList.append(statItem);
   }
