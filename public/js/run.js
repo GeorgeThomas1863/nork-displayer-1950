@@ -1,5 +1,4 @@
 import stateFront from "./util/state-front.js";
-import { resetDataObj } from "./util/state-front.js";
 import { updateDisplay } from "./main.js";
 import { getAuthParams, getAdminAuthParams, getAdminCommandParams } from "./util/params.js";
 import { sendToBack } from "./util/api-front.js";

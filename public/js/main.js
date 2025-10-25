@@ -1,9 +1,9 @@
 //MAIN PAGE
 import stateFront from "./util/state-front.js";
-import { dataObjExistsCheck, updateStateFront } from "./util/state-front.js";
-import { buildDropDownForm } from "./main-display/drop-down-form.js";
-import { buildInputForms } from "./main-display/input-forms.js";
-import { buildReturnDisplay, buildEmptyDisplay } from "./main-display/return-display.js";
+import { updateStateFront } from "./util/state-front.js";
+import { buildDropDownForm } from "./util/drop-down-form.js";
+import { buildInputForms } from "./control/input-forms.js";
+import { buildReturnDisplay } from "./control/return-form.js";
 import { sendToBack } from "./util/api-front.js";
 
 const displayElement = document.getElementById("display-element");

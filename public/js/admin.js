@@ -1,10 +1,6 @@
 import stateFront from "./util/state-front.js";
 import { buildAdminForm } from "./control/admin-form.js";
 import { sendToBack } from "./util/api-front.js";
-// // import { buildAdminParams } from "./util.js";
-
-// import { buildAdminBackendDisplay } from "./admin/admin-return.js";
-// import { checkNewDataNeededAdmin } from "./util/check-data.js";
 
 const adminDisplayElement = document.getElementById("admin-display-element");
 
