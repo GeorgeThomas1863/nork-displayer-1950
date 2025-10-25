@@ -8,7 +8,6 @@
 
 import express from "express";
 import session from "express-session";
-// import cors from "cors";
 import routes from "./routes/router.js";
 
 import CONFIG from "./config/config.js";
@@ -33,14 +32,6 @@ app.use(express.static("public"));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
-// app.use(
-//   cors({
-//     origin: [`http://localhost:${scrapePort}`],
-//     methods: ["GET", "POST"],
-//     allowedHeaders: ["Content-Type", "Authorization"],
-//   })
-// );
 
 //routes
 app.use(routes);
