@@ -1037,7 +1037,7 @@ h3 {
 .stats-section-title {
   margin: 0 auto;
   margin-bottom: 1rem;
-  text-align: center;
+  text-align: left;
   background-color: rgb(235, 235, 235);
   color: #2563a8;
   padding: 1rem 1.5rem;
@@ -1046,7 +1046,7 @@ h3 {
   text-transform: uppercase;
   letter-spacing: -0.01em;
   line-height: 1.4;
-  border-radius: 12px;
+  border-radius: 12px 12px 0 0;
 }
 
 .stats-section:last-child {
@@ -1096,7 +1096,7 @@ h3 {
   background-color: #164388;
 } */
 
-.log-item-collapse .collapse-header:has(.collapse-arrow.expanded) {
+/* .log-item-collapse .collapse-header:has(.collapse-arrow.expanded) {
   border-radius: 8px 8px 0 0;
 }
 
@@ -1118,7 +1118,7 @@ h3 {
 
 .log-item-collapse .collapse-arrow.expanded::before {
   border-color: #2c3e50;
-}
+} */
 
 .log-title {
   color: #ffffff;
