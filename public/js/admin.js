@@ -30,6 +30,8 @@ export const updateAdminDisplay = async () => {
   if (!adminDisplayElement) return null;
 
   const adminDataRoute = await sendToBack({ route: "/get-backend-value-route", key: "adminDataRoute" });
+  console.log("ADMIN DATA ROUTE");
+  console.dir(adminDataRoute);
   if (!adminDataRoute) return null;
 
   const adminUpdateArray = await sendToBack({ route: adminDataRoute.value, stateAdmin: stateAdmin });
