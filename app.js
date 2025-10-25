@@ -8,7 +8,7 @@
 
 import express from "express";
 import session from "express-session";
-import cors from "cors";
+// import cors from "cors";
 import routes from "./routes/router.js";
 
 import CONFIG from "./config/config.js";
@@ -18,7 +18,7 @@ const { expressPicPath, expressVidPath, expressWatchPath, expressConfigPublicPat
 const app = express();
 
 //claude solution to auth problem
-app.set("trust proxy", 1);
+// app.set("trust proxy", 1);
 
 app.use(session(CONFIG.buildSessionConfig()));
 
@@ -34,13 +34,13 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use(
-  cors({
-    origin: [`http://localhost:${scrapePort}`],
-    methods: ["GET", "POST"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
+// app.use(
+//   cors({
+//     origin: [`http://localhost:${scrapePort}`],
+//     methods: ["GET", "POST"],
+//     allowedHeaders: ["Content-Type", "Authorization"],
+//   })
+// );
 
 //routes
 app.use(routes);
