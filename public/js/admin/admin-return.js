@@ -7,6 +7,12 @@ export const buildAdminReturnDisplay = async (inputArray) => {
   const adminReturnContainer = document.createElement("div");
   adminReturnContainer.id = "admin-return-container";
 
+  // Create static title (not collapsible)
+  const logTitle = document.createElement("h2");
+  logTitle.className = "stats-section-title";
+  logTitle.textContent = "SCRAPE LOG HISTORY";
+  adminReturnContainer.append(logTitle);
+
   // Build the log history section
   const logHistorySection = await buildLogHistorySection(inputArray);
   if (logHistorySection) {
@@ -16,6 +22,10 @@ export const buildAdminReturnDisplay = async (inputArray) => {
   // Build the database statistics section
   const dbStatsSection = await buildDatabaseStatsSection(inputArray);
   if (dbStatsSection) {
+    const dbStatsTitle = document.createElement("h2");
+    dbStatsTitle.className = "stats-section-title";
+    dbStatsTitle.textContent = "DATABASE STATISTICS";
+    adminReturnContainer.append(dbStatsTitle);
     adminReturnContainer.append(dbStatsSection);
   }
 
@@ -40,12 +50,6 @@ export const buildLogHistorySection = async (inputArray) => {
   const logHistorySection = document.createElement("div");
   logHistorySection.id = "log-history-section";
   logHistorySection.className = "stats-section";
-
-  // Create static title (not collapsible)
-  const sectionTitle = document.createElement("h2");
-  sectionTitle.className = "stats-section-title";
-  sectionTitle.textContent = "SCRAPE LOG HISTORY";
-  logHistorySection.append(sectionTitle);
 
   // Create the log list
   const logList = document.createElement("ul");
@@ -176,12 +180,6 @@ export const buildDatabaseStatsSection = async (inputArray) => {
   const dbStatsSection = document.createElement("div");
   dbStatsSection.id = "db-stats-section";
   dbStatsSection.className = "stats-section";
-
-  // Create static title (not collapsible)
-  const sectionTitle = document.createElement("h2");
-  sectionTitle.className = "stats-section-title";
-  sectionTitle.textContent = "DATABASE STATISTICS";
-  dbStatsSection.append(sectionTitle);
 
   // Create the stats content
   const statsContent = document.createElement("div");
