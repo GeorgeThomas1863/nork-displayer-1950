@@ -1,5 +1,3 @@
-import { buildCollapseContainer } from "../util/collapse-display.js";
-
 // MAIN FUNCTION - Build the complete stats display
 export const buildAdminReturnDisplay = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
@@ -89,16 +87,7 @@ export const buildLogListItem = async (logEntry, sessionNumber, isFirst) => {
   // Create title for this log entry
   const logTitle = await buildLogTitle(scrapeStartTime, sessionNumber);
 
-  // Wrap in collapse
-  const logItemCollapseObj = {
-    titleElement: logTitle,
-    contentElement: logDetailsContainer,
-    isExpanded: isFirst,
-    className: "log-item-collapse",
-  };
-
-  const logItemCollapse = await buildCollapseContainer(logItemCollapseObj);
-  logListItem.append(logItemCollapse);
+  logListItem.append(logTitle, logDetailsContainer);
 
   return logListItem;
 };
