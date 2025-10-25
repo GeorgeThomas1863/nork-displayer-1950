@@ -27,6 +27,8 @@ export const runAdminCommand = async () => {
     if (!adminCommandParams || !adminCommandRoute) return null;
     adminCommandParams.route = adminCommandRoute.value;
 
+    //POLLING
+
     console.log("ADMIN COMMAND PARAMS");
     console.dir(adminCommandParams);
 

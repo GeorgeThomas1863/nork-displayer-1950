@@ -1,4 +1,4 @@
-import stateFront from "./util/state-front.js";
+import stateAdmin from "./admin/admin-state.js";
 import { buildAdminForm } from "./admin/admin-form.js";
 import { sendToBack } from "./util/api-front.js";
 
@@ -7,26 +7,29 @@ const adminDisplayElement = document.getElementById("admin-display-element");
 //BREAK OUT INTO SEPARATE FUNCTIONS
 export const buildAdminDisplay = async () => {
   if (!adminDisplayElement) return null;
-
-  const { isFirstLoad } = stateFront;
+  const { isFirstLoad } = stateAdmin;
 
   //if not first load, just append data
-  if (!isFirstLoad) {
+  if (isFirstLoad) {
+    const adminFormData = await buildAdminForm();
+    adminDisplayElement.append(adminFormData);
   }
 
-  //otherwise first load, build form
-  const adminFormData = await buildAdminForm();
-  adminDisplayElement.append(adminFormData);
+  await updateAdminDisplay();
 
-  const adminStartData = await getAdminStartData();
+  return true;
 
-  const pollData = await pollBackend();
-  console.log("POLL DATA");
-  console.dir(pollData);
+  // const adminStartData = await getAdminStartData();
+
+  // const pollData = await pollBackend();
+  // console.log("POLL DATA");
+  // console.dir(pollData);
 };
 
 export const updateAdminDisplay = async () => {
   if (!adminDisplayElement) return null;
+  const { isFirstLoad } = stateAdmin;
+  if (isFirstLoad) return null;
 };
 
 export const getAdminStartData = async () => {
