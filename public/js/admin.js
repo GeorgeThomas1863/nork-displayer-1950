@@ -1,5 +1,6 @@
 import stateAdmin from "./admin/admin-state.js";
 import { buildAdminForm } from "./admin/admin-form.js";
+import { buildAdminReturnDisplay } from "./admin/admin-return.js";
 import { sendToBack } from "./util/api-front.js";
 
 const adminDisplayElement = document.getElementById("admin-display-element");
@@ -37,6 +38,8 @@ export const updateAdminDisplay = async () => {
   const adminUpdateArray = await sendToBack({ route: adminDataRoute.value, stateAdmin: stateAdmin });
   console.log("ADMIN UPDATE ARRAY");
   console.dir(adminUpdateArray);
+
+  const adminReturnDisplay = await buildAdminReturnDisplay(adminUpdateArray);
 };
 
 export const pollBackend = async () => {
