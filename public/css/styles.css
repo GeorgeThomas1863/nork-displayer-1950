@@ -1036,12 +1036,12 @@ h3 {
 
 .stats-section-title {
   margin: 0 auto;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   text-align: center;
   background-color: rgb(235, 235, 235);
-  color: #b3d9ff;
+  color: #2563a8;
   padding: 1rem 1.5rem;
-  font-size: 1.7rem;
+  font-size: 2rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: -0.01em;
