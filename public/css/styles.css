@@ -1035,10 +1035,10 @@ h3 {
 }
 
 .stats-section-title {
-  background-color: #2563a8;
-  color: #ffffff;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+  color: #2c3e50;
   padding: 1rem 1.5rem;
-  margin: 0;
   font-size: 1.7rem;
   font-weight: 600;
   text-transform: uppercase;
