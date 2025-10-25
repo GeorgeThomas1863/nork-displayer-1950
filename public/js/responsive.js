@@ -1,15 +1,14 @@
 import {
   runAuth,
-  runAdminAuth,
-  runAdminCommand,
   runPwToggle,
   runDropDownToggle,
-  runAdminToggleURL,
   runChangeButtonType,
   runChangeDataType,
   runChangeHowMany,
   runChangeSortBy,
 } from "./run.js";
+
+import { runAdminAuth, runAdminCommand, runAdminToggleURL } from "./admin/admin-run.js";
 
 import debounce from "./util/debounce.js";
 
@@ -40,10 +39,8 @@ export const clickHandler = async (e) => {
   //----------
 
   // if (clickUpdate) await runUpdateStateDisplay(clickUpdate);
-  if (clickUpdate && clickUpdate.includes("-type-button-"))
-    await runChangeButtonType(clickUpdate);
-  if (clickUpdate && clickUpdate.includes("get-"))
-    await runChangeDataType(clickUpdate);
+  if (clickUpdate && clickUpdate.includes("-type-button-")) await runChangeButtonType(clickUpdate);
+  if (clickUpdate && clickUpdate.includes("get-")) await runChangeDataType(clickUpdate);
 
   //   await updateAdminStateEventTriggered(clickType);
 
@@ -66,14 +63,9 @@ export const keyHandler = async (e) => {
   const adminAuthButton = document.getElementById("admin-auth-button");
 
   // Check if auth button is visible and enabled (user is on auth screen)
-  if (authButton && authButton.offsetParent !== null && !authButton.disabled)
-    return await runAuth();
+  if (authButton && authButton.offsetParent !== null && !authButton.disabled) return await runAuth();
 
-  if (
-    adminAuthButton &&
-    adminAuthButton.offsetParent !== null &&
-    !adminAuthButton.disabled
-  )
+  if (adminAuthButton && adminAuthButton.offsetParent !== null && !adminAuthButton.disabled)
     return await runAdminAuth();
 
   return null;
@@ -88,8 +80,7 @@ export const changeHandler = async (e) => {
   console.log(changeElement);
   console.log(changeId);
 
-  if (changeId && changeId.includes("-sort-by"))
-    return await runChangeSortBy(changeElement);
+  if (changeId && changeId.includes("-sort-by")) return await runChangeSortBy(changeElement);
 
   if (changeId !== "admin-how-much") return null;
 
@@ -104,11 +95,7 @@ export const inputHandler = async (e) => {
   const inputElement = e.target;
 
   if (!inputElement || !inputElement.id.includes("-how-many")) return null;
-  if (
-    !inputElement.value ||
-    isNaN(inputElement.value || isNaN(parseInt(inputElement.value)))
-  )
-    return null;
+  if (!inputElement.value || isNaN(inputElement.value || isNaN(parseInt(inputElement.value)))) return null;
 
   console.log("INPUT HANDLER");
   console.log(inputElement.id);

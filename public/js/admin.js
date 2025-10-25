@@ -1,5 +1,5 @@
 import stateFront from "./util/state-front.js";
-import { buildAdminForm } from "./control/admin-form.js";
+import { buildAdminForm } from "./admin/admin-form.js";
 import { sendToBack } from "./util/api-front.js";
 
 const adminDisplayElement = document.getElementById("admin-display-element");
@@ -23,6 +23,10 @@ export const buildAdminDisplay = async () => {
   const pollData = await pollBackend();
   console.log("POLL DATA");
   console.dir(pollData);
+};
+
+export const updateAdminDisplay = async () => {
+  if (!adminDisplayElement) return null;
 };
 
 export const getAdminStartData = async () => {
