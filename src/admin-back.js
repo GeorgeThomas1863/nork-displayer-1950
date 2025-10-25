@@ -1,8 +1,12 @@
 import axios from "axios";
 import CONFIG from "../config/config.js";
 
+import dbModel from "../models/db-model.js";
+
 export const runAdminCommand = async (inputParams) => {
   const { scrapePort, apiScraper } = CONFIG;
+
+  //CREATE DISPLAYER ID
 
   try {
     const url = `http://localhost:${scrapePort}${apiScraper}`;
@@ -23,4 +27,27 @@ export const runAdminCommand = async (inputParams) => {
   }
 };
 
-export const runAdminCurrentData = async () => {};
+export const runGetAdminData = async () => {
+  const { collectionsArr } = CONFIG;
+
+  const dataArray = [];
+  for (const collection of collectionsArr) {
+    try {
+      const dataModel = new dbModel("", collection);
+      const data = await dataModel.getAll();
+      if (!data || !data.length) continue;
+
+      const retunrObj = {
+        collection: collection,
+        data: data,
+      };
+
+      dataArray.push(retunrObj);
+    } catch (e) {
+      console.log("ERROR: " + e.message + "; FUNCTION: " + e.function);
+      continue;
+    }
+  }
+
+  return dataArray;
+};

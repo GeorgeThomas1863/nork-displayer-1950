@@ -4,9 +4,9 @@ import CONFIG from "../config/config.js";
 import { requireAuth, requireAdminAuth } from "./auth.js";
 import { authController, adminAuthController } from "../controllers/auth-controller.js";
 import { mainDisplay, adminDisplay, display404, display500, display401 } from "../controllers/display-controller.js";
-import { getBackendValueController, updateDisplayDataController, adminCommandController, adminCurrentDataController, adminPollingController } from "../controllers/data-controller.js"; //prettier-ignore
+import { getBackendValueController, updateDisplayDataController, adminCommandController, adminDataController, adminPollingController } from "../controllers/data-controller.js"; //prettier-ignore
 
-const { updateDisplayDataRoute, adminAuthRoute, adminCommandRoute, apiDisplayer, adminCurrentDataRoute, adminPollingRoute } = CONFIG;
+const { updateDisplayDataRoute, adminAuthRoute, adminCommandRoute, adminDataRoute, adminPollingRoute } = CONFIG;
 
 const router = express.Router();
 
@@ -23,7 +23,7 @@ router.post(updateDisplayDataRoute, requireAuth, updateDisplayDataController);
 
 //-----------------------------
 
-router.post(adminCurrentDataRoute, requireAdminAuth, adminCurrentDataController);
+router.post(adminDataRoute, requireAdminAuth, adminDataController);
 
 //send data to scraper
 router.post(adminCommandRoute, requireAdminAuth, adminCommandController);

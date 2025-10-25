@@ -28,16 +28,13 @@ export const buildAdminDisplay = async () => {
 
 export const updateAdminDisplay = async () => {
   if (!adminDisplayElement) return null;
-  const { isFirstLoad } = stateAdmin;
-  if (isFirstLoad) return null;
-};
 
-export const getAdminStartData = async () => {
-  const adminStartRoute = await sendToBack({ route: "/get-backend-value-route", key: "adminCurrentDataRoute" });
-  if (!adminStartRoute) return null;
+  const adminDataRoute = await sendToBack({ route: "/get-backend-value-route", key: "adminDataRoute" });
+  if (!adminDataRoute) return null;
 
-  const data = await sendToBack({ route: adminStartRoute.value });
-  return data;
+  const adminUpdateArray = await sendToBack({ route: adminDataRoute.value, stateAdmin: stateAdmin });
+  console.log("ADMIN UPDATE ARRAY");
+  console.dir(adminUpdateArray);
 };
 
 export const pollBackend = async () => {
@@ -53,6 +50,9 @@ export const pollBackend = async () => {
   console.log(`Polling started - checking every ${pollInterval.value / 1000}s`);
 };
 
+buildAdminDisplay();
+
+//--------------------------------------
 //   const pollInterval = await sendToBack({ route: "/get-backend-value-route", key: "pollInterval" });
 
 //   // Set up interval
@@ -69,8 +69,6 @@ export const pollBackend = async () => {
 
 //   return data;
 // };
-
-buildAdminDisplay();
 
 //   const newDataNeededAdmin = await checkNewDataNeededAdmin();
 //   if (!newDataNeededAdmin) return null;
