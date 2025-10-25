@@ -40,6 +40,9 @@ export const updateAdminDisplay = async () => {
   console.dir(adminUpdateArray);
 
   const adminReturnDisplay = await buildAdminReturnDisplay(adminUpdateArray);
+  if (!adminReturnDisplay) return null;
+
+  adminDisplayElement.append(adminReturnDisplay);
 };
 
 export const pollBackend = async () => {
