@@ -926,8 +926,13 @@ h3 {
 
 /* ------------------------------------- */
 
+/* #admin-form-collapse-container {
+  margin: 1.5rem auto;
+  max-width: 500px;
+} */
+
 #admin-form-collapse-container {
-  /* margin: 1.5rem auto; */
+  width: 90%;
   max-width: 500px;
 }
 
