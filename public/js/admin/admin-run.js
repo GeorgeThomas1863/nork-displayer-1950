@@ -50,8 +50,8 @@ export const runAdminCommand = async () => {
 };
 
 export const runAdminUpdateData = async () => {
-  const currentAdminDataElement = document.getElementById("admin-return-container");
-  if (!currentAdminDataElement) return null;
+  // const currentAdminDataElement = document.getElementById("admin-return-container");
+  // if (!currentAdminDataElement) return null;
 
   await updateAdminDisplay();
   return true;
