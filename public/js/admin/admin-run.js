@@ -37,9 +37,15 @@ export const runAdminCommand = async () => {
     const adminCommandRoute = await sendToBack({ route: "/get-backend-value-route", key: "adminCommandRoute" });
     if (!adminCommandParams || !adminCommandRoute) return null;
     adminCommandParams.route = adminCommandRoute.value;
-    console.log("ADMIN COMMAND PARAMS");
-    console.dir(adminCommandParams);
+    // console.log("ADMIN COMMAND PARAMS");
+    // console.dir(adminCommandParams);
 
+    //update display 5 seconds after submit
+    setTimeout(async () => {
+      await updateAdminDisplay(); 
+    }, 5000);
+
+    //admin command submit
     const data = await sendToBack(adminCommandParams);
     console.log("ADMIN COMMAND DATA");
     console.dir(data);
