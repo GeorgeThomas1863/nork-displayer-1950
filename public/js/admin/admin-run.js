@@ -1,3 +1,4 @@
+import { updateAdminDisplay } from "../admin.js";
 import { getAdminAuthParams, getAdminCommandParams } from "../util/params.js";
 import { sendToBack } from "../util/api-front.js";
 import { hideArray, unhideArray } from "../util/collapse-display.js";
@@ -36,9 +37,6 @@ export const runAdminCommand = async () => {
     const adminCommandRoute = await sendToBack({ route: "/get-backend-value-route", key: "adminCommandRoute" });
     if (!adminCommandParams || !adminCommandRoute) return null;
     adminCommandParams.route = adminCommandRoute.value;
-
-    //POLLING
-
     console.log("ADMIN COMMAND PARAMS");
     console.dir(adminCommandParams);
 
@@ -51,3 +49,10 @@ export const runAdminCommand = async () => {
   }
 };
 
+export const runAdminUpdateData = async () => {
+  const currentAdminDataElement = document.getElementById("admin-return-container");
+  if (!currentAdminDataElement) return null;
+
+  await updateAdminDisplay();
+  return true;
+};

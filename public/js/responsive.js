@@ -9,7 +9,7 @@ import {
 } from "./run.js";
 
 //in admin folder
-import { runAdminAuth, runAdminCommand, runAdminToggleURL } from "./admin/admin-run.js";
+import { runAdminAuth, runAdminCommand, runAdminUpdateData, runAdminToggleURL } from "./admin/admin-run.js";
 
 import debounce from "./util/debounce.js";
 
@@ -34,6 +34,7 @@ export const clickHandler = async (e) => {
   if (clickType === "auth-submit") await runAuth();
   if (clickType === "admin-auth-submit") await runAdminAuth();
   if (clickType === "admin-command-submit") await runAdminCommand();
+  if (clickType === "admin-update-data-button") await runAdminUpdateData();
   if (clickType === "dropdown") await runDropDownToggle();
   if (clickType === "admin-redirect") window.location.href = "/admin";
 

@@ -25,6 +25,9 @@ export const buildAdminDisplay = async () => {
 export const updateAdminDisplay = async () => {
   if (!adminDisplayElement) return null;
 
+  const currentAdminDataElement = document.getElementById("admin-return-container");
+  if (currentAdminDataElement) currentAdminDataElement.remove();
+
   const adminDataRoute = await sendToBack({ route: "/get-backend-value-route", key: "adminDataRoute" });
   console.log("ADMIN DATA ROUTE");
   console.dir(adminDataRoute);
