@@ -32,9 +32,9 @@ export const adminCommandController = async (req, res) => {
 };
 
 export const adminDataController = async (req, res) => {
-  const { stateAdmin } = req.body;
+  // const { stateAdmin } = req.body;
 
-  const data = await runGetAdminData(stateAdmin);
+  const data = await runGetAdminData();
   return res.json(data);
 };
 
