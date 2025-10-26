@@ -198,7 +198,7 @@ export const buildAdminUpdateDataButton = async () => {
   const adminUpdateDataButton = document.createElement("button");
   adminUpdateDataButton.id = "admin-update-data-button";
   adminUpdateDataButton.textContent = "Update Data";
-  adminUpdateDataButton.className = "btn-update-data";
+  adminUpdateDataButton.className = "btn-submit";
   adminUpdateDataButton.setAttribute("data-label", "admin-update-data-button");
 
   adminUpdateDataButtonWrapper.append(adminUpdateDataButton);
