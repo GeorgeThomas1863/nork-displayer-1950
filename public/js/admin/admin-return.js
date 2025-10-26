@@ -1,9 +1,13 @@
+import { buildEmptyDisplay } from "../control/return-form.js";
+
 // MAIN FUNCTION - Build the complete stats display
 export const buildAdminReturnDisplay = async (inputArray) => {
   if (!inputArray) return null;
 
+  //empty display
   if (!inputArray.length) {
-    console.log("ALLAHU AKBAR");
+    const emptyDisplay = await buildEmptyDisplay();
+    return emptyDisplay;
   }
 
   const adminReturnContainer = document.createElement("div");

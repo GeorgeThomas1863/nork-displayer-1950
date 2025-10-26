@@ -35,6 +35,7 @@ export const buildReturnDisplay = async (inputArray) => {
   return returnDisplayWrapper;
 };
 
+//could put elsewhere
 export const buildEmptyDisplay = async () => {
   const emptyDisplayWrapper = document.createElement("div");
   emptyDisplayWrapper.id = "empty-display-wrapper";
