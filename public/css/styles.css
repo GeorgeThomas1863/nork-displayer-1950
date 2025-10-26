@@ -940,6 +940,7 @@ h3 {
 }
 
 #admin-form-collapse-container {
+  width: 100%;
   max-width: 600px;
 }
 
