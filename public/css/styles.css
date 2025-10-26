@@ -926,17 +926,12 @@ h3 {
 
 /* ------------------------------------- */
 
-/* #admin-form-collapse-container {
-  margin: 1.5rem auto;
-  max-width: 500px;
-} */
-
 #admin-form-overall-wrapper {
   width: 90%;
   margin: 0 auto;
   margin-top: 1.5rem;
   display: flex;
-  gap: 3rem;
+  gap: 5rem;
 }
 
 #admin-form-collapse-container {
@@ -1028,15 +1023,15 @@ h3 {
   box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
 }
 
-#admin-update-data-button-wrapper {
+/* #admin-update-data-button-wrapper {
   width: 90%;
   margin: 0 auto;
   margin-top: 2rem;
-}
+} */
 
 #admin-update-data-button {
   width: auto;
-  padding: 1rem 3rem;
+  padding: 1.5rem 3rem;
   font-size: 1.5rem;
   font-weight: 600;
   letter-spacing: -0.02em;
