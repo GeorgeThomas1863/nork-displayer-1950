@@ -1018,7 +1018,8 @@ h3 {
 #admin-update-data-button-wrapper {
   width: 90%;
   margin: 0 auto;
-  margin-bottom: 1.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
 }
 
 #admin-update-data-button {

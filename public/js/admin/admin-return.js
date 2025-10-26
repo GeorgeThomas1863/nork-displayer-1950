@@ -13,20 +13,10 @@ export const buildAdminReturnDisplay = async (inputArray) => {
 
   // Build the log history section
   const logHistorySection = await buildLogHistorySection(inputArray);
-  if (logHistorySection) {
-    adminReturnContainer.append(logHistorySection);
-  }
+  if (logHistorySection) adminReturnContainer.append(logHistorySection);
 
   // Build the database statistics section
   const dbStatsSection = await buildDatabaseStatsSection(inputArray);
-  // if (dbStatsSection) {
-  //   const dbStatsTitle = document.createElement("h2");
-  //   dbStatsTitle.className = "stats-section-title";
-  //   dbStatsTitle.textContent = "DATABASE STATISTICS";
-  //   adminReturnContainer.append(dbStatsTitle);
-  //   adminReturnContainer.append(dbStatsSection);
-  // }
-
   if (dbStatsSection) adminReturnContainer.append(dbStatsSection);
 
   return adminReturnContainer;
@@ -248,8 +238,8 @@ export const buildArticleBreakdownSection = async (stats) => {
   const sortedTypes = Object.entries(stats.articlesByType).sort((a, b) => b[1] - a[1]);
 
   for (const [type, count] of sortedTypes) {
-    const label = await formatArticleType(type);
-    const statItem = await buildStatItem(label, count);
+    // const label = await formatArticleType(type);
+    const statItem = await buildStatItem(type, count);
     statsList.append(statItem);
   }
 
@@ -386,17 +376,17 @@ export const formatDateTime = async (dateString) => {
   });
 };
 
-export const formatArticleType = async (type) => {
-  // Convert camelCase or other formats to readable format
-  const typeMap = {
-    fatboy: '"Revolutionary Activities" [KJU]',
-    topNews: "Top News",
-    latestNews: "Latest News",
-    externalNews: "External News",
-    anecdote: "Revolutionary Anecdotes",
-    people: "Always in Memory of the People",
-    all: "All Articles",
-  };
+// export const formatArticleType = async (type) => {
+//   // Convert camelCase or other formats to readable format
+//   const typeMap = {
+//     fatboy: '"Revolutionary Activities" [KJU]',
+//     topNews: "Top News",
+//     latestNews: "Latest News",
+//     externalNews: "External News",
+//     anecdote: "Revolutionary Anecdotes",
+//     people: "Always in Memory of the People",
+//     all: "All Articles",
+//   };
 
-  return typeMap[type] || type.charAt(0).toUpperCase() + type.slice(1);
-};
+//   return typeMap[type] || type.charAt(0).toUpperCase() + type.slice(1);
+// };
