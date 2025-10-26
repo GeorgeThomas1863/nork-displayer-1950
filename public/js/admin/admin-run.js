@@ -20,7 +20,19 @@ export const runAdminAuth = async () => {
   }
 };
 
+export const runAdminToggleURL = async () => {
+  const howMuchElement = document.getElementById("admin-how-much");
+  const urlListItem = document.getElementById("admin-url-input-list-item");
+  if (!howMuchElement || !urlListItem) return null;
+
+  howMuchElement.value === "admin-scrape-url" ? unhideArray([urlListItem]) : hideArray([urlListItem]);
+
+  return true;
+};
+
 export const runAdminCommand = async () => {
+  //trigger building admin return display
+
   try {
     const adminCommandParams = await getAdminCommandParams();
     const adminCommandRoute = await sendToBack({ route: "/get-backend-value-route", key: "adminCommandRoute" });
@@ -41,12 +53,15 @@ export const runAdminCommand = async () => {
   }
 };
 
-export const runAdminToggleURL = async () => {
-  const howMuchElement = document.getElementById("admin-how-much");
-  const urlListItem = document.getElementById("admin-url-input-list-item");
-  if (!howMuchElement || !urlListItem) return null;
+// export const pollBackend = async () => {
+//   const pollInterval = await sendToBack({ route: "/get-backend-value-route", key: "pollInterval" });
 
-  howMuchElement.value === "admin-scrape-url" ? unhideArray([urlListItem]) : hideArray([urlListItem]);
+//   setInterval(async () => {
+//     const data = await sendToBack({ route: "/polling-route" });
+//     console.log("POLL DATA");
+//     console.dir(data);
+//     return data;
+//   }, pollInterval.value);
 
-  return true;
-};
+//   console.log(`Polling started - checking every ${pollInterval.value / 1000}s`);
+// };

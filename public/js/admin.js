@@ -1,5 +1,5 @@
-import stateAdmin from "./admin/admin-state.js";
-import { buildAdminForm } from "./admin/admin-form.js";
+// import stateAdmin from "./admin/admin-state.js";
+import { buildAdminForm, buildAdminUpdateDataButton } from "./admin/admin-form.js";
 import { buildAdminReturnDisplay } from "./admin/admin-return.js";
 import { sendToBack } from "./util/api-front.js";
 
@@ -8,23 +8,16 @@ const adminDisplayElement = document.getElementById("admin-display-element");
 //BREAK OUT INTO SEPARATE FUNCTIONS
 export const buildAdminDisplay = async () => {
   if (!adminDisplayElement) return null;
-  const { isFirstLoad } = stateAdmin;
+  // const { isFirstLoad } = stateAdmin;
 
-  //if not first load, just append data
-  if (isFirstLoad) {
-    const adminFormData = await buildAdminForm();
-    adminDisplayElement.append(adminFormData);
-  }
+  const adminFormData = await buildAdminForm();
+  adminDisplayElement.append(adminFormData);
 
-  await updateAdminDisplay();
+  //admin add data button, hiddent by default
+  const adminUpdateDataButton = await buildAdminUpdateDataButton();
+  adminDisplayElement.append(adminUpdateDataButton);
 
   return true;
-
-  // const adminStartData = await getAdminStartData();
-
-  // const pollData = await pollBackend();
-  // console.log("POLL DATA");
-  // console.dir(pollData);
 };
 
 export const updateAdminDisplay = async () => {
@@ -43,19 +36,6 @@ export const updateAdminDisplay = async () => {
   if (!adminReturnDisplay) return null;
 
   adminDisplayElement.append(adminReturnDisplay);
-};
-
-export const pollBackend = async () => {
-  const pollInterval = await sendToBack({ route: "/get-backend-value-route", key: "pollInterval" });
-
-  setInterval(async () => {
-    const data = await sendToBack({ route: "/polling-route" });
-    console.log("POLL DATA");
-    console.dir(data);
-    return data;
-  }, pollInterval.value);
-
-  console.log(`Polling started - checking every ${pollInterval.value / 1000}s`);
 };
 
 buildAdminDisplay();
