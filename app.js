@@ -1,6 +1,10 @@
-//TODO: FINISH STYLING ADMIN RETURN DISPLAY
+//FIX SCRAPE TRACKING OBJ, GET RID OF DISPLAYER ID, FIX ADMIN RETURN DISPLAY
 
-//FIGURE OUT WAY TO DO POLLING THAT MAKES SENSE, ASK CLAUDE AT HIGH LEVEL
+//MAKE SCHEDULER LOG START / STOP IN SCRAPER
+
+//CHECK SCRAPE ACTIVE IS ACCURATELY LOGGING START / STOP
+
+//FIX BACKEND ADMIN RETURN STYLES
 
 //FIGURE OUT HOW TO ACTUALLY SECURE MONGO
 
@@ -10,17 +14,7 @@ import routes from "./routes/router.js";
 
 import CONFIG from "./config/config.js";
 
-const {
-  expressPicPath,
-  expressVidPath,
-  expressWatchPath,
-  expressConfigPublicPath,
-  picPath,
-  vidPath,
-  watchPath,
-  scrapePort,
-  displayPort,
-} = CONFIG;
+const { expressPicPath, expressVidPath, expressWatchPath, expressConfigPublicPath, picPath, vidPath, watchPath, scrapePort, displayPort } = CONFIG;
 
 const app = express();
 
