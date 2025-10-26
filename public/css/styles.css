@@ -935,6 +935,9 @@ h3 {
   width: 90%;
   margin: 0 auto;
   margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 #admin-form-collapse-container {
@@ -1025,11 +1028,11 @@ h3 {
   box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
 }
 
-#admin-update-data-button-wrapper {
+/* #admin-update-data-button-wrapper {
   width: 90%;
   margin: 0 auto;
   margin-top: 2rem;
-}
+} */
 
 #admin-update-data-button {
   width: auto;
