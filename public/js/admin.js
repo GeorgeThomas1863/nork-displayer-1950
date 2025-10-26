@@ -13,10 +13,6 @@ export const buildAdminDisplay = async () => {
   const adminFormData = await buildAdminForm();
   adminDisplayElement.append(adminFormData);
 
-  //admin add data button, hiddent by default
-  // const adminUpdateDataButton = await buildAdminUpdateDataButton();
-  // adminDisplayElement.append(adminUpdateDataButton);
-
   await updateAdminDisplay();
 
   return true;

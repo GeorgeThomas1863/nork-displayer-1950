@@ -4,14 +4,15 @@ import { buildEmptyDisplay } from "../control/return-form.js";
 export const buildAdminReturnDisplay = async (inputArray) => {
   if (!inputArray) return null;
 
-  //empty display
-  if (!inputArray.length) {
-    const emptyDisplay = await buildEmptyDisplay();
-    return emptyDisplay;
-  }
-
   const adminReturnContainer = document.createElement("div");
   adminReturnContainer.id = "admin-return-container";
+
+  //empty display
+  if (!inputArray.length) {
+    const emptyData = await buildEmptyDisplay();
+    adminReturnContainer.append(emptyData);
+    return adminReturnContainer;
+  }
 
   // Create static title (not collapsible)
   const logTitle = document.createElement("h2");
