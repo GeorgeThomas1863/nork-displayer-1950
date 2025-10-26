@@ -1018,8 +1018,7 @@ h3 {
 #admin-update-data-button-wrapper {
   width: 90%;
   margin: 0 auto;
-  margin-top: 1.5rem;
-  margin-bottom: 0.5rem;
+  margin-top: 3rem;
 }
 
 #admin-update-data-button {
@@ -1039,7 +1038,7 @@ h3 {
 /* STYLE 7: COMPACT TABLE-LIKE */
 
 #admin-return-container {
-  margin: 1.5rem auto;
+  margin: 0 auto;
   max-width: 90%;
 }
 
