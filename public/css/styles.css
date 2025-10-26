@@ -1015,6 +1015,14 @@ h3 {
   box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
 }
 
+#admin-update-data-button-wrapper {
+  margin-left: 1.5rem;
+}
+
+#admin-update-data-button {
+  width: auto;
+}
+
 /* -------------------------- */
 
 /* ================================================ */
