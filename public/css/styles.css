@@ -938,7 +938,7 @@ h3 {
 }
 
 #admin-form-collapse-container {
-  max-width: 500px;
+  max-width: 600px;
 }
 
 #admin-form-wrapper {
@@ -1028,7 +1028,7 @@ h3 {
 #admin-update-data-button-wrapper {
   width: 90%;
   margin: 0 auto;
-  margin-top: 3rem;
+  margin-top: 2rem;
 }
 
 #admin-update-data-button {
