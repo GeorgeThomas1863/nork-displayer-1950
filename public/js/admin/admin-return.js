@@ -19,13 +19,15 @@ export const buildAdminReturnDisplay = async (inputArray) => {
 
   // Build the database statistics section
   const dbStatsSection = await buildDatabaseStatsSection(inputArray);
-  if (dbStatsSection) {
-    const dbStatsTitle = document.createElement("h2");
-    dbStatsTitle.className = "stats-section-title";
-    dbStatsTitle.textContent = "DATABASE STATISTICS";
-    adminReturnContainer.append(dbStatsTitle);
-    adminReturnContainer.append(dbStatsSection);
-  }
+  // if (dbStatsSection) {
+  //   const dbStatsTitle = document.createElement("h2");
+  //   dbStatsTitle.className = "stats-section-title";
+  //   dbStatsTitle.textContent = "DATABASE STATISTICS";
+  //   adminReturnContainer.append(dbStatsTitle);
+  //   adminReturnContainer.append(dbStatsSection);
+  // }
+
+  if (dbStatsSection) adminReturnContainer.append(dbStatsSection);
 
   return adminReturnContainer;
 };
