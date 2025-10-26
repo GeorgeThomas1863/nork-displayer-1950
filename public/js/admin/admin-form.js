@@ -34,7 +34,10 @@ export const buildAdminForm = async () => {
   adminFormCollapseContainer.className = "wrapper";
   adminFormCollapseContainer.id = "admin-form-collapse-container";
 
-  adminFormOverallWrapper.append(adminFormCollapseContainer);
+  //build update button
+  const adminUpdateDataButton = await buildAdminUpdateDataButton();
+
+  adminFormOverallWrapper.append(adminFormCollapseContainer, adminUpdateDataButton);
 
   return adminFormOverallWrapper;
 };
