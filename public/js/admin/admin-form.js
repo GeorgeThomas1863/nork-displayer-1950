@@ -197,7 +197,7 @@ export const buildAdminUpdateDataButton = async () => {
 
   const adminUpdateDataButton = document.createElement("button");
   adminUpdateDataButton.id = "admin-update-data-button";
-  adminUpdateDataButton.textContent = "Update Data";
+  adminUpdateDataButton.textContent = "Update Mongo Data";
   adminUpdateDataButton.className = "btn-submit";
   adminUpdateDataButton.setAttribute("data-label", "admin-update-data-button");
 
