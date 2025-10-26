@@ -931,7 +931,7 @@ h3 {
   margin: 0 auto;
   margin-top: 1.5rem;
   display: flex;
-  gap: 5rem;
+  gap: 3rem;
 }
 
 #admin-form-collapse-container {
@@ -1031,7 +1031,7 @@ h3 {
 
 #admin-update-data-button {
   width: auto;
-  padding: 1.2rem 3rem;
+  padding: 1.2rem 5rem;
   font-size: 1.5rem;
   font-weight: 600;
   letter-spacing: -0.02em;
