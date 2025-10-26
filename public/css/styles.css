@@ -1023,8 +1023,13 @@ h3 {
 
 /* STYLE 7: COMPACT TABLE-LIKE */
 
+#admin-return-container {
+  margin: 1.5rem auto;
+  max-width: 90%;
+}
+
 .stats-section-title {
-  font-size: 20px;
+  font-size: 3rem;
   font-weight: 600;
   color: #2c3e50;
   margin-bottom: 15px;
