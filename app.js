@@ -1,10 +1,8 @@
-//TODO: KEEP GOING WITH REFACTORING BACKEND
+//TODO: FINISH STYLING ADMIN RETURN DISPLAY
 
-//BUILD JS FOR ADMIN DATA RETURN
+//FIGURE OUT WAY TO DO POLLING THAT MAKES SENSE, ASK CLAUDE AT HIGH LEVEL
 
-//UNFUCK SCRAPER UPDATING
-
-//FIGURE OUT HOW TO ACTUALLY PASS DATA SECURELY
+//FIGURE OUT HOW TO ACTUALLY SECURE MONGO
 
 import express from "express";
 import session from "express-session";
@@ -12,7 +10,17 @@ import routes from "./routes/router.js";
 
 import CONFIG from "./config/config.js";
 
-const { expressPicPath, expressVidPath, expressWatchPath, expressConfigPublicPath, picPath, vidPath, watchPath, scrapePort, displayPort } = CONFIG;
+const {
+  expressPicPath,
+  expressVidPath,
+  expressWatchPath,
+  expressConfigPublicPath,
+  picPath,
+  vidPath,
+  watchPath,
+  scrapePort,
+  displayPort,
+} = CONFIG;
 
 const app = express();
 
