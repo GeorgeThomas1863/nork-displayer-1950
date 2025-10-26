@@ -1,6 +1,9 @@
 import { buildCollapseContainer } from "../util/collapse-display.js";
 
 export const buildAdminForm = async () => {
+  const adminFormOverallWrapper = document.createElement("div");
+  adminFormOverallWrapper.id = "admin-form-overall-wrapper";
+
   const adminFormWrapper = document.createElement("ul");
   adminFormWrapper.id = "admin-form-wrapper";
 
@@ -31,7 +34,9 @@ export const buildAdminForm = async () => {
   adminFormCollapseContainer.className = "wrapper";
   adminFormCollapseContainer.id = "admin-form-collapse-container";
 
-  return adminFormCollapseContainer;
+  adminFormOverallWrapper.append(adminFormCollapseContainer);
+
+  return adminFormOverallWrapper;
 };
 
 export const buildCommandListItem = async () => {
