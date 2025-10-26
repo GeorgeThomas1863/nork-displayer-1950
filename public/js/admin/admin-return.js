@@ -1,6 +1,10 @@
 // MAIN FUNCTION - Build the complete stats display
 export const buildAdminReturnDisplay = async (inputArray) => {
-  if (!inputArray || !inputArray.length) return null;
+  if (!inputArray) return null;
+
+  if (!inputArray.length) {
+    console.log("ALLAHU AKBAR");
+  }
 
   const adminReturnContainer = document.createElement("div");
   adminReturnContainer.id = "admin-return-container";
