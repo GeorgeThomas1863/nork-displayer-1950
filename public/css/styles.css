@@ -1036,7 +1036,15 @@ h3 {
   font-weight: 600;
   letter-spacing: -0.02em;
   /* background: #2563a8; */
-  background: #991B1B  ;
+  background: #dc2626;
+}
+
+#admin-update-data-button:hover {
+  background: #b91c1c;
+}
+
+#admin-update-data-button:active {
+  background: #b91c1c;
 }
 
 /* -------------------------- */
