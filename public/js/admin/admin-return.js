@@ -1,4 +1,5 @@
 import { buildEmptyDisplay } from "../control/return-form.js";
+import { buildCollapseContainer } from "../util/collapse-display.js";
 
 // MAIN FUNCTION - Build the complete stats display
 export const buildAdminReturnDisplay = async (inputArray) => {
@@ -39,9 +40,7 @@ export const buildAdminReturnDisplay = async (inputArray) => {
 export const buildLogHistorySection = async (inputArray) => {
   // Find the log collection
   const logCollection = inputArray.find((item) => item.collection === "log");
-  if (!logCollection || !logCollection.data || !logCollection.data.length) {
-    return null;
-  }
+  if (!logCollection || !logCollection.data || !logCollection.data.length) return null;
 
   const logData = logCollection.data;
 
@@ -64,8 +63,11 @@ export const buildLogHistorySection = async (inputArray) => {
   let isFirst = true;
 
   for (let i = 0; i < sortedLogs.length; i++) {
-    const logEntry = sortedLogs[i];
-    const logListItem = await buildLogListItem(logEntry, i + 1, isFirst);
+    const logObj = sortedLogs[i];
+    logObj.index = i + 1;
+    logObj.isFirst = isFirst;
+
+    const logListItem = await buildLogListItem(logObj);
     logList.append(logListItem);
 
     isFirst = false;
@@ -76,45 +78,47 @@ export const buildLogHistorySection = async (inputArray) => {
   return logHistorySection;
 };
 
-export const buildLogListItem = async (logEntry, sessionNumber, isFirst) => {
-  const { scrapeStartTime } = logEntry;
+export const buildLogListItem = async (inputObj) => {
+  const { scrapeId, index, isFirst } = inputObj;
 
   const logListItem = document.createElement("li");
   logListItem.className = "log-list-item";
 
   // Build the log details content
-  const logDetailsContainer = await buildLogDetailsContainer(logEntry, sessionNumber);
+  const logDetailsContainer = await buildLogDetailsContainer(inputObj);
 
   // Create title for this log entry
-  const logTitle = await buildLogTitle(scrapeStartTime, sessionNumber);
+  const logTitle = await buildLogTitle(scrapeId, index);
 
-  logListItem.append(logTitle, logDetailsContainer);
+  //build collapse container
+  const logCollapseParams = {
+    titleElement: logTitle,
+    contentElement: logDetailsContainer,
+    isExpanded: isFirst,
+    className: "log-element-collapse",
+    dataAttribute: "log-element-header",
+  };
+
+  const logCollapseContainer = await buildCollapseContainer(logCollapseParams);
+
+  logListItem.append(logCollapseContainer);
 
   return logListItem;
 };
 
-export const buildLogTitle = async (scrapeStartTime, sessionNumber) => {
+export const buildLogTitle = async (scrapeId, index) => {
   const titleElement = document.createElement("div");
   titleElement.className = "log-title";
 
-  const date = new Date(scrapeStartTime);
-  const formattedDate = date.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-  const formattedTime = date.toLocaleTimeString("en-US", {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-
-  titleElement.innerHTML = `Scrape Session #${sessionNumber} <span class="log-title-date">${formattedDate} ${formattedTime}</span>`;
+  titleElement.innerHTML = `Scrape Session #${index} <span class="log-title-span"> | Scrape ID: ${scrapeId}</span>`;
 
   return titleElement;
 };
 
-export const buildLogDetailsContainer = async (logEntry, sessionNumber) => {
-  const { _id, scrapeStartTime } = logEntry;
+export const buildLogDetailsContainer = async (inputObj) => {
+  const {  scrapeId, dislayerId, intervalId, scrapeMessage, scrapeStep, scrapeError, scrapeActive, schedulerActive, scrapeStartTime, scrapeEndTime, scrapeLengthSeconds, scrapeLengthMinutes } = inputObj; //prettier-ignore
+  const scrapeStartTimeFormatted = await formatDateTime(scrapeStartTime);
+  const scrapeEndTimeFormatted = await formatDateTime(scrapeEndTime);
 
   const detailsContainer = document.createElement("div");
   detailsContainer.className = "log-details-container";
@@ -125,8 +129,18 @@ export const buildLogDetailsContainer = async (logEntry, sessionNumber) => {
 
   // Build detail rows
   const details = [
-    { label: "Session ID", value: _id },
-    { label: "Start Time", value: await formatDateTime(scrapeStartTime) },
+    { label: "Scrape ID", value: scrapeId },
+    { label: "Displayer ID", value: dislayerId },
+    { label: "Interval ID", value: intervalId },
+    { label: "Scrape Message", value: scrapeMessage },
+    { label: "Scrape Step", value: scrapeStep },
+    { label: "Scrape Error", value: scrapeError },
+    { label: "Scrape Active", value: scrapeActive },
+    { label: "Scheduler Active", value: schedulerActive },
+    { label: "Scrape Start Time", value: scrapeStartTimeFormatted },
+    { label: "Scrape End Time", value: scrapeEndTimeFormatted },
+    { label: "Scrape Seconds", value: scrapeLengthSeconds },
+    { label: "Scrape Minutes", value: scrapeLengthMinutes },
   ];
 
   for (const detail of details) {
@@ -143,15 +157,15 @@ export const buildDetailRow = async (label, value) => {
   const row = document.createElement("div");
   row.className = "detail-row";
 
-  const labelEl = document.createElement("span");
-  labelEl.className = "detail-label";
-  labelEl.textContent = label;
+  const labelSpan = document.createElement("span");
+  labelSpan.className = "detail-label";
+  labelSpan.textContent = label;
 
-  const valueEl = document.createElement("span");
-  valueEl.className = "detail-value";
-  valueEl.textContent = value || "N/A";
+  const valueSpan = document.createElement("span");
+  valueSpan.className = "detail-value";
+  valueSpan.textContent = value || "NULL";
 
-  row.append(labelEl, valueEl);
+  row.append(labelSpan, valueSpan);
 
   return row;
 };
