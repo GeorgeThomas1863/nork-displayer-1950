@@ -1016,13 +1016,14 @@ h3 {
 }
 
 #admin-update-data-button-wrapper {
-  margin-left: 5rem;
+  margin-left: 3rem;
 }
 
 #admin-update-data-button {
   width: auto;
-  font-size: 2rem;
-  font-weight: 700;
+  padding: 1rem 3rem;
+  font-size: 1.5rem;
+  font-weight: 500;
   letter-spacing: -0.02em;
 }
 
