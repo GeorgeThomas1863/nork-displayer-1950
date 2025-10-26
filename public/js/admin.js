@@ -17,6 +17,8 @@ export const buildAdminDisplay = async () => {
   const adminUpdateDataButton = await buildAdminUpdateDataButton();
   adminDisplayElement.append(adminUpdateDataButton);
 
+  await updateAdminDisplay();
+
   return true;
 };
 
@@ -41,6 +43,20 @@ export const updateAdminDisplay = async () => {
 buildAdminDisplay();
 
 //--------------------------------------
+
+// export const pollBackend = async () => {
+//   const pollInterval = await sendToBack({ route: "/get-backend-value-route", key: "pollInterval" });
+
+//   setInterval(async () => {
+//     const data = await sendToBack({ route: "/polling-route" });
+//     console.log("POLL DATA");
+//     console.dir(data);
+//     return data;
+//   }, pollInterval.value);
+
+//   console.log(`Polling started - checking every ${pollInterval.value / 1000}s`);
+// };
+
 //   const pollInterval = await sendToBack({ route: "/get-backend-value-route", key: "pollInterval" });
 
 //   // Set up interval

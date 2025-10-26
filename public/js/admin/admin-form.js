@@ -189,12 +189,18 @@ export const buildButtonListItem = async () => {
   return buttonListItem;
 };
 
+//-----------------------
+
 export const buildAdminUpdateDataButton = async () => {
+  const adminUpdateDataButtonWrapper = document.createElement("div");
+  adminUpdateDataButtonWrapper.id = "admin-update-data-button-wrapper";
+
   const adminUpdateDataButton = document.createElement("button");
   adminUpdateDataButton.id = "admin-update-data-button";
   adminUpdateDataButton.textContent = "Update Data";
   adminUpdateDataButton.className = "btn-update-data";
-  adminUpdateDataButton.classList.add("hidden");
   adminUpdateDataButton.setAttribute("data-label", "admin-update-data-button");
-  return adminUpdateDataButton;
+
+  adminUpdateDataButtonWrapper.append(adminUpdateDataButton);
+  return adminUpdateDataButtonWrapper;
 };

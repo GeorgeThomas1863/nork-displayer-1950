@@ -31,8 +31,6 @@ export const runAdminToggleURL = async () => {
 };
 
 export const runAdminCommand = async () => {
-  //trigger building admin return display
-
   try {
     const adminCommandParams = await getAdminCommandParams();
     const adminCommandRoute = await sendToBack({ route: "/get-backend-value-route", key: "adminCommandRoute" });
@@ -53,15 +51,3 @@ export const runAdminCommand = async () => {
   }
 };
 
-// export const pollBackend = async () => {
-//   const pollInterval = await sendToBack({ route: "/get-backend-value-route", key: "pollInterval" });
-
-//   setInterval(async () => {
-//     const data = await sendToBack({ route: "/polling-route" });
-//     console.log("POLL DATA");
-//     console.dir(data);
-//     return data;
-//   }, pollInterval.value);
-
-//   console.log(`Polling started - checking every ${pollInterval.value / 1000}s`);
-// };
