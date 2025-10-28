@@ -32,8 +32,7 @@ export const buildAuthPwListItem = async () => {
   authPwInput.className = "password-input";
 
   // REMOVE LATER / ALSO REMOVE FROM PARAMS
-  authPwInput.value = "nork";
-  // authPwInput.placeholder = "Input the site password here";
+  authPwInput.placeholder = "Input the site password here";
 
   const toggleAuthPwButton = document.createElement("button");
   toggleAuthPwButton.type = "button";
@@ -95,8 +94,7 @@ export const buildAdminAuthPwListItem = async () => {
   adminAuthPwInput.className = "password-input";
 
   // REMOVE LATER / ALSO REMOVE FROM PARAMS
-  adminAuthPwInput.value = "fuckyoukim1950";
-  //adminAuthPwInput.placeholder = "Input Admin Password";
+  adminAuthPwInput.placeholder = "Input Admin Password";
 
   const toggleAdminAuthPwButton = document.createElement("button");
   toggleAdminAuthPwButton.type = "button";
