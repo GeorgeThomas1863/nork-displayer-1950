@@ -32,6 +32,7 @@ export const buildAdminTableContainer = async (inputArray) => {
   adminTableHeader.className = "admin-table-header";
 
   const adminTableTitle = document.createElement("h1");
+  adminTableTitle.className = "admin-table-title";
   adminTableTitle.textContent = "KCNA Scrape Monitor";
 
   const adminRecordCount = document.createElement("div");
@@ -54,6 +55,8 @@ export const buildAdminTable = async (inputArray) => {
   if (!inputArray) return null;
 
   const adminTable = document.createElement("table");
+  adminTable.className = "admin-table";
+
   const thead = await buildAdminTableHeader();
   const tbody = document.createElement("tbody");
 
@@ -71,7 +74,10 @@ export const buildAdminTable = async (inputArray) => {
 
 export const buildAdminTableHeader = async () => {
   const adminTableHeader = document.createElement("thead");
+  adminTableHeader.className = "admin-table-header";
+  
   const adminHeaderRow = document.createElement("tr");
+  adminHeaderRow.className = "admin-header-row";
 
   const adminTableColumns = [
     { column: "id", text: "ID" },

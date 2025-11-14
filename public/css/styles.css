@@ -1054,119 +1054,172 @@ h3 {
 
 /* STYLE 7: COMPACT TABLE-LIKE */
 
-#admin-return-container {
+.admin-table-container {
+  max-width: 1400px;
   margin: 0 auto;
-  margin-top: 1rem;
-  max-width: 90%;
-}
-
-.stats-section-title {
-  font-size: 2rem;
-  font-weight: 600;
-  color: #2c3e50;
-  margin-bottom: 15px;
-  padding: 10px 15px;
-  background: #ecf0f1;
-  border-left: 5px solid #3498db;
-}
-
-.stats-section {
-  margin-bottom: 30px;
-}
-
-.log-list-item {
   background: white;
-  padding: 0;
-  margin-bottom: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
 
-.log-title {
-  font-size: 1.7rem;
-  font-weight: 600;
+.admin-table-wrapper {
+  overflow-x: auto;
+  padding: 20px 30px;
+}
+
+.admin-table-header {
+  background: #2c5aa0;
   color: white;
-  padding: 12px 15px;
-  background: #3498db;
-}
-
-.log-title-date {
-  color: rgba(255, 255, 255, 0.9);
-  font-weight: 400;
-  font-size: 14px;
-}
-
-.log-details-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0;
-}
-
-.detail-row {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px 15px;
-  border-bottom: 1px solid #ecf0f1;
-}
-
-.detail-row:last-child {
-  border-bottom: none;
-}
-
-.detail-row:nth-child(even) {
-  background: #f8f9fa;
-}
-
-.detail-label {
-  font-weight: 600;
-  color: #555;
-  font-size: 1.5rem;
-}
-
-.detail-value {
-  color: #2c3e50;
-  font-size: 1.5rem;
-}
-
-.stats-subsection {
-  margin-bottom: 1.5rem;
-}
-
-.stats-subsection-title {
-  font-size: 1.7rem;
-  font-weight: 600;
-  color: #2c3e50;
-  margin-bottom: 1rem;
-  padding: 8px 12px;
-  background: #ecf0f1;
-}
-
-.stats-list-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1px;
-  list-style: none;
-  background: #ddd;
-  border: 1px solid #ddd;
-}
-
-.stat-item {
-  background: white;
-  padding: 15px;
+  padding: 24px 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.stat-label {
-  font-size: 1.5rem;
-  color: #555;
-  font-weight: 500;
+.admin-table-title {
+  font-size: 24px;
+  font-weight: 600;
 }
 
-.stat-value {
-  font-size: 1.7rem;
-  font-weight: 700;
-  color: #3498db;
+.admin-record-count {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background: #f8f9fa;
+  position: sticky;
+  top: 0;
+}
+
+th {
+  padding: 14px 16px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #6c757d;
+  border-bottom: 2px solid #dee2e6;
+  cursor: pointer;
+  user-select: none;
+}
+
+th:hover {
+  background: #e9ecef;
+}
+
+th.sortable {
+  position: relative;
+}
+
+td {
+  padding: 16px;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 14px;
+}
+
+tr:hover {
+  background: #f8f9fa;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.status-active {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.status-finished {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.status-error {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.status-inactive {
+  background: #f5f5f5;
+  color: #616161;
+}
+
+.id-cell {
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  color: #6c757d;
+}
+
+.timestamp {
+  font-size: 13px;
+  color: #495057;
+}
+
+.duration {
+  font-weight: 600;
+  color: #2e7d32;
+}
+
+.null-value {
+  color: #adb5bd;
+  font-style: italic;
+}
+
+.message-cell {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.boolean-indicator {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+.boolean-true {
+  background: #2e7d32;
+}
+
+.boolean-false {
+  background: #c62828;
+}
+
+.sort-icon {
+  margin-left: 4px;
+  opacity: 0.3;
+  font-size: 10px;
+}
+
+th:hover .sort-icon {
+  opacity: 0.6;
+}
+
+th.sort-asc .sort-icon {
+  opacity: 1;
+  transform: rotate(180deg);
+}
+
+th.sort-desc .sort-icon {
+  opacity: 1;
 }
