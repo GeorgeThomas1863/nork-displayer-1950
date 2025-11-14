@@ -1,0 +1,415 @@
+import { buildEmptyDisplay } from "../control/return-form.js";
+import { buildCollapseContainer } from "../util/collapse-display.js";
+
+// MAIN FUNCTION - Build the complete stats display
+export const buildAdminReturnDisplay = async (inputArray) => {
+  if (!inputArray) return null;
+
+  const adminReturnContainer = document.createElement("div");
+  adminReturnContainer.id = "admin-return-container";
+
+  //empty display
+  if (!inputArray.length) {
+    const emptyData = await buildEmptyDisplay();
+    adminReturnContainer.append(emptyData);
+    return adminReturnContainer;
+  }
+
+  // Create static title (not collapsible)
+  const logTitle = document.createElement("h2");
+  logTitle.className = "stats-section-title";
+  logTitle.textContent = "SCRAPE LOG HISTORY";
+  adminReturnContainer.append(logTitle);
+
+  // Build the log history section
+  const logHistorySection = await buildLogHistorySection(inputArray);
+  if (logHistorySection) adminReturnContainer.append(logHistorySection);
+
+  // Build the database statistics section
+  const dbStatsSection = await buildDatabaseStatsSection(inputArray);
+  if (dbStatsSection) adminReturnContainer.append(dbStatsSection);
+
+  return adminReturnContainer;
+};
+
+// ==========================================
+// LOG HISTORY SECTION
+// ==========================================
+
+//claude method
+export const buildLogHistorySection = async (inputArray) => {
+  // Find the log collection
+  const logCollection = inputArray.find((item) => item.collection === "log");
+  if (!logCollection || !logCollection.data || !logCollection.data.length) return null;
+
+  const logData = logCollection.data;
+
+  // Create the main container for the entire section
+  const logHistorySection = document.createElement("div");
+  logHistorySection.id = "log-history-section";
+  logHistorySection.className = "stats-section";
+
+  // Create the log list
+  const logList = document.createElement("ul");
+  logList.id = "log-history-list";
+  logList.className = "stats-list";
+
+  // Sort by scrapeStartTime (most recent first)
+  const sortedLogs = [...logData].sort((a, b) => {
+    return new Date(b.scrapeStartTime) - new Date(a.scrapeStartTime);
+  });
+
+  // Build each log entry
+  let isFirst = true;
+
+  for (let i = 0; i < sortedLogs.length; i++) {
+    const logObj = sortedLogs[i];
+    logObj.index = i + 1;
+    logObj.isFirst = isFirst;
+
+    const logListItem = await buildLogListItem(logObj);
+    logList.append(logListItem);
+
+    isFirst = false;
+  }
+
+  logHistorySection.append(logList);
+
+  return logHistorySection;
+};
+
+export const buildLogListItem = async (inputObj) => {
+  const { scrapeId, index, isFirst } = inputObj;
+
+  const logListItem = document.createElement("li");
+  logListItem.className = "log-list-item";
+
+  // Build the log details content
+  const logDetailsContainer = await buildLogDetailsContainer(inputObj);
+
+  // Create title for this log entry
+  const logTitle = await buildLogTitle(scrapeId, index);
+
+  //build collapse container
+  const logCollapseParams = {
+    titleElement: logTitle,
+    contentElement: logDetailsContainer,
+    isExpanded: isFirst,
+    className: "log-element-collapse",
+    dataAttribute: "log-element-header",
+  };
+
+  const logCollapseContainer = await buildCollapseContainer(logCollapseParams);
+
+  logListItem.append(logCollapseContainer);
+
+  return logListItem;
+};
+
+export const buildLogTitle = async (scrapeId, index) => {
+  const titleElement = document.createElement("div");
+  titleElement.className = "log-title";
+
+  titleElement.innerHTML = `Scrape Session #${index} <span class="log-title-span"> | Scrape ID: ${scrapeId}</span>`;
+
+  return titleElement;
+};
+
+export const buildLogDetailsContainer = async (inputObj) => {
+  const {  scrapeId, dislayerId, intervalId, scrapeMessage, scrapeStep, scrapeError, scrapeActive, schedulerActive, scrapeStartTime, scrapeEndTime, scrapeLengthSeconds, scrapeLengthMinutes } = inputObj; //prettier-ignore
+  const scrapeStartTimeFormatted = await formatDateTime(scrapeStartTime);
+  const scrapeEndTimeFormatted = await formatDateTime(scrapeEndTime);
+
+  const detailsContainer = document.createElement("div");
+  detailsContainer.className = "log-details-container";
+
+  // Create a grid for the details
+  const detailsGrid = document.createElement("div");
+  detailsGrid.className = "log-details-grid";
+
+  // Build detail rows
+  const details = [
+    { label: "Scrape ID", value: scrapeId },
+    { label: "Displayer ID", value: dislayerId },
+    { label: "Interval ID", value: intervalId },
+    { label: "Scrape Message", value: scrapeMessage },
+    { label: "Scrape Step", value: scrapeStep },
+    { label: "Scrape Error", value: scrapeError },
+    { label: "Scrape Active", value: scrapeActive },
+    { label: "Scheduler Active", value: schedulerActive },
+    { label: "Scrape Start Time", value: scrapeStartTimeFormatted },
+    { label: "Scrape End Time", value: scrapeEndTimeFormatted },
+    { label: "Scrape Seconds", value: scrapeLengthSeconds },
+    { label: "Scrape Minutes", value: scrapeLengthMinutes },
+  ];
+
+  for (const detail of details) {
+    const detailRow = await buildDetailRow(detail.label, detail.value);
+    detailsGrid.append(detailRow);
+  }
+
+  detailsContainer.append(detailsGrid);
+
+  return detailsContainer;
+};
+
+export const buildDetailRow = async (label, value) => {
+  const row = document.createElement("div");
+  row.className = "detail-row";
+
+  const labelSpan = document.createElement("span");
+  labelSpan.className = "detail-label";
+  labelSpan.textContent = label;
+
+  const valueSpan = document.createElement("span");
+  valueSpan.className = "detail-value";
+  valueSpan.textContent = value || "NULL";
+
+  row.append(labelSpan, valueSpan);
+
+  return row;
+};
+
+// ==========================================
+// DATABASE STATISTICS SECTION
+// ==========================================
+
+export const buildDatabaseStatsSection = async (inputArray) => {
+  if (!inputArray || !inputArray.length) return null;
+
+  // Calculate all the counts
+  const stats = await calculateStats(inputArray);
+
+  // Create the main container for the entire section
+  const dbStatsSection = document.createElement("div");
+  dbStatsSection.id = "db-stats-section";
+  dbStatsSection.className = "stats-section";
+
+  // Create the stats content
+  const statsContent = document.createElement("div");
+  statsContent.className = "db-stats-content";
+
+  // Build Collection Totals section
+  const collectionTotalsSection = await buildCollectionTotalsSection(stats);
+  statsContent.append(collectionTotalsSection);
+
+  // Build Article Breakdown section
+  const articleBreakdownSection = await buildArticleBreakdownSection(stats);
+  if (articleBreakdownSection) {
+    statsContent.append(articleBreakdownSection);
+  }
+
+  // Build Recent Activity section
+  const recentActivitySection = await buildRecentActivitySection(stats, inputArray);
+  if (recentActivitySection) {
+    statsContent.append(recentActivitySection);
+  }
+
+  dbStatsSection.append(statsContent);
+
+  return dbStatsSection;
+};
+
+export const buildCollectionTotalsSection = async (stats) => {
+  const section = document.createElement("div");
+  section.className = "stats-subsection";
+
+  const sectionTitle = document.createElement("h3");
+  sectionTitle.className = "stats-subsection-title";
+  sectionTitle.textContent = "Collection Totals";
+  section.append(sectionTitle);
+
+  const statsList = document.createElement("ul");
+  statsList.className = "stats-list-grid";
+
+  const totals = [
+    { label: "Total Scrape Sessions", value: stats.totalScrapeSessions },
+    { label: "Total Articles", value: stats.totalArticles },
+    { label: "Total Pictures", value: stats.totalPics },
+    { label: "Total Picture Sets", value: stats.totalPicSets },
+    { label: "Total Videos", value: stats.totalVids },
+    { label: "Total Video Pages", value: stats.totalVidPages },
+  ];
+
+  for (const item of totals) {
+    const statItem = await buildStatItem(item.label, item.value);
+    statsList.append(statItem);
+  }
+
+  section.append(statsList);
+
+  return section;
+};
+
+export const buildArticleBreakdownSection = async (stats) => {
+  if (!stats.articlesByType || Object.keys(stats.articlesByType).length === 0) {
+    return null;
+  }
+
+  const section = document.createElement("div");
+  section.className = "stats-subsection";
+
+  const sectionTitle = document.createElement("h3");
+  sectionTitle.className = "stats-subsection-title";
+  sectionTitle.textContent = "Article Breakdown";
+  section.append(sectionTitle);
+
+  const statsList = document.createElement("ul");
+  statsList.className = "stats-list-grid";
+
+  // Sort by count (descending)
+  const sortedTypes = Object.entries(stats.articlesByType).sort((a, b) => b[1] - a[1]);
+
+  for (const [type, count] of sortedTypes) {
+    // const label = await formatArticleType(type);
+    const statItem = await buildStatItem(type, count);
+    statsList.append(statItem);
+  }
+
+  section.append(statsList);
+
+  return section;
+};
+
+export const buildRecentActivitySection = async (stats, inputArray) => {
+  const logCollection = inputArray.find((item) => item.collection === "log");
+  if (!logCollection || !logCollection.data || !logCollection.data.length) {
+    return null;
+  }
+
+  const section = document.createElement("div");
+  section.className = "stats-subsection";
+
+  const sectionTitle = document.createElement("h3");
+  sectionTitle.className = "stats-subsection-title";
+  sectionTitle.textContent = "Recent Activity";
+  section.append(sectionTitle);
+
+  const statsList = document.createElement("ul");
+  statsList.className = "stats-list-grid";
+
+  // Find most recent scrape
+  const sortedLogs = [...logCollection.data].sort((a, b) => {
+    return new Date(b.scrapeStartTime) - new Date(a.scrapeStartTime);
+  });
+
+  const mostRecentScrape = sortedLogs[0];
+  const mostRecentDate = new Date(mostRecentScrape.scrapeStartTime);
+  const formattedRecentDate = mostRecentDate.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
+  const recentStats = [
+    { label: "Last Scrape Session", value: formattedRecentDate },
+    { label: "Total Sessions", value: stats.totalScrapeSessions },
+  ];
+
+  for (const item of recentStats) {
+    const statItem = await buildStatItem(item.label, item.value);
+    statsList.append(statItem);
+  }
+
+  section.append(statsList);
+
+  return section;
+};
+
+export const buildStatItem = async (label, value) => {
+  const listItem = document.createElement("li");
+  listItem.className = "stat-item";
+
+  const labelEl = document.createElement("span");
+  labelEl.className = "stat-label";
+  labelEl.textContent = label;
+
+  const valueEl = document.createElement("span");
+  valueEl.className = "stat-value";
+  valueEl.textContent = typeof value === "number" ? value.toLocaleString() : value;
+
+  listItem.append(labelEl, valueEl);
+
+  return listItem;
+};
+
+// ==========================================
+// HELPER FUNCTIONS
+// ==========================================
+
+export const calculateStats = async (inputArray) => {
+  const stats = {
+    totalScrapeSessions: 0,
+    totalArticles: 0,
+    totalPics: 0,
+    totalPicSets: 0,
+    totalVids: 0,
+    totalVidPages: 0,
+    articlesByType: {},
+  };
+
+  for (const collection of inputArray) {
+    const { collection: collectionName, data } = collection;
+    const count = data ? data.length : 0;
+
+    switch (collectionName) {
+      case "log":
+        stats.totalScrapeSessions = count;
+        break;
+      case "articles":
+        stats.totalArticles = count;
+        // Count by article type
+        if (data) {
+          for (const article of data) {
+            const type = article.articleType || "unknown";
+            stats.articlesByType[type] = (stats.articlesByType[type] || 0) + 1;
+          }
+        }
+        break;
+      case "pics":
+        stats.totalPics = count;
+        break;
+      case "picSets":
+        stats.totalPicSets = count;
+        break;
+      case "vids":
+        stats.totalVids = count;
+        break;
+      case "vidPages":
+        stats.totalVidPages = count;
+        break;
+    }
+  }
+
+  return stats;
+};
+
+export const formatDateTime = async (dateString) => {
+  if (!dateString) return "N/A";
+  const date = new Date(dateString);
+  return date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  });
+};
+
+// export const formatArticleType = async (type) => {
+//   // Convert camelCase or other formats to readable format
+//   const typeMap = {
+//     fatboy: '"Revolutionary Activities" [KJU]',
+//     topNews: "Top News",
+//     latestNews: "Latest News",
+//     externalNews: "External News",
+//     anecdote: "Revolutionary Anecdotes",
+//     people: "Always in Memory of the People",
+//     all: "All Articles",
+//   };
+
+//   return typeMap[type] || type.charAt(0).toUpperCase() + type.slice(1);
+// };
