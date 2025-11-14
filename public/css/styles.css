@@ -1094,7 +1094,7 @@ h3 {
   border-collapse: collapse;
 }
 
-thead {
+thead.admin-table-header {
   background: #f8f9fa;
   position: sticky;
   top: 0;
