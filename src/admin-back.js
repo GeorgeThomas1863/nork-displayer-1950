@@ -27,27 +27,33 @@ export const runAdminCommand = async (inputParams) => {
   }
 };
 
-export const runGetAdminData = async () => {
-  const { collectionsArr } = CONFIG;
+// export const runGetAdminData = async () => {
+//   const { collectionsArr } = CONFIG;
 
-  const dataArray = [];
-  for (const collection of collectionsArr) {
-    try {
-      const dataModel = new dbModel("", collection);
-      const data = await dataModel.getAll();
-      if (!data || !data.length) continue;
+//   const dataArray = [];
+//   for (const collection of collectionsArr) {
+//     try {
+//       const dataModel = new dbModel("", collection);
+//       const data = await dataModel.getAll();
+//       if (!data || !data.length) continue;
 
-      const retunrObj = {
-        collection: collection,
-        data: data,
-      };
+//       const retunrObj = {
+//         collection: collection,
+//         data: data,
+//       };
 
-      dataArray.push(retunrObj);
-    } catch (e) {
-      console.log("ERROR: " + e.message + "; FUNCTION: " + e.function);
-      continue;
-    }
-  }
+//       dataArray.push(retunrObj);
+//     } catch (e) {
+//       console.log("ERROR: " + e.message + "; FUNCTION: " + e.function);
+//       continue;
+//     }
+//   }
 
-  return dataArray;
+//   return dataArray;
+// };
+
+export const getAdminLogs = async () => {
+  const dataModel = new dbModel("", "log");
+  const data = await dataModel.getAll();
+  return data;
 };

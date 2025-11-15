@@ -2,7 +2,8 @@ import CONFIG from "../config/config.js";
 // import kcnaState from "../src/kcna/state-kcna.js";
 
 import { runUpdateDisplayData } from "../src/main-back.js";
-import { runAdminCommand, runGetAdminData } from "../src/admin-back.js";
+// import { runAdminCommand, runGetAdminData } from "../src/admin-back.js";
+import { runAdminCommand, getAdminLogs } from "../src/admin-back.js";
 
 export const getBackendValueController = async (req, res) => {
   const { key } = req.body;
@@ -34,7 +35,8 @@ export const adminCommandController = async (req, res) => {
 export const adminDataController = async (req, res) => {
   // const { stateAdmin } = req.body;
 
-  const data = await runGetAdminData();
+  // const data = await runGetAdminData();
+  const data = await getAdminLogs()
   return res.json(data);
 };
 

@@ -1,29 +1,27 @@
 import { buildEmptyDisplay } from "../control/return-form.js";
 
-export const buildAdminReturnDisplay = async (inputArray) => {
-  if (!inputArray) return null;
-
-  console.log("BACKEND INPUT ARRAY");
-  console.log(inputArray);
-  console.dir(inputArray);
+export const buildAdminReturnDisplay = async (inputObj) => {
+  console.log("BACKEND INPUT OBJ");
+  console.log(inputObj);
+  console.dir(inputObj);
 
   const adminReturnContainer = document.createElement("div");
   adminReturnContainer.id = "admin-return-container";
 
   //empty display
-  if (!inputArray.length) {
+  if (!inputObj) {
     const emptyData = await buildEmptyDisplay();
     adminReturnContainer.append(emptyData);
     return adminReturnContainer;
   }
 
-  const adminTableContainer = await buildAdminTableContainer(inputArray);
+  const adminTableContainer = await buildAdminTableContainer(inputObj);
   if (adminTableContainer) adminReturnContainer.append(adminTableContainer);
 
   return adminReturnContainer;
 };
 
-export const buildAdminTableContainer = async (inputArray) => {
+export const buildAdminTableContainer = async (inputObj) => {
   const adminTableContainer = document.createElement("div");
   adminTableContainer.className = "admin-table-container";
 
@@ -41,12 +39,12 @@ export const buildAdminTableContainer = async (inputArray) => {
 
   const adminRecordCount = document.createElement("div");
   adminRecordCount.className = "admin-record-count";
-  adminRecordCount.textContent = `${inputArray.length} Records`;
+  adminRecordCount.textContent = `${inputObj.length} Records`;
 
   adminTableHeaderWrapper.appendChild(adminTableTitle);
   adminTableHeaderWrapper.appendChild(adminRecordCount);
 
-  const adminTable = await buildAdminTable(inputArray);
+  const adminTable = await buildAdminTable(inputObj);
   adminTableWrapper.appendChild(adminTable);
 
   adminTableContainer.appendChild(adminTableHeaderWrapper);
@@ -79,7 +77,7 @@ export const buildAdminTable = async (inputArray) => {
 export const buildAdminTableHeader = async () => {
   const adminTableHeader = document.createElement("thead");
   adminTableHeader.className = "admin-table-header";
-  
+
   const adminHeaderRow = document.createElement("tr");
   adminHeaderRow.className = "admin-header-row";
 
@@ -201,7 +199,7 @@ export const getStatusClass = async (inputObj) => {
 export const getStatusText = async (inputObj) => {
   if (!inputObj) return null;
   const { scrapeError, scrapeActive, scrapeEndTime } = inputObj;
-  
+
   if (scrapeError) return "Error";
   if (scrapeActive) return "Active";
   if (scrapeEndTime) return "Finished";
