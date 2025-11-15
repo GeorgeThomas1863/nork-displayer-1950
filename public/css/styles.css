@@ -1067,7 +1067,16 @@ h3 {
   padding: 20px 30px;
 }
 
-.admin-table-header-wrapper {
+/* .admin-table-header-wrapper {
+  background: #2c5aa0;
+  color: white;
+  padding: 24px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+} */
+
+#admin-table-header-wrapper {
   background: #2c5aa0;
   color: white;
   padding: 24px 30px;
