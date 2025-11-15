@@ -16,7 +16,7 @@ export const buildAdminReturnDisplay = async (inputData) => {
   }
 
   for (let i = 0; i < inputData.length; i++) {
-    const inputObj = inputArray[i];
+    const inputObj = inputData[i];
     const { collection, data } = inputObj;
     if (collection !== "log") continue;
     if (!data || !data.length) continue;
