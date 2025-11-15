@@ -38,7 +38,6 @@ export const buildAdminTableContainer = async (inputArray) => {
 
   // Build table wrapper
   const adminTableWrapper = document.createElement("div");
-  adminTableWrapper.id = "admin-table-wrapper";
   adminTableWrapper.className = "admin-table-wrapper";
 
   // Build header
