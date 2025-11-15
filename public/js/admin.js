@@ -28,11 +28,11 @@ export const updateAdminDisplay = async () => {
   if (!adminDataRoute) return null;
 
   // const adminUpdateArray = await sendToBack({ route: adminDataRoute.value, stateAdmin: stateAdmin });
-  const adminUpdateObj = await sendToBack({ route: adminDataRoute.value });
+  const adminUpdateArray = await sendToBack({ route: adminDataRoute.value });
   // console.log("ADMIN UPDATE ARRAY");
   // console.dir(adminUpdateArray);
 
-  const adminReturnDisplay = await buildAdminReturnDisplay(adminUpdateObj);
+  const adminReturnDisplay = await buildAdminReturnDisplay(adminUpdateArray);
   if (!adminReturnDisplay) return null;
 
   adminDisplayElement.append(adminReturnDisplay);

@@ -1,21 +1,21 @@
 import { buildEmptyDisplay } from "../control/return-form.js";
 
-export const buildAdminReturnDisplay = async (inputObj) => {
+export const buildAdminReturnDisplay = async (inputArray) => {
   console.log("BACKEND INPUT OBJ");
-  console.log(inputObj);
-  console.dir(inputObj);
+  console.log(inputArray);
+  console.dir(inputArray);
 
   const adminReturnContainer = document.createElement("div");
   adminReturnContainer.id = "admin-return-container";
 
   //empty display
-  if (!inputObj) {
+  if (!inputArray || !inputArray.length) {
     const emptyData = await buildEmptyDisplay();
     adminReturnContainer.append(emptyData);
     return adminReturnContainer;
   }
 
-  const adminTableContainer = await buildAdminTableContainer(inputObj);
+  const adminTableContainer = await buildAdminTableContainer(inputArray);
   if (adminTableContainer) adminReturnContainer.append(adminTableContainer);
 
   return adminReturnContainer;
