@@ -3,6 +3,10 @@ import { buildEmptyDisplay } from "../control/return-form.js";
 export const buildAdminReturnDisplay = async (inputArray) => {
   if (!inputArray) return null;
 
+  console.log("BACKEND INPUT ARRAY");
+  console.log(inputArray);
+  console.dir(inputArray);
+
   const adminReturnContainer = document.createElement("div");
   adminReturnContainer.id = "admin-return-container";
 
