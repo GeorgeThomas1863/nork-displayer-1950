@@ -28,8 +28,8 @@ export const buildAdminTableContainer = async (inputArray) => {
   adminTableWrapper.className = "admin-table-wrapper";
 
   // Build header
-  const adminTableHeader = document.createElement("div");
-  adminTableHeader.className = "admin-table-header";
+  const adminTableHeaderWrapper = document.createElement("div");
+  adminTableHeaderWrapper.className = "admin-table-header-wrapper";
 
   const adminTableTitle = document.createElement("h1");
   adminTableTitle.className = "admin-table-title";
@@ -39,13 +39,13 @@ export const buildAdminTableContainer = async (inputArray) => {
   adminRecordCount.className = "admin-record-count";
   adminRecordCount.textContent = `${inputArray.length} Records`;
 
-  adminTableHeader.appendChild(adminTableTitle);
-  adminTableHeader.appendChild(adminRecordCount);
+  adminTableHeaderWrapper.appendChild(adminTableTitle);
+  adminTableHeaderWrapper.appendChild(adminRecordCount);
 
   const adminTable = await buildAdminTable(inputArray);
   adminTableWrapper.appendChild(adminTable);
 
-  adminTableContainer.appendChild(adminTableHeader);
+  adminTableContainer.appendChild(adminTableHeaderWrapper);
   adminTableContainer.appendChild(adminTableWrapper);
 
   return adminTableContainer;

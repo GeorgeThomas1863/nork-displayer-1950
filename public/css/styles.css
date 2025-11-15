@@ -1052,8 +1052,6 @@ h3 {
 /* ADMIN RETURN DIPLAY STYLES CLAUDE */
 /* ================================================ */
 
-/* STYLE 7: COMPACT TABLE-LIKE */
-
 .admin-table-container {
   max-width: 1400px;
   margin: 0 auto;
@@ -1068,7 +1066,7 @@ h3 {
   padding: 20px 30px;
 }
 
-.admin-table-header {
+.admin-table-header-wrapper {
   background: #2c5aa0;
   color: white;
   padding: 24px 30px;
@@ -1094,7 +1092,7 @@ h3 {
   border-collapse: collapse;
 }
 
-thead.admin-table-header {
+.admin-table-header {
   background: #f8f9fa;
   position: sticky;
   top: 0;
