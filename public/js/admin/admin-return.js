@@ -1,4 +1,5 @@
 import { buildEmptyDisplay } from "../control/return-form.js";
+import { buildCollapseContainer } from "../util/collapse-display.js";
 
 //input is array of all collections as objs
 export const buildAdminReturnDisplay = async (inputData) => {
@@ -59,6 +60,17 @@ export const buildAdminTableContainer = async (inputArray) => {
 
   adminTableContainer.appendChild(adminTableHeaderWrapper);
   adminTableContainer.appendChild(adminTableWrapper);
+
+  const collapseTableParams = {
+    titleElement: adminTableHeaderWrapper,
+    contentElement: adminTableWrapper,
+    isExpanded: true,
+    className: "admin-table-collapse",
+    dataAttribute: "admin-table-collapse",
+  };
+
+  const adminTableCollapseContainer = await buildCollapseContainer(collapseTableParams);
+  adminTableContainer.appendChild(adminTableCollapseContainer);
 
   return adminTableContainer;
 };
