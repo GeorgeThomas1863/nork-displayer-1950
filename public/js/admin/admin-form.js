@@ -19,7 +19,7 @@ export const buildAdminForm = async () => {
   //MAKE IT COLLAPSE HERE
   const titleElement = document.createElement("div");
   titleElement.textContent = "ADMIN FORM CONTROL";
-  titleElement.className = "collapse-header admin-form-title";
+  titleElement.className = "admin-form-title";
 
   //build collapse container
   const adminFormCollapseParams = {
