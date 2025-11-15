@@ -1069,7 +1069,7 @@ h3 {
 
 .admin-table-header-wrapper {
   width: 100%;
-  background: #2c5aa0;
+  /* background: #2c5aa0; */
   color: white;
   padding: 24px 30px;
   display: flex;
