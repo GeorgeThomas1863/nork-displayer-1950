@@ -1,27 +1,37 @@
 import { buildEmptyDisplay } from "../control/return-form.js";
 
-export const buildAdminReturnDisplay = async (inputArray) => {
-  console.log("BACKEND INPUT OBJ");
-  console.log(inputArray);
-  console.dir(inputArray);
+//input is array of all collections as objs
+export const buildAdminReturnDisplay = async (inputData) => {
+  console.log("BACKEND DATA OBJ");
+  console.log(inputData);
 
   const adminReturnContainer = document.createElement("div");
   adminReturnContainer.id = "admin-return-container";
 
   //empty display
-  if (!inputArray || !inputArray.length) {
+  if (!inputData || !inputData.length) {
     const emptyData = await buildEmptyDisplay();
     adminReturnContainer.append(emptyData);
     return adminReturnContainer;
   }
 
-  const adminTableContainer = await buildAdminTableContainer(inputArray);
-  if (adminTableContainer) adminReturnContainer.append(adminTableContainer);
+  for (let i = 0; i < inputData.length; i++) {
+    const inputObj = inputArray[i];
+    const { collection, data } = inputObj;
+    if (collection !== "log") continue;
+    if (!data || !data.length) continue;
+
+    //data is array of objs
+    const adminTableContainer = await buildAdminTableContainer(data);
+    if (adminTableContainer) adminReturnContainer.append(adminTableContainer);
+  }
 
   return adminReturnContainer;
 };
 
-export const buildAdminTableContainer = async (inputObj) => {
+export const buildAdminTableContainer = async (inputArray) => {
+  if (!inputArray || !inputArray.length) return null;
+
   const adminTableContainer = document.createElement("div");
   adminTableContainer.className = "admin-table-container";
 
@@ -39,12 +49,12 @@ export const buildAdminTableContainer = async (inputObj) => {
 
   const adminRecordCount = document.createElement("div");
   adminRecordCount.className = "admin-record-count";
-  adminRecordCount.textContent = `${inputObj.length} Records`;
+  adminRecordCount.textContent = `${inputArray.length} Records`;
 
   adminTableHeaderWrapper.appendChild(adminTableTitle);
   adminTableHeaderWrapper.appendChild(adminRecordCount);
 
-  const adminTable = await buildAdminTable(inputObj);
+  const adminTable = await buildAdminTable(inputArray);
   adminTableWrapper.appendChild(adminTable);
 
   adminTableContainer.appendChild(adminTableHeaderWrapper);
@@ -54,8 +64,6 @@ export const buildAdminTableContainer = async (inputObj) => {
 };
 
 export const buildAdminTable = async (inputArray) => {
-  if (!inputArray) return null;
-
   const adminTable = document.createElement("table");
   adminTable.className = "admin-table";
 
@@ -118,7 +126,8 @@ export const buildAdminTableRow = async (inputObj) => {
   // ID cell
   const idCell = document.createElement("td");
   idCell.className = "id-cell";
-  idCell.textContent = await truncateMongoId(inputObj._id);
+  // idCell.textContent = await truncateMongoId(inputObj._id);
+  idCell.textContent = inputObj._id;
   adminTableRow.appendChild(idCell);
 
   // Status cell
@@ -179,12 +188,12 @@ export const buildAdminTableRow = async (inputObj) => {
   return adminTableRow;
 };
 
-export const truncateMongoId = async (mongoId) => {
-  if (!mongoId) return "—";
-  const idStr = typeof mongoId === "object" ? mongoId.$oid || mongoId.toString() : mongoId.toString();
-  if (!idStr) return "—";
-  return "..." + idStr.slice(-6);
-};
+// export const truncateMongoId = async (mongoId) => {
+//   if (!mongoId) return "—";
+//   const idStr = typeof mongoId === "object" ? mongoId.$oid || mongoId.toString() : mongoId.toString();
+//   if (!idStr) return "—";
+//   return "..." + idStr.slice(-6);
+// };
 
 export const getStatusClass = async (inputObj) => {
   if (!inputObj) return null;
