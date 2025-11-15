@@ -1077,10 +1077,11 @@ h3 {
   align-items: center;
 }
 
-/* .admin-table-title {
-  font-size: 24px;
+.admin-table-title {
+  font-size: 1.7rem;
   font-weight: 600;
-} */
+  text-align: left;
+}
 
 .admin-record-count {
   background: rgba(255, 255, 255, 0.2);
