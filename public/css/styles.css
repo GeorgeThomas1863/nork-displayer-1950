@@ -1251,7 +1251,7 @@ th.sort-desc .sort-icon {
   gap: 0.25rem;
   border-right: 1px solid #e0e0e0;
   flex: 1;
-  text-align: center;
+  text-align: left;
 }
 
 /* .admin-stat-item:first-child {
