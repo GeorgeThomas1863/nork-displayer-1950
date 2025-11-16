@@ -1254,9 +1254,9 @@ th.sort-desc .sort-icon {
   text-align: center;
 }
 
-.admin-stat-item:first-child {
+/* .admin-stat-item:first-child {
   padding-left: 0;
-}
+} */
 
 .admin-stat-item:last-child {
   border-right: none;
