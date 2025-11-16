@@ -1235,8 +1235,8 @@ th.sort-desc .sort-icon {
 .admin-stats-bar {
   background: white;
   border-radius: 6px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-  border: 1px solid #e9ecef;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 1px solid #dee2e6;
   padding: 0.75rem 1.5rem;
   display: flex;
   justify-content: space-between;
