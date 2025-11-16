@@ -83,16 +83,16 @@ export const buildAdminStatsSection = async (inputData) => {
     const statItem = document.createElement("div");
     statItem.className = "admin-stat-item";
 
-    const statValue = document.createElement("div");
-    statValue.className = "stat-value";
-    statValue.textContent = stat.value;
-
     const statLabel = document.createElement("div");
     statLabel.className = "stat-label";
     statLabel.textContent = stat.label;
 
-    statItem.appendChild(statValue);
-    statItem.appendChild(statLabel);
+    const statValue = document.createElement("div");
+    statValue.className = "stat-value";
+    statValue.textContent = stat.value;
+
+    statItem.append(statLabel, statValue);
+
     statsBar.appendChild(statItem);
   }
 
