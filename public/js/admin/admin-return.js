@@ -16,6 +16,10 @@ export const buildAdminReturnDisplay = async (inputData) => {
     return adminReturnContainer;
   }
 
+  //from mr claude
+  const statsSection = await buildAdminStatsSection(inputData);
+  if (statsSection) adminReturnContainer.append(statsSection);
+
   for (let i = 0; i < inputData.length; i++) {
     const inputObj = inputData[i];
     const { collection, data } = inputObj;
@@ -29,6 +33,74 @@ export const buildAdminReturnDisplay = async (inputData) => {
 
   return adminReturnContainer;
 };
+
+//--------------------------------
+
+//would take longer to fix this than its worth
+export const buildAdminStatsSection = async (inputData) => {
+  if (!inputData || !inputData.length) return null;
+
+  const logData = inputData.find((item) => item.collection === "log")?.data || [];
+  const articlesData = inputData.find((item) => item.collection === "articles")?.data || [];
+  const picsData = inputData.find((item) => item.collection === "pics")?.data || [];
+  const picSetsData = inputData.find((item) => item.collection === "picSets")?.data || [];
+  const vidsData = inputData.find((item) => item.collection === "vids")?.data || [];
+
+  const totalScrapes = logData.length;
+  const activeScrapes = logData.filter((item) => item.scrapeActive).length;
+  const finishedScrapes = logData.filter((item) => item.scrapeEndTime && !item.scrapeError).length;
+  const errorScrapes = logData.filter((item) => item.scrapeError).length;
+  const totalArticles = articlesData.length;
+  const totalPics = picsData.length;
+  const totalPicSets = picSetsData.length;
+  const totalVids = vidsData.length;
+
+  const completedScrapes = logData.filter((item) => item.scrapeLengthSeconds !== null);
+  const avgDuration =
+    completedScrapes.length > 0 ? Math.round(completedScrapes.reduce((sum, item) => sum + item.scrapeLengthSeconds, 0) / completedScrapes.length) : 0;
+
+  const statsContainer = document.createElement("div");
+  statsContainer.className = "admin-stats-container";
+
+  const statsBar = document.createElement("div");
+  statsBar.className = "admin-stats-bar";
+
+  const stats = [
+    { label: "Total", value: totalScrapes },
+    { label: "Active", value: activeScrapes },
+    { label: "Completed", value: finishedScrapes },
+    { label: "Errors", value: errorScrapes },
+    { label: "Avg Time", value: `${avgDuration}s` },
+    { label: "Articles", value: totalArticles },
+    { label: "Pics", value: totalPics },
+    { label: "Pic Sets", value: totalPicSets },
+    { label: "Videos", value: totalVids },
+  ];
+
+  for (let i = 0; i < stats.length; i++) {
+    const stat = stats[i];
+
+    const statItem = document.createElement("div");
+    statItem.className = "admin-stat-item";
+
+    const statValue = document.createElement("div");
+    statValue.className = "stat-value";
+    statValue.textContent = stat.value;
+
+    const statLabel = document.createElement("div");
+    statLabel.className = "stat-label";
+    statLabel.textContent = stat.label;
+
+    statItem.appendChild(statValue);
+    statItem.appendChild(statLabel);
+    statsBar.appendChild(statItem);
+  }
+
+  statsContainer.appendChild(statsBar);
+  return statsContainer;
+};
+
+//----------------------
 
 export const buildAdminTableContainer = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
