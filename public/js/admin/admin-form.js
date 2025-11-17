@@ -55,7 +55,7 @@ export const buildCommandListItem = async () => {
   commandSelect.name = "admin-command-type";
   commandSelect.id = "admin-command-type";
 
-  // Command select options
+  // Command select options //WORK ON DISPLAYING THE RETURN OF BELOW FROM SCRAPER
   const commandOptionArray = [
     { value: "admin-start-scrape", id: "admin-start-scrape", text: "Scrape Start", selected: true },
     { value: "admin-stop-scrape", id: "admin-stop-scrape", text: "Scrape Stop" },
