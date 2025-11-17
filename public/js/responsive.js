@@ -9,7 +9,7 @@ import {
 } from "./run.js";
 
 //in admin folder
-import { runAdminAuth, runAdminCommand, runAdminUpdateData, runAdminToggleURL } from "./admin/admin-run.js";
+import { runAdminAuth, runAdminCommand, runAdminUpdateData, runAdminToggleURL } from "./run-admin.js";
 
 import debounce from "./util/debounce.js";
 
