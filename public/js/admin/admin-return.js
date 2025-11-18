@@ -42,6 +42,8 @@ export const buildAdminStatsSection = async (inputData) => {
 
   //!!!!!!!!!!!!!!!!!!
 
+  //ALSO WORK ON DIPSLAYING RETURN FROM COMMAND
+
   //BUILD STATS ON BACKEND WITH MONGO QUERIES FOR WHAT YOU NEED, DISPLAY WITH MAP
 
   //!!!!!!!!!!!!!!!!!!!!
