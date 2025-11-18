@@ -40,8 +40,21 @@ export const buildAdminReturnDisplay = async (inputData) => {
 export const buildAdminStatsSection = async (inputData) => {
   if (!inputData || !inputData.length) return null;
 
-  console.log("inputData");
-  console.dir(inputData);
+  //!!!!!!!!!!!!!!!!!!
+
+  //BUILD STATS ON BACKEND WITH MONGO QUERIES FOR WHAT YOU NEED, DISPLAY WITH MAP
+
+  //!!!!!!!!!!!!!!!!!!!!
+
+  // for (let i = 0; i < inputData.length; i++) {
+  //   const inputObj = inputData[i];
+  //   const { collection, data } = inputObj;
+
+  //   if (!data || !data.length) continue;
+  // }
+
+  // console.log("inputData");
+  // console.dir(inputData);
 
   const logData = inputData.find((item) => item.collection === "log")?.data || [];
   const articlesData = inputData.find((item) => item.collection === "articles")?.data || [];
