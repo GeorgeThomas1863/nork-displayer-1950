@@ -40,6 +40,9 @@ export const buildAdminReturnDisplay = async (inputData) => {
 export const buildAdminStatsSection = async (inputData) => {
   if (!inputData || !inputData.length) return null;
 
+  console.log("inputData");
+  console.dir(inputData);
+
   const logData = inputData.find((item) => item.collection === "log")?.data || [];
   const articlesData = inputData.find((item) => item.collection === "articles")?.data || [];
   const picsData = inputData.find((item) => item.collection === "pics")?.data || [];
