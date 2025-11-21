@@ -1029,11 +1029,12 @@ h3 {
 }
 
 #admin-submit-button {
-  width: 50%;
+  width: 60%;
+  justify-content: right;
 }
 
 #admin-update-data-button {
-  width: 40%;
+  width: 30%;
 }
 
 /* #admin-button-list-item button {
