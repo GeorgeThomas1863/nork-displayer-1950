@@ -35,9 +35,11 @@ export const buildAdminForm = async () => {
   adminFormCollapseContainer.id = "admin-form-collapse-container";
 
   //build update button
-  const adminUpdateDataButton = await buildAdminUpdateDataButton();
+  // const adminUpdateDataButton = await buildAdminUpdateDataButton();
 
-  adminFormOverallWrapper.append(adminFormCollapseContainer, adminUpdateDataButton);
+  // adminFormOverallWrapper.append(adminFormCollapseContainer, adminUpdateDataButton);
+
+  adminFormOverallWrapper.append(adminFormCollapseContainer);
 
   return adminFormOverallWrapper;
 };
@@ -182,33 +184,41 @@ export const buildUrlListItem = async () => {
 };
 
 export const buildButtonListItem = async () => {
-  // Create submit button
-  const button = document.createElement("button");
-  button.id = "admin-submit-button";
-  button.className = "btn-submit";
-  button.textContent = "Submit";
-  button.setAttribute("data-label", "admin-command-submit");
-
-  // Create list item for button
   const buttonListItem = document.createElement("li");
   buttonListItem.id = "admin-submit-list-item";
-  buttonListItem.appendChild(button);
+
+  // Create submit button
+  const submitButton = document.createElement("button");
+  submitButton.id = "admin-submit-button";
+  submitButton.className = "btn-submit";
+  submitButton.textContent = "Submit";
+  submitButton.setAttribute("data-label", "admin-command-submit");
+
+  const updateDataButton = document.createElement("button");
+  updateDataButton.id = "admin-update-data-button";
+  updateDataButton.textContent = "Update Mongo Data";
+  updateDataButton.className = "btn-submit";
+  updateDataButton.setAttribute("data-label", "admin-update-data-button");
+
+  // Create list item for button
+
+  buttonListItem.append(updateDataButton, submitButton);
 
   return buttonListItem;
 };
 
 //-----------------------
 
-export const buildAdminUpdateDataButton = async () => {
-  const adminUpdateDataButtonWrapper = document.createElement("div");
-  adminUpdateDataButtonWrapper.id = "admin-update-data-button-wrapper";
+// export const buildAdminUpdateDataButton = async () => {
+//   const adminUpdateDataButtonWrapper = document.createElement("div");
+//   adminUpdateDataButtonWrapper.id = "admin-update-data-button-wrapper";
 
-  const adminUpdateDataButton = document.createElement("button");
-  adminUpdateDataButton.id = "admin-update-data-button";
-  adminUpdateDataButton.textContent = "Update Mongo Data";
-  adminUpdateDataButton.className = "btn-submit";
-  adminUpdateDataButton.setAttribute("data-label", "admin-update-data-button");
+//   const adminUpdateDataButton = document.createElement("button");
+//   adminUpdateDataButton.id = "admin-update-data-button";
+//   adminUpdateDataButton.textContent = "Update Mongo Data";
+//   adminUpdateDataButton.className = "btn-submit";
+//   adminUpdateDataButton.setAttribute("data-label", "admin-update-data-button");
 
-  adminUpdateDataButtonWrapper.append(adminUpdateDataButton);
-  return adminUpdateDataButtonWrapper;
-};
+//   adminUpdateDataButtonWrapper.append(adminUpdateDataButton);
+//   return adminUpdateDataButtonWrapper;
+// };
