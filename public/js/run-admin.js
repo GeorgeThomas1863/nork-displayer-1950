@@ -28,9 +28,12 @@ export const runAdminCommand = async () => {
     if (!adminCommandParams || !adminCommandRoute) return null;
     adminCommandParams.route = adminCommandRoute.value;
 
-    //HERE!!!!!!! // UNFUCK
-    console.log("ADMIN COMMAND PARAMS");
-    console.log(adminCommandParams);
+    setTimeout(async () => {
+      adminCommandParams.command = "admin-scrape-status";
+      const data = await sendToBack(adminCommandParams);
+      console.log("ADMIN COMMAND DATA");
+      console.dir(data);
+    }, 3000);
 
     //update display 5 seconds after submit
     setTimeout(async () => {
