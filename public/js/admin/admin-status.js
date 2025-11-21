@@ -66,8 +66,6 @@ export const buildScrapeMessageListItem = async (scrapeMessage) => {
 };
 
 export const buildScrapeIdListItem = async (scrapeId) => {
-  if (!scrapeId) return null;
-
   const scrapeIdListItem = document.createElement("li");
   scrapeIdListItem.id = "admin-scrape-id-list-item";
 
@@ -128,8 +126,6 @@ export const buildSchedulerStatusListItem = async (schedulerActive) => {
 };
 
 export const buildScrapeLengthSecondsListItem = async (scrapeLengthSeconds) => {
-  if (!scrapeLengthSeconds) return null;
-
   const scrapeLengthSecondsListItem = document.createElement("li");
   scrapeLengthSecondsListItem.id = "admin-scrape-length-seconds-list-item";
 
