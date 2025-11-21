@@ -6,12 +6,12 @@ export const buildAdminStatusDisplay = async (inputData) => {
   if (!inputData) return null;
   const { scrapeActive, schedulerActive, scrapeLengthSeconds, scrapeMessage, scrapeId } = inputData;
 
-  //remove existing data
-  const currentAdminStatusElement = document.getElementById("admin-status-wrapper");
-  if (currentAdminStatusElement) currentAdminStatusElement.remove();
-
   console.log("!!!!!!!!!ADMIN STATUS DATA");
   console.dir(inputData);
+
+  //remove existing data
+  const currentAdminStatusElement = document.getElementById("admin-status-collapse-container");
+  if (currentAdminStatusElement) currentAdminStatusElement.remove();
 
   const adminStatusWrapper = document.createElement("ul");
   adminStatusWrapper.id = "admin-status-wrapper";
@@ -37,6 +37,7 @@ export const buildAdminStatusDisplay = async (inputData) => {
   };
 
   const adminStatusCollapseContainer = await buildCollapseContainer(adminStatusCollapseParams);
+  adminStatusCollapseContainer.id = "admin-status-collapse-container";
 
   adminDisplayElement.append(adminStatusCollapseContainer);
 
