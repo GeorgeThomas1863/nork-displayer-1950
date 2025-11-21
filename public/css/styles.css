@@ -109,7 +109,7 @@ h3 {
 }
 
 .collapse-header:hover {
-  background: #3573b8;
+  background: #164388;
 }
 
 .collapse-header:active {
@@ -1094,7 +1094,7 @@ h3 {
   text-align: left;
   color: #2c3e50;
   margin: 0;
-  font-weight: 700;
+  font-weight: 500;
 }
 
 .admin-status-collapse .collapse-header {
