@@ -1099,7 +1099,7 @@ h3 {
   margin: 0;
 }
 
-.collapse-title.admin-stats-title {
+.admin-stats-title .collapse-title {
   background-color: #1e4620;
   line-height: 1.8;
 }
