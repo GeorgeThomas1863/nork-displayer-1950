@@ -1,6 +1,6 @@
 import { buildCollapseContainer } from "../util/collapse-display.js";
 
-const adminDisplayElement = document.getElementById("admin-display-element");
+const adminFormOverallWrapper = document.getElementById("admin-form-overall-wrapper");
 
 export const buildAdminStatusDisplay = async (inputData) => {
   if (!inputData) return null;
@@ -39,9 +39,9 @@ export const buildAdminStatusDisplay = async (inputData) => {
   const adminStatusCollapseContainer = await buildCollapseContainer(adminStatusCollapseParams);
   adminStatusCollapseContainer.id = "admin-status-collapse-container";
 
-  adminDisplayElement.append(adminStatusCollapseContainer);
+  adminFormOverallWrapper.append(adminStatusCollapseContainer);
 
-  return adminDisplayElement;
+  return adminFormOverallWrapper;
 };
 
 //should use loops but dont care
