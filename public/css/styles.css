@@ -1029,39 +1029,22 @@ h3 {
 }
 
 #admin-submit-button {
-  width: 70%;
+  width: 69%;
   margin-left: auto;
 }
 
 #admin-update-data-button {
-  width: 30%;
-}
-
-/* #admin-button-list-item button {
-  flex: 1;
-} */
-
-/* #admin-update-data-button-wrapper {
-  width: 90%;
-  margin: 0 auto;
-  margin-top: 2rem;
-} */
-
-#admin-update-data-button {
-  /* width: auto;
-  padding: 1.2rem 5rem;
-  font-size: 1.5rem;
-  font-weight: 600; */
+  width: 28%;
   letter-spacing: -0.02em;
   background: #1e4620;
 }
 
 #admin-update-data-button:hover {
-  background: #065f46;
+  background: #0C2D1C;
 }
 
 #admin-update-data-button:active {
-  background: #065f46;
+  background: #0C2D1C;
 }
 
 /* +++++++++++++++++++++++++++++++++++++++ */
@@ -1107,7 +1090,7 @@ h3 {
 
 .status-value {
   flex: 1;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   text-align: left;
   color: #2c3e50;
   margin: 0;
@@ -1120,11 +1103,11 @@ h3 {
 }
 
 .admin-status-collapse .collapse-header:hover {
-  background-color: #065f46;
+  background-color: #0C2D1C;
 }
 
 .admin-status-collapse .collapse-header:active {
-  background-color: #065f46;
+  background-color: #0C2D1C;
 }
 
 /* -------------------------- */
