@@ -1040,11 +1040,11 @@ h3 {
 }
 
 #admin-update-data-button:hover {
-  background: #0C2D1C;
+  background: #0c2d1c;
 }
 
 #admin-update-data-button:active {
-  background: #0C2D1C;
+  background: #0c2d1c;
 }
 
 /* +++++++++++++++++++++++++++++++++++++++ */
@@ -1081,7 +1081,7 @@ h3 {
   flex: 0 0 150px;
   font-size: 0.9rem;
   font-weight: 600;
-  /* text-align: right; */
+  align-items: center;
   text-transform: uppercase;
   letter-spacing: 0.8px;
   color: #2d3748;
@@ -1092,9 +1092,10 @@ h3 {
   flex: 1;
   font-size: 1.4rem;
   text-align: left;
-  color: #2c3e50;
+  color: black;
   margin: 0;
   font-weight: 500;
+  letter-spacing: -0.05em;
 }
 
 .admin-status-collapse .collapse-header {
@@ -1103,11 +1104,11 @@ h3 {
 }
 
 .admin-status-collapse .collapse-header:hover {
-  background-color: #0C2D1C;
+  background-color: #0c2d1c;
 }
 
 .admin-status-collapse .collapse-header:active {
-  background-color: #0C2D1C;
+  background-color: #0c2d1c;
 }
 
 /* -------------------------- */
