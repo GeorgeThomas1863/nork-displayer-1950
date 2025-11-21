@@ -1085,13 +1085,14 @@ h3 {
 }
 
 .admin-status-collapse .collapse-header {
-  justify-content: left;
+  /* justify-content: left; */
   background-color: #1e4620;
   padding: 1rem 1.5rem;
 }
 
 #admin-status-wrapper li {
   display: flex;
+  justify-content: left;
   align-items: baseline;
   gap: 1rem;
   padding: 16px 0;
