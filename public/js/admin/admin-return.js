@@ -34,6 +34,9 @@ export const buildAdminReturnDisplay = async (inputData) => {
   return adminReturnContainer;
 };
 
+export const buildAdminStatusDisplay = async (inputData) => {
+  return null;
+};
 //--------------------------------
 
 //would take longer to fix this than its worth
