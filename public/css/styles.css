@@ -1099,8 +1099,9 @@ h3 {
   margin: 0;
 }
 
-.admin-stats-title {
+.collapse-title.admin-stats-title {
   background-color: #1e4620;
+  line-height: 1.8;
 }
 
 .status-value {
