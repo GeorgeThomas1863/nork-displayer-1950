@@ -1,6 +1,26 @@
 import { buildEmptyDisplay } from "../control/return-form.js";
 import { buildCollapseContainer } from "../util/collapse-display.js";
 
+export const buildAdminStatusDisplay = async (inputData) => {
+  if (!inputData) return null;
+
+  console.log("!!!!!!!!!ADMIN STATUS DATA");
+  console.dir(inputData);
+
+  const adminStatusContainer = document.createElement("div");
+  adminStatusContainer.id = "admin-status-container";
+
+  const adminStatusTitle = document.createElement("h1");
+  adminStatusTitle.className = "admin-status-title";
+  adminStatusTitle.textContent = "KCNA Scrape Status";
+
+  adminStatusContainer.appendChild(adminStatusTitle);
+
+  return null;
+};
+
+//-------------------------
+
 //input is array of all collections as objs
 export const buildAdminReturnDisplay = async (inputData) => {
   console.log("BACKEND DATA OBJ");
@@ -34,9 +54,6 @@ export const buildAdminReturnDisplay = async (inputData) => {
   return adminReturnContainer;
 };
 
-export const buildAdminStatusDisplay = async (inputData) => {
-  return null;
-};
 //--------------------------------
 
 //would take longer to fix this than its worth

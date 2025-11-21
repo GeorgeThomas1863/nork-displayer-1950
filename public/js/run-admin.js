@@ -30,10 +30,10 @@ export const runAdminCommand = async () => {
 
     setTimeout(async () => {
       adminCommandParams.command = "admin-scrape-status";
-      const data = await sendToBack(adminCommandParams);
-      await buildAdminStatusDisplay(data);
-      console.log("ADMIN COMMAND DATA");
-      console.dir(data);
+      const statusData = await sendToBack(adminCommandParams);
+      await buildAdminStatusDisplay(statusData);
+      // console.log("ADMIN COMMAND DATA");
+      // console.dir(data);
     }, 3000);
 
     //update display 5 seconds after submit
