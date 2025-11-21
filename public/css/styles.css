@@ -1100,7 +1100,7 @@ h3 {
 }
 
 .status-label {
-  /* flex: 0 0 200px; */
+  flex: 0 0 150px;
   font-size: 0.9rem;
   font-weight: 600;
   /* text-align: right; */
@@ -1113,6 +1113,7 @@ h3 {
 .status-value {
   flex: 1;
   font-size: 1.2rem;
+  text-align: left;
   color: #2c3e50;
   margin: 0;
   font-weight: 700;
