@@ -1078,7 +1078,7 @@ h3 {
 }
 
 #admin-status-wrapper {
-  padding: 1rem 1.5rem;
+  padding: 1.2rem 1.5rem;
   margin: 0;
   background-color: #ffffff;
   border-radius: 0 0 12px 12px;
@@ -1107,7 +1107,7 @@ h3 {
 
 .status-value {
   flex: 1;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   text-align: left;
   color: #2c3e50;
   margin: 0;
