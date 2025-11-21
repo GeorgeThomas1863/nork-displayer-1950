@@ -1,6 +1,8 @@
 import { buildEmptyDisplay } from "../control/return-form.js";
 import { buildCollapseContainer } from "../util/collapse-display.js";
 
+const adminDisplayElement = document.getElementById("admin-display-element");
+
 export const buildAdminStatusDisplay = async (inputData) => {
   if (!inputData) return null;
 
