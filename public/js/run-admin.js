@@ -35,12 +35,12 @@ export const runAdminCommand = async () => {
       await buildAdminStatusDisplay(statusData);
       // console.log("ADMIN COMMAND DATA");
       // console.dir(data);
-    }, 3000);
+    }, 1000);
 
     //update display 5 seconds after submit
     setTimeout(async () => {
       await updateAdminDisplay();
-    }, 5000);
+    }, 3000);
 
     //admin command submit
     const data = await sendToBack(adminCommandParams);
