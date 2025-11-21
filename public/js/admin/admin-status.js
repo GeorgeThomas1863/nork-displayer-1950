@@ -54,7 +54,7 @@ export const buildScrapeMessageListItem = async (scrapeMessage) => {
   scrapeMessageLabel.id = "admin-scrape-message-label";
   scrapeMessageLabel.className = "status-label";
   scrapeMessageLabel.setAttribute("for", "admin-scrape-message-element");
-  scrapeMessageLabel.textContent = "Scrape Message";
+  scrapeMessageLabel.textContent = "Scrape Message:";
 
   const scrapeMessageElement = document.createElement("h2");
   scrapeMessageElement.id = "admin-scrape-message-element";
@@ -74,7 +74,7 @@ export const buildScrapeIdListItem = async (scrapeId) => {
   scrapeIdLabel.id = "admin-scrape-id-label";
   scrapeIdLabel.className = "status-label";
   scrapeIdLabel.setAttribute("for", "admin-scrape-id-element");
-  scrapeIdLabel.textContent = "Scrape ID";
+  scrapeIdLabel.textContent = "Scrape ID:";
 
   const scrapeIdElement = document.createElement("h2");
   scrapeIdElement.id = "admin-scrape-id-element";
@@ -94,7 +94,7 @@ export const buildScrapeStatusListItem = async (scrapeActive) => {
   scrapeStatusLabel.id = "admin-scrape-status-label";
   scrapeStatusLabel.className = "status-label";
   scrapeStatusLabel.setAttribute("for", "admin-scrape-status-element");
-  scrapeStatusLabel.textContent = "Scrape Status";
+  scrapeStatusLabel.textContent = "Scrape Status:";
 
   const scrapeStatusElement = document.createElement("h2");
   scrapeStatusElement.id = "admin-scrape-status-element";
@@ -114,7 +114,7 @@ export const buildSchedulerStatusListItem = async (schedulerActive) => {
   schedulerStatusLabel.id = "admin-scheduler-status-label";
   schedulerStatusLabel.className = "status-label";
   schedulerStatusLabel.setAttribute("for", "admin-scheduler-status-element");
-  schedulerStatusLabel.textContent = "Scheduler Status";
+  schedulerStatusLabel.textContent = "Scheduler Status:";
 
   const schedulerStatusElement = document.createElement("h2");
   schedulerStatusElement.id = "admin-scheduler-status-element";
@@ -134,7 +134,7 @@ export const buildScrapeLengthSecondsListItem = async (scrapeLengthSeconds) => {
   scrapeLengthSecondsLabel.id = "admin-scrape-length-seconds-label";
   scrapeLengthSecondsLabel.className = "status-label";
   scrapeLengthSecondsLabel.setAttribute("for", "admin-scrape-length-seconds-element");
-  scrapeLengthSecondsLabel.textContent = "Scrape Seconds";
+  scrapeLengthSecondsLabel.textContent = "Scrape Seconds:";
 
   const scrapeLengthSecondsElement = document.createElement("h2");
   scrapeLengthSecondsElement.id = "admin-scrape-length-seconds-element";

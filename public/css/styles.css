@@ -1086,8 +1086,8 @@ h3 {
 
 #admin-status-wrapper li {
   display: flex;
-  align-items: center;
-  justify-content: baseline;
+  align-items: baseline;
+  gap: 1.5rem;
   padding: 16px 0;
 }
 
@@ -1125,7 +1125,7 @@ h3 {
   max-width: 1400px;
   width: 90%;
   margin: 0 auto;
-  margin-bottom: 1.5rem;
+  margin-bottom: 5rem;
   background: white;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
