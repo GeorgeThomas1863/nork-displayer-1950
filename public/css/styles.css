@@ -1090,7 +1090,7 @@ h3 {
 }
 
 .status-label {
-  flex: 0 0 220px;
+  flex: 0 0 200px;
   font-size: 0.9rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -1099,9 +1099,8 @@ h3 {
   margin: 0;
 }
 
-.admin-stats-title .collapse-title {
+#admin-stats-title .collapse-title {
   background-color: #1e4620;
-  line-height: 1.8;
 }
 
 .status-value {

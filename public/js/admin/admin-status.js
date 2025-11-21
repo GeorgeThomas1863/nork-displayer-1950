@@ -26,6 +26,7 @@ export const buildAdminStatusDisplay = async (inputData) => {
 
   const statsTitleElement = document.createElement("div");
   statsTitleElement.textContent = "SCRAPE STATUS";
+  statsTitleElement.id = "admin-stats-title";
   statsTitleElement.className = "admin-stats-title";
 
   const adminStatusCollapseParams = {
@@ -133,7 +134,7 @@ export const buildScrapeLengthSecondsListItem = async (scrapeLengthSeconds) => {
   scrapeLengthSecondsLabel.id = "admin-scrape-length-seconds-label";
   scrapeLengthSecondsLabel.className = "status-label";
   scrapeLengthSecondsLabel.setAttribute("for", "admin-scrape-length-seconds-element");
-  scrapeLengthSecondsLabel.textContent = "Scrape Length Seconds";
+  scrapeLengthSecondsLabel.textContent = "Scrape Seconds";
 
   const scrapeLengthSecondsElement = document.createElement("h2");
   scrapeLengthSecondsElement.id = "admin-scrape-length-seconds-element";
