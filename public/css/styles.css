@@ -1030,11 +1030,11 @@ h3 {
 
 #admin-submit-button {
   width: 60%;
-  justify-content: right;
+  margin-left: auto;
 }
 
 #admin-update-data-button {
-  width: 30%;
+  width: 35%;
 }
 
 /* #admin-button-list-item button {
