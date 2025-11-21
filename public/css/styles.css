@@ -1085,7 +1085,6 @@ h3 {
 }
 
 .admin-status-collapse .collapse-header {
-  /* justify-content: left; */
   background-color: #1e4620;
   padding: 1rem 1.5rem;
 }
@@ -1094,6 +1093,7 @@ h3 {
   display: flex;
   justify-content: left;
   align-items: baseline;
+  text-align: left;
   gap: 1rem;
   padding: 16px 0;
 }
@@ -1102,7 +1102,7 @@ h3 {
   flex: 0 0 200px;
   font-size: 0.9rem;
   font-weight: 600;
-  text-align: right;
+  /* text-align: right; */
   text-transform: uppercase;
   letter-spacing: 0.8px;
   color: #2d3748;
