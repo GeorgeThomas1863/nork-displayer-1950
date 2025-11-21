@@ -1022,15 +1022,15 @@ h3 {
   box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
 }
 
-#admin-button-list-item {
+#admin-form-wrapper #admin-button-list-item {
   display: flex;
   flex-direction: row;
   gap: 1rem;
 }
 
-#admin-button-list-item button {
+/* #admin-button-list-item button {
   flex: 1;
-}
+} */
 
 /* #admin-update-data-button-wrapper {
   width: 90%;
