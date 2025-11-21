@@ -6,7 +6,7 @@ export const buildAdminStatusDisplay = async (inputData) => {
   if (!inputData) return null;
   const { scrapeActive, schedulerActive, scrapeLengthSeconds, scrapeMessage, scrapeId } = inputData;
 
-  console.log("!!!!!!!!!ADMIN STATUS DATA");
+  console.log("ADMIN STATUS DATA");
   console.dir(inputData);
 
   //remove existing data
@@ -46,19 +46,19 @@ export const buildAdminStatusDisplay = async (inputData) => {
 
 //should use loops but dont care
 export const buildScrapeMessageListItem = async (scrapeMessage) => {
-  if (!scrapeMessage) return null;
-
   const scrapeMessageListItem = document.createElement("li");
   scrapeMessageListItem.id = "admin-scrape-message-list-item";
 
   const scrapeMessageLabel = document.createElement("label");
   scrapeMessageLabel.id = "admin-scrape-message-label";
+  scrapeMessageLabel.className = "status-label";
   scrapeMessageLabel.setAttribute("for", "admin-scrape-message-element");
   scrapeMessageLabel.textContent = "Scrape Message";
 
   const scrapeMessageElement = document.createElement("h2");
   scrapeMessageElement.id = "admin-scrape-message-element";
-  scrapeMessageElement.textContent = scrapeMessage;
+  scrapeMessageElement.className = "status-value";
+  scrapeMessageElement.textContent = scrapeMessage || "NONE";
 
   scrapeMessageListItem.append(scrapeMessageLabel, scrapeMessageElement);
 
@@ -73,12 +73,14 @@ export const buildScrapeIdListItem = async (scrapeId) => {
 
   const scrapeIdLabel = document.createElement("label");
   scrapeIdLabel.id = "admin-scrape-id-label";
+  scrapeIdLabel.className = "status-label";
   scrapeIdLabel.setAttribute("for", "admin-scrape-id-element");
   scrapeIdLabel.textContent = "Scrape ID";
 
   const scrapeIdElement = document.createElement("h2");
   scrapeIdElement.id = "admin-scrape-id-element";
-  scrapeIdElement.textContent = scrapeId;
+  scrapeIdElement.className = "status-value";
+  scrapeIdElement.textContent = scrapeId || "NONE";
 
   scrapeIdListItem.append(scrapeIdLabel, scrapeIdElement);
 
@@ -91,11 +93,13 @@ export const buildScrapeStatusListItem = async (scrapeActive) => {
 
   const scrapeStatusLabel = document.createElement("label");
   scrapeStatusLabel.id = "admin-scrape-status-label";
+  scrapeStatusLabel.className = "status-label";
   scrapeStatusLabel.setAttribute("for", "admin-scrape-status-element");
   scrapeStatusLabel.textContent = "Scrape Status";
 
   const scrapeStatusElement = document.createElement("h2");
   scrapeStatusElement.id = "admin-scrape-status-element";
+  scrapeStatusElement.className = "status-value";
   scrapeStatusElement.textContent = scrapeActive ? "Active" : "Inactive";
 
   scrapeStatusListItem.append(scrapeStatusLabel, scrapeStatusElement);
@@ -109,11 +113,13 @@ export const buildSchedulerStatusListItem = async (schedulerActive) => {
 
   const schedulerStatusLabel = document.createElement("label");
   schedulerStatusLabel.id = "admin-scheduler-status-label";
+  schedulerStatusLabel.className = "status-label";
   schedulerStatusLabel.setAttribute("for", "admin-scheduler-status-element");
   schedulerStatusLabel.textContent = "Scheduler Status";
 
   const schedulerStatusElement = document.createElement("h2");
   schedulerStatusElement.id = "admin-scheduler-status-element";
+  schedulerStatusElement.className = "status-value";
   schedulerStatusElement.textContent = schedulerActive ? "Active" : "Inactive";
 
   schedulerStatusListItem.append(schedulerStatusLabel, schedulerStatusElement);
@@ -129,12 +135,14 @@ export const buildScrapeLengthSecondsListItem = async (scrapeLengthSeconds) => {
 
   const scrapeLengthSecondsLabel = document.createElement("label");
   scrapeLengthSecondsLabel.id = "admin-scrape-length-seconds-label";
+  scrapeLengthSecondsLabel.className = "status-label";
   scrapeLengthSecondsLabel.setAttribute("for", "admin-scrape-length-seconds-element");
   scrapeLengthSecondsLabel.textContent = "Scrape Length Seconds";
 
   const scrapeLengthSecondsElement = document.createElement("h2");
   scrapeLengthSecondsElement.id = "admin-scrape-length-seconds-element";
-  scrapeLengthSecondsElement.textContent = scrapeLengthSeconds;
+  scrapeLengthSecondsElement.className = "status-value";
+  scrapeLengthSecondsElement.textContent = scrapeLengthSeconds || "NONE";
 
   scrapeLengthSecondsListItem.append(scrapeLengthSecondsLabel, scrapeLengthSecondsElement);
 
