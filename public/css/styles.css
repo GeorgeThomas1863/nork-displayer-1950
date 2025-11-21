@@ -1029,7 +1029,7 @@ h3 {
 }
 
 #admin-submit-button {
-  width: 65%;
+  width: 70%;
   margin-left: auto;
 }
 
@@ -1053,15 +1053,15 @@ h3 {
   font-size: 1.5rem;
   font-weight: 600; */
   letter-spacing: -0.02em;
-  background: #dc2626;
+  background: #1e4620;
 }
 
 #admin-update-data-button:hover {
-  background: #b91c1c;
+  background: #065f46;
 }
 
 #admin-update-data-button:active {
-  background: #b91c1c;
+  background: #065f46;
 }
 
 /* +++++++++++++++++++++++++++++++++++++++ */
@@ -1082,11 +1082,6 @@ h3 {
   margin: 0;
   background-color: #ffffff;
   border-radius: 0 0 12px 12px;
-}
-
-.admin-status-collapse .collapse-header {
-  background-color: #1e4620;
-  padding: 1rem 1.5rem;
 }
 
 #admin-status-wrapper li {
@@ -1117,6 +1112,19 @@ h3 {
   color: #2c3e50;
   margin: 0;
   font-weight: 700;
+}
+
+.admin-status-collapse .collapse-header {
+  background-color: #1e4620;
+  padding: 1rem 1.5rem;
+}
+
+.admin-status-collapse .collapse-header:hover {
+  background-color: #065f46;
+}
+
+.admin-status-collapse .collapse-header:active {
+  background-color: #065f46;
 }
 
 /* -------------------------- */
