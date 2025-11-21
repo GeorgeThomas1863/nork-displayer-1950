@@ -1028,6 +1028,14 @@ h3 {
   gap: 1rem;
 }
 
+#admin-submit-button {
+  width: 70%;
+}
+
+#admin-update-data-button {
+  width: 20%;
+}
+
 /* #admin-button-list-item button {
   flex: 1;
 } */
