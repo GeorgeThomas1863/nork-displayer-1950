@@ -1074,7 +1074,7 @@ h3 {
 
 #admin-status-collapse-container {
   width: 100%;
-  max-width: 500px;
+  max-width: 600px;
 }
 
 #admin-status-wrapper {
@@ -1087,6 +1087,7 @@ h3 {
 #admin-status-wrapper li {
   display: flex;
   align-items: center;
+  justify-content: baseline;
   padding: 16px 0;
 }
 
@@ -1094,6 +1095,7 @@ h3 {
   flex: 0 0 200px;
   font-size: 0.9rem;
   font-weight: 600;
+  text-align: right;
   text-transform: uppercase;
   letter-spacing: 0.8px;
   color: #2d3748;
@@ -1123,6 +1125,7 @@ h3 {
   max-width: 1400px;
   width: 90%;
   margin: 0 auto;
+  margin-bottom: 1.5rem;
   background: white;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
