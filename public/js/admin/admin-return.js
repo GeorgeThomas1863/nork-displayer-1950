@@ -1,28 +1,6 @@
 import { buildEmptyDisplay } from "../control/return-form.js";
 import { buildCollapseContainer } from "../util/collapse-display.js";
 
-const adminDisplayElement = document.getElementById("admin-display-element");
-
-export const buildAdminStatusDisplay = async (inputData) => {
-  if (!inputData) return null;
-
-  console.log("!!!!!!!!!ADMIN STATUS DATA");
-  console.dir(inputData);
-
-  const adminStatusContainer = document.createElement("div");
-  adminStatusContainer.id = "admin-status-container";
-
-  const adminStatusTitle = document.createElement("h1");
-  adminStatusTitle.className = "admin-status-title";
-  adminStatusTitle.textContent = "KCNA Scrape Status";
-
-  adminStatusContainer.appendChild(adminStatusTitle);
-
-  return null;
-};
-
-//-------------------------
-
 //input is array of all collections as objs
 export const buildAdminReturnDisplay = async (inputData) => {
   console.log("BACKEND DATA OBJ");
