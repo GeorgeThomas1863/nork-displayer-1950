@@ -1022,6 +1022,11 @@ h3 {
   box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
 }
 
+#admin-button-list-item {
+  display: flex;
+  gap: 1rem;
+}
+
 /* #admin-update-data-button-wrapper {
   width: 90%;
   margin: 0 auto;
@@ -1029,12 +1034,11 @@ h3 {
 } */
 
 #admin-update-data-button {
-  width: auto;
+  /* width: auto;
   padding: 1.2rem 5rem;
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 600; */
   letter-spacing: -0.02em;
-  /* background: #2563a8; */
   background: #dc2626;
 }
 

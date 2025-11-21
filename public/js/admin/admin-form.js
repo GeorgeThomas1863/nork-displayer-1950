@@ -185,7 +185,7 @@ export const buildUrlListItem = async () => {
 
 export const buildButtonListItem = async () => {
   const buttonListItem = document.createElement("li");
-  buttonListItem.id = "admin-submit-list-item";
+  buttonListItem.id = "admin-button-list-item";
 
   // Create submit button
   const submitButton = document.createElement("button");
