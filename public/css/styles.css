@@ -1094,7 +1094,8 @@ h3 {
   justify-content: left;
   align-items: baseline;
   text-align: left;
-  gap: 1rem;
+  gap: 0;
+  /* gap: 1rem; */
   padding: 16px 0;
 }
 
