@@ -44,22 +44,6 @@ export const buildAdminStatsSection = async (inputData) => {
 
   //BUILD STATS ON BACKEND WITH MONGO QUERIES FOR WHAT YOU NEED, DISPLAY WITH MAP
 
-  //ALSO WORK ON DIPSLAYING RETURN FROM COMMAND
-
-  //ADD BACK IN CLICK LISTENER LOGIC FOR TABLE
-
-  //!!!!!!!!!!!!!!!!!!!!
-
-  // for (let i = 0; i < inputData.length; i++) {
-  //   const inputObj = inputData[i];
-  //   const { collection, data } = inputObj;
-
-  //   if (!data || !data.length) continue;
-  // }
-
-  // console.log("inputData");
-  // console.dir(inputData);
-
   const logData = inputData.find((item) => item.collection === "log")?.data || [];
   const articlesData = inputData.find((item) => item.collection === "articles")?.data || [];
   const picsData = inputData.find((item) => item.collection === "pics")?.data || [];
