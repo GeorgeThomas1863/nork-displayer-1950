@@ -1,15 +1,4 @@
-import {
-  runAuth,
-  runPwToggle,
-  runDropDownToggle,
-  runChangeButtonType,
-  runChangeDataType,
-  runChangeHowMany,
-  runChangeSortBy,
-} from "./run.js";
-
-//in admin folder
-import { runAdminAuth, runAdminCommand, runAdminUpdateData, runAdminToggleURL } from "./run-admin.js";
+import { runAuth, runPwToggle, runDropDownToggle, runChangeButtonType, runChangeDataType, runChangeHowMany, runChangeSortBy } from "./run.js";
 
 import debounce from "./util/debounce.js";
 
@@ -32,9 +21,6 @@ export const clickHandler = async (e) => {
 
   if (clickType === "pwToggle") await runPwToggle();
   if (clickType === "auth-submit") await runAuth();
-  if (clickType === "admin-auth-submit") await runAdminAuth();
-  if (clickType === "admin-command-submit") await runAdminCommand();
-  if (clickType === "admin-update-data-button") await runAdminUpdateData();
   if (clickType === "dropdown") await runDropDownToggle();
   if (clickType === "admin-redirect") window.location.href = "/admin";
 
@@ -43,14 +29,6 @@ export const clickHandler = async (e) => {
   // if (clickUpdate) await runUpdateStateDisplay(clickUpdate);
   if (clickUpdate && clickUpdate.includes("-type-button-")) await runChangeButtonType(clickUpdate);
   if (clickUpdate && clickUpdate.includes("get-")) await runChangeDataType(clickUpdate);
-
-  //   await updateAdminStateEventTriggered(clickType);
-
-  //   //run thing
-  //   // console.log("AHHHHHHHHHHH");
-  //   await buildAdminDisplay();
-
-  //   return "DONE";
 };
 
 export const keyHandler = async (e) => {
@@ -62,13 +40,9 @@ export const keyHandler = async (e) => {
 
   // Determine which button to trigger based on context
   const authButton = document.getElementById("auth-button");
-  const adminAuthButton = document.getElementById("admin-auth-button");
 
   // Check if auth button is visible and enabled (user is on auth screen)
   if (authButton && authButton.offsetParent !== null && !authButton.disabled) return await runAuth();
-
-  if (adminAuthButton && adminAuthButton.offsetParent !== null && !adminAuthButton.disabled)
-    return await runAdminAuth();
 
   return null;
 };
@@ -83,10 +57,6 @@ export const changeHandler = async (e) => {
   console.log(changeId);
 
   if (changeId && changeId.includes("-sort-by")) return await runChangeSortBy(changeElement);
-
-  if (changeId !== "admin-how-much") return null;
-
-  await runAdminToggleURL();
 };
 
 // create debounced function for input
@@ -108,18 +78,11 @@ export const inputHandler = async (e) => {
 };
 
 const authElement = document.getElementById("auth-element");
-const adminAuthElement = document.getElementById("admin-auth-element");
 const displayElement = document.getElementById("display-element");
-const adminDisplayElement = document.getElementById("admin-display-element");
 
 if (authElement) {
   authElement.addEventListener("click", clickHandler);
   authElement.addEventListener("keydown", keyHandler);
-}
-
-if (adminAuthElement) {
-  adminAuthElement.addEventListener("click", clickHandler);
-  adminAuthElement.addEventListener("keydown", keyHandler);
 }
 
 if (displayElement) {
@@ -127,9 +90,4 @@ if (displayElement) {
   displayElement.addEventListener("keydown", keyHandler);
   displayElement.addEventListener("input", inputHandler);
   displayElement.addEventListener("change", changeHandler);
-}
-
-if (adminDisplayElement) {
-  adminDisplayElement.addEventListener("click", clickHandler);
-  adminDisplayElement.addEventListener("change", changeHandler);
 }

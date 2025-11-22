@@ -1,8 +1,8 @@
-import { updateAdminDisplay } from "./admin.js";
-import { buildAdminStatusDisplay } from "./admin/admin-status.js";
-import { getAdminAuthParams, getAdminCommandParams } from "./util/params.js";
-import { sendToBack } from "./util/api-front.js";
-import { hideArray, unhideArray } from "./util/collapse-display.js";
+import { updateAdminDisplay } from "./admin-main.js";
+import { buildAdminStatusDisplay } from "./admin-status.js";
+import { getAdminAuthParams, getAdminCommandParams } from "../util/params.js";
+import { sendToBack } from "../util/api-front.js";
+import { hideArray, unhideArray } from "../util/collapse-display.js";
 
 export const runAdminAuth = async () => {
   try {
