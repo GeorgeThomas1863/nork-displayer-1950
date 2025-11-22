@@ -1,3 +1,5 @@
+import { rebuildAdminTableBody } from "./admin-return.js";
+
 let currentSortColumn = null;
 let currentSortDirection = "asc";
 let adminTableData = [];
@@ -32,7 +34,7 @@ export const runAdminSortColumn = async (column) => {
   const sortedData = sortTableData(adminTableData, column, currentSortDirection);
 
   // Rebuild table body with sorted data
-  await rebuildTableBody(sortedData);
+  await rebuildAdminTableBody(sortedData);
 };
 
 const sortTableData = (data, column, direction) => {
@@ -117,27 +119,3 @@ const updateSortIcons = (activeColumn) => {
   }
 };
 
-const rebuildTableBody = async (sortedData) => {
-  const table = document.querySelector(".admin-table");
-  if (!table) return;
-
-  // Remove existing tbody
-  const oldTbody = table.querySelector("tbody");
-  if (oldTbody) {
-    oldTbody.remove();
-  }
-
-  // Create new tbody with sorted data
-  const tbody = document.createElement("tbody");
-
-  // Import buildAdminTableRow from your display file
-  const { buildAdminTableRow } = await import("../display/admin-display.js");
-
-  for (let i = 0; i < sortedData.length; i++) {
-    const row = await buildAdminTableRow(sortedData[i]);
-    if (!row) continue;
-    tbody.appendChild(row);
-  }
-
-  table.appendChild(tbody);
-};

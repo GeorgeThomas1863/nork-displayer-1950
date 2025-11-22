@@ -323,3 +323,25 @@ export const formatDuration = async (durationSeconds) => {
   if (durationSeconds === null || durationSeconds === undefined) return null;
   return `${durationSeconds}s`;
 };
+
+export const rebuildAdminTableBody = async (sortedData) => {
+  const table = document.querySelector(".admin-table");
+  if (!table) return;
+
+  // Remove existing tbody
+  const oldTbody = table.querySelector("tbody");
+  if (oldTbody) {
+    oldTbody.remove();
+  }
+
+  // Create new tbody with sorted data
+  const tbody = document.createElement("tbody");
+
+  for (let i = 0; i < sortedData.length; i++) {
+    const row = await buildAdminTableRow(sortedData[i]);
+    if (!row) continue;
+    tbody.appendChild(row);
+  }
+
+  table.appendChild(tbody);
+};
