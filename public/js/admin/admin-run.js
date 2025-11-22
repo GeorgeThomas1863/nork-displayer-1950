@@ -1,4 +1,4 @@
-import { updateAdminDisplay } from "./admin-main.js";
+import { updateAdminDisplay } from "../admin.js";
 import { buildAdminStatusDisplay } from "./admin-status.js";
 import { getAdminAuthParams, getAdminCommandParams } from "../util/params.js";
 import { sendToBack } from "../util/api-front.js";

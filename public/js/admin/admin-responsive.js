@@ -1,5 +1,6 @@
 import { runAdminAuth, runAdminCommand, runAdminUpdateData, runAdminToggleURL } from "./admin-run.js";
 import { runPwToggle } from "../run.js";
+import { runAdminSortColumn } from "./admin-sort-tbl.js";
 
 export const clickHandler = async (e) => {
   e.preventDefault();
@@ -8,6 +9,7 @@ export const clickHandler = async (e) => {
   const clickId = clickElement.id;
   const clickType = clickElement.getAttribute("data-label");
   const clickUpdate = clickElement.getAttribute("data-update");
+  const clickColumn = clickElement.getAttribute("data-column");
 
   console.log("CLICK HANDLER");
   console.log(clickElement);
@@ -17,11 +19,13 @@ export const clickHandler = async (e) => {
   console.log("CLICK DATA TYPE");
   if (clickType) console.log(clickType);
   if (clickUpdate) console.log(clickUpdate);
+  if (clickColumn) console.log(clickColumn);
 
   if (clickType === "admin-auth-submit") await runAdminAuth();
   if (clickType === "admin-command-submit") await runAdminCommand();
   if (clickType === "admin-update-data-button") await runAdminUpdateData();
   if (clickType === "pwToggle") await runPwToggle();
+  if (clickColumn) await runAdminSortColumn(clickColumn);
 };
 
 export const keyHandler = async (e) => {
@@ -64,4 +68,9 @@ if (adminAuthElement) {
 if (adminDisplayElement) {
   adminDisplayElement.addEventListener("click", clickHandler);
   adminDisplayElement.addEventListener("change", changeHandler);
+
+  const headers = adminDisplayElement.querySelectorAll(".admin-table-header th");
+  headers.forEach((header) => {
+    header.addEventListener("click", clickHandler);
+  });
 }

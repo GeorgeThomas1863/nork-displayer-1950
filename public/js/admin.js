@@ -1,7 +1,7 @@
 // import stateAdmin from "./admin/admin-state.js";
-import { buildAdminForm } from "./admin-form.js";
-import { buildAdminReturnDisplay } from "./admin-return.js";
-import { sendToBack } from "../util/api-front.js";
+import { buildAdminForm } from "./admin/admin-form.js";
+import { buildAdminReturnDisplay } from "./admin/admin-return.js";
+import { sendToBack } from "./util/api-front.js";
 
 const adminDisplayElement = document.getElementById("admin-display-element");
 
