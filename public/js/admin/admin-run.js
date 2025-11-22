@@ -44,10 +44,10 @@ export const runAdminCommand = async () => {
 
     //admin command submit
     const data = await sendToBack(adminCommandParams);
-    console.log("ADMIN COMMAND DATA");
-    console.dir(data);
+    // console.log("ADMIN COMMAND DATA");
+    // console.dir(data);
   } catch (e) {
-    console.log("ERROR: " + e.message + "; FUNCTION: " + e.function);
+    // console.log("ERROR: " + e.message + "; FUNCTION: " + e.function);
     return null;
   }
 };

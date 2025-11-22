@@ -22,6 +22,6 @@ export const display404 = (req, res) => {
 };
 
 export const display500 = (error, req, res, next) => {
-  console.log(error);
+  // console.log(error);
   res.status(500).sendFile(path.join(__dirname, "../html/500.html"));
 };

@@ -12,10 +12,10 @@ export const setAdminTableData = (data) => {
 };
 
 export const runAdminSortColumn = async (column) => {
-  console.log("SORTING COLUMN:", column);
+  // console.log("SORTING COLUMN:", column);
 
   if (!adminTableData || !adminTableData.length) {
-    console.log("No table data available");
+    // console.log("No table data available");
     return;
   }
 

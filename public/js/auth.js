@@ -16,7 +16,7 @@ export const buildAuthMainDisplay = async () => {
 
     authMainElement.appendChild(authMainForm);
   } catch (e) {
-    console.log("ERROR: " + e.message + "; FUNCTION: " + e.function);
+    // console.log("ERROR: " + e.message + "; FUNCTION: " + e.function);
   }
 };
 
@@ -33,7 +33,7 @@ export const buildAuthAdminDisplay = async () => {
 
     authAdminElement.appendChild(authAdminForm);
   } catch (e) {
-    console.log("ERROR: " + e.message + "; FUNCTION: " + e.function);
+    // console.log("ERROR: " + e.message + "; FUNCTION: " + e.function);
   }
 };
 

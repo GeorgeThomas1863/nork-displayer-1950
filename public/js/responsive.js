@@ -10,14 +10,14 @@ export const clickHandler = async (e) => {
   const clickType = clickElement.getAttribute("data-label");
   const clickUpdate = clickElement.getAttribute("data-update");
 
-  console.log("CLICK HANDLER");
-  console.log(clickElement);
-  console.log("CLICK ID");
-  console.log(clickId);
+  // console.log("CLICK HANDLER");
+  // console.log(clickElement);
+  // console.log("CLICK ID");
+  // console.log(clickId);
 
-  console.log("CLICK DATA TYPE");
-  if (clickType) console.log(clickType);
-  if (clickUpdate) console.log(clickUpdate);
+  // console.log("CLICK DATA TYPE");
+  // if (clickType) console.log(clickType);
+  // if (clickUpdate) console.log(clickUpdate);
 
   if (clickType === "pwToggle") await runPwToggle();
   if (clickType === "auth-submit") await runAuth();
@@ -35,8 +35,8 @@ export const keyHandler = async (e) => {
   if (e.key !== "Enter") return null;
   e.preventDefault();
 
-  console.log("KEY HANDLER");
-  console.log(e.key);
+  // console.log("KEY HANDLER");
+  // console.log(e.key);
 
   // Determine which button to trigger based on context
   const authButton = document.getElementById("auth-button");
@@ -52,9 +52,9 @@ export const changeHandler = async (e) => {
   const changeElement = e.target;
   const changeId = changeElement.id;
 
-  console.log("CHANGE HANDLER");
-  console.log(changeElement);
-  console.log(changeId);
+  // console.log("CHANGE HANDLER");
+  // console.log(changeElement);
+  // console.log(changeId);
 
   if (changeId && changeId.includes("-sort-by")) return await runChangeSortBy(changeElement);
 };
@@ -69,10 +69,10 @@ export const inputHandler = async (e) => {
   if (!inputElement || !inputElement.id.includes("-how-many")) return null;
   if (!inputElement.value || isNaN(inputElement.value || isNaN(parseInt(inputElement.value)))) return null;
 
-  console.log("INPUT HANDLER");
-  console.log(inputElement.id);
-  console.log("INPUT VALUE");
-  console.log(inputElement.value);
+  // console.log("INPUT HANDLER");
+  // console.log(inputElement.id);
+  // console.log("INPUT VALUE");
+  // console.log(inputElement.value);
 
   await debouncedInputTriggered(inputElement);
 };

@@ -35,8 +35,8 @@ export const updateDisplay = async () => {
   const updateArray = await sendToBack({ route: updateDataRoute.value, stateFront: stateFront });
   await updateStateFront(updateArray);
 
-  console.log("UPDATE DATA");
-  console.dir(updateArray || "NO UPDATE DATA");
+  // console.log("UPDATE DATA");
+  // console.dir(updateArray || "NO UPDATE DATA");
 
   // also handles empty display
   const returnDisplay = await buildReturnDisplay(updateArray);
@@ -44,8 +44,8 @@ export const updateDisplay = async () => {
 
   displayElement.append(returnDisplay);
 
-  console.log("STATE FRONT");
-  console.dir(stateFront);
+  // console.log("STATE FRONT");
+  // console.dir(stateFront);
 
   return true;
 };

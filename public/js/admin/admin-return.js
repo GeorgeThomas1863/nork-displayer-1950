@@ -4,8 +4,8 @@ import { buildCollapseContainer } from "../util/collapse-display.js";
 
 //input is array of all collections as objs
 export const buildAdminReturnDisplay = async (inputData) => {
-  console.log("BACKEND DATA OBJ");
-  console.dir(inputData);
+  // console.log("BACKEND DATA OBJ");
+  // console.dir(inputData);
 
   const adminReturnContainer = document.createElement("div");
   adminReturnContainer.id = "admin-return-container";

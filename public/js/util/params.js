@@ -11,7 +11,7 @@ export const getAuthParams = async () => {
 
     return params;
   } catch (e) {
-    console.log("ERROR: " + e.message + "; FUNCTION: " + e.function);
+    // console.log("ERROR: " + e.message + "; FUNCTION: " + e.function);
     return null;
   }
 };
@@ -27,7 +27,7 @@ export const getAdminAuthParams = async () => {
 
     return params;
   } catch (e) {
-    console.log("ERROR: " + e.message + "; FUNCTION: " + e.function);
+    // console.log("ERROR: " + e.message + "; FUNCTION: " + e.function);
     return null;
   }
 };
@@ -44,7 +44,7 @@ export const getAdminCommandParams = async () => {
 
     return params;
   } catch (e) {
-    console.log("ERROR: " + e.message + "; FUNCTION: " + e.function);
+    // console.log("ERROR: " + e.message + "; FUNCTION: " + e.function);
     return null;
   }
 };

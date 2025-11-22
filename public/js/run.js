@@ -15,7 +15,7 @@ export const runAuth = async () => {
     window.location.href = authData.redirect;
     return authData;
   } catch (e) {
-    console.log("ERROR: " + e.message + "; FUNCTION: " + e.function);
+    // console.log("ERROR: " + e.message + "; FUNCTION: " + e.function);
     return null;
   }
 };
@@ -24,8 +24,8 @@ export const runPwToggle = async () => {
   const pwButton = document.querySelector(".password-toggle-btn");
   const pwInput = document.querySelector(".password-input");
 
-  console.log(pwButton);
-  console.log(pwInput);
+  // console.log(pwButton);
+  // console.log(pwInput);
   const currentSvgId = pwButton.querySelector("svg").id;
 
   if (currentSvgId === "eye-closed-icon") {
@@ -58,9 +58,9 @@ export const runChangeButtonType = async (clickUpdate) => {
   const typePrefix = clickUpdate.split("-")[0];
   const typeId = clickUpdate.split("-").pop();
 
-  console.log("RUN CHANGE BUTTON TYPE");
-  console.log(typePrefix);
-  console.log(typeId);
+  // console.log("RUN CHANGE BUTTON TYPE");
+  // console.log(typePrefix);
+  // console.log(typeId);
 
   const currentActiveButton = document.querySelector(`#${typePrefix}-type-button-list .button-type-item.active`);
   if (currentActiveButton) currentActiveButton.classList.remove("active");
@@ -134,10 +134,10 @@ export const runChangeSortBy = async (changeElement) => {
   const sortBy = sortByRaw.substring(sortByRaw.indexOf("-") + 1);
   const typePrefix = changeId.split("-")[0];
 
-  console.log("RUN CHANGE SORT BY");
+  // console.log("RUN CHANGE SORT BY");
 
-  console.log(sortBy);
-  console.log(typePrefix);
+  // console.log(sortBy);
+  // console.log(typePrefix);
 
   if (!sortBy || sortBy === stateFront.orderBy) return null;
 

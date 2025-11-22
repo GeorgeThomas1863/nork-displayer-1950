@@ -10,8 +10,8 @@ export const runUpdateDisplayData = async (inputParams) => {
   // const newDataNeeded = await checkNewDataNeeded(inputParams);
   // if (!newDataNeeded) return null;
 
-  console.log("RUN UPDATE PARAMS");
-  console.log(inputParams);
+  // console.log("RUN UPDATE PARAMS");
+  // console.log(inputParams);
 
   let dataArray = null;
   switch (typeTrigger) {
@@ -31,7 +31,7 @@ export const runUpdateDisplayData = async (inputParams) => {
   const sortArray = await sortDataReturn(dataArray, typeTrigger);
   if (!sortArray || !sortArray.length) return null;
 
-  console.log(`${sortArray?.length} NEW ${typeTrigger} ITEMS`);
+  // console.log(`${sortArray?.length} NEW ${typeTrigger} ITEMS`);
   return sortArray;
 };
 
