@@ -1,3 +1,4 @@
+import { setAdminTableData } from "./admin-sort-tbl.js";
 import { buildEmptyDisplay } from "../control/return-form.js";
 import { buildCollapseContainer } from "../util/collapse-display.js";
 
@@ -108,6 +109,8 @@ export const buildAdminStatsSection = async (inputData) => {
 
 export const buildAdminTableContainer = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
+
+  setAdminTableData(inputArray);
 
   const adminTableContainer = document.createElement("div");
   adminTableContainer.className = "admin-table-container";
