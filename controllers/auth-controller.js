@@ -1,5 +1,3 @@
-import bcrypt from "bcrypt";
-
 import CONFIG from "../config/config.js";
 
 export const authController = async (req, res) => {
