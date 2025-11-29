@@ -8,10 +8,8 @@ export const authController = async (req, res) => {
     return;
   }
 
-  const pwValid = await bcrypt.compare(req.body.pw, CONFIG.pw);
-
   //pw check
-  if (!pwValid) {
+  if (req.body.pw !== CONFIG.pw) {
     res.json({ success: false, redirect: "/401" });
     return;
   }
@@ -27,10 +25,8 @@ export const adminAuthController = async (req, res) => {
     return;
   }
 
-  const pwAdminValid = await bcrypt.compare(req.body.pwAdmin, CONFIG.pwAdmin);
-
   //pw check
-  if (!pwAdminValid) {
+  if (req.body.pwAdmin !== CONFIG.pwAdmin) {
     res.json({ success: false, redirect: "/401" });
     return;
   }
