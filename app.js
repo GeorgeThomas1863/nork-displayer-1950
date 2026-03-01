@@ -7,9 +7,9 @@ import express from "express";
 import session from "express-session";
 import routes from "./routes/router.js";
 
-import CONFIG from "./config/config.js";
+import CONFIG from "./middleware/config.js";
 
-const { expressPicPath, expressVidPath, expressWatchPath, expressConfigPublicPath, picPath, vidPath, watchPath, scrapePort, displayPort } = CONFIG;
+const { expressPicPath, expressVidPath, expressWatchPath, picPath, vidPath, watchPath, displayPort } = CONFIG;
 
 const app = express();
 
@@ -22,7 +22,6 @@ app.use(session(CONFIG.buildSessionConfig()));
 app.use(expressPicPath, express.static(picPath));
 app.use(expressVidPath, express.static(vidPath));
 app.use(expressWatchPath, express.static(watchPath));
-app.use(expressConfigPublicPath, express.static("config/config-public.js"));
 
 //standard public path
 app.use(express.static("public"));

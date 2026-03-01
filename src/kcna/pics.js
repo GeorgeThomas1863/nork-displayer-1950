@@ -1,4 +1,4 @@
-import CONFIG from "../../config/config.js";
+import CONFIG from "../../middleware/config.js";
 import { dataLookup } from "../main-back.js";
 // import dbModel from "../../models/db-model.js";
 

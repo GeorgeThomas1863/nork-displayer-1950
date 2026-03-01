@@ -1,4 +1,4 @@
-import CONFIG from "../config/config.js";
+import CONFIG from "../middleware/config.js";
 // import kcnaState from "../src/kcna/state-kcna.js";
 
 import { runUpdateDisplayData } from "../src/main-back.js";

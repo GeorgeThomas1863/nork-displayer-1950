@@ -1,6 +1,6 @@
 import express from "express";
 
-import CONFIG from "../config/config.js";
+import CONFIG from "../middleware/config.js";
 import { requireAuth, requireAdminAuth } from "./auth.js";
 import { authController, adminAuthController } from "../controllers/auth-controller.js";
 import { mainDisplay, adminDisplay, display404, display500, display401 } from "../controllers/display-controller.js";

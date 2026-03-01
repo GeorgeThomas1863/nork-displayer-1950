@@ -1,4 +1,4 @@
-import CONFIG from "../config/config.js";
+import CONFIG from "../middleware/config.js";
 
 export const authController = async (req, res) => {
   if (!req.body || !req.body.pw) {
