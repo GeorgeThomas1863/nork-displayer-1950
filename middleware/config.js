@@ -15,6 +15,7 @@ const CONFIG = {
   // API
   apiDisplayer: process.env.API_DISPLAYER,
   apiScraper: process.env.API_SCRAPER,
+  apiPassword: process.env.API_PASSWORD,
 
   // File system paths
   mediaPath: process.env.MEDIA_PATH,

@@ -1,8 +1,5 @@
-// import kcnaState from "../src/kcna/state-kcna.js";
-
 import { runUpdateDisplayData } from "../src/main-back.js";
 import { runAdminCommand, runGetAdminData } from "../src/admin-back.js";
-// import { runAdminCommand, getAdminLogs } from "../src/admin-back.js";
 
 export const updateDisplayDataController = async (req, res) => {
   const { stateFront } = req.body;
@@ -31,8 +28,5 @@ export const adminDataController = async (req, res) => {
 };
 
 export const adminPollingController = async (req, res) => {
-  // const inputParams = req.body;
-  // if (!inputParams) return null;
-  // const stateData = kcnaState;
-  // return res.json(stateData);
+  res.status(501).json({ error: "Not implemented" });
 };

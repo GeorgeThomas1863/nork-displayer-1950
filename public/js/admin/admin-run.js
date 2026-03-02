@@ -16,7 +16,7 @@ export const runAdminAuth = async () => {
     window.location.href = authData.redirect;
     return authData;
   } catch (e) {
-    console.log("ERROR: " + e.message + "; FUNCTION: " + e.function);
+    console.error("ERROR:", e.message);
     return null;
   }
 };
@@ -45,7 +45,7 @@ export const runAdminCommand = async () => {
     // console.log("ADMIN COMMAND DATA");
     // console.dir(data);
   } catch (e) {
-    // console.log("ERROR: " + e.message + "; FUNCTION: " + e.function);
+    console.error("ERROR:", e.message);
     return null;
   }
 };

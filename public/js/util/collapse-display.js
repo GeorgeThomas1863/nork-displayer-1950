@@ -1,11 +1,11 @@
-export const hideArray = async (inputs) => {
+export const hideArray = (inputs) => {
   for (const input of inputs) {
     if (!input) continue;
     input.classList.add("hidden");
   }
 };
 
-export const unhideArray = async (inputs) => {
+export const unhideArray = (inputs) => {
   for (const input of inputs) {
     if (!input) continue;
     input.classList.remove("hidden");
@@ -26,7 +26,6 @@ export const buildCollapseContainer = async (inputObj) => {
   collapseHeader.className = "collapse-header";
 
   const arrow = document.createElement("div");
-  arrow.id = "collapse-arrow";
   arrow.className = isExpanded ? "collapse-arrow expanded" : "collapse-arrow";
   arrow.setAttribute("data-update", dataAttribute);
 
@@ -45,34 +44,29 @@ export const buildCollapseContainer = async (inputObj) => {
   //add collapse element at end
   collapseContainer.append(collapseHeader, contentElement);
 
-  // CLICK LISTENER HERE
-  collapseHeader.addEventListener("click", () => {
-    arrow.classList.toggle("expanded");
-    contentElement.classList.toggle("hidden");
-  });
-
   return collapseContainer;
 };
 
-export const defineCollapseItems = async (inputArray) => {
+export const defineCollapseItems = (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
 
   for (let i = 0; i < inputArray.length; i++) {
     const collapseElement = inputArray[i];
     const header = collapseElement.querySelector(".collapse-header");
-    if (!header) continue;
+    const content = collapseElement.querySelector(".collapse-content");
+    const arrow = collapseElement.querySelector(".collapse-arrow");
+    if (!header || !content || !arrow) continue;
 
     header.addEventListener("click", () => {
-      // collapse shit
-      for (let j = 0; j < inputArray.length; j++) {
-        if (i !== j) {
-          const otherCollapse = inputArray[j];
-          const otherContent = otherCollapse.querySelector(".collapse-content");
-          const otherArrow = otherCollapse.querySelector(".collapse-arrow");
+      arrow.classList.toggle("expanded");
+      content.classList.toggle("hidden");
 
-          otherContent.classList.add("hidden");
-          otherArrow.classList.remove("expanded");
-        }
+      for (let j = 0; j < inputArray.length; j++) {
+        if (i === j) continue;
+        const otherContent = inputArray[j].querySelector(".collapse-content");
+        const otherArrow = inputArray[j].querySelector(".collapse-arrow");
+        if (otherContent) otherContent.classList.add("hidden");
+        if (otherArrow) otherArrow.classList.remove("expanded");
       }
     });
   }

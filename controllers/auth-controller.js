@@ -13,8 +13,11 @@ export const authController = async (req, res) => {
   }
 
   // auth pw
-  req.session.authenticated = true;
-  res.json({ success: true, redirect: "/" });
+  req.session.regenerate((err) => {
+    if (err) return res.status(500).json({ success: false, redirect: "/401" });
+    req.session.authenticated = true;
+    res.json({ success: true, redirect: "/" });
+  });
 };
 
 export const adminAuthController = async (req, res) => {
@@ -30,6 +33,10 @@ export const adminAuthController = async (req, res) => {
   }
 
   // auth pw
-  req.session.adminAuthenticated = true;
-  res.json({ success: true, redirect: "/admin" });
+  req.session.regenerate((err) => {
+    if (err) return res.status(500).json({ success: false, redirect: "/401" });
+    req.session.authenticated = true;
+    req.session.adminAuthenticated = true;
+    res.json({ success: true, redirect: "/admin" });
+  });
 };

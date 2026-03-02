@@ -14,7 +14,7 @@ export const runAdminCommand = async (inputParams) => {
     // console.log("API OUTGOING DATA");
     // console.log(inputParams);
 
-    const apiRes = await axios.post(url, inputParams);
+    const apiRes = await axios.post(url, { ...inputParams, apiPassword: CONFIG.apiPassword });
     if (!apiRes) return null;
     const data = apiRes.data;
 
@@ -22,7 +22,7 @@ export const runAdminCommand = async (inputParams) => {
     // console.log(data);
     return data;
   } catch (e) {
-    // console.log("ERROR: " + e.message + "; FUNCTION: " + e.function);
+    console.error("ERROR:", e.message);
     return null;
   }
 };
@@ -34,7 +34,7 @@ export const runGetAdminData = async () => {
   for (const collection of collectionsArr) {
     try {
       const dataModel = new dbModel("", collection);
-      const data = await dataModel.getAll();
+      const data = await dataModel.getAll(500);
       if (!data || !data.length) continue;
 
       const retunrObj = {
@@ -44,7 +44,7 @@ export const runGetAdminData = async () => {
 
       dataArray.push(retunrObj);
     } catch (e) {
-      // console.log("ERROR: " + e.message + "; FUNCTION: " + e.function);
+      console.error("ERROR:", e.message);
       continue;
     }
   }

@@ -1,9 +1,6 @@
 //import mongo
-import { dbConnect, dbGet } from "../middleware/db-config.js";
+import { dbGet } from "../middleware/db-config.js";
 import { ObjectId } from "mongodb";
-
-//connect to db AGAIN here just to be safe
-await dbConnect();
 
 class dbModel {
   constructor(dataObject, collection) {
@@ -31,9 +28,9 @@ class dbModel {
 
   //GET STUFF
 
-  async getAll() {
-    const arrayData = await dbGet().collection(this.collection).find().toArray();
-    return arrayData;
+  async getAll(limit = 0) {
+    const cursor = dbGet().collection(this.collection).find();
+    return await (limit > 0 ? cursor.limit(limit) : cursor).toArray();
   }
 
   async getUniqueItem() {

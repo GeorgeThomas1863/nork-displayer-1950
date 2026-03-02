@@ -6,14 +6,14 @@ export const getNewVids = async (inputParams) => {
   if (!inputParams) return null;
   const { orderBy } = inputParams;
 
-  const vidParams = await buildVidParams(inputParams);
+  const vidParams = buildVidParams(inputParams);
   if (!vidParams) return null;
 
   //ONLY get vidPages for now
   return await dataLookup(vidParams, "vidPages", orderBy, false);
 };
 
-export const buildVidParams = async (inputParams) => {
+export const buildVidParams = (inputParams) => {
   if (!inputParams) return null;
   const { howMany, vidType } = inputParams;
   const { defaultDataLoad } = CONFIG;
@@ -24,7 +24,7 @@ export const buildVidParams = async (inputParams) => {
       params = {
         sortKey: "date",
         sortKey2: "vidId",
-        howMany: howMany || defaultDataLoad.vids,
+        howMany: Math.min(+(howMany) || defaultDataLoad.vids, 100),
       };
       break;
 
@@ -32,7 +32,7 @@ export const buildVidParams = async (inputParams) => {
       params = {
         sortKey: "date",
         sortKey2: "vidPageId",
-        howMany: howMany || defaultDataLoad.vidPages,
+        howMany: Math.min(+(howMany) || defaultDataLoad.vidPages, 100),
       };
       break;
 

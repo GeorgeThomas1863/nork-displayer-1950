@@ -1,4 +1,4 @@
-import { buildCollapseContainer } from "../util/collapse-display.js";
+import { buildCollapseContainer, defineCollapseItems } from "../util/collapse-display.js";
 import { buildPicWrapper } from "./pics-return.js";
 
 export const buildPicsCollapseContainer = async (inputArray, type) => {
@@ -23,6 +23,7 @@ export const buildPicsCollapseContainer = async (inputArray, type) => {
   };
 
   const picCollapseElement = await buildCollapseContainer(picCollapseObj);
+  defineCollapseItems([picCollapseElement]);
 
   return picCollapseElement;
 };

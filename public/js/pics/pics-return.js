@@ -57,7 +57,7 @@ export const buildPicTypeButtons = async () => {
   return picTypeButtonContainer;
 };
 
-export const buildPicTypeButtonItem = async (buttonData) => {
+export const buildPicTypeButtonItem = (buttonData) => {
   const { picType } = stateFront;
   const { buttonValue, buttonText } = buttonData;
 
@@ -152,7 +152,7 @@ export const buildPicContainer = async (inputObj) => {
   const { date, picArray } = inputObj;
 
   const picContainerElement = document.createElement("article");
-  picContainerElement.id = "pic-container-element";
+  picContainerElement.className = "pic-container-element";
 
   const picWrapper = await buildPicWrapper(picArray, true);
 
@@ -164,17 +164,17 @@ export const buildPicContainer = async (inputObj) => {
   return picContainerElement;
 };
 
-export const buildPicContainerTitle = async (title) => {
+export const buildPicContainerTitle = (title) => {
   const titleElement = document.createElement("h2");
-  titleElement.id = "pic-container-title";
+  titleElement.className = "pic-container-title";
   titleElement.textContent = title;
 
   return titleElement;
 };
 
-export const buildPicContainerDate = async (date) => {
+export const buildPicContainerDate = (date) => {
   const dateElement = document.createElement("div");
-  dateElement.id = "pic-container-date";
+  dateElement.className = "pic-container-date";
   const dateObj = new Date(date);
   dateElement.textContent = dateObj.toLocaleDateString("en-US", {
     year: "numeric",
@@ -191,7 +191,7 @@ export const buildPicWrapper = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
 
   const picWrapperElement = document.createElement("li");
-  picWrapperElement.id = "pic-wrapper-element";
+  picWrapperElement.className = "pic-wrapper-element";
 
   //build pic / stat elements
   for (let i = 0; i < inputArray.length; i++) {
@@ -212,7 +212,7 @@ export const buildPicWrapperItem = async (inputObj) => {
   // console.log(inputObj);
 
   const picWrapperItem = document.createElement("li");
-  picWrapperItem.id = "pic-wrapper-item";
+  picWrapperItem.className = "pic-wrapper-item";
 
   const picElement = await buildPicElement(savePath);
   const picStatsElement = await buildPicElementStats(inputObj);
@@ -227,7 +227,7 @@ export const buildPicElement = async (savePath) => {
   if (!savePath) return null;
 
   const picElement = document.createElement("img");
-  picElement.id = "pic-element";
+  picElement.className = "pic-element";
 
   //define pic path
   const fileName = savePath.split("/").pop();
@@ -245,7 +245,7 @@ export const buildPicElementStats = async (inputObj) => {
   const { date, headers } = inputObj;
 
   const picStatsElement = document.createElement("div");
-  picStatsElement.id = "pic-element-stats";
+  picStatsElement.className = "pic-element-stats";
 
   const picDateElement = await buildPicElementDate(date);
   const picServerElement = await buildPicElementServer(headers);
@@ -259,7 +259,7 @@ export const buildPicElementDate = async (date) => {
   if (!date) return null;
 
   const dateElement = document.createElement("div");
-  dateElement.id = "pic-element-date";
+  dateElement.className = "pic-element-date";
   const dateObj = new Date(date);
   const formattedDate = dateObj.toLocaleDateString("en-US", {
     year: "numeric",
@@ -272,13 +272,15 @@ export const buildPicElementDate = async (date) => {
   return dateElement;
 };
 
-export const buildPicElementServer = async (headers) => {
+export const buildPicElementServer = (headers) => {
   if (!headers || !headers.server) return null;
-  const serverData = headers.server;
 
   const picServerElement = document.createElement("div");
-  picServerElement.id = "pic-element-server";
-  picServerElement.innerHTML = `<b>Server Data:</b> ${serverData}`;
+  picServerElement.className = "pic-element-server";
+  const label = document.createElement("b");
+  label.textContent = "Server Data: ";
+  picServerElement.appendChild(label);
+  picServerElement.appendChild(document.createTextNode(headers.server || ""));
 
   return picServerElement;
 };

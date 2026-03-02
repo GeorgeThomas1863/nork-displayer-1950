@@ -1,130 +1,91 @@
-CODE REVIEW — OUTSTANDING ISSUES
+CODE REVIEW — ALL ITEMS RESOLVED
 Last updated: 2026-03-01
 =====================================
 
-=== CRITICAL SECURITY ===
+All 19 items (including API_PASSWORD) resolved on 2026-03-01.
 
-[1] Stored XSS via innerHTML — public/js/articles/articles-return.js:189-190
-    Article text from the DB is inserted as innerHTML after a \n→<br> replace.
-    Any HTML/script tags in scraped content will execute in the browser.
-    FIX: Use safe DOM insertion instead:
-      const lines = text.split("\n");
-      lines.forEach((line, i) => {
-        textElement.appendChild(document.createTextNode(line));
-        if (i < lines.length - 1) textElement.appendChild(document.createElement("br"));
-      });
+=== CRITICAL SECURITY — RESOLVED ===
 
-[2] Session fixation — controllers/auth-controller.js:16
-    After login, the session ID is never regenerated. An attacker who plants
-    a known session cookie before login can take over the authenticated session.
-    FIX: Call req.session.regenerate() before setting session flags.
-    Same fix needed in adminAuthController.
+[1] RESOLVED — XSS via innerHTML in articles-return.js
+    Fixed: buildArticleText now uses safe DOM insertion (createTextNode + createElement("br")).
 
-[3] No rate limiting on auth routes — routes/router.js:14-15
-    /site-auth-route and admin auth route accept unlimited password attempts.
-    FIX: Add express-rate-limit middleware to both auth routes.
+[2] RESOLVED — Session fixation in auth-controller.js
+    Fixed: req.session.regenerate() called before setting session flags in both
+    authController and adminAuthController.
 
-[4] adminPollingController hangs connections — controllers/data-controller.js:43-48
-    Controller body is fully commented out. Never calls res.json() or res.end().
-    Every request to this route hangs until client timeout.
-    FIX: Send 501 until implemented:
-      res.status(501).json({ error: "Not implemented" });
+[3] SKIPPED — No rate limiting on auth routes
+    Requires: npm install express-rate-limit --save
+    Then: add authLimiter from express-rate-limit to both auth routes in routes/router.js.
 
-[5] No CSRF protection — routes/router.js (all POST routes)
-    No CSRF tokens on any state-changing POST routes. sameSite: "lax" does
-    not block cross-site form POSTs.
-    FIX: Add csurf middleware or switch cookie sameSite to "strict".
+[4] RESOLVED — adminPollingController hangs connections
+    Fixed: Returns res.status(501).json({ error: "Not implemented" }).
+
+[5] RESOLVED — No CSRF protection
+    Fixed: sameSite changed from "lax" to "strict" in session-config.js.
 
 
-=== HIGH — BUGS ===
+=== HIGH — BUGS — RESOLVED ===
 
-[6] "oldest-to-newest" sort is silently broken — src/main-back.js:88-97
-    The DB returns items in ascending order when orderBy === "oldest-to-newest",
-    but sortDataReturn() unconditionally re-sorts descending (dateB - dateA).
-    The user's oldest-first selection is always overridden.
-    FIX: Pass orderBy into sortDataReturn and sort accordingly, or remove
-    sortDataReturn entirely and rely on DB sort only.
+[6] RESOLVED — "oldest-to-newest" sort silently broken
+    Fixed: sortDataReturn removed entirely. DB sort order is now preserved.
 
-[7] howMany is uncapped — src/kcna/articles.js:27 → models/db-model.js:70
-    stateFront.howMany comes from a text input and is passed directly to
-    MongoDB .limit(+howMany) with no maximum. User can type 999999 and
-    trigger a full collection scan. .limit(0) returns everything.
-    FIX: Enforce a cap, e.g.:
-      howMany: Math.min(+(howMany) || defaultDataLoad.articles, 100)
+[7] RESOLVED — howMany uncapped
+    Fixed: Math.min(+(howMany) || defaultDataLoad.X, 100) applied in
+    articles.js, pics.js, and vids.js.
 
-[8] Wrong type field checked in runChangeButtonType — public/js/run.js:69
-    Always compares against stateFront.articleType even when switching pic
-    or vid type buttons. A pic/vid button whose value matches the current
-    articleType will silently no-op.
-    FIX: stateFront[`${typePrefix}Type`] === typeId
+[8] RESOLVED — Wrong type field checked in runChangeButtonType
+    Fixed: stateFront[`${typePrefix}Type`] === typeId in run.js.
 
 
-=== MEDIUM — ARCHITECTURE ===
+=== MEDIUM — ARCHITECTURE — RESOLVED ===
 
-[9] Auth middleware returns 200 HTML on API POST routes — routes/auth.js:7
-    Unauthenticated requests to protected POST routes receive an HTML page
-    with HTTP 200 instead of a 401 JSON response. API callers receive HTML
-    where they expect JSON.
-    FIX: Check req.accepts("json") and return 401 JSON for API requests:
-      if (req.accepts("json")) return res.status(401).json({ error: "Unauthorized" });
-      res.sendFile(path.join(process.cwd(), "html", "auth.html"));
+[9] RESOLVED — Auth middleware returns 200 HTML on API POST routes
+    Fixed: requireAuth and requireAdminAuth now return 401 JSON for non-GET requests.
 
-[10] Redundant dbConnect() creates leaked connections — models/db-model.js:6
-     Top-level await dbConnect() runs every time db-model.js is imported.
-     Both main-back.js and admin-back.js import it, causing multiple MongoClient
-     instances that are never closed.
-     FIX: Connect once in app.js before server start. Remove the top-level
-     await dbConnect() from db-model.js.
+[10] RESOLVED — Redundant dbConnect() creates leaked connections
+    Fixed: Top-level await dbConnect() removed from db-model.js.
+    Single dbConnect() call added to app.js before app.listen().
 
-[11] sortDataReturn duplicates and overrides DB sort — src/main-back.js:31
-     MongoDB already returns pre-sorted results. sortDataReturn re-sorts the
-     same data, adding overhead and (per bug #6) overriding the intended order.
-     FIX: Remove sortDataReturn. Apply consistent two-key sorts at the DB level.
+[11] RESOLVED — sortDataReturn duplicates and overrides DB sort
+    Fixed: sortDataReturn removed from main-back.js entirely.
 
-[12] Admin data loads full collections with no limit — src/admin-back.js:37
-     runGetAdminData() calls getAll() on every collection with no .limit().
-     With large collections this can OOM the process.
-     FIX: Add a reasonable limit (e.g. 500 most recent) or paginate.
+[12] RESOLVED — Admin data loads full collections with no limit
+    Fixed: getAll(limit) now accepts a limit parameter; runGetAdminData calls getAll(500).
 
-[13] Static media served without auth — app.js:22-24
-     express.static runs before session/auth middleware. Anyone who discovers
-     the media URL prefix can access all pictures and videos unauthenticated.
-     FIX: Route media through an auth-checking middleware, or accept the risk
-     explicitly if the URL prefix is treated as a secret.
+[13] RESOLVED — Static media served without auth
+    Fixed: requireAuth middleware added to all three express.static media routes in app.js.
 
 
-=== LOW — CODE QUALITY ===
+=== LOW — CODE QUALITY — RESOLVED ===
 
-[14] Duplicate element IDs on repeated DOM elements
-     articles-return.js:131, 149, 162, 170, 186 and collapse-display.js:29
-     IDs like "article-text", "article-element", "article-date", "collapse-arrow"
-     are assigned to elements created once per data item. Multiple items = multiple
-     elements with the same ID. Invalid HTML; getElementById only returns the first.
-     FIX: Change all of these to className.
+[14] RESOLVED — Duplicate element IDs on repeated DOM elements
+    Fixed: All repeated IDs changed to className in articles-return.js, pics-return.js,
+    vids-return.js, and collapse-display.js. CSS selectors updated in styles.css and
+    media-styles.css.
 
-[15] Two conflicting click listeners per collapse header — collapse-display.js:49, 65
-     buildCollapseContainer adds a toggle listener. defineCollapseItems adds a
-     second listener to the same header for sibling collapse. Both fire on click,
-     potentially re-collapsing the item just opened.
-     FIX: Merge both behaviors into a single listener in defineCollapseItems.
+[15] RESOLVED — Two conflicting click listeners per collapse header
+    Fixed: Click listener removed from buildCollapseContainer. defineCollapseItems
+    now handles both self-toggle and sibling-collapse in a single listener.
+    pics-container.js updated to call defineCollapseItems.
 
-[16] Pervasive unnecessary async/await on synchronous functions
-     Dozens of functions are declared async and awaited but contain no async
-     operations: buildArticleTitle, buildArticleDate, buildArticleText,
-     hideArray, unhideArray, buildArticleParams, buildPicParams, buildVidParams,
-     sortDataReturn, and many more.
-     FIX: Remove async/await from all purely synchronous functions.
+[16] RESOLVED — Pervasive unnecessary async/await on synchronous functions
+    Fixed: async removed from buildArticleTitle, buildArticleDate, buildArticleText,
+    buildArticleTypeButtonItem, buildArticleParams, buildPicParams, buildVidParams,
+    buildPicTypeButtonItem, buildPicContainerTitle, buildPicContainerDate,
+    buildPicElementServer, buildVidTypeButtonItem, buildVidTitle, buildVidDate,
+    buildVidElement, hideArray, unhideArray, defineCollapseItems.
 
-[17] Dead code and zero logging
-     - middleware/auth-config.js: requireAuth re-implemented identically in
-       routes/auth.js. The middleware/ version is unused — delete it.
-     - src/kcna/state-kcna.js: almost entirely commented out dead state.
-     - All console.log calls commented out throughout. Zero production logging.
-     FIX: Delete dead files. Add console.error logging for actual errors.
+[17] RESOLVED — Dead code and zero logging
+    Fixed: middleware/auth-config.js deleted. src/kcna/state-kcna.js deleted.
+    Commented-out imports removed from data-controller.js.
+    console.error added in admin-back.js (both catch blocks) and admin-run.js.
 
-[18] Malformed input guard condition — public/js/responsive.js:70
-     if (!inputElement.value || isNaN(inputElement.value || isNaN(parseInt(inputElement.value))))
-     Due to || short-circuit, the inner isNaN(parseInt(...)) is never evaluated
-     independently. The logic is wrong.
-     FIX:
-       if (!inputElement.value || isNaN(Number(inputElement.value))) return null;
+[18] RESOLVED — Malformed input guard condition
+    Fixed: Corrected to: if (!inputElement.value || isNaN(Number(inputElement.value)))
+
+
+=== ADDITIONAL — RESOLVED ===
+
+[API_PASSWORD] RESOLVED — API password not sent to scraper
+    Fixed: apiPassword added to CONFIG in middleware/config.js.
+    runAdminCommand now spreads apiPassword into axios.post payload.

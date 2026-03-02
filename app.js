@@ -8,6 +8,8 @@ import session from "express-session";
 import routes from "./routes/router.js";
 
 import CONFIG from "./middleware/config.js";
+import { dbConnect } from "./middleware/db-config.js";
+import { requireAuth } from "./routes/auth.js";
 
 const { expressPicPath, expressVidPath, expressWatchPath, picPath, vidPath, watchPath, displayPort } = CONFIG;
 
@@ -19,9 +21,9 @@ const app = express();
 app.use(session(CONFIG.buildSessionConfig()));
 
 //custom paths to expose to frontend
-app.use(expressPicPath, express.static(picPath));
-app.use(expressVidPath, express.static(vidPath));
-app.use(expressWatchPath, express.static(watchPath));
+app.use(expressPicPath, requireAuth, express.static(picPath));
+app.use(expressVidPath, requireAuth, express.static(vidPath));
+app.use(expressWatchPath, requireAuth, express.static(watchPath));
 
 //standard public path
 app.use(express.static("public"));
@@ -33,4 +35,5 @@ app.use(express.json());
 app.use(routes);
 
 // app.listen(1801);
+await dbConnect();
 app.listen(displayPort);

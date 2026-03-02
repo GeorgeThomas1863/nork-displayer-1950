@@ -66,7 +66,7 @@ export const runChangeButtonType = async (clickUpdate) => {
   if (currentActiveButton) currentActiveButton.classList.remove("active");
 
   //same type clicked
-  if (!typeId || stateFront.articleType === typeId) return null;
+  if (!typeId || stateFront[`${typePrefix}Type`] === typeId) return null;
 
   stateFront[`${typePrefix}Type`] = typeId;
   stateFront.eventTrigger = `${typePrefix}-type-button-click`;

@@ -72,7 +72,7 @@ export const buildArticleTypeButtons = async () => {
   return articleTypeButtonContainer;
 };
 
-export const buildArticleTypeButtonItem = async (buttonData) => {
+export const buildArticleTypeButtonItem = (buttonData) => {
   const { articleType } = stateFront;
   const { buttonValue, buttonText } = buttonData;
 
@@ -128,7 +128,7 @@ export const buildArticleContainer = async (inputObj) => {
   const { picArray } = inputObj;
 
   const articleContainer = document.createElement("div");
-  articleContainer.id = "article-container-element";
+  articleContainer.className = "article-container-element";
 
   //Add pics as collapse (if present)
   const articlePicData = await buildPicsCollapseContainer(picArray, "article");
@@ -146,7 +146,7 @@ export const buildArticleElement = async (inputObj) => {
   const { date, text } = inputObj;
 
   const articleElement = document.createElement("article");
-  articleElement.id = "article-element";
+  articleElement.className = "article-element";
 
   // Then append date and text after pictures (title is handled by collapse header)
   const dateElement = await buildArticleDate(date);
@@ -157,18 +157,18 @@ export const buildArticleElement = async (inputObj) => {
   return articleElement;
 };
 
-export const buildArticleTitle = async (title) => {
+export const buildArticleTitle = (title) => {
   const titleElement = document.createElement("h2");
-  titleElement.id = "article-title";
+  titleElement.className = "article-title";
   titleElement.textContent = title;
 
   return titleElement;
 };
 
-export const buildArticleDate = async (date) => {
+export const buildArticleDate = (date) => {
   // Format and append date
   const dateElement = document.createElement("div");
-  dateElement.id = "article-date";
+  dateElement.className = "article-date";
   const dateObj = new Date(date);
   dateElement.textContent = dateObj.toLocaleDateString("en-US", {
     year: "numeric",
@@ -179,15 +179,14 @@ export const buildArticleDate = async (date) => {
   return dateElement;
 };
 
-export const buildArticleText = async (text) => {
+export const buildArticleText = (text) => {
   if (!text) return null;
-
   const textElement = document.createElement("div");
-  textElement.id = "article-text";
-
-  // Fix line breaks by replacing \n with <br> tags
-  const textWithBreaks = text.replace(/\n/g, "<br>");
-  textElement.innerHTML = textWithBreaks;
-
+  textElement.className = "article-text";
+  const lines = text.split("\n");
+  lines.forEach((line, i) => {
+    textElement.appendChild(document.createTextNode(line));
+    if (i < lines.length - 1) textElement.appendChild(document.createElement("br"));
+  });
   return textElement;
 };

@@ -6,7 +6,7 @@ export const getNewPics = async (inputParams) => {
   if (!inputParams) return null;
   const { orderBy, picType } = inputParams;
 
-  const picParams = await buildPicParams(inputParams);
+  const picParams = buildPicParams(inputParams);
   if (!picParams) return null;
 
   if (picType === "all") return await dataLookup(picParams, "pics", orderBy, false);
@@ -14,7 +14,7 @@ export const getNewPics = async (inputParams) => {
   return await dataLookup(picParams, "picSets", orderBy, false);
 };
 
-export const buildPicParams = async (inputParams) => {
+export const buildPicParams = (inputParams) => {
   if (!inputParams) return null;
   const { howMany, picType } = inputParams;
   const { defaultDataLoad } = CONFIG;
@@ -25,7 +25,7 @@ export const buildPicParams = async (inputParams) => {
       params = {
         sortKey: "date",
         sortKey2: "picId",
-        howMany: howMany || defaultDataLoad.pics,
+        howMany: Math.min(+(howMany) || defaultDataLoad.pics, 100),
       };
       break;
 
@@ -33,7 +33,7 @@ export const buildPicParams = async (inputParams) => {
       params = {
         sortKey: "date",
         sortKey2: "picSetId",
-        howMany: howMany || defaultDataLoad.picSets,
+        howMany: Math.min(+(howMany) || defaultDataLoad.picSets, 100),
       };
       break;
 

@@ -4,7 +4,7 @@
     gap: 1rem; /* Reduced from 5rem */
   }
 
-  #pic-wrapper-element {
+  .pic-wrapper-element {
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -97,19 +97,19 @@
     font-size: 0.9rem; /* Reduced from 1.5rem */
   }
 
-  #article-title {
+  .article-title {
     font-size: 1.5rem;
   }
 
-  #pic-wrapper-element {
+  .pic-wrapper-element {
     gap: 0.5rem;
   }
 
-  #pic-container-title {
+  .pic-container-title {
     font-size: 1.5rem;
   }
 
-  #vid-title {
+  .vid-title {
     font-size: 1.5rem;
   }
 
@@ -172,54 +172,54 @@
     margin: 0 auto;
   }
 
-  #pic-wrapper-element {
+  .pic-wrapper-element {
     grid-template-columns: 1fr;
     gap: 0.5rem;
   }
 
-  #article-element {
+  .article-element {
     padding: 0 1rem;
   }
 
-  #article-title {
+  .article-title {
     font-size: 1.2rem;
   }
 
-  #article-title span {
+  .article-title span {
     font-size: 1rem;
   }
 
-  #article-date {
+  .article-date {
     margin-top: 1rem;
   }
 
-  #article-text {
+  .article-text {
     font-size: 0.85rem;
     line-height: 1.1;
     letter-spacing: -0.02em;
   }
 
-  #pic-container-title {
+  .pic-container-title {
     font-size: 1.2rem;
   }
 
-  #pic-container-title span {
+  .pic-container-title span {
     font-size: 1rem;
   }
 
-  #pic-container-date {
+  .pic-container-date {
     margin-top: 1rem;
   }
 
-  #vid-title {
+  .vid-title {
     font-size: 1.2rem;
   }
 
-  #vid-title span {
+  .vid-title span {
     font-size: 1rem;
   }
 
-  #vid-date {
+  .vid-date {
     margin-top: 1rem;
   }
 
@@ -341,7 +341,7 @@
     width: 100%;
   }
 
-  #pic-wrapper-element {
+  .pic-wrapper-element {
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
   }
@@ -360,7 +360,7 @@
 /* ===== MEDIUM PHONES LANDSCAPE ===== */
 @media (max-width: 876px) and (orientation: landscape) {
   /* Pic grid adjustments */
-  #pic-wrapper-element {
+  .pic-wrapper-element {
     grid-template-columns: repeat(1, 1fr);
     gap: 0.8rem;
   }

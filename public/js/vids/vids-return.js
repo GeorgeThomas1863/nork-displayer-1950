@@ -42,7 +42,7 @@ export const buildVidTypeButtons = async () => {
   return vidTypeButtonContainer;
 };
 
-export const buildVidTypeButtonItem = async (buttonData) => {
+export const buildVidTypeButtonItem = (buttonData) => {
   const { vidType } = stateFront;
   const { buttonValue, buttonText } = buttonData;
 
@@ -121,7 +121,7 @@ export const buildVidContainer = async (inputObj) => {
   const { savePath } = vidData;
 
   const vidContainerElement = document.createElement("article");
-  vidContainerElement.id = "vid-container-element";
+  vidContainerElement.className = "vid-container-element";
 
   const vidElement = await buildVidElement(savePath);
   const dateElement = await buildVidDate(date);
@@ -131,19 +131,19 @@ export const buildVidContainer = async (inputObj) => {
   return vidContainerElement;
 };
 
-export const buildVidTitle = async (title) => {
+export const buildVidTitle = (title) => {
   if (!title) return null;
   const titleElement = document.createElement("h2");
-  titleElement.id = "vid-title";
+  titleElement.className = "vid-title";
   titleElement.textContent = title;
 
   return titleElement;
 };
 
-export const buildVidDate = async (date) => {
+export const buildVidDate = (date) => {
   if (!date) return null;
   const dateElement = document.createElement("div");
-  dateElement.id = "vid-date";
+  dateElement.className = "vid-date";
   const dateObj = new Date(date);
   dateElement.textContent = dateObj.toLocaleDateString("en-US", {
     year: "numeric",
@@ -154,11 +154,11 @@ export const buildVidDate = async (date) => {
   return dateElement;
 };
 
-export const buildVidElement = async (savePath) => {
+export const buildVidElement = (savePath) => {
   if (!savePath) return null;
 
   const vidElement = document.createElement("video");
-  vidElement.id = "vid-element";
+  vidElement.className = "vid-element";
   vidElement.controls = true;
 
   const sourceElement = document.createElement("source");

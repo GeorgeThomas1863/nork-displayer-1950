@@ -67,7 +67,7 @@ export const inputHandler = async (e) => {
   const inputElement = e.target;
 
   if (!inputElement || !inputElement.id.includes("-how-many")) return null;
-  if (!inputElement.value || isNaN(inputElement.value || isNaN(parseInt(inputElement.value)))) return null;
+  if (!inputElement.value || isNaN(Number(inputElement.value))) return null;
 
   // console.log("INPUT HANDLER");
   // console.log(inputElement.id);
