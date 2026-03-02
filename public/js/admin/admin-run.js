@@ -7,9 +7,8 @@ import { hideArray, unhideArray } from "../util/collapse-display.js";
 export const runAdminAuth = async () => {
   try {
     const adminAuthParams = await getAdminAuthParams();
-    const adminAuthRoute = await sendToBack({ route: "/get-backend-value-route", key: "adminAuthRoute" });
-    if (!adminAuthParams || !adminAuthRoute) return null;
-    adminAuthParams.route = adminAuthRoute.value;
+    if (!adminAuthParams) return null;
+    adminAuthParams.route = "/nork-admin-auth-route";
 
     const authData = await sendToBack(adminAuthParams);
     if (!authData || !authData.redirect) return null;
@@ -25,9 +24,8 @@ export const runAdminAuth = async () => {
 export const runAdminCommand = async () => {
   try {
     const adminCommandParams = await getAdminCommandParams();
-    const adminCommandRoute = await sendToBack({ route: "/get-backend-value-route", key: "adminCommandRoute" });
-    if (!adminCommandParams || !adminCommandRoute) return null;
-    adminCommandParams.route = adminCommandRoute.value;
+    if (!adminCommandParams) return null;
+    adminCommandParams.route = "/nork-admin-command-route";
 
     setTimeout(async () => {
       adminCommandParams.command = "admin-scrape-status";

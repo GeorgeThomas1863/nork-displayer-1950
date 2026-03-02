@@ -18,18 +18,20 @@ No test suite is configured. There is no lint script in `package.json`.
 
 ## Config Setup
 
-The `config/` directory is **gitignored** and must be cloned separately from a private repo:
+All configuration is loaded from a `.env` file in the project root (gitignored). The app will not start without it.
 
-```bash
-bash setup-config.sh <config-repo-url>
-```
+Key `.env` variables:
+- `DISPLAY_PORT`, `SCRAPE_PORT` — service ports
+- `PW`, `ADMIN_PW` — auth passwords
+- `SESSION_SECRET` — express-session secret
+- `MONGO_URI`, `DB_NAME` — MongoDB connection
+- `COLLECTIONSARR` — comma-separated collection names
+- `PIC_PATH`, `VID_PATH`, `WATCH_PATH` — filesystem media paths
+- `EXPRESS_PIC_PATH`, `EXPRESS_VID_PATH`, `EXPRESS_WATCH_PATH` — URL prefixes for static media
+- `DEFAULT_LOAD_ARTICLES`, `DEFAULT_LOAD_PICS`, etc. — default result counts
+- `UPDATE_DISPLAY_DATA_ROUTE`, `ADMIN_*_ROUTE` — API route names
 
-Config provides two files consumed by the app:
-- `config/config.js` — ports, route names, passwords, file paths, session config, MongoDB collections
-- `config/db.js` — exports `dbConnect()` and `dbGet()` for MongoDB access
-- `config/config-public.js` — subset of config exposed as a static file to the frontend at `expressPicPath`
-
-The app will not start without this directory.
+Config is loaded in `middleware/config.js` (exports `CONFIG`) and `middleware/db-config.js` (exports `dbConnect`, `dbGet`).
 
 ## Architecture
 

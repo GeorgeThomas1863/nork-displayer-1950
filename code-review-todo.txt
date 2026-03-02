@@ -1,0 +1,130 @@
+CODE REVIEW — OUTSTANDING ISSUES
+Last updated: 2026-03-01
+=====================================
+
+=== CRITICAL SECURITY ===
+
+[1] Stored XSS via innerHTML — public/js/articles/articles-return.js:189-190
+    Article text from the DB is inserted as innerHTML after a \n→<br> replace.
+    Any HTML/script tags in scraped content will execute in the browser.
+    FIX: Use safe DOM insertion instead:
+      const lines = text.split("\n");
+      lines.forEach((line, i) => {
+        textElement.appendChild(document.createTextNode(line));
+        if (i < lines.length - 1) textElement.appendChild(document.createElement("br"));
+      });
+
+[2] Session fixation — controllers/auth-controller.js:16
+    After login, the session ID is never regenerated. An attacker who plants
+    a known session cookie before login can take over the authenticated session.
+    FIX: Call req.session.regenerate() before setting session flags.
+    Same fix needed in adminAuthController.
+
+[3] No rate limiting on auth routes — routes/router.js:14-15
+    /site-auth-route and admin auth route accept unlimited password attempts.
+    FIX: Add express-rate-limit middleware to both auth routes.
+
+[4] adminPollingController hangs connections — controllers/data-controller.js:43-48
+    Controller body is fully commented out. Never calls res.json() or res.end().
+    Every request to this route hangs until client timeout.
+    FIX: Send 501 until implemented:
+      res.status(501).json({ error: "Not implemented" });
+
+[5] No CSRF protection — routes/router.js (all POST routes)
+    No CSRF tokens on any state-changing POST routes. sameSite: "lax" does
+    not block cross-site form POSTs.
+    FIX: Add csurf middleware or switch cookie sameSite to "strict".
+
+
+=== HIGH — BUGS ===
+
+[6] "oldest-to-newest" sort is silently broken — src/main-back.js:88-97
+    The DB returns items in ascending order when orderBy === "oldest-to-newest",
+    but sortDataReturn() unconditionally re-sorts descending (dateB - dateA).
+    The user's oldest-first selection is always overridden.
+    FIX: Pass orderBy into sortDataReturn and sort accordingly, or remove
+    sortDataReturn entirely and rely on DB sort only.
+
+[7] howMany is uncapped — src/kcna/articles.js:27 → models/db-model.js:70
+    stateFront.howMany comes from a text input and is passed directly to
+    MongoDB .limit(+howMany) with no maximum. User can type 999999 and
+    trigger a full collection scan. .limit(0) returns everything.
+    FIX: Enforce a cap, e.g.:
+      howMany: Math.min(+(howMany) || defaultDataLoad.articles, 100)
+
+[8] Wrong type field checked in runChangeButtonType — public/js/run.js:69
+    Always compares against stateFront.articleType even when switching pic
+    or vid type buttons. A pic/vid button whose value matches the current
+    articleType will silently no-op.
+    FIX: stateFront[`${typePrefix}Type`] === typeId
+
+
+=== MEDIUM — ARCHITECTURE ===
+
+[9] Auth middleware returns 200 HTML on API POST routes — routes/auth.js:7
+    Unauthenticated requests to protected POST routes receive an HTML page
+    with HTTP 200 instead of a 401 JSON response. API callers receive HTML
+    where they expect JSON.
+    FIX: Check req.accepts("json") and return 401 JSON for API requests:
+      if (req.accepts("json")) return res.status(401).json({ error: "Unauthorized" });
+      res.sendFile(path.join(process.cwd(), "html", "auth.html"));
+
+[10] Redundant dbConnect() creates leaked connections — models/db-model.js:6
+     Top-level await dbConnect() runs every time db-model.js is imported.
+     Both main-back.js and admin-back.js import it, causing multiple MongoClient
+     instances that are never closed.
+     FIX: Connect once in app.js before server start. Remove the top-level
+     await dbConnect() from db-model.js.
+
+[11] sortDataReturn duplicates and overrides DB sort — src/main-back.js:31
+     MongoDB already returns pre-sorted results. sortDataReturn re-sorts the
+     same data, adding overhead and (per bug #6) overriding the intended order.
+     FIX: Remove sortDataReturn. Apply consistent two-key sorts at the DB level.
+
+[12] Admin data loads full collections with no limit — src/admin-back.js:37
+     runGetAdminData() calls getAll() on every collection with no .limit().
+     With large collections this can OOM the process.
+     FIX: Add a reasonable limit (e.g. 500 most recent) or paginate.
+
+[13] Static media served without auth — app.js:22-24
+     express.static runs before session/auth middleware. Anyone who discovers
+     the media URL prefix can access all pictures and videos unauthenticated.
+     FIX: Route media through an auth-checking middleware, or accept the risk
+     explicitly if the URL prefix is treated as a secret.
+
+
+=== LOW — CODE QUALITY ===
+
+[14] Duplicate element IDs on repeated DOM elements
+     articles-return.js:131, 149, 162, 170, 186 and collapse-display.js:29
+     IDs like "article-text", "article-element", "article-date", "collapse-arrow"
+     are assigned to elements created once per data item. Multiple items = multiple
+     elements with the same ID. Invalid HTML; getElementById only returns the first.
+     FIX: Change all of these to className.
+
+[15] Two conflicting click listeners per collapse header — collapse-display.js:49, 65
+     buildCollapseContainer adds a toggle listener. defineCollapseItems adds a
+     second listener to the same header for sibling collapse. Both fire on click,
+     potentially re-collapsing the item just opened.
+     FIX: Merge both behaviors into a single listener in defineCollapseItems.
+
+[16] Pervasive unnecessary async/await on synchronous functions
+     Dozens of functions are declared async and awaited but contain no async
+     operations: buildArticleTitle, buildArticleDate, buildArticleText,
+     hideArray, unhideArray, buildArticleParams, buildPicParams, buildVidParams,
+     sortDataReturn, and many more.
+     FIX: Remove async/await from all purely synchronous functions.
+
+[17] Dead code and zero logging
+     - middleware/auth-config.js: requireAuth re-implemented identically in
+       routes/auth.js. The middleware/ version is unused — delete it.
+     - src/kcna/state-kcna.js: almost entirely commented out dead state.
+     - All console.log calls commented out throughout. Zero production logging.
+     FIX: Delete dead files. Add console.error logging for actual errors.
+
+[18] Malformed input guard condition — public/js/responsive.js:70
+     if (!inputElement.value || isNaN(inputElement.value || isNaN(parseInt(inputElement.value))))
+     Due to || short-circuit, the inner isNaN(parseInt(...)) is never evaluated
+     independently. The logic is wrong.
+     FIX:
+       if (!inputElement.value || isNaN(Number(inputElement.value))) return null;

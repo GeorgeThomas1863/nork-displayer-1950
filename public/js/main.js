@@ -30,9 +30,7 @@ export const updateDisplay = async () => {
   const currentDataElement = document.getElementById("return-display-wrapper");
   if (currentDataElement) currentDataElement.remove();
 
-  const updateDataRoute = await sendToBack({ route: "/get-backend-value-route", key: "updateDisplayDataRoute" });
-
-  const updateArray = await sendToBack({ route: updateDataRoute.value, stateFront: stateFront });
+  const updateArray = await sendToBack({ route: "/nork-update-display-data-route", stateFront: stateFront });
   await updateStateFront(updateArray);
 
   // console.log("UPDATE DATA");

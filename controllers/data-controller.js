@@ -1,18 +1,8 @@
-import CONFIG from "../middleware/config.js";
 // import kcnaState from "../src/kcna/state-kcna.js";
 
 import { runUpdateDisplayData } from "../src/main-back.js";
 import { runAdminCommand, runGetAdminData } from "../src/admin-back.js";
 // import { runAdminCommand, getAdminLogs } from "../src/admin-back.js";
-
-export const getBackendValueController = async (req, res) => {
-  const { key } = req.body;
-  if (!key) return null;
-
-  const value = CONFIG[key];
-
-  return res.json({ value });
-};
 
 export const updateDisplayDataController = async (req, res) => {
   const { stateFront } = req.body;

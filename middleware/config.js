@@ -16,13 +16,6 @@ const CONFIG = {
   apiDisplayer: process.env.API_DISPLAYER,
   apiScraper: process.env.API_SCRAPER,
 
-  // Routes
-  updateDisplayDataRoute: process.env.UPDATE_DISPLAY_DATA_ROUTE,
-  adminAuthRoute: process.env.ADMIN_AUTH_ROUTE,
-  adminCommandRoute: process.env.ADMIN_COMMAND_ROUTE,
-  adminDataRoute: process.env.ADMIN_DATA_ROUTE,
-  adminPollingRoute: process.env.ADMIN_POLLING_ROUTE,
-
   // File system paths
   mediaPath: process.env.MEDIA_PATH,
   picPath: process.env.PIC_PATH,

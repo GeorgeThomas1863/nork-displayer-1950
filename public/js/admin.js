@@ -24,11 +24,8 @@ export const updateAdminDisplay = async () => {
   const currentAdminDataElement = document.getElementById("admin-return-container");
   if (currentAdminDataElement) currentAdminDataElement.remove();
 
-  const adminDataRoute = await sendToBack({ route: "/get-backend-value-route", key: "adminDataRoute" });
-  if (!adminDataRoute) return null;
-
-  // const adminUpdateArray = await sendToBack({ route: adminDataRoute.value, stateAdmin: stateAdmin });
-  const adminUpdateArray = await sendToBack({ route: adminDataRoute.value });
+  // const adminUpdateArray = await sendToBack({ route: "/nork-admin-data-route", stateAdmin: stateAdmin });
+  const adminUpdateArray = await sendToBack({ route: "/nork-admin-data-route" });
   // console.log("ADMIN UPDATE ARRAY");
   // console.dir(adminUpdateArray);
 
