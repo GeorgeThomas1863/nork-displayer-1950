@@ -5,7 +5,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "test": "vitest run"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,7 @@
     "express": "^5.1.0",
     "express-session": "^1.18.2",
     "mongodb": "^6.19.0",
-    "nodemon": "^3.1.10"
+    "nodemon": "^3.1.10",
+    "vitest": "^3.2.4"
   }
 }
