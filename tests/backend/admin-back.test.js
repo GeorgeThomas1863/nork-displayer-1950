@@ -1,11 +1,10 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 
 vi.mock('axios', () => ({ default: { post: vi.fn() } }))
 vi.mock('../../middleware/config.js', () => ({
   default: {
     scrapePort: 3001,
     apiScraper: '/api/scrape',
-    apiPassword: 'testpass',
     collectionsArr: ['articles', 'pics', 'vidPages'],
   }
 }))
@@ -18,6 +17,11 @@ import dbModel from '../../models/db-model.js'
 describe('runAdminCommand', () => {
   beforeEach(() => {
     vi.clearAllMocks()
+    process.env.API_PASSWORD = 'testpass'
+  })
+
+  afterEach(() => {
+    delete process.env.API_PASSWORD
   })
 
   it('returns data when axios.post resolves with data', async () => {
@@ -52,7 +56,7 @@ describe('runAdminCommand', () => {
     await runAdminCommand({ command: 'scrape', target: 'kcna' })
     expect(axios.post).toHaveBeenCalledWith(
       'http://localhost:3001/api/scrape',
-      { command: 'scrape', target: 'kcna', apiPassword: 'testpass' }
+      { command: 'scrape', target: 'kcna', password: 'testpass' }
     )
   })
 })
