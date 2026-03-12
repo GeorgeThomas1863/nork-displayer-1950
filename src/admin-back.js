@@ -14,7 +14,7 @@ export const runAdminCommand = async (inputParams) => {
     // console.log("API OUTGOING DATA");
     // console.log(inputParams);
 
-    const apiRes = await axios.post(url, { ...inputParams, apiPassword: CONFIG.apiPassword });
+    const apiRes = await axios.post(url, { ...inputParams, password: process.env.API_PASSWORD });
     if (!apiRes) return null;
     const data = apiRes.data;
 
