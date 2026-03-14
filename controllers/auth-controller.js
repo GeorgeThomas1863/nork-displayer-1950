@@ -1,4 +1,3 @@
-import CONFIG from "../middleware/config.js";
 
 export const authController = async (req, res) => {
   if (!req.body || !req.body.pw) {
@@ -7,7 +6,7 @@ export const authController = async (req, res) => {
   }
 
   //pw check
-  if (req.body.pw !== CONFIG.pw) {
+  if (req.body.pw !== process.env.PW) {
     res.json({ success: false, redirect: "/401" });
     return;
   }
@@ -27,7 +26,7 @@ export const adminAuthController = async (req, res) => {
   }
 
   //pw check
-  if (req.body.pwAdmin !== CONFIG.pwAdmin) {
+  if (req.body.pwAdmin !== process.env.ADMIN_PW) {
     res.json({ success: false, redirect: "/401" });
     return;
   }

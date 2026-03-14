@@ -8,23 +8,21 @@ import express from "express";
 import session from "express-session";
 import routes from "./routes/router.js";
 
-import CONFIG from "./middleware/config.js";
+import { buildSessionConfig } from "./middleware/session-config.js";
 import { dbConnect } from "./middleware/db-config.js";
 import { requireAuth } from "./routes/auth.js";
-
-const { expressPicPath, expressVidPath, expressWatchPath, picPath, vidPath, watchPath, displayPort } = CONFIG;
 
 const app = express();
 
 //claude solution to auth problem
 // app.set("trust proxy", 1);
 
-app.use(session(CONFIG.buildSessionConfig()));
+app.use(session(buildSessionConfig()));
 
 //custom paths to expose to frontend
-app.use(expressPicPath, requireAuth, express.static(picPath));
-app.use(expressVidPath, requireAuth, express.static(vidPath));
-app.use(expressWatchPath, requireAuth, express.static(watchPath));
+app.use(process.env.EXPRESS_PIC_PATH, requireAuth, express.static(process.env.PIC_PATH));
+app.use(process.env.EXPRESS_VID_PATH, requireAuth, express.static(process.env.VID_PATH));
+app.use(process.env.EXPRESS_WATCH_PATH, requireAuth, express.static(process.env.WATCH_PATH));
 
 //standard public path
 app.use(express.static("public"));
@@ -37,4 +35,4 @@ app.use(routes);
 
 // app.listen(1801);
 await dbConnect();
-app.listen(displayPort);
+app.listen(process.env.DISPLAY_PORT);

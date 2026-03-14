@@ -1,4 +1,3 @@
-import CONFIG from "../../middleware/config.js";
 import { dataLookup } from "../main-back.js";
 // import dbModel from "../../models/db-model.js";
 
@@ -17,7 +16,6 @@ export const getNewPics = async (inputParams) => {
 export const buildPicParams = (inputParams) => {
   if (!inputParams) return null;
   const { howMany, picType } = inputParams;
-  const { defaultDataLoad } = CONFIG;
 
   let params = null;
   switch (picType) {
@@ -25,7 +23,7 @@ export const buildPicParams = (inputParams) => {
       params = {
         sortKey: "date",
         sortKey2: "picId",
-        howMany: Math.min(+(howMany) || defaultDataLoad.pics, 100),
+        howMany: Math.min(+(howMany) || +process.env.DEFAULT_LOAD_PICS, 100),
       };
       break;
 
@@ -33,7 +31,7 @@ export const buildPicParams = (inputParams) => {
       params = {
         sortKey: "date",
         sortKey2: "picSetId",
-        howMany: Math.min(+(howMany) || defaultDataLoad.picSets, 100),
+        howMany: Math.min(+(howMany) || +process.env.DEFAULT_LOAD_PICSETS, 100),
       };
       break;
 

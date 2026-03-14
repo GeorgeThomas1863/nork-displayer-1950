@@ -1,4 +1,3 @@
-import CONFIG from "../../middleware/config.js";
 // import dbModel from "../../models/db-model.js";
 import { dataLookup } from "../main-back.js";
 
@@ -16,7 +15,6 @@ export const getNewVids = async (inputParams) => {
 export const buildVidParams = (inputParams) => {
   if (!inputParams) return null;
   const { howMany, vidType } = inputParams;
-  const { defaultDataLoad } = CONFIG;
 
   let params = null;
   switch (vidType) {
@@ -24,7 +22,7 @@ export const buildVidParams = (inputParams) => {
       params = {
         sortKey: "date",
         sortKey2: "vidId",
-        howMany: Math.min(+(howMany) || defaultDataLoad.vids, 100),
+        howMany: Math.min(+(howMany) || +process.env.DEFAULT_LOAD_VIDS, 100),
       };
       break;
 
@@ -32,7 +30,7 @@ export const buildVidParams = (inputParams) => {
       params = {
         sortKey: "date",
         sortKey2: "vidPageId",
-        howMany: Math.min(+(howMany) || defaultDataLoad.vidPages, 100),
+        howMany: Math.min(+(howMany) || +process.env.DEFAULT_LOAD_VIDPAGES, 100),
       };
       break;
 

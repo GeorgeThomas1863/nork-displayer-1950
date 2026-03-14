@@ -1,4 +1,3 @@
-import CONFIG from "../../middleware/config.js";
 // import dbModel from "../../models/db-model.js";
 import { dataLookup } from "../main-back.js";
 
@@ -17,13 +16,12 @@ export const getNewArticles = async (inputParams) => {
 export const buildArticleParams = (inputParams) => {
   if (!inputParams) return null;
   const { articleType, howMany } = inputParams;
-  const { defaultDataLoad } = CONFIG;
 
   if (articleType === "all") {
     const allParams = {
       sortKey: "date",
       sortKey2: "articleId",
-      howMany: Math.min(+(howMany) || defaultDataLoad.articles, 100),
+      howMany: Math.min(+(howMany) || +process.env.DEFAULT_LOAD_ARTICLES, 100),
     };
     return allParams;
   }
@@ -31,7 +29,7 @@ export const buildArticleParams = (inputParams) => {
   const articleParams = {
     filterKey: "articleType",
     filterValue: articleType,
-    howMany: Math.min(+(howMany) || defaultDataLoad.articles, 100),
+    howMany: Math.min(+(howMany) || +process.env.DEFAULT_LOAD_ARTICLES, 100),
     sortKey: "date",
   };
 

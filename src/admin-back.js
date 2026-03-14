@@ -1,15 +1,12 @@
 import axios from "axios";
-import CONFIG from "../middleware/config.js";
 
 import dbModel from "../models/db-model.js";
 
 export const runAdminCommand = async (inputParams) => {
-  const { scrapePort, apiScraper } = CONFIG;
-
   //CREATE DISPLAYER ID
 
   try {
-    const url = `http://localhost:${scrapePort}${apiScraper}`;
+    const url = `http://localhost:${process.env.SCRAPE_PORT}${process.env.API_SCRAPER}`;
     // console.log(`SENDING API REQ TO ${url}`);
     // console.log("API OUTGOING DATA");
     // console.log(inputParams);
@@ -28,7 +25,7 @@ export const runAdminCommand = async (inputParams) => {
 };
 
 export const runGetAdminData = async () => {
-  const { collectionsArr } = CONFIG;
+  const collectionsArr = process.env.COLLECTIONSARR.split(",");
 
   const dataArray = [];
   for (const collection of collectionsArr) {
