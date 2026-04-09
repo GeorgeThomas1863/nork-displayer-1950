@@ -1,6 +1,7 @@
 import axios from "axios";
 
 import dbModel from "../models/db-model.js";
+import { dbGet } from "../middleware/db-config.js";
 
 export const runAdminCommand = async (inputParams) => {
   //CREATE DISPLAYER ID
@@ -14,6 +15,17 @@ export const runAdminCommand = async (inputParams) => {
     const apiRes = await axios.post(url, { ...inputParams, password: process.env.API_PASSWORD });
     if (!apiRes) return null;
     const data = apiRes.data;
+
+    const cmd = inputParams.command;
+    if (cmd === "admin-start-scheduler" || cmd === "admin-stop-scheduler") {
+      await dbGet()
+        .collection("appConfig")
+        .updateOne(
+          { _id: "config" },
+          { $set: { schedulerActive: cmd === "admin-start-scheduler" } },
+          { upsert: true }
+        );
+    }
 
     // console.log("API OUTGOING RESPONSE");
     // console.log(data);
