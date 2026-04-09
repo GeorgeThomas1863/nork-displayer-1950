@@ -1,13 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 
 vi.mock('axios', () => ({ default: { post: vi.fn() } }))
-vi.mock('../../middleware/config.js', () => ({
-  default: {
-    scrapePort: 3001,
-    apiScraper: '/api/scrape',
-    collectionsArr: ['articles', 'pics', 'vidPages'],
-  }
-}))
 vi.mock('../../models/db-model.js', () => ({ default: vi.fn() }))
 
 import { runAdminCommand, runGetAdminData } from '../../src/admin-back.js'
@@ -18,10 +11,14 @@ describe('runAdminCommand', () => {
   beforeEach(() => {
     vi.clearAllMocks()
     process.env.API_PASSWORD = 'testpass'
+    process.env.SCRAPE_PORT = '3001'
+    process.env.API_SCRAPER = '/api/scrape'
   })
 
   afterEach(() => {
     delete process.env.API_PASSWORD
+    delete process.env.SCRAPE_PORT
+    delete process.env.API_SCRAPER
   })
 
   it('returns data when axios.post resolves with data', async () => {
@@ -66,6 +63,11 @@ describe('runGetAdminData', () => {
 
   beforeEach(() => {
     vi.clearAllMocks()
+    process.env.COLLECTIONSARR = 'articles,pics,vidPages'
+  })
+
+  afterEach(() => {
+    delete process.env.COLLECTIONSARR
   })
 
   it('returns an array with 3 items when all collections return data', async () => {

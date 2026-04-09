@@ -13,7 +13,7 @@ export const updateDisplayDataController = async (req, res) => {
 //send admin command
 export const adminCommandController = async (req, res) => {
   const inputParams = req.body;
-  if (!inputParams) return null;
+  if (!inputParams) return res.status(400).json({ error: "Bad request" });
 
   const data = await runAdminCommand(inputParams);
   return res.json(data);

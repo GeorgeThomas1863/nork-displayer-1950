@@ -39,7 +39,7 @@ app.use(routes);
 await dbConnect();
 app.listen(process.env.DISPLAY_PORT);
 
-autoStartScheduler();
+autoStartScheduler().catch(e => console.error("[startup] Fatal:", e));
 
 async function autoStartScheduler() {
   const config = await dbGet().collection("appConfig").findOne({ _id: "config" });

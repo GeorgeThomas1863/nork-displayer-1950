@@ -14,6 +14,7 @@ export const sendToBack = async (inputParams) => {
     const data = await res.json();
     return data;
   } catch (error) {
-    // console.log(error);
+    console.error("sendToBack failed:", error.message);
+    return null;
   }
 };

@@ -1,8 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest'
-
-vi.mock('../../middleware/config.js', () => ({
-  default: { pw: 'correctpw', pwAdmin: 'correctadminpw' }
-}))
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 
 import { authController, adminAuthController } from '../../controllers/auth-controller.js'
 
@@ -16,6 +12,16 @@ function makeReq(body, regenerateErr = null) {
   }
   return { body, session }
 }
+
+beforeEach(() => {
+  process.env.PW = 'correctpw'
+  process.env.ADMIN_PW = 'correctadminpw'
+})
+
+afterEach(() => {
+  delete process.env.PW
+  delete process.env.ADMIN_PW
+})
 
 describe('authController', () => {
   it('returns failure json when body is absent', async () => {
