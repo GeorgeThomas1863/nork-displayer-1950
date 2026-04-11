@@ -152,8 +152,7 @@ export const buildArticleElement = async (inputObj) => {
   const dateElement = await buildArticleDate(date);
   const textElement = await buildArticleText(text);
 
-  if (textElement) articleElement.append(dateElement, textElement);
-  else articleElement.append(dateElement);
+  articleElement.append(dateElement, textElement);
 
   return articleElement;
 };

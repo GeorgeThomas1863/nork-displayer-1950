@@ -1,4 +1,8 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
+import { describe, it, expect, vi, beforeEach } from 'vitest'
+
+vi.mock('../../middleware/config.js', () => ({
+  default: { defaultDataLoad: { vids: 3, vidPages: 4 } }
+}))
 
 vi.mock('../../src/main-back.js', () => ({
   dataLookup: vi.fn()
@@ -9,13 +13,6 @@ import { dataLookup } from '../../src/main-back.js'
 
 beforeEach(() => {
   vi.clearAllMocks()
-  process.env.DEFAULT_LOAD_VIDS = '3'
-  process.env.DEFAULT_LOAD_VIDPAGES = '4'
-})
-
-afterEach(() => {
-  delete process.env.DEFAULT_LOAD_VIDS
-  delete process.env.DEFAULT_LOAD_VIDPAGES
 })
 
 describe('buildVidParams', () => {

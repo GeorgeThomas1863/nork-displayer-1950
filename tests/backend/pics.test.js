@@ -1,4 +1,8 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
+import { describe, it, expect, vi, beforeEach } from 'vitest'
+
+vi.mock('../../middleware/config.js', () => ({
+  default: { defaultDataLoad: { pics: 5, picSets: 3 } }
+}))
 
 vi.mock('../../src/main-back.js', () => ({
   dataLookup: vi.fn()
@@ -9,13 +13,6 @@ import { dataLookup } from '../../src/main-back.js'
 
 beforeEach(() => {
   vi.clearAllMocks()
-  process.env.DEFAULT_LOAD_PICS = '5'
-  process.env.DEFAULT_LOAD_PICSETS = '3'
-})
-
-afterEach(() => {
-  delete process.env.DEFAULT_LOAD_PICS
-  delete process.env.DEFAULT_LOAD_PICSETS
 })
 
 describe('buildPicParams', () => {

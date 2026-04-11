@@ -60,12 +60,12 @@ describe('adminCommandController', () => {
     expect(res.json).toHaveBeenCalledWith(result)
   })
 
-  it('returns 400 when req.body is null', async () => {
+  it('returns null without calling res.json when req.body is null', async () => {
     const req = { body: null }
     const res = makeRes()
-    await adminCommandController(req, res)
-    expect(res.status).toHaveBeenCalledWith(400)
-    expect(res.json).toHaveBeenCalledWith({ error: 'Bad request' })
+    const returnVal = await adminCommandController(req, res)
+    expect(returnVal).toBeNull()
+    expect(res.json).not.toHaveBeenCalled()
   })
 })
 
