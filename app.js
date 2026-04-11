@@ -1,8 +1,6 @@
 //FIGURE OUT HOWTO PULL PICS FROM TELEGRAM AND DISPLAY ON FRONTEND, CANNOT STORE PICS ON SERVER, TOO FUCKING MANY
 //change duration to hours / minutes on admin display
-//keep going
 
-//FIGURE OUT HOW TO ACTUALLY SECURE MONGO
 
 import express from "express";
 import session from "express-session";

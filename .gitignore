@@ -25,6 +25,8 @@ build/Release
 node_modules/
 package-lock.json
 
+code-review-todo.txt
+/code-review-todo.txt
 
 # Optional npm cache directory
 .npm
