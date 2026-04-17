@@ -13,7 +13,7 @@ import { requireAuth } from "./routes/auth.js";
 const app = express();
 
 //claude solution to auth problem
-// app.set("trust proxy", 1);
+app.set("trust proxy", 1);
 
 app.use(session(buildSessionConfig()));
 
