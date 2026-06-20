@@ -8,10 +8,22 @@ const adminDisplayElement = document.getElementById("admin-display-element");
 //BREAK OUT INTO SEPARATE FUNCTIONS
 export const buildAdminDisplay = async () => {
   if (!adminDisplayElement) return null;
-  // const { isFirstLoad } = stateAdmin;
+
+  const sidebar = document.createElement("div");
+  sidebar.id = "admin-sidebar";
+
+  const sidebarTitle = document.createElement("div");
+  sidebarTitle.id = "admin-sidebar-title";
+  sidebarTitle.textContent = "KCNA Monitor";
+  sidebar.append(sidebarTitle);
 
   const adminFormData = await buildAdminForm();
-  adminDisplayElement.append(adminFormData);
+  sidebar.append(adminFormData);
+
+  const mainContent = document.createElement("div");
+  mainContent.id = "admin-main-content";
+
+  adminDisplayElement.append(sidebar, mainContent);
 
   await updateAdminDisplay();
 
@@ -21,18 +33,18 @@ export const buildAdminDisplay = async () => {
 export const updateAdminDisplay = async () => {
   if (!adminDisplayElement) return null;
 
+  const mainContent = document.getElementById("admin-main-content");
+  if (!mainContent) return null;
+
   const currentAdminDataElement = document.getElementById("admin-return-container");
   if (currentAdminDataElement) currentAdminDataElement.remove();
 
-  // const adminUpdateArray = await sendToBack({ route: "/nork-admin-data-route", stateAdmin: stateAdmin });
   const adminUpdateArray = await sendToBack({ route: "/nork-admin-data-route" });
-  // console.log("ADMIN UPDATE ARRAY");
-  // console.dir(adminUpdateArray);
 
   const adminReturnDisplay = await buildAdminReturnDisplay(adminUpdateArray);
   if (!adminReturnDisplay) return null;
 
-  adminDisplayElement.append(adminReturnDisplay);
+  mainContent.append(adminReturnDisplay);
 };
 
 buildAdminDisplay();

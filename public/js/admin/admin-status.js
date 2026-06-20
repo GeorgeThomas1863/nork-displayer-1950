@@ -1,9 +1,10 @@
 import { buildCollapseContainer } from "../util/collapse-display.js";
 
-const adminFormOverallWrapper = document.getElementById("admin-form-overall-wrapper");
-
 export const buildAdminStatusDisplay = async (inputData) => {
   if (!inputData) return null;
+
+  const adminFormOverallWrapper = document.getElementById("admin-form-overall-wrapper");
+  if (!adminFormOverallWrapper) return null;
   const { scrapeActive, schedulerActive, scrapeLengthSeconds, scrapeMessage, scrapeId } = inputData;
 
   console.log("ADMIN STATUS DATA");
