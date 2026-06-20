@@ -33,4 +33,8 @@ app.use(routes);
 
 // app.listen(1801);
 await dbConnect();
-app.listen(process.env.DISPLAY_PORT);
+
+app.listen(process.env.DISPLAY_PORT, () =>
+  console.log(`Displayer running on port ${process.env.DISPLAY_PORT}`)
+);
+
