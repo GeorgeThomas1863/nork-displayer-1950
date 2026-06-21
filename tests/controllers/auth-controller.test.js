@@ -1,8 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest'
-
-vi.mock('../../middleware/config.js', () => ({
-  default: { pw: 'correctpw', pwAdmin: 'correctadminpw' }
-}))
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 
 import { authController, adminAuthController } from '../../controllers/auth-controller.js'
 
@@ -10,12 +6,23 @@ function makeRes() {
   return { status: vi.fn().mockReturnThis(), json: vi.fn() }
 }
 
-function makeReq(body, regenerateErr = null) {
+function makeReq(body, regenerateErr = null, saveErr = null) {
   const session = {
     regenerate: vi.fn((cb) => cb(regenerateErr)),
+    save: vi.fn((cb) => cb(saveErr)),
   }
   return { body, session }
 }
+
+beforeEach(() => {
+  process.env.PW = 'correctpw'
+  process.env.ADMIN_PW = 'correctadminpw'
+})
+
+afterEach(() => {
+  delete process.env.PW
+  delete process.env.ADMIN_PW
+})
 
 describe('authController', () => {
   it('returns failure json when body is absent', async () => {
@@ -47,8 +54,16 @@ describe('authController', () => {
     expect(res.json).toHaveBeenCalledWith({ success: true, redirect: '/' })
   })
 
-  it('returns status 500 failure when regenerate errors', async () => {
+  it('returns status 500 when regenerate errors', async () => {
     const req = makeReq({ pw: 'correctpw' }, new Error('session error'))
+    const res = makeRes()
+    await authController(req, res)
+    expect(res.status).toHaveBeenCalledWith(500)
+    expect(res.json).toHaveBeenCalledWith({ success: false, redirect: '/401' })
+  })
+
+  it('returns status 500 when save errors', async () => {
+    const req = makeReq({ pw: 'correctpw' }, null, new Error('save error'))
     const res = makeRes()
     await authController(req, res)
     expect(res.status).toHaveBeenCalledWith(500)
@@ -87,8 +102,16 @@ describe('adminAuthController', () => {
     expect(res.json).toHaveBeenCalledWith({ success: true, redirect: '/admin' })
   })
 
-  it('returns status 500 failure when regenerate errors', async () => {
+  it('returns status 500 when regenerate errors', async () => {
     const req = makeReq({ pwAdmin: 'correctadminpw' }, new Error('session error'))
+    const res = makeRes()
+    await adminAuthController(req, res)
+    expect(res.status).toHaveBeenCalledWith(500)
+    expect(res.json).toHaveBeenCalledWith({ success: false, redirect: '/401' })
+  })
+
+  it('returns status 500 when save errors', async () => {
+    const req = makeReq({ pwAdmin: 'correctadminpw' }, null, new Error('save error'))
     const res = makeRes()
     await adminAuthController(req, res)
     expect(res.status).toHaveBeenCalledWith(500)

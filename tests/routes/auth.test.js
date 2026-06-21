@@ -7,6 +7,7 @@ function makeReq(session = {}, method = 'GET') {
 
 function makeRes() {
   const res = {
+    setHeader: vi.fn(),
     status: vi.fn().mockReturnThis(),
     json: vi.fn(),
     sendFile: vi.fn(),

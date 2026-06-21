@@ -1,8 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest'
-
-vi.mock('../../middleware/config.js', () => ({
-  default: { defaultDataLoad: { articles: 3 } }
-}))
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 
 vi.mock('../../src/main-back.js', () => ({
   dataLookup: vi.fn()
@@ -13,6 +9,11 @@ import { dataLookup } from '../../src/main-back.js'
 
 beforeEach(() => {
   vi.clearAllMocks()
+  process.env.DEFAULT_LOAD_ARTICLES = '3'
+})
+
+afterEach(() => {
+  delete process.env.DEFAULT_LOAD_ARTICLES
 })
 
 describe('buildArticleParams', () => {
