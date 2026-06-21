@@ -13,6 +13,7 @@ config/
 
 .claude/.tmp
 .claude/.pics
+.playwright-mcp
 
 # logs
 logs
