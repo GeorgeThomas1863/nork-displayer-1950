@@ -1,6 +1,6 @@
-// import stateAdmin from "./admin/admin-state.js";
 import { buildAdminForm } from "./admin/admin-form.js";
 import { buildAdminReturnDisplay } from "./admin/admin-return.js";
+import { buildAdminStatusDisplay } from "./admin/admin-status.js";
 import { sendToBack } from "./util/api-front.js";
 
 const adminDisplayElement = document.getElementById("admin-display-element");
@@ -15,9 +15,14 @@ export const buildAdminDisplay = async () => {
   const sidebarTitle = document.createElement("div");
   sidebarTitle.id = "admin-sidebar-title";
   sidebarTitle.textContent = "KCNA Monitor";
-  sidebar.append(sidebarTitle);
 
-  const adminFormData = await buildAdminForm();
+  const sidebarSub = document.createElement("div");
+  sidebarSub.className = "admin-sidebar-sub";
+  sidebarSub.textContent = "Scraper Control";
+
+  sidebar.append(sidebarTitle, sidebarSub);
+
+  const adminFormData = buildAdminForm();
   sidebar.append(adminFormData);
 
   const mainContent = document.createElement("div");
@@ -26,6 +31,7 @@ export const buildAdminDisplay = async () => {
   adminDisplayElement.append(sidebar, mainContent);
 
   await updateAdminDisplay();
+  await buildAdminStatusDisplay(null);
 
   return true;
 };

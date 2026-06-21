@@ -1,224 +1,112 @@
-import { buildCollapseContainer } from "../util/collapse-display.js";
+export const buildAdminForm = () => {
+  const form = document.createElement("div");
+  form.className = "admin-sidebar-form";
 
-export const buildAdminForm = async () => {
-  const adminFormOverallWrapper = document.createElement("div");
-  adminFormOverallWrapper.id = "admin-form-overall-wrapper";
+  const commandGroup = buildCommandFormGroup();
+  const targetGroup = buildTargetFormGroup();
+  const howMuchGroup = buildHowMuchFormGroup();
+  const urlGroup = buildUrlFormGroup();
+  const buttonRow = buildButtonRow();
 
-  const adminFormWrapper = document.createElement("ul");
-  adminFormWrapper.id = "admin-form-wrapper";
-
-  const commandListItem = await buildCommandListItem();
-  const targetListItem = await buildTargetListItem();
-  const howMuchListItem = await buildHowMuchListItem();
-  const urlListItem = await buildUrlListItem();
-  const buttonListItem = await buildButtonListItem();
-
-  //append everything
-  adminFormWrapper.append(commandListItem, targetListItem, howMuchListItem, urlListItem, buttonListItem);
-
-  //MAKE IT COLLAPSE HERE
-  const titleElement = document.createElement("div");
-  titleElement.textContent = "ADMIN FORM CONTROL";
-  titleElement.className = "admin-form-title";
-
-  //build collapse container
-  const adminFormCollapseParams = {
-    titleElement: titleElement,
-    contentElement: adminFormWrapper,
-    isExpanded: true,
-    className: "admin-form-collapse",
-    dataAttribute: "admin-form-header",
-  };
-
-  const adminFormCollapseContainer = await buildCollapseContainer(adminFormCollapseParams);
-  adminFormCollapseContainer.className = "wrapper";
-  adminFormCollapseContainer.id = "admin-form-collapse-container";
-
-  //build update button
-  // const adminUpdateDataButton = await buildAdminUpdateDataButton();
-
-  // adminFormOverallWrapper.append(adminFormCollapseContainer, adminUpdateDataButton);
-
-  adminFormOverallWrapper.append(adminFormCollapseContainer);
-
-  return adminFormOverallWrapper;
+  form.append(commandGroup, targetGroup, howMuchGroup, urlGroup, buttonRow);
+  return form;
 };
 
-export const buildCommandListItem = async () => {
-  // Create Command list item
-  const commandListItem = document.createElement("li");
-  commandListItem.id = "admin-command-list-item";
+//---
 
-  const commandLabel = document.createElement("label");
-  commandLabel.setAttribute("for", "admin-command-type");
-  commandLabel.textContent = "Command";
-
-  const commandSelect = document.createElement("select");
-  commandSelect.name = "admin-command-type";
-  commandSelect.id = "admin-command-type";
-
-  // Command select options //WORK ON DISPLAYING THE RETURN OF BELOW FROM SCRAPER
-  const commandOptionArray = [
-    { value: "admin-start-scrape", id: "admin-start-scrape", text: "Scrape Start", selected: true },
-    { value: "admin-stop-scrape", id: "admin-stop-scrape", text: "Scrape Stop" },
-    { value: "admin-start-scheduler", id: "admin-start-scheduler", text: "Scheduler ON" },
-    { value: "admin-stop-scheduler", id: "admin-stop-scheduler", text: "Scheduler OFF" },
-    { value: "admin-scrape-status", id: "admin-scrape-status", text: "Get Scrape Status" },
+const buildCommandFormGroup = () => {
+  const options = [
+    { value: "admin-start-scrape", text: "Scrape Start", selected: true },
+    { value: "admin-stop-scrape", text: "Scrape Stop" },
+    { value: "admin-start-scheduler", text: "Scheduler ON" },
+    { value: "admin-stop-scheduler", text: "Scheduler OFF" },
+    { value: "admin-scrape-status", text: "Get Scrape Status" },
   ];
+  return buildFormGroup("Command", "admin-command-type", buildSelect("admin-command-type", options));
+};
 
-  for (let i = 0; i < commandOptionArray.length; i++) {
-    const optionData = commandOptionArray[i];
+const buildTargetFormGroup = () => {
+  const options = [
+    { value: "kcna", text: "KCNA", selected: true },
+    { value: "watch", text: "KCNA Watch" },
+  ];
+  return buildFormGroup("Target", "admin-target-type", buildSelect("admin-target-type", options));
+};
+
+const buildHowMuchFormGroup = () => {
+  const options = [
+    { value: "admin-scrape-new", text: "Scrape NEW", selected: true },
+    { value: "admin-scrape-all", text: "Scrape ALL" },
+    { value: "admin-scrape-url", text: "Scrape URL" },
+  ];
+  return buildFormGroup("How Much", "admin-how-much", buildSelect("admin-how-much", options));
+};
+
+const buildUrlFormGroup = () => {
+  const group = document.createElement("div");
+  group.id = "admin-url-input-list-item";
+  group.className = "admin-form-group hidden";
+
+  const label = document.createElement("label");
+  label.setAttribute("for", "admin-url-input");
+  label.textContent = "URL";
+
+  const input = document.createElement("input");
+  input.type = "text";
+  input.id = "admin-url-input";
+  input.name = "admin-url-input";
+  input.placeholder = "https://kcna.kp/...";
+
+  group.append(label, input);
+  return group;
+};
+
+const buildButtonRow = () => {
+  const row = document.createElement("div");
+  row.className = "admin-btn-row";
+
+  const updateBtn = document.createElement("button");
+  updateBtn.id = "admin-update-data-button";
+  updateBtn.className = "admin-btn admin-btn-secondary";
+  updateBtn.textContent = "Update Mongo";
+  updateBtn.setAttribute("data-label", "admin-update-data-button");
+
+  const submitBtn = document.createElement("button");
+  submitBtn.id = "admin-submit-button";
+  submitBtn.className = "admin-btn admin-btn-primary";
+  submitBtn.textContent = "Submit";
+  submitBtn.setAttribute("data-label", "admin-command-submit");
+
+  row.append(updateBtn, submitBtn);
+  return row;
+};
+
+//---
+
+const buildFormGroup = (labelText, inputId, inputElement) => {
+  const group = document.createElement("div");
+  group.className = "admin-form-group";
+
+  const label = document.createElement("label");
+  label.setAttribute("for", inputId);
+  label.textContent = labelText;
+
+  group.append(label, inputElement);
+  return group;
+};
+
+const buildSelect = (id, options) => {
+  const select = document.createElement("select");
+  select.name = id;
+  select.id = id;
+
+  for (const opt of options) {
     const option = document.createElement("option");
-    option.value = optionData.value;
-    option.id = optionData.id;
-    option.textContent = optionData.text;
-    if (optionData.selected) {
-      option.selected = true;
-    }
-    commandSelect.append(option);
+    option.value = opt.value;
+    option.textContent = opt.text;
+    if (opt.selected) option.selected = true;
+    select.append(option);
   }
 
-  commandListItem.appendChild(commandLabel);
-  commandListItem.appendChild(commandSelect);
-
-  return commandListItem;
+  return select;
 };
-
-export const buildTargetListItem = async () => {
-  const targetListItem = document.createElement("li");
-  targetListItem.id = "admin-target-list-item";
-
-  const targetLabel = document.createElement("label");
-  targetLabel.setAttribute("for", "admin-target-type");
-  targetLabel.textContent = "Target Site";
-
-  const targetSelect = document.createElement("select");
-  targetSelect.name = "admin-target-type";
-  targetSelect.id = "admin-target-type";
-
-  const targetOptionArray = [
-    { value: "kcna", id: "kcna", text: "KCNA", selected: true },
-    { value: "watch", id: "watch", text: "KCNA Watch" },
-  ];
-
-  for (let i = 0; i < targetOptionArray.length; i++) {
-    const optionData = targetOptionArray[i];
-    const option = document.createElement("option");
-    option.value = optionData.value;
-    option.id = optionData.id;
-    option.textContent = optionData.text;
-    if (optionData.selected) {
-      option.selected = true;
-    }
-    targetSelect.append(option);
-  }
-
-  targetListItem.appendChild(targetLabel);
-  targetListItem.appendChild(targetSelect);
-
-  return targetListItem;
-};
-
-export const buildHowMuchListItem = async () => {
-  // Create How Much list item
-  const howMuchListItem = document.createElement("li");
-  howMuchListItem.id = "admin-how-much-list-item";
-
-  const howMuchLabel = document.createElement("label");
-  howMuchLabel.setAttribute("for", "admin-how-much");
-  howMuchLabel.textContent = "How Much?";
-
-  const howMuchSelect = document.createElement("select");
-  howMuchSelect.name = "admin-how-much";
-  howMuchSelect.id = "admin-how-much";
-
-  // How Much select options
-  const howMuchOptionArray = [
-    {
-      value: "admin-scrape-new",
-      id: "admin-scrape-new",
-      text: "Scrape NEW",
-      selected: true,
-    },
-    { value: "admin-scrape-all", id: "admin-scrape-all", text: "Scrape ALL" },
-    { value: "admin-scrape-url", id: "admin-scrape-url", text: "Scrape URL" },
-  ];
-
-  for (let i = 0; i < howMuchOptionArray.length; i++) {
-    const optionData = howMuchOptionArray[i];
-    const option = document.createElement("option");
-    option.value = optionData.value;
-    option.id = optionData.id;
-    option.textContent = optionData.text;
-    if (optionData.selected) {
-      option.selected = true;
-    }
-    howMuchSelect.append(option);
-  }
-
-  howMuchListItem.appendChild(howMuchLabel);
-  howMuchListItem.appendChild(howMuchSelect);
-
-  return howMuchListItem;
-};
-
-export const buildUrlListItem = async () => {
-  // Create URL input (hidden)
-  const urlListItem = document.createElement("li");
-  urlListItem.id = "admin-url-input-list-item";
-  urlListItem.className = "hidden";
-
-  const urlLabel = document.createElement("label");
-  urlLabel.setAttribute("for", "admin-url-input");
-  urlLabel.textContent = "URL";
-
-  const urlInput = document.createElement("input");
-  urlInput.type = "text";
-  urlInput.name = "admin-url-input";
-  urlInput.id = "admin-url-input";
-
-  urlListItem.appendChild(urlLabel);
-  urlListItem.appendChild(urlInput);
-
-  return urlListItem;
-};
-
-export const buildButtonListItem = async () => {
-  const buttonListItem = document.createElement("li");
-  buttonListItem.id = "admin-button-list-item";
-
-  // Create submit button
-  const submitButton = document.createElement("button");
-  submitButton.id = "admin-submit-button";
-  submitButton.className = "btn-submit";
-  submitButton.textContent = "Submit";
-  submitButton.setAttribute("data-label", "admin-command-submit");
-
-  const updateDataButton = document.createElement("button");
-  updateDataButton.id = "admin-update-data-button";
-  updateDataButton.textContent = "Update Mongo";
-  updateDataButton.className = "btn-submit";
-  updateDataButton.setAttribute("data-label", "admin-update-data-button");
-
-  // Create list item for button
-
-  buttonListItem.append(updateDataButton, submitButton);
-
-  return buttonListItem;
-};
-
-//-----------------------
-
-// export const buildAdminUpdateDataButton = async () => {
-//   const adminUpdateDataButtonWrapper = document.createElement("div");
-//   adminUpdateDataButtonWrapper.id = "admin-update-data-button-wrapper";
-
-//   const adminUpdateDataButton = document.createElement("button");
-//   adminUpdateDataButton.id = "admin-update-data-button";
-//   adminUpdateDataButton.textContent = "Update Mongo Data";
-//   adminUpdateDataButton.className = "btn-submit";
-//   adminUpdateDataButton.setAttribute("data-label", "admin-update-data-button");
-
-//   adminUpdateDataButtonWrapper.append(adminUpdateDataButton);
-//   return adminUpdateDataButtonWrapper;
-// };

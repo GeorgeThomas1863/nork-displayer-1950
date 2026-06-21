@@ -1,148 +1,87 @@
-import { buildCollapseContainer } from "../util/collapse-display.js";
-
 export const buildAdminStatusDisplay = async (inputData) => {
-  if (!inputData) return null;
+  const sidebar = document.getElementById("admin-sidebar");
+  if (!sidebar) return null;
 
-  const adminFormOverallWrapper = document.getElementById("admin-form-overall-wrapper");
-  if (!adminFormOverallWrapper) return null;
-  const { scrapeActive, schedulerActive, scrapeLengthSeconds, scrapeMessage, scrapeId } = inputData;
+  const existingSection = document.getElementById("admin-status-section");
+  if (existingSection) existingSection.remove();
 
-  console.log("ADMIN STATUS DATA");
-  console.dir(inputData);
+  const { scrapeActive = false, schedulerActive = false, scrapeLengthSeconds = null, scrapeMessage = null, scrapeId = null } = inputData || {};
 
-  //remove existing data
-  const currentAdminStatusElement = document.getElementById("admin-status-collapse-container");
-  if (currentAdminStatusElement) currentAdminStatusElement.remove();
-
-  const adminStatusWrapper = document.createElement("ul");
-  adminStatusWrapper.id = "admin-status-wrapper";
-
-  const scrapeMessageListItem = await buildScrapeMessageListItem(scrapeMessage);
-  const scrapeIdListItem = await buildScrapeIdListItem(scrapeId);
-  const scrapeStatusListItem = await buildScrapeStatusListItem(scrapeActive);
-  const schedulerStatusListItem = await buildSchedulerStatusListItem(schedulerActive);
-  const scrapeLengthSecondsListItem = await buildScrapeLengthSecondsListItem(scrapeLengthSeconds);
-
-  adminStatusWrapper.append(scrapeMessageListItem, scrapeIdListItem, scrapeStatusListItem, schedulerStatusListItem, scrapeLengthSecondsListItem);
-
-  const statsTitleElement = document.createElement("div");
-  statsTitleElement.textContent = "SCRAPE STATUS";
-  statsTitleElement.id = "admin-stats-title";
-  statsTitleElement.className = "admin-stats-title";
-
-  const adminStatusCollapseParams = {
-    titleElement: statsTitleElement,
-    contentElement: adminStatusWrapper,
-    isExpanded: true,
-    className: "admin-status-collapse",
-    dataAttribute: "admin-status-header",
-  };
-
-  const adminStatusCollapseContainer = await buildCollapseContainer(adminStatusCollapseParams);
-  adminStatusCollapseContainer.id = "admin-status-collapse-container";
-
-  adminFormOverallWrapper.append(adminStatusCollapseContainer);
-
-  return adminFormOverallWrapper;
+  const section = buildStatusSection({ scrapeActive, schedulerActive, scrapeLengthSeconds, scrapeMessage, scrapeId });
+  sidebar.append(section);
+  return true;
 };
 
-//should use loops but dont care
-export const buildScrapeMessageListItem = async (scrapeMessage) => {
-  const scrapeMessageListItem = document.createElement("li");
-  scrapeMessageListItem.id = "admin-scrape-message-list-item";
+//---
 
-  const scrapeMessageLabel = document.createElement("label");
-  scrapeMessageLabel.id = "admin-scrape-message-label";
-  scrapeMessageLabel.className = "status-label";
-  scrapeMessageLabel.setAttribute("for", "admin-scrape-message-element");
-  scrapeMessageLabel.textContent = "Scrape Message:";
+const buildStatusSection = ({ scrapeActive, schedulerActive, scrapeLengthSeconds, scrapeMessage, scrapeId }) => {
+  const section = document.createElement("div");
+  section.id = "admin-status-section";
 
-  const scrapeMessageElement = document.createElement("h2");
-  scrapeMessageElement.id = "admin-scrape-message-element";
-  scrapeMessageElement.className = "status-value";
-  scrapeMessageElement.textContent = scrapeMessage || "NONE";
+  const separator = buildSeparator();
+  const heading = buildStatusHeading(scrapeActive);
+  const rows = buildAllStatusRows({ scrapeActive, schedulerActive, scrapeLengthSeconds, scrapeMessage, scrapeId });
 
-  scrapeMessageListItem.append(scrapeMessageLabel, scrapeMessageElement);
-
-  return scrapeMessageListItem;
+  section.append(separator, heading, ...rows);
+  return section;
 };
 
-export const buildScrapeIdListItem = async (scrapeId) => {
-  const scrapeIdListItem = document.createElement("li");
-  scrapeIdListItem.id = "admin-scrape-id-list-item";
-
-  const scrapeIdLabel = document.createElement("label");
-  scrapeIdLabel.id = "admin-scrape-id-label";
-  scrapeIdLabel.className = "status-label";
-  scrapeIdLabel.setAttribute("for", "admin-scrape-id-element");
-  scrapeIdLabel.textContent = "Scrape ID:";
-
-  const scrapeIdElement = document.createElement("h2");
-  scrapeIdElement.id = "admin-scrape-id-element";
-  scrapeIdElement.className = "status-value";
-  scrapeIdElement.textContent = scrapeId || "NONE";
-
-  scrapeIdListItem.append(scrapeIdLabel, scrapeIdElement);
-
-  return scrapeIdListItem;
+const buildSeparator = () => {
+  const el = document.createElement("div");
+  el.className = "admin-separator";
+  return el;
 };
 
-export const buildScrapeStatusListItem = async (scrapeActive) => {
-  const scrapeStatusListItem = document.createElement("li");
-  scrapeStatusListItem.id = "admin-scrape-status-list-item";
+const buildStatusHeading = (scrapeActive) => {
+  const heading = document.createElement("div");
+  heading.id = "admin-status-heading";
+  heading.className = scrapeActive ? "admin-status-heading active" : "admin-status-heading";
 
-  const scrapeStatusLabel = document.createElement("label");
-  scrapeStatusLabel.id = "admin-scrape-status-label";
-  scrapeStatusLabel.className = "status-label";
-  scrapeStatusLabel.setAttribute("for", "admin-scrape-status-element");
-  scrapeStatusLabel.textContent = "Scrape Status:";
+  const dot = document.createElement("span");
+  dot.className = "admin-status-dot";
 
-  const scrapeStatusElement = document.createElement("h2");
-  scrapeStatusElement.id = "admin-scrape-status-element";
-  scrapeStatusElement.className = "status-value";
-  scrapeStatusElement.textContent = scrapeActive ? "Active" : "Inactive";
-
-  scrapeStatusListItem.append(scrapeStatusLabel, scrapeStatusElement);
-
-  return scrapeStatusListItem;
+  heading.append(dot, "Live Scrape Status");
+  return heading;
 };
 
-export const buildSchedulerStatusListItem = async (schedulerActive) => {
-  const schedulerStatusListItem = document.createElement("li");
-  schedulerStatusListItem.id = "admin-scheduler-status-list-item";
+const buildAllStatusRows = ({ scrapeActive, schedulerActive, scrapeLengthSeconds, scrapeMessage, scrapeId }) => {
+  const rowDefs = [
+    { label: "Scrape Message", id: "admin-scrape-message-element", value: scrapeMessage, mono: false },
+    { label: "Scrape ID", id: "admin-scrape-id-element", value: scrapeId, mono: true },
+    { label: "Scrape Status", id: "admin-scrape-status-element", value: scrapeActive ? "Active" : null, mono: false },
+    { label: "Scheduler Status", id: "admin-scheduler-status-element", value: schedulerActive ? "Active" : null, mono: false },
+    { label: "Scrape Seconds", id: "admin-scrape-length-seconds-element", value: scrapeLengthSeconds, mono: false },
+  ];
 
-  const schedulerStatusLabel = document.createElement("label");
-  schedulerStatusLabel.id = "admin-scheduler-status-label";
-  schedulerStatusLabel.className = "status-label";
-  schedulerStatusLabel.setAttribute("for", "admin-scheduler-status-element");
-  schedulerStatusLabel.textContent = "Scheduler Status:";
-
-  const schedulerStatusElement = document.createElement("h2");
-  schedulerStatusElement.id = "admin-scheduler-status-element";
-  schedulerStatusElement.className = "status-value";
-  schedulerStatusElement.textContent = schedulerActive ? "Active" : "Inactive";
-
-  schedulerStatusListItem.append(schedulerStatusLabel, schedulerStatusElement);
-
-  return schedulerStatusListItem;
+  const rows = [];
+  for (const def of rowDefs) {
+    rows.push(buildStatusRow(def.label, def.id, def.value, def.mono));
+  }
+  return rows;
 };
 
-export const buildScrapeLengthSecondsListItem = async (scrapeLengthSeconds) => {
-  const scrapeLengthSecondsListItem = document.createElement("li");
-  scrapeLengthSecondsListItem.id = "admin-scrape-length-seconds-list-item";
+//---
 
-  const scrapeLengthSecondsLabel = document.createElement("label");
-  scrapeLengthSecondsLabel.id = "admin-scrape-length-seconds-label";
-  scrapeLengthSecondsLabel.className = "status-label";
-  scrapeLengthSecondsLabel.setAttribute("for", "admin-scrape-length-seconds-element");
-  scrapeLengthSecondsLabel.textContent = "Scrape Seconds:";
+const buildStatusRow = (labelText, valueId, value, isMono) => {
+  const row = document.createElement("div");
+  row.className = "admin-status-row";
 
-  const scrapeLengthSecondsElement = document.createElement("h2");
-  scrapeLengthSecondsElement.id = "admin-scrape-length-seconds-element";
-  scrapeLengthSecondsElement.className = "status-value";
-  scrapeLengthSecondsElement.textContent = scrapeLengthSeconds || "NONE";
+  const labelEl = document.createElement("span");
+  labelEl.className = "s-label";
+  labelEl.textContent = labelText;
 
-  scrapeLengthSecondsListItem.append(scrapeLengthSecondsLabel, scrapeLengthSecondsElement);
+  const valueEl = document.createElement("span");
+  valueEl.id = valueId;
+  valueEl.className = buildValueClass(value, isMono);
+  valueEl.textContent = value != null ? String(value) : "—";
 
-  return scrapeLengthSecondsListItem;
+  row.append(labelEl, valueEl);
+  return row;
+};
+
+const buildValueClass = (value, isMono) => {
+  let className = "s-value";
+  if (isMono) className += " mono";
+  if (value == null) className += " muted";
+  return className;
 };
