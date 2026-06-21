@@ -145,7 +145,7 @@ describe('buildArticleTypeButtonItem', () => {
   })
 
   it('does not add active class when buttonValue does not match stateFront.articleType', () => {
-    const li = buildArticleTypeButtonItem({ buttonValue: 'topNews', buttonText: 'Top News' })
+    const li = buildArticleTypeButtonItem({ buttonValue: 'top', buttonText: 'Top News' })
     const button = li.children[0]
     expect(button.classList._classes.has('active')).toBe(false)
   })

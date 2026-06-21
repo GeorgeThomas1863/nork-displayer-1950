@@ -48,13 +48,19 @@ export const buildArticleTypeButtons = async () => {
 
   // Define button data matching your dropdown options
   const buttonData = [
-    { buttonValue: "fatboy", buttonText: `"Revolutionary Activities" [KJU sh*t]` },
-    { buttonValue: "all", buttonText: "ALL ARTICLES" },
-    { buttonValue: "topNews", buttonText: "Top News" },
-    { buttonValue: "latestNews", buttonText: "Latest News" },
-    { buttonValue: "externalNews", buttonText: "External News" },
-    { buttonValue: "anecdote", buttonText: "Revolutionary Anecdotes" },
-    { buttonValue: "people", buttonText: "Always in Memory of the People" },
+    { buttonValue: "all",        buttonText: "ALL ARTICLES" },
+    { buttonValue: "fatboy",     buttonText: "Revolutionary Activities [KJU]" },
+    { buttonValue: "top",        buttonText: "Top News" },
+    { buttonValue: "latest",     buttonText: "Latest News" },
+    { buttonValue: "home",       buttonText: "Home" },
+    { buttonValue: "world",      buttonText: "World" },
+    { buttonValue: "society",    buttonText: "Society" },
+    { buttonValue: "external",   buttonText: "External News" },
+    { buttonValue: "commentary", buttonText: "Commentary" },
+    { buttonValue: "anecdote",   buttonText: "Anecdotes" },
+    { buttonValue: "people",     buttonText: "In Memory of the People" },
+    { buttonValue: "documents",  buttonText: "Documents" },
+    { buttonValue: "newYear",    buttonText: "New Year" },
   ];
 
   // Create button list

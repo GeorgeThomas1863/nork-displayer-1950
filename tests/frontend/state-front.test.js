@@ -25,21 +25,21 @@ describe('updateStateFront', () => {
     const result = await updateStateFront([1, 2, 3])
     expect(result).toBe(true)
     expect(stateFront.dataObj.articles.fatboy).toBe(3)
-    expect(stateFront.dataObj.articles.topNews).toBeNull()
-    expect(stateFront.dataObj.articles.latestNews).toBeNull()
-    expect(stateFront.dataObj.articles.externalNews).toBeNull()
+    expect(stateFront.dataObj.articles.top).toBeNull()
+    expect(stateFront.dataObj.articles.latest).toBeNull()
+    expect(stateFront.dataObj.articles.external).toBeNull()
     expect(stateFront.dataObj.articles.anecdote).toBeNull()
     expect(stateFront.dataObj.articles.people).toBeNull()
     expect(stateFront.dataObj.articles.all).toBeNull()
     expect(stateFront.isFirstLoad).toBe(false)
   })
 
-  it('typeTrigger articles, articleType topNews, array of 5 — sets topNews=5, fatboy=null', async () => {
+  it('typeTrigger articles, articleType top, array of 5 — sets top=5, fatboy=null', async () => {
     stateFront.typeTrigger = 'articles'
-    stateFront.articleType = 'topNews'
+    stateFront.articleType = 'top'
     const result = await updateStateFront([1, 2, 3, 4, 5])
     expect(result).toBe(true)
-    expect(stateFront.dataObj.articles.topNews).toBe(5)
+    expect(stateFront.dataObj.articles.top).toBe(5)
     expect(stateFront.dataObj.articles.fatboy).toBeNull()
   })
 

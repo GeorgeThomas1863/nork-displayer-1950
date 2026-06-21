@@ -54,7 +54,7 @@ describe('buildArticleParams', () => {
   })
 
   it('uses provided howMany for non-all articleType', () => {
-    const result = buildArticleParams({ articleType: 'topNews', howMany: 25 })
+    const result = buildArticleParams({ articleType: 'top', howMany: 25 })
     expect(result.howMany).toBe(25)
   })
 
