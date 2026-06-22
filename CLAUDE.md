@@ -26,7 +26,6 @@ Key `.env` variables:
 - `PW`, `ADMIN_PW` — auth passwords
 - `SESSION_SECRET` — express-session secret
 - `MONGO_URI`, `DB_NAME` — MongoDB connection
-- `COLLECTIONSARR` — comma-separated collection names
 - `PIC_PATH`, `VID_PATH`, `WATCH_PATH` — filesystem media paths
 - `EXPRESS_PIC_PATH`, `EXPRESS_VID_PATH`, `EXPRESS_WATCH_PATH` — URL prefixes for auth-gated static media
 - `DEFAULT_LOAD_ARTICLES`, `DEFAULT_LOAD_PICS`, `DEFAULT_LOAD_PICSETS`, `DEFAULT_LOAD_VIDS`, `DEFAULT_LOAD_VIDPAGES` — default result counts
@@ -80,7 +79,7 @@ models/db-model.js        dbModel class: getNewestItemsArray, getOldestItemsArra
 4. Each builds query params and calls `dataLookup()` → `dbModel` → MongoDB (sort order set in query)
 5. Result array returned as JSON
 
-**MongoDB collections:** `articles`, `pics`, `picSets`, `vidPages`. Names come from `COLLECTIONSARR`.
+**MongoDB collections:** `log`, `articles`, `pics`, `picSets`, `vidPages`.
 
 ### Frontend (Vanilla JS ES modules, no bundler)
 

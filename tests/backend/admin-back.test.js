@@ -63,19 +63,14 @@ describe('runGetAdminData', () => {
 
   beforeEach(() => {
     vi.clearAllMocks()
-    process.env.COLLECTIONSARR = 'articles,pics,vidPages'
   })
 
-  afterEach(() => {
-    delete process.env.COLLECTIONSARR
-  })
-
-  it('returns an array with 3 items when all collections return data', async () => {
+  it('returns an array with 4 items when all collections return data', async () => {
     dbModel.mockImplementation((_, collection) => ({
       getAll: makeGetAll([{ _id: collection + '-1' }]),
     }))
     const result = await runGetAdminData()
-    expect(result).toHaveLength(3)
+    expect(result).toHaveLength(4)
     result.forEach((item) => {
       expect(item).toHaveProperty('collection')
       expect(item).toHaveProperty('data')
@@ -89,19 +84,19 @@ describe('runGetAdminData', () => {
         : makeGetAll([{ _id: collection + '-1' }]),
     }))
     const result = await runGetAdminData()
-    expect(result).toHaveLength(2)
+    expect(result).toHaveLength(3)
     expect(result.map((r) => r.collection)).not.toContain('pics')
   })
 
   it('skips a collection that throws and continues with the rest', async () => {
     dbModel.mockImplementation((_, collection) => ({
-      getAll: collection === 'vidPages'
+      getAll: collection === 'picSets'
         ? vi.fn().mockRejectedValue(new Error('db error'))
         : makeGetAll([{ _id: collection + '-1' }]),
     }))
     const result = await runGetAdminData()
-    expect(result).toHaveLength(2)
-    expect(result.map((r) => r.collection)).not.toContain('vidPages')
+    expect(result).toHaveLength(3)
+    expect(result.map((r) => r.collection)).not.toContain('picSets')
   })
 
   it('returns empty array when all collections return empty data', async () => {

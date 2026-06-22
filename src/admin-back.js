@@ -25,7 +25,7 @@ export const runAdminCommand = async (inputParams) => {
 };
 
 export const runGetAdminData = async () => {
-  const collectionsArr = process.env.COLLECTIONSARR.split(",");
+  const collectionsArr = ["log", "articles", "pics", "picSets"];
 
   const dataArray = [];
   for (const collection of collectionsArr) {
