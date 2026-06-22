@@ -49,7 +49,7 @@ export const buildAdminStatsSection = async (inputData) => {
   const articlesData = inputData.find((item) => item.collection === "articles")?.data || [];
   const picsData = inputData.find((item) => item.collection === "pics")?.data || [];
   const picSetsData = inputData.find((item) => item.collection === "picSets")?.data || [];
-  const vidsData = inputData.find((item) => item.collection === "vids")?.data || [];
+  // const vidsData = inputData.find((item) => item.collection === "vids")?.data || [];
 
   const totalScrapes = logData.length;
   const activeScrapes = logData.filter((item) => item.scrapeActive).length;
@@ -58,7 +58,7 @@ export const buildAdminStatsSection = async (inputData) => {
   const totalArticles = articlesData.length;
   const totalPics = picsData.length;
   const totalPicSets = picSetsData.length;
-  const totalVids = vidsData.length;
+  // const totalVids = vidsData.length;
 
   const completedScrapes = logData.filter((item) => item.scrapeLengthSeconds !== null);
   const avgDuration =
@@ -79,7 +79,7 @@ export const buildAdminStatsSection = async (inputData) => {
     { label: "Articles", value: totalArticles },
     { label: "Pics", value: totalPics },
     { label: "Pic Sets", value: totalPicSets },
-    { label: "Videos", value: totalVids },
+    // { label: "Videos", value: totalVids },
   ];
 
   for (let i = 0; i < stats.length; i++) {
