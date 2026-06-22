@@ -23,7 +23,7 @@ export const buildPicParams = (inputParams) => {
       params = {
         sortKey: "date",
         sortKey2: "picId",
-        howMany: Math.min(+(howMany) || +process.env.DEFAULT_LOAD_PICS, 100),
+        howMany: Math.min(+(howMany) || +process.env.DEFAULT_LOAD_PICS, 10000),
       };
       break;
 
@@ -31,7 +31,7 @@ export const buildPicParams = (inputParams) => {
       params = {
         sortKey: "date",
         sortKey2: "picSetId",
-        howMany: Math.min(+(howMany) || +process.env.DEFAULT_LOAD_PICSETS, 100),
+        howMany: Math.min(+(howMany) || +process.env.DEFAULT_LOAD_PICSETS, 10000),
       };
       break;
 

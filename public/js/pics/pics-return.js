@@ -234,6 +234,7 @@ export const buildPicElement = async (savePath) => {
   const picPath = "/kcna-pics/" + fileName;
 
   picElement.src = picPath;
+  picElement.loading = "lazy";
   picElement.alt = "KCNA PIC";
 
   return picElement;

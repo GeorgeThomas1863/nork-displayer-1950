@@ -36,9 +36,9 @@ describe('buildPicParams', () => {
     expect(result.howMany).toBe(50)
   })
 
-  it('caps howMany at 100 for picType "all"', () => {
-    const result = buildPicParams({ picType: 'all', howMany: 200 })
-    expect(result.howMany).toBe(100)
+  it('caps howMany at 10000 for picType "all"', () => {
+    const result = buildPicParams({ picType: 'all', howMany: 20000 })
+    expect(result.howMany).toBe(10000)
   })
 
   it('returns correct params for picType "picSets" with no howMany', () => {
