@@ -12,6 +12,10 @@
     padding: 1.2rem;
   }
 
+  .article-element-collapse > .collapse-content {
+    padding: 0;
+  }
+
   .wrapper label {
     font-size: 0.85rem;
   }
