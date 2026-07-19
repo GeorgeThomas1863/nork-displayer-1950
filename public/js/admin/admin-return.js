@@ -10,6 +10,12 @@ export const buildAdminReturnDisplay = async (inputData) => {
   const adminReturnContainer = document.createElement("div");
   adminReturnContainer.id = "admin-return-container";
 
+  if (inputData?.success === false) {
+    const errorDisplay = buildAdminErrorDisplay(inputData.message);
+    adminReturnContainer.append(errorDisplay);
+    return adminReturnContainer;
+  }
+
   //empty display
   if (!inputData || !inputData.length) {
     const emptyData = await buildEmptyDisplay();
@@ -37,6 +43,13 @@ export const buildAdminReturnDisplay = async (inputData) => {
 
 //--------------------------------
 
+const buildAdminErrorDisplay = (message) => {
+  const errorDisplay = document.createElement("p");
+  errorDisplay.className = "admin-data-error";
+  errorDisplay.textContent = message || "Unable to load admin data";
+  return errorDisplay;
+};
+
 //would take longer to fix this than its worth
 export const buildAdminStatsSection = async (inputData) => {
   if (!inputData || !inputData.length) return null;
@@ -45,24 +58,19 @@ export const buildAdminStatsSection = async (inputData) => {
 
   //BUILD STATS ON BACKEND WITH MONGO QUERIES FOR WHAT YOU NEED, DISPLAY WITH MAP
 
-  const logData = inputData.find((item) => item.collection === "log")?.data || [];
-  const articlesData = inputData.find((item) => item.collection === "articles")?.data || [];
-  const picsData = inputData.find((item) => item.collection === "pics")?.data || [];
-  const picSetsData = inputData.find((item) => item.collection === "picSets")?.data || [];
-  // const vidsData = inputData.find((item) => item.collection === "vids")?.data || [];
+  const logCollection = getAdminCollection(inputData, "log");
+  const articlesCollection = getAdminCollection(inputData, "articles");
+  const picsCollection = getAdminCollection(inputData, "pics");
+  const picSetsCollection = getAdminCollection(inputData, "picSets");
+  const vidsCollection = getAdminCollection(inputData, "vidPages");
+  const logStats = buildLogStats(logCollection.data);
 
-  const totalScrapes = logData.length;
-  const activeScrapes = logData.filter((item) => item.scrapeActive).length;
-  const finishedScrapes = logData.filter((item) => item.scrapeEndTime && !item.scrapeError).length;
-  const errorScrapes = logData.filter((item) => item.scrapeError).length;
-  const totalArticles = articlesData.length;
-  const totalPics = picsData.length;
-  const totalPicSets = picSetsData.length;
-  // const totalVids = vidsData.length;
-
-  const completedScrapes = logData.filter((item) => item.scrapeLengthSeconds !== null);
-  const avgDuration =
-    completedScrapes.length > 0 ? Math.round(completedScrapes.reduce((sum, item) => sum + item.scrapeLengthSeconds, 0) / completedScrapes.length) : 0;
+  const totalScrapes = logCollection.count;
+  const totalArticles = articlesCollection.count;
+  const totalPics = picsCollection.count;
+  const totalPicSets = picSetsCollection.count;
+  const totalVids = vidsCollection.count;
+  const { activeScrapes, finishedScrapes, errorScrapes, avgDuration } = logStats;
 
   const statsContainer = document.createElement("div");
   statsContainer.className = "admin-stats-container";
@@ -79,7 +87,7 @@ export const buildAdminStatsSection = async (inputData) => {
     { label: "Articles", value: totalArticles },
     { label: "Pics", value: totalPics },
     { label: "Pic Sets", value: totalPicSets },
-    // { label: "Videos", value: totalVids },
+    { label: "Videos", value: totalVids },
   ];
 
   for (let i = 0; i < stats.length; i++) {
@@ -103,6 +111,38 @@ export const buildAdminStatsSection = async (inputData) => {
 
   statsContainer.appendChild(statsBar);
   return statsContainer;
+};
+
+const getAdminCollection = (inputData, collectionName) => {
+  for (const inputObj of inputData) {
+    if (inputObj.collection !== collectionName) continue;
+    return {
+      count: inputObj.count ?? 0,
+      data: inputObj.data || [],
+    };
+  }
+
+  return { count: 0, data: [] };
+};
+
+const buildLogStats = (logData) => {
+  let activeScrapes = 0;
+  let finishedScrapes = 0;
+  let errorScrapes = 0;
+  let completedScrapes = 0;
+  let totalDuration = 0;
+
+  for (const logItem of logData) {
+    if (logItem.scrapeActive) activeScrapes++;
+    if (logItem.scrapeEndTime && !logItem.scrapeError) finishedScrapes++;
+    if (logItem.scrapeError) errorScrapes++;
+    if (logItem.scrapeLengthSeconds === null || logItem.scrapeLengthSeconds === undefined) continue;
+    completedScrapes++;
+    totalDuration += logItem.scrapeLengthSeconds;
+  }
+
+  const avgDuration = completedScrapes ? Math.round(totalDuration / completedScrapes) : 0;
+  return { activeScrapes, finishedScrapes, errorScrapes, avgDuration };
 };
 
 //----------------------

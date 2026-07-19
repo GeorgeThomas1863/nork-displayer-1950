@@ -36,21 +36,23 @@ export const buildAdminDisplay = async () => {
   return true;
 };
 
-export const updateAdminDisplay = async () => {
+export const updateAdminDisplay = async (isCurrent = isAlwaysCurrent) => {
   if (!adminDisplayElement) return null;
 
   const mainContent = document.getElementById("admin-main-content");
   if (!mainContent) return null;
 
-  const currentAdminDataElement = document.getElementById("admin-return-container");
-  if (currentAdminDataElement) currentAdminDataElement.remove();
-
   const adminUpdateArray = await sendToBack({ route: "/nork-admin-data-route" });
+  if (!isCurrent()) return null;
 
   const adminReturnDisplay = await buildAdminReturnDisplay(adminUpdateArray);
-  if (!adminReturnDisplay) return null;
+  if (!adminReturnDisplay || !isCurrent()) return null;
 
+  const currentAdminDataElement = document.getElementById("admin-return-container");
+  if (currentAdminDataElement) currentAdminDataElement.remove();
   mainContent.append(adminReturnDisplay);
 };
+
+const isAlwaysCurrent = () => true;
 
 buildAdminDisplay();

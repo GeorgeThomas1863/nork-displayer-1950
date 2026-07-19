@@ -4,6 +4,10 @@ import { getAdminAuthParams, getAdminCommandParams } from "../util/params.js";
 import { sendToBack } from "../util/api-front.js";
 import { hideArray, unhideArray } from "../util/collapse-display.js";
 
+let commandGeneration = 0;
+let statusTimerId = null;
+let refreshTimerId = null;
+
 export const runAdminAuth = async () => {
   try {
     const adminAuthParams = await getAdminAuthParams();
@@ -22,32 +26,90 @@ export const runAdminAuth = async () => {
 };
 
 export const runAdminCommand = async () => {
+  const adminCommandParams = await getAdminCommandParams();
+  if (!adminCommandParams) return null;
+
+  const generation = beginCommandGeneration();
+  scheduleStatusUpdate(adminCommandParams.scrapeId, generation);
+  scheduleAdminDisplayUpdate(generation);
+
   try {
-    const adminCommandParams = await getAdminCommandParams();
-    if (!adminCommandParams) return null;
-    adminCommandParams.route = "/nork-admin-command-route";
-
-    setTimeout(async () => {
-      adminCommandParams.command = "admin-scrape-status";
-      const statusData = await sendToBack(adminCommandParams);
-      await buildAdminStatusDisplay(statusData);
-      // console.log("ADMIN COMMAND DATA");
-      // console.dir(data);
-    }, 1000);
-
-    //update display 5 seconds after submit
-    setTimeout(async () => {
-      await updateAdminDisplay();
-    }, 3000);
-
-    //admin command submit
-    const data = await sendToBack(adminCommandParams);
-    // console.log("ADMIN COMMAND DATA");
-    // console.dir(data);
+    const commandResult = await sendAdminCommand(adminCommandParams);
+    await renderCurrentStatus(commandResult, generation);
+    await refreshCurrentAdminDisplay(generation);
+    return commandResult;
   } catch (e) {
-    console.error("ERROR:", e.message);
-    return null;
+    console.error("ADMIN COMMAND ERROR:", e.message);
+    const failure = buildRequestFailure("Unable to run admin command");
+    await renderCurrentStatus(failure, generation);
+    await refreshCurrentAdminDisplay(generation);
+    return failure;
   }
+};
+
+const beginCommandGeneration = () => {
+  commandGeneration += 1;
+  clearScheduledUpdates();
+  return commandGeneration;
+};
+
+const clearScheduledUpdates = () => {
+  if (statusTimerId !== null) clearTimeout(statusTimerId);
+  if (refreshTimerId !== null) clearTimeout(refreshTimerId);
+  statusTimerId = null;
+  refreshTimerId = null;
+};
+
+const sendAdminCommand = async (adminCommandParams) => {
+  return sendToBack({ ...adminCommandParams, route: "/nork-admin-command-route" });
+};
+
+const scheduleStatusUpdate = (scrapeId, generation) => {
+  statusTimerId = setTimeout(() => requestAndRenderStatus(scrapeId, generation), 1000);
+};
+
+const requestAndRenderStatus = async (scrapeId, generation) => {
+  try {
+    const statusParams = { route: "/nork-admin-polling-route", scrapeId };
+    const statusResult = await sendToBack(statusParams);
+    await renderCurrentStatus(statusResult, generation);
+  } catch (e) {
+    console.error("ADMIN STATUS ERROR:", e.message);
+    const failure = buildRequestFailure("Unable to retrieve scraper status");
+    await renderCurrentStatus(failure, generation);
+  }
+};
+
+const scheduleAdminDisplayUpdate = (generation) => {
+  refreshTimerId = setTimeout(() => refreshCurrentAdminDisplay(generation), 3000);
+};
+
+const refreshCurrentAdminDisplay = async (generation) => {
+  if (!isCurrentGeneration(generation)) return;
+  try {
+    await updateAdminDisplay(() => isCurrentGeneration(generation));
+  } catch (e) {
+    console.error("ADMIN DISPLAY ERROR:", e.message);
+    const failure = buildRequestFailure("Unable to refresh admin display");
+    await renderCurrentStatus(failure, generation);
+  }
+};
+
+const renderCurrentStatus = async (result, generation) => {
+  if (!isCurrentGeneration(generation)) return false;
+  try {
+    await buildAdminStatusDisplay(result);
+    return true;
+  } catch (e) {
+    console.error("ADMIN STATUS DISPLAY ERROR:", e.message);
+    return false;
+  }
+};
+
+const isCurrentGeneration = (generation) => generation === commandGeneration;
+
+const buildRequestFailure = (message) => {
+  return { success: false, message, data: { status: 503 } };
 };
 
 //---------------------

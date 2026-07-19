@@ -63,9 +63,20 @@ describe('buildArticleParams', () => {
     expect(result.howMany).toBe(3)
   })
 
-  it('sets filterValue to "people" for articleType "people"', () => {
-    const result = buildArticleParams({ articleType: 'people' })
-    expect(result.filterValue).toBe('people')
+  it.each([
+    'fatboy',
+    'top',
+    'latest',
+    'home',
+    'world',
+    'society',
+    'external',
+    'anecdote',
+    'people',
+    'documents',
+  ])('maps supported articleType "%s" to the matching database filter', (articleType) => {
+    const result = buildArticleParams({ articleType })
+    expect(result.filterValue).toBe(articleType)
   })
 })
 

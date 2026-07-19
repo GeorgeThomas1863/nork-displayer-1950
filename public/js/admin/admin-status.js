@@ -5,14 +5,25 @@ export const buildAdminStatusDisplay = async (inputData) => {
   const existingSection = document.getElementById("admin-status-section");
   if (existingSection) existingSection.remove();
 
-  const { scrapeActive = false, schedulerActive = false, scrapeLengthSeconds = null, scrapeMessage = null, scrapeId = null } = inputData || {};
-
-  const section = buildStatusSection({ scrapeActive, schedulerActive, scrapeLengthSeconds, scrapeMessage, scrapeId });
+  const statusData = buildStatusData(inputData);
+  const section = buildStatusSection(statusData);
   sidebar.append(section);
   return true;
 };
 
 //---
+
+const buildStatusData = (inputData) => {
+  const operationData = inputData?.data || inputData || {};
+  const scrapeMessage = inputData?.success === false ? inputData.message : operationData.scrapeMessage || inputData?.message;
+  const {
+    scrapeActive = false,
+    schedulerActive = false,
+    scrapeLengthSeconds = null,
+    scrapeId = null,
+  } = operationData;
+  return { scrapeActive, schedulerActive, scrapeLengthSeconds, scrapeMessage, scrapeId };
+};
 
 const buildStatusSection = ({ scrapeActive, schedulerActive, scrapeLengthSeconds, scrapeMessage, scrapeId }) => {
   const section = document.createElement("div");

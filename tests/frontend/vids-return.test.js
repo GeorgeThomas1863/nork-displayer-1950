@@ -8,7 +8,8 @@ vi.mock('../../public/js/util/state-front.js', () => ({
   default: { articleType: 'fatboy', picType: 'all', vidType: 'vidPages' },
 }))
 
-import { buildVidTitle, buildVidDate, buildVidElement, buildVidTypeButtonItem } from '../../public/js/vids/vids-return.js'
+import { buildVidTitle, buildVidDate, buildVidElement, buildVidListItem, buildVidPagesDisplay, buildVidTypeButtonItem, buildVidsReturnDisplay } from '../../public/js/vids/vids-return.js'
+import { buildCollapseContainer } from '../../public/js/util/collapse-display.js'
 
 function createEl(tag) {
   const el = {
@@ -119,6 +120,57 @@ describe('buildVidElement', () => {
     const source = el.children[0]
     expect(source.src).toBe('/kcna-vids/video.mp4')
     expect(source.type).toBe('video/mp4')
+  })
+})
+
+describe('video record validation', () => {
+  const validRecord = {
+    title: 'Valid video',
+    date: '2024-06-15',
+    vidData: { savePath: '/videos/test.mp4' },
+  }
+
+  it.each([
+    ['title', { date: validRecord.date, vidData: validRecord.vidData }],
+    ['date', { title: validRecord.title, vidData: validRecord.vidData }],
+    ['vidData', { title: validRecord.title, date: validRecord.date }],
+    ['savePath', { title: validRecord.title, date: validRecord.date, vidData: {} }],
+  ])('skips a record missing %s', async (_, record) => {
+    expect(await buildVidListItem(record, true)).toBeNull()
+  })
+
+  it('renders valid records from a mixed valid and invalid array', async () => {
+    const display = await buildVidPagesDisplay([
+      { title: 'Missing video data', date: validRecord.date },
+      validRecord,
+      { title: validRecord.title, vidData: validRecord.vidData },
+    ])
+
+    expect(display.children).toHaveLength(1)
+  })
+
+  it('returns null when every video record is invalid', async () => {
+    const display = await buildVidsReturnDisplay([
+      { title: 'Missing date', vidData: validRecord.vidData },
+      { date: validRecord.date, vidData: validRecord.vidData },
+    ])
+
+    expect(display).toBeNull()
+  })
+})
+
+describe('buildVidListItem', () => {
+  it('keeps untrusted video titles as text instead of HTML', async () => {
+    await buildVidListItem({
+      title: '<img src=x onerror=alert(1)>',
+      date: '2024-06-15',
+      vidData: { savePath: '/videos/test.mp4' },
+    }, true)
+
+    const collapseParams = buildCollapseContainer.mock.calls[0][0]
+    expect(collapseParams.titleElement.innerHTML).toBe('')
+    expect(collapseParams.titleElement.textContent).toBe('<img src=x onerror=alert(1)>')
+    expect(collapseParams.titleElement.children[1].textContent).toContain('June')
   })
 })
 

@@ -49,9 +49,9 @@ describe('updateDisplayDataController', () => {
 })
 
 describe('adminCommandController', () => {
-  it('calls runAdminCommand with req.body and passes result to res.json', async () => {
+  it('calls runAdminCommand with req.body and passes a success result to res.json', async () => {
     const body = { command: 'scrape' }
-    const result = { ok: true }
+    const result = { success: true, message: 'done', data: { ok: true } }
     runAdminCommand.mockResolvedValue(result)
     const req = { body }
     const res = makeRes()
@@ -60,18 +60,42 @@ describe('adminCommandController', () => {
     expect(res.json).toHaveBeenCalledWith(result)
   })
 
-  it('returns null without calling res.json when req.body is null', async () => {
-    const req = { body: null }
+  it('maps scraper operation failures to their non-2xx status', async () => {
+    const result = { success: false, message: 'unauthorized', data: { status: 401 } }
+    runAdminCommand.mockResolvedValue(result)
+    const req = { body: { command: 'scrape' } }
     const res = makeRes()
-    const returnVal = await adminCommandController(req, res)
-    expect(returnVal).toBeNull()
-    expect(res.json).not.toHaveBeenCalled()
+
+    await adminCommandController(req, res)
+
+    expect(res.status).toHaveBeenCalledWith(401)
+    expect(res.json).toHaveBeenCalledWith(result)
+  })
+
+  it.each([
+    null,
+    {},
+    { command: '' },
+    { command: 123 },
+  ])('returns a structured 400 for malformed command body %#', async (body) => {
+    const req = { body }
+    const res = makeRes()
+
+    await adminCommandController(req, res)
+
+    expect(runAdminCommand).not.toHaveBeenCalled()
+    expect(res.status).toHaveBeenCalledWith(400)
+    expect(res.json).toHaveBeenCalledWith({
+      success: false,
+      message: 'Invalid admin command request',
+      data: { status: 400 },
+    })
   })
 })
 
 describe('adminDataController', () => {
   it('calls runGetAdminData and passes result to res.json', async () => {
-    const result = { collections: [] }
+    const result = []
     runGetAdminData.mockResolvedValue(result)
     const req = {}
     const res = makeRes()
@@ -79,14 +103,60 @@ describe('adminDataController', () => {
     expect(runGetAdminData).toHaveBeenCalledOnce()
     expect(res.json).toHaveBeenCalledWith(result)
   })
+
+  it('returns a structured 503 when admin collection data cannot be loaded', async () => {
+    runGetAdminData.mockResolvedValue(null)
+    const req = {}
+    const res = makeRes()
+
+    await adminDataController(req, res)
+
+    expect(res.status).toHaveBeenCalledWith(503)
+    expect(res.json).toHaveBeenCalledWith({
+      success: false,
+      message: 'Unable to load admin data',
+      data: { status: 503 },
+    })
+  })
 })
 
 describe('adminPollingController', () => {
-  it('responds with status 501 and not-implemented error', async () => {
-    const req = {}
+  it('retrieves live status through the scraper status command', async () => {
+    const result = {
+      success: true,
+      message: 'Scrape running',
+      data: { scrapeActive: true },
+    }
+    runAdminCommand.mockResolvedValue(result)
+    const req = { body: { scrapeId: 'scrape-1' } }
     const res = makeRes()
+
     await adminPollingController(req, res)
-    expect(res.status).toHaveBeenCalledWith(501)
-    expect(res.json).toHaveBeenCalledWith({ error: 'Not implemented' })
+
+    expect(runAdminCommand).toHaveBeenCalledWith({
+      command: 'admin-scrape-status',
+      scrapeId: 'scrape-1',
+    })
+    expect(res.json).toHaveBeenCalledWith(result)
+  })
+
+  it.each([
+    null,
+    [],
+    { scrapeId: 123 },
+    { scrapeId: {} },
+  ])('returns a structured 400 for malformed polling body %#', async (body) => {
+    const req = { body }
+    const res = makeRes()
+
+    await adminPollingController(req, res)
+
+    expect(runAdminCommand).not.toHaveBeenCalled()
+    expect(res.status).toHaveBeenCalledWith(400)
+    expect(res.json).toHaveBeenCalledWith({
+      success: false,
+      message: 'Invalid admin polling request',
+      data: { status: 400 },
+    })
   })
 })

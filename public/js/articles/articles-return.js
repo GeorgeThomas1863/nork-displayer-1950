@@ -56,11 +56,9 @@ export const buildArticleTypeButtons = async () => {
     { buttonValue: "world",      buttonText: "World" },
     { buttonValue: "society",    buttonText: "Society" },
     { buttonValue: "external",   buttonText: "External News" },
-    { buttonValue: "commentary", buttonText: "Commentary" },
     { buttonValue: "anecdote",   buttonText: "Anecdotes" },
     { buttonValue: "people",     buttonText: "In Memory of the People" },
     { buttonValue: "documents",  buttonText: "Documents" },
-    { buttonValue: "newYear",    buttonText: "New Year" },
   ];
 
   // Create button list

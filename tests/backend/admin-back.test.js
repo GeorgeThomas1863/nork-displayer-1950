@@ -21,22 +21,51 @@ describe('runAdminCommand', () => {
     delete process.env.API_PASSWORD
   })
 
-  it('returns data when axios.post resolves with data', async () => {
-    axios.post.mockResolvedValue({ data: { ok: true } })
-    const result = await runAdminCommand({ command: 'scrape' })
-    expect(result).toEqual({ ok: true })
+  it('returns a structured success result with scraper data', async () => {
+    const data = { scrapeActive: true, scrapeMessage: 'Scrape started' }
+    axios.post.mockResolvedValue({ data })
+
+    const result = await runAdminCommand({ command: 'admin-start-scrape' })
+
+    expect(result).toEqual({ success: true, message: 'Scrape started', data })
   })
 
-  it('returns null when axios.post resolves with null data', async () => {
-    axios.post.mockResolvedValue({ data: null })
-    const result = await runAdminCommand({ command: 'scrape' })
-    expect(result).toBeNull()
+  it('unwraps a structured successful scraper result', async () => {
+    const scraperState = { scrapeActive: false, scrapeMessage: 'Scrape complete' }
+    axios.post.mockResolvedValue({
+      data: { success: true, message: 'Status returned', data: scraperState },
+    })
+
+    const result = await runAdminCommand({ command: 'scrape-status' })
+
+    expect(result).toEqual({ success: true, message: 'Status returned', data: scraperState })
   })
 
-  it('returns null when axios.post throws', async () => {
-    axios.post.mockRejectedValue(new Error('network error'))
-    const result = await runAdminCommand({ command: 'scrape' })
-    expect(result).toBeNull()
+  it('returns a safe failure when the scraper is offline', async () => {
+    axios.post.mockRejectedValue(new Error('connect ECONNREFUSED 127.0.0.1'))
+
+    const result = await runAdminCommand({ command: 'admin-start-scrape' })
+
+    expect(result).toEqual({
+      success: false,
+      message: 'Scraper service is unavailable',
+      data: { status: 503 },
+    })
+  })
+
+  it.each([
+    [401, 'unauthorized'],
+    [400, 'Invalid scraper command'],
+    [500, 'Scrape pipeline failed'],
+  ])('preserves safe scraper failure status %s and message', async (status, message) => {
+    axios.post.mockRejectedValue({
+      message: 'Request failed',
+      response: { status, data: { error: message } },
+    })
+
+    const result = await runAdminCommand({ command: 'admin-start-scrape' })
+
+    expect(result).toEqual({ success: false, message, data: { status } })
   })
 
   it('calls axios.post with the correct URL', async () => {
@@ -59,64 +88,72 @@ describe('runAdminCommand', () => {
 })
 
 describe('runGetAdminData', () => {
-  const makeGetAll = (returnValue) => vi.fn().mockResolvedValue(returnValue)
-
   beforeEach(() => {
     vi.clearAllMocks()
   })
 
-  it('returns an array with 4 items when all collections return data', async () => {
+  it('returns exact counts above the bounded record limit', async () => {
     dbModel.mockImplementation((_, collection) => ({
-      getAll: makeGetAll([{ _id: collection + '-1' }]),
+      countAll: vi.fn().mockResolvedValue(collection === 'articles' ? 725 : 1),
+      getAll: vi.fn().mockResolvedValue([{ _id: collection + '-1' }]),
     }))
+
     const result = await runGetAdminData()
-    expect(result).toHaveLength(4)
-    result.forEach((item) => {
-      expect(item).toHaveProperty('collection')
-      expect(item).toHaveProperty('data')
+
+    expect(result.find((item) => item.collection === 'articles').count).toBe(725)
+    expect(dbModel.mock.results[0].value.getAll).toHaveBeenCalledWith(500)
+  })
+
+  it('includes video page counts in the admin result', async () => {
+    dbModel.mockImplementation((_, collection) => ({
+      countAll: vi.fn().mockResolvedValue(collection === 'vidPages' ? 612 : 1),
+      getAll: vi.fn().mockResolvedValue([{ _id: collection + '-1' }]),
+    }))
+
+    const result = await runGetAdminData()
+
+    expect(result).toContainEqual({
+      collection: 'vidPages',
+      count: 612,
+      data: [{ _id: 'vidPages-1' }],
     })
   })
 
-  it('skips a collection that returns an empty array', async () => {
-    dbModel.mockImplementation((_, collection) => ({
-      getAll: collection === 'pics'
-        ? makeGetAll([])
-        : makeGetAll([{ _id: collection + '-1' }]),
-    }))
-    const result = await runGetAdminData()
-    expect(result).toHaveLength(3)
-    expect(result.map((r) => r.collection)).not.toContain('pics')
-  })
-
-  it('skips a collection that throws and continues with the rest', async () => {
-    dbModel.mockImplementation((_, collection) => ({
-      getAll: collection === 'picSets'
-        ? vi.fn().mockRejectedValue(new Error('db error'))
-        : makeGetAll([{ _id: collection + '-1' }]),
-    }))
-    const result = await runGetAdminData()
-    expect(result).toHaveLength(3)
-    expect(result.map((r) => r.collection)).not.toContain('picSets')
-  })
-
-  it('returns empty array when all collections return empty data', async () => {
+  it('keeps empty collections so their exact zero count remains visible', async () => {
     dbModel.mockImplementation(() => ({
-      getAll: makeGetAll([]),
+      countAll: vi.fn().mockResolvedValue(0),
+      getAll: vi.fn().mockResolvedValue([]),
     }))
+
     const result = await runGetAdminData()
-    expect(result).toEqual([])
+
+    expect(result).toHaveLength(5)
+    expect(result[0]).toMatchObject({ count: 0, data: [] })
   })
 
-  it('returns correct structure with collection name and data', async () => {
-    const articlesData = [{ _id: 'a1' }, { _id: 'a2' }]
+  it('returns null when a collection count fails', async () => {
     dbModel.mockImplementation((_, collection) => ({
-      getAll: collection === 'articles'
-        ? makeGetAll(articlesData)
-        : makeGetAll([{ _id: collection + '-1' }]),
+      countAll: collection === 'picSets'
+        ? vi.fn().mockRejectedValue(new Error('db error'))
+        : vi.fn().mockResolvedValue(1),
+      getAll: vi.fn().mockResolvedValue([{ _id: collection + '-1' }]),
     }))
+
     const result = await runGetAdminData()
-    const articlesResult = result.find((r) => r.collection === 'articles')
-    expect(articlesResult.collection).toBe('articles')
-    expect(articlesResult.data).toEqual(articlesData)
+
+    expect(result).toBeNull()
+  })
+
+  it('returns null when a bounded collection read fails', async () => {
+    dbModel.mockImplementation((_, collection) => ({
+      countAll: vi.fn().mockResolvedValue(1),
+      getAll: collection === 'pics'
+        ? vi.fn().mockRejectedValue(new Error('read failed'))
+        : vi.fn().mockResolvedValue([{ _id: collection + '-1' }]),
+    }))
+
+    const result = await runGetAdminData()
+
+    expect(result).toBeNull()
   })
 })

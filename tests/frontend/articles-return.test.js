@@ -11,7 +11,13 @@ vi.mock('../../public/js/util/state-front.js', () => ({
   default: { articleType: 'fatboy', picType: 'all', vidType: 'vidPages' },
 }))
 
-import { buildArticleTitle, buildArticleDate, buildArticleText, buildArticleTypeButtonItem } from '../../public/js/articles/articles-return.js'
+import {
+  buildArticleTitle,
+  buildArticleDate,
+  buildArticleText,
+  buildArticleTypeButtons,
+  buildArticleTypeButtonItem,
+} from '../../public/js/articles/articles-return.js'
 
 function createEl(tag) {
   const el = {
@@ -123,6 +129,34 @@ describe('buildArticleText', () => {
     expect(el.children[2].textContent).toBe('b')
     expect(el.children[3].tagName).toBe('BR')
     expect(el.children[4].textContent).toBe('c')
+  })
+})
+
+describe('buildArticleTypeButtons', () => {
+  it('builds controls for all scraper-supported article types only', async () => {
+    const container = await buildArticleTypeButtons()
+    const buttons = container.children[0].children
+    const buttonValues = []
+
+    for (const buttonItem of buttons) {
+      buttonValues.push(buttonItem.children[0]._attrs['data-update'].replace('article-type-button-', ''))
+    }
+
+    expect(buttonValues).toEqual([
+      'all',
+      'fatboy',
+      'top',
+      'latest',
+      'home',
+      'world',
+      'society',
+      'external',
+      'anecdote',
+      'people',
+      'documents',
+    ])
+    expect(buttonValues).not.toContain('commentary')
+    expect(buttonValues).not.toContain('newYear')
   })
 })
 

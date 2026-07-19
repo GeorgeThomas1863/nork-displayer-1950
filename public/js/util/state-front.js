@@ -4,7 +4,7 @@ const stateFront = {
   eventTrigger: null,
 
   typeTrigger: "articles", //default articles
-  articleType: "fatboy", //default fatboy
+  articleType: "latest", //default most recent
   picType: "all",
   vidType: "vidPages",
   howMany: null,
@@ -19,11 +19,9 @@ const stateFront = {
       world: null,
       society: null,
       external: null,
-      commentary: null,
       anecdote: null,
       people: null,
       documents: null,
-      newYear: null,
     },
     pics: null,
     vids: null,
@@ -65,11 +63,9 @@ export const resetDataObj = async () => {
       world: null,
       society: null,
       external: null,
-      commentary: null,
       anecdote: null,
       people: null,
       documents: null,
-      newYear: null,
     },
     pics: null,
     vids: null,

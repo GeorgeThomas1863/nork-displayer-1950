@@ -14,6 +14,7 @@ export const buildVidsReturnDisplay = async (inputArray) => {
   //ADD SWITCH HERE LATER
 
   const vidPagesDisplay = await buildVidPagesDisplay(inputArray);
+  if (!vidPagesDisplay) return null;
   vidDisplayContainer.append(vidPagesDisplay);
 
   return vidDisplayContainer;
@@ -74,22 +75,21 @@ export const buildVidPagesDisplay = async (inputArray) => {
 
   for (let i = 0; i < inputArray.length; i++) {
     const vidListItem = await buildVidListItem(inputArray[i], isFirst);
+    if (!vidListItem) continue;
     vidArrayElement.appendChild(vidListItem);
 
-    // Store the collapse components for group functionality
     const collapseItem = vidListItem.querySelector(".collapse-container");
     if (collapseItem) collapseArray.push(collapseItem);
-
     isFirst = false;
   }
 
-  // Set up the collapse group behavior
+  if (!vidArrayElement.children.length) return null;
   await defineCollapseItems(collapseArray);
-
   return vidArrayElement;
 };
 
 export const buildVidListItem = async (inputObj, isFirst) => {
+  if (!isValidVidRecord(inputObj)) return null;
   const { title, date } = inputObj;
 
   const vidListItem = document.createElement("li");
@@ -100,7 +100,9 @@ export const buildVidListItem = async (inputObj, isFirst) => {
   //build title element
   const dateElement = await buildVidDate(date);
   const titleElement = await buildVidTitle(title);
-  titleElement.innerHTML = `${titleElement.textContent} <span>[${dateElement.textContent}]</span>`;
+  const titleDateElement = document.createElement("span");
+  titleDateElement.textContent = `[${dateElement.textContent}]`;
+  titleElement.append(document.createTextNode(" "), titleDateElement);
 
   // Wrap the article content in a collapsible
   const vidCollapseObj = {
@@ -117,6 +119,7 @@ export const buildVidListItem = async (inputObj, isFirst) => {
 };
 
 export const buildVidContainer = async (inputObj) => {
+  if (!isValidVidRecord(inputObj)) return null;
   const { vidData, date } = inputObj;
   const { savePath } = vidData;
 
@@ -129,6 +132,15 @@ export const buildVidContainer = async (inputObj) => {
   vidContainerElement.append(vidElement, dateElement);
 
   return vidContainerElement;
+};
+
+const isValidVidRecord = (inputObj) => {
+  if (!inputObj || typeof inputObj !== "object") return false;
+  const { title, date, vidData } = inputObj;
+  if (typeof title !== "string" || !title.trim()) return false;
+  if (typeof date !== "string" || !date.trim()) return false;
+  if (!vidData || typeof vidData !== "object") return false;
+  return typeof vidData.savePath === "string" && Boolean(vidData.savePath.trim());
 };
 
 export const buildVidTitle = (title) => {

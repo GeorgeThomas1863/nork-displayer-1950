@@ -1,11 +1,37 @@
-import { describe, it, expect, beforeEach } from 'vitest'
+import { describe, it, expect, beforeEach, vi } from 'vitest'
 import stateFront, { updateStateFront, resetDataObj, dataObjExistsCheck } from '../../public/js/util/state-front.js'
 
 beforeEach(async () => {
   await resetDataObj()
   stateFront.typeTrigger = 'articles'
-  stateFront.articleType = 'fatboy'
+  stateFront.articleType = 'latest'
   stateFront.isFirstLoad = true
+})
+
+describe('article count state', () => {
+  it('loads the most recent article feed by default', async () => {
+    vi.resetModules()
+    const { default: initialState } = await import('../../public/js/util/state-front.js')
+
+    expect(initialState.articleType).toBe('latest')
+    expect(initialState.orderBy).toBe('newest-to-oldest')
+  })
+
+  it('tracks all scraper-supported article types only', () => {
+    expect(Object.keys(stateFront.dataObj.articles)).toEqual([
+      'fatboy',
+      'all',
+      'top',
+      'latest',
+      'home',
+      'world',
+      'society',
+      'external',
+      'anecdote',
+      'people',
+      'documents',
+    ])
+  })
 })
 
 describe('updateStateFront', () => {
