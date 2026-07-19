@@ -4,7 +4,7 @@ const stateFront = {
   eventTrigger: null,
 
   typeTrigger: "articles", //default articles
-  articleType: "latest", //default most recent
+  articleType: "fatboy", //default Revolutionary Activities [KJU]
   picType: "all",
   vidType: "vidPages",
   howMany: null,
