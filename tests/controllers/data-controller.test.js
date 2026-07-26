@@ -104,6 +104,44 @@ describe('adminDataController', () => {
     expect(res.json).toHaveBeenCalledWith(result)
   })
 
+  it('passes a valid whitelisted sortColumn/sortDir pair through unchanged', async () => {
+    runGetAdminData.mockResolvedValue([])
+    const req = { body: { sortColumn: 'duration', sortDir: 'asc' } }
+    const res = makeRes()
+
+    await adminDataController(req, res)
+
+    expect(runGetAdminData).toHaveBeenCalledWith({ sortColumn: 'duration', sortDir: 'asc' })
+  })
+
+  it.each([
+    [{}, { sortColumn: 'endTime', sortDir: 'desc' }],
+    [{ sortColumn: 'bogus', sortDir: 'asc' }, { sortColumn: 'endTime', sortDir: 'asc' }],
+    [{ sortColumn: 'status', sortDir: 'bogus' }, { sortColumn: 'status', sortDir: 'desc' }],
+    [{ sortColumn: 123, sortDir: null }, { sortColumn: 'endTime', sortDir: 'desc' }],
+  ])('falls back invalid/missing sort params %j to %j', async (body, expected) => {
+    runGetAdminData.mockResolvedValue([])
+    const req = { body }
+    const res = makeRes()
+
+    await adminDataController(req, res)
+
+    expect(runGetAdminData).toHaveBeenCalledWith(expected)
+  })
+
+  it.each([null, [], 'not-an-object', undefined])(
+    'falls back to endTime/desc when req.body is not a plain object (%#)',
+    async (body) => {
+      runGetAdminData.mockResolvedValue([])
+      const req = { body }
+      const res = makeRes()
+
+      await adminDataController(req, res)
+
+      expect(runGetAdminData).toHaveBeenCalledWith({ sortColumn: 'endTime', sortDir: 'desc' })
+    }
+  )
+
   it('returns a structured 503 when admin collection data cannot be loaded', async () => {
     runGetAdminData.mockResolvedValue(null)
     const req = {}

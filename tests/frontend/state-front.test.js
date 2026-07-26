@@ -13,7 +13,7 @@ describe('article count state', () => {
     vi.resetModules()
     const { default: initialState } = await import('../../public/js/util/state-front.js')
 
-    expect(initialState.articleType).toBe('latest')
+    expect(initialState.articleType).toBe('fatboy')
     expect(initialState.orderBy).toBe('newest-to-oldest')
   })
 

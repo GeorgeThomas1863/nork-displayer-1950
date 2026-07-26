@@ -1,7 +1,7 @@
 import { beforeAll, describe, expect, it, vi } from "vitest";
 
 vi.mock("../../public/js/admin/admin-sort-tbl.js", () => ({
-  setAdminTableData: vi.fn(),
+  applySortIcons: vi.fn(),
 }));
 vi.mock("../../public/js/control/return-form.js", () => ({
   buildEmptyDisplay: vi.fn(),

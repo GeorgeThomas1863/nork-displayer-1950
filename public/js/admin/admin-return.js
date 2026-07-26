@@ -1,4 +1,4 @@
-import { setAdminTableData } from "./admin-sort-tbl.js";
+import { applySortIcons } from "./admin-sort-tbl.js";
 import { buildEmptyDisplay } from "../control/return-form.js";
 import { buildCollapseContainer } from "../util/collapse-display.js";
 
@@ -34,7 +34,7 @@ export const buildAdminReturnDisplay = async (inputData) => {
     if (!data || !data.length) continue;
 
     //data is array of objs
-    const adminTableContainer = await buildAdminTableContainer(data);
+    const adminTableContainer = await buildAdminTableContainer(data, inputObj.count);
     if (adminTableContainer) adminReturnContainer.append(adminTableContainer);
   }
 
@@ -50,27 +50,21 @@ const buildAdminErrorDisplay = (message) => {
   return errorDisplay;
 };
 
-//would take longer to fix this than its worth
 export const buildAdminStatsSection = async (inputData) => {
   if (!inputData || !inputData.length) return null;
-
-  //!!!!!!!!!!!!!!!!!!
-
-  //BUILD STATS ON BACKEND WITH MONGO QUERIES FOR WHAT YOU NEED, DISPLAY WITH MAP
 
   const logCollection = getAdminCollection(inputData, "log");
   const articlesCollection = getAdminCollection(inputData, "articles");
   const picsCollection = getAdminCollection(inputData, "pics");
   const picSetsCollection = getAdminCollection(inputData, "picSets");
   const vidsCollection = getAdminCollection(inputData, "vidPages");
-  const logStats = buildLogStats(logCollection.data);
 
   const totalScrapes = logCollection.count;
   const totalArticles = articlesCollection.count;
   const totalPics = picsCollection.count;
   const totalPicSets = picSetsCollection.count;
   const totalVids = vidsCollection.count;
-  const { activeScrapes, finishedScrapes, errorScrapes, avgDuration } = logStats;
+  const { activeScrapes, finishedScrapes, errorScrapes, avgDuration } = logCollection.stats;
 
   const statsContainer = document.createElement("div");
   statsContainer.className = "admin-stats-container";
@@ -119,38 +113,17 @@ const getAdminCollection = (inputData, collectionName) => {
     return {
       count: inputObj.count ?? 0,
       data: inputObj.data || [],
+      stats: inputObj.stats || {},
     };
   }
 
-  return { count: 0, data: [] };
-};
-
-const buildLogStats = (logData) => {
-  let activeScrapes = 0;
-  let finishedScrapes = 0;
-  let errorScrapes = 0;
-  let completedScrapes = 0;
-  let totalDuration = 0;
-
-  for (const logItem of logData) {
-    if (logItem.scrapeActive) activeScrapes++;
-    if (logItem.scrapeEndTime && !logItem.scrapeError) finishedScrapes++;
-    if (logItem.scrapeError) errorScrapes++;
-    if (logItem.scrapeLengthSeconds === null || logItem.scrapeLengthSeconds === undefined) continue;
-    completedScrapes++;
-    totalDuration += logItem.scrapeLengthSeconds;
-  }
-
-  const avgDuration = completedScrapes ? Math.round(totalDuration / completedScrapes) : 0;
-  return { activeScrapes, finishedScrapes, errorScrapes, avgDuration };
+  return { count: 0, data: [], stats: {} };
 };
 
 //----------------------
 
-export const buildAdminTableContainer = async (inputArray) => {
+export const buildAdminTableContainer = async (inputArray, count) => {
   if (!inputArray || !inputArray.length) return null;
-
-  setAdminTableData(inputArray);
 
   const adminTableContainer = document.createElement("div");
   adminTableContainer.className = "admin-table-container";
@@ -169,12 +142,13 @@ export const buildAdminTableContainer = async (inputArray) => {
 
   const adminRecordCount = document.createElement("div");
   adminRecordCount.className = "admin-record-count";
-  adminRecordCount.textContent = `${inputArray.length} Records`;
+  adminRecordCount.textContent = `${inputArray.length} of ${count} Records`;
 
   adminTableHeaderWrapper.appendChild(adminTableTitle);
   adminTableHeaderWrapper.appendChild(adminRecordCount);
 
   const adminTable = await buildAdminTable(inputArray);
+  applySortIcons(adminTable);
   adminTableWrapper.appendChild(adminTable);
 
   adminTableContainer.appendChild(adminTableHeaderWrapper);
@@ -362,26 +336,4 @@ export const formatDateTime = async (dateString) => {
 export const formatDuration = async (durationSeconds) => {
   if (durationSeconds === null || durationSeconds === undefined) return null;
   return `${durationSeconds}s`;
-};
-
-export const rebuildAdminTableBody = async (sortedData) => {
-  const table = document.querySelector(".admin-table");
-  if (!table) return;
-
-  // Remove existing tbody
-  const oldTbody = table.querySelector("tbody");
-  if (oldTbody) {
-    oldTbody.remove();
-  }
-
-  // Create new tbody with sorted data
-  const tbody = document.createElement("tbody");
-
-  for (let i = 0; i < sortedData.length; i++) {
-    const row = await buildAdminTableRow(sortedData[i]);
-    if (!row) continue;
-    tbody.appendChild(row);
-  }
-
-  table.appendChild(tbody);
 };

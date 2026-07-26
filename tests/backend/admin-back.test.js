@@ -88,71 +88,172 @@ describe('runAdminCommand', () => {
 })
 
 describe('runGetAdminData', () => {
+  const buildLogModel = (overrides = {}) => ({
+    countAll: vi.fn().mockResolvedValue(overrides.count ?? 5),
+    getSortedItemsArray: vi.fn().mockResolvedValue(overrides.data ?? []),
+    getLogStatsSummary: vi.fn().mockResolvedValue(
+      overrides.stats ?? { activeScrapes: 0, finishedScrapes: 0, errorScrapes: 0, avgDuration: 0 }
+    ),
+  })
+
+  const buildCountModel = (count) => ({ countAll: vi.fn().mockResolvedValue(count) })
+
+  // wires dbModel so only the "log" collection gets the sorted/stats mock; captures
+  // the dataObject passed to `new dbModel(dataObject, "log")` for assertions below
+  const mockDbModelCapturingLogDataObject = (logModel = buildLogModel()) => {
+    let capturedDataObject
+    dbModel.mockImplementation((dataObject, collection) => {
+      if (collection === 'log') {
+        capturedDataObject = dataObject
+        return logModel
+      }
+      return buildCountModel(1)
+    })
+    return () => capturedDataObject
+  }
+
   beforeEach(() => {
     vi.clearAllMocks()
+    delete process.env.DEFAULT_LOAD_LOG
   })
 
-  it('returns exact counts above the bounded record limit', async () => {
-    dbModel.mockImplementation((_, collection) => ({
-      countAll: vi.fn().mockResolvedValue(collection === 'articles' ? 725 : 1),
-      getAll: vi.fn().mockResolvedValue([{ _id: collection + '-1' }]),
-    }))
-
-    const result = await runGetAdminData()
-
-    expect(result.find((item) => item.collection === 'articles').count).toBe(725)
-    expect(dbModel.mock.results[0].value.getAll).toHaveBeenCalledWith(500)
+  afterEach(() => {
+    delete process.env.DEFAULT_LOAD_LOG
   })
 
-  it('includes video page counts in the admin result', async () => {
-    dbModel.mockImplementation((_, collection) => ({
-      countAll: vi.fn().mockResolvedValue(collection === 'vidPages' ? 612 : 1),
-      getAll: vi.fn().mockResolvedValue([{ _id: collection + '-1' }]),
-    }))
-
-    const result = await runGetAdminData()
-
-    expect(result).toContainEqual({
-      collection: 'vidPages',
-      count: 612,
-      data: [{ _id: 'vidPages-1' }],
+  it('returns sorted+capped log data with stats, and count-only entries for the other collections', async () => {
+    const logRows = [{ _id: '1' }, { _id: '2' }]
+    const stats = { activeScrapes: 1, finishedScrapes: 2, errorScrapes: 0, avgDuration: 42 }
+    dbModel.mockImplementation((_, collection) => {
+      if (collection === 'log') return buildLogModel({ count: 2, data: logRows, stats })
+      return buildCountModel(collection === 'articles' ? 725 : 1)
     })
+
+    const result = await runGetAdminData({ sortColumn: 'endTime', sortDir: 'desc' })
+
+    expect(result[0]).toEqual({ collection: 'log', count: 2, data: logRows, stats })
+    expect(result.find((item) => item.collection === 'articles')).toEqual({ collection: 'articles', count: 725 })
+    expect(result.find((item) => item.collection === 'pics')).toEqual({ collection: 'pics', count: 1 })
+    expect(result.find((item) => item.collection === 'picSets')).toEqual({ collection: 'picSets', count: 1 })
+    expect(result.find((item) => item.collection === 'vidPages')).toEqual({ collection: 'vidPages', count: 1 })
+    expect(result.find((item) => item.collection === 'articles')).not.toHaveProperty('data')
   })
 
-  it('keeps empty collections so their exact zero count remains visible', async () => {
-    dbModel.mockImplementation(() => ({
-      countAll: vi.fn().mockResolvedValue(0),
-      getAll: vi.fn().mockResolvedValue([]),
-    }))
+  it('caps the log query at DEFAULT_LOAD_LOG when it is set to a valid number', async () => {
+    process.env.DEFAULT_LOAD_LOG = '50'
+    const getCapturedDataObject = mockDbModelCapturingLogDataObject()
 
-    const result = await runGetAdminData()
+    await runGetAdminData({})
+
+    expect(getCapturedDataObject().howMany).toBe(50)
+  })
+
+  it.each([undefined, 'not-a-number', '0'])(
+    'falls back to a cap of 100 when DEFAULT_LOAD_LOG is %s',
+    async (envValue) => {
+      if (envValue === undefined) delete process.env.DEFAULT_LOAD_LOG
+      else process.env.DEFAULT_LOAD_LOG = envValue
+      const getCapturedDataObject = mockDbModelCapturingLogDataObject()
+
+      await runGetAdminData({})
+
+      expect(getCapturedDataObject().howMany).toBe(100)
+    }
+  )
+
+  it('defaults to the endTime/desc sort when called without sort params', async () => {
+    const getCapturedDataObject = mockDbModelCapturingLogDataObject()
+
+    await runGetAdminData()
+
+    expect(getCapturedDataObject().sortObj).toEqual({ scrapeEndTime: -1, _id: -1 })
+  })
+
+  it('builds the compound status sort across scrapeError, scrapeActive, and _id', async () => {
+    const getCapturedDataObject = mockDbModelCapturingLogDataObject()
+
+    await runGetAdminData({ sortColumn: 'status', sortDir: 'desc' })
+
+    expect(getCapturedDataObject().sortObj).toEqual({ scrapeError: -1, scrapeActive: -1, _id: -1 })
+  })
+
+  it.each([
+    ['id', 'asc', { _id: 1 }],
+    ['startTime', 'desc', { scrapeStartTime: -1, _id: -1 }],
+    ['endTime', 'asc', { scrapeEndTime: 1, _id: 1 }],
+    ['duration', 'asc', { scrapeLengthSeconds: 1, _id: 1 }],
+    ['step', 'desc', { scrapeStep: -1, _id: -1 }],
+    ['message', 'asc', { scrapeMessage: 1, _id: 1 }],
+    ['active', 'desc', { scrapeActive: -1, _id: -1 }],
+    ['status', 'asc', { scrapeError: 1, scrapeActive: 1, _id: 1 }],
+  ])('maps sortColumn=%s sortDir=%s to sort object %j', async (sortColumn, sortDir, expected) => {
+    const getCapturedDataObject = mockDbModelCapturingLogDataObject()
+
+    await runGetAdminData({ sortColumn, sortDir })
+
+    expect(getCapturedDataObject().sortObj).toEqual(expected)
+  })
+
+  it('keeps an empty log collection with zero count, empty data, and zeroed stats', async () => {
+    const zeroedStats = { activeScrapes: 0, finishedScrapes: 0, errorScrapes: 0, avgDuration: 0 }
+    dbModel.mockImplementation((_, collection) => {
+      if (collection === 'log') return buildLogModel({ count: 0, data: [], stats: zeroedStats })
+      return buildCountModel(0)
+    })
+
+    const result = await runGetAdminData({})
 
     expect(result).toHaveLength(5)
-    expect(result[0]).toMatchObject({ count: 0, data: [] })
+    expect(result[0]).toEqual({ collection: 'log', count: 0, data: [], stats: zeroedStats })
   })
 
-  it('returns null when a collection count fails', async () => {
-    dbModel.mockImplementation((_, collection) => ({
-      countAll: collection === 'picSets'
-        ? vi.fn().mockRejectedValue(new Error('db error'))
-        : vi.fn().mockResolvedValue(1),
-      getAll: vi.fn().mockResolvedValue([{ _id: collection + '-1' }]),
-    }))
+  it('returns null when the log count fails', async () => {
+    dbModel.mockImplementation((_, collection) => {
+      if (collection === 'log') {
+        return { ...buildLogModel(), countAll: vi.fn().mockRejectedValue(new Error('db error')) }
+      }
+      return buildCountModel(1)
+    })
 
-    const result = await runGetAdminData()
+    const result = await runGetAdminData({})
 
     expect(result).toBeNull()
   })
 
-  it('returns null when a bounded collection read fails', async () => {
-    dbModel.mockImplementation((_, collection) => ({
-      countAll: vi.fn().mockResolvedValue(1),
-      getAll: collection === 'pics'
-        ? vi.fn().mockRejectedValue(new Error('read failed'))
-        : vi.fn().mockResolvedValue([{ _id: collection + '-1' }]),
-    }))
+  it('returns null when the sorted log read fails', async () => {
+    dbModel.mockImplementation((_, collection) => {
+      if (collection === 'log') {
+        return { ...buildLogModel(), getSortedItemsArray: vi.fn().mockRejectedValue(new Error('read failed')) }
+      }
+      return buildCountModel(1)
+    })
 
-    const result = await runGetAdminData()
+    const result = await runGetAdminData({})
+
+    expect(result).toBeNull()
+  })
+
+  it('returns null when the log stats aggregation fails', async () => {
+    dbModel.mockImplementation((_, collection) => {
+      if (collection === 'log') {
+        return { ...buildLogModel(), getLogStatsSummary: vi.fn().mockRejectedValue(new Error('agg failed')) }
+      }
+      return buildCountModel(1)
+    })
+
+    const result = await runGetAdminData({})
+
+    expect(result).toBeNull()
+  })
+
+  it('returns null when a count-only collection fails', async () => {
+    dbModel.mockImplementation((_, collection) => {
+      if (collection === 'log') return buildLogModel()
+      if (collection === 'picSets') return { countAll: vi.fn().mockRejectedValue(new Error('db error')) }
+      return buildCountModel(1)
+    })
+
+    const result = await runGetAdminData({})
 
     expect(result).toBeNull()
   })

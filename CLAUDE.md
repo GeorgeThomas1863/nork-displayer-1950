@@ -28,7 +28,7 @@ Key `.env` variables:
 - `MONGO_URI`, `DB_NAME` — MongoDB connection
 - `PIC_PATH`, `VID_PATH`, `WATCH_PATH` — filesystem media paths
 - `EXPRESS_PIC_PATH`, `EXPRESS_VID_PATH`, `EXPRESS_WATCH_PATH` — URL prefixes for auth-gated static media
-- `DEFAULT_LOAD_ARTICLES`, `DEFAULT_LOAD_PICS`, `DEFAULT_LOAD_PICSETS`, `DEFAULT_LOAD_VIDS`, `DEFAULT_LOAD_VIDPAGES` — default result counts
+- `DEFAULT_LOAD_ARTICLES`, `DEFAULT_LOAD_PICS`, `DEFAULT_LOAD_PICSETS`, `DEFAULT_LOAD_VIDS`, `DEFAULT_LOAD_VIDPAGES`, `DEFAULT_LOAD_LOG` — default result counts
 - `API_SCRAPER` — route on the scraper service to proxy admin commands to
 - `API_PASSWORD` — password sent with proxied scraper requests
 
@@ -110,7 +110,7 @@ public/js/
     admin-return.js     Stats bar + sortable log table
     admin-run.js        runAdminAuth, runAdminCommand (polls status, refreshes display)
     admin-responsive.js Event listeners for admin page
-    admin-sort-tbl.js   setAdminTableData, runAdminSortColumn
+    admin-sort-tbl.js   runAdminSortColumn, getAdminSortState, applySortIcons
     admin-status.js     buildAdminStatusDisplay (scrape/scheduler live status)
 ```
 

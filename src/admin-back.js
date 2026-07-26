@@ -30,12 +30,28 @@ const buildCommandFailure = (error) => {
   return { success: false, message, data: { status } };
 };
 
-export const runGetAdminData = async () => {
-  const collections = ["log", "articles", "pics", "picSets", "vidPages"];
+//column -> mongo field(s) for the admin log sort
+const LOG_SORT_FIELDS = {
+  id: ["_id"],
+  status: ["scrapeError", "scrapeActive"],
+  startTime: ["scrapeStartTime"],
+  endTime: ["scrapeEndTime"],
+  duration: ["scrapeLengthSeconds"],
+  step: ["scrapeStep"],
+  message: ["scrapeMessage"],
+  active: ["scrapeActive"],
+};
+
+export const runGetAdminData = async ({ sortColumn, sortDir } = {}) => {
+  const countOnlyCollections = ["articles", "pics", "picSets", "vidPages"];
   const dataArray = [];
 
-  for (const collection of collections) {
-    const collectionData = await getAdminCollectionData(collection);
+  const logData = await getAdminLogData(sortColumn, sortDir);
+  if (!logData) return null;
+  dataArray.push(logData);
+
+  for (const collection of countOnlyCollections) {
+    const collectionData = await getAdminCollectionCount(collection);
     if (!collectionData) return null;
     dataArray.push(collectionData);
   }
@@ -43,20 +59,43 @@ export const runGetAdminData = async () => {
   return dataArray;
 };
 
-const getAdminCollectionData = async (collection) => {
+//build the mongo sort object for the log collection, always tiebroken by _id
+const buildLogSortObject = (sortColumn, sortDir) => {
+  const dir = sortDir === "asc" ? 1 : -1;
+  const fields = LOG_SORT_FIELDS[sortColumn] || LOG_SORT_FIELDS.endTime;
+
+  const sortObj = {};
+  for (const field of fields) {
+    sortObj[field] = dir;
+  }
+  sortObj._id = dir;
+
+  return sortObj;
+};
+
+const getAdminLogData = async (sortColumn, sortDir) => {
+  try {
+    const howMany = +process.env.DEFAULT_LOAD_LOG || 100;
+    const sortObj = buildLogSortObject(sortColumn, sortDir);
+    const dataModel = new dbModel({ sortObj, howMany }, "log");
+
+    const count = await dataModel.countAll();
+    const data = await dataModel.getSortedItemsArray();
+    const stats = await dataModel.getLogStatsSummary();
+    return { collection: "log", count, data, stats };
+  } catch (e) {
+    console.error("ADMIN DATA ERROR FOR log:", e.message);
+    return null;
+  }
+};
+
+const getAdminCollectionCount = async (collection) => {
   try {
     const dataModel = new dbModel("", collection);
     const count = await dataModel.countAll();
-    const data = await dataModel.getAll(500);
-    return { collection, count, data };
+    return { collection, count };
   } catch (e) {
     console.error(`ADMIN DATA ERROR FOR ${collection}:`, e.message);
     return null;
   }
 };
-
-// export const getAdminLogs = async () => {
-//   const dataModel = new dbModel("", "log");
-//   const data = await dataModel.getAll();
-//   return data;
-// };

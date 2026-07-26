@@ -9,7 +9,8 @@ export const clickHandler = async (e) => {
   const clickId = clickElement.id;
   const clickType = clickElement.getAttribute("data-label");
   const clickUpdate = clickElement.getAttribute("data-update");
-  const clickColumn = clickElement.getAttribute("data-column");
+  const clickColumnHeader = clickElement.closest("th[data-column]");
+  const clickColumn = clickColumnHeader ? clickColumnHeader.getAttribute("data-column") : null;
 
   // console.log("CLICK HANDLER");
   // console.log(clickElement);
@@ -68,9 +69,4 @@ if (adminAuthElement) {
 if (adminDisplayElement) {
   adminDisplayElement.addEventListener("click", clickHandler);
   adminDisplayElement.addEventListener("change", changeHandler);
-
-  const headers = adminDisplayElement.querySelectorAll(".admin-table-header th");
-  headers.forEach((header) => {
-    header.addEventListener("click", clickHandler);
-  });
 }

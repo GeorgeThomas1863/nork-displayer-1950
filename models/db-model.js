@@ -114,6 +114,47 @@ class dbModel {
 
     return dataArray;
   }
+
+  //get items sorted by a prebuilt sort object (admin log table)
+  async getSortedItemsArray() {
+    const { sortObj, howMany } = this.dataObject;
+
+    //get data
+    const dataArray = await dbGet().collection(this.collection).find().sort(sortObj).limit(+howMany).toArray(); //prettier-ignore
+
+    return dataArray;
+  }
+
+  //aggregate active/finished/error counts and average duration (admin log stats bar)
+  async getLogStatsSummary() {
+    const pipeline = [
+      {
+        $group: {
+          _id: null,
+          activeScrapes: { $sum: { $cond: [{ $eq: ["$scrapeActive", true] }, 1, 0] } },
+          errorScrapes: { $sum: { $cond: [{ $eq: ["$scrapeError", true] }, 1, 0] } },
+          finishedScrapes: {
+            $sum: {
+              $cond: [
+                { $and: [{ $gt: ["$scrapeEndTime", null] }, { $ne: ["$scrapeError", true] }] },
+                1,
+                0,
+              ],
+            },
+          },
+          avgDuration: { $avg: "$scrapeLengthSeconds" },
+        },
+      },
+    ];
+
+    const results = await dbGet().collection(this.collection).aggregate(pipeline).toArray();
+    if (results.length === 0) {
+      return { activeScrapes: 0, finishedScrapes: 0, errorScrapes: 0, avgDuration: 0 };
+    }
+
+    const { activeScrapes, finishedScrapes, errorScrapes, avgDuration } = results[0];
+    return { activeScrapes, finishedScrapes, errorScrapes, avgDuration: Math.round(avgDuration || 0) };
+  }
 }
 
 export default dbModel;

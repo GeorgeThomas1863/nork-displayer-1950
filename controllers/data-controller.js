@@ -22,9 +22,9 @@ export const adminCommandController = async (req, res) => {
 };
 
 export const adminDataController = async (req, res) => {
-  // const { stateAdmin } = req.body;
+  const sortParams = buildSortParams(req.body);
 
-  const data = await runGetAdminData();
+  const data = await runGetAdminData(sortParams);
   if (!data) return sendAdminDataFailure(res);
   return res.json(data);
 };
@@ -52,6 +52,22 @@ const isValidPollingRequest = (inputParams) => {
 
 const isPlainObject = (inputData) => {
   return inputData !== null && typeof inputData === "object" && !Array.isArray(inputData);
+};
+
+const SORT_COLUMN_WHITELIST = ["id", "status", "startTime", "endTime", "duration", "step", "message", "active"];
+const SORT_DIR_WHITELIST = ["asc", "desc"];
+
+const sanitizeSortColumn = (sortColumn) => {
+  return SORT_COLUMN_WHITELIST.includes(sortColumn) ? sortColumn : "endTime";
+};
+
+const sanitizeSortDir = (sortDir) => {
+  return SORT_DIR_WHITELIST.includes(sortDir) ? sortDir : "desc";
+};
+
+const buildSortParams = (inputParams) => {
+  const { sortColumn, sortDir } = isPlainObject(inputParams) ? inputParams : {};
+  return { sortColumn: sanitizeSortColumn(sortColumn), sortDir: sanitizeSortDir(sortDir) };
 };
 
 const buildStatusParams = (inputParams) => {

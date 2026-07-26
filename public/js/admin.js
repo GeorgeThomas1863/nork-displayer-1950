@@ -2,6 +2,7 @@ import { buildAdminForm } from "./admin/admin-form.js";
 import { buildAdminReturnDisplay } from "./admin/admin-return.js";
 import { buildAdminStatusDisplay } from "./admin/admin-status.js";
 import { sendToBack } from "./util/api-front.js";
+import { getAdminSortState } from "./admin/admin-sort-tbl.js";
 
 const adminDisplayElement = document.getElementById("admin-display-element");
 
@@ -42,7 +43,7 @@ export const updateAdminDisplay = async (isCurrent = isAlwaysCurrent) => {
   const mainContent = document.getElementById("admin-main-content");
   if (!mainContent) return null;
 
-  const adminUpdateArray = await sendToBack({ route: "/nork-admin-data-route" });
+  const adminUpdateArray = await sendToBack({ route: "/nork-admin-data-route", ...getAdminSortState() });
   if (!isCurrent()) return null;
 
   const adminReturnDisplay = await buildAdminReturnDisplay(adminUpdateArray);
