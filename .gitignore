@@ -15,6 +15,9 @@ config/
 .claude/.pics
 .claude/pics/
 .playwright-mcp
+.mcp.json
+.remember/
+.superpowers/
 
 # logs
 logs
