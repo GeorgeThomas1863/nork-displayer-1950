@@ -73,7 +73,8 @@ describe('runAdminCommand', () => {
     await runAdminCommand({ command: 'scrape' })
     expect(axios.post).toHaveBeenCalledWith(
       'http://localhost:3001/api/scrape',
-      expect.any(Object)
+      expect.any(Object),
+      { timeout: 15000 }
     )
   })
 
@@ -82,7 +83,8 @@ describe('runAdminCommand', () => {
     await runAdminCommand({ command: 'scrape', target: 'kcna' })
     expect(axios.post).toHaveBeenCalledWith(
       'http://localhost:3001/api/scrape',
-      { command: 'scrape', target: 'kcna', password: 'testpass' }
+      { command: 'scrape', target: 'kcna', password: 'testpass' },
+      { timeout: 15000 }
     )
   })
 })

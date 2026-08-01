@@ -13,14 +13,11 @@ const mocks = vi.hoisted(() => {
     createElement,
     stateFront: {
       typeTrigger: "articles",
-      dataObj: { articles: {}, pics: null, vids: 1 },
+      dataObj: { articles: {}, pics: null, vids: null },
     },
     articleForm: createElement("article-form"),
     picForm: createElement("pic-form"),
-    vidForm: createElement("vid-form"),
-    videoResult: createElement("video-result"),
     defineCollapseItems: vi.fn(),
-    buildVidsReturnDisplay: vi.fn(),
   };
 });
 
@@ -30,17 +27,11 @@ vi.mock("../../public/js/articles/articles-form.js", () => ({
 vi.mock("../../public/js/pics/pics-form.js", () => ({
   buildPicsForm: vi.fn().mockResolvedValue(mocks.picForm),
 }));
-vi.mock("../../public/js/vids/vids-form.js", () => ({
-  buildVidsForm: vi.fn().mockResolvedValue(mocks.vidForm),
-}));
 vi.mock("../../public/js/articles/articles-return.js", () => ({
   buildArticlesReturnDisplay: vi.fn(),
 }));
 vi.mock("../../public/js/pics/pics-return.js", () => ({
   buildPicsReturnDisplay: vi.fn(),
-}));
-vi.mock("../../public/js/vids/vids-return.js", () => ({
-  buildVidsReturnDisplay: mocks.buildVidsReturnDisplay,
 }));
 vi.mock("../../public/js/util/collapse-display.js", () => ({
   defineCollapseItems: mocks.defineCollapseItems,
@@ -60,25 +51,22 @@ beforeAll(() => {
 beforeEach(() => {
   vi.clearAllMocks();
   mocks.stateFront.typeTrigger = "articles";
-  mocks.buildVidsReturnDisplay.mockResolvedValue(mocks.videoResult);
 });
 
-describe("video UI reachability", () => {
-  it("includes the existing video selector and dispatches video results", async () => {
+//vids were removed from the site 2026-08-01; these guard against re-introduction
+describe("video UI removal", () => {
+  it("builds only the article and pic forms", async () => {
     const forms = await buildInputForms();
 
-    expect(forms.children).toContain(mocks.vidForm);
-    expect(mocks.defineCollapseItems).toHaveBeenCalledWith([
-      mocks.articleForm,
-      mocks.picForm,
-      mocks.vidForm,
-    ]);
+    expect(forms.children).toEqual([mocks.articleForm, mocks.picForm]);
+    expect(mocks.defineCollapseItems).toHaveBeenCalledWith([mocks.articleForm, mocks.picForm]);
+  });
 
+  it("returns null for a vids display trigger", async () => {
     mocks.stateFront.typeTrigger = "vids";
-    const input = [{ title: "Reachable video" }];
-    const result = await buildReturnDisplay(input);
 
-    expect(mocks.buildVidsReturnDisplay).toHaveBeenCalledWith(input);
-    expect(result.children).toContain(mocks.videoResult);
+    const result = await buildReturnDisplay([{ title: "no longer reachable" }]);
+
+    expect(result).toBeNull();
   });
 });

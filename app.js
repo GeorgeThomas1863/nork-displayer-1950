@@ -34,7 +34,8 @@ app.use(routes);
 // app.listen(1801);
 await dbConnect();
 
-app.listen(process.env.DISPLAY_PORT, () =>
+//loopback only: nginx on this box is the only legitimate client
+app.listen(process.env.DISPLAY_PORT, "127.0.0.1", () =>
   console.log(`Displayer running on port ${process.env.DISPLAY_PORT}`)
 );
 

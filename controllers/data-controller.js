@@ -39,9 +39,11 @@ export const adminPollingController = async (req, res) => {
   return sendOperationResult(res, result);
 };
 
+const ADMIN_COMMAND_WHITELIST = ["admin-start-scrape", "admin-stop-scrape", "admin-start-scheduler", "admin-stop-scheduler", "admin-scrape-status"];
+
 const isValidCommandRequest = (inputParams) => {
   if (!isPlainObject(inputParams)) return false;
-  return typeof inputParams.command === "string" && inputParams.command.trim().length > 0;
+  return ADMIN_COMMAND_WHITELIST.includes(inputParams.command);
 };
 
 const isValidPollingRequest = (inputParams) => {

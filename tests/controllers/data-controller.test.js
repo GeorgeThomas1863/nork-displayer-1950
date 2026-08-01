@@ -50,7 +50,7 @@ describe('updateDisplayDataController', () => {
 
 describe('adminCommandController', () => {
   it('calls runAdminCommand with req.body and passes a success result to res.json', async () => {
-    const body = { command: 'scrape' }
+    const body = { command: 'admin-start-scrape' }
     const result = { success: true, message: 'done', data: { ok: true } }
     runAdminCommand.mockResolvedValue(result)
     const req = { body }
@@ -63,7 +63,7 @@ describe('adminCommandController', () => {
   it('maps scraper operation failures to their non-2xx status', async () => {
     const result = { success: false, message: 'unauthorized', data: { status: 401 } }
     runAdminCommand.mockResolvedValue(result)
-    const req = { body: { command: 'scrape' } }
+    const req = { body: { command: 'admin-start-scrape' } }
     const res = makeRes()
 
     await adminCommandController(req, res)
@@ -77,6 +77,8 @@ describe('adminCommandController', () => {
     {},
     { command: '' },
     { command: 123 },
+    { command: 'scrape' },
+    { command: 'not-a-real-command' },
   ])('returns a structured 400 for malformed command body %#', async (body) => {
     const req = { body }
     const res = makeRes()
