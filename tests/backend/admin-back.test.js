@@ -104,7 +104,7 @@ describe('runGetAdminData', () => {
   // the dataObject passed to `new dbModel(dataObject, "log")` for assertions below
   const mockDbModelCapturingLogDataObject = (logModel = buildLogModel()) => {
     let capturedDataObject
-    dbModel.mockImplementation((dataObject, collection) => {
+    dbModel.mockImplementation(function (dataObject, collection) {
       if (collection === 'log') {
         capturedDataObject = dataObject
         return logModel
@@ -126,7 +126,7 @@ describe('runGetAdminData', () => {
   it('returns sorted+capped log data with stats, and count-only entries for the other collections', async () => {
     const logRows = [{ _id: '1' }, { _id: '2' }]
     const stats = { activeScrapes: 1, finishedScrapes: 2, errorScrapes: 0, avgDuration: 42 }
-    dbModel.mockImplementation((_, collection) => {
+    dbModel.mockImplementation(function (_, collection) {
       if (collection === 'log') return buildLogModel({ count: 2, data: logRows, stats })
       return buildCountModel(collection === 'articles' ? 725 : 1)
     })
@@ -198,7 +198,7 @@ describe('runGetAdminData', () => {
 
   it('keeps an empty log collection with zero count, empty data, and zeroed stats', async () => {
     const zeroedStats = { activeScrapes: 0, finishedScrapes: 0, errorScrapes: 0, avgDuration: 0 }
-    dbModel.mockImplementation((_, collection) => {
+    dbModel.mockImplementation(function (_, collection) {
       if (collection === 'log') return buildLogModel({ count: 0, data: [], stats: zeroedStats })
       return buildCountModel(0)
     })
@@ -210,7 +210,7 @@ describe('runGetAdminData', () => {
   })
 
   it('returns null when the log count fails', async () => {
-    dbModel.mockImplementation((_, collection) => {
+    dbModel.mockImplementation(function (_, collection) {
       if (collection === 'log') {
         return { ...buildLogModel(), countAll: vi.fn().mockRejectedValue(new Error('db error')) }
       }
@@ -223,7 +223,7 @@ describe('runGetAdminData', () => {
   })
 
   it('returns null when the sorted log read fails', async () => {
-    dbModel.mockImplementation((_, collection) => {
+    dbModel.mockImplementation(function (_, collection) {
       if (collection === 'log') {
         return { ...buildLogModel(), getSortedItemsArray: vi.fn().mockRejectedValue(new Error('read failed')) }
       }
@@ -236,7 +236,7 @@ describe('runGetAdminData', () => {
   })
 
   it('returns null when the log stats aggregation fails', async () => {
-    dbModel.mockImplementation((_, collection) => {
+    dbModel.mockImplementation(function (_, collection) {
       if (collection === 'log') {
         return { ...buildLogModel(), getLogStatsSummary: vi.fn().mockRejectedValue(new Error('agg failed')) }
       }
@@ -249,7 +249,7 @@ describe('runGetAdminData', () => {
   })
 
   it('returns null when a count-only collection fails', async () => {
-    dbModel.mockImplementation((_, collection) => {
+    dbModel.mockImplementation(function (_, collection) {
       if (collection === 'log') return buildLogModel()
       if (collection === 'picSets') return { countAll: vi.fn().mockRejectedValue(new Error('db error')) }
       return buildCountModel(1)
