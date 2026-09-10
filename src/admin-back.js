@@ -7,7 +7,8 @@ const SCRAPER_API_TIMEOUT_MS = 15000;
 
 export const runAdminCommand = async (inputParams) => {
   try {
-    const url = `http://localhost:${process.env.SCRAPE_PORT}${process.env.API_SCRAPER}`;
+    const scraperHost = process.env.SCRAPER_HOST || "localhost";
+    const url = `http://${scraperHost}:${process.env.SCRAPE_PORT}${process.env.API_SCRAPER}`;
     const apiRes = await axios.post(url, { ...inputParams, password: process.env.API_PASSWORD }, { timeout: SCRAPER_API_TIMEOUT_MS });
     return buildCommandSuccess(apiRes?.data);
   } catch (e) {

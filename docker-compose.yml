@@ -1,0 +1,57 @@
+name: nork
+
+services:
+  displayer:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${DISPLAY_PORT}:${DISPLAY_PORT}"
+    env_file:
+      - path: .env
+      - path: .env.local
+        required: false
+    environment:
+      HOST: 0.0.0.0
+      MONGO_URI: mongodb://mongo:27017
+      SCRAPER_HOST: scraper
+      PIC_PATH: /data/pics
+    depends_on:
+      mongo:
+        condition: service_healthy
+      scraper:
+        condition: service_started
+    volumes:
+      - pics:/data/pics:ro
+
+  scraper:
+    build: ../nork-scraper-1950
+    restart: unless-stopped
+    env_file:
+      - path: ../nork-scraper-1950/.env
+      - path: ../nork-scraper-1950/.env.local
+        required: false
+    environment:
+      HOST: 0.0.0.0
+      MONGO_URI: mongodb://mongo:27017
+      PIC_PATH: /data/pics
+    depends_on:
+      mongo:
+        condition: service_healthy
+    volumes:
+      - pics:/data/pics
+
+  mongo:
+    image: mongo:8
+    restart: unless-stopped
+    volumes:
+      - mongo-data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.runCommand({ping:1}).ok"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+volumes:
+  pics:
+  mongo-data:

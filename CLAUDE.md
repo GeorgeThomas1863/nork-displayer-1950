@@ -11,7 +11,8 @@ Do NOT commit anything to GitHub. The user controls all commits. Do not touch Gi
 ## Commands
 
 ```bash
-npm start        # Start with nodemon (auto-restarts on changes)
+npm run dev      # Local dev loop with nodemon (auto-restarts on changes)
+npm run docker:up  # Build and run the production stack (see docs/docker.md)
 npm test         # Run vitest test suite
 ```
 
@@ -23,11 +24,14 @@ All configuration is loaded from a `.env` file in the project root (gitignored).
 
 Key `.env` variables:
 - `DISPLAY_PORT`, `SCRAPE_PORT` — service ports
+- `HOST` — optional listen host; defaults to `127.0.0.1`
+- `SCRAPER_HOST` — optional scraper service host; defaults to `localhost`
 - `PW`, `ADMIN_PW` — auth passwords
 - `SESSION_SECRET` — express-session secret
 - `MONGO_URI`, `DB_NAME` — MongoDB connection
-- `PIC_PATH`, `VID_PATH`, `WATCH_PATH` — filesystem media paths
-- `EXPRESS_PIC_PATH`, `EXPRESS_VID_PATH`, `EXPRESS_WATCH_PATH` — URL prefixes for auth-gated static media
+- `PIC_PATH` — required filesystem path for pictures
+- `EXPRESS_PIC_PATH` — required URL prefix for auth-gated pictures
+- `VID_PATH`/`EXPRESS_VID_PATH`, `WATCH_PATH`/`EXPRESS_WATCH_PATH` — optional filesystem path and URL-prefix pairs; each route is mounted only when both values are set
 - `DEFAULT_LOAD_ARTICLES`, `DEFAULT_LOAD_PICS`, `DEFAULT_LOAD_PICSETS`, `DEFAULT_LOAD_VIDS`, `DEFAULT_LOAD_VIDPAGES`, `DEFAULT_LOAD_LOG` — default result counts
 - `API_SCRAPER` — route on the scraper service to proxy admin commands to
 - `API_PASSWORD` — password sent with proxied scraper requests
@@ -43,6 +47,7 @@ app.js                    Entry point: session, auth-gated static paths, routes,
 middleware/
   session-config.js       buildSessionConfig() — 24h cookie, httpOnly, secure:auto
   db-config.js            dbConnect() / dbGet() — single MongoDB connection
+  static-media.js         mountRequiredAuthStatic() (pics, throws if unset), mountAuthStatic() (optional vid/watch), resolveListenHost()
 routes/
   router.js               All route definitions (routes are hardcoded strings, not env vars)
   auth.js                 requireAuth, requireAdminAuth middleware
@@ -137,12 +142,13 @@ Static media (`EXPRESS_PIC_PATH`, `EXPRESS_VID_PATH`, `EXPRESS_WATCH_PATH`) is a
 
 ```
 tests/
-  backend/      admin-back.test.js, articles.test.js, main-back.test.js, pics.test.js, vids.test.js
-  controllers/  auth-controller.test.js, data-controller.test.js, display-controller.test.js
-  frontend/     articles-return.test.js, collapse-display.test.js, debounce.test.js,
-                pics-return.test.js, state-front.test.js, vids-return.test.js
-  middleware/   session-config.test.js
+  backend/      admin-back.test.js, articles.test.js, db-model.test.js, pics.test.js, vids.test.js
+  controllers/  auth-controller.test.js, data-controller.test.js
+  frontend/     admin-counts.test.js, admin-run.test.js, admin-status.test.js, articles-return.test.js,
+                state-front.test.js, video-reachability.test.js, vids-return.test.js
+  middleware/   static-media.test.js
   routes/       auth.test.js
+  scripts/      trim-pics-select.test.js
 ```
 
 Run with `npm test` (vitest).

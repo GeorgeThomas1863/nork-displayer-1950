@@ -10,12 +10,14 @@ import dbModel from '../../models/db-model.js'
 describe('runAdminCommand', () => {
   beforeEach(() => {
     vi.clearAllMocks()
+    delete process.env.SCRAPER_HOST
     process.env.SCRAPE_PORT = '3001'
     process.env.API_SCRAPER = '/api/scrape'
     process.env.API_PASSWORD = 'testpass'
   })
 
   afterEach(() => {
+    delete process.env.SCRAPER_HOST
     delete process.env.SCRAPE_PORT
     delete process.env.API_SCRAPER
     delete process.env.API_PASSWORD
@@ -68,11 +70,24 @@ describe('runAdminCommand', () => {
     expect(result).toEqual({ success: false, message, data: { status } })
   })
 
-  it('calls axios.post with the correct URL', async () => {
+  it('uses localhost when SCRAPER_HOST is unset', async () => {
     axios.post.mockResolvedValue({ data: {} })
     await runAdminCommand({ command: 'scrape' })
     expect(axios.post).toHaveBeenCalledWith(
       'http://localhost:3001/api/scrape',
+      expect.any(Object),
+      { timeout: 15000 }
+    )
+  })
+
+  it('uses SCRAPER_HOST when it is set', async () => {
+    process.env.SCRAPER_HOST = 'scraper'
+    axios.post.mockResolvedValue({ data: {} })
+
+    await runAdminCommand({ command: 'scrape' })
+
+    expect(axios.post).toHaveBeenCalledWith(
+      'http://scraper:3001/api/scrape',
       expect.any(Object),
       { timeout: 15000 }
     )

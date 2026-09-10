@@ -11,7 +11,8 @@ Do NOT commit anything to GitHub. The user controls all commits. Do not touch Gi
 ## Commands
 
 ```bash
-npm start        # Start with nodemon (auto-restarts on changes)
+npm run dev      # Local dev loop with nodemon (auto-restarts on changes)
+npm run docker:up  # Build and run the production stack (see docs/docker.md)
 npm test         # Run vitest test suite
 ```
 

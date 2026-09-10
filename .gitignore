@@ -10,6 +10,7 @@ config/
 .env.production.local
 .env.local
 .env.*
+.env.example
 
 .claude/.tmp
 .claude/.pics
@@ -21,6 +22,8 @@ config/
 .superpowers/
 
 todo.txt
+to-copy.txt
+prompt.txt
 
 # logs
 logs
@@ -65,3 +68,20 @@ coverage/
 
 # Per-user Claude Code overrides
 .claude/settings.local.json
+
+# claudex worktrees
+.claude/worktrees/
+
+# Docker local overrides and backups (Dockerfile / docker-compose.yml stay tracked)
+docker-compose.override.yml
+docker-compose.override.yaml
+compose.override.yml
+compose.override.yaml
+docker-compose.*.local.yml
+*.env.docker
+backups/
+*.archive
+*.dump
+
+# Local design spec (contains machine paths)
+docs/superpowers/specs/2026-09-09-dockerize-design.md

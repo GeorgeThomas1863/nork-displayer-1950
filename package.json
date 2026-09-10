@@ -5,8 +5,11 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js",
-    "test": "vitest run"
+    "dev": "nodemon app.js",
+    "test": "vitest run",
+    "docker:up": "docker compose up -d --build",
+    "docker:down": "docker compose down",
+    "docker:logs": "docker compose logs -f"
   },
   "repository": {
     "type": "git",
@@ -23,7 +26,9 @@
     "dotenv": "^17.3.1",
     "express": "^5.1.0",
     "express-session": "^1.18.2",
-    "mongodb": "^6.19.0",
+    "mongodb": "^6.19.0"
+  },
+  "devDependencies": {
     "nodemon": "^3.1.10",
     "vitest": "^5.0.0"
   }
