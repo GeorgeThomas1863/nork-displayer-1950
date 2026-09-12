@@ -1120,7 +1120,7 @@ h3 {
 /* ================================================ */
 
 .admin-table-container {
-  max-width: 1400px;
+  max-width: 1600px;
   width: 100%;
   margin-bottom: 5rem;
   background: white;
@@ -1169,7 +1169,7 @@ h3 {
 }
 
 th {
-  padding: 14px 16px;
+  padding: 14px 12px;
   text-align: left;
   font-weight: 600;
   font-size: 13px;
@@ -1179,6 +1179,7 @@ th {
   border-bottom: 2px solid #dee2e6;
   cursor: pointer;
   user-select: none;
+  white-space: nowrap;
 }
 
 th:hover {
@@ -1190,7 +1191,7 @@ th.sortable {
 }
 
 td {
-  padding: 16px;
+  padding: 16px 12px;
   border-bottom: 1px solid #f0f0f0;
   font-size: 14px;
 }
@@ -1301,7 +1302,7 @@ th.sort-desc .sort-icon {
 }
 
 .admin-stats-container {
-  max-width: 1400px;
+  max-width: 1600px;
   width: 100%;
   margin: 1.5rem 0;
 }
