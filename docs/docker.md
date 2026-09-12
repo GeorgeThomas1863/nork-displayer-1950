@@ -7,8 +7,7 @@ The production stack is one Docker Compose project named `nork`: `displayer`, `s
 Before running Compose, confirm all of the following:
 
 - The `nork-displayer-1950` and `nork-scraper-1950` repositories are side by side. From the displayer repository, the scraper must be available at `../nork-scraper-1950`.
-- The scraper's private `config/` directory has been placed in the scraper repository before the image is built.
-- Each repository has its own `.env` file with its production settings.
+- Each repository has its own `.env` file with its production settings. Neither repository uses a `config/` directory; all configuration comes from `.env`.
 - Docker Engine and the Docker Compose plugin are installed.
 - The host has enough free disk space for Docker images, MongoDB, the pic volume, and backups.
 
