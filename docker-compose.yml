@@ -24,11 +24,11 @@ services:
       - pics:/data/pics:ro
 
   scraper:
-    build: ../nork-scraper-1950
+    build: ../scraper
     restart: unless-stopped
     env_file:
-      - path: ../nork-scraper-1950/.env
-      - path: ../nork-scraper-1950/.env.local
+      - path: ../scraper/.env
+      - path: ../scraper/.env.local
         required: false
     environment:
       HOST: 0.0.0.0
