@@ -203,6 +203,13 @@ describe('runGetAdminData', () => {
     ['message', 'asc', { scrapeMessage: 1, _id: 1 }],
     ['active', 'desc', { scrapeActive: -1, _id: -1 }],
     ['status', 'asc', { scrapeError: 1, scrapeActive: 1, _id: 1 }],
+    ['artUrls', 'desc', { 'scrapeStats.articleURLs': -1, _id: -1 }],
+    ['articles', 'asc', { 'scrapeStats.articles': 1, _id: 1 }],
+    ['setUrls', 'desc', { 'scrapeStats.picSetURLs': -1, _id: -1 }],
+    ['picSets', 'asc', { 'scrapeStats.picSets': 1, _id: 1 }],
+    ['pics', 'desc', { 'scrapeStats.pics': -1, _id: -1 }],
+    ['articlesTg', 'asc', { 'scrapeStats.articlesTG': 1, _id: 1 }],
+    ['picSetsTg', 'desc', { 'scrapeStats.picSetsTG': -1, _id: -1 }],
   ])('maps sortColumn=%s sortDir=%s to sort object %j', async (sortColumn, sortDir, expected) => {
     const getCapturedDataObject = mockDbModelCapturingLogDataObject()
 
