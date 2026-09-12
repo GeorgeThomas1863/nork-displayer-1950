@@ -41,17 +41,16 @@ const LOG_SORT_FIELDS = {
   startTime: ["scrapeStartTime"],
   endTime: ["scrapeEndTime"],
   duration: ["scrapeLengthSeconds"],
-  artUrls: ["scrapeStats.articleURLs"],
-  articles: ["scrapeStats.articles"],
-  setUrls: ["scrapeStats.picSetURLs"],
-  picSets: ["scrapeStats.picSets"],
-  pics: ["scrapeStats.pics"],
-  articlesTg: ["scrapeStats.articlesTG"],
-  picSetsTg: ["scrapeStats.picSetsTG"],
   step: ["scrapeStep"],
   message: ["scrapeMessage"],
   active: ["scrapeActive"],
 };
+
+//collections counted per-scrapeId to build each log row's scrapeStats
+const STAT_COLLECTIONS = ["articles", "pics", "picSets"];
+
+//stat columns are computed after the log query runs, so they sort in JS, not in mongo
+const STAT_SORT_COLUMNS = ["articles", "pics", "picSets"];
 
 export const runGetAdminData = async ({ sortColumn, sortDir } = {}) => {
   const countOnlyCollections = ["articles", "pics", "picSets", "vidPages"];
@@ -91,13 +90,51 @@ const getAdminLogData = async (sortColumn, sortDir) => {
     const dataModel = new dbModel({ sortObj, howMany }, "log");
 
     const count = await dataModel.countAll();
-    const data = await dataModel.getSortedItemsArray();
+    const logRows = await dataModel.getSortedItemsArray();
     const stats = await dataModel.getLogStatsSummary();
+
+    const scrapeIdCountsByCollection = await getScrapeIdCountsByCollection();
+    const dataWithStats = attachScrapeStats(logRows, scrapeIdCountsByCollection);
+    const data = sortByStatColumn(dataWithStats, sortColumn, sortDir);
+
     return { collection: "log", count, data, stats };
   } catch (e) {
     console.error("ADMIN DATA ERROR FOR log:", e.message);
     return null;
   }
+};
+
+//one aggregation per stat collection -> { articles: { [scrapeId]: count }, pics: {...}, picSets: {...} }
+const getScrapeIdCountsByCollection = async () => {
+  const countsByCollection = {};
+  for (const collection of STAT_COLLECTIONS) {
+    const dataModel = new dbModel("", collection);
+    countsByCollection[collection] = await dataModel.getScrapeIdCounts();
+  }
+  return countsByCollection;
+};
+
+//attach a { articles, pics, picSets } scrapeStats object to each log row, 0 when no docs match
+const attachScrapeStats = (logRows, countsByCollection) => {
+  const rowsWithStats = [];
+  for (const row of logRows) {
+    const scrapeStats = {};
+    for (const collection of STAT_COLLECTIONS) {
+      scrapeStats[collection] = countsByCollection[collection][row.scrapeId] || 0;
+    }
+    rowsWithStats.push({ ...row, scrapeStats });
+  }
+  return rowsWithStats;
+};
+
+//scrapeStats columns can't be sorted by the mongo query since they're computed after it runs
+const sortByStatColumn = (logRows, sortColumn, sortDir) => {
+  if (!STAT_SORT_COLUMNS.includes(sortColumn)) return logRows;
+
+  const dir = sortDir === "asc" ? 1 : -1;
+  const sortedRows = [...logRows];
+  sortedRows.sort((rowA, rowB) => (rowA.scrapeStats[sortColumn] - rowB.scrapeStats[sortColumn]) * dir);
+  return sortedRows;
 };
 
 const getAdminCollectionCount = async (collection) => {

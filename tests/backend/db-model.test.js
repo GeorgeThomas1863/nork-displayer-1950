@@ -123,3 +123,43 @@ describe("dbModel.getLogStatsSummary", () => {
     expect(result.avgDuration).toBe(0);
   });
 });
+
+describe("dbModel.getScrapeIdCounts", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it("sends a $group-by-scrapeId pipeline that excludes missing/null scrapeId", async () => {
+    toArray.mockResolvedValue([]);
+    const model = new dbModel("", "articles");
+
+    await model.getScrapeIdCounts();
+
+    expect(collection).toHaveBeenCalledWith("articles");
+    expect(aggregate).toHaveBeenCalledWith([
+      { $match: { scrapeId: { $exists: true, $ne: null } } },
+      { $group: { _id: "$scrapeId", count: { $sum: 1 } } },
+    ]);
+  });
+
+  it("returns a scrapeId -> count lookup map built from the aggregation rows", async () => {
+    toArray.mockResolvedValue([
+      { _id: "scrape-1", count: 12 },
+      { _id: "scrape-2", count: 3 },
+    ]);
+    const model = new dbModel("", "pics");
+
+    const result = await model.getScrapeIdCounts();
+
+    expect(result).toEqual({ "scrape-1": 12, "scrape-2": 3 });
+  });
+
+  it("returns an empty map when the collection has no matching documents", async () => {
+    toArray.mockResolvedValue([]);
+    const model = new dbModel("", "picSets");
+
+    const result = await model.getScrapeIdCounts();
+
+    expect(result).toEqual({});
+  });
+});

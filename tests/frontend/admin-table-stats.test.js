@@ -47,19 +47,15 @@ const EXPECTED_COLUMNS = [
   "startTime",
   "endTime",
   "duration",
-  "artUrls",
   "articles",
-  "setUrls",
-  "picSets",
   "pics",
-  "articlesTg",
-  "picSetsTg",
+  "picSets",
   "step",
   "message",
   "active",
 ];
 
-const EXPECTED_STAT_HEADERS = ["Art URLs", "Articles", "Set URLs", "Pic Sets", "Pics DL", "Art TG", "Sets TG"];
+const EXPECTED_STAT_HEADERS = ["Articles", "Pics", "Pic Sets"];
 
 const baseLog = {
   _id: "abc123",
@@ -72,11 +68,11 @@ const baseLog = {
   scrapeMessage: "ok",
 };
 
-//stat cells sit between Duration (index 4) and Step (index 12)
-const getStatCells = (row) => row.children.slice(5, 12);
+//stat cells sit between Duration (index 4) and Step (index 8)
+const getStatCells = (row) => row.children.slice(5, 8);
 
 describe("buildAdminTableHeader scrape stat columns", () => {
-  it("has the seven stat columns between duration and step, in order", async () => {
+  it("has the three stat columns between duration and step, in order", async () => {
     const thead = await buildAdminTableHeader();
     const ths = thead.children[0].children;
 
@@ -87,7 +83,7 @@ describe("buildAdminTableHeader scrape stat columns", () => {
 
   it("uses the expected header texts for the stat columns", async () => {
     const thead = await buildAdminTableHeader();
-    const ths = thead.children[0].children.slice(5, 12);
+    const ths = thead.children[0].children.slice(5, 8);
 
     const texts = [];
     for (const th of ths) texts.push(th.textContent.trim());
@@ -96,10 +92,10 @@ describe("buildAdminTableHeader scrape stat columns", () => {
 });
 
 describe("buildAdminTableRow scrape stat cells", () => {
-  it("renders numbers from scrapeStats, including zero", async () => {
+  it("renders mongo doc counts from scrapeStats, including zero", async () => {
     const row = await buildAdminTableRow({
       ...baseLog,
-      scrapeStats: { articleURLs: 12, articles: 0, picSetURLs: 7, picSets: 3, pics: 45, articlesTG: 0, picSetsTG: 2 },
+      scrapeStats: { articles: 0, pics: 45, picSets: 3 },
     });
 
     const cells = getStatCells(row);
@@ -110,9 +106,9 @@ describe("buildAdminTableRow scrape stat cells", () => {
       classes.push(cell.className);
     }
 
-    expect(texts).toEqual(["12", "0", "7", "3", "45", "0", "2"]);
-    expect(classes).toEqual(Array(7).fill("stat-cell"));
-    expect(row.children).toHaveLength(15);
+    expect(texts).toEqual(["0", "45", "3"]);
+    expect(classes).toEqual(Array(3).fill("stat-cell"));
+    expect(row.children).toHaveLength(11);
   });
 
   it("renders a dash with null-value class when scrapeStats is missing", async () => {
@@ -123,11 +119,11 @@ describe("buildAdminTableRow scrape stat cells", () => {
       expect(cell.textContent).toBe("—");
       expect(cell.className).toBe("null-value");
     }
-    expect(row.children).toHaveLength(15);
+    expect(row.children).toHaveLength(11);
   });
 
   it("renders a dash for an individual stat key missing from scrapeStats", async () => {
-    const row = await buildAdminTableRow({ ...baseLog, scrapeStats: { articleURLs: 5 } });
+    const row = await buildAdminTableRow({ ...baseLog, scrapeStats: { articles: 5 } });
 
     const cells = getStatCells(row);
     expect(cells[0].textContent).toBe("5");

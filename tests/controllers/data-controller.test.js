@@ -116,6 +116,19 @@ describe('adminDataController', () => {
     expect(runGetAdminData).toHaveBeenCalledWith({ sortColumn: 'duration', sortDir: 'asc' })
   })
 
+  it.each(['articles', 'pics', 'picSets'])(
+    'passes the scrape-stat sortColumn %s through to runGetAdminData',
+    async (sortColumn) => {
+      runGetAdminData.mockResolvedValue([])
+      const req = { body: { sortColumn, sortDir: 'asc' } }
+      const res = makeRes()
+
+      await adminDataController(req, res)
+
+      expect(runGetAdminData).toHaveBeenCalledWith({ sortColumn, sortDir: 'asc' })
+    }
+  )
+
   it.each([
     [{}, { sortColumn: 'endTime', sortDir: 'desc' }],
     [{ sortColumn: 'bogus', sortDir: 'asc' }, { sortColumn: 'endTime', sortDir: 'asc' }],

@@ -155,6 +155,23 @@ class dbModel {
     const { activeScrapes, finishedScrapes, errorScrapes, avgDuration } = results[0];
     return { activeScrapes, finishedScrapes, errorScrapes, avgDuration: Math.round(avgDuration || 0) };
   }
+
+  //count documents in this collection grouped by scrapeId (admin log table stat columns)
+  async getScrapeIdCounts() {
+    const pipeline = [
+      { $match: { scrapeId: { $exists: true, $ne: null } } },
+      { $group: { _id: "$scrapeId", count: { $sum: 1 } } },
+    ];
+
+    const results = await dbGet().collection(this.collection).aggregate(pipeline).toArray();
+
+    const countsByScrapeId = {};
+    for (const result of results) {
+      countsByScrapeId[result._id] = result.count;
+    }
+
+    return countsByScrapeId;
+  }
 }
 
 export default dbModel;

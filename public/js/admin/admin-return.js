@@ -200,13 +200,9 @@ export const buildAdminTableHeader = async () => {
     { column: "startTime", text: "Start Time" },
     { column: "endTime", text: "End Time" },
     { column: "duration", text: "Duration" },
-    { column: "artUrls", text: "Art URLs" },
     { column: "articles", text: "Articles" },
-    { column: "setUrls", text: "Set URLs" },
+    { column: "pics", text: "Pics" },
     { column: "picSets", text: "Pic Sets" },
-    { column: "pics", text: "Pics DL" },
-    { column: "articlesTg", text: "Art TG" },
-    { column: "picSetsTg", text: "Sets TG" },
     { column: "step", text: "Step" },
     { column: "message", text: "Message" },
     { column: "active", text: "Active" },
@@ -275,8 +271,8 @@ export const buildAdminTableRow = async (inputObj) => {
   durationCell.textContent = durationText || "—";
   adminTableRow.appendChild(durationCell);
 
-  // Scrape stat cells (older log docs have no scrapeStats)
-  const statKeys = ["articleURLs", "articles", "picSetURLs", "picSets", "pics", "articlesTG", "picSetsTG"];
+  // Scrape stat cells: mongo doc counts per collection for this row's scrapeId (older log docs have no scrapeStats)
+  const statKeys = ["articles", "pics", "picSets"];
   for (let i = 0; i < statKeys.length; i++) {
     const statValue = getScrapeStat(inputObj, statKeys[i]);
     adminTableRow.appendChild(buildStatCell(statValue));

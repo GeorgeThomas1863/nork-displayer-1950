@@ -113,7 +113,12 @@ describe('runGetAdminData', () => {
     ),
   })
 
-  const buildCountModel = (count) => ({ countAll: vi.fn().mockResolvedValue(count) })
+  // scrapeIdCounts backs both the count-only collection loop (countAll) and the
+  // per-scrapeId stat aggregation (getScrapeIdCounts) used to build each log row's scrapeStats
+  const buildCountModel = (count, scrapeIdCounts = {}) => ({
+    countAll: vi.fn().mockResolvedValue(count),
+    getScrapeIdCounts: vi.fn().mockResolvedValue(scrapeIdCounts),
+  })
 
   // wires dbModel so only the "log" collection gets the sorted/stats mock; captures
   // the dataObject passed to `new dbModel(dataObject, "log")` for assertions below
@@ -139,16 +144,26 @@ describe('runGetAdminData', () => {
   })
 
   it('returns sorted+capped log data with stats, and count-only entries for the other collections', async () => {
-    const logRows = [{ _id: '1' }, { _id: '2' }]
+    const logRows = [{ _id: '1', scrapeId: 's1' }, { _id: '2', scrapeId: 's2' }]
     const stats = { activeScrapes: 1, finishedScrapes: 2, errorScrapes: 0, avgDuration: 42 }
     dbModel.mockImplementation(function (_, collection) {
       if (collection === 'log') return buildLogModel({ count: 2, data: logRows, stats })
-      return buildCountModel(collection === 'articles' ? 725 : 1)
+      if (collection === 'articles') return buildCountModel(725, { s1: 3, s2: 1 })
+      if (collection === 'pics') return buildCountModel(1, { s1: 10 })
+      return buildCountModel(1)
     })
 
     const result = await runGetAdminData({ sortColumn: 'endTime', sortDir: 'desc' })
 
-    expect(result[0]).toEqual({ collection: 'log', count: 2, data: logRows, stats })
+    expect(result[0]).toEqual({
+      collection: 'log',
+      count: 2,
+      data: [
+        { _id: '1', scrapeId: 's1', scrapeStats: { articles: 3, pics: 10, picSets: 0 } },
+        { _id: '2', scrapeId: 's2', scrapeStats: { articles: 1, pics: 0, picSets: 0 } },
+      ],
+      stats,
+    })
     expect(result.find((item) => item.collection === 'articles')).toEqual({ collection: 'articles', count: 725 })
     expect(result.find((item) => item.collection === 'pics')).toEqual({ collection: 'pics', count: 1 })
     expect(result.find((item) => item.collection === 'picSets')).toEqual({ collection: 'picSets', count: 1 })
@@ -203,13 +218,6 @@ describe('runGetAdminData', () => {
     ['message', 'asc', { scrapeMessage: 1, _id: 1 }],
     ['active', 'desc', { scrapeActive: -1, _id: -1 }],
     ['status', 'asc', { scrapeError: 1, scrapeActive: 1, _id: 1 }],
-    ['artUrls', 'desc', { 'scrapeStats.articleURLs': -1, _id: -1 }],
-    ['articles', 'asc', { 'scrapeStats.articles': 1, _id: 1 }],
-    ['setUrls', 'desc', { 'scrapeStats.picSetURLs': -1, _id: -1 }],
-    ['picSets', 'asc', { 'scrapeStats.picSets': 1, _id: 1 }],
-    ['pics', 'desc', { 'scrapeStats.pics': -1, _id: -1 }],
-    ['articlesTg', 'asc', { 'scrapeStats.articlesTG': 1, _id: 1 }],
-    ['picSetsTg', 'desc', { 'scrapeStats.picSetsTG': -1, _id: -1 }],
   ])('maps sortColumn=%s sortDir=%s to sort object %j', async (sortColumn, sortDir, expected) => {
     const getCapturedDataObject = mockDbModelCapturingLogDataObject()
 
@@ -217,6 +225,17 @@ describe('runGetAdminData', () => {
 
     expect(getCapturedDataObject().sortObj).toEqual(expected)
   })
+
+  it.each(['articles', 'pics', 'picSets'])(
+    'falls back to the default endTime mongo sort for stat column %s (the mongo doc has no such field; it is sorted in JS afterward)',
+    async (sortColumn) => {
+      const getCapturedDataObject = mockDbModelCapturingLogDataObject()
+
+      await runGetAdminData({ sortColumn, sortDir: 'asc' })
+
+      expect(getCapturedDataObject().sortObj).toEqual({ scrapeEndTime: 1, _id: 1 })
+    }
+  )
 
   it('keeps an empty log collection with zero count, empty data, and zeroed stats', async () => {
     const zeroedStats = { activeScrapes: 0, finishedScrapes: 0, errorScrapes: 0, avgDuration: 0 }
@@ -273,7 +292,75 @@ describe('runGetAdminData', () => {
   it('returns null when a count-only collection fails', async () => {
     dbModel.mockImplementation(function (_, collection) {
       if (collection === 'log') return buildLogModel()
-      if (collection === 'picSets') return { countAll: vi.fn().mockRejectedValue(new Error('db error')) }
+      if (collection === 'picSets') {
+        return { countAll: vi.fn().mockRejectedValue(new Error('db error')), getScrapeIdCounts: vi.fn().mockResolvedValue({}) }
+      }
+      return buildCountModel(1)
+    })
+
+    const result = await runGetAdminData({})
+
+    expect(result).toBeNull()
+  })
+})
+
+describe('runGetAdminData scrapeStats', () => {
+  const buildLogModel = (overrides = {}) => ({
+    countAll: vi.fn().mockResolvedValue(overrides.count ?? 5),
+    getSortedItemsArray: vi.fn().mockResolvedValue(overrides.data ?? []),
+    getLogStatsSummary: vi.fn().mockResolvedValue(
+      overrides.stats ?? { activeScrapes: 0, finishedScrapes: 0, errorScrapes: 0, avgDuration: 0 }
+    ),
+  })
+
+  const buildCountModel = (count, scrapeIdCounts = {}) => ({
+    countAll: vi.fn().mockResolvedValue(count),
+    getScrapeIdCounts: vi.fn().mockResolvedValue(scrapeIdCounts),
+  })
+
+  beforeEach(() => {
+    vi.clearAllMocks()
+  })
+
+  it('attaches articles/pics/picSets doc counts by scrapeId, defaulting missing scrapeIds/collections to 0', async () => {
+    const logRows = [{ _id: '1', scrapeId: 'a' }, { _id: '2', scrapeId: 'b' }]
+    dbModel.mockImplementation(function (_, collection) {
+      if (collection === 'log') return buildLogModel({ data: logRows })
+      if (collection === 'articles') return buildCountModel(1, { a: 5 })
+      if (collection === 'pics') return buildCountModel(1, { a: 2, b: 7 })
+      if (collection === 'picSets') return buildCountModel(1, {})
+      return buildCountModel(1)
+    })
+
+    const result = await runGetAdminData({})
+
+    expect(result[0].data).toEqual([
+      { _id: '1', scrapeId: 'a', scrapeStats: { articles: 5, pics: 2, picSets: 0 } },
+      { _id: '2', scrapeId: 'b', scrapeStats: { articles: 0, pics: 7, picSets: 0 } },
+    ])
+  })
+
+  it('sorts rows by a stat column ascending and descending after attaching scrapeStats', async () => {
+    const logRows = [{ _id: '1', scrapeId: 'a' }, { _id: '2', scrapeId: 'b' }, { _id: '3', scrapeId: 'c' }]
+    dbModel.mockImplementation(function (_, collection) {
+      if (collection === 'log') return buildLogModel({ data: logRows })
+      if (collection === 'articles') return buildCountModel(1, { a: 5, b: 1, c: 9 })
+      return buildCountModel(1, {})
+    })
+
+    const asc = await runGetAdminData({ sortColumn: 'articles', sortDir: 'asc' })
+    expect(asc[0].data.map((row) => row._id)).toEqual(['2', '1', '3'])
+
+    const desc = await runGetAdminData({ sortColumn: 'articles', sortDir: 'desc' })
+    expect(desc[0].data.map((row) => row._id)).toEqual(['3', '1', '2'])
+  })
+
+  it('returns null when a stat aggregation fails', async () => {
+    dbModel.mockImplementation(function (_, collection) {
+      if (collection === 'log') return buildLogModel()
+      if (collection === 'articles') {
+        return { countAll: vi.fn().mockResolvedValue(1), getScrapeIdCounts: vi.fn().mockRejectedValue(new Error('agg failed')) }
+      }
       return buildCountModel(1)
     })
 
