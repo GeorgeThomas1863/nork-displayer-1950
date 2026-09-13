@@ -73,6 +73,24 @@ class dbModel {
     return dataArray;
   }
 
+  async getNewestWatchVidsArray() {
+    const { howMany } = this.dataObject;
+    const filter = {
+      site: "watch",
+      vidName: { $type: "string", $ne: "" },
+      vidSize: { $gt: 0 },
+    };
+
+    const dataArray = await dbGet()
+      .collection(this.collection)
+      .find(filter)
+      .sort({ date: -1, vidPageId: -1 })
+      .limit(+howMany)
+      .toArray();
+
+    return dataArray;
+  }
+
   //OLD VERSION WITH SECOND SORT KEY
   // async getNewestItemsByTypeArray() {
   //     const { sortKey, sortKey2, howMany, filterKey, filterValue } = this.dataObject;

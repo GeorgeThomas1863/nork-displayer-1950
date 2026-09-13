@@ -1,11 +1,20 @@
 import { runUpdateDisplayData } from "../src/main-back.js";
 import { runAdminCommand, runGetAdminData } from "../src/admin-back.js";
+import { getWatchVids } from "../src/watch/watch-vids.js";
 
 export const updateDisplayDataController = async (req, res) => {
   const { stateFront } = req.body;
 
   const data = await runUpdateDisplayData(stateFront);
   return res.json(data);
+};
+
+export const watchSmokeDataController = async (req, res) => {
+  const { howMany } = req.body ?? {};
+  const watchVids = await getWatchVids(howMany);
+
+  if (!watchVids) return res.status(500).json({ error: "Unable to load watch videos" });
+  return res.json(watchVids);
 };
 
 //--------------------

@@ -2,11 +2,14 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 
 vi.mock('../../src/main-back.js', () => ({ runUpdateDisplayData: vi.fn() }))
 vi.mock('../../src/admin-back.js', () => ({ runAdminCommand: vi.fn(), runGetAdminData: vi.fn() }))
+vi.mock('../../src/watch/watch-vids.js', () => ({ getWatchVids: vi.fn() }))
 
 import { runUpdateDisplayData } from '../../src/main-back.js'
 import { runAdminCommand, runGetAdminData } from '../../src/admin-back.js'
+import { getWatchVids } from '../../src/watch/watch-vids.js'
 import {
   updateDisplayDataController,
+  watchSmokeDataController,
   adminCommandController,
   adminDataController,
   adminPollingController,
@@ -45,6 +48,43 @@ describe('updateDisplayDataController', () => {
     const res = makeRes()
     await updateDisplayDataController(req, res)
     expect(res.json).toHaveBeenCalledWith(null)
+  })
+})
+
+describe('watchSmokeDataController', () => {
+  it('returns the watch video array as JSON', async () => {
+    const result = [{ title: 'Evening broadcast', mediaUrl: '/watch/evening.mp4' }]
+    getWatchVids.mockResolvedValue(result)
+    const req = { body: { howMany: 5 } }
+    const res = makeRes()
+
+    await watchSmokeDataController(req, res)
+
+    expect(getWatchVids).toHaveBeenCalledWith(5)
+    expect(res.json).toHaveBeenCalledWith(result)
+  })
+
+  it('falls back to the default count when the request has no body', async () => {
+    const result = []
+    getWatchVids.mockResolvedValue(result)
+    const req = { body: undefined }
+    const res = makeRes()
+
+    await watchSmokeDataController(req, res)
+
+    expect(getWatchVids).toHaveBeenCalledWith(undefined)
+    expect(res.json).toHaveBeenCalledWith(result)
+  })
+
+  it('returns 500 JSON when watch videos cannot be loaded', async () => {
+    getWatchVids.mockResolvedValue(null)
+    const req = { body: { howMany: 5 } }
+    const res = makeRes()
+
+    await watchSmokeDataController(req, res)
+
+    expect(res.status).toHaveBeenCalledWith(500)
+    expect(res.json).toHaveBeenCalledWith({ error: 'Unable to load watch videos' })
   })
 })
 

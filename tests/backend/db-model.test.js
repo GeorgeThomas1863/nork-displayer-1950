@@ -48,6 +48,30 @@ describe("dbModel.getSortedItemsArray", () => {
   });
 });
 
+describe("dbModel.getNewestWatchVidsArray", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it("filters playable watch videos, sorts newest first, and applies the requested limit", async () => {
+    const rows = [{ vidName: "latest.mp4" }];
+    toArray.mockResolvedValue(rows);
+    const model = new dbModel({ howMany: "7" }, "vidPages");
+
+    const result = await model.getNewestWatchVidsArray();
+
+    expect(collection).toHaveBeenCalledWith("vidPages");
+    expect(find).toHaveBeenCalledWith({
+      site: "watch",
+      vidName: { $type: "string", $ne: "" },
+      vidSize: { $gt: 0 },
+    });
+    expect(sort).toHaveBeenCalledWith({ date: -1, vidPageId: -1 });
+    expect(limit).toHaveBeenCalledWith(7);
+    expect(result).toBe(rows);
+  });
+});
+
 describe("dbModel.getLogStatsSummary", () => {
   beforeEach(() => {
     vi.clearAllMocks();

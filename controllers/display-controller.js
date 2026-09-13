@@ -9,6 +9,10 @@ export const mainDisplay = async (req, res) => {
   res.sendFile(path.join(__dirname, "../html/index.html"));
 };
 
+export const watchSmokeDisplay = (req, res) => {
+  res.sendFile(path.join(__dirname, "../html/watch-smoke.html"));
+};
+
 export const adminDisplay = (req, res) => {
   res.sendFile(path.join(__dirname, "../html/admin.html"));
 };

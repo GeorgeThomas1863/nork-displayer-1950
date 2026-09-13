@@ -1,5 +1,29 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
+
+vi.mock('../../controllers/display-controller.js', () => ({
+  mainDisplay: function mainDisplay() {},
+  watchSmokeDisplay: function watchSmokeDisplay() {},
+  adminDisplay: function adminDisplay() {},
+  display401: function display401() {},
+  display404: function display404() {},
+  display500: function display500() {},
+}))
+
+vi.mock('../../controllers/data-controller.js', () => ({
+  updateDisplayDataController: function updateDisplayDataController() {},
+  watchSmokeDataController: function watchSmokeDataController() {},
+  adminCommandController: function adminCommandController() {},
+  adminDataController: function adminDataController() {},
+  adminPollingController: function adminPollingController() {},
+}))
+
+vi.mock('../../controllers/auth-controller.js', () => ({
+  authController: function authController() {},
+  adminAuthController: function adminAuthController() {},
+}))
+
 import { requireAuth, requireAdminAuth } from '../../routes/auth.js'
+import router from '../../routes/router.js'
 
 function makeReq(session = {}, method = 'GET') {
   return { session, method }
@@ -109,5 +133,17 @@ describe('requireAdminAuth', () => {
     expect(next).toHaveBeenCalledOnce()
     expect(res.sendFile).not.toHaveBeenCalled()
     expect(res.status).not.toHaveBeenCalled()
+  })
+})
+
+describe('watch smoke routes', () => {
+  it.each([
+    ['/watch-smoke', 'get', 'watchSmokeDisplay'],
+    ['/nork-watch-smoke-data-route', 'post', 'watchSmokeDataController'],
+  ])('protects %s with requireAuth before its controller', (path, method, controllerName) => {
+    const route = router.stack.find((layer) => layer.route?.path === path && layer.route.methods[method])
+    const handlerNames = route?.route.stack.map((layer) => layer.handle.name)
+
+    expect(handlerNames).toEqual(['requireAuth', controllerName])
   })
 })
