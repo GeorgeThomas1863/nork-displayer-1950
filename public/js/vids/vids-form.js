@@ -13,7 +13,7 @@ export const buildVidsForm = async () => {
   vidWrapper.append(vidHowManyListItem, vidSortByListItem);
 
   const titleElement = document.createElement("div");
-  titleElement.textContent = "Vids";
+  titleElement.textContent = "VIDS";
 
   //build collapse container
   const vidCollapseObj = {
