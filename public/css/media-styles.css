@@ -22,16 +22,14 @@
 
   .wrapper input,
   .wrapper select {
-    font-size: 0.85rem;
-    padding: 0.5rem;
+    font-size: 16px;
+    padding: 0.65rem 0.75rem;
+    min-height: 44px;
+    box-sizing: border-box;
   }
 
   .collapse-title {
     font-size: 1.2rem;
-  }
-
-  .article-pic-collapse .collapse-title {
-    font-size: 1.1rem;
   }
 
   .button-type-list {
@@ -42,6 +40,24 @@
   .button-type-item {
     padding: 0.45rem 0.9rem;
     font-size: 0.8rem;
+  }
+}
+
+/* ===== 1024px AND BELOW (keeps admin sidebar controls at touch size through tablet widths) ===== */
+@media (max-width: 1024px) {
+  .admin-form-group select,
+  .admin-form-group input[type="text"] {
+    min-height: 44px;
+    font-size: 16px;
+    padding: 12px 10px;
+    box-sizing: border-box;
+  }
+
+  .admin-btn {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
@@ -71,21 +87,12 @@
   }
 
   #drop-down-bars {
-    width: 2.2rem;
-    height: 2.2rem;
-  }
-
-  #drop-down-menu-display h2 {
-    font-size: 2.2rem;
-    padding: 0.7rem 1.8rem;
+    width: 2.75rem;
+    height: 2.75rem;
   }
 
   .collapse-title {
     font-size: 1rem;
-  }
-
-  .article-pic-collapse .collapse-title {
-    font-size: 0.9rem;
   }
 
   .article-title {
@@ -124,6 +131,7 @@
 
   #admin-sidebar {
     width: 100%;
+    min-width: 0;
     overflow-y: visible;
     border-right: none;
     border-bottom: 1px solid #e2e8f0;
@@ -131,6 +139,19 @@
 
   #admin-main-content {
     overflow-y: visible;
+    overflow-x: hidden;
+  }
+
+  /* prevent the stat strip's nowrap labels from forcing the page wider */
+  .admin-stats-bar {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    justify-content: flex-start;
+    gap: 1.5rem;
+  }
+
+  .admin-stat-item {
+    flex: 0 0 auto;
   }
 }
 
@@ -147,25 +168,6 @@
 
   .collapse-title {
     font-size: 1.5rem;
-  }
-
-  .article-pic-collapse .collapse-header {
-    padding: 0.75rem 1rem;
-  }
-
-  .article-pic-collapse .collapse-title {
-    font-size: 1rem;
-  }
-
-  .article-pic-collapse .collapse-arrow {
-    width: 21px;
-    height: 21px;
-    margin-right: 8px;
-  }
-
-  .article-pic-collapse .collapse-arrow::before {
-    width: 6px;
-    height: 6px;
   }
 
   #return-display-wrapper {
@@ -240,6 +242,27 @@
 
   .button-type-item:hover {
     transform: translateY(-0.5px);
+  }
+}
+
+/* ===== 680px AND BELOW (covers 576-611px portrait phones AND the 667px landscape phone case) ===== */
+@media (max-width: 680px) {
+  /* video/article/pic type-filter pills need a real tap target on phones (incl. 667px landscape); desktop keeps the compact size */
+  .button-type-item {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .admin-table-wrapper {
+    padding: 12px;
+  }
+
+  th,
+  td {
+    padding: 8px 6px;
+    font-size: 12px;
   }
 }
 

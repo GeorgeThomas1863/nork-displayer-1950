@@ -84,7 +84,7 @@ models/db-model.js        dbModel class: getNewestItemsArray, getOldestItemsArra
 4. Each builds query params and calls `dataLookup()` → `dbModel` → MongoDB (sort order set in query)
 5. Result array returned as JSON
 
-**MongoDB collections:** `log`, `articles`, `pics`, `picSets`, `vidPages`.
+**MongoDB collections:** `log`, `articles`, `pics`, `picSets`, `watch`.
 
 ### Frontend (Vanilla JS ES modules, no bundler)
 
@@ -124,7 +124,7 @@ public/js/
 - `typeTrigger`: `"articles"` | `"pics"` | `"vids"`
 - `articleType`: `"fatboy"` | `"topNews"` | `"latestNews"` | `"externalNews"` | `"anecdote"` | `"people"` | `"all"`
 - `picType`: `"all"` | `"picSets"`
-- `vidType`: `"vidPages"`
+- `vidType`: `"watch"`
 - `orderBy`: `"newest-to-oldest"` | `"oldest-to-newest"`
 - `howMany`: number | null (falls back to `DEFAULT_LOAD_*` env var)
 - `eventTrigger`: last user action that triggered an update

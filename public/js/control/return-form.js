@@ -26,9 +26,9 @@ export const buildReturnDisplay = async (inputArray) => {
       return null;
   }
 
-  //returns empty display, overwrites if no data
+  //returns empty display, overwrites if no data (or if the builder returned null)
   const dataObjExists = await dataObjExistsCheck();
-  if (!dataObjExists) data = await buildEmptyDisplay();
+  if (!dataObjExists || !data) data = await buildEmptyDisplay();
 
   returnDisplayWrapper.append(data);
 

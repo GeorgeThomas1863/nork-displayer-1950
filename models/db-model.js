@@ -73,18 +73,27 @@ class dbModel {
     return dataArray;
   }
 
+  //playable watch vids only (has a real file name and a non-zero size)
   async getNewestWatchVidsArray() {
     const { howMany } = this.dataObject;
-    const filter = {
-      site: "watch",
-      vidName: { $type: "string", $ne: "" },
-      vidSize: { $gt: 0 },
-    };
 
     const dataArray = await dbGet()
       .collection(this.collection)
-      .find(filter)
+      .find(buildWatchVidFilter())
       .sort({ date: -1, vidPageId: -1 })
+      .limit(+howMany)
+      .toArray();
+
+    return dataArray;
+  }
+
+  async getOldestWatchVidsArray() {
+    const { howMany } = this.dataObject;
+
+    const dataArray = await dbGet()
+      .collection(this.collection)
+      .find(buildWatchVidFilter())
+      .sort({ date: 1, vidPageId: 1 })
       .limit(+howMany)
       .toArray();
 
@@ -191,5 +200,13 @@ class dbModel {
     return countsByScrapeId;
   }
 }
+
+//---
+
+const buildWatchVidFilter = () => ({
+  site: "watch",
+  vidName: { $type: "string", $ne: "" },
+  vidSize: { $gt: 0 },
+});
 
 export default dbModel;

@@ -167,7 +167,7 @@ describe('runGetAdminData', () => {
     expect(result.find((item) => item.collection === 'articles')).toEqual({ collection: 'articles', count: 725 })
     expect(result.find((item) => item.collection === 'pics')).toEqual({ collection: 'pics', count: 1 })
     expect(result.find((item) => item.collection === 'picSets')).toEqual({ collection: 'picSets', count: 1 })
-    expect(result.find((item) => item.collection === 'vidPages')).toEqual({ collection: 'vidPages', count: 1 })
+    expect(result.find((item) => item.collection === 'watch')).toEqual({ collection: 'watch', count: 1 })
     expect(result.find((item) => item.collection === 'articles')).not.toHaveProperty('data')
   })
 

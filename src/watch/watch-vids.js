@@ -5,7 +5,7 @@ export const getWatchVids = async (howMany) => {
   const normalizedHowMany = normalizeHowMany(howMany);
 
   try {
-    const watchModel = new dbModel({ howMany: normalizedHowMany }, "vidPages");
+    const watchModel = new dbModel({ howMany: normalizedHowMany }, "watch");
     const watchVids = await watchModel.getNewestWatchVidsArray();
     return buildWatchVidDtos(watchVids);
   } catch (error) {
@@ -35,13 +35,18 @@ const normalizeNumber = (value) => {
 const buildWatchVidDtos = (watchVids) => {
   const watchVidDtos = [];
   for (const watchVid of watchVids) {
-    watchVidDtos.push(buildWatchVidDto(watchVid));
+    const watchVidDto = buildWatchVidDto(watchVid);
+    if (!watchVidDto) continue;
+    watchVidDtos.push(watchVidDto);
   }
   return watchVidDtos;
 };
 
-const buildWatchVidDto = (watchVid) => {
+//returns null for records with no playable file name
+export const buildWatchVidDto = (watchVid) => {
+  if (!watchVid) return null;
   const { title, date, vidType, vidName, vidSize } = watchVid;
+  if (!hasVidName(vidName)) return null;
   const mediaPath = trimTrailingSlash(process.env.EXPRESS_WATCH_PATH);
 
   return {
@@ -53,5 +58,7 @@ const buildWatchVidDto = (watchVid) => {
     mediaUrl: `${mediaPath}/${encodeURIComponent(vidName)}`,
   };
 };
+
+const hasVidName = (vidName) => typeof vidName === "string" && vidName.trim() !== "";
 
 const trimTrailingSlash = (path) => path.replace(/\/+$/, "");

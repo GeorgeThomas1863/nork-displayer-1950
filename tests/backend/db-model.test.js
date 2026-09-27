@@ -56,11 +56,11 @@ describe("dbModel.getNewestWatchVidsArray", () => {
   it("filters playable watch videos, sorts newest first, and applies the requested limit", async () => {
     const rows = [{ vidName: "latest.mp4" }];
     toArray.mockResolvedValue(rows);
-    const model = new dbModel({ howMany: "7" }, "vidPages");
+    const model = new dbModel({ howMany: "7" }, "watch");
 
     const result = await model.getNewestWatchVidsArray();
 
-    expect(collection).toHaveBeenCalledWith("vidPages");
+    expect(collection).toHaveBeenCalledWith("watch");
     expect(find).toHaveBeenCalledWith({
       site: "watch",
       vidName: { $type: "string", $ne: "" },
@@ -68,6 +68,30 @@ describe("dbModel.getNewestWatchVidsArray", () => {
     });
     expect(sort).toHaveBeenCalledWith({ date: -1, vidPageId: -1 });
     expect(limit).toHaveBeenCalledWith(7);
+    expect(result).toBe(rows);
+  });
+});
+
+describe("dbModel.getOldestWatchVidsArray", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it("filters playable watch videos, sorts oldest first, and applies the requested limit", async () => {
+    const rows = [{ vidName: "first.mp4" }];
+    toArray.mockResolvedValue(rows);
+    const model = new dbModel({ howMany: "3" }, "watch");
+
+    const result = await model.getOldestWatchVidsArray();
+
+    expect(collection).toHaveBeenCalledWith("watch");
+    expect(find).toHaveBeenCalledWith({
+      site: "watch",
+      vidName: { $type: "string", $ne: "" },
+      vidSize: { $gt: 0 },
+    });
+    expect(sort).toHaveBeenCalledWith({ date: 1, vidPageId: 1 });
+    expect(limit).toHaveBeenCalledWith(3);
     expect(result).toBe(rows);
   });
 });

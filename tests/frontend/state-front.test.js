@@ -14,6 +14,7 @@ describe('article count state', () => {
     const { default: initialState } = await import('../../public/js/util/state-front.js')
 
     expect(initialState.articleType).toBe('fatboy')
+    expect(initialState.vidType).toBe('watch')
     expect(initialState.orderBy).toBe('newest-to-oldest')
   })
 

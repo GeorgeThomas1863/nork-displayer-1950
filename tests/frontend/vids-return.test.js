@@ -5,10 +5,10 @@ vi.mock('../../public/js/util/collapse-display.js', () => ({
   defineCollapseItems: vi.fn(),
 }))
 vi.mock('../../public/js/util/state-front.js', () => ({
-  default: { articleType: 'fatboy', picType: 'all', vidType: 'vidPages' },
+  default: { articleType: 'fatboy', picType: 'all', vidType: 'watch' },
 }))
 
-import { buildVidTitle, buildVidDate, buildVidElement, buildVidListItem, buildVidPagesDisplay, buildVidTypeButtonItem, buildVidsReturnDisplay } from '../../public/js/vids/vids-return.js'
+import { buildVidTitle, buildVidDate, buildVidElement, buildVidListItem, buildWatchDisplay, buildVidTypeButtonItem, buildVidsReturnDisplay } from '../../public/js/vids/vids-return.js'
 import { buildCollapseContainer } from '../../public/js/util/collapse-display.js'
 
 function createEl(tag) {
@@ -96,6 +96,11 @@ describe('buildVidDate', () => {
     expect(el.className).toBe('vid-date')
     expect(el.textContent.length).toBeGreaterThan(0)
   })
+
+  it('formats a UTC-midnight calendar date as the same day regardless of local timezone', () => {
+    const el = buildVidDate('2026-09-26T00:00:00.000Z')
+    expect(el.textContent).toContain('September 26, 2026')
+  })
 })
 
 describe('buildVidElement', () => {
@@ -108,17 +113,17 @@ describe('buildVidElement', () => {
   })
 
   it('returns a video element with class vid-element and controls=true', () => {
-    const el = buildVidElement('/path/to/video.mp4')
+    const el = buildVidElement('/watch/video.mp4')
     expect(el.tagName).toBe('VIDEO')
     expect(el.className).toBe('vid-element')
     expect(el.controls).toBe(true)
   })
 
-  it('video has 1 child source element with correct src and type', () => {
-    const el = buildVidElement('/path/to/video.mp4')
+  it('video has 1 child source element using mediaUrl directly as src', () => {
+    const el = buildVidElement('/watch/video.mp4')
     expect(el.children.length).toBe(1)
     const source = el.children[0]
-    expect(source.src).toBe('/kcna-vids/video.mp4')
+    expect(source.src).toBe('/watch/video.mp4')
     expect(source.type).toBe('video/mp4')
   })
 })
@@ -127,23 +132,23 @@ describe('video record validation', () => {
   const validRecord = {
     title: 'Valid video',
     date: '2024-06-15',
-    vidData: { savePath: '/videos/test.mp4' },
+    mediaUrl: '/watch/test.mp4',
   }
 
   it.each([
-    ['title', { date: validRecord.date, vidData: validRecord.vidData }],
-    ['date', { title: validRecord.title, vidData: validRecord.vidData }],
-    ['vidData', { title: validRecord.title, date: validRecord.date }],
-    ['savePath', { title: validRecord.title, date: validRecord.date, vidData: {} }],
+    ['title', { date: validRecord.date, mediaUrl: validRecord.mediaUrl }],
+    ['date', { title: validRecord.title, mediaUrl: validRecord.mediaUrl }],
+    ['mediaUrl', { title: validRecord.title, date: validRecord.date }],
+    ['mediaUrl (empty string)', { title: validRecord.title, date: validRecord.date, mediaUrl: '' }],
   ])('skips a record missing %s', async (_, record) => {
     expect(await buildVidListItem(record, true)).toBeNull()
   })
 
   it('renders valid records from a mixed valid and invalid array', async () => {
-    const display = await buildVidPagesDisplay([
-      { title: 'Missing video data', date: validRecord.date },
+    const display = await buildWatchDisplay([
+      { title: 'Missing media url', date: validRecord.date },
       validRecord,
-      { title: validRecord.title, vidData: validRecord.vidData },
+      { title: validRecord.title, mediaUrl: validRecord.mediaUrl },
     ])
 
     expect(display.children).toHaveLength(1)
@@ -151,8 +156,8 @@ describe('video record validation', () => {
 
   it('returns null when every video record is invalid', async () => {
     const display = await buildVidsReturnDisplay([
-      { title: 'Missing date', vidData: validRecord.vidData },
-      { date: validRecord.date, vidData: validRecord.vidData },
+      { title: 'Missing date', mediaUrl: validRecord.mediaUrl },
+      { date: validRecord.date, mediaUrl: validRecord.mediaUrl },
     ])
 
     expect(display).toBeNull()
@@ -164,7 +169,7 @@ describe('buildVidListItem', () => {
     await buildVidListItem({
       title: '<img src=x onerror=alert(1)>',
       date: '2024-06-15',
-      vidData: { savePath: '/videos/test.mp4' },
+      mediaUrl: '/watch/test.mp4',
     }, true)
 
     const collapseParams = buildCollapseContainer.mock.calls[0][0]
@@ -176,15 +181,15 @@ describe('buildVidListItem', () => {
 
 describe('buildVidTypeButtonItem', () => {
   it('returns a li with a button that has the correct id', () => {
-    const li = buildVidTypeButtonItem({ buttonValue: 'vidPages', buttonText: 'KCNA Vids' })
+    const li = buildVidTypeButtonItem({ buttonValue: 'watch', buttonText: 'KCNA Watch' })
     expect(li.tagName).toBe('LI')
     const button = li.children[0]
-    expect(button.id).toBe('vid-type-button-vidPages')
+    expect(button.id).toBe('vid-type-button-watch')
   })
 
   it('adds active class when buttonValue matches stateFront.vidType', () => {
-    // stateFront.vidType is 'vidPages'
-    const li = buildVidTypeButtonItem({ buttonValue: 'vidPages', buttonText: 'KCNA Vids' })
+    // stateFront.vidType is 'watch'
+    const li = buildVidTypeButtonItem({ buttonValue: 'watch', buttonText: 'KCNA Watch' })
     const button = li.children[0]
     expect(button.classList._classes.has('active')).toBe(true)
   })

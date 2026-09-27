@@ -53,7 +53,7 @@ const STAT_COLLECTIONS = ["articles", "pics", "picSets"];
 const STAT_SORT_COLUMNS = ["articles", "pics", "picSets"];
 
 export const runGetAdminData = async ({ sortColumn, sortDir } = {}) => {
-  const countOnlyCollections = ["articles", "pics", "picSets", "vidPages"];
+  const countOnlyCollections = ["articles", "pics", "picSets", "watch"];
   const dataArray = [];
 
   const logData = await getAdminLogData(sortColumn, sortDir);

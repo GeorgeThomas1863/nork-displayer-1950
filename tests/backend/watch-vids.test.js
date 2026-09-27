@@ -28,7 +28,7 @@ describe("getWatchVids", () => {
 
     await getWatchVids();
 
-    expect(dbModel).toHaveBeenCalledWith({ howMany: 8 }, "vidPages");
+    expect(dbModel).toHaveBeenCalledWith({ howMany: 8 }, "watch");
   });
 
   it("uses 5 when howMany and the configured default are invalid", async () => {
@@ -37,7 +37,7 @@ describe("getWatchVids", () => {
 
     await getWatchVids("invalid");
 
-    expect(dbModel).toHaveBeenCalledWith({ howMany: 5 }, "vidPages");
+    expect(dbModel).toHaveBeenCalledWith({ howMany: 5 }, "watch");
   });
 
   it.each([
@@ -50,7 +50,7 @@ describe("getWatchVids", () => {
 
     await getWatchVids(input);
 
-    expect(dbModel).toHaveBeenCalledWith({ howMany: expected }, "vidPages");
+    expect(dbModel).toHaveBeenCalledWith({ howMany: expected }, "watch");
   });
 
   it("returns safe DTOs with encoded media URLs and no savePath", async () => {

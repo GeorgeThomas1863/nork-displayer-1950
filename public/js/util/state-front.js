@@ -6,7 +6,7 @@ const stateFront = {
   typeTrigger: "articles", //default articles
   articleType: "fatboy", //default Revolutionary Activities [KJU]
   picType: "all",
-  vidType: "vidPages",
+  vidType: "watch",
   howMany: null,
   orderBy: "newest-to-oldest",
   dataObj: {

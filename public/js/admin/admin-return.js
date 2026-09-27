@@ -57,7 +57,7 @@ export const buildAdminStatsSection = async (inputData) => {
   const articlesCollection = getAdminCollection(inputData, "articles");
   const picsCollection = getAdminCollection(inputData, "pics");
   const picSetsCollection = getAdminCollection(inputData, "picSets");
-  const vidsCollection = getAdminCollection(inputData, "vidPages");
+  const vidsCollection = getAdminCollection(inputData, "watch");
 
   const totalScrapes = logCollection.count;
   const totalArticles = articlesCollection.count;

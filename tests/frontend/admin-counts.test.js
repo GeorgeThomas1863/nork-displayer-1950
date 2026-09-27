@@ -48,7 +48,7 @@ describe("admin collection counts", () => {
       { collection: "articles", count: 725, data: [{}] },
       { collection: "pics", count: 640, data: [{}] },
       { collection: "picSets", count: 530, data: [{}] },
-      { collection: "vidPages", count: 612, data: [{}] },
+      { collection: "watch", count: 612, data: [{}] },
     ];
 
     const section = await buildAdminStatsSection(input);

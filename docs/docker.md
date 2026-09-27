@@ -66,7 +66,7 @@ If nginx already uses that same loopback address and port, only reload it after 
 
 | Volume | Mounted location | Contents |
 | --- | --- | --- |
-| `nork_mongo-data` | MongoDB data directory in `mongo` | `log`, `articles`, `pics`, `picSets`, and `vidPages` collections |
+| `nork_mongo-data` | MongoDB data directory in `mongo` | `log`, `articles`, `pics`, `picSets`, and `watch` collections |
 | `nork_pics` | `/data/pics` in both app containers | Scraped picture files; read-only in `displayer` |
 
 Confirm the names before backup or migration:
@@ -133,13 +133,13 @@ mongodump --uri="<HOST_MONGO_URI>" --archive --db "<DB_NAME>" | docker compose -
 Compare the five collection counts on the host:
 
 ```sh
-mongosh "<HOST_MONGO_URI>" --quiet --eval 'const d=db.getSiblingDB("<DB_NAME>"); for (const c of ["log","articles","pics","picSets","vidPages"]) print(c+"="+d.getCollection(c).countDocuments())'
+mongosh "<HOST_MONGO_URI>" --quiet --eval 'const d=db.getSiblingDB("<DB_NAME>"); for (const c of ["log","articles","pics","picSets","watch"]) print(c+"="+d.getCollection(c).countDocuments())'
 ```
 
 Then compare the same counts in the container:
 
 ```sh
-docker compose -p nork exec -T mongo mongosh --quiet --eval 'const d=db.getSiblingDB("<DB_NAME>"); for (const c of ["log","articles","pics","picSets","vidPages"]) print(c+"="+d.getCollection(c).countDocuments())'
+docker compose -p nork exec -T mongo mongosh --quiet --eval 'const d=db.getSiblingDB("<DB_NAME>"); for (const c of ["log","articles","pics","picSets","watch"]) print(c+"="+d.getCollection(c).countDocuments())'
 ```
 
 Do not continue until every source and destination count matches.

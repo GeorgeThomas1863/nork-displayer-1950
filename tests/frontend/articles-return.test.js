@@ -8,7 +8,7 @@ vi.mock('../../public/js/pics/pics-container.js', () => ({
   buildPicsCollapseContainer: vi.fn().mockResolvedValue(null),
 }))
 vi.mock('../../public/js/util/state-front.js', () => ({
-  default: { articleType: 'fatboy', picType: 'all', vidType: 'vidPages' },
+  default: { articleType: 'fatboy', picType: 'all', vidType: 'watch' },
 }))
 
 import {

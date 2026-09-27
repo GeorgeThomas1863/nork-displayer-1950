@@ -13,9 +13,9 @@ export const buildVidsReturnDisplay = async (inputArray) => {
 
   //ADD SWITCH HERE LATER
 
-  const vidPagesDisplay = await buildVidPagesDisplay(inputArray);
-  if (!vidPagesDisplay) return null;
-  vidDisplayContainer.append(vidPagesDisplay);
+  const watchDisplay = await buildWatchDisplay(inputArray);
+  if (!watchDisplay) return null;
+  vidDisplayContainer.append(watchDisplay);
 
   return vidDisplayContainer;
 };
@@ -25,8 +25,8 @@ export const buildVidTypeButtons = async () => {
   vidTypeButtonContainer.id = "vid-type-button-container";
   vidTypeButtonContainer.className = "button-type-container";
 
-  // Only vid pages to start
-  const buttonData = [{ buttonValue: "vidPages", buttonText: "KCNA Vid Pages" }];
+  // Only KCNA Watch videos to start.
+  const buttonData = [{ buttonValue: "watch", buttonText: "KCNA Watch" }];
 
   // Create button list
   const buttonList = document.createElement("ul");
@@ -64,7 +64,7 @@ export const buildVidTypeButtonItem = (buttonData) => {
 };
 
 // FIX
-export const buildVidPagesDisplay = async (inputArray) => {
+export const buildWatchDisplay = async (inputArray) => {
   if (!inputArray || !inputArray.length) return null;
 
   const vidArrayElement = document.createElement("ul");
@@ -120,13 +120,12 @@ export const buildVidListItem = async (inputObj, isFirst) => {
 
 export const buildVidContainer = async (inputObj) => {
   if (!isValidVidRecord(inputObj)) return null;
-  const { vidData, date } = inputObj;
-  const { savePath } = vidData;
+  const { mediaUrl, date } = inputObj;
 
   const vidContainerElement = document.createElement("article");
   vidContainerElement.className = "vid-container-element";
 
-  const vidElement = await buildVidElement(savePath);
+  const vidElement = await buildVidElement(mediaUrl);
   const dateElement = await buildVidDate(date);
 
   vidContainerElement.append(vidElement, dateElement);
@@ -136,11 +135,10 @@ export const buildVidContainer = async (inputObj) => {
 
 const isValidVidRecord = (inputObj) => {
   if (!inputObj || typeof inputObj !== "object") return false;
-  const { title, date, vidData } = inputObj;
+  const { title, date, mediaUrl } = inputObj;
   if (typeof title !== "string" || !title.trim()) return false;
   if (typeof date !== "string" || !date.trim()) return false;
-  if (!vidData || typeof vidData !== "object") return false;
-  return typeof vidData.savePath === "string" && Boolean(vidData.savePath.trim());
+  return typeof mediaUrl === "string" && Boolean(mediaUrl.trim());
 };
 
 export const buildVidTitle = (title) => {
@@ -161,23 +159,21 @@ export const buildVidDate = (date) => {
     year: "numeric",
     month: "long",
     day: "numeric",
+    timeZone: "UTC",
   });
 
   return dateElement;
 };
 
-export const buildVidElement = (savePath) => {
-  if (!savePath) return null;
+export const buildVidElement = (mediaUrl) => {
+  if (!mediaUrl) return null;
 
   const vidElement = document.createElement("video");
   vidElement.className = "vid-element";
   vidElement.controls = true;
 
   const sourceElement = document.createElement("source");
-  const fileName = savePath.split("/").pop();
-  const vidPath = "/kcna-vids/" + fileName;
-
-  sourceElement.src = vidPath;
+  sourceElement.src = mediaUrl;
   sourceElement.type = "video/mp4";
 
   vidElement.appendChild(sourceElement);
@@ -248,8 +244,8 @@ export const buildVidElement = (savePath) => {
 //     case "all":
 //       return buildVidsAllDisplay(inputArray);
 
-//     case "vidPages":
-//       return buildVidPagesDisplay(inputArray);
+//     case "watch":
+//       return buildWatchDisplay(inputArray);
 
 //     default:
 //       return null;
