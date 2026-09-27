@@ -1,5 +1,4 @@
 import { buildCollapseContainer, defineCollapseItems } from "../util/collapse-display.js";
-import stateFront from "../util/state-front.js";
 
 //ONLY NEED 1 VID DISPLAY FOR NOW
 export const buildVidsReturnDisplay = async (inputArray) => {
@@ -8,59 +7,13 @@ export const buildVidsReturnDisplay = async (inputArray) => {
   const vidDisplayContainer = document.createElement("div");
   vidDisplayContainer.id = "vid-display-container";
 
-  const vidTypeButtons = await buildVidTypeButtons();
-  vidDisplayContainer.append(vidTypeButtons);
-
-  //ADD SWITCH HERE LATER
+  //ADD VID TYPE SWITCH HERE LATER (only KCNA Watch for now)
 
   const watchDisplay = await buildWatchDisplay(inputArray);
   if (!watchDisplay) return null;
   vidDisplayContainer.append(watchDisplay);
 
   return vidDisplayContainer;
-};
-
-export const buildVidTypeButtons = async () => {
-  const vidTypeButtonContainer = document.createElement("div");
-  vidTypeButtonContainer.id = "vid-type-button-container";
-  vidTypeButtonContainer.className = "button-type-container";
-
-  // Only KCNA Watch videos to start.
-  const buttonData = [{ buttonValue: "watch", buttonText: "KCNA Watch" }];
-
-  // Create button list
-  const buttonList = document.createElement("ul");
-  buttonList.id = "vid-type-button-list";
-  buttonList.className = "button-type-list";
-
-  // Build each button
-  for (let i = 0; i < buttonData.length; i++) {
-    const buttonItem = await buildVidTypeButtonItem(buttonData[i]);
-    buttonList.append(buttonItem);
-  }
-
-  vidTypeButtonContainer.append(buttonList);
-  return vidTypeButtonContainer;
-};
-
-export const buildVidTypeButtonItem = (buttonData) => {
-  const { vidType } = stateFront;
-  const { buttonValue, buttonText } = buttonData;
-
-  const buttonListItem = document.createElement("li");
-  buttonListItem.className = "button-type-list-item";
-
-  const button = document.createElement("button");
-  button.id = `vid-type-button-${buttonValue}`;
-  button.className = "button-type-item";
-  button.setAttribute("data-update", `vid-type-button-${buttonValue}`);
-  button.innerHTML = buttonText;
-
-  //add active type
-  if (vidType === buttonValue) button.classList.add("active");
-
-  buttonListItem.append(button);
-  return buttonListItem;
 };
 
 // FIX

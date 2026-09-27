@@ -895,11 +895,13 @@ h3 {
 }
 
 .vid-element {
+  display: block;
   margin: 0 auto;
-  width: 100%;
+  width: auto;
   max-width: 100%;
   height: auto;
-  /* object-fit: cover; */
+  max-height: 70vh;
+  background-color: #000;
 }
 
 /* ----------------------------------- */

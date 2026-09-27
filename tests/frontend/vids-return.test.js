@@ -8,7 +8,7 @@ vi.mock('../../public/js/util/state-front.js', () => ({
   default: { articleType: 'fatboy', picType: 'all', vidType: 'watch' },
 }))
 
-import { buildVidTitle, buildVidDate, buildVidElement, buildVidListItem, buildWatchDisplay, buildVidTypeButtonItem, buildVidsReturnDisplay } from '../../public/js/vids/vids-return.js'
+import { buildVidTitle, buildVidDate, buildVidElement, buildVidListItem, buildWatchDisplay, buildVidsReturnDisplay } from '../../public/js/vids/vids-return.js'
 import { buildCollapseContainer } from '../../public/js/util/collapse-display.js'
 
 function createEl(tag) {
@@ -179,24 +179,3 @@ describe('buildVidListItem', () => {
   })
 })
 
-describe('buildVidTypeButtonItem', () => {
-  it('returns a li with a button that has the correct id', () => {
-    const li = buildVidTypeButtonItem({ buttonValue: 'watch', buttonText: 'KCNA Watch' })
-    expect(li.tagName).toBe('LI')
-    const button = li.children[0]
-    expect(button.id).toBe('vid-type-button-watch')
-  })
-
-  it('adds active class when buttonValue matches stateFront.vidType', () => {
-    // stateFront.vidType is 'watch'
-    const li = buildVidTypeButtonItem({ buttonValue: 'watch', buttonText: 'KCNA Watch' })
-    const button = li.children[0]
-    expect(button.classList._classes.has('active')).toBe(true)
-  })
-
-  it('does not add active class when buttonValue does not match stateFront.vidType', () => {
-    const li = buildVidTypeButtonItem({ buttonValue: 'other', buttonText: 'Other' })
-    const button = li.children[0]
-    expect(button.classList._classes.has('active')).toBe(false)
-  })
-})
