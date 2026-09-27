@@ -18,7 +18,7 @@ Run all commands below from the displayer repository unless a step says otherwis
 Build images and start the stack:
 
 ```sh
-docker compose -p nork up -d --build
+sudo docker compose -p nork up -d --build
 ```
 
 The package shortcut is equivalent:
