@@ -123,9 +123,27 @@ describe('getNewVids', () => {
         vidName: 'clip.mp4',
         vidSize: 12345,
         mediaUrl: '/watch/clip.mp4',
+        posterUrl: null,
       },
     ])
     expect(result[0]).not.toHaveProperty('savePath')
+  })
+
+  it('returns posterUrl built from EXPRESS_WATCH_PATH when thumbName is present', async () => {
+    getNewestWatchVidsArray.mockResolvedValue([
+      {
+        title: 'Evening broadcast',
+        date: '2026-09-13',
+        vidType: 'broadcast',
+        vidName: 'clip.mp4',
+        vidSize: 12345,
+        thumbName: 'clip.jpg',
+      },
+    ])
+
+    const result = await getNewVids({ vidType: 'watch', orderBy: 'newest-to-oldest' })
+
+    expect(result[0].posterUrl).toBe('/watch/clip.jpg')
   })
 
   it('drops records with a missing, null, or empty vidName', async () => {

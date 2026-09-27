@@ -8,7 +8,7 @@ vi.mock('../../public/js/util/state-front.js', () => ({
   default: { articleType: 'fatboy', picType: 'all', vidType: 'watch' },
 }))
 
-import { buildVidTitle, buildVidDate, buildVidElement, buildVidListItem, buildWatchDisplay, buildVidsReturnDisplay } from '../../public/js/vids/vids-return.js'
+import { buildVidTitle, buildVidDate, buildVidElement, buildVidContainer, buildVidListItem, buildWatchDisplay, buildVidsReturnDisplay } from '../../public/js/vids/vids-return.js'
 import { buildCollapseContainer } from '../../public/js/util/collapse-display.js'
 
 function createEl(tag) {
@@ -50,6 +50,13 @@ function createEl(tag) {
       return this.tagName.toLowerCase() === sel.toLowerCase()
     },
   }
+  // Mirrors real HTMLVideoElement behavior: the .poster IDL property reflects the poster content attribute.
+  Object.defineProperty(el, 'poster', {
+    get() { return this._attrs.poster },
+    set(value) { this._attrs.poster = value },
+    enumerable: true,
+    configurable: true,
+  })
   return el
 }
 
@@ -125,6 +132,51 @@ describe('buildVidElement', () => {
     const source = el.children[0]
     expect(source.src).toBe('/watch/video.mp4')
     expect(source.type).toBe('video/mp4')
+  })
+
+  it('always sets preload to "none"', () => {
+    const el = buildVidElement('/watch/video.mp4', '/watch/video.jpg')
+    expect(el.preload).toBe('none')
+  })
+
+  it('sets the poster attribute from the second argument', () => {
+    const el = buildVidElement('/watch/video.mp4', '/watch/video.jpg')
+    expect(el.getAttribute('poster')).toBe('/watch/video.jpg')
+  })
+
+  it.each([
+    ['null', null],
+    ['undefined', undefined],
+    ['empty string', ''],
+  ])('does not set a poster attribute when posterUrl is %s', (_, posterUrl) => {
+    const el = buildVidElement('/watch/video.mp4', posterUrl)
+    expect(el.preload).toBe('none')
+    expect(el.getAttribute('poster')).toBeUndefined()
+  })
+})
+
+describe('buildVidContainer', () => {
+  it('passes posterUrl through to the video element', async () => {
+    const container = await buildVidContainer({
+      title: 'Evening broadcast',
+      date: '2024-06-15',
+      mediaUrl: '/watch/test.mp4',
+      posterUrl: '/watch/test.jpg',
+    })
+
+    const videoElement = container.children[0]
+    expect(videoElement.getAttribute('poster')).toBe('/watch/test.jpg')
+  })
+
+  it('does not set a poster attribute when posterUrl is absent', async () => {
+    const container = await buildVidContainer({
+      title: 'Evening broadcast',
+      date: '2024-06-15',
+      mediaUrl: '/watch/test.mp4',
+    })
+
+    const videoElement = container.children[0]
+    expect(videoElement.getAttribute('poster')).toBeUndefined()
   })
 })
 

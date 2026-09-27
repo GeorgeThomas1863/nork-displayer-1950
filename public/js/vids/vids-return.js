@@ -73,12 +73,12 @@ export const buildVidListItem = async (inputObj, isFirst) => {
 
 export const buildVidContainer = async (inputObj) => {
   if (!isValidVidRecord(inputObj)) return null;
-  const { mediaUrl, date } = inputObj;
+  const { mediaUrl, posterUrl, date } = inputObj;
 
   const vidContainerElement = document.createElement("article");
   vidContainerElement.className = "vid-container-element";
 
-  const vidElement = await buildVidElement(mediaUrl);
+  const vidElement = await buildVidElement(mediaUrl, posterUrl);
   const dateElement = await buildVidDate(date);
 
   vidContainerElement.append(vidElement, dateElement);
@@ -118,12 +118,16 @@ export const buildVidDate = (date) => {
   return dateElement;
 };
 
-export const buildVidElement = (mediaUrl) => {
+export const buildVidElement = (mediaUrl, posterUrl) => {
   if (!mediaUrl) return null;
 
   const vidElement = document.createElement("video");
   vidElement.className = "vid-element";
   vidElement.controls = true;
+  vidElement.preload = "none";
+  if (typeof posterUrl === "string" && posterUrl.trim() !== "") {
+    vidElement.poster = posterUrl;
+  }
 
   const sourceElement = document.createElement("source");
   sourceElement.src = mediaUrl;

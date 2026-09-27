@@ -76,9 +76,45 @@ describe("getWatchVids", () => {
         vidName: "folder name+#.mp4",
         vidSize: 12345,
         mediaUrl: "/watch/folder%20name%2B%23.mp4",
+        posterUrl: null,
       },
     ]);
     expect(result[0]).not.toHaveProperty("savePath");
+  });
+
+  it("returns an encoded posterUrl when thumbName is present", async () => {
+    process.env.EXPRESS_WATCH_PATH = "/watch/";
+    getNewestWatchVidsArray.mockResolvedValue([
+      {
+        title: "Evening broadcast",
+        date: "2026-09-13",
+        vidType: "broadcast",
+        vidName: "clip.mp4",
+        vidSize: 12345,
+        thumbName: "kctv 2026-09-26+news#5pm.jpg",
+      },
+    ]);
+
+    const result = await getWatchVids(1);
+
+    expect(result[0].posterUrl).toBe("/watch/kctv%202026-09-26%2Bnews%235pm.jpg");
+  });
+
+  it("returns null posterUrl for a blank thumbName", async () => {
+    getNewestWatchVidsArray.mockResolvedValue([
+      {
+        title: "Evening broadcast",
+        date: "2026-09-13",
+        vidType: "broadcast",
+        vidName: "clip.mp4",
+        vidSize: 12345,
+        thumbName: "   ",
+      },
+    ]);
+
+    const result = await getWatchVids(1);
+
+    expect(result[0].posterUrl).toBeNull();
   });
 
   it("returns null without querying when EXPRESS_WATCH_PATH is unset", async () => {

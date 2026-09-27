@@ -45,8 +45,8 @@ const buildWatchVidDtos = (watchVids) => {
 //returns null for records with no playable file name
 export const buildWatchVidDto = (watchVid) => {
   if (!watchVid) return null;
-  const { title, date, vidType, vidName, vidSize } = watchVid;
-  if (!hasVidName(vidName)) return null;
+  const { title, date, vidType, vidName, vidSize, thumbName } = watchVid;
+  if (!hasFileName(vidName)) return null;
   const mediaPath = trimTrailingSlash(process.env.EXPRESS_WATCH_PATH);
 
   return {
@@ -56,9 +56,10 @@ export const buildWatchVidDto = (watchVid) => {
     vidName,
     vidSize,
     mediaUrl: `${mediaPath}/${encodeURIComponent(vidName)}`,
+    posterUrl: hasFileName(thumbName) ? `${mediaPath}/${encodeURIComponent(thumbName)}` : null,
   };
 };
 
-const hasVidName = (vidName) => typeof vidName === "string" && vidName.trim() !== "";
+const hasFileName = (fileName) => typeof fileName === "string" && fileName.trim() !== "";
 
 const trimTrailingSlash = (path) => path.replace(/\/+$/, "");
