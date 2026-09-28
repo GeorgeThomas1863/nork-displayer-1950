@@ -159,8 +159,8 @@ describe('runGetAdminData', () => {
       collection: 'log',
       count: 2,
       data: [
-        { _id: '1', scrapeId: 's1', scrapeStats: { articles: 3, pics: 10, picSets: 0 } },
-        { _id: '2', scrapeId: 's2', scrapeStats: { articles: 1, pics: 0, picSets: 0 } },
+        { _id: '1', scrapeId: 's1', scrapeStats: { articles: 3, pics: 10, picSets: 0, watch: 0 } },
+        { _id: '2', scrapeId: 's2', scrapeStats: { articles: 1, pics: 0, picSets: 0, watch: 0 } },
       ],
       stats,
     })
@@ -214,7 +214,6 @@ describe('runGetAdminData', () => {
     ['startTime', 'desc', { scrapeStartTime: -1, _id: -1 }],
     ['endTime', 'asc', { scrapeEndTime: 1, _id: 1 }],
     ['duration', 'asc', { scrapeLengthSeconds: 1, _id: 1 }],
-    ['step', 'desc', { scrapeStep: -1, _id: -1 }],
     ['message', 'asc', { scrapeMessage: 1, _id: 1 }],
     ['active', 'desc', { scrapeActive: -1, _id: -1 }],
     ['status', 'asc', { scrapeError: 1, scrapeActive: 1, _id: 1 }],
@@ -226,7 +225,7 @@ describe('runGetAdminData', () => {
     expect(getCapturedDataObject().sortObj).toEqual(expected)
   })
 
-  it.each(['articles', 'pics', 'picSets'])(
+  it.each(['articles', 'pics', 'picSets', 'watch'])(
     'falls back to the default endTime mongo sort for stat column %s (the mongo doc has no such field; it is sorted in JS afterward)',
     async (sortColumn) => {
       const getCapturedDataObject = mockDbModelCapturingLogDataObject()
@@ -322,21 +321,22 @@ describe('runGetAdminData scrapeStats', () => {
     vi.clearAllMocks()
   })
 
-  it('attaches articles/pics/picSets doc counts by scrapeId, defaulting missing scrapeIds/collections to 0', async () => {
+  it('attaches articles/pics/picSets/watch doc counts by scrapeId, defaulting missing scrapeIds/collections to 0', async () => {
     const logRows = [{ _id: '1', scrapeId: 'a' }, { _id: '2', scrapeId: 'b' }]
     dbModel.mockImplementation(function (_, collection) {
       if (collection === 'log') return buildLogModel({ data: logRows })
       if (collection === 'articles') return buildCountModel(1, { a: 5 })
       if (collection === 'pics') return buildCountModel(1, { a: 2, b: 7 })
       if (collection === 'picSets') return buildCountModel(1, {})
+      if (collection === 'watch') return buildCountModel(1, { b: 4 })
       return buildCountModel(1)
     })
 
     const result = await runGetAdminData({})
 
     expect(result[0].data).toEqual([
-      { _id: '1', scrapeId: 'a', scrapeStats: { articles: 5, pics: 2, picSets: 0 } },
-      { _id: '2', scrapeId: 'b', scrapeStats: { articles: 0, pics: 7, picSets: 0 } },
+      { _id: '1', scrapeId: 'a', scrapeStats: { articles: 5, pics: 2, picSets: 0, watch: 0 } },
+      { _id: '2', scrapeId: 'b', scrapeStats: { articles: 0, pics: 7, picSets: 0, watch: 4 } },
     ])
   })
 

@@ -156,7 +156,7 @@ describe('adminDataController', () => {
     expect(runGetAdminData).toHaveBeenCalledWith({ sortColumn: 'duration', sortDir: 'asc' })
   })
 
-  it.each(['articles', 'pics', 'picSets'])(
+  it.each(['articles', 'pics', 'picSets', 'watch'])(
     'passes the scrape-stat sortColumn %s through to runGetAdminData',
     async (sortColumn) => {
       runGetAdminData.mockResolvedValue([])

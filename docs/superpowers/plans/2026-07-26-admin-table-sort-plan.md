@@ -8,7 +8,7 @@
 - **Never commit.** Leave all changes in the working tree. The user owns all commits.
 - ESM modules throughout (`import`/`export`), Express v5 backend, vanilla JS frontend (no frameworks, no bundler).
 - Code style: one function = one job named as a verb phrase; guard clauses at top; max 2 nesting levels; `for` loops instead of `.forEach`/`.map`/`.filter`/`.reduce` unless there is a specific reason; wrap external calls (DB, network) in try/catch with contextual `console.error`; queries return data or null; no speculative code or single-use abstractions. Match the surrounding code's comment density and naming.
-- **API contract** (binding, both tasks): `POST /nork-admin-data-route` body fields `sortColumn` and `sortDir`, both optional. `sortColumn` whitelist: `id | status | startTime | endTime | duration | step | message | active`. `sortDir` whitelist: `asc | desc`. Missing/invalid → fall back to `endTime` / `desc`.
+- **API contract** (binding, both tasks): `POST /nork-admin-data-route` body fields `sortColumn` and `sortDir`, both optional. `sortColumn` whitelist: `id | status | startTime | endTime | duration | articles | pics | picSets | watch | message | active`. `sortDir` whitelist: `asc | desc`. Missing/invalid → fall back to `endTime` / `desc`.
 - **Response shape** (binding, both tasks): array of per-collection objects. Log entry: `{ collection: "log", count, data: [sorted rows], stats: { activeScrapes, finishedScrapes, errorScrapes, avgDuration } }`. Other four entries (`articles`, `pics`, `picSets`, `vidPages`): `{ collection, count }` — no `data` field.
 - Log row cap: `+process.env.DEFAULT_LOAD_LOG || 100` (hard fallback 100 when env var unset/invalid).
 - Every Mongo sort object ends with an `_id` tiebreaker in the same direction. Status column sorts by `{ scrapeError: dir, scrapeActive: dir, _id: dir }`.
@@ -27,7 +27,7 @@ Files: `models/db-model.js`, `src/admin-back.js`, `controllers/data-controller.j
      - `avgDuration`: `$avg` of `scrapeLengthSeconds` (Mongo `$avg` ignores null/missing), rounded to an integer, `0` when the collection is empty or no durations exist
      - Return the plain summary object (no `_id`); when the collection is empty the aggregation returns no rows — return zeros.
 2. `src/admin-back.js` — rework `runGetAdminData` to accept `{ sortColumn, sortDir }` (already validated by the controller):
-   - Build the Mongo sort object from a column→field mapping: `id → _id`, `status → scrapeError, scrapeActive`, `startTime → scrapeStartTime`, `endTime → scrapeEndTime`, `duration → scrapeLengthSeconds`, `step → scrapeStep`, `message → scrapeMessage`, `active → scrapeActive`; direction `asc → 1`, `desc → -1`; append `_id` in the same direction.
+   - Build the Mongo sort object from a column→field mapping: `id → _id`, `status → scrapeError, scrapeActive`, `startTime → scrapeStartTime`, `endTime → scrapeEndTime`, `duration → scrapeLengthSeconds`, `message → scrapeMessage`, `active → scrapeActive`; direction `asc → 1`, `desc → -1`; append `_id` in the same direction.
    - `log` collection: `countAll()` + `getSortedItemsArray()` with `howMany = +process.env.DEFAULT_LOAD_LOG || 100` + `getLogStatsSummary()` → `{ collection: "log", count, data, stats }`.
    - Other four collections: `countAll()` only → `{ collection, count }`.
    - Keep the existing per-collection try/catch → `null` on failure → controller 503 behavior. Remove the now-dead `getAll` usage from this flow (leave `dbModel.getAll` itself alone — do not delete model methods this plan doesn't own).

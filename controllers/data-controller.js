@@ -65,7 +65,7 @@ const isPlainObject = (inputData) => {
   return inputData !== null && typeof inputData === "object" && !Array.isArray(inputData);
 };
 
-const SORT_COLUMN_WHITELIST = ["id", "status", "startTime", "endTime", "duration", "articles", "pics", "picSets", "step", "message", "active"];
+const SORT_COLUMN_WHITELIST = ["id", "status", "startTime", "endTime", "duration", "articles", "pics", "picSets", "watch", "message", "active"];
 const SORT_DIR_WHITELIST = ["asc", "desc"];
 
 const sanitizeSortColumn = (sortColumn) => {

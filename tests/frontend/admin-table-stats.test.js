@@ -50,12 +50,12 @@ const EXPECTED_COLUMNS = [
   "articles",
   "pics",
   "picSets",
-  "step",
+  "watch",
   "message",
   "active",
 ];
 
-const EXPECTED_STAT_HEADERS = ["Articles", "Pics", "Pic Sets"];
+const EXPECTED_STAT_HEADERS = ["Articles", "Pics", "Pic Sets", "Watch"];
 
 const baseLog = {
   _id: "abc123",
@@ -68,11 +68,11 @@ const baseLog = {
   scrapeMessage: "ok",
 };
 
-//stat cells sit between Duration (index 4) and Step (index 8)
-const getStatCells = (row) => row.children.slice(5, 8);
+//stat cells sit between Duration (index 4) and Message (index 9)
+const getStatCells = (row) => row.children.slice(5, 9);
 
 describe("buildAdminTableHeader scrape stat columns", () => {
-  it("has the three stat columns between duration and step, in order", async () => {
+  it("has the four stat columns between duration and message, in order", async () => {
     const thead = await buildAdminTableHeader();
     const ths = thead.children[0].children;
 
@@ -83,7 +83,7 @@ describe("buildAdminTableHeader scrape stat columns", () => {
 
   it("uses the expected header texts for the stat columns", async () => {
     const thead = await buildAdminTableHeader();
-    const ths = thead.children[0].children.slice(5, 8);
+    const ths = thead.children[0].children.slice(5, 9);
 
     const texts = [];
     for (const th of ths) texts.push(th.textContent.trim());
@@ -95,7 +95,7 @@ describe("buildAdminTableRow scrape stat cells", () => {
   it("renders mongo doc counts from scrapeStats, including zero", async () => {
     const row = await buildAdminTableRow({
       ...baseLog,
-      scrapeStats: { articles: 0, pics: 45, picSets: 3 },
+      scrapeStats: { articles: 0, pics: 45, picSets: 3, watch: 2 },
     });
 
     const cells = getStatCells(row);
@@ -106,8 +106,8 @@ describe("buildAdminTableRow scrape stat cells", () => {
       classes.push(cell.className);
     }
 
-    expect(texts).toEqual(["0", "45", "3"]);
-    expect(classes).toEqual(Array(3).fill("stat-cell"));
+    expect(texts).toEqual(["0", "45", "3", "2"]);
+    expect(classes).toEqual(Array(4).fill("stat-cell"));
     expect(row.children).toHaveLength(11);
   });
 

@@ -26,7 +26,7 @@ The admin log table loads up to 500 rows in natural insertion order (oldest firs
 { "sortColumn": "endTime", "sortDir": "desc" }
 ```
 
-- `sortColumn` whitelist: `id | status | startTime | endTime | duration | step | message | active`
+- `sortColumn` whitelist: `id | status | startTime | endTime | duration | articles | pics | picSets | watch | message | active`
 - `sortDir` whitelist: `asc | desc`
 - Anything missing or invalid falls back to `endTime` / `desc`. Validation lives in `adminDataController`; client strings never reach a Mongo sort directly.
 
@@ -44,7 +44,7 @@ The admin log table loads up to 500 rows in natural insertion order (oldest firs
 | startTime | `{ scrapeStartTime: dir, _id: dir }` |
 | endTime | `{ scrapeEndTime: dir, _id: dir }` |
 | duration | `{ scrapeLengthSeconds: dir, _id: dir }` |
-| step | `{ scrapeStep: dir, _id: dir }` |
+| articles, pics, picSets, watch | Mongo query falls back to the endTime sort; rows are then re-sorted in JS by their `scrapeStats` count |
 | message | `{ scrapeMessage: dir, _id: dir }` |
 | active | `{ scrapeActive: dir, _id: dir }` |
 
