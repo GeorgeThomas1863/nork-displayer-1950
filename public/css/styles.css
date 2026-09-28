@@ -894,13 +894,16 @@ h3 {
   width: 95%;
 }
 
+/* KCTV source video is 720x576 (square pixels) -> 5:4 display aspect ratio.
+   Fixed aspect-ratio + width keep the box the same size before and after
+   play (poster is 300x175, video is 720x576, so intrinsic size differs).
+   Change the 5 / 4 ratio and the 720px width if the KCTV source format changes. */
 .vid-element {
   display: block;
   margin: 0 auto;
-  width: auto;
-  max-width: 100%;
+  aspect-ratio: 5 / 4;
+  width: min(100%, 720px, calc(70vh * 5 / 4));
   height: auto;
-  max-height: 70vh;
   background-color: #000;
 }
 
