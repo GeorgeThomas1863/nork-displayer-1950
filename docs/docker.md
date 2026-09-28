@@ -54,7 +54,7 @@ The package shortcut is equivalent:
 npm run docker:down
 ```
 
-> **NEVER run `docker compose down -v`.** The `-v` flag deletes `nork_mongo-data` and `nork_pics`. MongoDB data and all copied pics are then recoverable only from a valid backup.
+> **NEVER run `docker compose down -v`.** The `-v` flag deletes `nork_mongo-data`, `nork_pics`, `nork_watch`, and `nork_watch-profile`. MongoDB data, all copied pics, downloaded KCTV videos, and the kcnawatch login are then recoverable only from a valid backup.
 
 ## nginx
 
@@ -68,6 +68,8 @@ If nginx already uses that same loopback address and port, only reload it after 
 | --- | --- | --- |
 | `nork_mongo-data` | MongoDB data directory in `mongo` | `log`, `articles`, `pics`, `picSets`, and `watch` collections |
 | `nork_pics` | `/data/pics` in both app containers | Scraped picture files; read-only in `displayer` |
+| `nork_watch` | `/data/watch` in both app containers | KCTV bulletin MP4s; read-only in `displayer` |
+| `nork_watch-profile` | `/data/watch-profile` in `scraper` | Logged-in Chrome profile for kcnawatch.org |
 
 Confirm the names before backup or migration:
 
@@ -95,6 +97,15 @@ Archive the pic volume through a throwaway Alpine container:
 ```sh
 docker run --rm -v nork_pics:/data:ro -v "${PWD}/backups:/out" alpine sh -c 'tar czf /out/nork-pics.tgz -C /data .'
 ```
+
+Archive the watch volumes the same way:
+
+```sh
+docker run --rm -v nork_watch:/data:ro -v "${PWD}/backups:/out" alpine sh -c 'tar czf /out/nork-watch.tgz -C /data .'
+docker run --rm -v nork_watch-profile:/data:ro -v "${PWD}/backups:/out" alpine sh -c 'tar czf /out/nork-watch-profile.tgz -C /data .'
+```
+
+`nork_watch-profile` holds a live kcnawatch.org login session. Treat its backups like a credential: restrict permissions and keep them off shared storage.
 
 Check that both backup files are non-empty and store a copy away from the production host. Test restores periodically; an untested archive is not a reliable backup.
 

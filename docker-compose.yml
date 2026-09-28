@@ -15,6 +15,7 @@ services:
       MONGO_URI: mongodb://mongo:27017
       SCRAPER_HOST: scraper
       PIC_PATH: /data/pics
+      WATCH_PATH: /data/watch
     depends_on:
       mongo:
         condition: service_healthy
@@ -22,6 +23,7 @@ services:
         condition: service_started
     volumes:
       - pics:/data/pics:ro
+      - watch:/data/watch:ro
 
   scraper:
     build: ../scraper
@@ -34,11 +36,15 @@ services:
       HOST: 0.0.0.0
       MONGO_URI: mongodb://mongo:27017
       PIC_PATH: /data/pics
+      WATCH_PATH: /data/watch
+      WATCH_PROFILE_PATH: /data/watch-profile
     depends_on:
       mongo:
         condition: service_healthy
     volumes:
       - pics:/data/pics
+      - watch:/data/watch
+      - watch-profile:/data/watch-profile
 
   mongo:
     image: mongo:8
@@ -55,3 +61,5 @@ services:
 volumes:
   pics:
   mongo-data:
+  watch:
+  watch-profile:
