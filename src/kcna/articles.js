@@ -31,6 +31,7 @@ export const buildArticleParams = (inputParams) => {
     filterValue: articleType,
     howMany: Math.min(+(howMany) || +process.env.DEFAULT_LOAD_ARTICLES, 100),
     sortKey: "date",
+    sortKey2: "articleId",
   };
 
   return articleParams;

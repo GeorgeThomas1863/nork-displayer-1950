@@ -49,7 +49,8 @@ describe('buildArticleParams', () => {
       filterKey: 'articleType',
       filterValue: 'fatboy',
       howMany: 3,
-      sortKey: 'date'
+      sortKey: 'date',
+      sortKey2: 'articleId'
     })
   })
 
@@ -100,7 +101,7 @@ describe('getNewArticles', () => {
     dataLookup.mockResolvedValue([])
     await getNewArticles({ articleType: 'fatboy', orderBy: 'newest-to-oldest' })
     expect(dataLookup).toHaveBeenCalledWith(
-      { filterKey: 'articleType', filterValue: 'fatboy', howMany: 3, sortKey: 'date' },
+      { filterKey: 'articleType', filterValue: 'fatboy', howMany: 3, sortKey: 'date', sortKey2: 'articleId' },
       'articles',
       'newest-to-oldest',
       true

@@ -81,6 +81,13 @@ describe('requireAuth', () => {
     expect(res.json).toHaveBeenCalledWith({ error: 'Unauthorized' })
     expect(next).not.toHaveBeenCalled()
   })
+
+  it('still sets no-store for an authenticated request (regression guard)', () => {
+    const req = makeReq({ authenticated: true })
+    const res = makeRes()
+    requireAuth(req, res, next)
+    expect(res.setHeader).toHaveBeenCalledWith('Cache-Control', 'no-store')
+  })
 })
 
 describe('requireAdminAuth', () => {

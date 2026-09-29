@@ -46,7 +46,7 @@ Key `.env` variables:
 app.js                    Entry point: session, auth-gated static paths, routes, DB connect
 middleware/
   session-config.js       buildSessionConfig() — 24h cookie, httpOnly, secure:auto
-  db-config.js            dbConnect() / dbGet() — single MongoDB connection
+  db-config.js            dbConnect() / dbGet() — single MongoDB connection; ensureIndexes() — creates display query indexes on startup
   static-media.js         mountRequiredAuthStatic() (pics, throws if unset), mountAuthStatic() (optional vid/watch), resolveListenHost()
 routes/
   router.js               All route definitions (routes are hardcoded strings, not env vars)
@@ -146,7 +146,7 @@ tests/
   controllers/  auth-controller.test.js, data-controller.test.js
   frontend/     admin-counts.test.js, admin-run.test.js, admin-status.test.js, articles-return.test.js,
                 state-front.test.js, video-reachability.test.js, vids-return.test.js
-  middleware/   static-media.test.js
+  middleware/   static-media.test.js, db-indexes.test.js
   routes/       auth.test.js
   scripts/      trim-pics-select.test.js
 ```

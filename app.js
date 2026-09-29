@@ -7,7 +7,7 @@ import session from "express-session";
 import routes from "./routes/router.js";
 
 import { buildSessionConfig } from "./middleware/session-config.js";
-import { dbConnect } from "./middleware/db-config.js";
+import { dbConnect, ensureIndexes } from "./middleware/db-config.js";
 import { mountAuthStatic, mountRequiredAuthStatic, resolveListenHost } from "./middleware/static-media.js";
 
 const app = express();
@@ -33,6 +33,8 @@ app.use(routes);
 
 // app.listen(1801);
 await dbConnect();
+const indexResult = await ensureIndexes();
+console.log(indexResult.message);
 
 //loopback by default; containers override HOST to expose the service
 app.listen(process.env.DISPLAY_PORT, resolveListenHost(process.env.HOST), () =>

@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 vi.mock('express', () => ({
-  default: { static: vi.fn((dirPath) => ({ dirPath })) },
+  default: { static: vi.fn((dirPath, options) => ({ dirPath, options })) },
 }))
 vi.mock('../../routes/auth.js', () => ({ requireAuth: vi.fn() }))
 
@@ -33,7 +33,15 @@ describe('mountAuthStatic', () => {
 
     mountAuthStatic(app, '/media', '/data/media')
 
-    expect(app.use).toHaveBeenCalledWith('/media', requireAuth, { dirPath: '/data/media' })
+    expect(express.static).toHaveBeenCalledWith('/data/media', expect.objectContaining({ setHeaders: expect.any(Function) }))
+    const [urlPrefix, authMiddleware, staticResult] = app.use.mock.calls[0]
+    expect(urlPrefix).toBe('/media')
+    expect(authMiddleware).toBe(requireAuth)
+    expect(staticResult.dirPath).toBe('/data/media')
+
+    const res = { setHeader: vi.fn() }
+    staticResult.options.setHeaders(res)
+    expect(res.setHeader).toHaveBeenCalledWith('Cache-Control', 'private, max-age=604800, immutable')
   })
 })
 
@@ -59,7 +67,15 @@ describe('mountRequiredAuthStatic', () => {
 
     mountRequiredAuthStatic(app, '/kcna-pics', '/data/pics', 'pics')
 
-    expect(app.use).toHaveBeenCalledWith('/kcna-pics', requireAuth, { dirPath: '/data/pics' })
+    expect(express.static).toHaveBeenCalledWith('/data/pics', expect.objectContaining({ setHeaders: expect.any(Function) }))
+    const [urlPrefix, authMiddleware, staticResult] = app.use.mock.calls[0]
+    expect(urlPrefix).toBe('/kcna-pics')
+    expect(authMiddleware).toBe(requireAuth)
+    expect(staticResult.dirPath).toBe('/data/pics')
+
+    const res = { setHeader: vi.fn() }
+    staticResult.options.setHeaders(res)
+    expect(res.setHeader).toHaveBeenCalledWith('Cache-Control', 'private, max-age=604800, immutable')
   })
 })
 
