@@ -27,7 +27,7 @@ describe("ensureIndexes", () => {
 
     expect(calls).toEqual([
       { name: "articles", keys: { date: -1, articleId: -1 } },
-      { name: "articles", keys: { articleType: 1, date: -1, articleId: -1 } },
+      { name: "articles", keys: { articleTypeArray: 1, date: -1, articleId: -1 } },
       { name: "pics", keys: { date: -1, picId: -1 } },
       { name: "picSets", keys: { date: -1, picSetId: -1 } },
       { name: "watch", keys: { site: 1, date: -1, vidPageId: -1 } },

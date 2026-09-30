@@ -122,14 +122,14 @@ public/js/
 **`stateFront` singleton** (`util/state-front.js`). Key fields:
 - `isFirstLoad: boolean` — true until first `buildDisplay()` completes
 - `typeTrigger`: `"articles"` | `"pics"` | `"vids"`
-- `articleType`: `"fatboy"` | `"topNews"` | `"latestNews"` | `"externalNews"` | `"anecdote"` | `"people"` | `"all"`
+- `articleType`: UI-selected category, one of `"all"` | `"fatboy"` | `"top"` | `"latest"` | `"home"` | `"world"` | `"society"` | `"external"` | `"anecdote"` | `"people"` | `"documents"`. This is view state only; it is not a DB field. The DB field is `articleTypeArray` (array of category strings; an article can be in several, e.g. `["latest","top","home"]`). Legacy values `commentary` and `newYear` may appear in `articleTypeArray` but have no button.
 - `picType`: `"all"` | `"picSets"`
 - `vidType`: `"watch"`
 - `orderBy`: `"newest-to-oldest"` | `"oldest-to-newest"`
 - `howMany`: number | null (falls back to `DEFAULT_LOAD_*` env var)
 - `eventTrigger`: last user action that triggered an update
 - `scrapeId`: tracks active scrape for admin
-- `dataObj`: nested count tracker `{ articles: { fatboy, topNews, ... }, pics, vids }`
+- `dataObj`: nested count tracker `{ articles: { fatboy, top, ... }, pics, vids }`
 
 **Admin commands** (sent via `runAdminCommand`):
 - `command`: `start-scrape` | `stop-scrape` | `start-scheduler` | `stop-scheduler` | `scrape-status`

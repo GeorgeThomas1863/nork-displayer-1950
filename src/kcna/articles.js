@@ -27,7 +27,7 @@ export const buildArticleParams = (inputParams) => {
   }
 
   const articleParams = {
-    filterKey: "articleType",
+    filterKey: "articleTypeArray",
     filterValue: articleType,
     howMany: Math.min(+(howMany) || +process.env.DEFAULT_LOAD_ARTICLES, 100),
     sortKey: "date",

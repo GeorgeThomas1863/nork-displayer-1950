@@ -741,6 +741,16 @@ h3 {
   width: 98%;
 }
 
+.article-categories {
+  margin: 0 auto;
+  width: 98%;
+  padding: 0.35rem 0 0 0.5rem;
+  font-size: 0.8rem;
+  color: #94a3b8;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
 .article-text {
   margin-top: 1rem;
   font-size: 1.05rem;

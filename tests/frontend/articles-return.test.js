@@ -15,6 +15,7 @@ import {
   buildArticleTitle,
   buildArticleDate,
   buildArticleText,
+  buildArticleCategories,
   buildArticleTypeButtons,
   buildArticleTypeButtonItem,
 } from '../../public/js/articles/articles-return.js'
@@ -182,5 +183,22 @@ describe('buildArticleTypeButtonItem', () => {
     const li = buildArticleTypeButtonItem({ buttonValue: 'top', buttonText: 'Top News' })
     const button = li.children[0]
     expect(button.classList._classes.has('active')).toBe(false)
+  })
+})
+
+describe('buildArticleCategories', () => {
+  it('joins button labels with a middle dot', () => {
+    const el = buildArticleCategories(['top', 'latest', 'home'])
+    expect(el.textContent).toBe('Top News · Latest News · Home')
+  })
+
+  it('falls back to the raw value for types with no button', () => {
+    const el = buildArticleCategories(['latest', 'commentary'])
+    expect(el.textContent).toBe('Latest News · commentary')
+  })
+
+  it('returns null when articleTypeArray is missing or empty', () => {
+    expect(buildArticleCategories(undefined)).toBeNull()
+    expect(buildArticleCategories([])).toBeNull()
   })
 })

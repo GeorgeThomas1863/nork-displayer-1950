@@ -23,7 +23,7 @@ export const dbGet = () => {
 //indexes that back the sorted display queries in models/db-model.js
 const INDEXES = [
   { collection: "articles", keys: { date: -1, articleId: -1 } },
-  { collection: "articles", keys: { articleType: 1, date: -1, articleId: -1 } },
+  { collection: "articles", keys: { articleTypeArray: 1, date: -1, articleId: -1 } },
   { collection: "pics", keys: { date: -1, picId: -1 } },
   { collection: "picSets", keys: { date: -1, picSetId: -1 } },
   { collection: "watch", keys: { site: 1, date: -1, vidPageId: -1 } },

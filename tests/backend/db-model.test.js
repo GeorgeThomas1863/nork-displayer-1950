@@ -56,12 +56,12 @@ describe("dbModel.getNewestItemsByTypeArray", () => {
   it("filters by type and sorts newest first with the secondary tie-breaker key", async () => {
     const rows = [{ articleId: 2 }, { articleId: 1 }];
     toArray.mockResolvedValue(rows);
-    const params = { filterKey: "articleType", filterValue: "fatboy", howMany: 3, sortKey: "date", sortKey2: "articleId" };
+    const params = { filterKey: "articleTypeArray", filterValue: "fatboy", howMany: 3, sortKey: "date", sortKey2: "articleId" };
     const model = new dbModel(params, "articles");
 
     const result = await model.getNewestItemsByTypeArray();
 
-    expect(find).toHaveBeenCalledWith({ articleType: "fatboy" });
+    expect(find).toHaveBeenCalledWith({ articleTypeArray: "fatboy" });
     expect(sort).toHaveBeenCalledWith({ date: -1, articleId: -1 });
     expect(limit).toHaveBeenCalledWith(3);
     expect(result).toBe(rows);

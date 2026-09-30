@@ -40,26 +40,26 @@ export const buildArticlesReturnDisplay = async (inputArray) => {
   return articleDisplayContainer;
 };
 
+//button values and human labels; also used to label an article's categories
+const ARTICLE_TYPE_BUTTONS = [
+  { buttonValue: "all",        buttonText: "ALL ARTICLES" },
+  { buttonValue: "fatboy",     buttonText: "Revolutionary Activities [KJU]" },
+  { buttonValue: "top",        buttonText: "Top News" },
+  { buttonValue: "latest",     buttonText: "Latest News" },
+  { buttonValue: "home",       buttonText: "Home" },
+  { buttonValue: "world",      buttonText: "World" },
+  { buttonValue: "society",    buttonText: "Society" },
+  { buttonValue: "external",   buttonText: "External News" },
+  { buttonValue: "anecdote",   buttonText: "Anecdotes" },
+  { buttonValue: "people",     buttonText: "In Memory of the People" },
+  { buttonValue: "documents",  buttonText: "Documents" },
+];
+
 //build buttons here
 export const buildArticleTypeButtons = async () => {
   const articleTypeButtonContainer = document.createElement("div");
   articleTypeButtonContainer.id = "article-type-button-container";
   articleTypeButtonContainer.className = "button-type-container";
-
-  // Define button data matching your dropdown options
-  const buttonData = [
-    { buttonValue: "all",        buttonText: "ALL ARTICLES" },
-    { buttonValue: "fatboy",     buttonText: "Revolutionary Activities [KJU]" },
-    { buttonValue: "top",        buttonText: "Top News" },
-    { buttonValue: "latest",     buttonText: "Latest News" },
-    { buttonValue: "home",       buttonText: "Home" },
-    { buttonValue: "world",      buttonText: "World" },
-    { buttonValue: "society",    buttonText: "Society" },
-    { buttonValue: "external",   buttonText: "External News" },
-    { buttonValue: "anecdote",   buttonText: "Anecdotes" },
-    { buttonValue: "people",     buttonText: "In Memory of the People" },
-    { buttonValue: "documents",  buttonText: "Documents" },
-  ];
 
   // Create button list
   const buttonList = document.createElement("ul");
@@ -67,8 +67,8 @@ export const buildArticleTypeButtons = async () => {
   buttonList.className = "button-type-list";
 
   // Build each button
-  for (let i = 0; i < buttonData.length; i++) {
-    const buttonItem = await buildArticleTypeButtonItem(buttonData[i]);
+  for (let i = 0; i < ARTICLE_TYPE_BUTTONS.length; i++) {
+    const buttonItem = await buildArticleTypeButtonItem(ARTICLE_TYPE_BUTTONS[i]);
     buttonList.append(buttonItem);
   }
 
@@ -147,7 +147,7 @@ export const buildArticleContainer = async (inputObj) => {
 };
 
 export const buildArticleElement = async (inputObj) => {
-  const { date, text } = inputObj;
+  const { date, text, articleTypeArray } = inputObj;
 
   const articleElement = document.createElement("article");
   articleElement.className = "article-element";
@@ -156,7 +156,12 @@ export const buildArticleElement = async (inputObj) => {
   const dateElement = await buildArticleDate(date);
   const textElement = await buildArticleText(text);
 
-  articleElement.append(dateElement, textElement);
+  articleElement.append(dateElement);
+
+  const categoryElement = buildArticleCategories(articleTypeArray);
+  if (categoryElement) articleElement.append(categoryElement);
+
+  articleElement.append(textElement);
 
   return articleElement;
 };
@@ -181,6 +186,27 @@ export const buildArticleDate = (date) => {
   });
 
   return dateElement;
+};
+
+export const buildArticleCategories = (articleTypeArray) => {
+  if (!Array.isArray(articleTypeArray) || !articleTypeArray.length) return null;
+
+  const labelList = [];
+  for (let i = 0; i < articleTypeArray.length; i++) {
+    labelList.push(getArticleTypeLabel(articleTypeArray[i]));
+  }
+
+  const categoryElement = document.createElement("div");
+  categoryElement.className = "article-categories";
+  categoryElement.textContent = labelList.join(" · ");
+  return categoryElement;
+};
+
+export const getArticleTypeLabel = (typeValue) => {
+  for (let i = 0; i < ARTICLE_TYPE_BUTTONS.length; i++) {
+    if (ARTICLE_TYPE_BUTTONS[i].buttonValue === typeValue) return ARTICLE_TYPE_BUTTONS[i].buttonText;
+  }
+  return typeValue;
 };
 
 export const buildArticleText = (text) => {
